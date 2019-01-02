@@ -1,0 +1,801 @@
+﻿/* Size ALL ----------*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+h1
+{
+    font-size: 36px;
+}
+
+h2
+{
+    font-size: 32px;
+}
+
+h3
+{
+    font-size: 28px;
+}
+
+h4
+{
+    font-size: 24px;
+}
+
+h5
+{
+    font-size: 20px;
+}
+
+h6
+{
+    font-size: 16px;
+}
+
+p
+{
+    margin: 0;
+}
+
+rating,
+phone,
+email,
+name,
+address
+{
+    margin: 7px 7px 7px 0;
+}
+
+    phone > i,
+    email > i,
+    name > i,
+    address > i
+    {
+        margin-right: 7px;
+    }
+
+/* Text */
+.az-text-left
+{
+    text-align: left !important;
+}
+
+.az-text-right
+{
+    text-align: right !important;
+}
+
+.az-text-justify
+{
+    text-align: justify !important;
+}
+
+.az-text-center
+{
+    text-align: center !important;
+}
+
+.az-text-capitalize
+{
+    text-transform: capitalize !important;
+}
+
+.az-text-uppercase
+{
+    text-transform: uppercase !important;
+}
+
+.az-text-lowercase
+{
+    text-transform: lowercase !important;
+}
+
+.az-text-greyscale-100
+{
+    filter: grayscale(100%) !important;
+}
+
+.az-text-greyscale-75
+{
+    filter: grayscale(75%) !important;
+}
+
+.az-text-greyscale-50
+{
+    filter: grayscale(50%) !important;
+}
+
+.az-text-opacity-75
+{
+    opacity: 0.75 !important;
+}
+
+.az-text-opacity-50
+{
+    opacity: 0.50 !important;
+}
+
+.az-text-opacity-25
+{
+    opacity: 0.25 !important;
+}
+
+.az-text-tiny
+{
+    font-size: 12px !important;
+}
+
+.az-text-small
+{
+    font-size: 16px !important;
+}
+
+.az-text-medium
+{
+    font-size: 20px !important;
+}
+
+.az-text-large
+{
+    font-size: 24px !important;
+}
+
+.az-text-xlarge
+{
+    font-size: 28px !important;
+}
+
+.az-text-xxlarge
+{
+    font-size: 32px !important;
+}
+
+.az-text-xxxlarge
+{
+    font-size: 36px !important;
+    font-weight: 200 !important;
+}
+
+.az-text-xxxxlarge
+{
+    font-size: 40px !important;
+    font-weight: 200 !important;
+}
+
+.az-text-xxxxxlarge
+{
+    font-size: 44px !important;
+    font-weight: 200 !important;
+}
+
+.az-text-jumbo
+{
+    font-size: 64px !important;
+    font-weight: 200 !important;
+}
+
+/* Size XS ----------*/
+/* Text ---*/
+.az-xs-text-left
+{
+    text-align: left !important;
+}
+
+.az-xs-text-right
+{
+    text-align: right !important;
+}
+
+.az-xs-text-justify
+{
+    text-align: justify !important;
+}
+
+.az-xs-text-center
+{
+    text-align: center !important;
+}
+
+.az-xs-text-capitalize
+{
+    text-transform: capitalize !important;
+}
+
+.az-xs-text-uppercase
+{
+    text-transform: uppercase !important;
+}
+
+.az-xs-text-lowercase
+{
+    text-transform: lowercase !important;
+}
+
+.az-xs-text-greyscale-100
+{
+    filter: grayscale(100%) !important;
+}
+
+.az-xs-text-greyscale-75
+{
+    filter: grayscale(75%) !important;
+}
+
+.az-xs-text-greyscale-50
+{
+    filter: grayscale(50%) !important;
+}
+
+.az-xs-text-opacity-75
+{
+    opacity: 0.75 !important;
+}
+
+.az-xs-text-opacity-50
+{
+    opacity: 0.50 !important;
+}
+
+.az-xs-text-opacity-25
+{
+    opacity: 0.25 !important;
+}
+
+.az-xs-text-tiny
+{
+    font-size: 12px !important;
+}
+
+.az-xs-text-small
+{
+    font-size: 16px !important;
+}
+
+.az-xs-text-medium
+{
+    font-size: 20px !important;
+}
+
+.az-xs-text-large
+{
+    font-size: 24px !important;
+}
+
+.az-xs-text-xlarge
+{
+    font-size: 28px !important;
+}
+
+.az-xs-text-xxlarge
+{
+    font-size: 32px !important;
+}
+
+.az-xs-text-xxxlarge
+{
+    font-size: 36px !important;
+    font-weight: 200 !important;
+}
+
+.az-xs-text-xxxxlarge
+{
+    font-size: 40px !important;
+    font-weight: 200 !important;
+}
+
+.az-xs-text-xxxxxlarge
+{
+    font-size: 44px !important;
+    font-weight: 200 !important;
+}
+
+.az-xs-text-jumbo
+{
+    font-size: 64px !important;
+    font-weight: 200 !important;
+}
+
+/* Size SM ----------*/
+@media (min-width: 576px)
+{
+    /* Text ---*/
+    .az-sm-text-left
+    {
+        text-align: left !important;
+    }
+
+    .az-sm-text-right
+    {
+        text-align: right !important;
+    }
+
+    .az-sm-text-justify
+    {
+        text-align: justify !important;
+    }
+
+    .az-sm-text-center
+    {
+        text-align: center !important;
+    }
+
+    .az-sm-text-capitalize
+    {
+        text-transform: capitalize !important;
+    }
+
+    .az-sm-text-uppercase
+    {
+        text-transform: uppercase !important;
+    }
+
+    .az-sm-text-lowercase
+    {
+        text-transform: lowercase !important;
+    }
+
+    .az-sm-text-greyscale-100
+    {
+        filter: grayscale(100%) !important;
+    }
+
+    .az-sm-text-greyscale-75
+    {
+        filter: grayscale(75%) !important;
+    }
+
+    .az-sm-text-greyscale-50
+    {
+        filter: grayscale(50%) !important;
+    }
+
+    .az-sm-text-opacity-75
+    {
+        opacity: 0.75 !important;
+    }
+
+    .az-sm-text-opacity-50
+    {
+        opacity: 0.50 !important;
+    }
+
+    .az-sm-text-opacity-25
+    {
+        opacity: 0.25 !important;
+    }
+
+    .az-sm-text-tiny
+    {
+        font-size: 12px !important;
+    }
+
+    .az-sm-text-small
+    {
+        font-size: 16px !important;
+    }
+
+    .az-sm-text-medium
+    {
+        font-size: 20px !important;
+    }
+
+    .az-sm-text-large
+    {
+        font-size: 24px !important;
+    }
+
+    .az-sm-text-xlarge
+    {
+        font-size: 28px !important;
+    }
+
+    .az-sm-text-xxlarge
+    {
+        font-size: 32px !important;
+    }
+
+    .az-sm-text-xxxlarge
+    {
+        font-size: 36px !important;
+        font-weight: 200 !important;
+    }
+
+    .az-sm-text-xxxxlarge
+    {
+        font-size: 40px !important;
+        font-weight: 200 !important;
+    }
+
+    .az-sm-text-xxxxxlarge
+    {
+        font-size: 44px !important;
+        font-weight: 200 !important;
+    }
+
+    .az-sm-text-jumbo
+    {
+        font-size: 64px !important;
+        font-weight: 200 !important;
+    }
+}
+
+/* Size MD ----------*/
+@media (min-width: 768px)
+{
+    /* Text ---*/
+    .az-md-text-left
+    {
+        text-align: left !important;
+    }
+
+    .az-md-text-right
+    {
+        text-align: right !important;
+    }
+
+    .az-md-text-justify
+    {
+        text-align: justify !important;
+    }
+
+    .az-md-text-center
+    {
+        text-align: center !important;
+    }
+
+    .az-md-text-capitalize
+    {
+        text-transform: capitalize !important;
+    }
+
+    .az-md-text-uppercase
+    {
+        text-transform: uppercase !important;
+    }
+
+    .az-md-text-lowercase
+    {
+        text-transform: lowercase !important;
+    }
+
+    .az-md-text-greyscale-100
+    {
+        filter: grayscale(100%) !important;
+    }
+
+    .az-md-text-greyscale-75
+    {
+        filter: grayscale(75%) !important;
+    }
+
+    .az-md-text-greyscale-50
+    {
+        filter: grayscale(50%) !important;
+    }
+
+    .az-md-text-opacity-75
+    {
+        opacity: 0.75 !important;
+    }
+
+    .az-md-text-opacity-50
+    {
+        opacity: 0.50 !important;
+    }
+
+    .az-md-text-opacity-25
+    {
+        opacity: 0.25 !important;
+    }
+
+    .az-md-text-tiny
+    {
+        font-size: 12px !important;
+    }
+
+    .az-md-text-small
+    {
+        font-size: 16px !important;
+    }
+
+    .az-md-text-medium
+    {
+        font-size: 20px !important;
+    }
+
+    .az-md-text-large
+    {
+        font-size: 24px !important;
+    }
+
+    .az-md-text-xlarge
+    {
+        font-size: 28px !important;
+    }
+
+    .az-md-text-xxlarge
+    {
+        font-size: 32px !important;
+    }
+
+    .az-md-text-xxxlarge
+    {
+        font-size: 36px !important;
+        font-weight: 200 !important;
+    }
+
+    .az-md-text-xxxxlarge
+    {
+        font-size: 40px !important;
+        font-weight: 200 !important;
+    }
+
+    .az-md-text-xxxxxlarge
+    {
+        font-size: 44px !important;
+        font-weight: 200 !important;
+    }
+
+    .az-md-text-jumbo
+    {
+        font-size: 64px !important;
+        font-weight: 200 !important;
+    }
+}
+
+/* Size LG ----------*/
+@media (min-width: 992px)
+{
+    /* Text ---*/
+    .az-lg-text-left
+    {
+        text-align: left !important;
+    }
+
+    .az-lg-text-right
+    {
+        text-align: right !important;
+    }
+
+    .az-lg-text-justify
+    {
+        text-align: justify !important;
+    }
+
+    .az-lg-text-center
+    {
+        text-align: center !important;
+    }
+
+    .az-lg-text-capitalize
+    {
+        text-transform: capitalize !important;
+    }
+
+    .az-lg-text-uppercase
+    {
+        text-transform: uppercase !important;
+    }
+
+    .az-lg-text-lowercase
+    {
+        text-transform: lowercase !important;
+    }
+
+    .az-lg-text-greyscale-100
+    {
+        filter: grayscale(100%) !important;
+    }
+
+    .az-lg-text-greyscale-75
+    {
+        filter: grayscale(75%) !important;
+    }
+
+    .az-lg-text-greyscale-50
+    {
+        filter: grayscale(50%) !important;
+    }
+
+    .az-lg-text-opacity-75
+    {
+        opacity: 0.75 !important;
+    }
+
+    .az-lg-text-opacity-50
+    {
+        opacity: 0.50 !important;
+    }
+
+    .az-lg-text-opacity-25
+    {
+        opacity: 0.25 !important;
+    }
+
+    .az-lg-text-tiny
+    {
+        font-size: 12px !important;
+    }
+
+    .az-lg-text-small
+    {
+        font-size: 16px !important;
+    }
+
+    .az-lg-text-medium
+    {
+        font-size: 20px !important;
+    }
+
+    .az-lg-text-large
+    {
+        font-size: 24px !important;
+    }
+
+    .az-lg-text-xlarge
+    {
+        font-size: 28px !important;
+    }
+
+    .az-lg-text-xxlarge
+    {
+        font-size: 32px !important;
+    }
+
+    .az-lg-text-xxxlarge
+    {
+        font-size: 36px !important;
+        font-weight: 200 !important;
+    }
+
+    .az-lg-text-xxxxlarge
+    {
+        font-size: 40px !important;
+        font-weight: 200 !important;
+    }
+
+    .az-lg-text-xxxxxlarge
+    {
+        font-size: 44px !important;
+        font-weight: 200 !important;
+    }
+
+    .az-lg-text-jumbo
+    {
+        font-size: 64px !important;
+        font-weight: 200 !important;
+    }
+}
+
+/* Size XL ----------*/
+@media (min-width: 1200px)
+{
+    /* Text ---*/
+    .az-xl-text-left
+    {
+        text-align: left !important;
+    }
+
+    .az-xl-text-right
+    {
+        text-align: right !important;
+    }
+
+    .az-xl-text-justify
+    {
+        text-align: justify !important;
+    }
+
+    .az-xl-text-center
+    {
+        text-align: center !important;
+    }
+
+    .az-xl-text-capitalize
+    {
+        text-transform: capitalize !important;
+    }
+
+    .az-xl-text-uppercase
+    {
+        text-transform: uppercase !important;
+    }
+
+    .az-xl-text-lowercase
+    {
+        text-transform: lowercase !important;
+    }
+
+    .az-xl-text-greyscale-100
+    {
+        filter: grayscale(100%) !important;
+    }
+
+    .az-xl-text-greyscale-75
+    {
+        filter: grayscale(75%) !important;
+    }
+
+    .az-xl-text-greyscale-50
+    {
+        filter: grayscale(50%) !important;
+    }
+
+    .az-xl-text-opacity-75
+    {
+        opacity: 0.75 !important;
+    }
+
+    .az-xl-text-opacity-50
+    {
+        opacity: 0.50 !important;
+    }
+
+    .az-xl-text-opacity-25
+    {
+        opacity: 0.25 !important;
+    }
+
+    .az-xl-text-tiny
+    {
+        font-size: 12px !important;
+    }
+
+    .az-xl-text-small
+    {
+        font-size: 16px !important;
+    }
+
+    .az-xl-text-medium
+    {
+        font-size: 20px !important;
+    }
+
+    .az-xl-text-large
+    {
+        font-size: 24px !important;
+    }
+
+    .az-xl-text-xlarge
+    {
+        font-size: 28px !important;
+    }
+
+    .az-xl-text-xxlarge
+    {
+        font-size: 32px !important;
+    }
+
+    .az-xl-text-xxxlarge
+    {
+        font-size: 36px !important;
+        font-weight: 200 !important;
+    }
+
+    .az-xl-text-xxxxlarge
+    {
+        font-size: 40px !important;
+        font-weight: 200 !important;
+    }
+
+    .az-xl-text-xxxxxlarge
+    {
+        font-size: 44px !important;
+        font-weight: 200 !important;
+    }
+
+    .az-xl-text-jumbo
+    {
+        font-size: 64px !important;
+        font-weight: 200 !important;
+    }
+}

@@ -1,0 +1,36 @@
+﻿.az-accordion-card
+{
+    display: block;
+    position: relative;
+    overflow: visible;
+    white-space: normal;
+}
+
+    .az-accordion-card > header
+    {
+        cursor: pointer;
+    }
+
+        .az-accordion-card > header > *
+        {
+            display: inline-block;
+        }
+
+        .az-accordion-card > header > i
+        {
+            float: right;
+        }
+
+    .az-accordion-card > article
+    {
+        display: none;
+    }
+
+@media (max-width: 576px)
+{
+    .az-accordion
+    {
+        margin-left: 7px;
+        margin-right: 7px;
+    }
+}

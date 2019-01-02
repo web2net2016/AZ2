@@ -1,0 +1,56 @@
+﻿.az-slideshow
+{
+    position: relative;
+    width: 100%;
+}
+
+    .az-slideshow .az-slides
+    {
+        position: relative;
+        width: 100%;
+    }
+
+        .az-slideshow .az-slides slide
+        {
+            position: absolute;
+            width: 100%;
+        }
+
+            .az-slideshow .az-slides slide img
+            {
+                width: 100%;
+            }
+
+    .az-slideshow .az-arrows
+    {
+        font-size: 50px;
+        color: #FFFFFF;
+        cursor: pointer;
+    }
+
+    .az-slideshow .az-arrows:hover
+    {
+        font-size: 60px;
+    }
+
+    .az-slideshow .az-arrow-left
+    {
+    }
+
+    .az-slideshow .az-arrow-right
+    {
+        margin-right: 7px;
+    }
+
+@media (max-width: 576px)
+{
+    .az-slideshow .az-arrows
+    {
+        font-size: 30px;
+    }
+
+        .az-slideshow .az-arrows:hover
+        {
+            font-size: 35px;
+        }
+}

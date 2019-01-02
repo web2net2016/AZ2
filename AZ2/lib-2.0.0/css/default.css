@@ -1,0 +1,636 @@
+﻿/* Size ALL ----------*/
+html
+{
+    height: 100%;
+    overflow-x: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body
+{
+    padding: 0;
+    outline: 0;
+}
+
+a:link
+{
+    text-decoration: none;
+    text-decoration-color: transparent;
+}
+
+a:hover
+{
+    text-decoration: none;
+    text-decoration-color: transparent;
+}
+
+a:active
+{
+    text-decoration: none;
+    text-decoration-color: transparent;
+}
+
+a:visited
+{
+    text-decoration: none;
+    text-decoration-color: transparent;
+}
+
+a:link, a:hover, a:active, a:visited
+{
+    outline: 0;
+}
+
+img
+{
+    border: 0;
+    outline: 0;
+}
+
+iframe
+{
+    border: 0;
+    outline: 0;
+}
+
+table
+{
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    border: 0 !important;
+}
+
+ul
+{
+    margin: 0;
+}
+
+.az-no-parent-scroll
+{
+    position: fixed;
+}
+
+#az-cover-spin
+{
+    z-index: 50000;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,0.7);
+}
+
+@-webkit-keyframes cover-spin
+{
+    from
+    {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to
+    {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes cover-spin
+{
+    from
+    {
+        -moz-transform: rotate(0deg);
+    }
+
+    to
+    {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes cover-spin
+{
+    from
+    {
+        -o-transform: rotate(0deg);
+    }
+
+    to
+    {
+        -o-transform: rotate(360deg);
+    }
+}
+
+@keyframes cover-spin
+{
+    from
+    {
+        transform: rotate(0deg);
+    }
+
+    to
+    {
+        transform: rotate(360deg);
+    }
+}
+
+#az-cover-spin::after
+{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 48%;
+    top: 40%;
+    width: 40px;
+    height: 40px;
+    border-style: solid;
+    border-color: black;
+    border-top-color: transparent;
+    border-width: 4px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-animation: cover-spin .8s linear infinite;
+    -moz-animation: cover-spin .8s linear infinite;
+    -o-animation: cover-spin .8s linear infinite;
+    animation: cover-spin .8s linear infinite;
+}
+
+.az-cursor-pointer
+{
+    cursor: pointer;
+}
+
+.az-clearfix::after
+{
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.az-ul-none
+{
+    list-style-type: none;
+    padding: 0;
+}
+
+.az-ul-default
+{
+    padding: 0;
+}
+
+    .az-ul-default li
+    {
+        padding-bottom: 4px;
+    }
+
+/* Image */
+.az-image
+{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.az-circle-10
+{
+    -webkit-border-radius: 10%;
+    -moz-border-radius: 10%;
+    border-radius: 10%;
+}
+
+.az-circle-20
+{
+    -webkit-border-radius: 20%;
+    -moz-border-radius: 20%;
+    border-radius: 20%;
+}
+
+.az-circle-30
+{
+    -webkit-border-radius: 30%;
+    -moz-border-radius: 30%;
+    border-radius: 30%;
+}
+
+.az-circle-40
+{
+    -webkit-border-radius: 40%;
+    -moz-border-radius: 40%;
+    border-radius: 40%;
+}
+
+.az-circle-50
+{
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+/* Rotate */
+.az-rotate
+{
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+
+.az-cw-rotate-0
+{
+    -webkit-transform: rotate(0deg) !important;
+    -moz-transform: rotate(0deg) !important;
+    -o-transform: rotate(0deg) !important;
+    transform: rotate(0deg) !important;
+}
+
+.az-cw-rotate-45
+{
+    -webkit-transform: rotate(45deg) !important;
+    -moz-transform: rotate(45deg) !important;
+    -o-transform: rotate(45deg) !important;
+    transform: rotate(45deg) !important;
+}
+
+.az-cw-rotate-90
+{
+    -webkit-transform: rotate(90deg) !important;
+    -moz-transform: rotate(90deg) !important;
+    -o-transform: rotate(90deg) !important;
+    transform: rotate(90deg) !important;
+}
+
+.az-cw-rotate-135
+{
+    -webkit-transform: rotate(135deg) !important;
+    -moz-transform: rotate(135deg) !important;
+    -o-transform: rotate(135deg) !important;
+    transform: rotate(135deg) !important;
+}
+
+.az-cw-rotate-180
+{
+    -webkit-transform: rotate(180deg) !important;
+    -moz-transform: rotate(180deg) !important;
+    -o-transform: rotate(180deg) !important;
+    transform: rotate(180deg) !important;
+}
+
+.az-cw-rotate-225
+{
+    -webkit-transform: rotate(225deg) !important;
+    -moz-transform: rotate(225deg) !important;
+    -o-transform: rotate(225deg) !important;
+    transform: rotate(225deg) !important;
+}
+
+.az-cw-rotate-270
+{
+    -webkit-transform: rotate(270deg) !important;
+    -moz-transform: rotate(270deg) !important;
+    -o-transform: rotate(270deg) !important;
+    transform: rotate(270deg) !important;
+}
+
+.az-cw-rotate-315
+{
+    -webkit-transform: rotate(315deg) !important;
+    -moz-transform: rotate(315deg) !important;
+    -o-transform: rotate(315deg) !important;
+    transform: rotate(315deg) !important;
+}
+
+.az-cw-rotate-360
+{
+    -webkit-transform: rotate(360deg) !important;
+    -moz-transform: rotate(360deg) !important;
+    -o-transform: rotate(360deg) !important;
+    transform: rotate(360deg) !important;
+}
+
+/* Shadow */
+.az-shadow-1, .az-shadow-hover-1:hover
+{
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.az-shadow-2, .az-shadow-hover-2:hover
+{
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.az-shadow-3, .az-shadow-hover-3:hover
+{
+    -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.az-shadow-4, .az-shadow-hover-4:hover
+{
+    -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    -moz-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.az-shadow-5, .az-shadow-hover-5:hover
+{
+    -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    -moz-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+
+/* Size XS ----------*/
+/* Shadow */
+.az-xs-shadow-1, .az-xs-shadow-hover-1:hover
+{
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.az-xs-shadow-2, .az-xs-shadow-hover-2:hover
+{
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.az-xs-shadow-3, .az-xs-shadow-hover-3:hover
+{
+    -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.az-xs-shadow-4, .az-xs-shadow-hover-4:hover
+{
+    -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    -moz-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.az-xs-shadow-5, .az-xs-shadow-hover-5:hover
+{
+    -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    -moz-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+/* Size SM ----------*/
+@media (min-width: 576px)
+{
+    /* Shadow */
+    .az-sm-shadow-1, .az-sm-shadow-hover-1:hover
+    {
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+
+    .az-sm-shadow-2, .az-sm-shadow-hover-2:hover
+    {
+        -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    .az-sm-shadow-3, .az-sm-shadow-hover-3:hover
+    {
+        -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        -moz-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    }
+
+    .az-sm-shadow-4, .az-sm-shadow-hover-4:hover
+    {
+        -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        -moz-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    .az-sm-shadow-5, .az-sm-shadow-hover-5:hover
+    {
+        -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        -moz-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    }
+}
+
+/* Size MD ----------*/
+@media (min-width: 768px)
+{
+    /* Shadow */
+    .az-md-shadow-1, .az-md-shadow-hover-1:hover
+    {
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+
+    .az-md-shadow-2, .az-md-shadow-hover-2:hover
+    {
+        -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    .az-md-shadow-3, .az-md-shadow-hover-3:hover
+    {
+        -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        -moz-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    }
+
+    .az-md-shadow-4, .az-md-shadow-hover-4:hover
+    {
+        -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        -moz-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    .az-md-shadow-5, .az-md-shadow-hover-5:hover
+    {
+        -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        -moz-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    }
+}
+
+/* Size LG ----------*/
+@media (min-width: 992px)
+{
+    /* Shadow */
+    .az-lg-shadow-1, .az-lg-shadow-hover-1:hover
+    {
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+
+    .az-lg-shadow-2, .az-lg-shadow-hover-2:hover
+    {
+        -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    .az-lg-shadow-3, .az-lg-shadow-hover-3:hover
+    {
+        -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        -moz-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    }
+
+    .az-lg-shadow-4, .az-lg-shadow-hover-4:hover
+    {
+        -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        -moz-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    .az-lg-shadow-5, .az-lg-shadow-hover-5:hover
+    {
+        -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        -moz-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    }
+}
+
+/* Size XL ----------*/
+@media (min-width: 1200px)
+{
+    /* Shadow */
+    .az-xl-shadow-1, .az-xl-shadow-hover-1:hover
+    {
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+
+    .az-xl-shadow-2, .az-xl-shadow-hover-2:hover
+    {
+        -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    .az-xl-shadow-3, .az-xl-shadow-hover-3:hover
+    {
+        -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        -moz-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    }
+
+    .az-xl-shadow-4, .az-xl-shadow-hover-4:hover
+    {
+        -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        -moz-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    .az-xl-shadow-5, .az-xl-shadow-hover-5:hover
+    {
+        -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        -moz-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    }
+}
+
+
+/* CODE  */
+.az-code-header
+{
+    width: auto;
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    padding: 8px 12px;
+    font-family: Consolas, "courier new";
+    font-size: 20px;
+}
+
+.az-code
+{
+    width: auto;
+    background-color: #FFFFFF;
+    padding: 8px 12px;
+    border-left: 4px solid #4CAF50;
+    word-wrap: break-word;
+    font-family: Consolas, "courier new";
+    font-size: 16px;
+}
+
+.az-code-property-wrapper
+{
+    border: 1px solid #4CAF50;
+    padding: 8px 12px;
+    margin-bottom: 21px;
+}
+
+    .az-code-property-wrapper brown
+    {
+        color: brown;
+    }
+
+    .az-code-property-wrapper mediumblue
+    {
+        color: mediumblue;
+    }
+
+    .az-code-property-wrapper red
+    {
+        color: red;
+    }
+
+    .az-code-property-wrapper > property,
+    .az-code-property-wrapper > type,
+    .az-code-property-wrapper > default,
+    .az-code-property-wrapper > units,
+    .az-code-property-wrapper > values
+    {
+        display: block;
+        font-family: Consolas, "courier new";
+        font-size: 16px;
+    }
+
+    .az-code-property-wrapper > property
+    {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .az-code-property-wrapper > type > span:first-child,
+    .az-code-property-wrapper > default > span:first-child,
+    .az-code-property-wrapper > units > span:first-child,
+    .az-code-property-wrapper > values > span:first-child
+    {
+        font-weight: bold;
+    }
+
+.az-note-header
+{
+    width: auto;
+    background-color: #FFB900;
+    color: #FFFFFF;
+    padding: 8px 12px;
+    font-family: Consolas, "courier new";
+    font-size: 20px;
+}
+
+.az-note
+{
+    width: auto;
+    background-color: #ffffcc;
+    padding: 8px 12px;
+    border-left: 4px solid #FFB900;
+    word-wrap: break-word;
+    font-family: Consolas, "courier new";
+    font-size: 16px;
+}
