@@ -25,15 +25,11 @@
 
         $(document).ready(function ()
         {
-            initializePage({ }, function ()
-            {
-                $("#cmdSnackbar1").off("click", setSnackbar1).on("click", setSnackbar1);
-                $("#cmdSnackbar2").off("click", setSnackbar2).on("click", setSnackbar2);
-                $("#cmdSnackbar3").off("click", setSnackbar3).on("click", setSnackbar3);
+            $("#cmdSnackbar1").off("click", setSnackbar1).on("click", setSnackbar1);
+            $("#cmdSnackbar2").off("click", setSnackbar2).on("click", setSnackbar2);
+            $("#cmdSnackbar3").off("click", setSnackbar3).on("click", setSnackbar3);
 
-                w3CodeColor();
-                hideCoverSpin();
-            });
+            w3CodeColor();
         });
 
         function setSnackbar1()

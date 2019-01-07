@@ -31,10 +31,10 @@
             {
                 azAjaxUrl: "https://jsonplaceholder.typicode.com/albums/1/photos",
                 azAjaxType: "GET",
-                azAjaxContentType: "",
+                azAjaxContentType: ""
             };
 
-            initAZAjax(_azAjaxOptions).done(function (data)
+            new initAZAjax(_azAjaxOptions).done(function (data)
             {
                 $.each(data.slice(0, 3), function (i, SelectedObj)
                 {

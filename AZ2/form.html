@@ -25,11 +25,7 @@
 
         $(document).ready(function ()
         {
-            initializePage({}, function ()
-            {
-                w3CodeColor();
-                hideCoverSpin();
-            });
+            w3CodeColor();
         });
 
     </script>
@@ -799,7 +795,7 @@
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">FormStyle</h1>
                     <div class="az-code jsHigh notranslate">
-                        formStyle("#" + ThisFormId)<br />
+                        formStyle("#" + $ObjAZForm)<br />
                         <br />
                     </div>
                     <div class="az-code htmlHigh notranslate">
@@ -815,7 +811,7 @@
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">Serialize Form</h1>
                     <div class="az-code jsHigh notranslate">
-                        serializeForm("#" + ThisFormId)<br />
+                        serializeForm("#" + $ObjAZForm)<br />
                         <br />
                     </div>
                     <div class="az-code htmlHigh notranslate">

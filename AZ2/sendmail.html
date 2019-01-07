@@ -29,10 +29,10 @@
 
         $(document).ready(function ()
         {
-            initializePage(
+            azPageFunction = new initAZPage(
             {
-                getLanguage: true,
-                getValidation: true
+                azPageLanguage: true,
+                azPageValidation: true
             }, function ()
             {
                 setContentInfo();
@@ -43,7 +43,7 @@
         {
             formdirty = false;
             hideCoverSpin();
-            $("#" + ThisFormId).show();
+            $($ObjAZForm).show();
         }
 
         function validateDirty()
@@ -58,7 +58,7 @@
 
         function verifySubmit()
         {
-            var _ObjForm = serializeForm("#" + ThisFormId);
+            var _ObjForm = serializeForm($ObjAZForm);
             if (isEmpty(_ObjForm) == false)
             {
                 showCoverSpin()

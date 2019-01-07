@@ -113,7 +113,9 @@
     <Content Include="lib-2.0.0\jqueryui\jquery-ui.min.js" />
     <Content Include="lib-2.0.0\jqueryui\jquery_ui_langs.min.js" />
     <Content Include="lib-2.0.0\js\az-2.0.0.js" />
-    <Content Include="lib-2.0.0\js\az-2.0.0.min.js" />
+    <Content Include="lib-2.0.0\js\az-2.0.0.min.js">
+      <DependentUpon>az-2.0.0.js</DependentUpon>
+    </Content>
     <Content Include="lib-2.0.0\js\default.lang.js" />
     <Content Include="lib-2.0.0\js\functionlib.js" />
     <Content Include="lib-2.0.0\js\jquery.3.3.1.js" />

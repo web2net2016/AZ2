@@ -1,13 +1,200 @@
-﻿/*! AZ-Functionlib v2.0.0 | (c) web2net AS */
+﻿// AZ-Functionlib v2.0.0 | (c) web2net AS
+// Site info
 
-$(document).ready(function ()
+if (typeof AppName === 'undefined' || AppName === null)
 {
-    (function ()
+    var AppName = "AZ Team";
+}
+if (typeof AppVersion === 'undefined' || AppVersion === null)
+{
+    var AppVersion = "2.0.0";
+}
+if (typeof ApiVersion === 'undefined' || ApiVersion === null)
+{
+    var ApiVersion = "_1";
+}
+
+// Language
+var SingleNonLanguageElements = {};
+var SingleDefaultElements = {};
+var SingleElements = {};
+var ObjPageLanguage = {};
+
+// Customer - User Info
+var ObjCustomerInfo = {};
+var ThisCustomerName = "";
+var ThisUserNo = "";
+var ThisFirstName = "";
+var ThisLastName = "";
+var ThisEmail = "";
+var ThisProfileImage = "";
+var ThisLanguage = "nb-NO";
+var ThisUserType = "";
+
+// Div
+var ThisLocation = "";
+var ThisPage = "";
+var azPageFunction = "";
+var $ObjAZForm = {};
+
+var ObjJsonValidation = {};
+var LanguagePage = "";
+var ValidationPage = "";
+var ModalDialogScrollTop = 0;
+var ObjInitializePageOptions = {};
+var DebugMode = true;
+
+(function ($)
+{
+    var _$Obj = $({});
+    $.each(
     {
+        trigger: "publish",
+        on: "subscribe",
+        one: "subscribeonce",
+        off: "unsubscribe"
+    }, function (key, val)
+    {
+        jQuery[val] = function ()
+        {
+            _$Obj[key].apply(_$Obj, arguments);
+        };
+    });
 
+    var azLastScrollTop = 0;
+    $(window).scroll(function ()
+    {
+        $.publish("functionlib/azWindowScroll", { azWindowScrollTop: $(window).scrollTop(), azWindowScrollDir: ($(window).scrollTop() > azLastScrollTop) ? "down" : "up" });
+        azLastScrollTop = $(this).scrollTop();
+    });
 
-    })();
-});
+    $(window).resize(function ()
+    {
+        $.publish("functionlib/azWindowResize", { azWindowWidth: window.innerWidth, azWindowHeight: window.innerHeight, azWindowScrollTop: $(window).scrollTop(), azWindowScrollLeft: $(window).scrollLeft(), azWindowOrientation: (window.innerHeight > window.innerWidth) ? "portrait" : "landscape" });
+    });
+
+})(jQuery);
+
+// AZ Page
+function initAZPage(Options, Callback)
+{
+    //showCoverSpin();
+
+    var main = this;
+    var _Defaults =
+    {
+        azPageLanguageClientStorage: false,
+        azPageCustomerInfo: false,
+        azPageSystemMenu: false,
+        azPageLanguage: false,
+        azPageValidation: false,
+        azPageFormStyle: true,
+        azPageGridView: false,
+
+        dialogAlertClass: 'az-alert-danger',
+        dialogNormalClass: 'az-alert-info',
+        dialogAlertTimeout: 3000
+
+        //accordionIndex: ""
+        //navbarMenuAnimate: true
+    };
+    main.Options = $.extend({}, _Defaults, Options || {});
+    ObjInitializePageOptions = main.Options;
+
+    ThisLocation = window.document.location.hostname;
+    ThisPage = window.document.location.pathname;
+    $ObjAZForm = (window.document.forms.length > 0) ? $(window.document.forms[0]) : "";
+
+    main.azGridView = function ()
+    {
+        if (main.Options.azPageGridView)
+        {
+            $.subscribeonce("functionlib/initGridView", function (e)
+            {
+                Callback();
+            });
+            new initGridView($ObjAZForm);
+        }
+        else
+        {
+            Callback();
+        }
+    }
+
+    main.azFormStyle = function ()
+    {
+        if (main.Options.azPageFormStyle)
+        {
+            $.subscribeonce("functionlib/initAZFormStyle", function (e)
+            {
+                main.azGridView();
+            });
+            new initAZFormStyle($ObjAZForm);
+        }
+        else
+        {
+            main.azGridView();
+        }
+    }
+
+    main.azValidation = function ()
+    {
+        if (main.Options.azPageValidation)
+        {
+            $.subscribeonce("functionlib/initAZGetValidation", function (e)
+            {
+                $.subscribeonce("functionlib/initAZSetValidation", function (e)
+                {
+                    main.azFormStyle();
+                });
+                new initAZSetValidation();
+            });
+            new initAZGetValidation(ValidationPage);
+        }
+        else
+        {
+            main.azFormStyle();
+        }
+    }
+
+    main.azLanguage = function ()
+    {
+        if (main.Options.azPageLanguage)
+        {
+            $.subscribeonce("functionlib/initAZGetLanguage", function (e)
+            {
+                new initAZSetLanguage();
+                main.azValidation();
+            });
+            new initAZGetLanguage(LanguagePage);
+        }
+        else
+        {
+            main.azValidation();
+        }
+    }
+
+    if (main.Options.azPageLanguageClientStorage)
+    {
+        new initAZSetLanguageClientStorage();
+    }
+    if (main.Options.azPageCustomerInfo)
+    {
+        $.subscribeonce("functionlib/initAZGetCustomerInfo", function (e)
+        {
+            if (main.Options.azPageSystemMenu)
+            {
+                new initAZSetSystemMenu();
+            }
+            main.azLanguage();
+        });
+        new initAZGetCustomerInfo();
+    }
+    else
+    {
+        main.azLanguage();
+    }
+}
 
 // AZ Accordion
 function initAZAccordion(Options)
@@ -17,7 +204,7 @@ function initAZAccordion(Options)
     {
         azAccordionId: "",
         azAccordionHeightStyle: "content",
-        azAccordionCollapsible: true,
+        azAccordionCollapsible: true, 
         azAccordionIconClosed: "fas fa-plus",
         azAccordionIconOpen: "fas fa-minus"
     };
@@ -56,6 +243,7 @@ function initAZAccordion(Options)
             execAZAccordion($(this));
         });
 
+        var azAccordionDeactivated = "";
         function execAZAccordion($SelectedAccordionHeader)
         {
             if ($SelectedAccordionHeader.hasClass("accordion-active"))
@@ -66,7 +254,14 @@ function initAZAccordion(Options)
                     $SelectedAccordionHeader.removeClass("accordion-active");
                     $("i", $SelectedAccordionHeader).removeClass(main.Options.azAccordionIconOpen).addClass(main.Options.azAccordionIconClosed);
                 }
-                $.publish("functionlib/azAccordionIndex", { azAccordionId: main.Options.azAccordionId, azAccordionIndex: $SelectedAccordionHeader.parent().index() });
+                $.publish("functionlib/azAccordionActivate",
+                {
+                    azAccordionId: main.Options.azAccordionId,
+                    azAccordionStatus: "closed",
+                    azAccordionActivated: $SelectedAccordionHeader.parent().index(),
+                    azAccordionDeactivated: azAccordionDeactivated
+                });
+                azAccordionDeactivated = $SelectedAccordionHeader.parent().index();
             }
             else
             {
@@ -76,7 +271,14 @@ function initAZAccordion(Options)
                 $SelectedAccordionHeader.siblings("article").slideDown(100);
                 $SelectedAccordionHeader.addClass("accordion-active");
                 $("i", $SelectedAccordionHeader).removeClass(main.Options.azAccordionIconClosed).addClass(main.Options.azAccordionIconOpen);
-                $.publish("functionlib/azAccordionIndex", { azAccordionId: main.Options.azAccordionId, azAccordionIndex: $SelectedAccordionHeader.parent().index() });
+                $.publish("functionlib/azAccordionActivate",
+                {
+                    azAccordionId: main.Options.azAccordionId,
+                    azAccordionStatus: "open",
+                    azAccordionActivated: $SelectedAccordionHeader.parent().index(),
+                    azAccordionDeactivated: azAccordionDeactivated
+                });
+                azAccordionDeactivated = $SelectedAccordionHeader.parent().index();
             }
         }
 
@@ -96,8 +298,9 @@ function initAZAccordion(Options)
 }
 
 // AZ Ajax
-var initAZAjax = function (Options)
+function initAZAjax(Options)
 {
+    var main = this;
     var _Defaults =
     {
         azAjaxUrl: "",
@@ -109,32 +312,32 @@ var initAZAjax = function (Options)
         azAjaxExceptionAction: "silent",
         azAjaxExceptionErrorText: ""
     };
-    var _Options = $.extend({}, _Defaults, Options || {});
+    main.Options = $.extend({}, _Defaults, Options || {});
 
-    if (_Options.azAjaxUrl != "")
+    if (main.Options.azAjaxUrl != "")
     {
         var _azAjaxOptions =
         {
-            url: _Options.azAjaxUrl,
-            dataType: _Options.azAjaxDataType,
-            type: _Options.azAjaxType,
-            contentType: _Options.azAjaxContentType,
-            timeout: _Options.azAjaxTimeout
+            url: main.Options.azAjaxUrl,
+            dataType: main.Options.azAjaxDataType,
+            type: main.Options.azAjaxType,
+            contentType: main.Options.azAjaxContentType,
+            timeout: main.Options.azAjaxTimeout
         };
 
-        _Options.azAjaxTransferType = _Options.azAjaxObjToSend.hasOwnProperty("TransferType") === true ? _Options.azAjaxObjToSend.TransferType : "";
-        if (isEmpty(_Options.azAjaxObjToSend) === false)
+        main.Options.azAjaxTransferType = main.Options.azAjaxObjToSend.hasOwnProperty("TransferType") === true ? main.Options.azAjaxObjToSend.TransferType : "";
+        if (isEmpty(main.Options.azAjaxObjToSend) === false)
         {
-            _azAjaxOptions.data = JSON.stringify(_Options.azAjaxObjToSend);
-            consoleLog(JSON.stringify(_Options.azAjaxObjToSend));
+            _azAjaxOptions.data = JSON.stringify(main.Options.azAjaxObjToSend);
+            consoleLog(JSON.stringify(main.Options.azAjaxObjToSend));
         }
 
         $.ajaxSetup({ cache: false });
         var _CurrentAjax = $.ajax(_azAjaxOptions).promise();
         _CurrentAjax.fail(function (jqXHR, textStatus, errorThrown)
         {
-            var _statusText = jqXHR.statusText == "timeout" ? "Timeout" : _Options.azAjaxExceptionErrorText;
-            throwException(_Options.azAjaxExceptionAction, "", ThisPage, _Options.azAjaxTransferType + ":Status:" + jqXHR.statusText, _statusText);
+            var _statusText = jqXHR.statusText == "timeout" ? "Timeout" : main.Options.azAjaxExceptionErrorText;
+            throwException(main.Options.azAjaxExceptionAction, "", ThisPage, main.Options.azAjaxTransferType + ":Status:" + jqXHR.statusText, _statusText);
         });
         return _CurrentAjax;
     }
@@ -150,209 +353,10 @@ var initAZAjax = function (Options)
 
 
 
-// Site info
-if (typeof AppName === 'undefined' || AppName === null)
-{
-    var AppName = "AZ Team";
-}
-if (typeof AppVersion === 'undefined' || AppVersion === null)
-{
-    var AppVersion = "2.0.0";
-}
-if (typeof ApiVersion === 'undefined' || ApiVersion === null)
-{
-    var ApiVersion = "_1";
-}
-
-// Language
-var SingleNonLanguageElements = {};
-var SingleDefaultElements = {};
-var SingleElements = {};
-var ObjPageLanguage = {};
-
-// Customer - User Info
-var ObjCustomerInfo = {};
-var ThisCustomerName = "";
-var ThisUserNo = "";
-var ThisFirstName = "";
-var ThisLastName = "";
-var ThisEmail = "";
-var ThisProfileImage = "";
-var ThisLanguage = "nb-NO";
-var ThisUserType = "";
-
-// Div
-var ObjJsonValidation = {};
-var ThisLocation = "";
-var ThisFormId = "";
-var ThisPage = "";
-var LanguagePage = "";
-var ValidationPage = "";
-var ModalDialogScrollTop = 0;
-var ObjInitializePageOptions = {};
-var DebugMode = true;
-
-(function ($)
-{
-    var _$Obj = $({});
-    $.each(
-    {
-        trigger: "publish",
-        on: "subscribe",
-        one: "subscribeonce",
-        off: "unsubscribe"
-    }, function (key, val)
-    {
-        jQuery[val] = function ()
-        {
-            _$Obj[key].apply(_$Obj, arguments);
-        };
-    });
-})(jQuery);
-
-function initializePage(Options, Callback)
-{
-    showCoverSpin();
-    var _Defaults =
-    {
-        setAdjustStyle: false,
-        setLanguageClientStorage: false,
-        getCustomerInfo: false,
-        setSystemMenu: false,
-        getLanguage: false,
-        getValidation: false,
-        formStyle: true,
-        setGridView: false,
-        accordionIndex: "",
-        navbarMenuAnimate: true,
-        setWindowScrollTop: false,
-        dialogAlertClass: 'az-alert-danger',
-        dialogNormalClass: 'az-alert-info',
-        dialogAlertTimeout: 3000
-    };
-    var _Options = $.extend({}, _Defaults, Options || {});
-    ObjInitializePageOptions = _Options;
-
-    var _ArrayWindowProperties = [window.innerWidth, window.innerHeight, $(window).scrollTop(), $(window).scrollLeft()];
-    $.publish("functionlib/windowResize", { windowProperties: _ArrayWindowProperties });
-    $(window).resize(function ()
-    {
-        if (_Options.setAdjustStyle)
-        {
-            adjustStyle();
-        }
-        _ArrayWindowProperties = [window.innerWidth, window.innerHeight, $(window).scrollTop(), $(window).scrollLeft()];
-        $.publish("functionlib/windowResize", { windowProperties: _ArrayWindowProperties });
-    });
-    ThisLocation = window.document.location.hostname;
-    ThisPage = window.document.location.pathname;
-    ThisFormId = window.document.forms[0].id;
-
-    if (_Options.setWindowScrollTop)
-    {
-        $(window).scroll(function ()
-        {
-            $.publish("functionlib/windowScroll", $(this).scrollTop());
-        });
-    }
-    if (_Options.setAdjustStyle)
-    {
-        adjustStyle();
-    }
-    if (_Options.setLanguageClientStorage)
-    {
-        setLanguageClientStorage();
-    }
-    if (_Options.getCustomerInfo)
-    {
-        $.subscribeonce("functionlib/getCustomerInfo", function (e)
-        {
-            if (_Options.setSystemMenu)
-            {
-                setSystemMenu();
-            }
-            getSetLanguage();
-        });
-        getCustomerInfo();
-    }
-    else
-    {
-        getSetLanguage();
-    }
-
-    function getSetLanguage()
-    {
-        if (_Options.getLanguage)
-        {
-            $.subscribeonce("functionlib/getLanguage", function (e)
-            {
-                setLanguage();
-                getSetValidation();
-            });
-            getLanguage(LanguagePage);
-        }
-        else
-        {
-            getSetValidation();
-        }
-    }
-
-    function getSetValidation()
-    {
-        if (_Options.getValidation)
-        {
-            $.subscribeonce("validation/getValidation", function (e)
-            {
-                $.subscribeonce("validation/setValidation", function (e)
-                {
-                    getSetFormStyle();
-                });
-                setValidation();
-            });
-            getValidation(ValidationPage);
-        }
-        else
-        {
-            getSetFormStyle();
-        }
-    }
-
-    function getSetFormStyle()
-    {
-        if (_Options.formStyle)
-        {
-            $.subscribeonce("validation/formStyle", function (e)
-            {
-                getSetGridView();
-            });
-            formStyle("#" + ThisFormId);
-        }
-        else
-        {
-            getSetGridView();
-        }
-    }
-
-    function getSetGridView()
-    {
-        if (_Options.setGridView)
-        {
-            $.subscribeonce("functionlib/setGridView", function (e)
-            {
-                Callback();
-            });
-            setGridView("#" + ThisFormId);
-        }
-        else
-        {
-            Callback();
-        }
-    }
-}
 
 
-// Language
-function getLanguage(SelectedPage)
+// AZ Get Language
+function initAZGetLanguage(SelectedPage)
 {
     $.ajaxSetup({ cache: false });
     $.getJSON(SelectedPage).done(function (data)
@@ -360,30 +364,31 @@ function getLanguage(SelectedPage)
         if (isEmpty(data) === false)
         {
             ObjPageLanguage = data;
-            consoleLog("getLanguage");
-            $.publish("functionlib/getLanguage");
+            consoleLog("initAZGetLanguage");
+            $.publish("functionlib/initAZGetLanguage");
         }
         else
         {
-            throwException("silent", "", ThisPage, "getLanguage-1", "Language");
+            throwException("silent", "", ThisPage, "initAZGetLanguage-1", "Language");
         }
     }).fail(function (jqXHR, textStatus, err)
     {
-        throwException("silent", "", ThisPage, "getLanguage-2", "Language");
+        throwException("silent", "", ThisPage, "initAZGetLanguage-2", "Language");
     });
 }
 
-function setLanguage()
+// AZ Set Language
+function initAZSetLanguage()
 {
-    setFormLanguage(MyDefaultLanguage.ObjNonLanguageElements);
+    azSetFormLanguage(MyDefaultLanguage.ObjNonLanguageElements);
     SingleNonLanguageElements = MyDefaultLanguage.SingleNonLanguageElements;
     if (ThisLanguage != undefined)
     {
-        setFormLanguage(MyDefaultLanguage.ObjDefaultElements[ThisLanguage]);
+        azSetFormLanguage(MyDefaultLanguage.ObjDefaultElements[ThisLanguage]);
         SingleDefaultElements = MyDefaultLanguage.SingleDefaultElements[ThisLanguage];
         if (isEmpty(ObjPageLanguage) === false)
         {
-            setFormLanguage(ObjPageLanguage.ObjElements[ThisLanguage]);
+            azSetFormLanguage(ObjPageLanguage.ObjElements[ThisLanguage]);
             SingleElements = ObjPageLanguage.SingleElements[ThisLanguage];
             if (SingleElements.labelPageTitle != undefined)
             {
@@ -391,11 +396,11 @@ function setLanguage()
             }
         }
     }
-    consoleLog("setLanguage");
-    $.publish("functionlib/setLanguage");
+    consoleLog("initAZSetLanguage");
+    $.publish("functionlib/initAZSetLanguage");
 }
 
-function setFormLanguage(ObjElements)
+function azSetFormLanguage(ObjElements)
 {
     $.each(ObjElements, function (Key, Value)
     {
@@ -526,10 +531,11 @@ function setFormLanguage(ObjElements)
             }
         });
     });
-    $.publish("functionlib/setFormLanguage");
+    $.publish("functionlib/azSetFormLanguage");
 }
 
-function setLanguageClientStorage()
+// AZ Set Language Client Storage
+function initAZSetLanguageClientStorage()
 {
     var _CurrentLanguage = "";
     _CurrentLanguage = clientStorage("get", "language", "")
@@ -541,48 +547,40 @@ function setLanguageClientStorage()
     {
         clientStorage("set", "language", ThisLanguage);
     }
-    consoleLog("setLanguageClientStorage");
-    $.publish("functionlib/setLanguageClientStorage");
+    consoleLog("initAZSetLanguageClientStorage");
+    $.publish("functionlib/initAZSetLanguageClientStorage");
 }
 
-// Customer Info
-function getCustomerInfo()
+// AZ Get Customer Info
+function initAZGetCustomerInfo()
 {
     ObjCustomerInfo = JSON.parse(clientStorage("get", "customerinfo", ""));
-    if (isEmpty(ObjCustomerInfo) === false)
+    if (isEmpty(ObjCustomerInfo) === false && ObjCustomerInfo.hasOwnProperty("UserSignIn"))
     {
-        if (ObjCustomerInfo.hasOwnProperty("UserSignIn"))
-        {
-            ThisCustomerName = ObjCustomerInfo.UserSignIn.CustomerName
-            ThisUserNo = ObjCustomerInfo.UserSignIn.UserNo
-            ThisFirstName = ObjCustomerInfo.UserSignIn.FirstName
-            ThisLastName = ObjCustomerInfo.UserSignIn.LastName
-            ThisEmail = ObjCustomerInfo.UserSignIn.Email
-            ThisProfileImage = ObjCustomerInfo.UserSignIn.ProfileImage
-            ThisLanguage = ObjCustomerInfo.UserSignIn.LanguageCode;
-            ThisUserType = ObjCustomerInfo.UserSignIn.UserType
-            $('#cmdMenuActiveUser').text(ThisFirstName + " " + ThisLastName);
-            moment.locale(ThisLanguage);
-            consoleLog("getCustomerInfo");
-            $.publish("functionlib/getCustomerInfo");
-        }
-        else
-        {
-            throwException("silent", "", ThisPage, "getCustomerInfo-1", "LoadData");
-            window.location.href = "/index.html";
-        }
+        ThisCustomerName = ObjCustomerInfo.UserSignIn.CustomerName;
+        ThisUserNo = ObjCustomerInfo.UserSignIn.UserNo;
+        ThisFirstName = ObjCustomerInfo.UserSignIn.FirstName;
+        ThisLastName = ObjCustomerInfo.UserSignIn.LastName;
+        ThisEmail = ObjCustomerInfo.UserSignIn.Email;
+        ThisProfileImage = ObjCustomerInfo.UserSignIn.ProfileImage;
+        ThisLanguage = ObjCustomerInfo.UserSignIn.LanguageCode;
+        ThisUserType = ObjCustomerInfo.UserSignIn.UserType;
+        $('#cmdMenuActiveUser').text(ThisFirstName + " " + ThisLastName);
+        moment.locale(ThisLanguage);
+        consoleLog("initAZGetCustomerInfo");
+        $.publish("functionlib/initAZGetCustomerInfo");
     }
     else
     {
-        throwException("silent", "", ThisPage, "getCustomerInfo-2", "LoadData");
+        throwException("silent", "", ThisPage, "initAZGetCustomerInfo-1", "LoadData");
         window.location.href = "/index.html";
     }
 }
 
-// Menu Content
-function setSystemMenu()
+// AZ Set System Menu
+function initAZSetSystemMenu()
 {
-    if (ObjCustomerInfo.hasOwnProperty("MainMenu"))
+    if (isEmpty(ObjCustomerInfo) === false && ObjCustomerInfo.hasOwnProperty("MainMenu"))
     {
         $.each(ObjCustomerInfo.MainMenu, function (i, MainMenuContent)
         {
@@ -591,12 +589,12 @@ function setSystemMenu()
                 $("." + MainMenuContent.Name + "_" + MainMenuContent.Type + ", #" + MainMenuContent.Name + "_" + MainMenuContent.Type).css({ "display": "block" });
             }
         });
-        consoleLog("setSystemMenu");
-        $.publish("functionlib/setSystemMenu");
+        consoleLog("initAZSetSystemMenu");
+        $.publish("functionlib/initAZSetSystemMenu");
     }
     else
     {
-        throwException("dialog", "", ThisPage, "setSystemMenu-1", "LoadData");
+        throwException("dialog", "", ThisPage, "initAZSetSystemMenu-1", "LoadData");
     }
 }
 
@@ -921,8 +919,8 @@ function confirmCancel(FunctionToRun)
     }
 }
 
-// Modal Dialog
-function initializeModalDialog(Options)
+// AZ Modal Dialog
+function initAZModalDialog(Options)
 {
     var _Defaults =
     {
@@ -940,15 +938,13 @@ function initializeModalDialog(Options)
         dialogPosition: false,
         dialogPositionOf: {},
         dialogPositionMy: "left bottom-30",
-        dialogPositionAt: "left top",
-        dialogBeforeOpen: function () { },
-        dialogAfterOpen: function () { }
+        dialogPositionAt: "left top"
     };
     var _Options = $.extend({}, _Defaults, Options || {});
 
     if ($('#az-modal-dialog').length == 0)
     {
-        $.subscribeonce("functionlib/initializeModalDialog/dialogBeforeOpen", function ()
+        $.subscribeonce("functionlib/initAZModalDialog/dialogBeforeOpen", function ()
         {
             ModalDialogScrollTop = 0;
             var _HTML = "";
@@ -1051,10 +1047,9 @@ function initializeModalDialog(Options)
                     }
                 }
             });
-            $.publish("functionlib/initializeModalDialog");
-            checkAsyncAndPublish(_Options.dialogAfterOpen, "");
+            $.publish("functionlib/initAZModalDialog/dialogAfterOpen");
         });
-        checkAsyncAndPublish(_Options.dialogBeforeOpen, "functionlib/initializeModalDialog/dialogBeforeOpen");
+        $.publish("functionlib/initAZModalDialog/dialogBeforeOpen");
     }
 }
 
@@ -1135,6 +1130,7 @@ function changeModalTitlebar(Options)
         dialogAlertTimeout: 3000
     };
     var _Options = $.extend({}, _Defaults, Options || {});
+
     if (Options.hasOwnProperty("dialogAlertClass") === false)
     {
         _Options.dialogAlertClass = ObjInitializePageOptions.dialogAlertClass;
@@ -1328,7 +1324,7 @@ function hideShowPassword(e)
     }
 }
 
-function setGridView(SelectedArea)
+function initGridView(SelectedArea)
 {
     if (isEmpty(ObjJsonValidation) === false)
     {
@@ -1403,7 +1399,7 @@ function setGridView(SelectedArea)
             }
         });
         $(window).one("beforeunload", function (e) { showCoverSpin() });
-        $.publish("functionlib/setGridView");
+        $.publish("functionlib/initGridView");
     }
     else
     {
@@ -1800,7 +1796,7 @@ function clientStorageError(consoleText)
     console.error("Client Storage Error\n" + consoleText);
 }
 
-function getValidation(SelectedPage)
+function initAZGetValidation(SelectedPage)
 {
     $.ajaxSetup({ cache: false });
     $.getJSON(SelectedPage).done(function (data)
@@ -1808,20 +1804,20 @@ function getValidation(SelectedPage)
         if (data instanceof Object && data != null && data != undefined)
         {
             ObjJsonValidation = data;
-            consoleLog("getValidation");
-            $.publish("validation/getValidation");
+            consoleLog("initAZGetValidation");
+            $.publish("functionlib/initAZGetValidation");
         }
         else
         {
-            throwException("silent", "", ThisPage, "getValidation-1", "Validation");
+            throwException("silent", "", ThisPage, "initAZGetValidation-1", "Validation");
         }
     }).fail(function (jqXHR, textStatus, err)
     {
-        throwException("silent", "", ThisPage, "getValidation-2", "Validation");
+        throwException("silent", "", ThisPage, "initAZGetValidation-2", "Validation");
     });
 }
 
-function setValidation(SelectedArea)
+function initAZSetValidation(SelectedArea)
 {
     var _SelectedArea = "";
     if (SelectedArea != "" && SelectedArea != undefined && SelectedArea != null)
@@ -1879,8 +1875,8 @@ function setValidation(SelectedArea)
             }
         });
     });
-    consoleLog("setValidation");
-    $.publish("validation/setValidation");
+    consoleLog("initAZSetValidation");
+    $.publish("functionlib/initAZSetValidation");
 }
 
 function getValidateType(SelectedType)
@@ -1900,7 +1896,7 @@ function getValidateType(SelectedType)
     return validTypes[SelectedType];
 }
 
-function formStyle(SelectedArea)
+function initAZFormStyle(SelectedArea)
 {
     var _DatePicker = false;
     var _SelectedArea = "";
@@ -2452,143 +2448,142 @@ function formStyle(SelectedArea)
         }
     });
 
-    setAccordion(_Options.accordionIndex);
-    setPortfolio();
-    $(window).resize(function ()
-    {
-        setPortfolio();
-        closeNavbarMobile();
-    });
+    //setPortfolio();
+    //$(window).resize(function ()
+    //{
+    //    setPortfolio();
+    //    closeNavbarMobile();
+    //});
 
     // Disabled Form Enter
-    if ($("#" + ThisFormId).hasClass("disabled-enter") == true)
-    {
-        $("#" + ThisFormId).off('keypress').on('keypress', function (e)
-        {
-            if ((e.keyCode || e.which) == 13)
-            {
-                return false;
-            }
-        });
-    }
+    //if ($("#" + $ObjAZForm).hasClass("disabled-enter") == true)
+    //{
+    //    $("#" + $ObjAZForm).off('keypress').on('keypress', function (e)
+    //    {
+    //        if ((e.keyCode || e.which) == 13)
+    //        {
+    //            return false;
+    //        }
+    //    });
+    //}
 
     // Mandatory Asterisk
-    $(".mandatory", _SelectedArea).not(".az-no-asterisk").each(function ()
-    {
-        $(".az-mandatory-asterisk", this).remove();
-        $(this).append(' <span class="az-mandatory-asterisk">*</span>');
-    });
+    //$(".mandatory", _SelectedArea).not(".az-no-asterisk").each(function ()
+    //{
+    //    $(".az-mandatory-asterisk", this).remove();
+    //    $(this).append(' <span class="az-mandatory-asterisk">*</span>');
+    //});
 
     // Password Eye
-    $(".passwordeye").off("click", hideShowPassword).on("click", hideShowPassword);
+    //$(".passwordeye").off("click", hideShowPassword).on("click", hideShowPassword);
 
     // Animated Label
-    $(".az-label-animated").off("click", azLabelAnimatedClick).on("click", azLabelAnimatedClick);
+    //$(".az-label-animated").off("click", azLabelAnimatedClick).on("click", azLabelAnimatedClick);
 
     // Adjust Cards Height
-    $('.az-accordion-card.adjust, .az-card.adjust, .az-list-card.adjust, .az-timeline-card.adjust').matchHeight();
+    //$('.az-accordion-card.adjust, .az-card.adjust, .az-list-card.adjust, .az-timeline-card.adjust').matchHeight();
 
     // Navbar Menu
-    var _$NavbarMenu = $(".az-navbar-menu");
-    var _NavbarTopHeight = _$NavbarMenu.parents(".az-navbar-top").height();
-    _$NavbarMenu.off().on("click", "li > a", function (e)
-    {
-        var _Anchor = $(this).attr('href');
-        if (_Anchor.indexOf("#") === 0)
-        {
-            e.preventDefault();
-            if (_$NavbarMenu.parents(".az-navbar-top").hasClass("az-navbar-sticky") == false)
-            {
-                _NavbarTopHeight = 0;
-            }
-            if (_Options.navbarMenuAnimate)
-            {
-                $('html, body').stop().animate(
-                    {
-                        scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
-                    },
-                    {
-                        easing: 'easeInOutExpo',
-                        duration: 1500
-                    });
-            }
-            else
-            {
-                $('html, body').stop().animate(
-                    {
-                        scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
-                    },
-                    {
-                        duration: 0
-                    });
-            }
-            $(".az-navbar-top-content").removeClass("mobile");
-        }
-    });
+    //var _$NavbarMenu = $(".az-navbar-menu");
+    //var _NavbarTopHeight = _$NavbarMenu.parents(".az-navbar-top").height();
+    //_$NavbarMenu.off().on("click", "li > a", function (e)
+    //{
+    //    var _Anchor = $(this).attr('href');
+    //    if (_Anchor.indexOf("#") === 0)
+    //    {
+    //        e.preventDefault();
+    //        if (_$NavbarMenu.parents(".az-navbar-top").hasClass("az-navbar-sticky") == false)
+    //        {
+    //            _NavbarTopHeight = 0;
+    //        }
+    //        if (_Options.navbarMenuAnimate)
+    //        {
+    //            $('html, body').stop().animate(
+    //                {
+    //                    scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
+    //                },
+    //                {
+    //                    easing: 'easeInOutExpo',
+    //                    duration: 1500
+    //                });
+    //        }
+    //        else
+    //        {
+    //            $('html, body').stop().animate(
+    //                {
+    //                    scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
+    //                },
+    //                {
+    //                    duration: 0
+    //                });
+    //        }
+    //        $(".az-navbar-top-content").removeClass("mobile");
+    //    }
+    //});
 
     // Sidebar Menu
-    var _$SidebarMenu = $(".az-sidebar-menu");
-    _$SidebarMenu.off().on("click", "li > a", function (e)
-    {
-        e.preventDefault();
-        var _Anchor = $(this).attr('href');
-        if (_Anchor.indexOf("#") === -1)
-        {
-            showCoverSpin();
-            $("#" + ThisFormId).attr(
-            {
-                "action": _Anchor,
-                "method": "POST"
-            }).submit();
-        }
-    });
+    //var _$SidebarMenu = $(".az-sidebar-menu");
+    //_$SidebarMenu.off().on("click", "li > a", function (e)
+    //{
+    //    e.preventDefault();
+    //    var _Anchor = $(this).attr('href');
+    //    if (_Anchor.indexOf("#") === -1)
+    //    {
+    //        showCoverSpin();
+    //        $("#" + $ObjAZForm).attr(
+    //        {
+    //            "action": _Anchor,
+    //            "method": "POST"
+    //        }).submit();
+    //    }
+    //});
 
     // Menu
-    var _$SideMenu = $(".az-menu");
-    _$SideMenu.off().on("click", "div > a", function (e)
-    {
-        e.preventDefault();
-        var _Anchor = $(this).attr('href');
-        if (_Anchor.indexOf("#") === -1)
-        {
-            showCoverSpin();
-            $("#" + ThisFormId).attr(
-            {
-                "action": _Anchor,
-                "method": "POST"
-            }).submit();
-        }
-    });
+    //var _$SideMenu = $(".az-menu");
+    //_$SideMenu.off().on("click", "div > a", function (e)
+    //{
+    //    e.preventDefault();
+    //    var _Anchor = $(this).attr('href');
+    //    if (_Anchor.indexOf("#") === -1)
+    //    {
+    //        showCoverSpin();
+    //        $("#" + $ObjAZForm).attr(
+    //        {
+    //            "action": _Anchor,
+    //            "method": "POST"
+    //        }).submit();
+    //    }
+    //});
 
     // Dropdown Menu
-    if ($(".az-dropdown-button").is(":button"))
-    {
-        $(".az-dropdown-button").off("click", setDropdownClickEvent).on("click", setDropdownClickEvent);
-    }
-    $(".az-dropdown-button[href]").off("click", setDropdownClickEvent).on("click", setDropdownClickEvent);
+    //if ($(".az-dropdown-button").is(":button"))
+    //{
+    //    $(".az-dropdown-button").off("click", setDropdownClickEvent).on("click", setDropdownClickEvent);
+    //}
+    //$(".az-dropdown-button[href]").off("click", setDropdownClickEvent).on("click", setDropdownClickEvent);
 
     // Get URl Paramaters
-    var urlParameters = getURLParameters(window.location.href);
-    if (isEmpty(urlParameters) === false)
-    {
-        if (urlParameters.hasOwnProperty('scrollto'))
-        {
-            $('html, body').stop().animate(
-            {
-                scrollTop: $("#" + urlParameters.scrollto).offset().top
-            },
-            {
-                easing: 'easeInOutExpo',
-                duration: 1500
-            });
-        }
-        if (urlParameters.hasOwnProperty('accordion'))
-        {
-            setAccordion(Number(urlParameters.accordion));
-        }
-    }
-    consoleLog("formStyle");
-    $.publish("validation/formStyle");
+    //var urlParameters = getURLParameters(window.location.href);
+    //if (isEmpty(urlParameters) === false)
+    //{
+    //    if (urlParameters.hasOwnProperty('scrollto'))
+    //    {
+    //        $('html, body').stop().animate(
+    //        {
+    //            scrollTop: $("#" + urlParameters.scrollto).offset().top
+    //        },
+    //        {
+    //            easing: 'easeInOutExpo',
+    //            duration: 1500
+    //        });
+    //    }
+    //    if (urlParameters.hasOwnProperty('accordion'))
+    //    {
+    //        setAccordion(Number(urlParameters.accordion));
+    //    }
+    //}
+    consoleLog("initAZFormStyle");
+    $.publish("functionlib/initAZFormStyle");
 }
 
 // Form Validation - Key Press
@@ -2871,7 +2866,7 @@ function serializeForm(SelectedArea)
 
 function isValidEmail(Email)
 {
-    var _RegExp = /^((([a-z]|[0-9]|!|#|$|%|&|'|\*|\+|\-|\/|=|\?|\^|_|`|\{|\||\}|~)+(\.([a-z]|[0-9]|!|#|$|%|&|'|\*|\+|\-|\/|=|\?|\^|_|`|\{|\||\}|~)+)*)@((((([a-z]|[0-9])([a-z]|[0-9]|\-){0,61}([a-z]|[0-9])\.))*([a-z]|[0-9])([a-z]|[0-9]|\-){0,61}([a-z]|[0-9])\.)[\w]{2,4}|(((([0-9]){1,3}\.){3}([0-9]){1,3}))|(\[((([0-9]){1,3}\.){3}([0-9]){1,3})\])))$/
+    var _RegExp = /^((([a-z]|[0-9]|!|#|$|%|&|'|\*|\+|\-|\/|=|\?|\^|_|`|\{|\||\}|~)+(\.([a-z]|[0-9]|!|#|$|%|&|'|\*|\+|\-|\/|=|\?|\^|_|`|\{|\||\}|~)+)*)@((((([a-z]|[0-9])([a-z]|[0-9]|\-){0,61}([a-z]|[0-9])\.))*([a-z]|[0-9])([a-z]|[0-9]|\-){0,61}([a-z]|[0-9])\.)[\w]{2,4}|(((([0-9]){1,3}\.){3}([0-9]){1,3}))|(\[((([0-9]){1,3}\.){3}([0-9]){1,3})\])))$/;
     return _RegExp.test(Email);
 }
 
@@ -3101,6 +3096,35 @@ function adjustStyle()
     }
 }
 
+// AZ Get Events
+function azGetEvents(element)
+{
+    var elemEvents = $._data(element, "events");
+    var allDocEvnts = $._data(document, "events");
+    for (var evntType in allDocEvnts)
+    {
+        if (allDocEvnts.hasOwnProperty(evntType))
+        {
+            var evts = allDocEvnts[evntType];
+            for (var i = 0; i < evts.length; i++)
+            {
+                if ($(element).is(evts[i].selector))
+                {
+                    if (elemEvents == null)
+                    {
+                        elemEvents = {};
+                    }
+                    if (!elemEvents.hasOwnProperty(evntType))
+                    {
+                        elemEvents[evntType] = [];
+                    }
+                    elemEvents[evntType].push(evts[i]);
+                }
+            }
+        }
+    }
+    return elemEvents;
+}
 
 // TODO
 var initializeAjax = function (Options, ObjData)

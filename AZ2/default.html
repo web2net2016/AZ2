@@ -25,19 +25,166 @@
 
         $(document).ready(function ()
         {
-            initializePage({}, function ()
-            {               
-                w3CodeColor();
-                hideCoverSpin();
+            $.subscribe("functionlib/azWindowScroll", function (e, data)
+            {
+                $("#azWindowScrollTop").text(data.azWindowScrollTop)
+                $("#azWindowScrollDir").text(data.azWindowScrollDir)
             });
+
+            $.subscribe("functionlib/azWindowResize", function (e, data)
+            {
+                $("#azWindowWidth").text(data.azWindowWidth)
+                $("#azWindowHeight").text(data.azWindowHeight)
+                $("#azWindowScrollTop2").text(data.azWindowScrollTop)
+                $("#azWindowScrollLeft").text(data.azWindowScrollLeft)
+                $("#azWindowOrientation").text(data.azWindowOrientation)
+            });
+
+            $("#cmdAZAnim").off().on("click", function (e)
+            {
+                var _$cmdAZAnim = $(this);
+                _$cmdAZAnim.attr("disabled", true);
+                $("p.az-anim-message").append(" Started...");
+                $.when(effect()).done(function ()
+                {
+                    $("p.az-anim-message").append(" Finished!");
+                    window.setTimeout(function ()
+                    {
+                        $("p.az-anim-message").text("Animation...");
+                        $("div.az-anim-rect").show();
+                        _$cmdAZAnim.attr("disabled", false);
+                    }, 3000)
+                });
+            });
+
+            var effect = function ()
+            {
+                return $("div.az-anim-rect").each(function (i)
+                {
+                    $(this).fadeIn().fadeOut(1000 * (i + 1));
+                });
+            };
+
+            w3CodeColor();
         });
 
     </script>
+    <style>
+        div.az-anim-rect
+        {
+            display: block;
+            float: left;
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            background-color: #4CAF50;
+        }
+    </style>
 </head>
 <body>
 
     <form id="frmReg">
         <div class="az-container">
+
+            <div class="row az-margin-t-56 ">
+                <div class="az-col xs-12">
+                    <h1 class="az-code-header">AZ Standard Functions</h1>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-code htmlHigh notranslate">
+                        <div class="az-code-property-wrapper">
+                            <property>AZ Promise</property>
+                            <type><span>Type:</span> <brown>Functions</brown></type>
+                            <br />
+                            &emsp;&ensp;&emsp;&ensp;$.subscribe()<br />
+                            &emsp;&ensp;&emsp;&ensp;$.subscribeonce()<br />
+                            &emsp;&ensp;&emsp;&ensp;$.unsubscribe()<br />
+                            <br />
+                            Ved hjelp av JQuery Promise, har vi laget flere funksjoner som du kan abonnere på og som vil hjelpe deg til å få en bedre flyt i din egen kode.
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>functionlib/azWindowScroll</property>
+                            <type><span>Type:</span> <brown>Function</brown></type>
+                            <br />
+                            <div class="jsHigh notranslate">
+                                $.subscribe("functionlib/azWindowScroll", function (e, data)<br />
+                                {<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azWindowScrollTop<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azWindowScrollDir<br />
+                                });<br />
+                                <br />
+                                Denne funksjonen trigges hver gang du scroller.
+                                <br />
+                            </div>
+                            <br />
+                            <span>azWindowScrollTop: </span><span id="azWindowScrollTop"></span>
+                            <br />
+                            <span>azWindowScrollDir: </span><span id="azWindowScrollDir"></span>
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>functionlib/azWindowResize</property>
+                            <type><span>Type:</span> <brown>Function</brown></type>
+                            <br />
+                            <div class="jsHigh notranslate">
+                                $.subscribe("functionlib/azWindowResize", function (e, data)<br />
+                                {<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azWindowWidth<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azWindowHeight<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azWindowScrollTop<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azWindowScrollLeft<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azWindowOrientation<br />
+                                });<br />
+                                <br />
+                                Denne funksjonen trigges hver gang siden endrer størrelse.
+                                <br />
+                            </div>
+                            <br />
+                            <span>azWindowWidth: </span><span id="azWindowWidth"></span>
+                            <br />
+                            <span>azWindowHeight: </span><span id="azWindowHeight"></span>
+                            <br />
+                            <span>azWindowScrollTop: </span><span id="azWindowScrollTop2"></span>
+                            <br />
+                            <span>azWindowScrollLeft: </span><span id="azWindowScrollLeft"></span>
+                            <br />
+                            <span>azWindowOrientation: </span><span id="azWindowOrientation"></span>
+                        </div>
+                        <br />
+                        Under ser du også et eksempel på å bruke Promise ved hjelp av funksjonen <span class="az-code-property-wrapper"><mediumblue>$.when</mediumblue></span>
+                        <br />
+                        <br />
+                        <div style="display: inline-block; height: 70px;">
+                            <p class="az-anim-message">Animation...</p>
+                            <div class="az-anim-rect"></div>
+                            <div class="az-anim-rect"></div>
+                            <div class="az-anim-rect"></div>
+                            <div class="az-anim-rect"></div>
+                        </div>
+                    </div>
+                    <div class="az-code jsHigh notranslate">
+                        var effect = function ()<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;return $("div.az-anim-rect").each(function (i)<br />
+                        &emsp;&ensp;&emsp;&ensp;{<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;$(this).fadeIn().fadeOut(1000 * (i + 1));<br />
+                        &emsp;&ensp;&emsp;&ensp;});<br />
+                        };<br />
+                        <br />
+                        $.when(effect()).done(function ()<br />
+                        {<br />
+                        });
+                        <br />
+                        <br />
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" id="cmdAZAnim" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Go Anim</button>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
                 <div class="az-col xs-12"><h1>h1 font-size: 36px</h1></div>

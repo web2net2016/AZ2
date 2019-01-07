@@ -25,11 +25,16 @@
 
         $(document).ready(function ()
         {
+            azPageFunction = new initAZPage({}, function ()
+            {
+                hideCoverSpin();
+            });
+
             w3CodeColor();
 
-            $.subscribe("functionlib/azAccordionIndex", function (e, data)
+            $.subscribe("functionlib/azAccordionActivate", function (e, data)
             {
-                console.log(data.azAccordionId + " - " + data.azAccordionIndex)
+                console.log(data.azAccordionId + " - " + data.azAccordionStatus + " - Activated: " + data.azAccordionActivated + " - Deactivated: " + data.azAccordionDeactivated)
             });
 
             $.subscribe("functionlib/azAccordionHeader", function (e, data)
@@ -37,12 +42,12 @@
                 console.log(data.azAccordionId, data.azAccordionHeaderJQElement)
             });
 
-            azAccordion1 = new initAZAccordion(
+            azAccordionFunction1 = new initAZAccordion(
             {
                 azAccordionId: "az-accordion-1"
             });
 
-            azAccordion2 = new initAZAccordion(
+            azAccordionFunction2 = new initAZAccordion(
             {
                 azAccordionId: "az-accordion-2",
                 azAccordionHeightStyle: "auto",
@@ -51,9 +56,9 @@
                 azAccordionIconOpen: "fas fa-arrow-circle-up"
             });
 
-            $("#cmdAZAccordion1").off().on("click", function (e) { azAccordion1.setAZAccordion(0) });
-            $("#cmdAZAccordion2").off().on("click", function (e) { azAccordion1.setAZAccordion(1) });
-            $("#cmdAZAccordion3").off().on("click", function (e) { azAccordion1.setAZAccordion(2) });
+            $("#cmdAZAccordion1").off().on("click", function (e) { azAccordionFunction1.setAZAccordion(0) });
+            $("#cmdAZAccordion2").off().on("click", function (e) { azAccordionFunction1.setAZAccordion(1) });
+            $("#cmdAZAccordion3").off().on("click", function (e) { azAccordionFunction1.setAZAccordion(2) });
         });
 
     </script>
@@ -137,33 +142,22 @@
             </div>
 
             <div class="az-row az-margin-t-14">
-                <div class="az-col xs-12 sm-6 md-4">
+                <div class="az-col xs-12 sm-6">
                     <div class="az-code jsHigh notranslate">
-                        azAccordion1.setAZAccordion(0);<br />
+                        azAccordionFunction1.setAZAccordion(0);<br />
+                        <br />
+                        azAccordionFunction1.setAZAccordion(1);<br />
+                        <br />
+                        azAccordionFunction1.setAZAccordion(2);<br />
                         <br />
                     </div>
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZAccordion1">AZ Accordion 1</button>
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        azAccordion1.setAZAccordion(1);<br />
-                        <br />
-                    </div>
-                    <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZAccordion2">AZ Accordion 2</button>
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        azAccordion1.setAZAccordion(2);<br />
-                        <br />
-                    </div>
-                    <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZAccordion3">AZ Accordion 3</button>
                     </div>
                 </div>
+                <div class="az-col xs-12 sm-6"></div>
             </div>
 
             <div class="row az-margin-t-14">
@@ -174,7 +168,7 @@
             <div class="az-row">
                 <div class="az-col xs-12 sm-6">
                     <div class="az-code jsHigh notranslate">
-                        var azAccordion1 = new initAZAccordion(<br />
+                        var azAccordionFunction1 = new initAZAccordion(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionId: "az-accordion-1"<br />
                         });<br />
@@ -187,7 +181,7 @@
                 </div>
                 <div class="az-col xs-12 sm-6">
                     <div class="az-code jsHigh notranslate">
-                        var azAccordion2 = new initAZAccordion(<br />
+                        var azAccordionFunction2 = new initAZAccordion(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionId: "az-accordion-2"<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionHeightStyle: "auto",<br />
@@ -221,7 +215,7 @@
                         <br />
                     </div>
                     <div class="az-code jsHigh notranslate">
-                        var azAccordion1 = new initAZAccordion(<br />
+                        var azAccordionFunction1 = new initAZAccordion(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionId: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionHeightStyle: "content",<br />
@@ -232,7 +226,7 @@
                         <br />
                         <br />
                         <br />
-                        azAccordion1.setAZAccordion(0);<br />
+                        azAccordionFunction1.setAZAccordion(0);<br />
                         <br />
                         <br />
                     </div>
@@ -278,14 +272,16 @@
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>functionlib/azAccordionIndex</property>
+                            <property>functionlib/azAccordionActivate</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
                             <br />
                             <div class="jsHigh notranslate">
-                                $.subscribe("functionlib/azAccordionIndex", function (e, data)<br />
+                                $.subscribe("functionlib/azAccordionActivate", function (e, data)<br />
                                 {<br />
                                 &emsp;&ensp;&emsp;&ensp;data.azAccordionId<br />
-                                &emsp;&ensp;&emsp;&ensp;data.azAccordionIndex<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azAccordionStatus<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azAccordionActivated<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azAccordionDeactivated<br />
                                 });<br />
                                 <br />
                             </div>
@@ -312,3 +308,34 @@
 
 </body>
 </html>
+
+
+<!--<div class="az-row az-margin-t-14">
+    <div class="az-col xs-12 sm-6 md-4">
+        <div class="az-code jsHigh notranslate">
+            azAccordionFunction1.setAZAccordion(0);<br />
+            <br />
+        </div>
+        <div class="az-form-group">
+            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZAccordion1">AZ Accordion 1</button>
+        </div>
+    </div>
+    <div class="az-col xs-12 sm-6 md-4">
+        <div class="az-code jsHigh notranslate">
+            azAccordionFunction1.setAZAccordion(1);<br />
+            <br />
+        </div>
+        <div class="az-form-group">
+            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZAccordion2">AZ Accordion 2</button>
+        </div>
+    </div>
+    <div class="az-col xs-12 sm-6 md-4">
+        <div class="az-code jsHigh notranslate">
+            azAccordionFunction1.setAZAccordion(2);<br />
+            <br />
+        </div>
+        <div class="az-form-group">
+            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZAccordion3">AZ Accordion 3</button>
+        </div>
+    </div>
+</div>-->

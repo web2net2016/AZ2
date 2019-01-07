@@ -40,7 +40,7 @@
                 <div class="az-row az-margin-t-56 az-margin-b-56">
                     <div class="az-col xs-8">
 
-                        <h1>AZ CDN 2.0.0</h1>
+                        <h1>AZ 2.0.0</h1>
                         <h4 class="az-margin-t-14">AZ CSS</h4>
                         <ul class="az-margin-t-14">
                             <li class="az-margin-t-14"><a href="/lib-2.0.0/css/accordion.css">Accordion</a></li>
@@ -99,6 +99,7 @@
                     <div class="az-col xs-1">&nbsp;</div>
                     <div class="az-col xs-3">
 
+                        <h1>&nbsp;</h1>
                         <h1>AZ Eksempler</h1>
                         <ul class="az-margin-t-14">
                             <li class="az-margin-t-14"><a href="/azaccordion.html">AZ Accordion</a></li>
@@ -169,76 +170,17 @@
                             NB! 'hideCoverSpin()' vil da fjerne denne igjen.
                             <br />
                             <br />
-                            <strong>ThisLocation - ThisPage - ThisFormId</strong>
+                            <strong>ThisLocation - ThisPage - $ObjAZForm</strong>
                             <br />
                             ThisLocation = window.document.location.hostname;&emsp;&ensp;&emsp;&ensp;"cdn.web2net.no"<br />
                             ThisPage = window.document.location.pathname;&emsp;&ensp;&emsp;&ensp;"/index.html"<br />
-                            ThisFormId = window.document.forms[0].id;&emsp;&ensp;&emsp;&ensp;"frmReg"<br />
+                            $ObjAZForm = window.document.forms[0].id;&emsp;&ensp;&emsp;&ensp;"frmReg"<br />
                             <br />
                             Dette er tre variabler som brukes til flere funksjoner og prosesser i systemet i tillegg til at du kan bruke disse selv.
                             <br />
                             <br />
                             NB! Vi anbefaler at ALLE dine HTML sider inneholder: &emsp;&ensp;'&lt;form id="frmReg"&gt;&lt;/form&gt';
                             <br />
-                            <br />
-                            <strong>Promise</strong>
-                            <br />
-                            $.publish()<br />
-                            $.subscribe()<br />
-                            $.subscribeonce()<br />
-                            $.unsubscribe()<br />
-                            <br />
-                            Det er mange funksjoner i systemet du kan abonnere på som vil hjelpe deg til å få en bedre flyt i din egen kode.
-                            <br />
-                            <br />
-                            <strong>Window Resize</strong>
-                            <br />
-                            $.publish("functionlib/windowResize", { windowProperties: _ArrayWindowProperties });
-                            <br />
-                            <br />
-                            Denne funksjonen trigges når siden lastes og hver gang siden endrer størrelsen, og returnerer et objekt med et Array med følgende verdier:
-                            <br />
-                            <br />
-                            'window.innerWidth'<br />
-                            'window.innerHeight'<br />
-                            'window.scrollTop'<br />
-                            'window.scrollLeft'<br />
-                            <br />
-                            Slik abonnerer du på funksjonen:
-                            <br />
-                            <br />
-                            $.subscribe("functionlib/windowResize", function (e, data)<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;data.windowProperties[0]&emsp;&ensp;=&emsp;&ensp;"window.innerWidth"<br />
-                            &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;data.windowProperties[1]&emsp;&ensp;=&emsp;&ensp;"window.innerHeight"<br />
-                            &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;data.windowProperties[2]&emsp;&ensp;=&emsp;&ensp;"window.scrollTop"<br />
-                            &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;data.windowProperties[3]&emsp;&ensp;=&emsp;&ensp;"window.scrollLeft"<br />
-                            });<br />
-                            <br />
-                            <strong>Scroll Top</strong>
-                            <br />
-                            setWindowScrollTop: false&emsp;&ensp;(default)<br />
-                            setWindowScrollTop: true
-                            <br />
-                            <br />
-                            Ved å sette dette parameteret til true, vil du også kunne abonnere på funksjonen:
-                            <br />
-                            <br />
-                            $.publish("functionlib/windowScroll", $(this).scrollTop());
-                            <br />
-                            <br />
-                            Denne funksjonen trigges hver gang du scroller, og returnerer følgende verdi:
-                            <br />
-                            <br />
-                            'window.scrollTop'<br />
-                            <br />
-                            Slik abonnerer du på funksjonen:
-                            <br />
-                            <br />
-                            $.subscribe("functionlib/windowScroll", function (e, data)<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;data&emsp;&ensp;=&emsp;&ensp;"window.scrollTop"<br />
-                            });<br />
                             <br />
                         </div>
 
