@@ -16,102 +16,16 @@
     <title></title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
-    <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
-    <link rel="stylesheet" href="/lib/standard.css" />
-    <script src="/lib/functionlib.js"></script>
-    <script src="lib/az-codecolor.js"></script>
-    <script>
-
-        $(document).ready(function ()
-        {
-            w3CodeColor();
-
-            //var items = [{
-            //    url: 'http://localhost:60967',
-            //    img: '/web2net/analytics.png',
-            //    title: 'Lorem Ipsum'
-            //}];
-
-            //var itemTpl = $('script[data-template="listitem"]').text().split(/\$\{(.+?)\}/g);
-
-            //$('.list-items').append($.map(items, function (item)
-            //{
-            //    return $.map(itemTpl, render(item)).join('');
-            //}));
-
-
-            //console.log(itemTpl)
-
-            //var div = $('<div>');
-            //div.load("/lib/templates.html #datoformat");
-
-            //var itemTpl = div.text().split(/\$\{(.+?)\}/g);
-
-            //console.log(itemTpl)
-
-
-
-            //$.get('url/to/template', function (data)
-            //{
-            //    temp = data
-            //    $('.list-items').html(null);
-
-            //    $.each(items, function (index)
-            //    {
-            //        $(this).append(temp.clone())
-            //    });
-            //});
-
-        });
-
-        function render(props)
-        {
-            console.log(props)
-            return function (tok, i)
-            {
-                console.log(tok)
-                return (i % 2) ? props[tok] : tok;
-            };
-        }
-
-        //<ul class="list-items"></ul>
-
-    </script>
 </head>
 <body>
 
     <form id="frmReg">
 
-        <ul class="list-items"></ul>
+        <h1 style="width: 50%; float: left;"><a href="https://cdn.web2net.no/">AZ 1.0.0</a></h1>
 
-        <div id="section-1" class="az-section">
-            <div id="container-1" class="az-container">
+        <h1 style="width: 50%; float: left;"><a href="/lib-2.0.0/azcdn200.html">AZ 2.0.0</a></h1>
 
-                <div class="az-row az-margin-t-56">
-                    <div class="az-col xs-6 az-text-center">
-                        <h1><a href="https://cdn.web2net.no/">AZ 1.0.0</a></h1>
-                    </div>
-                    <div class="az-col xs-6 az-text-center">
-                        <h1><a href="/azcdn200.html">AZ 2.0.0</a></h1>
-                    </div>
-                </div>
-
-            </div>
-        </div>
     </form>
-
-
-    <!--<script type="text/template" data-template="listitem">
-        <a href="${url}" class="list-group-item">
-            <table>
-                <tr>
-                    <td><img src="${img}"></td>
-                    <td><p class="list-group-item-text">${title}</p></td>
-                </tr>
-            </table>
-        </a>
-    </script>-->
 
 </body>
 </html>

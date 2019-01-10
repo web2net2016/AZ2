@@ -203,7 +203,8 @@ function initAZAccordion(Options)
     {
         azAccordionId: "",
         azAccordionHeightStyle: "content",
-        azAccordionCollapsible: true, 
+        azAccordionCollapsible: true,
+        azAccordionOpenEvent: "click",
         azAccordionIconClosed: "fas fa-plus",
         azAccordionIconOpen: "fas fa-minus",
         azAccordionSlideDown: 100,
@@ -237,7 +238,7 @@ function initAZAccordion(Options)
             execAZAccordion(main.$Accordion.children(".az-accordion-card").eq(SelectedIndex).children("header"));
         }
 
-        main.$Accordion.off().on("click", ".az-accordion-card > header", function (e)
+        main.$Accordion.off().on(main.Options.azAccordionOpenEvent, ".az-accordion-card > header", function (e)
         {
             var _Element = e.target || e.srcElement;            
             $.publish("functionlib/azAccordionHeader", { azAccordionId: main.Options.azAccordionId, azAccordionHeaderJQElement: $(_Element) });
@@ -370,21 +371,7 @@ function initAZTabs(Options)
                 main.azArticleHeight();
             });
         }
-
         main.setAZTabs(0);
-
-        //if (main.Options.azAccordionHeightStyle == "auto")
-        //{
-        //    main.azArticleHeight();
-        //    $(window).resize(function ()
-        //    {
-        //        main.azArticleHeight();
-        //    });
-        //}
-        //if (main.Options.azAccordionCollapsible == false)
-        //{
-        //    main.setAZTabs(0);
-        //}
     }   
 }
 
@@ -437,14 +424,6 @@ function initAZAjax(Options)
         return $.Deferred().resolve("");
     }
 }
-
-
-
-
-
-
-
-
 
 // AZ Get Language
 function initAZGetLanguage(SelectedPage)

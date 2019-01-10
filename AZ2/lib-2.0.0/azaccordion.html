@@ -20,7 +20,7 @@
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
     <link rel="stylesheet" href="/lib/standard.css" />
     <script src="/lib/functionlib.js"></script>
-    <script src="lib/az-codecolor.js"></script>
+    <script src="/lib/az-codecolor.js"></script>
     <script>
 
         $(document).ready(function ()
@@ -52,6 +52,7 @@
                 azAccordionId: "az-accordion-2",
                 azAccordionHeightStyle: "auto",
                 azAccordionCollapsible: false,
+                azAccordionOpenEvent: "mouseover",
                 azAccordionIconClosed: "fas fa-arrow-circle-down",
                 azAccordionIconOpen: "fas fa-arrow-circle-up",
                 azAccordionSlideDown: 400,
@@ -181,6 +182,7 @@
                         <br />
                         <br />
                         <br />
+                        <br />
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6">
@@ -190,6 +192,7 @@
                         &emsp;&ensp;&emsp;&ensp;azAccordionId: "az-accordion-2"<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionHeightStyle: "auto",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionCollapsible: false,<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionOpenEvent: "mouseover",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionIconClosed: "fas fa-arrow-circle-down",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionIconOpen: "fas fa-arrow-circle-up",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionSlideDown: 400,<br />
@@ -226,6 +229,7 @@
                         &emsp;&ensp;&emsp;&ensp;azAccordionId: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionHeightStyle: "content",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionCollapsible: true,<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionOpenEvent: "click",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionIconClosed: "fas fa-plus",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionIconOpen: "fas fa-minus",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionSlideDown: 100,<br />
@@ -268,6 +272,14 @@
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>"fas fa-plus"</brown></default>
                             <br />
+
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azAccordionOpenEvent</property>
+                            <type><span>Type:</span> <brown>String</brown></type>
+                            <default><span>Default:</span> <brown>"click"</brown></default>
+                            <values><span>Values:</span> <brown>"click"</brown> or <brown>"mouseover"</brown></values>
 
                             <br />
                         </div>
