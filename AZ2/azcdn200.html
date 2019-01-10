@@ -28,13 +28,14 @@
             w3CodeColor();
         });
 
+
     </script>
 </head>
 <body>
 
     <form id="frmReg">
 
-        <div id="section-1" class="az-section">
+        <div id="section-1" class="az-section az-container">
             <div id="container-1" class="az-container">
 
                 <div class="az-row az-margin-t-56 az-margin-b-56">
@@ -57,6 +58,7 @@
                             <li class="az-margin-t-14"><a href="/lib-2.0.0/css/sidebar.css">Sidebar</a></li>
                             <li class="az-margin-t-14"><a href="/lib-2.0.0/css/slideshow.css">Slideshow</a></li>
                             <li class="az-margin-t-14"><a href="/lib-2.0.0/css/table.css">Table</a></li>
+                            <li class="az-margin-t-14"><a href="/lib-2.0.0/css/tabs.css">Table</a></li>
                             <li class="az-margin-t-14"><a href="/lib-2.0.0/css/text.css">Text</a></li>
                             <li class="az-margin-t-14"><a href="/lib-2.0.0/css/timeline.css">Timeline</a></li>
                             <li class="az-margin-t-14"><a href="http://fontawesome.com" target="_blank">Font Awesome 5.0.6</a></li>
@@ -106,6 +108,7 @@
                             <li class="az-margin-t-14"><a href="/azajax.html">AZ Ajax</a></li>
                             <li class="az-margin-t-14"><a href="/azmodaldialog.html">AZ Modal Dialog</a></li>
                             <li class="az-margin-t-14"><a href="/azsnackbar.html">AZ Snackbar</a></li>
+                            <li class="az-margin-t-14"><a href="/aztabs.html">AZ Tabs</a></li>
                             <li class="az-margin-t-14"><a href="/azwindow.html">AZ Window</a></li>
                             <br />
                             <li class="az-margin-t-14"><a href="/card.html">AZ Card</a></li>
@@ -126,66 +129,66 @@
                 </div>
 
                 <!--<div class="az-row az-margin-t-56 az-margin-b-56">
-                    <div class="az-col xs-12">
-                        <h1 class="az-code-header">AZ JS Initialize</h1>
-                        <div class="az-code jsHigh notranslate">
-                            initializePage(<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;setAdjustStyle: false,<br />
-                            &emsp;&ensp;&emsp;&ensp;setLanguageClientStorage: false,<br />
-                            &emsp;&ensp;&emsp;&ensp;getCustomerInfo: false,<br />
-                            &emsp;&ensp;&emsp;&ensp;setSystemMenu: false,<br />
-                            &emsp;&ensp;&emsp;&ensp;getLanguage: false,<br />
-                            &emsp;&ensp;&emsp;&ensp;getValidation: false,<br />
-                            &emsp;&ensp;&emsp;&ensp;formStyle: true,<br />
-                            &emsp;&ensp;&emsp;&ensp;setGridView: false,<br />
-                            &emsp;&ensp;&emsp;&ensp;accordionIndex: "",<br />
-                            &emsp;&ensp;&emsp;&ensp;navbarMenuAnimate: true,<br />
-                            &emsp;&ensp;&emsp;&ensp;setWindowScrollTop: false,<br />
-                            &emsp;&ensp;&emsp;&ensp;dialogAlertClass: 'az-alert-danger',<br />
-                            &emsp;&ensp;&emsp;&ensp;dialogNormalClass: 'az-alert-info',<br />
-                            &emsp;&ensp;&emsp;&ensp;dialogAlertTimeout: 3000<br />
-                            }, function ()<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;hideCoverSpin();<br />
-                            });<br />
-                            <br />
-                            <br />
-                            <strong>Initiering</strong>
-                            <br />
-                            Når funksjonen kjøres, vil det automatisk utføres flere funksjoner og prosesser i tillegg til det du bestemmer ved hjelp av funksjonens parametere som du ser over.
-                            Funksjonen avsluttes med en 'Callback()' funksjon som gir deg muligheten til å trigge dine egne funksjoner umiddelbart etter at 'initializePage()' er ferdig.
-                            <br />
-                            <br />
-                            NB! Vi anbefaler at du kjører funksjonen 'hideCoverSpin()' umiddelbart etter at 'initializePage()' er ferdig.
-                            <br />
-                            <br />
-                            <strong>Cover Spin</strong>
-                            <br />
-                            showCoverSpin();<br />
-                            <br />
-                            Denne funksjonen appender følgende til body:&emsp;&ensp;'&lt;div id="az-cover-spin"&gt;&lt;/div&gt';
-                            <br />
-                            <br />
-                            NB! 'hideCoverSpin()' vil da fjerne denne igjen.
-                            <br />
-                            <br />
-                            <strong>ThisLocation - ThisPage - $ObjAZForm</strong>
-                            <br />
-                            ThisLocation = window.document.location.hostname;&emsp;&ensp;&emsp;&ensp;"cdn.web2net.no"<br />
-                            ThisPage = window.document.location.pathname;&emsp;&ensp;&emsp;&ensp;"/index.html"<br />
-                            $ObjAZForm = window.document.forms[0].id;&emsp;&ensp;&emsp;&ensp;"frmReg"<br />
-                            <br />
-                            Dette er tre variabler som brukes til flere funksjoner og prosesser i systemet i tillegg til at du kan bruke disse selv.
-                            <br />
-                            <br />
-                            NB! Vi anbefaler at ALLE dine HTML sider inneholder: &emsp;&ensp;'&lt;form id="frmReg"&gt;&lt;/form&gt';
-                            <br />
-                            <br />
-                        </div>
+        <div class="az-col xs-12">
+            <h1 class="az-code-header">AZ JS Initialize</h1>
+            <div class="az-code jsHigh notranslate">
+                initializePage(<br />
+                {<br />
+                &emsp;&ensp;&emsp;&ensp;setAdjustStyle: false,<br />
+                &emsp;&ensp;&emsp;&ensp;setLanguageClientStorage: false,<br />
+                &emsp;&ensp;&emsp;&ensp;getCustomerInfo: false,<br />
+                &emsp;&ensp;&emsp;&ensp;setSystemMenu: false,<br />
+                &emsp;&ensp;&emsp;&ensp;getLanguage: false,<br />
+                &emsp;&ensp;&emsp;&ensp;getValidation: false,<br />
+                &emsp;&ensp;&emsp;&ensp;formStyle: true,<br />
+                &emsp;&ensp;&emsp;&ensp;setGridView: false,<br />
+                &emsp;&ensp;&emsp;&ensp;accordionIndex: "",<br />
+                &emsp;&ensp;&emsp;&ensp;navbarMenuAnimate: true,<br />
+                &emsp;&ensp;&emsp;&ensp;setWindowScrollTop: false,<br />
+                &emsp;&ensp;&emsp;&ensp;dialogAlertClass: 'az-alert-danger',<br />
+                &emsp;&ensp;&emsp;&ensp;dialogNormalClass: 'az-alert-info',<br />
+                &emsp;&ensp;&emsp;&ensp;dialogAlertTimeout: 3000<br />
+                }, function ()<br />
+                {<br />
+                &emsp;&ensp;&emsp;&ensp;hideCoverSpin();<br />
+                });<br />
+                <br />
+                <br />
+                <strong>Initiering</strong>
+                <br />
+                Når funksjonen kjøres, vil det automatisk utføres flere funksjoner og prosesser i tillegg til det du bestemmer ved hjelp av funksjonens parametere som du ser over.
+                Funksjonen avsluttes med en 'Callback()' funksjon som gir deg muligheten til å trigge dine egne funksjoner umiddelbart etter at 'initializePage()' er ferdig.
+                <br />
+                <br />
+                NB! Vi anbefaler at du kjører funksjonen 'hideCoverSpin()' umiddelbart etter at 'initializePage()' er ferdig.
+                <br />
+                <br />
+                <strong>Cover Spin</strong>
+                <br />
+                showCoverSpin();<br />
+                <br />
+                Denne funksjonen appender følgende til body:&emsp;&ensp;'&lt;div id="az-cover-spin"&gt;&lt;/div&gt';
+                <br />
+                <br />
+                NB! 'hideCoverSpin()' vil da fjerne denne igjen.
+                <br />
+                <br />
+                <strong>ThisLocation - ThisPage - $ObjAZForm</strong>
+                <br />
+                ThisLocation = window.document.location.hostname;&emsp;&ensp;&emsp;&ensp;"cdn.web2net.no"<br />
+                ThisPage = window.document.location.pathname;&emsp;&ensp;&emsp;&ensp;"/index.html"<br />
+                $ObjAZForm = window.document.forms[0].id;&emsp;&ensp;&emsp;&ensp;"frmReg"<br />
+                <br />
+                Dette er tre variabler som brukes til flere funksjoner og prosesser i systemet i tillegg til at du kan bruke disse selv.
+                <br />
+                <br />
+                NB! Vi anbefaler at ALLE dine HTML sider inneholder: &emsp;&ensp;'&lt;form id="frmReg"&gt;&lt;/form&gt';
+                <br />
+                <br />
+            </div>
 
-                    </div>
-                </div>-->
+        </div>
+    </div>-->
 
             </div>
         </div>

@@ -27,24 +27,24 @@
         {
             w3CodeColor();
 
-            var items = [{
-                url: 'http://localhost:60967',
-                img: '/web2net/analytics.png',
-                title: 'Lorem Ipsum'
-            }];
+            //var items = [{
+            //    url: 'http://localhost:60967',
+            //    img: '/web2net/analytics.png',
+            //    title: 'Lorem Ipsum'
+            //}];
 
-            var itemTpl = $('script[data-template="listitem"]').text().split(/\$\{(.+?)\}/g);
+            //var itemTpl = $('script[data-template="listitem"]').text().split(/\$\{(.+?)\}/g);
 
-            $('.list-items').append($.map(items, function (item)
-            {
-                return $.map(itemTpl, render(item)).join('');
-            }));
+            //$('.list-items').append($.map(items, function (item)
+            //{
+            //    return $.map(itemTpl, render(item)).join('');
+            //}));
 
 
             //console.log(itemTpl)
 
-            var div = $('<div>');
-            div.load("/lib/templates.html #datoformat");
+            //var div = $('<div>');
+            //div.load("/lib/templates.html #datoformat");
 
             //var itemTpl = div.text().split(/\$\{(.+?)\}/g);
 
@@ -85,7 +85,7 @@
 
         <ul class="list-items"></ul>
 
-        <!--<div id="section-1" class="az-section">
+        <div id="section-1" class="az-section">
             <div id="container-1" class="az-container">
 
                 <div class="az-row az-margin-t-56">
@@ -98,11 +98,11 @@
                 </div>
 
             </div>
-        </div>-->
+        </div>
     </form>
 
 
-    <script type="text/template" data-template="listitem">
+    <!--<script type="text/template" data-template="listitem">
         <a href="${url}" class="list-group-item">
             <table>
                 <tr>
@@ -111,7 +111,7 @@
                 </tr>
             </table>
         </a>
-    </script>
+    </script>-->
 
 </body>
 </html>

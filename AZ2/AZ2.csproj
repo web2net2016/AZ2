@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="aztabs.html" />
     <Content Include="azaccordion.html" />
     <Content Include="azajax.html" />
     <Content Include="azcdn200.html" />
@@ -80,9 +81,12 @@
     <Content Include="form.html" />
     <Content Include="grid.html" />
     <Content Include="index.html" />
+    <Content Include="lib-2.0.0\css\tabs.css" />
     <Content Include="lib-2.0.0\css\accordion.css" />
     <Content Include="lib-2.0.0\css\az-2.0.0.css" />
-    <Content Include="lib-2.0.0\css\az-2.0.0.min.css" />
+    <Content Include="lib-2.0.0\css\az-2.0.0.min.css">
+      <DependentUpon>az-2.0.0.css</DependentUpon>
+    </Content>
     <Content Include="lib-2.0.0\css\card.css" />
     <Content Include="lib-2.0.0\css\color.css" />
     <Content Include="lib-2.0.0\css\default.css" />
@@ -187,7 +191,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bundleconfig.json" />
     <Content Include="lib-2.0.0\fontawesome\webfonts\fa-brands-400.eot" />
     <Content Include="lib-2.0.0\fontawesome\webfonts\fa-brands-400.ttf" />
     <Content Include="lib-2.0.0\fontawesome\webfonts\fa-brands-400.woff" />
@@ -202,6 +205,7 @@
     <Content Include="lib-2.0.0\fontawesome\webfonts\fa-solid-900.woff2" />
     <Content Include="lib\contact-form-lang.json" />
     <Content Include="lib\contact-form-val.json" />
+    <None Include="bundleconfig.json" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

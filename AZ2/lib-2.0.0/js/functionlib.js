@@ -72,7 +72,6 @@ var DebugMode = true;
     {
         $.publish("functionlib/azWindowResize", { azWindowWidth: window.innerWidth, azWindowHeight: window.innerHeight, azWindowScrollTop: $(window).scrollTop(), azWindowScrollLeft: $(window).scrollLeft(), azWindowOrientation: (window.innerHeight > window.innerWidth) ? "portrait" : "landscape" });
     });
-
 })(jQuery);
 
 // AZ Page
@@ -206,7 +205,9 @@ function initAZAccordion(Options)
         azAccordionHeightStyle: "content",
         azAccordionCollapsible: true, 
         azAccordionIconClosed: "fas fa-plus",
-        azAccordionIconOpen: "fas fa-minus"
+        azAccordionIconOpen: "fas fa-minus",
+        azAccordionSlideDown: 100,
+        azAccordionSlideUp: 100
     };
     main.Options = $.extend({}, _Defaults, Options || {});
 
@@ -250,7 +251,7 @@ function initAZAccordion(Options)
             {
                 if (main.Options.azAccordionCollapsible)
                 {
-                    $SelectedAccordionHeader.siblings("article").slideUp(100);
+                    $SelectedAccordionHeader.siblings("article").slideUp(main.Options.azAccordionSlideUp);
                     $SelectedAccordionHeader.removeClass("accordion-active");
                     $("i", $SelectedAccordionHeader).removeClass(main.Options.azAccordionIconOpen).addClass(main.Options.azAccordionIconClosed);
                 }
@@ -265,10 +266,10 @@ function initAZAccordion(Options)
             }
             else
             {
-                main.$AccordionCard.children("article").slideUp(100);
+                main.$AccordionCard.children("article").slideUp(main.Options.azAccordionSlideUp);
                 main.$AccordionCard.children("header").removeClass("accordion-active");
                 $("i", main.$AccordionCard.children("header")).removeClass(main.Options.azAccordionIconOpen).addClass(main.Options.azAccordionIconClosed);
-                $SelectedAccordionHeader.siblings("article").slideDown(100);
+                $SelectedAccordionHeader.siblings("article").slideDown(main.Options.azAccordionSlideDown);
                 $SelectedAccordionHeader.addClass("accordion-active");
                 $("i", $SelectedAccordionHeader).removeClass(main.Options.azAccordionIconClosed).addClass(main.Options.azAccordionIconOpen);
                 $.publish("functionlib/azAccordionActivate",
@@ -294,6 +295,96 @@ function initAZAccordion(Options)
         {
             main.setAZAccordion(0);
         }
+    }   
+}
+
+// AZ Tabs
+function initAZTabs(Options)
+{
+    var main = this;
+    var _Defaults =
+    {
+        azTabsId: "",
+        azTabsHeightStyle: "content",
+        azTabsOpenEvent: "click"
+    };
+    main.Options = $.extend({}, _Defaults, Options || {});
+
+    if (main.Options.azTabsId != "")
+    {
+        main.$Tabs = $("#" + main.Options.azTabsId);
+        main.$TabsCard = main.$Tabs.children(".az-tabs-card");
+
+        var _MaxArticleHeight = 0;
+        main.azArticleHeight = function ()
+        {
+            _MaxArticleHeight = 0;
+            main.$TabsCard.children("article").css({ height: "inherit" });
+            main.$TabsCard.children("article").each(function ()
+            {
+                _MaxArticleHeight = Math.max(_MaxArticleHeight, $(this).height());
+            });
+            if (_MaxArticleHeight > 0)
+            {
+                main.$TabsCard.children("article").height(_MaxArticleHeight);
+            }
+        }
+
+        main.setAZTabs = function (SelectedIndex)
+        {
+            execAZTabs(main.$Tabs.children("ul").children("li").eq(SelectedIndex));
+        }
+
+        main.$Tabs.off().on(main.Options.azTabsOpenEvent, "ul > li", function (e)
+        {
+            var _Element = e.target || e.srcElement;
+            $.publish("functionlib/azTabs", { azTabsId: main.Options.azTabsId, azTabsJQElement: $(_Element) });
+            execAZTabs($(this));
+        });
+
+        var azTabsDeactivated = "";
+        function execAZTabs($SelectedTab)
+        {
+            var _MenuIndex = $($SelectedTab).index()
+
+            main.$Tabs.children("ul").children("li").removeClass("tabs-active");
+            main.$Tabs.children("ul").children("li").eq(_MenuIndex).addClass("tabs-active");
+
+            main.$TabsCard.children("article").removeClass("article-active");
+            main.$TabsCard.eq(_MenuIndex).children("article").addClass("article-active");
+
+            $.publish("functionlib/azTabsActivate",
+            {
+                azTabsId: main.Options.azTabsId,
+                azTabsActivated: _MenuIndex,
+                azTabsDeactivated: azTabsDeactivated
+            });
+            azTabsDeactivated = _MenuIndex;
+        }
+
+        if (main.Options.azTabsHeightStyle == "auto")
+        {
+            main.azArticleHeight();
+            $(window).resize(function ()
+            {
+                main.azArticleHeight();
+            });
+        }
+
+        main.setAZTabs(0);
+
+        //if (main.Options.azAccordionHeightStyle == "auto")
+        //{
+        //    main.azArticleHeight();
+        //    $(window).resize(function ()
+        //    {
+        //        main.azArticleHeight();
+        //    });
+        //}
+        //if (main.Options.azAccordionCollapsible == false)
+        //{
+        //    main.setAZTabs(0);
+        //}
     }   
 }
 
@@ -3344,6 +3435,16 @@ function closeStandardConfirm()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//$("#myInput").on("keyup", function ()
+//{
+//    var value = $(this).val().toLowerCase();
+//    $("#az-css li").filter(function ()
+//    {
+//        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+//    });
+//});
 
 //function setAccordion(SelectedIndex)
 //{

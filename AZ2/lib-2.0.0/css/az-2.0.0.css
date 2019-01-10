@@ -73,6 +73,9 @@
         height: 100%;
         width: 100%;
         opacity: 0;
+        -webkit-transition: opacity 0.5s ease;
+        -moz-transition: opacity 0.5s ease;
+        -o-transition: opacity 0.5s ease;
         transition: opacity 0.5s ease;
     }
 
@@ -5139,6 +5142,7 @@ ul
         padding: 0 7px 0 7px;
         box-sizing: border-box;
         -webkit-transition: -webkit-box-shadow ease-in-out .15s;
+        -moz-transition: box-shadow ease-in-out .15s;
         -o-transition: box-shadow ease-in-out .15s;
         transition: box-shadow ease-in-out .15s;
     }
@@ -5216,6 +5220,7 @@ ul
         box-sizing: border-box;
         resize: none;
         -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -moz-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
         -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
         transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     }
@@ -5250,6 +5255,7 @@ ul
         width: 100%;
         height: 30px;
         -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -moz-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
         -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
         transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     }
@@ -5283,6 +5289,7 @@ ul
         height: 20px;
         top: 5px;
         -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -moz-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
         -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
         transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     }
@@ -5435,6 +5442,9 @@ ul
         position: absolute;
         top: 13px;
         opacity: 0.5;
+        -webkit-transition: 0.2s ease top;
+        -moz-transition: 0.2s ease top;
+        -o-transition: 0.2s ease top;
         transition: 0.2s ease top;
     }
 
@@ -8070,6 +8080,9 @@ template
     {
         float: left;
         margin: 0 7px 7px 0;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
         transition: all 0.5s ease;
     }
 
@@ -8104,12 +8117,13 @@ template
 
 .az-portfolio-content-hidden
 {
-    -ms-transform: scale(0, 0);
-    -webkit-transform: scale(0, 0);
-    transform: scale(0, 0);
-    opacity: 0;
     width: 0 !important;
     margin: 0 !important;
+    opacity: 0;
+    -webkit-transform: scale(0, 0);
+    -moz-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    transform: scale(0, 0);
 }
 
 /* Overlay */
@@ -8128,6 +8142,9 @@ template
     height: 100%;
     width: 100%;
     opacity: 0;
+    -webkit-transition: opacity 0.5s ease;
+    -moz-transition: opacity 0.5s ease;
+    -o-transition: opacity 0.5s ease;
     transition: opacity 0.5s ease;
 }
 
@@ -8342,6 +8359,55 @@ template
 		margin-left: auto;
 	}
 }
+.az-tabs
+{
+    display: inline-block;
+    width: 100%;
+}
+
+    .az-tabs > ul
+    {
+        list-style-type: none;
+        margin: 0;
+    }
+
+        .az-tabs > ul::after
+        {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .az-tabs > ul > li
+        {
+            float: left;
+            border-bottom-width: 0 !important;
+            cursor: pointer;
+        }
+
+.az-tabs-card
+{
+}
+
+    .az-tabs-card > article
+    {
+        display: none;
+    }
+
+        .az-tabs-card > article.article-active
+        {
+            display: block;
+        }
+
+@media (max-width: 576px)
+{
+    .az-tabs
+    {
+        margin-left: 7px;
+        margin-right: 7px;
+    }
+}
+
 /* Size ALL ----------*/
 h1,
 h2,
@@ -9322,6 +9388,9 @@ address
     height: 100%;
     width: 100%;
     opacity: 0;
+    -webkit-transition: opacity 0.8s ease;
+    -moz-transition: opacity 0.8s ease;
+    -o-transition: opacity 0.8s ease;
     transition: opacity 0.8s ease;
 }
 

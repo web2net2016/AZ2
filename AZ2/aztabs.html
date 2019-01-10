@@ -1,0 +1,286 @@
+﻿
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title></title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
+    <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
+    <link rel="stylesheet" href="/lib/standard.css" />
+    <script src="/lib/functionlib.js"></script>
+    <script src="lib/az-codecolor.js"></script>
+    <script>
+
+        $(document).ready(function ()
+        {
+            azPageFunction = new initAZPage({}, function ()
+            {
+                hideCoverSpin();
+            });
+
+            w3CodeColor();
+
+            $.subscribe("functionlib/azTabsActivate", function (e, data)
+            {
+                console.log(data.azTabsId + " - Activated: " + data.azTabsActivated + " - Deactivated: " + data.azTabsDeactivated)
+            });
+
+            $.subscribe("functionlib/azTabs", function (e, data)
+            {
+                console.log(data.azTabsId, data.azTabsJQElement)
+            });
+
+            var azTabsFunction1 = new initAZTabs(
+            {
+                azTabsId: "az-tabs-1"
+            });
+
+            var azTabsFunction2 = new initAZTabs(
+            {
+                azTabsId: "az-tabs-2",
+                azTabsHeightStyle: "auto",
+                azTabsOpenEvent: "mouseover"
+            });
+
+            $("#cmdAZTabs1").off().on("click", function (e) { azTabsFunction1.setAZTabs(0) });
+            $("#cmdAZTabs2").off().on("click", function (e) { azTabsFunction1.setAZTabs(1) });
+            $("#cmdAZTabs3").off().on("click", function (e) { azTabsFunction1.setAZTabs(2) });
+        });
+
+    </script>
+</head>
+<body>
+
+    <form id="frmReg">
+        <div class="az-container">
+
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12 sm-6">
+
+                    <div class="az-tabs" id="az-tabs-1">
+                        <ul>
+                            <li>Tabs 1</li>
+                            <li>Tabs 2</li>
+                            <li>Tabs 3</li>
+                        </ul>
+                        <div class="az-tabs-card">
+                            <article>
+                                <img class="az-image az-width-40 az-left az-margin-r-14 az-shadow-1" src="/web2net/img_avatar2.png" />
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p class="az-clearfix">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <div class="az-tabs-card">
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <div class="az-tabs-card">
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="az-col xs-12 sm-6">
+
+                    <div class="az-tabs" id="az-tabs-2">
+                        <ul>
+                            <li>Tabs 1</li>
+                            <li>Tabs 2</li>
+                            <li>Tabs 3</li>
+                            <li>Tabs 4</li>
+                        </ul>
+                        <div class="az-tabs-card">
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <div class="az-tabs-card">
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <div class="az-tabs-card">
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <div class="az-tabs-card">
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-code jsHigh notranslate">
+                        azTabsFunction1.setAZTabs(0);<br />
+                        <br />
+                        azTabsFunction1.setAZTabs(1);<br />
+                        <br />
+                        azTabsFunction1.setAZTabs(2);<br />
+                        <br />
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZTabs1">AZ Tabs 1</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZTabs2">AZ Tabs 2</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZTabs3">AZ Tabs 3</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6"></div>
+            </div>
+
+            <div class="row az-margin-t-14">
+                <div class="az-col xs-12">
+                    <h1 class="az-code-header">AZ Tabs</h1>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-code jsHigh notranslate">
+                        var azTabsFunction1 = new initAZTabs(<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;azTabsId: "az-tabs-1"<br />
+                        });<br />
+                        <br />
+                        <br />
+                        <br />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-code jsHigh notranslate">
+                        var azTabsFunction2 = new initAZTabs(<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;azTabsId: "az-tabs-2",<br />
+                        &emsp;&ensp;&emsp;&ensp;azTabsHeightStyle: "content",<br />
+                        &emsp;&ensp;&emsp;&ensp;azTabsOpenEvent: "mouseover"<br />
+                        });<br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+
+            <div class="az-row az-margin-b-56">
+                <div class="az-col xs-12">
+                    <div class="az-code htmlHigh notranslate">
+                        <br />
+                        <br />
+                        &lt;div class="az-tabs" id="az-tabs-1"&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&lt;ul&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&lt;li&gt;Tabs 1&lt;/li&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&lt;li&gt;Tabs 2&lt;/li&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&lt;/ul&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&lt;div class="az-tabs-card"&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&lt;article&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.&lt;/p&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&lt;/article&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&lt;/div&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&lt;div class="az-tabs-card"&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&lt;article&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.&lt;/p&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&lt;/article&gt;<br />
+                        &emsp;&ensp;&emsp;&ensp;&lt;/div&gt;<br />
+                        &lt;/div&gt;<br />
+                        <br />
+                        <br />
+                    </div>
+                        <div class="az-code jsHigh notranslate">
+                            var azTabsFunction1 = new initAZTabs(<br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;azTabsId: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;azTabsHeightStyle: "content",<br />
+                            &emsp;&ensp;&emsp;&ensp;azTabsOpenEvent: "click"<br />
+                            });<br />
+                            <br />
+                            <br />
+                            <br />
+                            azTabsFunction1.setAZTabs(0);<br />
+                            <br />
+                            <br />
+                        </div>
+                        <div class="az-code htmlHigh notranslate">
+                            <div class="az-code-property-wrapper">
+                                <property>azTabsId</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>""</brown></default>
+                                <br />
+
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azTabsHeightStyle</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>"content"</brown></default>
+                                <values><span>Values:</span> <brown>"content"</brown> or <brown>"auto"</brown></values>
+
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azTabsOpenEvent</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>"click"</brown></default>
+                                <values><span>Values:</span> <brown>"click"</brown> or <brown>"mouseover"</brown></values>
+
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>functionlib/azTabsActivate</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    $.subscribe("functionlib/azTabsActivate", function (e, data)<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azTabsId<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azTabsActivated<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azTabsDeactivated<br />
+                                    });<br />
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>functionlib/azTabs</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    $.subscribe("functionlib/azTabs", function (e, data)<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azTabsId<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azTabsJQElement<br />
+                                    });<br />
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+        </div>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿.az-tabs
+{
+    display: inline-block;
+    width: 100%;
+}
+
+    .az-tabs > ul
+    {
+        list-style-type: none;
+        margin: 0;
+    }
+
+        .az-tabs > ul::after
+        {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .az-tabs > ul > li
+        {
+            float: left;
+            border-bottom-width: 0 !important;
+            cursor: pointer;
+        }
+
+.az-tabs-card
+{
+}
+
+    .az-tabs-card > article
+    {
+        display: none;
+    }
+
+        .az-tabs-card > article.article-active
+        {
+            display: block;
+        }
+
+@media (max-width: 576px)
+{
+    .az-tabs
+    {
+        margin-left: 7px;
+        margin-right: 7px;
+    }
+}
