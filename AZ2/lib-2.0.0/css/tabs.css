@@ -33,11 +33,6 @@
         display: none;
     }
 
-        .az-tabs-card > article.article-active
-        {
-            display: block;
-        }
-
 @media (max-width: 576px)
 {
     .az-tabs

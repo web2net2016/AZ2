@@ -16,26 +16,32 @@
     <title></title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
-    <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
-    <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
-    <script src="/lib-2.0.0/lib/functionlib.js"></script>
-    <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css?id=1" />
+    <script src="/lib-2.0.0/js/az-2.0.0.min.js?id=1"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css?id=1" />
+    <script src="/lib-2.0.0/lib/functionlib.js?id=1"></script>
+    <script src="/lib-2.0.0/lib/az-codecolor.js?id=1"></script>
     <script>
 
         $(document).ready(function ()
         {
+            azPageFunction = new initAZPage({}, function ()
+            {
+                hideCoverSpin();
+            });
+
+            w3CodeColor();
+
             $("#cmdSnackbar1").off("click", setSnackbar1).on("click", setSnackbar1);
             $("#cmdSnackbar2").off("click", setSnackbar2).on("click", setSnackbar2);
             $("#cmdSnackbar3").off("click", setSnackbar3).on("click", setSnackbar3);
-
-            w3CodeColor();
         });
 
         function setSnackbar1()
         {
-            showSnackbar(
+            azSnackbarFunction1 = new initAZSnackbar(
             {
+                azSnackbarId: "az-snackbar-1",
                 snackbarText: 'Dette er en tekst... til venstre...'
             });
         }
@@ -67,83 +73,6 @@
         <div class="az-container">
 
             <div class="az-row az-margin-t-56">
-                <div class="az-col xs-12">
-                    <h1 class="az-code-header">AZ Snackbar</h1>
-                    <div class="az-code jsHigh notranslate">
-                        showSnackbar(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarText: "",<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarPosition: "left",<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarBottom: 20,<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarMobileMinHeight: 0,<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarClose: false,<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarTimeout: 3000<br />
-                        });<br />
-                        <br />
-                        <strong>Innhold</strong>
-                        <br />
-                        snackbarText: ""&emsp;&ensp;(default)<br />
-                        <br />
-                        Innholdet kan variere fra en enkel tekst, til komplette 'forms' med HTML.
-                        <br />
-                        <br />
-                        <strong>Posisjonering</strong>
-                        <br />
-                        snackbarPosition: "left"&emsp;&ensp;(default)<br />
-                        snackbarPosition: "right"<br />
-                        <br />
-                        <strong>Avstand fra bunnen</strong>
-                        <br />
-                        snackbarBottom: 20&emsp;&ensp;(default)<br />
-                        <br />
-                        Hvis du ønsker å endre avstanden fra bunnen av siden og opp til 'AZSnackbar', kan du øke eller redusere denne verdien.
-                        <br />
-                        <br />
-                        <strong>Mobil visning</strong>
-                        <br />
-                        snackbarMobileMinHeight: 0&emsp;&ensp;(default)<br />
-                        <br />
-                        Ved skjermstørrelser under '576px', vil 'AZSnackbar' bruke hele bredden av skjermen og avstanden til bunnen av siden reduseres til '0px'.
-                        Videre har du muligheten til å sette en minimum høyde på 'AZSnackbar', slik at denne kan dekke over f.eks. en meny eller lignende du har i bunnen av siden.
-                        <br />
-                        <br />
-                        <strong>Tips:</strong> Hvis du bruker 'snackbarMobileMinHeight', må du trekke fra '28px' som er den totale paddingen i 'AZSnackbar'.
-                        <br />
-                        <strong>NB!</strong> 'snackbarPosition' og 'snackbarBottom' vil ikke ha noen funksjon i mobil visning.
-                        <br />
-                        <br />
-                        <strong>Lukkeknapp - X</strong>
-                        <br />
-                        snackbarClose: false&emsp;&ensp;(default)<br />
-                        <br />
-                        Ved å endre verdien til true, vil det settes inn en lukkeknapp (X) i høyre del, samtidig som 'snackbarTimeout' overstyres,
-                        dvs. at 'AZSnackbar' vises helt til brukeren selv velger å lukke den.
-                        <br />
-                        <br />
-                        <strong>Visningstid</strong>
-                        <br />
-                        snackbarTimeout: 3000&emsp;&ensp;(default)<br />
-                        <br />
-                        Visningstiden oppgis i millisekunder.
-                        <br />
-                        <br />
-                        <strong>Nytt innhold</strong>
-                        <br />
-                        Hvis du ønsker å endre innholdet uten å aktivere 'AZSnackbar' på nytt, kan du bruke funksjonen:
-                        <br />
-                        <br />
-                        changeSnackbarText("Din tekst");<br />
-                        <br />
-                        <strong>Utseende</strong>
-                        <br />
-                        For styling av 'AZSnackbar', finner du CSS klassen '#az-snackbar' i Template - Standard filen.
-                        <br />
-                        <br />
-                    </div>
-                </div>
-            </div>
-
-            <div class="az-row az-margin-t-14 az-margin-b-56">
                 <div class="az-col xs-12 sm-6 md-4">
                     <div class="az-code jsHigh notranslate">
                         showSnackbar(<br />
@@ -184,6 +113,111 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row az-margin-t-14">
+                <div class="az-col xs-12">
+                    <h1 class="az-code-header">AZ Snackbar</h1>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-code jsHigh notranslate">
+                        var azSnackbarFunction1 = new initAZSnackbar(<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarId: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;snackbarText: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;snackbarPosition: "left",<br />
+                        &emsp;&ensp;&emsp;&ensp;snackbarBottom: 20,<br />
+                        &emsp;&ensp;&emsp;&ensp;snackbarMobileMinHeight: 0,<br />
+                        &emsp;&ensp;&emsp;&ensp;snackbarClose: false,<br />
+                        &emsp;&ensp;&emsp;&ensp;snackbarTimeout: 3000<br />
+                        });<br />
+                        <br />
+                        Hvis du ønsker å bruke egne knapper eller linker for å åpne/lukke din Accordion, bruker du JavaScript funksjonen under.
+                        <br />
+                        <br />
+                        azSnackbarFunction1.setAZSnackbar();<br />
+                        <br />
+                    </div>
+                    <div class="az-code htmlHigh notranslate">
+                        <div class="az-code-property-wrapper">
+                            <property>azSnackbarId</property>
+                            <type><span>Type:</span> <brown>String</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <br />
+
+                            <br />
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+                        <!--<br />
+                <strong>Innhold</strong>
+                <br />
+                snackbarText: ""&emsp;&ensp;(default)<br />
+                <br />
+                Innholdet kan variere fra en enkel tekst, til komplette 'forms' med HTML.
+                <br />
+                <br />
+                <strong>Posisjonering</strong>
+                <br />
+                snackbarPosition: "left"&emsp;&ensp;(default)<br />
+                snackbarPosition: "right"<br />
+                <br />
+                <strong>Avstand fra bunnen</strong>
+                <br />
+                snackbarBottom: 20&emsp;&ensp;(default)<br />
+                <br />
+                Hvis du ønsker å endre avstanden fra bunnen av siden og opp til 'AZSnackbar', kan du øke eller redusere denne verdien.
+                <br />
+                <br />
+                <strong>Mobil visning</strong>
+                <br />
+                snackbarMobileMinHeight: 0&emsp;&ensp;(default)<br />
+                <br />
+                Ved skjermstørrelser under '576px', vil 'AZSnackbar' bruke hele bredden av skjermen og avstanden til bunnen av siden reduseres til '0px'.
+                Videre har du muligheten til å sette en minimum høyde på 'AZSnackbar', slik at denne kan dekke over f.eks. en meny eller lignende du har i bunnen av siden.
+                <br />
+                <br />
+                <strong>Tips:</strong> Hvis du bruker 'snackbarMobileMinHeight', må du trekke fra '28px' som er den totale paddingen i 'AZSnackbar'.
+                <br />
+                <strong>NB!</strong> 'snackbarPosition' og 'snackbarBottom' vil ikke ha noen funksjon i mobil visning.
+                <br />
+                <br />
+                <strong>Lukkeknapp - X</strong>
+                <br />
+                snackbarClose: false&emsp;&ensp;(default)<br />
+                <br />
+                Ved å endre verdien til true, vil det settes inn en lukkeknapp (X) i høyre del, samtidig som 'snackbarTimeout' overstyres,
+                dvs. at 'AZSnackbar' vises helt til brukeren selv velger å lukke den.
+                <br />
+                <br />
+                <strong>Visningstid</strong>
+                <br />
+                snackbarTimeout: 3000&emsp;&ensp;(default)<br />
+                <br />
+                Visningstiden oppgis i millisekunder.
+                <br />
+                <br />
+                <strong>Nytt innhold</strong>
+                <br />
+                Hvis du ønsker å endre innholdet uten å aktivere 'AZSnackbar' på nytt, kan du bruke funksjonen:
+                <br />
+                <br />
+                changeSnackbarText("Din tekst");<br />
+                <br />
+                <strong>Utseende</strong>
+                <br />
+                For styling av 'AZSnackbar', finner du CSS klassen '#az-snackbar' i Template - Standard filen.
+                <br />
+                <br />-->
 
         </div>
     </form>

@@ -35,7 +35,6 @@ accordion.css
     {
         padding: 7px;
         background-color: #009688;
-        color: #FFFFFF;
     }
 
         .az-accordion-card > header:hover
@@ -49,11 +48,13 @@ accordion.css
 
         .az-accordion-card > header > *
         {
+            color: #FFFFFF;
             font-size: 14px;
         }
 
         .az-accordion-card > header > i
         {
+            color: #FFFFFF;
             font-size: 12px;
             margin-right: 2px;
             margin-top: 4px;
@@ -63,18 +64,23 @@ accordion.css
     {
         padding: 7px;
         background-color: #FFFFFF;
-        color: #000000;
     }
 
         .az-accordion-card > article > *
         {
+            color: #000000;
             font-size: 14px;
         }
 
-    .az-accordion-card > header.accordion-active
+    .az-accordion-card > header.az-accordion-header-active
     {
         background-color: #607d8b;
     }
+
+    .az-accordion-card > article.az-accordion-article-active
+    {
+    }
+
 
 /*--------------------------------------------------------
 Card 
@@ -94,7 +100,7 @@ card.css
         color: #FFFFFF;
     }
 
-        .az-card > header > h1
+        .az-card > header > *
         {
             font-size: 14px;
         }
@@ -551,16 +557,6 @@ form.css
     color: #FF0000;
 }
 
-/* Snackbar */
-#az-snackbar
-{
-    background-color: #333333;
-    color: #FFFFFF;
-    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-
 
 /*--------------------------------------------------------
 Grid 
@@ -941,6 +937,22 @@ slideshow.css
 
 
 /*--------------------------------------------------------
+Snackbar 
+snackbar.css    
+-----------------------------------------------------------*/
+#az-snackbar
+{
+    background-color: #333333;
+    color: #FFFFFF;
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+
+
+
+/*--------------------------------------------------------
 Table 
 table.css    
 -----------------------------------------------------------*/
@@ -973,16 +985,16 @@ tabs.css
             border: 1px solid #DDDDDD;
         }
 
-        .az-tabs > ul > li:hover
-        {
-            background-color: #FF9F55;
-            -webkit-transition: background-color 0.4s;
-            -moz-transition: background-color 0.4s;
-            -o-transition: background-color 0.4s;
-            transition: background-color 0.4s;
-        }
+            .az-tabs > ul > li:hover
+            {
+                background-color: #FF9F55;
+                -webkit-transition: background-color 0.4s;
+                -moz-transition: background-color 0.4s;
+                -o-transition: background-color 0.4s;
+                transition: background-color 0.4s;
+            }
 
-            .az-tabs > ul > li.tabs-active
+            .az-tabs > ul > li.az-tabs-tab-active
             {
                 background-color: #FF9F55;
             }
@@ -992,16 +1004,17 @@ tabs.css
     margin: 0 7px 7px 7px;
     padding: 7px;
     background-color: #FFFFFF;
-    color: #000000;
 }
 
     .az-tabs-card > article > *
     {
+        color: #000000;
         font-size: 14px;
     }
 
-    .az-tabs-card > article.article-active
+    .az-tabs-card > article.az-tabs-article-active
     {
+        display: block;
     }
 
 

@@ -1456,12 +1456,12 @@ function initAZAccordion(Options)
         var azAccordionDeactivated = "";
         function execAZAccordion($SelectedAccordionHeader)
         {
-            if ($SelectedAccordionHeader.hasClass("accordion-active"))
+            if ($SelectedAccordionHeader.hasClass("az-accordion-header-active"))
             {
                 if (main.Options.azAccordionCollapsible)
                 {
-                    $SelectedAccordionHeader.siblings("article").slideUp(main.Options.azAccordionSlideUp);
-                    $SelectedAccordionHeader.removeClass("accordion-active");
+                    $SelectedAccordionHeader.removeClass("az-accordion-header-active");
+                    $SelectedAccordionHeader.siblings("article").slideUp(main.Options.azAccordionSlideUp).removeClass("az-accordion-article-active");
                     $("i", $SelectedAccordionHeader).removeClass(main.Options.azAccordionIconOpen).addClass(main.Options.azAccordionIconClosed);
                 }
                 $.publish("functionlib/azAccordionActivate",
@@ -1475,12 +1475,14 @@ function initAZAccordion(Options)
             }
             else
             {
-                main.$AccordionCard.children("article").slideUp(main.Options.azAccordionSlideUp);
-                main.$AccordionCard.children("header").removeClass("accordion-active");
+                main.$AccordionCard.children("header").removeClass("az-accordion-header-active");
+                main.$AccordionCard.children("article").slideUp(main.Options.azAccordionSlideUp).removeClass("az-accordion-article-active");
                 $("i", main.$AccordionCard.children("header")).removeClass(main.Options.azAccordionIconOpen).addClass(main.Options.azAccordionIconClosed);
-                $SelectedAccordionHeader.siblings("article").slideDown(main.Options.azAccordionSlideDown);
-                $SelectedAccordionHeader.addClass("accordion-active");
+
+                $SelectedAccordionHeader.addClass("az-accordion-header-active");
+                $SelectedAccordionHeader.siblings("article").slideDown(main.Options.azAccordionSlideDown).addClass("az-accordion-article-active");
                 $("i", $SelectedAccordionHeader).removeClass(main.Options.azAccordionIconClosed).addClass(main.Options.azAccordionIconOpen);
+                
                 $.publish("functionlib/azAccordionActivate",
                 {
                     azAccordionId: main.Options.azAccordionId,
@@ -1547,7 +1549,11 @@ function initAZTabs(Options)
         main.$Tabs.off().on(main.Options.azTabsOpenEvent, "ul > li", function (e)
         {
             var _Element = e.target || e.srcElement;
-            $.publish("functionlib/azTabs", { azTabsId: main.Options.azTabsId, azTabsJQElement: $(_Element) });
+            $.publish("functionlib/azTabs",
+            {
+                azTabsId: main.Options.azTabsId,
+                azTabsJQElement: $(_Element)
+            });
             execAZTabs($(this));
         });
 
@@ -1556,11 +1562,11 @@ function initAZTabs(Options)
         {
             var _MenuIndex = $($SelectedTab).index()
 
-            main.$Tabs.children("ul").children("li").removeClass("tabs-active");
-            main.$Tabs.children("ul").children("li").eq(_MenuIndex).addClass("tabs-active");
+            main.$Tabs.children("ul").children("li").removeClass("az-tabs-tab-active");
+            main.$Tabs.children("ul").children("li").eq(_MenuIndex).addClass("az-tabs-tab-active");
 
-            main.$TabsCard.children("article").removeClass("article-active");
-            main.$TabsCard.eq(_MenuIndex).children("article").addClass("article-active");
+            main.$TabsCard.children("article").removeClass("az-tabs-article-active");
+            main.$TabsCard.eq(_MenuIndex).children("article").addClass("az-tabs-article-active");
 
             $.publish("functionlib/azTabsActivate",
             {
@@ -1632,6 +1638,95 @@ function initAZAjax(Options)
         return $.Deferred().resolve("");
     }
 }
+
+// AZ Snackbar
+function initAZSnackbar(Options)
+{
+    var main = this;
+    var _Defaults =
+    {
+        azSnackbarId = "",
+        snackbarText: "",
+        snackbarPosition: "left",
+        snackbarBottom: 20,
+        snackbarMobileMinHeight: 0,
+        snackbarClose: false,
+        snackbarTimeout: 3000
+    };
+    main.Options = $.extend({}, _Defaults, Options || {});
+
+    if (main.Options.azSnackbarId != "" && $("#" + main.Options.azSnackbarId).length == 0)
+    {
+        main.$Wrapper = $('<div></div>').attr({ "id": main.Options.azSnackbarId });
+        main.$Table = $('<table></table>').addClass("az-table az-width-100");
+
+        if (main.Options.snackbarClose == true)
+        {
+            main.$Close = $('<td valign="middle"></td>').html("X").addClass("az-width-10 az-snackbar-close");
+            main.$Close.off("click").on("click", function ()
+            {
+                closeSnackbar();
+            });
+        }
+        else
+        {
+            main.$Close = $('<td></td>');
+            window.setTimeout(function ()
+            {
+                closeSnackbar();
+            }, main.Options.snackbarTimeout);
+        }
+        main.$Text = $('<td></td>').html(main.Options.snackbarText).addClass("az-snackbar-text");
+        main.$TableRow = $('<tr></tr>').append(main.$Text).append(main.$Close);
+        main.$Table.append(main.$TableRow);
+        main.$Wrapper.append(main.$Table);
+
+        if (window.innerWidth < 576)
+        {
+            main.$Wrapper.addClass("az-snackbar-mobile");
+            if (main.Options.snackbarMobileMinHeight > 0)
+            {
+                main.$Wrapper.css({ "min-height": main.Options.snackbarMobileMinHeight })
+            }
+            $("body").append(main.$Wrapper);
+            main.$Wrapper.animate(
+            {
+                "opacity": 1,
+            }, 500);
+        }
+        else
+        {
+            main.Options.snackbarPosition = main.Options.snackbarPosition == "left" ? "az-snackbar-left" : "az-snackbar-right";
+            main.$Wrapper.addClass("az-snackbar " + main.Options.snackbarPosition);
+            $("body").append(main.$Wrapper);
+            main.$Wrapper.animate(
+            {
+                "bottom": main.Options.snackbarBottom,
+                "opacity": 1,
+            }, 500);
+        }
+
+        function closeSnackbar()
+        {
+            main.$Wrapper.animate(
+            {
+                "bottom": 0,
+                "opacity": 0,
+            }, 500, function ()
+            {
+                $("#" + main.Options.azSnackbarId).remove();
+            });
+        }
+    }
+}
+
+//function changeSnackbarText(snackbarText)
+//{
+//    if ($("#az-snackbar").length > 0)
+//    {
+//        _$AZSnackbarText[0].innerHTML = snackbarText;
+//    }
+//}
 
 // AZ Get Language
 function initAZGetLanguage(SelectedPage)
@@ -1873,100 +1968,6 @@ function initAZSetSystemMenu()
     else
     {
         throwException("dialog", "", ThisPage, "initAZSetSystemMenu-1", "LoadData");
-    }
-}
-
-// Snackbar
-var _$AZSnackbarText = {};
-var _$AZSnackbarClose = {};
-var _$AZSnackbarWrapper = {};
-var _$Table = {};
-function showSnackbar(Options)
-{
-    var _Defaults =
-    {
-        snackbarText: "",
-        snackbarPosition: "left",
-        snackbarBottom: 20,
-        snackbarMobileMinHeight: 0,
-        snackbarClose: false,
-        snackbarTimeout: 3000
-    };
-    var _Options = $.extend({}, _Defaults, Options || {});
-
-    if ($("#az-snackbar").length == 0)
-    {
-        _$AZSnackbarText = {};
-        _$AZSnackbarClose = {};
-        _$AZSnackbarWrapper = {};
-        _$AZSnackbarWrapper = $('<div></div>').attr({ "id": "az-snackbar" });
-        _$Table = $('<table></table>').addClass("az-table az-width-100");
-
-        if (_Options.snackbarClose == true)
-        {
-            _$AZSnackbarClose = $('<td valign="middle"></td>').html("X").addClass("az-width-10 az-snackbar-close");
-            _$AZSnackbarClose.off("click").on("click", function ()
-            {
-                closeSnackbar();
-            });
-        }
-        else
-        {
-            _$AZSnackbarClose = $('<td></td>');
-            window.setTimeout(function ()
-            {
-                closeSnackbar();
-            }, _Options.snackbarTimeout);
-        }
-        _$AZSnackbarText = $('<td></td>').html(_Options.snackbarText).addClass("az-snackbar-text");
-        _$TableRow = $('<tr></tr>').append(_$AZSnackbarText).append(_$AZSnackbarClose);
-        _$Table.append(_$TableRow);
-        _$AZSnackbarWrapper.append(_$Table);
-
-        if (window.innerWidth < 576)
-        {
-            _$AZSnackbarWrapper.addClass("az-snackbar-mobile");
-            if (_Options.snackbarMobileMinHeight > 0)
-            {
-                _$AZSnackbarWrapper.css({ "min-height": _Options.snackbarMobileMinHeight })
-            }
-            $("body").append(_$AZSnackbarWrapper);
-            _$AZSnackbarWrapper.animate(
-            {
-                "opacity": 1,
-            }, 500);
-        }
-        else
-        {
-            _Options.snackbarPosition = _Options.snackbarPosition == "left" ? "az-snackbar-left" : "az-snackbar-right";
-            _$AZSnackbarWrapper.addClass("az-snackbar " + _Options.snackbarPosition);
-            $("body").append(_$AZSnackbarWrapper);
-            _$AZSnackbarWrapper.animate(
-            {
-                "bottom": _Options.snackbarBottom,
-                "opacity": 1,
-            }, 500);
-        }
-
-        function closeSnackbar()
-        {
-            _$AZSnackbarWrapper.animate(
-            {
-                "bottom": 0,
-                "opacity": 0,
-            }, 500, function ()
-            {
-                $("#az-snackbar").remove();
-            });
-        }
-    }
-}
-
-function changeSnackbarText(snackbarText)
-{
-    if ($("#az-snackbar").length > 0)
-    {
-        _$AZSnackbarText[0].innerHTML = snackbarText;
     }
 }
 
