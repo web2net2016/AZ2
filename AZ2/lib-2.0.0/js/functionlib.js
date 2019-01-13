@@ -442,7 +442,7 @@ function initAZSnackbar(Options)
         snackbarPosition: "left",
         snackbarBottom: 20,
         snackbarMobileMinHeight: 0,
-        snackbarClose: false,
+        azSnackbarClose: false,
         snackbarTimeout: 3000
     };
     main.Options = $.extend({}, _Defaults, Options || {});
@@ -452,7 +452,7 @@ function initAZSnackbar(Options)
         main.$Wrapper = $('<div></div>').attr({ "id": main.Options.azSnackbarId });
         main.$Table = $('<table></table>').addClass("az-table az-width-100");
 
-        if (main.Options.snackbarClose == true)
+        if (main.Options.azSnackbarClose === true)
         {
             main.$Close = $('<td valign="middle"></td>').html("X").addClass("az-width-10 az-snackbar-close");
             main.$Close.off("click").on("click", function ()

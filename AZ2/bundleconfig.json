@@ -27,16 +27,16 @@
   {
     "outputFileName": "lib-2.0.0/js/az-2.0.0.js",
     "inputFiles": [
+      "lib-2.0.0/jqueryui/jquery-ui.min.js",
+      "lib-2.0.0/jqueryui/jquery_ui_langs.min.js",
+      "lib-2.0.0/js/default.lang.js",
+      "lib-2.0.0/js/functionlib.js",
       "lib-2.0.0/js/jquery.3.3.1.js",
       "lib-2.0.0/js/jquery.matchHeight.js",
       "lib-2.0.0/js/moment.locales.js",
-      "lib-2.0.0/jqueryui/jquery-ui.min.js",
-      "lib-2.0.0/jqueryui/jquery_ui_langs.min.js",
       "lib-2.0.0/js/numeral.js",
       "lib-2.0.0/js/numeral.locales.js",
-      "lib-2.0.0/js/watch.js",
-      "lib-2.0.0/js/default.lang.js",
-      "lib-2.0.0/js/functionlib.js"
+      "lib-2.0.0/js/watch.js"
     ]
   }
 ]
