@@ -940,16 +940,20 @@ slideshow.css
 Snackbar 
 snackbar.css    
 -----------------------------------------------------------*/
-#az-snackbar
+.az-snackbar
 {
-    background-color: #333333;
-    color: #FFFFFF;
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
+    .az-snackbar > .az-snackbar-table .az-snackbar-text
+    {
+    }
 
+    .az-snackbar > .az-snackbar-table .az-snackbar-close
+    {
+    }
 
 
 /*--------------------------------------------------------

@@ -16,11 +16,11 @@
     <title></title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css?id=1" />
-    <script src="/lib-2.0.0/js/az-2.0.0.min.js?id=1"></script>
-    <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css?id=1" />
-    <script src="/lib-2.0.0/lib/functionlib.js?id=1"></script>
-    <script src="/lib-2.0.0/lib/az-codecolor.js?id=1"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
+    <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
+    <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
         $(document).ready(function ()
@@ -42,26 +42,30 @@
             azSnackbarFunction1 = new initAZSnackbar(
             {
                 azSnackbarId: "az-snackbar-1",
-                snackbarText: 'Dette er en tekst... til venstre...'
+                azSnackbarText: 'Dette er en tekst... til venstre...'
             });
         }
 
         function setSnackbar2()
         {
-            showSnackbar(
+            azSnackbarFunction2 = new initAZSnackbar(
             {
-                snackbarText: 'Dette er også en tekst... til høyre...',
-                snackbarPosition: "right"
+                azSnackbarId: "az-snackbar-2",
+                azSnackbarText: "Dette er også en tekst... til høyre...",
+                azSnackbarPosition: "right",
+                azSnackbarBackgroundColor: "FF9F55",
+                azSnackbarTextColor: "000000"
             });
         }
 
         function setSnackbar3()
         {
-            showSnackbar(
+            azSnackbarFunction3 = new initAZSnackbar(
             {
-                snackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                snackbarPosition: "right",
-                snackbarClose: true
+                azSnackbarId: "az-snackbar-3",
+                azSnackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                azSnackbarPosition: "right",
+                azSnackbarClose: true
             });
         }
 
@@ -75,9 +79,10 @@
             <div class="az-row az-margin-t-56">
                 <div class="az-col xs-12 sm-6 md-4">
                     <div class="az-code jsHigh notranslate">
-                        showSnackbar(<br />
+                        azSnackbarFunction1 = new initAZSnackbar(<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarText: "Din tekst",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarId: "az-snackbar-1",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarText: "Din tekst"<br />
                         });<br />
                         <br />
                     </div>
@@ -87,10 +92,13 @@
                 </div>
                 <div class="az-col xs-12 sm-6 md-4">
                     <div class="az-code jsHigh notranslate">
-                        showSnackbar(<br />
+                        azSnackbarFunction2 = new initAZSnackbar(<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarText: "Din tekst",<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarPosition: "right",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarId: "az-snackbar-1",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarText: "Din tekst",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarPosition: "right",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarBackgroundColor: "FF9F55",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarTextColor: "000000"<br />
                         });<br />
                         <br />
                     </div>
@@ -100,11 +108,12 @@
                 </div>
                 <div class="az-col xs-12 sm-6 md-4">
                     <div class="az-code jsHigh notranslate">
-                        showSnackbar(<br />
+                        azSnackbarFunction3 = new initAZSnackbar(<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarText: "Din tekst",<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarPosition: "right",<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarClose: true,<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarId: "az-snackbar-1",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarText: "Din tekst",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarPosition: "right",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarClose: true<br />
                         });<br />
                         <br />
                     </div>
@@ -125,12 +134,15 @@
                         var azSnackbarFunction1 = new initAZSnackbar(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azSnackbarId: "",<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarText: "",<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarPosition: "left",<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarBottom: 20,<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarMobileMinHeight: 0,<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarClose: false,<br />
-                        &emsp;&ensp;&emsp;&ensp;snackbarTimeout: 3000<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarText: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarPosition: "left",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarBottom: 20,<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarMobileMinHeight: 0,<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarClose: false,<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarTimeout: 3000<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarBackgroundColor: "333333"<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarTextColor: "FFFFFF"<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarCloseColor: "FFFFFF"<br />
                         });<br />
                         <br />
                         Hvis du ønsker å bruke egne knapper eller linker for å åpne/lukke din Accordion, bruker du JavaScript funksjonen under.
@@ -148,82 +160,136 @@
 
                             <br />
                         </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azSnackbarText</property>
+                            <type><span>Type:</span> <brown>String</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <br />
+                            Innholdet kan variere fra en enkel tekst, til komplette 'forms' med HTML.
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azSnackbarPosition</property>
+                            <type><span>Type:</span> <brown>String</brown></type>
+                            <default><span>Default:</span> <brown>"left"</brown></default>
+                            <values><span>Values:</span> <brown>"left"</brown> or <brown>"right"</brown></values>
+                            <br />
 
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azSnackbarBottom</property>
+                            <type><span>Type:</span> <brown>Integer</brown></type>
+                            <default><span>Default:</span> <red>20</red></default>
+                            <units><span>Unit:</span> <red>pixels</red></units>
+                            <br />
+                            Hvis du ønsker å endre avstanden fra bunnen av siden og opp til 'AZSnackbar', kan du øke eller redusere denne verdien.
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azSnackbarMobileMinHeight</property>
+                            <type><span>Type:</span> <brown>Integer</brown></type>
+                            <default><span>Default:</span> <red>0</red></default>
+                            <units><span>Unit:</span> <red>pixels</red></units>
+                            <br />
+                            Ved skjermstørrelser under '576px', vil 'AZSnackbar' bruke hele bredden av skjermen og avstanden til bunnen av siden reduseres til '0px'.
+                            Videre har du muligheten til å sette en minimum høyde på 'AZSnackbar', slik at denne kan dekke over f.eks. en meny eller lignende du har i bunnen av siden.
+                            <br />
+                            <br />
+                            <strong>Tips:</strong> Hvis du bruker 'azSnackbarMobileMinHeight', må du trekke fra '28px' som er den totale paddingen i 'AZSnackbar'.
+                            <br />
+                            <br />
+                            <strong>NB!</strong> 'azSnackbarPosition' og 'azSnackbarBottom' vil ikke ha noen funksjon i mobil visning.
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azSnackbarClose</property>
+                            <type><span>Type:</span> <brown>Boolean</brown></type>
+                            <default><span>Default:</span> <mediumblue>false</mediumblue></default>
+                            <values><span>Values:</span> <mediumblue>false</mediumblue> or <mediumblue>true</mediumblue></values>
+                            <br />
+                            Ved å endre verdien til true, vil det settes inn en lukkeknapp (X) i høyre del, samtidig som 'azSnackbarTimeout' overstyres,
+                            dvs. at 'AZSnackbar' vises helt til brukeren selv velger å lukke den.
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azSnackbarTimeout</property>
+                            <type><span>Type:</span> <brown>Integer</brown></type>
+                            <default><span>Default:</span> <red>3000</red></default>
+                            <units><span>Unit:</span> <red>milliseconds</red></units>
+                            <br />
 
-
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azSnackbarBackgroundColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"333333"</brown></default>
+                            <br />
+                            Se CSS også .az-snackbar
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azSnackbarTextColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
+                            <br />
+                            Se CSS også .az-snackbar > .az-snackbar-table .az-snackbar-text
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azSnackbarCloseColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
+                            <br />
+                            Se CSS også .az-snackbar > .az-snackbar-table .az-snackbar-close
+                            <br />
+                        </div>
                     </div>
                 </div>
             </div>
 
-
-
-
-                        <!--<br />
-                <strong>Innhold</strong>
-                <br />
-                snackbarText: ""&emsp;&ensp;(default)<br />
-                <br />
-                Innholdet kan variere fra en enkel tekst, til komplette 'forms' med HTML.
-                <br />
-                <br />
-                <strong>Posisjonering</strong>
-                <br />
-                snackbarPosition: "left"&emsp;&ensp;(default)<br />
-                snackbarPosition: "right"<br />
-                <br />
-                <strong>Avstand fra bunnen</strong>
-                <br />
-                snackbarBottom: 20&emsp;&ensp;(default)<br />
-                <br />
-                Hvis du ønsker å endre avstanden fra bunnen av siden og opp til 'AZSnackbar', kan du øke eller redusere denne verdien.
-                <br />
-                <br />
-                <strong>Mobil visning</strong>
-                <br />
-                snackbarMobileMinHeight: 0&emsp;&ensp;(default)<br />
-                <br />
-                Ved skjermstørrelser under '576px', vil 'AZSnackbar' bruke hele bredden av skjermen og avstanden til bunnen av siden reduseres til '0px'.
-                Videre har du muligheten til å sette en minimum høyde på 'AZSnackbar', slik at denne kan dekke over f.eks. en meny eller lignende du har i bunnen av siden.
-                <br />
-                <br />
-                <strong>Tips:</strong> Hvis du bruker 'snackbarMobileMinHeight', må du trekke fra '28px' som er den totale paddingen i 'AZSnackbar'.
-                <br />
-                <strong>NB!</strong> 'snackbarPosition' og 'snackbarBottom' vil ikke ha noen funksjon i mobil visning.
-                <br />
-                <br />
-                <strong>Lukkeknapp - X</strong>
-                <br />
-                snackbarClose: false&emsp;&ensp;(default)<br />
-                <br />
-                Ved å endre verdien til true, vil det settes inn en lukkeknapp (X) i høyre del, samtidig som 'snackbarTimeout' overstyres,
-                dvs. at 'AZSnackbar' vises helt til brukeren selv velger å lukke den.
-                <br />
-                <br />
-                <strong>Visningstid</strong>
-                <br />
-                snackbarTimeout: 3000&emsp;&ensp;(default)<br />
-                <br />
-                Visningstiden oppgis i millisekunder.
-                <br />
-                <br />
-                <strong>Nytt innhold</strong>
-                <br />
-                Hvis du ønsker å endre innholdet uten å aktivere 'AZSnackbar' på nytt, kan du bruke funksjonen:
-                <br />
-                <br />
-                changeSnackbarText("Din tekst");<br />
-                <br />
-                <strong>Utseende</strong>
-                <br />
-                For styling av 'AZSnackbar', finner du CSS klassen '#az-snackbar' i Template - Standard filen.
-                <br />
-                <br />-->
+            <div class="row">
+                <div class="az-col xs-12">
+                    <h1 class="az-code-header">AZ Snackbar CSS</h1>
+                </div>
+            </div>
+            <div class="az-row az-margin-b-56">
+                <div class="az-col xs-12">
+                    <div class="az-code htmlHigh notranslate">
+                        AZ Snackbar har noe grunnleggende CSS som det i utgangspunktet ikke skal være nødvendig å justere på. <a href="/lib-2.0.0/css/snackbar.css" target="_blank" class="az-border-bottom-1-blue">snackbar.css</a>
+                        <br />
+                        CSS som du selv kan endre, finenr du i filen <a href="/lib-2.0.0/lib/standard.css" target="_blank" class="az-border-bottom-1-blue">standard.css</a>
+                        <br />
+                        <br />
+                        /*---------------------<br />
+                        Snackbar<br />
+                        snackbar.css<br />
+                        ---------------------*/<br />
+                        <br />
+                    </div>
+                    <div class="az-code cssHigh notranslate">
+                        .az-snackbar<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+                        &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+                        &emsp;&ensp;&emsp;&ensp;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+                        }<br />
+                        <br />
+                        .az-snackbar > .az-snackbar-table .az-snackbar-text<br />
+                        {<br />
+                        }<br />
+                        <br />
+                        .az-snackbar > .az-snackbar-table .az-snackbar-close<br />
+                        {<br />
+                        }<br />
+                        <br />
+                    </div>
+                </div>
+            </div>
 
         </div>
     </form>
 
 </body>
 </html>
-
-
-

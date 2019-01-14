@@ -1,6 +1,5 @@
 ﻿// AZ-Functionlib v2.0.0 | (c) web2net AS
 // Site info
-
 if (typeof AppName === 'undefined' || AppName === null)
 {
     var AppName = "AZ Team";
@@ -437,68 +436,25 @@ function initAZSnackbar(Options)
     var main = this;
     var _Defaults =
     {
-        azSnackbarId = "",
-        snackbarText: "",
-        snackbarPosition: "left",
-        snackbarBottom: 20,
-        snackbarMobileMinHeight: 0,
+        azSnackbarId: "",
+        azSnackbarText: "",
+        azSnackbarPosition: "left",
+        azSnackbarBottom: 20,
+        azSnackbarMobileMinHeight: 0,
         azSnackbarClose: false,
-        snackbarTimeout: 3000
+        azSnackbarTimeout: 3000,
+        azSnackbarBackgroundColor: "333333",
+        azSnackbarTextColor: "FFFFFF",
+        azSnackbarCloseColor: "FFFFFF"
     };
     main.Options = $.extend({}, _Defaults, Options || {});
 
     if (main.Options.azSnackbarId != "" && $("#" + main.Options.azSnackbarId).length == 0)
     {
-        main.$Wrapper = $('<div></div>').attr({ "id": main.Options.azSnackbarId });
-        main.$Table = $('<table></table>').addClass("az-table az-width-100");
+        main.$Wrapper = $('<div></div>').attr({ "id": main.Options.azSnackbarId }).addClass("az-snackbar");
+        main.$Table = $('<table></table>').addClass("az-snackbar-table");
 
-        if (main.Options.azSnackbarClose === true)
-        {
-            main.$Close = $('<td valign="middle"></td>').html("X").addClass("az-width-10 az-snackbar-close");
-            main.$Close.off("click").on("click", function ()
-            {
-                closeSnackbar();
-            });
-        }
-        else
-        {
-            main.$Close = $('<td></td>');
-            window.setTimeout(function ()
-            {
-                closeSnackbar();
-            }, main.Options.snackbarTimeout);
-        }
-        main.$Text = $('<td></td>').html(main.Options.snackbarText).addClass("az-snackbar-text");
-        main.$TableRow = $('<tr></tr>').append(main.$Text).append(main.$Close);
-        main.$Table.append(main.$TableRow);
-        main.$Wrapper.append(main.$Table);
-
-        if (window.innerWidth < 576)
-        {
-            main.$Wrapper.addClass("az-snackbar-mobile");
-            if (main.Options.snackbarMobileMinHeight > 0)
-            {
-                main.$Wrapper.css({ "min-height": main.Options.snackbarMobileMinHeight })
-            }
-            $("body").append(main.$Wrapper);
-            main.$Wrapper.animate(
-            {
-                "opacity": 1,
-            }, 500);
-        }
-        else
-        {
-            main.Options.snackbarPosition = main.Options.snackbarPosition == "left" ? "az-snackbar-left" : "az-snackbar-right";
-            main.$Wrapper.addClass("az-snackbar " + main.Options.snackbarPosition);
-            $("body").append(main.$Wrapper);
-            main.$Wrapper.animate(
-            {
-                "bottom": main.Options.snackbarBottom,
-                "opacity": 1,
-            }, 500);
-        }
-
-        function closeSnackbar()
+        main.closeAZSnackbar = function ()
         {
             main.$Wrapper.animate(
             {
@@ -509,16 +465,60 @@ function initAZSnackbar(Options)
                 $("#" + main.Options.azSnackbarId).remove();
             });
         }
+
+        if (main.Options.azSnackbarClose === true)
+        {
+            main.$Close = $('<td></td>').html("X").addClass("az-snackbar-close").css({ "color": "#" + main.Options.azSnackbarCloseColor + "" });
+            main.$Close.off("click").on("click", function ()
+            {
+                main.closeAZSnackbar();
+            });
+        }
+        else
+        {
+            main.$Close = "";
+            window.setTimeout(function ()
+            {
+                main.closeAZSnackbar();
+            }, main.Options.azSnackbarTimeout);
+        }
+
+        main.$TextCell = $('<td></td>').html(main.Options.azSnackbarText).addClass("az-snackbar-text").css({ "color": "#" + main.Options.azSnackbarTextColor + "" });
+        main.$TableRow = $('<tr></tr>').append(main.$TextCell).append(main.$Close);
+        main.$Table.append(main.$TableRow);
+        main.$Wrapper.append(main.$Table).css({ "background-color": "#" + main.Options.azSnackbarBackgroundColor + "" });
+
+        if (window.innerWidth < 576)
+        {
+            main.$Wrapper.addClass("az-snackbar-mobile");
+            if (main.Options.azSnackbarMobileMinHeight > 0)
+            {
+                main.$Wrapper.css({ "min-height": main.Options.azSnackbarMobileMinHeight })
+            }
+            $("body").append(main.$Wrapper);
+            main.$Wrapper.animate(
+            {
+                "opacity": 1,
+            }, 500);
+        }
+        else
+        {
+            main.Options.azSnackbarPosition = main.Options.azSnackbarPosition == "left" ? "az-snackbar-left" : "az-snackbar-right";
+            main.$Wrapper.addClass("az-snackbar " + main.Options.azSnackbarPosition);
+            $("body").append(main.$Wrapper);
+            main.$Wrapper.animate(
+            {
+                "bottom": main.Options.azSnackbarBottom,
+                "opacity": 1,
+            }, 500);
+        }
+
+        main.setAZSnackbarText = function (SnackbarText)
+        {
+            main.$TextCell.html(SnackbarText);            
+        }
     }
 }
-
-//function changeSnackbarText(snackbarText)
-//{
-//    if ($("#az-snackbar").length > 0)
-//    {
-//        _$AZSnackbarText[0].innerHTML = snackbarText;
-//    }
-//}
 
 // AZ Get Language
 function initAZGetLanguage(SelectedPage)

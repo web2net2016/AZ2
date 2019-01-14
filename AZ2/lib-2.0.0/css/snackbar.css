@@ -1,0 +1,50 @@
+﻿.az-snackbar
+{
+    position: fixed;
+    z-index: 5001;
+    opacity: 0;
+    min-width: 250px;
+    max-width: 500px;
+    bottom: 0;
+    padding: 14px 0 14px 0;
+}
+
+    .az-snackbar.az-snackbar-left
+    {
+        left: 7px;
+    }
+
+    .az-snackbar.az-snackbar-right
+    {
+        right: 7px;
+    }
+
+    .az-snackbar.az-snackbar-mobile
+    {
+        position: fixed;
+        z-index: 5001;
+        opacity: 0;
+        width: 100%;
+        bottom: 0;
+        padding: 14px 0 14px 0;
+    }
+
+    .az-snackbar > .az-snackbar-table
+    {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 0;
+    }
+
+        .az-snackbar > .az-snackbar-table .az-snackbar-text
+        {
+            padding: 0 14px 0 14px;
+        }
+
+        .az-snackbar > .az-snackbar-table .az-snackbar-close
+        {
+            padding-right: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }

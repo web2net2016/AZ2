@@ -567,51 +567,6 @@
     top: 15px;
 }
 
-/* Snackbar */
-.az-snackbar
-{
-    position: fixed;
-    z-index: 5001;
-    opacity: 0;
-    bottom: 0;
-    padding: 14px 0 14px 0;
-    min-width: 250px;
-    max-width: 500px;
-}
-
-.az-snackbar-mobile
-{
-    position: fixed;
-    z-index: 5001;
-    opacity: 0;
-    bottom: 0;
-    padding: 14px 0 14px 0;
-    width: 100%;
-}
-
-.az-snackbar-left
-{
-    left: 7px;
-}
-
-.az-snackbar-right
-{
-    right: 7px;
-}
-
-.az-snackbar-text
-{
-    padding: 0 14px 0 14px;
-}
-
-.az-snackbar-close
-{
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 0 14px 0 0;
-}
-
 /* Animations Keyframes */
 /* .az-input-animated */
 @-webkit-keyframes input-focus
