@@ -1,7 +1,9 @@
 ﻿//To support all modern browsers, the following styles should be used for transitions:
+
 //-webkit - transition
 //- moz - transition
 //transition
+
 //and for transforms:
 //-webkit - transform
 //- moz - transform

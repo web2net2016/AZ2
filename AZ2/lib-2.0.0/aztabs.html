@@ -54,9 +54,31 @@
                 azTabsOpenEvent: "mouseover"
             });
 
+            var azTabsFunction3 = new initAZTabs(
+            {
+                azTabsId: "az-tabs-3",
+                azTabsHeightStyle: "auto",
+                azTabsOpenEvent: "mouseover"
+            });
+
             $("#cmdAZTabs1").off().on("click", function (e) { azTabsFunction1.setAZTabs(0) });
             $("#cmdAZTabs2").off().on("click", function (e) { azTabsFunction1.setAZTabs(1) });
             $("#cmdAZTabs3").off().on("click", function (e) { azTabsFunction1.setAZTabs(2) });
+            $("#cmdAZTabsVertical").off().on("click", function (e)
+            {
+                $("#az-tabs-1").toggleClass(function ()
+                {
+                    if ($(this).hasClass("az-tabs-vertical"))
+                    {
+                        $("#cmdAZTabsVertical").text("AZ Tabs 1 Horisontal");
+                    }
+                    else
+                    {
+                        $("#cmdAZTabsVertical").text("AZ Tabs 1 Vertikal");
+                    }
+                    return "az-tabs-vertical";
+                });              
+            });            
         });
 
     </script>
@@ -66,7 +88,7 @@
     <form id="frmReg">
         <div class="az-container">
 
-            <div class="az-row az-margin-t-56">
+            <div class="az-row az-margin-t-28">
                 <div class="az-col xs-12 sm-6">
 
                     <div class="az-tabs" id="az-tabs-1">
@@ -102,10 +124,10 @@
 
                     <div class="az-tabs" id="az-tabs-2">
                         <ul>
-                            <li>Tabs 1</li>
-                            <li>Tabs 2</li>
-                            <li>Tabs 3</li>
-                            <li>Tabs 4</li>
+                            <li><i class="fas fa-search fa-lg fa-fw"></i></li>
+                            <li><i class="fas fa-suitcase fa-lg fa-fw"></i></li>
+                            <li><i class="fas fa-inbox fa-lg fa-fw"></i></li>
+                            <li><i class="fas fa-user fa-lg fa-fw"></i></li>
                         </ul>
                         <div class="az-tabs-card">
                             <article>
@@ -136,26 +158,80 @@
                 </div>
             </div>
 
-            <div class="az-row az-margin-t-28">
-                <div class="az-col xs-12 sm-6">
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12">
+                    <div class="az-code htmlHigh notranslate">
+                        Hvis du ønsker å bruke egne knapper eller linker for å åpne/lukke din Tab, bruker du JavaScript funksjonen under.
+                    </div>
                     <div class="az-code jsHigh notranslate">
                         azTabsFunction1.setAZTabs(0);<br />
-                        <br />
                         azTabsFunction1.setAZTabs(1);<br />
-                        <br />
                         azTabsFunction1.setAZTabs(2);<br />
+                        <br />
+                    </div>
+                    <div class="az-code htmlHigh notranslate">
+                        Ved å legge til CSS klassen "az-tabs-vertical" til DIV "wrapperen" vil du få en helt annen effekt:<br />
+                        <br />
+                        &lt;div class="az-tabs az-tabs-vertical" id="az-tabs-1"&gt;&lt;/div&gt;<br />
                         <br />
                     </div>
                     <div class="az-form-group">
                         <button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZTabs1">AZ Tabs 1</button>
                         <button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZTabs2">AZ Tabs 2</button>
                         <button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZTabs3">AZ Tabs 3</button>
+                        <button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZTabsVertical">AZ Tabs Horisontal</button>
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-6"></div>
             </div>
 
-            <div class="row az-margin-t-14">
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12 sm-6">
+
+                    <div class="az-tabs az-tabs-bottom" id="az-tabs-3">
+                        <div class="az-tabs-card">
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <div class="az-tabs-card">
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <div class="az-tabs-card">
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <div class="az-tabs-card">
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <ul>
+                            <li><i class="fas fa-search fa-lg fa-fw"></i></li>
+                            <li><i class="fas fa-suitcase fa-lg fa-fw"></i></li>
+                            <li><i class="fas fa-inbox fa-lg fa-fw"></i></li>
+                            <li><i class="fas fa-user fa-lg fa-fw"></i></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-code htmlHigh notranslate az-xs-margin-t-28 az-sm-margin-t-56">
+                        Ved å legge til CSS klassen "az-tabs-bottom" til DIV "wrapperen" samt å legge "tabb-menyen" under, vil du få en helt annen effekt:<br />
+                        <br />
+                        &lt;div class="az-tabs az-tabs-bottom" id="az-tabs-3"&gt;&lt;/div&gt;<br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row az-margin-t-28">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">AZ Tabs</h1>
                 </div>
@@ -194,11 +270,6 @@
                         &emsp;&ensp;&emsp;&ensp;azTabsHeightStyle: "content",<br />
                         &emsp;&ensp;&emsp;&ensp;azTabsOpenEvent: "click"<br />
                         });<br />
-                        <br />
-                        Hvis du ønsker å bruke egne knapper eller linker for å åpne/lukke din Tab, bruker du JavaScript funksjonen under.
-                        <br />
-                        <br />
-                        azTabsFunction1.setAZTabs(0);<br />
                         <br />
                     </div>
                     <div class="az-code htmlHigh notranslate">
@@ -304,9 +375,6 @@
                     <div class="az-code cssHigh notranslate">
                         .az-tabs<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);<br />
-                        &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);<br />
-                        &emsp;&ensp;&emsp;&ensp;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);<br />
                         }<br />
                         <br />
                         .az-tabs > ul<br />
@@ -339,22 +407,37 @@
                         &emsp;&ensp;&emsp;&ensp;background-color: #FF9F55;<br />
                         }<br />
                         <br />
-                        .az-tabs-card > article<br />
+                        .az-tabs > .az-tabs-card > article<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;margin: 0 7px 7px 7px;<br />
                         &emsp;&ensp;&emsp;&ensp;padding: 7px;<br />
                         &emsp;&ensp;&emsp;&ensp;background-color: #FFFFFF;<br />
                         }<br />
                         <br />
-                        .az-tabs-card > article > *<br />
+                        .az-tabs > .az-tabs-card > article > *<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;color: #000000;<br />
                         &emsp;&ensp;&emsp;&ensp;font-size: 14px;<br />
                         }<br />
                         <br />
-                        .az-tabs-card > article.az-tabs-article-active<br />
+                        .az-tabs > .az-tabs-card > article.az-tabs-article-active<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;display: block;<br />
+                        }<br />
+                        <br />
+                        .az-tabs.az-tabs-vertical > .az-tabs-card > article<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;margin-top: 7px;<br />
+                        }<br />
+                        <br />
+                        .az-tabs.az-tabs-bottom > ul<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;padding: 0 0 7px 7px;<br />
+                        }<br />
+                        <br />
+                        .az-tabs.az-tabs-bottom > .az-tabs-card > article<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;margin: 7px 7px 0 7px;<br />
                         }<br />
                         <br />
                     </div>

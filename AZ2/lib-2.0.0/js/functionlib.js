@@ -348,6 +348,11 @@ function initAZTabs(Options)
             execAZTabs($(this));
         });
 
+        if (window.innerWidth < 576)
+        {
+            main.$Tabs.removeClass("az-tabs-vertical");
+        }
+
         var azTabsDeactivated = "";
         function execAZTabs($SelectedTab)
         {
@@ -789,6 +794,7 @@ function initializeAZWindow(Options)
         $.subscribeonce("functionlib/initializeAZWindow/dialogBeforeOpen", function ()
         {
             ModalDialogScrollTop = 0;
+
             var _HTML = "";
             _HTML = '<div id="az-modal-background">';
             _HTML += '<div id="az-modal">';
@@ -805,6 +811,7 @@ function initializeAZWindow(Options)
             _HTML += '</div>';
             _HTML += '</div>';
             $("body").append(_HTML);
+
             var _$Background = $("#az-modal-background");
             _$Background.css({ "display": "block" });
             var _$AzModal = $("#az-modal");

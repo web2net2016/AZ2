@@ -72,8 +72,59 @@
         <div class="az-container">
 
             <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12 sm-6 md-4">
+                    <div class="az-code jsHigh notranslate">
+                        initializeAZWindow(<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;dialogTitle: "Din tittel",<br />
+                        &emsp;&ensp;&emsp;&ensp;dialogText: "Din tekst"<br />
+                        });<br />
+                        <br />
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow1">AZ Window 1</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-4">
+                    <div class="az-code jsHigh notranslate">
+                        initializeAZWindow(<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;dialogModal: true,<br />
+                        &emsp;&ensp;&emsp;&ensp;dialogTitle: "Din tittel",<br />
+                        &emsp;&ensp;&emsp;&ensp;dialogText: "Din tekst"<br />
+                        &emsp;&ensp;&emsp;&ensp;dialogButton1: "OK"<br />
+                        &emsp;&ensp;&emsp;&ensp;dialogLocationReload: true<br />
+                        });<br />
+                        <br />
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow2">AZ Window 2 (Modal - Location Reload)</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-4">
+                    <div class="az-code jsHigh notranslate">
+                        initializeAZWindow(<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;dialogTitle: "Din tittel"<br />
+                        &emsp;&ensp;&emsp;&ensp;dialogText: "Din tekst"<br />
+                        &emsp;&ensp;&emsp;&ensp;dialogButton2: "Avslutt"<br />
+                        &emsp;&ensp;&emsp;&ensp;dialogNoParentScroll: true<br />
+                        });<br />
+                        <br />
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow3">AZ Window 3 (No Parent Scroll)</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row az-margin-t-14">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">AZ Window</h1>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
                     <div class="az-code jsHigh notranslate">
                         initializeAZWindow(<br />
                         {<br />
@@ -89,8 +140,7 @@
                         &emsp;&ensp;&emsp;&ensp;dialogLocationReload: false,<br />
                         &emsp;&ensp;&emsp;&ensp;dialogNoParentScroll: false,<br />
                         &emsp;&ensp;&emsp;&ensp;dialogBeforeOpen: function () { },<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogAfterOpen: function () { },<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogClose: function () { }<br />
+                        &emsp;&ensp;&emsp;&ensp;dialogAfterOpen: function () { }<br />
                         });<br />
                         <br />
                     </div>
@@ -226,49 +276,41 @@
                 </div>
             </div>
 
-            <div class="az-row az-margin-t-14 az-margin-b-56">
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        initializeAZWindow(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogTitle: "Din tittel",<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogText: "Din tekst"<br />
-                        });<br />
-                        <br />
-                    </div>
-                    <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow1">AZ Window 1</button>
-                    </div>
+            <div class="row">
+                <div class="az-col xs-12">
+                    <h1 class="az-code-header">AZ Window CSS</h1>
                 </div>
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        initializeAZWindow(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogModal: true,<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogTitle: "Din tittel",<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogText: "Din tekst"<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogButton1: "OK"<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogLocationReload: true<br />
-                        });<br />
+            </div>
+            <div class="az-row az-margin-b-56">
+                <div class="az-col xs-12">
+                    <div class="az-code htmlHigh notranslate">
+                        AZ Window har noe grunnleggende CSS som det i utgangspunktet ikke skal være nødvendig å justere på. <a href="/lib-2.0.0/css/snackbar.css" target="_blank" class="az-border-bottom-1-blue">snackbar.css</a>
+                        <br />
+                        CSS som du selv kan endre, finenr du i filen <a href="/lib-2.0.0/lib/standard.css" target="_blank" class="az-border-bottom-1-blue">standard.css</a>
+                        <br />
+                        <br />
+                        /*---------------------<br />
+                        Snackbar<br />
+                        snackbar.css<br />
+                        ---------------------*/<br />
                         <br />
                     </div>
-                    <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow2">AZ Window 2 (Modal - Location Reload)</button>
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        initializeAZWindow(<br />
+                    <div class="az-code cssHigh notranslate">
+                        .az-snackbar<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogTitle: "Din tittel"<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogText: "Din tekst"<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogButton2: "Avslutt"<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogNoParentScroll: true<br />
-                        });<br />
+                        &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+                        &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+                        &emsp;&ensp;&emsp;&ensp;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+                        }<br />
                         <br />
-                    </div>
-                    <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow3">AZ Window 3 (No Parent Scroll)</button>
+                        .az-snackbar > .az-snackbar-table .az-snackbar-text<br />
+                        {<br />
+                        }<br />
+                        <br />
+                        .az-snackbar > .az-snackbar-table .az-snackbar-close<br />
+                        {<br />
+                        }<br />
+                        <br />
                     </div>
                 </div>
             </div>
