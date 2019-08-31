@@ -5,28 +5,38 @@
     opacity: 0;
     min-width: 250px;
     max-width: 500px;
-    bottom: 0;
     padding: 14px 0 14px 0;
 }
 
-    .az-snackbar.az-snackbar-left
+    .az-snackbar.az-snackbar-left-top
     {
         left: 7px;
+        top: -20px;
     }
 
-    .az-snackbar.az-snackbar-right
+    .az-snackbar.az-snackbar-left-bottom
+    {
+        left: 7px;
+        bottom: -20px;
+    }
+
+    .az-snackbar.az-snackbar-right-top
     {
         right: 7px;
+        top: -20px;
+    }
+
+    .az-snackbar.az-snackbar-right-bottom
+    {
+        right: 7px;
+        bottom: -20px;
     }
 
     .az-snackbar.az-snackbar-mobile
     {
-        position: fixed;
-        z-index: 5001;
-        opacity: 0;
         width: 100%;
-        bottom: 0;
-        padding: 14px 0 14px 0;
+        left: 0;
+        right: 0;
     }
 
     .az-snackbar > .az-snackbar-table

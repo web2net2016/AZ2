@@ -13,52 +13,30 @@
     <meta name="format-detection" content="email=no" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <title></title>
+    <title>AZ Tabs</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
+
     <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
     <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
         $(document).ready(function ()
         {
-            azPageFunction = new initAZPage({}, function ()
-            {
-                hideCoverSpin();
-            });
-
             w3CodeColor();
 
             $.subscribe("functionlib/azTabsActivate", function (e, data)
             {
-                console.log(data.azTabsId + " - Activated: " + data.azTabsActivated + " - Deactivated: " + data.azTabsDeactivated)
+                console.log("azTabsId: " + data.azTabsId + "\nazTabsActivated: " + data.azTabsActivated + "\nazTabsDeactivated: " + data.azTabsDeactivated)
             });
 
             $.subscribe("functionlib/azTabs", function (e, data)
             {
-                console.log(data.azTabsId, data.azTabsJQElement)
-            });
-
-            var azTabsFunction1 = new initAZTabs(
-            {
-                azTabsId: "az-tabs-1"
-            });
-
-            var azTabsFunction2 = new initAZTabs(
-            {
-                azTabsId: "az-tabs-2",
-                azTabsHeightStyle: "auto",
-                azTabsOpenEvent: "mouseover"
-            });
-
-            var azTabsFunction3 = new initAZTabs(
-            {
-                azTabsId: "az-tabs-3",
-                azTabsHeightStyle: "auto",
-                azTabsOpenEvent: "mouseover"
+                console.log("azTabsId: " + data.azTabsId + "\nazTabsJQElement: ", data.azTabsJQElement)
             });
 
             $("#cmdAZTabs1").off().on("click", function (e) { azTabsFunction1.setAZTabs(0) });
@@ -77,8 +55,27 @@
                         $("#cmdAZTabsVertical").text("AZ Tabs 1 Vertikal");
                     }
                     return "az-tabs-vertical";
-                });              
-            });            
+                });
+            });
+
+            var azTabsFunction1 = new initAZTabs(
+                {
+                    azTabsId: "az-tabs-1"
+                });
+
+            var azTabsFunction2 = new initAZTabs(
+                {
+                    azTabsId: "az-tabs-2",
+                    azTabsHeightStyle: "auto",
+                    azTabsOpenEvent: "mouseover"
+                });
+
+            var azTabsFunction3 = new initAZTabs(
+                {
+                    azTabsId: "az-tabs-3",
+                    azTabsHeightStyle: "auto",
+                    azTabsOpenEvent: "mouseover"
+                });
         });
 
     </script>
@@ -161,7 +158,7 @@
             <div class="az-row az-margin-t-14">
                 <div class="az-col xs-12">
                     <div class="az-code htmlHigh notranslate">
-                        Hvis du ønsker å bruke egne knapper eller linker for å åpne/lukke din Tab, bruker du JavaScript funksjonen under.
+                        Hvis du ønsker å bruke egne knapper eller linker til å åpne/lukke din Tab, bruker du JavaScript funksjonen under.
                     </div>
                     <div class="az-code jsHigh notranslate">
                         azTabsFunction1.setAZTabs(0);<br />
@@ -278,15 +275,12 @@
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>""</brown></default>
                             <br />
-
-                            <br />
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>azTabsHeightStyle</property>
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>"content"</brown></default>
                             <values><span>Values:</span> <brown>"content"</brown> or <brown>"auto"</brown></values>
-
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -294,7 +288,6 @@
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>"click"</brown></default>
                             <values><span>Values:</span> <brown>"click"</brown> or <brown>"mouseover"</brown></values>
-
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">

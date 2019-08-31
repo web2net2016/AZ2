@@ -13,13 +13,15 @@
     <meta name="format-detection" content="email=no" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <title></title>
+    <title>AZ Ajax</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
+
     <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
     <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
@@ -33,15 +35,17 @@
                 azAjaxType: "GET",
                 azAjaxContentType: ""
             };
+            azAjaxFunction1 = new initAZAjax(_azAjaxOptions).always();
 
-            new initAZAjax(_azAjaxOptions).done(function (data)
+            azAjaxFunction1.done(function (data, textStatus, jqXHR)
             {
-                $.each(data.slice(0, 3), function (i, SelectedObj)
+                $.each(data.slice(0, 1), function (i, SelectedObj)
                 {
                     console.log(JSON.stringify(SelectedObj))
                 });
+                console.log(textStatus)
+                console.log(jqXHR)
             });
-  
         });
 
     </script>
@@ -53,7 +57,7 @@
 
             <div class="az-row az-margin-t-56 az-margin-b-56">
                 <div class="az-col xs-12">
-                    <h1 class="az-code-header">AZ AJAX</h1>
+                    <h1 class="az-code-header">AZ Ajax</h1>
                     <div class="az-code jsHigh notranslate">
                         var _azAjaxOptions =<br />
                         {<br />
@@ -61,14 +65,29 @@
                         &emsp;&ensp;&emsp;&ensp;azAjaxDataType: "json",<br />
                         &emsp;&ensp;&emsp;&ensp;azAjaxType: "POST",<br />
                         &emsp;&ensp;&emsp;&ensp;azAjaxContentType: "application/json; charset=utf-8",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAjaxObjHeaders: {},<br />
                         &emsp;&ensp;&emsp;&ensp;azAjaxTimeout: 15000,<br />
                         &emsp;&ensp;&emsp;&ensp;azAjaxObjToSend: {},<br />
-                        &emsp;&ensp;&emsp;&ensp;azAjaxExceptionAction: "silent",<br />
-                        &emsp;&ensp;&emsp;&ensp;azAjaxExceptionErrorText: ""<br />
                         };<br />
                         <br />
-                        initAZAjax(_azAjaxOptions).done(function (data)<br />
+                        var azAjaxFunction1 = new initAZAjax(_azAjaxOptions).always(function (data, textStatus, jqXHR)<br />
                         {<br />
+                        &emsp;&ensp;&emsp;&ensp;// Her legger man logikken for å håndtere "always", "done" og "fail", etc.<br />
+                        });<br />
+                        <br />
+                        <br />
+                        <strong>Man kan også ha funksjoner på utsiden som lytter på om AZ Ajax har mottatt data eller har feilet.</strong><br />
+                        <br />
+                        var azAjaxFunction1 = new initAZAjax(_azAjaxOptions).always();<br />
+                        <br />
+                        azAjaxFunction1.done(function (data, textStatus, jqXHR)<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;// Her legger man logikken for å håndtere "done".<br />
+                        });<br />
+                        <br />
+                        azAjaxFunction1.fail(function (data, textStatus, jqXHR)<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;// Her legger man logikken for å håndtere "fail".<br />
                         });<br />
                         <br />
                     </div>
@@ -106,6 +125,14 @@
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
+                            <property>azAjaxObjHeaders</property>
+                            <type><span>Type:</span> <brown>Object</brown></type>
+                            <default><span>Default:</span> <mediumblue>{}</mediumblue></default>
+                            <br />
+
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
                             <property>azAjaxTimeout</property>
                             <type><span>Type:</span> <brown>Integer</brown></type>
                             <default><span>Default:</span> <red>15000</red></default>
@@ -119,23 +146,7 @@
                             <type><span>Type:</span> <brown>Object</brown></type>
                             <default><span>Default:</span> <mediumblue>{}</mediumblue></default>
                             <br />
-
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>azAjaxExceptionAction</property>
-                            <type><span>Type:</span> <brown>String</brown></type>
-                            <default><span>Default:</span> <brown>"silent"</brown></default>
-                            <br />
-                            Andre alternativer: <brown>"dialog"</brown>
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>azAjaxExceptionErrorText</property>
-                            <type><span>Type:</span> <brown>String</brown></type>
-                            <default><span>Default:</span> <brown>""</brown></default>
-                            <br />
-
+                            Dataene du sender omgjøres automatisk til en streng - <mediumblue>JSON.stringify(azAjaxObjToSend)</mediumblue>
                             <br />
                         </div>
                     </div>

@@ -1,0 +1,151 @@
+﻿
+.az-flex
+{
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: nowrap; 
+}
+
+    .az-flex.az-flex-wrap
+    {
+        flex-wrap: wrap;
+    }
+
+    /* Row */
+    .az-flex.az-flex-row
+    {
+        flex-direction: row;
+    }
+
+    .az-flex.az-flex-row-reverse
+    {
+        flex-direction: row-reverse;
+    }
+
+    /* Column */
+    .az-flex.az-flex-column
+    {
+        flex-direction: column;
+    }
+
+    .az-flex.az-flex-column-reverse
+    {
+        flex-direction: column-reverse;
+    }
+
+    /* V Align */
+    .az-flex.az-flex-v-align-left
+    {
+        justify-content: flex-start;
+    }
+
+    .az-flex.az-flex-v-align-center
+    {
+        justify-content: center;
+    }
+
+    .az-flex.az-flex-v-align-right
+    {
+        justify-content: flex-end;
+    }
+
+    /* H Align */
+    .az-flex.az-flex-h-align-top
+    {
+        align-items: flex-start;
+    }
+
+    .az-flex.az-flex-h-align-center
+    {
+        align-items: center;
+    }
+
+    .az-flex.az-flex-h-align-bottom
+    {
+        align-items: flex-end;
+    }
+
+    /* V Space */
+    .az-flex.az-flex-v-space-around
+    {
+        justify-content: space-around;
+    }
+
+    .az-flex.az-flex-v-space-between
+    {
+        justify-content: space-between;
+    }
+
+    /* H Space */
+    .az-flex.az-flex-h-space-around
+    {
+        align-content: space-around;
+    }
+
+    .az-flex.az-flex-h-space-between
+    {
+        align-content: space-between;
+    }
+
+    /* Display */
+    .az-flex.az-flex-topleft
+    {
+        justify-content: flex-start;
+    }
+
+    .az-flex.az-flex-topcenter
+    {
+        justify-content: center;
+    }
+
+    .az-flex.az-flex-topright
+    {
+        justify-content: flex-end;
+    }
+
+    .az-flex.az-flex-left
+    {
+        justify-content: flex-start;
+        align-content: center;
+    }
+
+    .az-flex.az-flex-center
+    {
+        justify-content: center;
+        align-content: center;
+    }
+
+    .az-flex.az-flex-right
+    {
+        justify-content: flex-end;
+        align-content: center;
+    }
+
+    .az-flex.az-flex-bottomleft
+    {
+        justify-content: flex-start;
+        align-content: flex-end;
+    }
+
+    .az-flex.az-flex-bottomcenter
+    {
+        justify-content: center;
+        align-content: flex-end;
+    }
+
+    .az-flex.az-flex-bottomright
+    {
+        justify-content: flex-end;
+        align-content: flex-end;
+    }
+
+.az-flex-col
+{
+    box-sizing: border-box;
+}
+
+    .az-flex-col.az-flex-col-stretch
+    {
+        width: 100% !important;
+        height: auto !important;
+    }

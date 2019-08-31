@@ -7,6 +7,7 @@
       "lib-2.0.0/css/color.css",
       "lib-2.0.0/css/default.css",
       "lib-2.0.0/css/display.css",
+      "lib-2.0.0/css/flex.css",
       "lib-2.0.0/css/form.css",
       "lib-2.0.0/css/grid.css",
       "lib-2.0.0/css/list.css",
@@ -36,7 +37,6 @@
       "lib-2.0.0/js/numeral.js",
       "lib-2.0.0/js/numeral.locales.js",
       "lib-2.0.0/js/watch.js",
-      "lib-2.0.0/js/default.lang.js",
       "lib-2.0.0/js/functionlib.js"
     ]
   }

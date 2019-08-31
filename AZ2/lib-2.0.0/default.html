@@ -13,60 +13,84 @@
     <meta name="format-detection" content="email=no" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <title></title>
+    <title>AZ Default</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
+
     <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
     <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
         $(document).ready(function ()
         {
+            w3CodeColor();
+
             $.subscribe("functionlib/azWindowScroll", function (e, data)
             {
-                $("#azWindowScrollTop").text(data.azWindowScrollTop)
-                $("#azWindowScrollDir").text(data.azWindowScrollDir)
+                $("#azWindowScrollTop").text(data.azWindowScrollTop);
+                $("#azWindowScrollDir").text(data.azWindowScrollDir);
             });
 
             $.subscribe("functionlib/azWindowResize", function (e, data)
             {
-                $("#azWindowWidth").text(data.azWindowWidth)
-                $("#azWindowHeight").text(data.azWindowHeight)
-                $("#azWindowScrollTop2").text(data.azWindowScrollTop)
-                $("#azWindowScrollLeft").text(data.azWindowScrollLeft)
-                $("#azWindowOrientation").text(data.azWindowOrientation)
+                $("#azWindowWidth").text(data.azWindowWidth);
+                $("#azWindowHeight").text(data.azWindowHeight);
+                $("#azWindowScrollTop2").text(data.azWindowScrollTop);
+                $("#azWindowScrollLeft").text(data.azWindowScrollLeft);
+                $("#azWindowOrientation").text(data.azWindowOrientation);
             });
 
-            $("#cmdAZAnim").off().on("click", function (e)
+            $("#cmdAZAnim").off("click", AZAnim).on("click", AZAnim);
+            $("#ShowCoverSpin1").off("click", ShowCoverSpin1).on("click", ShowCoverSpin1);
+            $("#ShowCoverSpin2").off("click", ShowCoverSpin2).on("click", ShowCoverSpin2);
+        });
+
+        function AZAnim()
+        {
+            var _$cmdAZAnim = $(this);
+            _$cmdAZAnim.attr("disabled", true);
+            $("p.az-anim-message").append(" Started...");
+
+            $.when(effect()).done(function ()
             {
-                var _$cmdAZAnim = $(this);
-                _$cmdAZAnim.attr("disabled", true);
-                $("p.az-anim-message").append(" Started...");
-                $.when(effect()).done(function ()
+                $("p.az-anim-message").append(" Finished!");
+                window.setTimeout(function ()
                 {
-                    $("p.az-anim-message").append(" Finished!");
-                    window.setTimeout(function ()
-                    {
-                        $("p.az-anim-message").text("Animation...");
-                        $("div.az-anim-rect").show();
-                        _$cmdAZAnim.attr("disabled", false);
-                    }, 3000)
-                });
+                    $("p.az-anim-message").text("Animation...");
+                    $("div.az-anim-rect").show();
+                    _$cmdAZAnim.attr("disabled", false);
+                }, 3000)
             });
 
-            var effect = function ()
+            function effect()
             {
                 return $("div.az-anim-rect").each(function (i)
                 {
-                    $(this).fadeIn().fadeOut(1000 * (i + 1));
+                    $(this).fadeOut(1000 * (i + 1));
                 });
             };
+        }
 
-            w3CodeColor();
-        });
+        function ShowCoverSpin1()
+        {
+            showCoverSpin();
+            $("#az-cover-spin").off("click", HideCoverSpin).on("click", HideCoverSpin);
+        }
+
+        function ShowCoverSpin2()
+        {
+            showCoverSpin("Show Cover Spin");
+            $("#az-cover-spin").off("click", HideCoverSpin).on("click", HideCoverSpin);
+        }
+
+        function HideCoverSpin()
+        {
+            hideCoverSpin();
+        }
 
     </script>
     <style>
@@ -101,6 +125,7 @@
                             &emsp;&ensp;&emsp;&ensp;$.subscribe()<br />
                             &emsp;&ensp;&emsp;&ensp;$.subscribeonce()<br />
                             &emsp;&ensp;&emsp;&ensp;$.unsubscribe()<br />
+                            &emsp;&ensp;&emsp;&ensp;$.publish()<br />
                             <br />
                             Ved hjelp av JQuery Promise, har vi laget flere funksjoner som du kan abonnere på og som vil hjelpe deg til å få en bedre flyt i din egen kode.
                             <br />
@@ -138,7 +163,7 @@
                                 &emsp;&ensp;&emsp;&ensp;data.azWindowOrientation<br />
                                 });<br />
                                 <br />
-                                Denne funksjonen trigges hver gang siden endrer størrelse.
+                                Denne funksjonen trigges når siden lastes og hver gang siden endrer størrelse.
                                 <br />
                             </div>
                             <br />
@@ -169,24 +194,54 @@
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;return $("div.az-anim-rect").each(function (i)<br />
                         &emsp;&ensp;&emsp;&ensp;{<br />
-                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;$(this).fadeIn().fadeOut(1000 * (i + 1));<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;$(this).fadeOut(1000 * (i + 1));<br />
                         &emsp;&ensp;&emsp;&ensp;});<br />
                         };<br />
                         <br />
-                        $.when(effect()).done(function ()<br />
-                        {<br />
-                        });
+                        $.when(effect()).done(function () {});<br />
                         <br />
                         <br />
                     </div>
-                    <div class="az-form-group">
-                        <button type="button" id="cmdAZAnim" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Go Anim</button>
+                    <div class="az-row az-code htmlHigh notranslate">
+                        <div class="az-col xs-12">
+                            <div class="az-form-group">
+                                <button type="button" id="cmdAZAnim" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Go Anim</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="az-code jsHigh notranslate">
+                        showCoverSpin();<br />
+                        <br />
+                        <br />
+                        showCoverSpin("Show Cover Spin");<br />
+                        <br />
+                        <br />
+                    </div>
+                    <div class="az-row az-code htmlHigh notranslate">
+                        <div class="az-col xs-6">
+                            <div class="az-form-group">
+                                <button id="ShowCoverSpin1" type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Show Cover Spin 1</button>
+                            </div>
+                        </div>
+                        <div class="az-col xs-6">
+                            <div class="az-form-group">
+                                <button id="ShowCoverSpin2" type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Show Cover Spin 2</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
 
-            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+
+            <!--<div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
                 <div class="az-col xs-12"><h1>h1 font-size: 36px</h1></div>
                 <div class="az-col xs-12"><h2>h2 font-size: 32px</h2></div>
                 <div class="az-col xs-12"><h3>h3 font-size: 28px</h3></div>
@@ -294,13 +349,7 @@
                 <div class="az-col xs-12 az-margin-b-7"><h1 class="az-shadow-3">.az-shadow-3</h1></div>
                 <div class="az-col xs-12 az-margin-b-7"><h1 class="az-shadow-4">.az-shadow-4</h1></div>
                 <div class="az-col xs-12 az-margin-b-7"><h1 class="az-shadow-5">.az-shadow-5</h1></div>
-            </div>
-
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            </div>-->
 
         </div>
     </form>

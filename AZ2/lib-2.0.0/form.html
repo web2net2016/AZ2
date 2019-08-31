@@ -13,11 +13,12 @@
     <meta name="format-detection" content="email=no" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <title></title>
+    <title>AZ Form</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
+
     <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
     <script src="/lib-2.0.0/lib/functionlib.js"></script>
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
@@ -26,6 +27,37 @@
         $(document).ready(function ()
         {
             w3CodeColor();
+
+            $.subscribe("functionlib/azCheckbox", function (e, data)
+            {
+                console.log("azCheckboxId: " + data.azCheckboxId + "\nazCheckboxValue: " + data.azCheckboxValue + "\nazCheckboxChecked: " + data.azCheckboxChecked + "\nazCheckboxJQElement: ", data.azCheckboxJQElement)
+            });
+
+            $.subscribe("functionlib/azRadio", function (e, data)
+            {
+                console.log("azRadioId: " + data.azRadioId + "\nazRadioName: " + data.azRadioName + "\nazRadioValue: " + data.azRadioValue + "\nazRadioChecked: " + data.azRadioChecked + "\nazRadioJQElement: ", data.azRadioJQElement)
+            });
+
+            $.subscribe("functionlib/azSwitch", function (e, data)
+            {
+                console.log("azSwitchId: " + data.azSwitchId + "\nazSwitchValue: " + data.azSwitchValue + "\nazSwitchChecked: " + data.azSwitchChecked + "\nazSwitchJQElement: ", data.azSwitchJQElement)
+            });
+
+            $.subscribe("functionlib/azRange", function (e, data)
+            {
+                console.log("azRangeId: " + data.azRangeId + "\nazRangeValue: " + data.azRangeValue + "\nazRangeJQElement: ", data.azRangeJQElement)
+            });
+
+            $(".slider").slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [75, 300],
+                slide: function (event, ui)
+                {
+                    //$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
+            });
         });
 
     </script>
@@ -35,7 +67,7 @@
     <form id="frmReg">
         <div class="az-container">
 
-            <div class="az-row az-margin-t-28 az-margin-b-28">
+            <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
                     <p class="az-text-center">Størrelse XS</p>
                 </div>
@@ -51,116 +83,176 @@
             </div>
 
             <!--Alert-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
+            <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <p class="az-alert xs az-alert-info" role="alert">Alert</p>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <p class="az-alert az-alert-info" role="alert">Alert</p>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <p class="az-alert sm az-alert-info" role="alert">Alert</p>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <p class="az-alert md az-alert-info" role="alert">Alert</p>
                     </div>
-
                 </div>
             </div>
-            <!--Input type text-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
-                <div class="az-col xs-12 sm-6 md-3">
 
+            <!--Alert-->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
-                        <label class="az-label xs">Navn</label>
+                        <p class="az-alert az-round xs az-alert-info" role="alert">Alert</p>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <p class="az-alert az-round az-alert-info" role="alert">Alert</p>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <p class="az-alert az-round sm az-alert-info" role="alert">Alert</p>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <p class="az-alert az-round md az-alert-info" role="alert">Alert</p>
+                    </div>
+                </div>
+            </div>
+
+            <!--Input type text-->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label xs mandatory">Navn</label>
                         <input type="text" class="az-input xs" />
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <label class="az-label">Navn</label>
+                        <label class="az-label mandatory">Navn</label>
                         <input type="text" class="az-input" />
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <label class="az-label sm">Navn</label>
+                        <label class="az-label sm mandatory">Navn</label>
                         <input type="text" class="az-input sm" />
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <label class="az-label md">Navn</label>
+                        <label class="az-label md mandatory">Navn</label>
                         <input type="text" class="az-input md" />
                     </div>
+                </div>
+            </div>
 
+            <!--Input type text-->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label xs mandatory">Navn</label>
+                        <input type="text" class="az-input az-round xs" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label mandatory">Navn</label>
+                        <input type="text" class="az-input az-round" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label sm mandatory">Navn</label>
+                        <input type="text" class="az-input az-round sm" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label md mandatory">Navn</label>
+                        <input type="text" class="az-input az-round md" />
+                    </div>
                 </div>
             </div>
 
             <!--Input type text Date Picker-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
+            <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <label class="az-label xs">Datovelger</label>
                         <input type="text" class="az-input xs date" />
                         <i class="fas fa-calendar-alt"></i>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <label class="az-label">Datovelger</label>
                         <input type="text" class="az-input date" />
                         <i class="fas fa-calendar-alt"></i>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <label class="az-label sm">Datovelger</label>
                         <input type="text" class="az-input sm date" />
                         <i class="fas fa-calendar-alt"></i>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <label class="az-label md">Datovelger</label>
                         <input type="text" class="az-input md date" />
                         <i class="fas fa-calendar-alt"></i>
                     </div>
+                </div>
+            </div>
 
+            <!--Input type text Date Picker-->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label xs">Datovelger</label>
+                        <input type="text" class="az-input az-round xs date" />
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label">Datovelger</label>
+                        <input type="text" class="az-input az-round date" />
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label sm">Datovelger</label>
+                        <input type="text" class="az-input az-round sm date" />
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label md">Datovelger</label>
+                        <input type="text" class="az-input az-round md date" />
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
                 </div>
             </div>
 
             <!--Input type select-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
+            <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <label class="az-label xs">Størrelse XS</label>
                         <select class="az-select xs">
@@ -170,10 +262,8 @@
                             <option value="3">Option 3</option>
                         </select>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <label class="az-label">Størrelse Normal</label>
                         <select class="az-select">
@@ -183,10 +273,8 @@
                             <option value="3">Option 3</option>
                         </select>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <label class="az-label sm">Størrelse SM</label>
                         <select class="az-select sm">
@@ -196,10 +284,8 @@
                             <option value="3">Option 3</option>
                         </select>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <label class="az-label md">Størrelse MD</label>
                         <select class="az-select md">
@@ -209,654 +295,468 @@
                             <option value="3">Option 3</option>
                         </select>
                     </div>
+                </div>
+            </div>
 
+            <!--Input type select-->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label xs">Størrelse XS</label>
+                        <select class="az-select az-round xs">
+                            <option value="0">Choose your option</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label">Størrelse Normal</label>
+                        <select class="az-select az-round">
+                            <option value="0">Choose your option</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label sm">Størrelse SM</label>
+                        <select class="az-select az-round sm">
+                            <option value="0">Choose your option</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label md">Størrelse MD</label>
+                        <select class="az-select az-round md">
+                            <option value="0">Choose your option</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
             <!--Input type textarea-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
+            <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <label class="az-label xs">Størrelse XS</label>
                         <textarea class="az-textarea xs"></textarea>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <label class="az-label">Størrelse Normal</label>
                         <textarea class="az-textarea"></textarea>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <label class="az-label sm">Størrelse SM</label>
                         <textarea class="az-textarea sm"></textarea>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <label class="az-label md">Størrelse MD</label>
                         <textarea class="az-textarea md"></textarea>
                     </div>
+                </div>
+            </div>
 
+            <!--Input type textarea-->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label xs">Størrelse XS</label>
+                        <textarea class="az-textarea az-round xs"></textarea>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label">Størrelse Normal</label>
+                        <textarea class="az-textarea az-round"></textarea>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label sm">Størrelse SM</label>
+                        <textarea class="az-textarea az-round sm"></textarea>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label md">Størrelse MD</label>
+                        <textarea class="az-textarea az-round md"></textarea>
+                    </div>
                 </div>
             </div>
 
             <!--Input type checkbox-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
+            <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <input class="az-checkbox xs" type="checkbox">
+                        <input class="az-checkbox xs" type="checkbox" value="1">
                         <label class="az-label xs">Størrelse XS</label>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <input class="az-checkbox" type="checkbox">
+                        <input class="az-checkbox" type="checkbox" value="2" checked="checked">
                         <label class="az-label">Størrelse Normal</label>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <input class="az-checkbox sm" type="checkbox">
+                        <input class="az-checkbox sm" type="checkbox" value="3">
                         <label class="az-label sm">Størrelse SM</label>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <input class="az-checkbox md" type="checkbox">
+                        <input class="az-checkbox md" type="checkbox" value="4">
                         <label class="az-label md">Størrelse MD</label>
                     </div>
-
                 </div>
             </div>
 
             <!--Input type radio-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
+            <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <input class="az-radio xs" type="radio" name="gender" value="male">
+                        <input class="az-radio xs" type="radio" name="id" value="1">
                         <label class="az-label xs">Størrelse XS</label>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <input class="az-radio" type="radio" name="gender" value="male">
+                        <input class="az-radio" type="radio" name="id" value="2" checked="checked">
                         <label class="az-label">Størrelse Normal</label>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <input class="az-radio sm" type="radio" name="gender" value="male">
+                        <input class="az-radio sm" type="radio" name="id" value="3">
                         <label class="az-label sm">Størrelse SM</label>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <input class="az-radio md" type="radio" name="gender" value="male">
+                        <input class="az-radio md" type="radio" name="id" value="4">
                         <label class="az-label md">Størrelse MD</label>
                     </div>
+                </div>
+            </div>
 
+            <!--Input type toggle switch-->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-switch xs">
+                            <input type="checkbox" id="switch1" value="1">
+                            <span class="az-slider xs"></span>
+                        </label>
+                        <label class="az-label xs">Størrelse XS</label>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-switch">
+                            <input type="checkbox" id="switch2" value="2" checked>
+                            <span class="az-slider"></span>
+                        </label>
+                        <label class="az-label">Størrelse Normal</label>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-switch sm">
+                            <input type="checkbox" id="switch3" value="3">
+                            <span class="az-slider sm"></span>
+                        </label>
+                        <label class="az-label sm">Størrelse SM</label>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-switch md">
+                            <input type="checkbox" id="switch4" value="4">
+                            <span class="az-slider md"></span>
+                        </label>
+                        <label class="az-label md">Størrelse MD</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Input type toggle switch-->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-switch xs">
+                            <input type="checkbox" id="switch5" value="5">
+                            <span class="az-slider az-round xs"></span>
+                        </label>
+                        <label class="az-label xs">Størrelse XS</label>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-switch">
+                            <input type="checkbox" id="switch6" value="6" checked>
+                            <span class="az-slider az-round"></span>
+                        </label>
+                        <label class="az-label">Størrelse Normal</label>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-switch sm">
+                            <input type="checkbox" id="switch7" value="7">
+                            <span class="az-slider az-round sm"></span>
+                        </label>
+                        <label class="az-label sm">Størrelse SM</label>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-switch md">
+                            <input type="checkbox" id="switch8" value="8">
+                            <span class="az-slider az-round md"></span>
+                        </label>
+                        <label class="az-label md">Størrelse MD</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Input type range -->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group xs">
+                        <input class="az-range xs" type="range" min="0" max="10" id="xsrange1">
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <input class="az-range" type="range" min="0" max="10" id="range1">
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group sm">
+                        <input class="az-range sm" type="range" min="0" max="10" id="smrange1">
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group md">
+                        <input class="az-range md" type="range" min="0" max="10" id="mdrange1">
+                    </div>
+                </div>
+            </div>
+
+            <!--Input type range -->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group xs">
+                        <input class="az-range az-round xs" type="range" min="0" max="10" id="xsrange2">
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <input class="az-range az-round" type="range" min="0" max="10" id="range2">
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group sm">
+                        <input class="az-range az-round sm" type="range" min="0" max="10" id="smrange2">
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group md">
+                        <input class="az-range az-round md" type="range" min="0" max="10" id="mdrange2">
+                    </div>
+                </div>
+            </div>
+
+            <!--Input type range -->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group xs">
+                        <div class="slider"></div>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <div class="slider"></div>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group sm">
+                        <div class="slider"></div>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group md">
+                        <div class="slider"></div>
+                    </div>
                 </div>
             </div>
 
             <!--Input type button-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
+            <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <button type="button" class="az-button xs az-button-block primary az-shadow-1 az-shadow-hover-2">Størrelse XS</button>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Størrelse Normal</button>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <button type="button" class="az-button sm az-button-block primary az-shadow-1 az-shadow-hover-2">Størrelse SM</button>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <button type="button" class="az-button md az-button-block primary az-shadow-1 az-shadow-hover-2">Størrelse MD</button>
                     </div>
-
                 </div>
             </div>
 
-            <!--Input type text / Group addon left icons-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
+            <!--Input type button-->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <label class="az-label xs" style="display: none;"></label>
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon xs"><i class="fas fa-user"></i></span>
-                            <input type="text" class="az-input xs" />
-                        </div>
+                        <button type="button" class="az-button az-round xs az-button-block primary az-shadow-1 az-shadow-hover-2">Størrelse XS</button>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <label class="az-label" style="display: none;"></label>
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon"><i class="fas fa-user"></i></span>
-                            <input type="text" class="az-input" />
-                        </div>
+                        <button type="button" class="az-button az-round az-button-block primary az-shadow-1 az-shadow-hover-2">Størrelse Normal</button>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <label class="az-label sm" style="display: none;"></label>
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon sm"><i class="fas fa-user"></i></span>
-                            <input type="text" class="az-input sm" />
-                        </div>
+                        <button type="button" class="az-button az-round sm az-button-block primary az-shadow-1 az-shadow-hover-2">Størrelse SM</button>
                     </div>
-
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
-                        <label class="az-label md" style="display: none;"></label>
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon md"><i class="fas fa-user"></i></span>
-                            <input type="text" class="az-input md" />
-                        </div>
+                        <button type="button" class="az-button az-round md az-button-block primary az-shadow-1 az-shadow-hover-2">Størrelse MD</button>
                     </div>
-
                 </div>
-            </div>
-
-            <!--Input type text / Group addon left and right icons-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label xs" style="display: none;"></label>
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon xs"><i class="fas fa-user"></i></span>
-                            <input type="text" class="az-input xs" />
-                            <span class="az-input-group-addon xs"><i class="fas fa-home"></i></span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label" style="display: none;"></label>
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon"><i class="fas fa-user"></i></span>
-                            <input type="text" class="az-input" />
-                            <span class="az-input-group-addon"><i class="fas fa-home"></i></span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label sm" style="display: none;"></label>
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon sm"><i class="fas fa-user"></i></span>
-                            <input type="text" class="az-input sm" />
-                            <span class="az-input-group-addon sm"><i class="fas fa-home"></i></span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label md" style="display: none;"></label>
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon md"><i class="fas fa-user"></i></span>
-                            <input type="text" class="az-input md" />
-                            <span class="az-input-group-addon md"><i class="fas fa-home"></i></span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!--Input type text / Group addon left text-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label xs" style="display: none;"></label>
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon xs">Søk</span>
-                            <input type="text" class="az-input xs" />
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label" style="display: none;"></label>
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon">Søk</span>
-                            <input type="text" class="az-input" />
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label sm" style="display: none;"></label>
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon sm">Søk</span>
-                            <input type="text" class="az-input sm" />
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label md" style="display: none;"></label>
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon md">Søk</span>
-                            <input type="text" class="az-input md" />
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!--Input type text animated-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
-                <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14">
-
-                    <div class="az-form-group">
-                        <input type="text" class="az-input-animated xs" id="xs1" />
-                        <label class="az-label-animated xs" for="xs1">Størrelse XS</label>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14">
-
-                    <div class="az-form-group">
-                        <input type="text" class="az-input-animated" id="normal1" />
-                        <label class="az-label-animated" for="normal1">Størrelse Normal</label>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14">
-
-                    <div class="az-form-group">
-                        <input type="text" class="az-input-animated sm" id="sm1" />
-                        <label class="az-label-animated sm" for="sm1">Størrelse SM</label>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14">
-
-                    <div class="az-form-group">
-                        <input type="text" class="az-input-animated md" id="md1" />
-                        <label class="az-label-animated md" for="md1">Størrelse MD</label>
-                    </div>
-
-                </div>
-            </div>
-
-            <!--Input type text animated / Group addon right icon-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
-                <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14">
-
-                    <div class="az-form-group">
-                        <div class="az-input-group">
-                            <input type="password" class="az-input-animated xs" id="xs2" />
-                            <label class="az-label-animated xs" for="xs2">Størrelse XS</label>
-                            <span data-connectedid="xs2" class="passwordeye az-input-group-addon-animated xs az-cursor-pointer"><i class="fas fa-eye fa-fw az-cursor-pointer"></i></span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14">
-
-                    <div class="az-form-group">
-                        <div class="az-input-group">
-                            <input type="password" class="az-input-animated" id="normal2" />
-                            <label class="az-label-animated" for="normal2">Størrelse Normal</label>
-                            <span data-connectedid="normal2" class="passwordeye az-input-group-addon-animated az-cursor-pointer"><i class="fas fa-eye fa-fw az-cursor-pointer"></i></span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14">
-
-                    <div class="az-form-group">
-                        <div class="az-input-group">
-                            <input type="password" class="az-input-animated sm" id="sm2" />
-                            <label class="az-label-animated sm" for="sm2">Størrelse SM</label>
-                            <span data-connectedid="sm2" class="passwordeye az-input-group-addon-animated sm az-cursor-pointer"><i class="fas fa-eye fa-fw az-cursor-pointer"></i></span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14">
-
-                    <div class="az-form-group">
-                        <div class="az-input-group">
-                            <input type="password" class="az-input-animated md" id="md2" />
-                            <label class="az-label-animated md" for="md2">Størrelse MD</label>
-                            <span data-connectedid="md2" class="passwordeye az-input-group-addon-animated md az-cursor-pointer"><i class="fas fa-eye fa-fw az-cursor-pointer"></i></span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!--Input type text animated / Group addon left icon-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
-                <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14">
-
-                    <div class="az-form-group">
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon-animated xs"><i class="fas fa-user"></i></span>
-                            <input type="text" class="az-input-animated xs" id="xs3" />
-                            <label class="az-label-animated xs" for="xs3">Størrelse XS</label>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14">
-
-                    <div class="az-form-group">
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon-animated"><i class="fas fa-user"></i></span>
-                            <input type="text" class="az-input-animated" id="normal3" />
-                            <label class="az-label-animated" for="normal3">Størrelse Normal</label>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14">
-
-                    <div class="az-form-group">
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon-animated sm"><i class="fas fa-user"></i></span>
-                            <input type="text" class="az-input-animated sm" id="sm3" />
-                            <label class="az-label-animated sm" for="sm3">Størrelse SM</label>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14">
-
-                    <div class="az-form-group">
-                        <div class="az-input-group">
-                            <span class="az-input-group-addon-animated md"><i class="fas fa-user"></i></span>
-                            <input type="text" class="az-input-animated md" id="md3" />
-                            <label class="az-label-animated md" for="md3">Størrelse MD</label>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!--Input type text Date Picker-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label">Datovelger - Tidligere datoer</label>
-                        <input type="text" class="az-input pastdate" />
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label">Datovelger - Ikke tidligere datoer</label>
-                        <input type="text" class="az-input nopastdate" />
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label">Datovelger - Fra dato</label>
-                        <input type="text" class="az-input fromdate" />
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label">Datovelger - Til dato</label>
-                        <input type="text" class="az-input todate" />
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-
-                </div>
-            </div>
-
-            <!--Input type text Diverse-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label">Tvinger store bokstaver</label>
-                        <input type="text" class="az-input forceuppercase" />
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label">Tvinger små bokstaver</label>
-                        <input type="text" class="az-input forcelowercase" />
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label">Kan ikke lime inn</label>
-                        <input type="text" class="az-input donotpaste" />
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label">Kan ikke trykke <strong>Enter</strong></label>
-                        <input type="text" class="az-input notenter" />
-                    </div>
-
-                </div>
-            </div>
-
-            <!--Input type text Diverse-->
-            <div class="az-row az-margin-t-28 az-margin-b-28">
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label">Bare les</label>
-                        <input type="text" class="az-input readonly" value="Dette er en test" />
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label">Deaktivert</label>
-                        <input type="text" class="az-input disabled" value="Dette er en test" />
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
-                    <div class="az-form-group">
-                        <label class="az-label">Markerer innholdet</label>
-                        <input type="text" class="az-input selecttext validate validate-numeric" data-attr="int" value="Dette er en test" />
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3"></div>
             </div>
 
             <!--Input type all buttons-->
-            <div class="az-row az-margin-t-28 az-margin-b-28 az-border-outline-1-teal">
+            <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
-
+                    <div class="az-form-group">
+                        <button type="button" class="az-button xs az-button-block default az-shadow-1 az-shadow-hover-2">Default</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button xs az-button-block primary az-shadow-1 az-shadow-hover-2">Primary</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button xs az-button-block success az-shadow-1 az-shadow-hover-2">Success</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button xs az-button-block info az-shadow-1 az-shadow-hover-2">Info</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button xs az-button-block warning az-shadow-1 az-shadow-hover-2">Warning</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button xs az-button-block danger az-shadow-1 az-shadow-hover-2">Danger</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button xs az-button-block link">Link</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block default az-shadow-1 az-shadow-hover-2">Default</button>
                     </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Primary</button>
                     </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block success az-shadow-1 az-shadow-hover-2">Success</button>
                     </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block info az-shadow-1 az-shadow-hover-2">Info</button>
                     </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block warning az-shadow-1 az-shadow-hover-2">Warning</button>
                     </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block danger az-shadow-1 az-shadow-hover-2">Danger</button>
                     </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block link">Link</button>
                     </div>
-
                 </div>
-            </div>
-
-            <div class="az-row az-margin-t-56">
-                <div class="az-col xs-12">
-                    <h1 class="az-code-header">FormStyle</h1>
-                    <div class="az-code jsHigh notranslate">
-                        formStyle("#" + $ObjAZForm)<br />
-                        <br />
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button sm az-button-block default az-shadow-1 az-shadow-hover-2">Default</button>
                     </div>
-                    <div class="az-code htmlHigh notranslate">
-
-
-
-
+                    <div class="az-form-group">
+                        <button type="button" class="az-button sm az-button-block primary az-shadow-1 az-shadow-hover-2">Primary</button>
                     </div>
-                </div>
-            </div>
-
-            <div class="az-row az-margin-t-56 az-margin-b-56">
-                <div class="az-col xs-12">
-                    <h1 class="az-code-header">Serialize Form</h1>
-                    <div class="az-code jsHigh notranslate">
-                        serializeForm("#" + $ObjAZForm)<br />
-                        <br />
+                    <div class="az-form-group">
+                        <button type="button" class="az-button sm az-button-block success az-shadow-1 az-shadow-hover-2">Success</button>
                     </div>
-                    <div class="az-code htmlHigh notranslate">
-
-
-
+                    <div class="az-form-group">
+                        <button type="button" class="az-button sm az-button-block info az-shadow-1 az-shadow-hover-2">Info</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button sm az-button-block warning az-shadow-1 az-shadow-hover-2">Warning</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button sm az-button-block danger az-shadow-1 az-shadow-hover-2">Danger</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button sm az-button-block link">Link</button>
                     </div>
                 </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button md az-button-block default az-shadow-1 az-shadow-hover-2">Default</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button md az-button-block primary az-shadow-1 az-shadow-hover-2">Primary</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button md az-button-block success az-shadow-1 az-shadow-hover-2">Success</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button md az-button-block info az-shadow-1 az-shadow-hover-2">Info</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button md az-button-block warning az-shadow-1 az-shadow-hover-2">Warning</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button md az-button-block danger az-shadow-1 az-shadow-hover-2">Danger</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button md az-button-block link">Link</button>
+                    </div>
+                </div>
             </div>
-
-
-            <!--Input type button special-->
-            <!--<div class="az-row az-margin-b-56">
-        <div class="az-col xs-3 az-xs-margin-t-14">
-
-            <div class="az-form-group">
-                <button type="button" class="az-button az-circle-50 az-bg-teal az-shadow-1 az-shadow-hover-2 az-text-xxxlarge">+</button>
-            </div>
-
-        </div>
-        <div class="az-col xs-3 az-xs-margin-t-14">
-
-            <div class="az-form-group">
-                <button type="button" class="az-button az-circle-50 az-bg-blue-grey az-shadow-1 az-shadow-hover-2 az-text-xxxlarge">+</button>
-            </div>
-
-        </div>
-        <div class="az-col xs-3 az-xs-margin-t-14">
-
-            <div class="az-form-group">
-                <button type="button" class="az-button az-bg-teal az-shadow-1 az-shadow-hover-2 az-text-xxxlarge">+</button>
-            </div>
-
-        </div>
-        <div class="az-col xs-3 az-xs-margin-t-14">
-
-            <div class="az-form-group">
-                <button type="button" class="az-button az-bg-blue-grey az-shadow-1 az-shadow-hover-2 az-text-xxxlarge">+</button>
-            </div>
-
-        </div>
-    </div>-->
 
         </div>
     </form>
+
 
 </body>
 </html>

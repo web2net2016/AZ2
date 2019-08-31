@@ -19,7 +19,6 @@ h6
     font-weight: 400;
 }
 
-
 /*--------------------------------------------------------
 Accordion 
 accordion.css    
@@ -184,39 +183,30 @@ display.css
 /*--------------------------------------------------------
 Form 
 form.css
-- Form Group - Input Group Addon
+- Form Group
+- Input Group Addon
 - Input Standard
+- Toggle Switch
+- Range (Slider)
 - Buttons
 - Input Animated
 - Alert
 - Modal
 - Dropdown
 - Badge
-- Snackbar
+- Cover Spin
+- Fieldset
+- Lable Asterisk
 - Animations Keyframes
 -----------------------------------------------------------*/
-/* Form Group - Input Group Addon */
+/* Form Group */
+
+/* Input Group Addon */
 .az-form-group .az-input-group-addon
 {
     border: 1px solid #BBBBBB;
     background-color: #DDDDDD;
 }
-
-    .az-form-group .az-input-group-addon.xs
-    {
-        font-size: 0.85em;
-    }
-
-    .az-form-group .az-input-group-addon.sm
-    {
-        font-size: 1.4em;
-    }
-
-    .az-form-group .az-input-group-addon.md
-    {
-        font-size: 1.7em;
-    }
-
 
 /* Input Standard */
 .az-form-group .az-input
@@ -225,56 +215,11 @@ form.css
     background-color: #FFFFFF;
 }
 
-    .az-form-group .az-input.xs
-    {
-        font-size: 0.85em;
-    }
-
-    .az-form-group .az-input.sm
-    {
-        font-size: 1.1em;
-    }
-
-    .az-form-group .az-input.md
-    {
-        font-size: 1.2em;
-    }
-
-.az-form-group .az-label.xs
-{
-    font-size: 0.85em;
-}
-
-.az-form-group .az-label.sm
-{
-    font-size: 1.1em;
-}
-
-.az-form-group .az-label.md
-{
-    font-size: 1.2em;
-}
-
 .az-form-group .az-textarea
 {
     border: 1px solid #BBBBBB;
     background-color: #FFFFFF;
 }
-
-    .az-form-group .az-textarea.xs
-    {
-        font-size: 0.85em;
-    }
-
-    .az-form-group .az-textarea.sm
-    {
-        font-size: 1.1em;
-    }
-
-    .az-form-group .az-textarea.md
-    {
-        font-size: 1.2em;
-    }
 
 .az-form-group .az-select
 {
@@ -282,43 +227,59 @@ form.css
     background-color: #FFFFFF;
 }
 
-    .az-form-group .az-select.xs
+/* Toggle Switch */
+.az-form-group .az-switch .az-slider
+{
+    background-color: #CCCCCC;
+}
+
+    .az-form-group .az-switch .az-slider:before
     {
-        font-size: 0.85em;
+        background-color: #FFFFFF;
     }
 
-    .az-form-group .az-select.sm
-    {
-        font-size: 1.1em;
-    }
+.az-form-group .az-switch input:checked + .az-slider
+{
+    background-color: #0078D7;
+}
 
-    .az-form-group .az-select.md
-    {
-        font-size: 1.2em;
-    }
+/* Range (Slider) */
+.az-form-group .az-range
+{
+    background-color: #DEDEDE;
+}
+
+.az-form-group .az-range::-webkit-slider-runnable-track
+{
+    background-color: #CCCCCC;
+}
+
+.az-form-group .az-range::-moz-range-track
+{
+    background-color: #CCCCCC;
+}
+
+.az-form-group .az-range::-ms-track
+{
+    background-color: #CCCCCC;
+}
+
+.az-form-group .az-range::-webkit-slider-thumb
+{
+    background-color: #0078D7;
+}
+
+.az-form-group .az-range::-moz-range-thumb
+{
+    background-color: #0078D7;
+}
+
+.az-form-group .az-range::-ms-thumb
+{
+    background-color: #0078D7;
+}
 
 /* Buttons */
-.az-form-group .az-button.xs
-{
-    font-size: 0.85em;
-}
-
-.az-form-group .az-button.sm
-{
-    font-size: 1.1em;
-}
-
-.az-form-group .az-button.md
-{
-    font-size: 1.2em;
-}
-
-.az-form-group .az-button-outline
-{
-    outline: 1px solid red;
-    outline-offset: 4px;
-}
-
 .az-form-group .az-button.default
 {
     background-color: #FFFFFF;
@@ -372,78 +333,18 @@ form.css
     background-color: transparent;
 }
 
-    .az-form-group .az-input-group-addon-animated.xs
-    {
-        font-size: 0.85em;
-    }
-
-    .az-form-group .az-input-group-addon-animated.sm
-    {
-        font-size: 1.4em;
-    }
-
-    .az-form-group .az-input-group-addon-animated.md
-    {
-        font-size: 1.7em;
-    }
-
 .az-form-group .az-input-animated
 {
     border-bottom: 1px solid #CCCCCC !important;
     background-color: transparent;
 }
 
-    .az-form-group .az-input-animated.xs
-    {
-        font-size: 0.85em;
-    }
-
-    .az-form-group .az-input-animated.sm
-    {
-        font-size: 1.1em;
-    }
-
-    .az-form-group .az-input-animated.md
-    {
-        font-size: 1.2em;
-    }
-
     .az-form-group .az-input-animated:focus
     {
         border-bottom: 1px solid #666666 !important;
     }
 
-.az-form-group .az-label-animated.xs
-{
-    font-size: 0.85em;
-}
-
-.az-form-group .az-label-animated.sm
-{
-    font-size: 1.1em;
-}
-
-.az-form-group .az-label-animated.md
-{
-    font-size: 1.2em;
-}
-
 /* Alert */
-.az-form-group .az-alert.xs
-{
-    font-size: 0.85em;
-}
-
-.az-form-group .az-alert.sm
-{
-    font-size: 1.1em;
-}
-
-.az-form-group .az-alert.md
-{
-    font-size: 1.2em;
-}
-
 .az-form-group .az-alert-default
 {
     background-color: #FFFFFF;
@@ -540,6 +441,17 @@ form.css
             {
                 border-bottom: 1px solid #009688;
             }
+
+/* Badge */
+
+
+
+/* Cover Spin Text */
+#az-cover-spin > div
+{
+    margin-top: 60px;
+    font-size: 16px;
+}
 
 /* Fieldset */
 .az-fieldset

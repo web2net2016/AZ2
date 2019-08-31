@@ -13,33 +13,30 @@
     <meta name="format-detection" content="email=no" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <title></title>
+    <title>AZ Accordion</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
+
     <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
     <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
         $(document).ready(function ()
         {
-            azPageFunction = new initAZPage({}, function ()
-            {
-                hideCoverSpin();
-            });
-
             w3CodeColor();
 
             $.subscribe("functionlib/azAccordionActivate", function (e, data)
             {
-                console.log(data.azAccordionId + " - " + data.azAccordionStatus + " - Activated: " + data.azAccordionActivated + " - Deactivated: " + data.azAccordionDeactivated)
+                console.log("azAccordionId: " + data.azAccordionId + "\nazAccordionStatus: " + data.azAccordionStatus + "\nazAccordionActivated: " + data.azAccordionActivated + "\nazAccordionDeactivated: " + data.azAccordionDeactivated)
             });
 
             $.subscribe("functionlib/azAccordionHeader", function (e, data)
             {
-                console.log(data.azAccordionId, data.azAccordionHeaderJQElement)
+                console.log("azAccordionId: " + data.azAccordionId + "\nazAccordionHeaderJQElement: ", data.azAccordionHeaderJQElement)
             });
 
             azAccordionFunction1 = new initAZAccordion(
@@ -70,99 +67,7 @@
     <form id="frmReg">
         <div class="az-container">
 
-            <div class="az-row az-margin-t-56">
-                <div class="az-col xs-12 sm-6">
-
-                    <div class="az-accordion" id="az-accordion-1">
-                        <div class="az-accordion-card">
-                            <header>
-                                <h1>AZ Accordion 1</h1>
-                            </header>
-                            <article>
-                                <img class="az-image az-width-40 az-left az-margin-r-14 az-shadow-1" src="/web2net/img_avatar2.png" />
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                <p class="az-clearfix">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </article>
-                        </div>
-                        <div class="az-accordion-card">
-                            <header>
-                                <h1>AZ Accordion 2</h1>
-                            </header>
-                            <article>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </article>
-                        </div>
-                        <div class="az-accordion-card">
-                            <header>
-                                <h1>AZ Accordion 3</h1>
-                            </header>
-                            <article>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </article>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="az-col xs-12 sm-6">
-
-                    <div class="az-accordion" id="az-accordion-2">
-                        <div class="az-accordion-card">
-                            <header>
-                                <h1>AZ Accordion 4</h1>
-                            </header>
-                            <article>
-                                <img class="az-image az-width-40 az-left az-margin-r-14 az-shadow-1" src="/web2net/img_avatar2.png" />
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                <p class="az-clearfix">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </article>
-                        </div>
-                        <div class="az-accordion-card">
-                            <header>
-                                <h1>AZ Accordion 5</h1>
-                            </header>
-                            <article>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </article>
-                        </div>
-                        <div class="az-accordion-card">
-                            <header>
-                                <h1>AZ Accordion 6</h1>
-                            </header>
-                            <article>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            </article>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="az-row az-margin-t-28">
-                <div class="az-col xs-12 sm-6">
-                    <div class="az-code jsHigh notranslate">
-                        azAccordionFunction1.setAZAccordion(0);<br />
-                        <br />
-                        azAccordionFunction1.setAZAccordion(1);<br />
-                        <br />
-                        azAccordionFunction1.setAZAccordion(2);<br />
-                        <br />
-                    </div>
-                    <div class="az-form-group">
-                        <button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZAccordion1">AZ Accordion 1</button>
-                        <button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZAccordion2">AZ Accordion 2</button>
-                        <button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZAccordion3">AZ Accordion 3</button>
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-6"></div>
-            </div>
-
-            <div class="row az-margin-t-14">
+            <div class="row az-margin-t-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">AZ Accordion</h1>
                 </div>
@@ -199,7 +104,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="az-row">
                 <div class="az-col xs-12">
                     <div class="az-code jsHigh notranslate">
@@ -215,7 +119,7 @@
                         &emsp;&ensp;&emsp;&ensp;azAccordionSlideUp: 100,<br />
                         });<br />
                         <br />
-                        Hvis du ønsker å bruke egne knapper eller linker for å åpne/lukke din Accordion, bruker du JavaScript funksjonen under.
+                        Hvis du ønsker å bruke egne knapper eller linker til å åpne/lukke din AZAccordion, bruker du JavaScript funksjonen under.
                         <br />
                         <br />
                         azAccordionFunction1.setAZAccordion(0);<br />
@@ -227,15 +131,12 @@
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>""</brown></default>
                             <br />
-
-                            <br />
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>azAccordionHeightStyle</property>
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>"content"</brown></default>
                             <values><span>Values:</span> <brown>"content"</brown> or <brown>"auto"</brown></values>
-
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -243,7 +144,6 @@
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>true</mediumblue></default>
                             <values><span>Values:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
-
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -251,7 +151,6 @@
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>"click"</brown></default>
                             <values><span>Values:</span> <brown>"click"</brown> or <brown>"mouseover"</brown></values>
-
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -259,15 +158,11 @@
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>"fas fa-plus"</brown></default>
                             <br />
-
-                            <br />
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>azAccordionIconOpen</property>
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>"fas fa-minus"</brown></default>
-                            <br />
-
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -276,16 +171,12 @@
                             <default><span>Default:</span> <red>100</red></default>
                             <units><span>Unit:</span> <red>milliseconds</red></units>
                             <br />
-
-                            <br />
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>azAccordionSlideUp</property>
                             <type><span>Type:</span> <brown>Integer</brown></type>
                             <default><span>Default:</span> <red>100</red></default>
                             <units><span>Unit:</span> <red>milliseconds</red></units>
-                            <br />
-
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -320,7 +211,95 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12 sm-6 az-xs-margin-b-28">
+                    <div class="az-accordion" id="az-accordion-1" style="width: 99%;">
+                        <div class="az-accordion-card">
+                            <header>
+                                <h1>AZ Accordion 1</h1>
+                            </header>
+                            <article>
+                                <img class="az-image az-width-40 az-left az-margin-r-14 az-shadow-1" src="/web2net/img_avatar2.png" />
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p class="az-clearfix">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <div class="az-accordion-card">
+                            <header>
+                                <h1>AZ Accordion 2</h1>
+                            </header>
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <div class="az-accordion-card">
+                            <header>
+                                <h1>AZ Accordion 3</h1>
+                            </header>
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-accordion" id="az-accordion-2" style="width: 99%;">
+                        <div class="az-accordion-card">
+                            <header>
+                                <h1>AZ Accordion 4</h1>
+                            </header>
+                            <article>
+                                <img class="az-image az-width-40 az-left az-margin-r-14 az-shadow-1" src="/web2net/img_avatar2.png" />
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p class="az-clearfix">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <div class="az-accordion-card">
+                            <header>
+                                <h1>AZ Accordion 5</h1>
+                            </header>
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                        <div class="az-accordion-card">
+                            <header>
+                                <h1>AZ Accordion 6</h1>
+                            </header>
+                            <article>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-code jsHigh notranslate">
+                        azAccordionFunction1.setAZAccordion(0);<br />
+                        <br />
+                        azAccordionFunction1.setAZAccordion(1);<br />
+                        <br />
+                        azAccordionFunction1.setAZAccordion(2);<br />
+                        <br />
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZAccordion1">AZ Accordion 1</button>
+                        <button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZAccordion2">AZ Accordion 2</button>
+                        <button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZAccordion3">AZ Accordion 3</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6"></div>
+            </div>
+
+            <div class="row az-margin-t-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">AZ Accordion HTML og CSS</h1>
                 </div>
@@ -342,14 +321,14 @@
                         &lt;/div&gt;<br />
                         <br />
                         <br />
-                        HEADER og ARTICLE tilføres en CSS klasse når en Accordion er aktiv.
+                        HEADER og ARTICLE tilføres en CSS klasse når en AZAccordion er aktiv.
                         <br />
                         <br />
                         &lt;header class="az-accordion-header-active"&gt;<br />
                         &lt;article class="az-accordion-article-active"&gt;<br />
                         <br />
                         <br />
-                        AZ Accordion har noe grunnleggende CSS som det i utgangspunktet ikke skal være nødvendig å justere på. <a href="/lib-2.0.0/css/accordion.css" target="_blank" class="az-border-bottom-1-blue">accordion.css</a>
+                        AZAccordion har noe grunnleggende CSS som det i utgangspunktet ikke skal være nødvendig å justere på. <a href="/lib-2.0.0/css/accordion.css" target="_blank" class="az-border-bottom-1-blue">accordion.css</a>
                         <br />
                         CSS som du selv kan endre, finenr du i filen <a href="/lib-2.0.0/lib/standard.css" target="_blank" class="az-border-bottom-1-blue">standard.css</a>
                         <br />

@@ -1,4 +1,69 @@
 ﻿/* Font Color */
+.az-text-color-default
+{
+    color: #FFFFFF !important;
+}
+
+.az-text-color-primary
+{
+    color: #0078D7 !important;
+}
+
+.az-text-color-success
+{
+    color: #28a745 !important;
+}
+
+.az-text-color-info
+{
+    color: #0bb2d4 !important;
+}
+
+.az-text-color-warning
+{
+    color: #FF851B !important;
+}
+
+.az-text-color-danger
+{
+    color: #FF4136 !important;
+}
+
+
+/* Backgrounds */
+.az-bg-default
+{
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+}
+.az-bg-primary
+{
+    background-color: #0078D7 !important;
+    color: #FFFFFF !important;
+}
+.az-bg-success
+{
+    background-color: #28a745 !important;
+    color: #FFFFFF !important;
+}
+.az-bg-info
+{
+    background-color: #0bb2d4 !important;
+    color: #FFFFFF !important;
+}
+.az-bg-warning
+{
+    background-color: #FF851B !important;
+    color: #FFFFFF !important;
+}
+.az-bg-danger
+{
+    background-color: #FF4136 !important;
+    color: #FFFFFF !important;
+}
+
+
+/* Font Color */
 .az-fire-engine
 {
     color: #E81123 !important;
@@ -116,7 +181,6 @@
 
 
 /* Hover Font Color */
-
 .az-fire-engine-hover:hover
 {
     color: #E81123 !important;
@@ -1960,5 +2024,3 @@
     outline: 1px solid #607d8b !important;
     outline-offset: -1px !important;
 }
-
-

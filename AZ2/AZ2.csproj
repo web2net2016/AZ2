@@ -76,6 +76,7 @@
     <Content Include="lib-2.0.0\azwindow.html" />
     <Content Include="lib-2.0.0\card.html" />
     <Content Include="lib-2.0.0\color.html" />
+    <Content Include="lib-2.0.0\css\flex.css" />
     <Content Include="lib-2.0.0\css\snackbar.css" />
     <Content Include="lib-2.0.0\css\az-2.0.0.css" />
     <Content Include="lib-2.0.0\css\az-2.0.0.min.css">
@@ -83,7 +84,9 @@
     </Content>
     <Content Include="lib-2.0.0\default.html" />
     <Content Include="favicon.ico" />
+    <Content Include="lib-2.0.0\form2.html" />
     <Content Include="lib-2.0.0\form.html" />
+    <Content Include="lib-2.0.0\flex.html" />
     <Content Include="lib-2.0.0\grid.html" />
     <Content Include="index.html" />
     <Content Include="lib-2.0.0\css\tabs.css" />
@@ -121,7 +124,8 @@
     <Content Include="lib-2.0.0\js\az-2.0.0.min.js">
       <DependentUpon>az-2.0.0.js</DependentUpon>
     </Content>
-    <Content Include="lib-2.0.0\js\default.lang.js" />
+    <Content Include="lib-2.0.0\lib\default.lang.js" />
+    <Content Include="lib-2.0.0\lib\functionlib - Copy.js" />
     <Content Include="lib-2.0.0\js\functionlib.js" />
     <Content Include="lib-2.0.0\js\jquery.3.3.1.js" />
     <Content Include="lib-2.0.0\js\jquery.matchHeight.js" />
@@ -131,6 +135,7 @@
     <Content Include="lib-2.0.0\js\watch.js" />
     <Content Include="lib-2.0.0\lib\az-codecolor.js" />
     <Content Include="lib-2.0.0\lib\functionlib.js" />
+    <Content Include="lib-2.0.0\lib\az-codecolor.css" />
     <Content Include="lib-2.0.0\lib\standard.css" />
     <Content Include="lib-2.0.0\lib\templates.html" />
     <Content Include="lib-2.0.0\list.html" />
