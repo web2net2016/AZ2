@@ -2702,12 +2702,6 @@ ul
     margin-right: auto !important;
 }
 
-.az-display-block
-{
-    display: block !important;
-    width: 100% !important;
-}
-
 /* Width */
 .az-width-10
 {
@@ -5754,21 +5748,18 @@ ul
         {
             width: 25px;
             height: 25px;
-            border-radius: 50%;
         }
 
         .az-form-group .az-range.az-round.sm::-webkit-slider-thumb
         {
             width: 35px;
             height: 35px;
-            border-radius: 50%;
         }
 
         .az-form-group .az-range.az-round.md::-webkit-slider-thumb
         {
             width: 40px;
             height: 40px;
-            border-radius: 50%;
         }
 
         /* Slider Thumb -moz-range */
@@ -5808,21 +5799,18 @@ ul
         {
             width: 25px;
             height: 25px;
-            border-radius: 50%;
         }
 
         .az-form-group .az-range.az-round.sm::-moz-range-thumb
         {
             width: 35px;
             height: 35px;
-            border-radius: 50%;
         }
 
         .az-form-group .az-range.az-round.md::-moz-range-thumb
         {
             width: 40px;
             height: 40px;
-            border-radius: 50%;
         }
 
         /* Slider Thumb -ms */
@@ -5862,21 +5850,18 @@ ul
         {
             width: 25px;
             height: 25px;
-            border-radius: 50%;
         }
 
         .az-form-group .az-range.az-round.sm::-ms-thumb
         {
             width: 35px;
             height: 35px;
-            border-radius: 50%;
         }
 
         .az-form-group .az-range.az-round.md::-ms-thumb
         {
             width: 40px;
             height: 40px;
-            border-radius: 50%;
         }
 
     /* Buttons */
@@ -8928,11 +8913,12 @@ template
 
     .az-slideshow .az-arrow-left
     {
+        margin-left: 14px;
     }
 
     .az-slideshow .az-arrow-right
     {
-        margin-right: 7px;
+        margin-right: 14px;
     }
 
 @media (max-width: 576px)

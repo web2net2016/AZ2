@@ -65,21 +65,19 @@ $(document).ready(function ()
                 }
                 if ($(this).hasClass("forceuppercase"))
                 {
-                    $(this).off("keypress", forceUppercaseFocusout).on("keypress", forceUppercaseFocusout);
-                    $(this).off("focusout", forceUppercaseFocusout).on("focusout", forceUppercaseFocusout);
+                    $(this).off("keypress focusout", azForceUppercaseKeypressFocusout).on("keypress focusout", azForceUppercaseKeypressFocusout);
                 }
                 if ($(this).hasClass("forcelowercase"))
                 {
-                    $(this).off("keypress", forceLowercaseFocusout).on("keypress", forceLowercaseFocusout);
-                    $(this).off("focusout", forceLowercaseFocusout).on("focusout", forceLowercaseFocusout);
+                    $(this).off("keypress focusout", azForceLowercaseKeypressFocusout).on("keypress focusout", azForceLowercaseKeypressFocusout);
                 }
                 if ($(this).hasClass("donotpaste"))
                 {
-                    $(this).off("keydown", doNotPaste).on("keydown", doNotPaste);
+                    $(this).off("keydown", azDoNotPaste).on("keydown", azDoNotPaste);
                 }
                 if ($(this).hasClass("notenter"))
                 {
-                    $(this).off("keydown", notEnter).on("keydown", notEnter);
+                    $(this).off("keydown", azNotEnter).on("keydown", azNotEnter);
                 }
                 if ($(this).hasClass("readonly"))
                 {
@@ -124,9 +122,9 @@ $(document).ready(function ()
                             },
                             onSelect: function (curDate, instance)
                             {
-                                if (typeof setDate == 'function')
+                                if (typeof azSetDate == 'function')
                                 {
-                                    setDate(curDate, instance);
+                                    azSetDate(curDate, instance);
                                 }
                             }
                         });
@@ -159,9 +157,9 @@ $(document).ready(function ()
                             yearRange: "-60:+0",
                             onSelect: function (curDate, instance)
                             {
-                                if (typeof setDate == 'function')
+                                if (typeof azSetDate == 'function')
                                 {
-                                    setDate(curDate, instance);
+                                    azSetDate(curDate, instance);
                                 }
                             }
                         });
@@ -193,9 +191,9 @@ $(document).ready(function ()
                             minDate: 0,
                             onSelect: function (curDate, instance)
                             {
-                                if (typeof setDate == 'function')
+                                if (typeof azSetDate == 'function')
                                 {
-                                    setDate(curDate, instance);
+                                    azSetDate(curDate, instance);
                                 }
                             }
                         });
@@ -228,9 +226,9 @@ $(document).ready(function ()
                             onSelect: function (curDate, instance)
                             {
                                 $(".todate").datepicker("option", "minDate", curDate);
-                                if (typeof setDate == 'function')
+                                if (typeof azSetDate == 'function')
                                 {
-                                    setDate(curDate, instance);
+                                    azSetDate(curDate, instance);
                                 }
                             }
                         });
@@ -263,9 +261,9 @@ $(document).ready(function ()
                             onSelect: function (curDate, instance)
                             {
                                 $(".fromdate").datepicker("option", "maxDate", curDate);
-                                if (typeof setDate == 'function')
+                                if (typeof azSetDate == 'function')
                                 {
-                                    setDate(curDate, instance);
+                                    azSetDate(curDate, instance);
                                 }
                             }
                         });
@@ -299,9 +297,9 @@ $(document).ready(function ()
                             onSelect: function (curDate, instance)
                             {
                                 $(".topastdate").datepicker("option", "minDate", curDate);
-                                if (typeof setDate == 'function')
+                                if (typeof azSetDate == 'function')
                                 {
-                                    setDate(curDate, instance);
+                                    azSetDate(curDate, instance);
                                 }
                             }
                         });
@@ -335,9 +333,9 @@ $(document).ready(function ()
                             onSelect: function (curDate, instance)
                             {
                                 $(".frompastdate").datepicker("option", "maxDate", curDate);
-                                if (typeof setDate == 'function')
+                                if (typeof azSetDate == 'function')
                                 {
-                                    setDate(curDate, instance);
+                                    azSetDate(curDate, instance);
                                 }
                             }
                         });
@@ -371,9 +369,9 @@ $(document).ready(function ()
                             onSelect: function (curDate, instance)
                             {
                                 $(".tonopastdate").datepicker("option", "minDate", curDate);
-                                if (typeof setDate == 'function')
+                                if (typeof azSetDate == 'function')
                                 {
-                                    setDate(curDate, instance);
+                                    azSetDate(curDate, instance);
                                 }
                             }
                         });
@@ -407,9 +405,9 @@ $(document).ready(function ()
                             onSelect: function (curDate, instance)
                             {
                                 $(".fromnopastdate").datepicker("option", "maxDate", curDate);
-                                if (typeof setDate == 'function')
+                                if (typeof azSetDate == 'function')
                                 {
-                                    setDate(curDate, instance);
+                                    azSetDate(curDate, instance);
                                 }
                             }
                         });
@@ -423,7 +421,7 @@ $(document).ready(function ()
             {
                 if ($(this).hasClass("az-range"))
                 {
-                    $(this).off("change", azRange).on("change", azRange);
+                    $(this).off("input change", azRange).on("input change", azRange);
                 }
             }            
             if ($(this).is("textarea"))
@@ -431,19 +429,19 @@ $(document).ready(function ()
                 $(this).attr("autocomplete", "false");
                 if ($(this).hasClass("forceuppercase"))
                 {
-                    $(this).off("focusout", forceUppercaseFocusout).on("focusout", forceUppercaseFocusout);
+                    $(this).off("keypress focusout", azForceUppercaseKeypressFocusout).on("keypress focusout", azForceUppercaseKeypressFocusout);
                 }
                 if ($(this).hasClass("forcelowercase"))
                 {
-                    $(this).off("focusout", forceLowercaseFocusout).on("focusout", forceLowercaseFocusout);
+                    $(this).off("keypress focusout", azForceLowercaseKeypressFocusout).on("keypress focusout", azForceLowercaseKeypressFocusout);
                 }
                 if ($(this).hasClass("donotpaste"))
                 {
-                    $(this).off("keydown", doNotPaste).on("keydown", doNotPaste);
+                    $(this).off("keydown", azDoNotPaste).on("keydown", azDoNotPaste);
                 }
                 if ($(this).hasClass("notenter"))
                 {
-                    $(this).off("keydown", notEnter).on("keydown", notEnter);
+                    $(this).off("keydown", azNotEnter).on("keydown", azNotEnter);
                 }
                 if ($(this).hasClass("readonly"))
                 {
@@ -469,11 +467,11 @@ $(document).ready(function ()
                 }
                 if ($(this).hasClass("az-checkbox"))
                 {
-                    $(this).off("click", azCheckbox).on("click", azCheckbox);
+                    $(this).off("click", azCheckboxClick).on("click", azCheckboxClick);
                 }
                 if ($(this).parent("label").hasClass("az-switch"))
                 {
-                    $(this).off("click", azSwitch).on("click", azSwitch);
+                    $(this).off("click", azSwitchClick).on("click", azSwitchClick);
                 }
             }
             if ($(this).is("[type='radio']"))
@@ -484,7 +482,7 @@ $(document).ready(function ()
                 }
                 if ($(this).hasClass("az-radio"))
                 {
-                    $(this).off("click", azRadio).on("click", azRadio);
+                    $(this).off("click", azRadioClick).on("click", azRadioClick);
                 }
             }
             if ($(this).is("select"))
@@ -500,37 +498,25 @@ $(document).ready(function ()
             }
             if ($(this).is("button"))
             {
-                if ($(this).hasClass("help"))
-                {
-                    $(this).off("click", modalHelp).on("click", modalHelp);
-                }
-                if ($(this).hasClass("setmap"))
-                {
-                    $(this).off("click", setGoogleMap).on("click", setGoogleMap);
-                }
-                if ($(this).hasClass("deletemap"))
-                {
-                    $(this).off("click", deleteGoogleMap).on("click", deleteGoogleMap);
-                }
                 if ($(this).hasClass("cancel"))
                 {
-                    $(this).off("click", verifyCancel).on("click", verifyCancel);
+                    $(this).off("click", azCancel).on("click", azCancel);
                 }
                 if ($(this).hasClass("submit"))
                 {
-                    $(this).off("click", verifySubmit).on("click", verifySubmit);
+                    $(this).off("click", azSubmit).on("click", azSubmit);
                 }
                 if ($(this).hasClass("delete"))
                 {
-                    $(this).off("click", verifyDelete).on("click", verifyDelete);
+                    $(this).off("click", azDelete).on("click", azDelete);
                 }
                 if ($(this).hasClass("az-navbar-button"))
                 {
-                    $(this).off("click", openCloseNavbarMobile).on("click", openCloseNavbarMobile);
+                    $(this).off("click", azToggleNavbarMobile).on("click", azToggleNavbarMobile);
                 }
                 if ($(this).hasClass("disabled"))
                 {
-                    disableButton($(this));
+                    azDisableButton(this);
                 }
             }
         });
@@ -543,7 +529,7 @@ $(document).ready(function ()
         });
 
         // Password Eye
-        $(".passwordeye").off("click", hideShowPassword).on("click", hideShowPassword);
+        $(".passwordeye").off("click", azHideShowPassword).on("click", azHideShowPassword);
 
         // Animated Label
         $(".az-label-animated").off("click", azLabelAnimatedClick).on("click", azLabelAnimatedClick);
@@ -552,6 +538,246 @@ $(document).ready(function ()
         $('.az-accordion-card.adjust, .az-card.adjust, .az-list-card.adjust, .az-timeline-card.adjust').matchHeight();
     })(jQuery);
 });
+
+function azHideShowPassword(e)
+{
+    var _SelectedElementId = "";
+    var _Element = e.target || e.srcElement;
+    if ($(_Element).hasClass("passwordeye"))
+    {
+        _SelectedElementId = $(_Element).attr("data-connectedid");
+    }
+    else
+    {
+        if ($(_Element).parent().hasClass("passwordeye"))
+        {
+            _SelectedElementId = $(_Element).parent().attr("data-connectedid");
+        }
+    }
+    if (_SelectedElementId != "")
+    {
+        var _$PasswordField = $("#" + _SelectedElementId)[0];
+        if (_$PasswordField.type == "password")
+        {
+            if (_$PasswordField.value != "")
+            {
+                _$PasswordField.type = "text";
+            }
+        }
+        else
+        {
+            _$PasswordField.type = "password";
+        }
+    }
+}
+
+function azInputAnimatedFocusout(e)
+{
+    var _Element = e.target || e.srcElement;
+    if ($(_Element).val() != "")
+    {
+        $('label[for="' + _Element.id + '"]').css({ "top": "-15px" });
+    }
+    else
+    {
+        $('label[for="' + _Element.id + '"]').removeAttr('style');
+    }
+}
+
+function azLabelAnimatedClick(e)
+{
+    var _Element = e.target || e.srcElement;
+    $(_Element).siblings(":input").focus();
+}
+
+function azForceUppercaseKeypressFocusout(e)
+{
+    var _Element = e.target || e.srcElement;
+    $(_Element).val($(_Element).val().toUpperCase());
+}
+
+function azForceLowercaseKeypressFocusout(e)
+{
+    var _Element = e.target || e.srcElement;
+    $(_Element).val($(_Element).val().toLowerCase());
+}
+
+function azDoNotPaste(e)
+{
+    if (e.ctrlKey == true && (e.which == 118 || e.which == 86))
+    {
+        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+    }
+}
+
+function azNotEnter(e)
+{
+    if ((e.keyCode || e.which) == 13)
+    {
+        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+    }
+}
+
+function azCheckboxClick(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _$SelectedCheckbox = $(this);
+    $.publish("functionlib/azCheckboxClick",
+        {
+            azCheckboxId: _$SelectedCheckbox.attr("id") === undefined ? "" : _$SelectedCheckbox.attr("id"),
+            azCheckboxValue: _$SelectedCheckbox.attr("value") === undefined ? "" : _$SelectedCheckbox.attr("value"),
+            azCheckboxChecked: _$SelectedCheckbox.is(":checked"),
+            azCheckboxJQElement: $(_Element)
+        });
+}
+
+function azRadioClick(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _$SelectedRadio = $(this);
+    $.publish("functionlib/azRadioClick",
+        {
+            azRadioId: _$SelectedRadio.attr("id") === undefined ? "" : _$SelectedRadio.attr("id"),
+            azRadioName: _$SelectedRadio.attr("name") === undefined ? "" : _$SelectedRadio.attr("name"),
+            azRadioValue: _$SelectedRadio.attr("value") === undefined ? "" : _$SelectedRadio.attr("value"),
+            azRadioChecked: _$SelectedRadio.is(":checked"),
+            azRadioJQElement: $(_Element)
+        });
+}
+
+function azSwitchClick(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _$SelectedSwitch = $(this);
+    $.publish("functionlib/azSwitchClick",
+        {
+            azSwitchId: _$SelectedSwitch.attr("id") === undefined ? "" : _$SelectedSwitch.attr("id"),
+            azSwitchValue: _$SelectedSwitch.attr("value") === undefined ? "" : _$SelectedSwitch.attr("value"),
+            azSwitchChecked: _$SelectedSwitch.is(":checked"),
+            azSwitchJQElement: $(_Element)
+        });
+}
+
+function azRange(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _$SelectedRange = $(this);
+    if (e.type === "input")
+    {
+        $.publish("functionlib/azRangeSlide",
+            {
+                azRangeId: _$SelectedRange.attr("id") === undefined ? "" : _$SelectedRange.attr("id"),
+                azRangeValue: _$SelectedRange.val(),
+                azRangeJQElement: $(_Element)
+            });
+    }
+    else if (e.type === "change")
+    {
+        $.publish("functionlib/azRangeStop",
+            {
+                azRangeId: _$SelectedRange.attr("id") === undefined ? "" : _$SelectedRange.attr("id"),
+                azRangeValue: _$SelectedRange.val(),
+                azRangeJQElement: $(_Element)
+            });
+    }
+}
+
+function azDisableButton(Element)
+{
+    var _$SelectedButton = $(Element);
+    if (!_$SelectedButton.hasClass("az-button-disabled"))
+    {
+        _$SelectedButton.addClass("az-button-disabled");
+        _$SelectedButton.attr("disabled", true);
+    }
+}
+
+function azEnableButton(Element)
+{
+    var _$SelectedButton = $(Element);
+    if (_$SelectedButton.hasClass("az-button-disabled"))
+    {
+        _$SelectedButton.removeClass("az-button-disabled");
+        _$SelectedButton.attr("disabled", false);
+    }
+}
+
+function azShowCoverSpin(CoverSpinText)
+{
+    var _CoverSpinText = CoverSpinText === undefined ? "" : CoverSpinText;
+    var _$CoverSpin = $("#az-cover-spin");
+    if (_$CoverSpin.length == 0)
+    {
+        $("body").append('<div id="az-cover-spin"><div>' + _CoverSpinText + '</div></div>');
+    }
+}
+
+function azHideCoverSpin()
+{
+    var _$CoverSpin = $("#az-cover-spin");
+    if (_$CoverSpin.length > 0)
+    {
+        _$CoverSpin.remove();
+    }
+}
+
+function azToggleNavbarMobile()
+{
+    var _$NavbarTopContent = $(".az-navbar-top-content");
+    if (_$NavbarTopContent.hasClass("mobile"))
+    {
+        _$NavbarTopContent.removeClass("mobile");
+    }
+    else
+    {
+        _$NavbarTopContent.addClass("mobile");
+    }
+}
+
+function azCloseNavbarMobile()
+{
+    var _$NavbarTopContent = $(".az-navbar-top-content");
+    if (_$NavbarTopContent.hasClass("mobile"))
+    {
+        _$NavbarTopContent.removeClass("mobile");
+    }
+}
+
+function setDropdownClickEvent(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _$ULDropdown = $(_Element).closest(".az-dropdown-click").find(".az-ul-dropdown");
+    $(".az-dropdown-show").not(_$ULDropdown).each(function ()
+    {
+        $(this).removeClass("az-dropdown-show");
+    });
+    if (_$ULDropdown.hasClass("az-dropdown-show"))
+    {
+        _$ULDropdown.removeClass("az-dropdown-show");
+    }
+    else
+    {
+        _$ULDropdown.addClass("az-dropdown-show");
+        window.setTimeout(function ()
+        {
+            $(document).one("click", { ULDropdown: _$ULDropdown }, removeDropdownEvent);
+        }, 100);
+    }
+}
+
+function removeDropdownEvent(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _$ULDropdown = e.data.ULDropdown;
+    if ($(_Element) != _$ULDropdown)
+    {
+        if (_$ULDropdown.hasClass("az-dropdown-show"))
+        {
+            _$ULDropdown.removeClass("az-dropdown-show");
+        }
+    }
+}
+
 
 //$.fn.greenText = function ()
 //{

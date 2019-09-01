@@ -35,11 +35,12 @@
 
     .az-slideshow .az-arrow-left
     {
+        margin-left: 14px;
     }
 
     .az-slideshow .az-arrow-right
     {
-        margin-right: 7px;
+        margin-right: 14px;
     }
 
 @media (max-width: 576px)

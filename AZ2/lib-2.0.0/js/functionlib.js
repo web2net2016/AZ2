@@ -843,7 +843,6 @@ function setPortfolio()
     }
 }
 
-
 function setParallaxImages(ParallaxImages)
 {
     $.each(ParallaxImages, function (i, ImagesContent)
@@ -854,288 +853,136 @@ function setParallaxImages(ParallaxImages)
 }
 
 // AZ Slideshow
-function initializeSlideshow(Options)
+function initAZSlideshow(Options)
 {
+    var _Main = this;
     var _Defaults =
     {
-        setArrows: false,
-        timer: 3000,
-        fadein: 1000,
-        fadeout: 1000
+        azSlideshowArrows: false,
+        azSlideshowTimer: 3000,
+        azSlideshowFadeIn: 1000,
+        azSlideshowFadeOut: 1000
     };
-    var _Options = $.extend({}, _Defaults, Options || {});
+    _Main.Options = $.extend({}, _Defaults, Options || {});
 
-    var _$Slideshow = $(".az-slideshow");
-    var _$Slides = $(".az-slides");
-    var _SlideShowTimer = 0;
-    var _SlideIndex = 0;
+    _Main.$Slideshow = $(".az-slideshow");
+    _Main.$Slides = $(".az-slides");
+    _Main.SlideShowTimer = 0;
+    _Main.SlideIndex = 0;
 
-    if (_$Slideshow.length > 0)
+    if (_Main.$Slideshow.length > 0)
     {
-        if (_Options.setArrows)
+        if (_Main.Options.azSlideshowArrows)
         {
-            _$Slideshow.append('<div class="az-arrows az-arrow-left az-display-left" onclick="plusDivs(-1)">&#10094;</div><div class="az-arrows az-arrow-right az-display-right" onclick="plusDivs(1)">&#10095;</div>');
-            $(".az-arrows", _$Slideshow).on("mouseenter", function ()
+            _Main.$Slideshow.append('<div class="az-arrows az-arrow-left az-display-left" onclick="plusDivs(-1)">&#10094;</div><div class="az-arrows az-arrow-right az-display-right" onclick="plusDivs(1)">&#10095;</div>');
+            $(".az-arrows", _Main.$Slideshow).on("mouseenter", function ()
             {
-                $.unsubscribe("functionlib/runSlides");
-                window.clearTimeout(_SlideShowTimer);
+                $.unsubscribe("runSlides");
+                window.clearTimeout(_Main.SlideShowTimer);
 
             }).on("mouseleave", function ()
             {
-                $.subscribe("functionlib/runSlides", function (e, data)
+                $.subscribe("runSlides", function (e, data)
                 {
-                    _SlideShowTimer = window.setTimeout(runSlides, _Options.timer);
+                    _Main.SlideShowTimer = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
                 });
                 runSlides();
             })
         }
 
-        $.subscribe("functionlib/windowResize", function (e, data)
+        $.subscribe("functionlib/azWindowResize", function (e, data)
         {
-            _$Slideshow.height($("slide:first", _$Slides).height());
+            _Main.$Slideshow.height($("slide:first", _Main.$Slides).height());
         });
 
-        $.subscribe("functionlib/runSlides", function (e, data)
+        $.subscribe("runSlides", function (e, data)
         {
-            _SlideShowTimer = window.setTimeout(runSlides, _Options.timer);
+            _Main.SlideShowTimer = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
         });
 
-        _$Slideshow.height($("slide:first", _$Slides).height());
-        $("slide:gt(0)", _$Slides).hide();
+        _Main.$Slideshow.height($("slide:first", _Main.$Slides).height());
+        $("slide:gt(0)", _Main.$Slides).hide();
         runSlides();
 
         function runSlides()
         {
-            $("slide", _$Slides).eq(_SlideIndex).fadeOut(_Options.fadeout);
-            _SlideIndex = (_SlideIndex != $("slide", _$Slides).length - 1) ? _SlideIndex + 1 : 0;
-            $("slide", _$Slides).eq(_SlideIndex).fadeIn(_Options.fadein, function ()
+            $("slide", _Main.$Slides).eq(_Main.SlideIndex).fadeOut(_Main.Options.azSlideshowFadeOut);
+            _Main.SlideIndex = (_Main.SlideIndex != $("slide", _Main.$Slides).length - 1) ? _Main.SlideIndex + 1 : 0;
+            $("slide", _Main.$Slides).eq(_Main.SlideIndex).fadeIn(_Main.Options.azSlideshowFadeIn, function ()
             {
-                $.publish("functionlib/runSlides");
+                $.publish("runSlides");
             });
         }
 
         plusDivs = function (n)
         {
-            $.unsubscribe("functionlib/runSlides");
-            window.clearTimeout(_SlideShowTimer);
-            _SlideIndex += n;
+            $.unsubscribe("runSlides");
+            window.clearTimeout(_Main.SlideShowTimer);
+            _Main.SlideIndex += n;
             showDivs();
         }
 
         showDivs = function ()
         {
-            if (_SlideIndex > $("slide", _$Slides).length - 1)
+            if (_Main.SlideIndex > $("slide", _Main.$Slides).length - 1)
             {
-                _SlideIndex = 0;
+                _Main.SlideIndex = 0;
             }
-            if (_SlideIndex < 0)
+            if (_Main.SlideIndex < 0)
             {
-                _SlideIndex = $("slide", _$Slides).length - 1;
+                _Main.SlideIndex = $("slide", _Main.$Slides).length - 1;
             };
-            $("slide", _$Slides).hide();
-            $("slide", _$Slides).eq(_SlideIndex).show();
+            $("slide", _Main.$Slides).hide();
+            $("slide", _Main.$Slides).eq(_Main.SlideIndex).show();
         }
     }
 }
 
-// AZ Get Events
-function azGetEvents(element)
+// AZ Range Multi
+function initAZRangeMulti(Options)
 {
-    var elemEvents = $._data(element[0], "events");
-    var allDocEvnts = $._data(document, "events");
-    for (var evntType in allDocEvnts)
+    var _Main = this;
+    var _Defaults =
     {
-        if (allDocEvnts.hasOwnProperty(evntType))
-        {
-            var evts = allDocEvnts[evntType];
-            for (var i = 0; i < evts.length; i++)
+        azRangeMultiId: "",
+        azRangeMultiMin: 0,
+        azRangeMultiMax: 100,
+        azRangeMultiStep: 1,
+        azRangeMultiValues: [0, 50]
+    };
+    _Main.Options = $.extend({}, _Defaults, Options || {});
+
+    if (_Main.Options.azRangeMultiId != "")
+    {
+        _Main.$MultiRange = $("#" + _Main.Options.azRangeMultiId);
+        _Main.$MultiRange.slider(
             {
-                if ($(element).is(evts[i].selector))
+                range: true,
+                min: _Main.Options.azRangeMultiMin,
+                max: _Main.Options.azRangeMultiMax,
+                step: _Main.Options.azRangeMultiStep,
+                values: _Main.Options.azRangeMultiValues,
+                slide: function (event, ui)
                 {
-                    if (elemEvents == null)
-                    {
-                        elemEvents = {};
-                    }
-                    if (!elemEvents.hasOwnProperty(evntType))
-                    {
-                        elemEvents[evntType] = [];
-                    }
-                    elemEvents[evntType].push(evts[i]);
+                    $.publish("functionlib/azRangeMultiSlide",
+                        {
+                            azRangeMultiId: _Main.Options.azRangeMultiId,
+                            azRangeMultiValueLeft: ui.values[0],
+                            azRangeMultiValueRight: ui.values[1],
+                            azRangeMultiJQElement: _Main.$MultiRange
+                        });
+                },
+                stop: function (event, ui)
+                {
+                    $.publish("functionlib/azRangeMultiStop",
+                        {
+                            azRangeMultiId: _Main.Options.azRangeMultiId,
+                            azRangeMultiValueLeft: ui.values[0],
+                            azRangeMultiValueRight: ui.values[1],
+                            azRangeMultiJQElement: _Main.$MultiRange
+                        });
                 }
-            }
-        }
-    }
-    return elemEvents;
-}
-
-function azCheckbox(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _$SelectedCheckbox = $(this);
-    $.publish("functionlib/azCheckbox",
-        {
-            azCheckboxId: _$SelectedCheckbox.attr("id") === undefined ? "" : _$SelectedCheckbox.attr("id"),
-            azCheckboxValue: _$SelectedCheckbox.attr("value") === undefined ? "" : _$SelectedCheckbox.attr("value"),
-            azCheckboxChecked: _$SelectedCheckbox.is(":checked"),
-            azCheckboxJQElement: $(_Element)
-        });
-}
-
-function azRadio(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _$SelectedRadio = $(this);
-    $.publish("functionlib/azRadio",
-        {
-            azRadioId: _$SelectedRadio.attr("id") === undefined ? "" : _$SelectedRadio.attr("id"),
-            azRadioName: _$SelectedRadio.attr("name") === undefined ? "" : _$SelectedRadio.attr("name"),
-            azRadioValue: _$SelectedRadio.attr("value") === undefined ? "" : _$SelectedRadio.attr("value"),
-            azRadioChecked: _$SelectedRadio.is(":checked"),
-            azRadioJQElement: $(_Element)
-        });
-}
-
-function azSwitch(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _$SelectedSwitch = $(this);
-    $.publish("functionlib/azSwitch",
-        {
-            azSwitchId: _$SelectedSwitch.attr("id") === undefined ? "" : _$SelectedSwitch.attr("id"),
-            azSwitchValue: _$SelectedSwitch.attr("value") === undefined ? "" : _$SelectedSwitch.attr("value"),
-            azSwitchChecked: _$SelectedSwitch.is(":checked"),
-            azSwitchJQElement: $(_Element)
-        });
-}
-
-function azRange(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _$SelectedRange = $(this);
-    $.publish("functionlib/azRange",
-        {
-            azRangeId: _$SelectedRange.attr("id") === undefined ? "" : _$SelectedRange.attr("id"),
-            azRangeValue: _$SelectedRange.val(),
-            azRangeJQElement: $(_Element)
-        });
-}
-
-function showCoverSpin(CoverSpinText)
-{
-    var _CoverSpinText = CoverSpinText === undefined ? "" : CoverSpinText;
-    var _$CoverSpin = $("#az-cover-spin");
-    if (_$CoverSpin.length == 0)
-    {
-        $("body").append('<div id="az-cover-spin"><div>' + _CoverSpinText + '</div></div>');
-    }
-}
-
-function hideCoverSpin()
-{
-    var _$CoverSpin = $("#az-cover-spin");
-    if (_$CoverSpin.length > 0)
-    {
-        _$CoverSpin.remove();
-    }
-}
-
-function openCloseNavbarMobile()
-{
-    var _$NavbarTopContent = $(".az-navbar-top-content");
-    if (_$NavbarTopContent.hasClass("mobile"))
-    {
-        _$NavbarTopContent.removeClass("mobile");
-    }
-    else
-    {
-        _$NavbarTopContent.addClass("mobile");
-    }
-}
-
-function closeNavbarMobile()
-{
-    var _$NavbarTopContent = $(".az-navbar-top-content");
-    if (_$NavbarTopContent.hasClass("mobile"))
-    {
-        _$NavbarTopContent.removeClass("mobile");
-    }
-}
-
-function setDropdownClickEvent(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _$ULDropdown = $(_Element).closest(".az-dropdown-click").find(".az-ul-dropdown");
-    $(".az-dropdown-show").not(_$ULDropdown).each(function ()
-    {
-        $(this).removeClass("az-dropdown-show");
-    });
-    if (_$ULDropdown.hasClass("az-dropdown-show"))
-    {
-        _$ULDropdown.removeClass("az-dropdown-show");
-    }
-    else
-    {
-        _$ULDropdown.addClass("az-dropdown-show");
-        window.setTimeout(function () { $(document).one("click", { ULDropdown: _$ULDropdown }, removeDropdownEvent); }, 100);
-    }
-}
-
-function removeDropdownEvent(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _$ULDropdown = e.data.ULDropdown;
-    if ($(_Element) != _$ULDropdown)
-    {
-        if (_$ULDropdown.hasClass("az-dropdown-show"))
-        {
-            _$ULDropdown.removeClass("az-dropdown-show");
-        }
-    }
-}
-
-function disableButton($Selector)
-{
-    if (!$Selector.hasClass("az-button-disabled"))
-    {
-        $Selector.addClass("az-button-disabled");
-        $Selector.attr("disabled", true);
-    }
-}
-
-function enableButton($Selector)
-{
-    if ($Selector.hasClass("az-button-disabled"))
-    {
-        $Selector.removeClass("az-button-disabled");
-        $Selector.attr("disabled", false);
-    }
-}
-
-function forceUppercaseFocusout(e)
-{
-    var _Element = e.target || e.srcElement;
-    $(_Element).val($(_Element).val().toUpperCase());
-}
-
-function forceLowercaseFocusout(e)
-{
-    var _Element = e.target || e.srcElement;
-    $(_Element).val($(_Element).val().toLowerCase());
-}
-
-function doNotPaste(e)
-{
-    if (e.ctrlKey == true && (e.which == 118 || e.which == 86))
-    {
-        e.preventDefault ? e.preventDefault() : e.returnValue = false;
-    }
-}
-
-function notEnter(e)
-{
-    if ((e.keyCode || e.which) == 13)
-    {
-        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+            });
     }
 }
 
@@ -1208,69 +1055,84 @@ function navigateTo(SelectedPage, SelectedTarget)
     }
 }
 
-function azInputAnimatedFocusout(e)
+function getSelectedObj(SelectedList1, SelectedKey1, SelectedVal1, SelectedList2, SelectedKey2, SelectedVal2)
 {
-    var _Element = e.target || e.srcElement;
-    if ($(_Element).val() != "")
+    var _ObjReturn = "";
+    $.each(SelectedList1, function (index1, Selected1Content)
     {
-        $('label[for="' + _Element.id + '"]').css({ "top": "-15px" });
-    }
-    else
-    {
-        $('label[for="' + _Element.id + '"]').removeAttr('style');
-    }
-}
-
-function azLabelAnimatedClick(e)
-{
-    var _Element = e.target || e.srcElement;
-    $(_Element).siblings(":input").focus();
-}
-
-function getSelectedObj(_SelectedList1, _SelectedKey, _SelectedVal)
-{
-    var _ThisReturn = "";
-    $.each(_SelectedList1, function (i, _SelectedObj1)
-    {
-        $.each(_SelectedObj1, function (_Key1, _Value1)
+        if (SelectedList2 !== undefined && SelectedList2 !== "")
         {
-            if (toString.call(_Value1) === "[object Array]" && _Value1.length > 0)
+            if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
             {
-                $.each(_Value1, function (i, _SelectedObj2)
+                $.each(Selected1Content[SelectedList2], function (index2, Selected2Content)
                 {
-                    $.each(_SelectedObj2, function (_Key2, _Value2)
+                    $.each(Selected2Content, function (Key, Value)
                     {
-                        if (_SelectedKey.toString().toLowerCase() == _Key2.toString().toLowerCase() && _SelectedVal.toString().toLowerCase() == _Value2.toString().toLowerCase())
+                        if (SelectedKey2.toString().toLowerCase() == Key.toString().toLowerCase() && SelectedVal2.toString().toLowerCase() == Value.toString().toLowerCase())
                         {
-                            _ThisReturn = _SelectedObj2;
+                            _ObjReturn = Selected2Content;
                             return false;
                         }
                     });
                 });
             }
-            else
+        }
+        else
+        {
+            $.each(Selected1Content, function (Key, Value)
             {
-                if (_SelectedKey.toString().toLowerCase() == _Key1.toString().toLowerCase() && _SelectedVal.toString().toLowerCase() == _Value1.toString().toLowerCase())
+                if (SelectedKey1.toString().toLowerCase() == Key.toString().toLowerCase() && SelectedVal1.toString().toLowerCase() == Value.toString().toLowerCase())
                 {
-                    _ThisReturn = _SelectedObj1;
+                    _ObjReturn = Selected1Content;
                     return false;
                 }
-            }
-        });
-    });
-    return _ThisReturn;
-}
-
-function removeSelectedObj(_SelectedObj, _SelectedKey)
-{
-    $.each(_SelectedObj, function (i, Selected)
-    {
-        if (_SelectedObj[i].UserId.toString().toLowerCase() == _SelectedKey.toString().toLowerCase())
-        {
-            _SelectedObj.splice(i, 1);
-            return false;
+            });
         }
     });
+    return _ObjReturn;
+}
+
+function removeSelectedObj(SelectedList1, SelectedKey1, SelectedVal1, SelectedList2, SelectedKey2, SelectedVal2)
+{
+    $.each(SelectedList1, function (index1, Selected1Content)
+    {
+        if (SelectedList2 !== undefined && SelectedList2 !== "")
+        {
+            if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
+            {
+                $.each(Selected1Content[SelectedList2], function (index2, Selected2Content)
+                {
+                    if (Selected2Content[SelectedKey2].toString().toLowerCase() == SelectedVal2.toString().toLowerCase())
+                    {
+                        Selected1Content[SelectedList2].splice(index2, 1);
+                        return false;
+                    }
+                });
+            }
+        }
+        else
+        {
+            if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
+            {
+                SelectedList1.splice(index1, 1);
+                return false;
+            }
+        }
+    });
+}
+
+function existsSelectedObj(SelectedList, SelectedKey, SelectedVal)
+{
+    var _Found = false;
+    for (var i = 0; i < SelectedList.length; i++)
+    {
+        if (SelectedList[i][SelectedKey].toString().toLowerCase() == SelectedVal.toString().toLowerCase())
+        {
+            _Found = true;
+            break;
+        }
+    }
+    return _Found;
 }
 
 // Error exception
@@ -1361,197 +1223,33 @@ function formatTime(SelectedTime)
     }
 }
 
-function hideShowPassword(e)
+function azGetEvents(element)
 {
-    var _SelectedElementId = "";
-    var _Element = e.target || e.srcElement;
-    if ($(_Element).hasClass("passwordeye"))
+    var elemEvents = $._data(element[0], "events");
+    var allDocEvnts = $._data(document, "events");
+    for (var evntType in allDocEvnts)
     {
-        _SelectedElementId = $(_Element).attr("data-connectedid");
-    }
-    else
-    {
-        if ($(_Element).parent().hasClass("passwordeye"))
+        if (allDocEvnts.hasOwnProperty(evntType))
         {
-            _SelectedElementId = $(_Element).parent().attr("data-connectedid");
-        }
-    }
-    if (_SelectedElementId != "")
-    {
-        var _$PasswordField = $("#" + _SelectedElementId)[0];
-        if (_$PasswordField.type == "password")
-        {
-            if (_$PasswordField.value != "")
+            var evts = allDocEvnts[evntType];
+            for (var i = 0; i < evts.length; i++)
             {
-                _$PasswordField.type = "text";
+                if ($(element).is(evts[i].selector))
+                {
+                    if (elemEvents == null)
+                    {
+                        elemEvents = {};
+                    }
+                    if (!elemEvents.hasOwnProperty(evntType))
+                    {
+                        elemEvents[evntType] = [];
+                    }
+                    elemEvents[evntType].push(evts[i]);
+                }
             }
         }
-        else
-        {
-            _$PasswordField.type = "password";
-        }
     }
-}
-
-//////////////////////////////////////////////////////////
-// Client Storage ////////////////////////////////////////
-//////////////////////////////////////////////////////////
-function clientStorage(ActionType, Name, Value)
-{
-    var _ThisLocation = window.document.location.hostname;
-    var _LocalStorageEnabled = checkLocalStorage();
-    if (typeof Value === "object")
-    {
-        Value = JSON.stringify(Value);
-    }
-    if (_LocalStorageEnabled == true)
-    {
-        if (ActionType == "set")
-        {
-            setLocalStorage(_ThisLocation + "-" + Name, Value);
-        }
-        else if (ActionType == "get")
-        {
-            return getLocalStorage(_ThisLocation + "-" + Name);
-        }
-        else if (ActionType == "remove")
-        {
-            removeLocalStorage(_ThisLocation + "-" + Name);
-        }
-        else if (ActionType == "delete")
-        {
-            removeLocalStorage(_ThisLocation + "-" + Name);
-        }
-        else
-        {
-            clientStorageError("Local Storage: Wrong action type.");
-        }
-    }
-    else
-    {
-        var _CookieEnabled = checkCookie();
-        if (_CookieEnabled == true)
-        {
-            if (ActionType == "set")
-            {
-                setCookie(_ThisLocation + "-" + Name, Value);
-            }
-            else if (ActionType == "get")
-            {
-                return getCookie(_ThisLocation + "-" + Name);
-            }
-            else if (ActionType == "remove")
-            {
-                removeCookie(_ThisLocation + "-" + Name);
-            }
-            else if (ActionType == "delete")
-            {
-                removeCookie(_ThisLocation + "-" + Name);
-            }
-            else
-            {
-                clientStorageError("Cookies: Wrong action type.");
-            }
-        }
-        else
-        {
-            clientStorageError("Local Storage / Cookies not supported.");
-        }
-    }
-}
-
-// Local Storeage
-function checkLocalStorage()
-{
-    try
-    {
-        var _SupportsLocalStorage = !!window.localStorage && typeof localStorage.getItem === 'function' && typeof localStorage.setItem === 'function' && typeof localStorage.removeItem === 'function';
-        if (_SupportsLocalStorage)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    catch (e)
-    {
-        return false;
-    }
-}
-
-function setLocalStorage(LSName, LSValue)
-{
-    localStorage.setItem(LSName, LSValue);
-}
-
-function getLocalStorage(LSName)
-{
-    return localStorage.getItem(LSName);
-}
-
-function removeLocalStorage(LSName)
-{
-    localStorage.removeItem(LSName);
-}
-
-// Cookies
-function checkCookie()
-{
-    try
-    {
-        if (navigator.cookieEnabled)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    catch (e)
-    {
-        return false;
-    }
-}
-
-function setCookie(CName, CValue)
-{
-    var _Date = new Date();
-    _Date.setTime(_Date.getTime() + (365 * 24 * 60 * 60 * 1000));
-    var _Expires = "expires=" + _Date.toUTCString();
-    document.cookie = CName + "=" + CValue + "; " + _Expires;
-}
-
-function getCookie(CName)
-{
-    var _Name = CName + "=";
-    var _DecodedCookie = decodeURIComponent(document.cookie);
-    var _CA = _DecodedCookie.split(';');
-    for (var i = 0; i < _CA.length; i++)
-    {
-        var _C = _CA[i];
-        while (_C.charAt(0) == ' ')
-        {
-            _C = _C.substring(1);
-        }
-        if (_C.indexOf(_Name) == 0)
-        {
-            return _C.substring(_Name.length, _C.length);
-        }
-    }
-    return "";
-}
-
-function removeCookie(CName)
-{
-    document.cookie = CName + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
-
-function clientStorageError(consoleText)
-{
-    console.error("Client Storage Error\n" + consoleText);
+    return elemEvents;
 }
 
 //////////////////////////////////////////////

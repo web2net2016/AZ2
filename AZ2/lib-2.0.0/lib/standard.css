@@ -249,35 +249,35 @@ form.css
     background-color: #DEDEDE;
 }
 
-.az-form-group .az-range::-webkit-slider-runnable-track
-{
-    background-color: #CCCCCC;
-}
+    .az-form-group .az-range::-webkit-slider-runnable-track
+    {
+        background-color: #CCCCCC;
+    }
 
-.az-form-group .az-range::-moz-range-track
-{
-    background-color: #CCCCCC;
-}
+    .az-form-group .az-range::-moz-range-track
+    {
+        background-color: #CCCCCC;
+    }
 
-.az-form-group .az-range::-ms-track
-{
-    background-color: #CCCCCC;
-}
+    .az-form-group .az-range::-ms-track
+    {
+        background-color: #CCCCCC;
+    }
 
-.az-form-group .az-range::-webkit-slider-thumb
-{
-    background-color: #0078D7;
-}
+    .az-form-group .az-range::-webkit-slider-thumb
+    {
+        background-color: #0078D7;
+    }
 
-.az-form-group .az-range::-moz-range-thumb
-{
-    background-color: #0078D7;
-}
+    .az-form-group .az-range::-moz-range-thumb
+    {
+        background-color: #0078D7;
+    }
 
-.az-form-group .az-range::-ms-thumb
-{
-    background-color: #0078D7;
-}
+    .az-form-group .az-range::-ms-thumb
+    {
+        background-color: #0078D7;
+    }
 
 /* Buttons */
 .az-form-group .az-button.default
@@ -1099,3 +1099,102 @@ jqueryui/jquery-ui.min.css
 {
     border: 1px solid #dddddd !important;
 }
+
+.az-form-group .az-range-multi
+{
+    height: 20px !important;
+    border: none !important;
+    background-color: #CCCCCC !important;
+}
+
+    .az-form-group .az-range-multi .ui-slider-handle:focus
+    {
+        outline: none;
+    }
+
+    .az-form-group .az-range-multi.xs
+    {
+        height: 15px !important;
+    }
+
+    .az-form-group .az-range-multi.sm
+    {
+        height: 25px !important;
+    }
+
+    .az-form-group .az-range-multi.md
+    {
+        height: 30px !important;
+    }
+
+    .az-form-group .az-range-multi.az-round
+    {
+        border-radius: 10px !important;
+    }
+
+        .az-form-group .az-range-multi.az-round.xs
+        {
+            border-radius: 5px !important;
+        }
+
+        .az-form-group .az-range-multi.az-round.sm
+        {
+            border-radius: 15px !important;
+        }
+
+        .az-form-group .az-range-multi.az-round.md
+        {
+            border-radius: 20px !important;
+        }
+
+    .az-form-group .az-range-multi .ui-slider-handle
+    {
+        width: 20px !important;
+        height: 30px !important;
+        border: none !important;
+        background: #0078D7 !important;
+        cursor: pointer !important;
+    }
+
+    .az-form-group .az-range-multi.xs .ui-slider-handle
+    {
+        width: 15px !important;
+        height: 25px !important;
+    }
+
+    .az-form-group .az-range-multi.sm .ui-slider-handle
+    {
+        width: 25px !important;
+        height: 35px !important;
+    }
+
+    .az-form-group .az-range-multi.md .ui-slider-handle
+    {
+        width: 30px !important;
+        height: 40px !important;
+    }
+
+    .az-form-group .az-range-multi.az-round .ui-slider-handle
+    {
+        width: 30px !important;
+        height: 30px !important;
+        border-radius: 50% !important;
+    }
+
+    .az-form-group .az-range-multi.az-round.xs .ui-slider-handle
+    {
+        width: 25px !important;
+        height: 25px !important;
+    }
+
+    .az-form-group .az-range-multi.az-round.sm .ui-slider-handle
+    {
+        width: 35px !important;
+        height: 35px !important;
+    }
+
+    .az-form-group .az-range-multi.az-round.md .ui-slider-handle
+    {
+        width: 40px !important;
+        height: 40px !important;
+    }

@@ -21,6 +21,7 @@
 
     <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
     <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
@@ -28,37 +29,81 @@
         {
             w3CodeColor();
 
-            $.subscribe("functionlib/azCheckbox", function (e, data)
+            $.subscribe("functionlib/azCheckboxClick", function (e, data)
             {
                 console.log("azCheckboxId: " + data.azCheckboxId + "\nazCheckboxValue: " + data.azCheckboxValue + "\nazCheckboxChecked: " + data.azCheckboxChecked + "\nazCheckboxJQElement: ", data.azCheckboxJQElement)
             });
 
-            $.subscribe("functionlib/azRadio", function (e, data)
+            $.subscribe("functionlib/azRadioClick", function (e, data)
             {
                 console.log("azRadioId: " + data.azRadioId + "\nazRadioName: " + data.azRadioName + "\nazRadioValue: " + data.azRadioValue + "\nazRadioChecked: " + data.azRadioChecked + "\nazRadioJQElement: ", data.azRadioJQElement)
             });
 
-            $.subscribe("functionlib/azSwitch", function (e, data)
+            $.subscribe("functionlib/azSwitchClick", function (e, data)
             {
                 console.log("azSwitchId: " + data.azSwitchId + "\nazSwitchValue: " + data.azSwitchValue + "\nazSwitchChecked: " + data.azSwitchChecked + "\nazSwitchJQElement: ", data.azSwitchJQElement)
             });
 
-            $.subscribe("functionlib/azRange", function (e, data)
+            $.subscribe("functionlib/azRangeSlide", function (e, data)
             {
                 console.log("azRangeId: " + data.azRangeId + "\nazRangeValue: " + data.azRangeValue + "\nazRangeJQElement: ", data.azRangeJQElement)
             });
 
-            $(".slider").slider({
-                range: true,
-                min: 0,
-                max: 500,
-                values: [75, 300],
-                slide: function (event, ui)
-                {
-                    //$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-                }
+            $.subscribe("functionlib/azRangeStop", function (e, data)
+            {
+                console.log("azRangeId: " + data.azRangeId + "\nazRangeValue: " + data.azRangeValue + "\nazRangeJQElement: ", data.azRangeJQElement)
             });
-        });
+
+            $.subscribe("functionlib/azRangeMultiSlide", function (e, data)
+            {
+                console.log("azRangeMultiId: " + data.azRangeMultiId + "\nazRangeMultiValueLeft: " + data.azRangeMultiValueLeft + "\nazRangeMultiValueRight: " + data.azRangeMultiValueRight + "\nazRangeMultiJQElement: ", data.azRangeMultiJQElement)
+            });
+
+            $.subscribe("functionlib/azRangeMultiStop", function (e, data)
+            {
+                console.log("azRangeMultiId: " + data.azRangeMultiId + "\nazRangeMultiValueLeft: " + data.azRangeMultiValueLeft + "\nazRangeMultiValueRight: " + data.azRangeMultiValueRight + "\nazRangeMultiJQElement: ", data.azRangeMultiJQElement)
+            });
+
+            new initAZRangeMulti(
+                {
+                    azRangeMultiId: "xsrange1-multi"
+                });
+
+            new initAZRangeMulti(
+                {
+                    azRangeMultiId: "range1-multi"
+                });
+
+            new initAZRangeMulti(
+                {
+                    azRangeMultiId: "smrange1-multi"
+                });
+
+            new initAZRangeMulti(
+                {
+                    azRangeMultiId: "mdrange1-multi"
+                });
+
+            new initAZRangeMulti(
+                {
+                    azRangeMultiId: "xsrange2-multi"
+                });
+
+            new initAZRangeMulti(
+                {
+                    azRangeMultiId: "range2-multi"
+                });
+
+            new initAZRangeMulti(
+                {
+                    azRangeMultiId: "smrange2-multi"
+                });
+
+            new initAZRangeMulti(
+                {
+                    azRangeMultiId: "mdrange2-multi"
+                });
+        });        
 
     </script>
 </head>
@@ -547,17 +592,17 @@
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
-                        <input class="az-range" type="range" min="0" max="10" id="range1">
+                        <input class="az-range" type="range" min="0" max="20" step="1" id="range1">
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group sm">
-                        <input class="az-range sm" type="range" min="0" max="10" id="smrange1">
+                        <input class="az-range sm" type="range" min="0" max="30" id="smrange1">
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group md">
-                        <input class="az-range md" type="range" min="0" max="10" id="mdrange1">
+                        <input class="az-range md" type="range" min="0" max="40" id="mdrange1">
                     </div>
                 </div>
             </div>
@@ -590,22 +635,46 @@
             <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group xs">
-                        <div class="slider"></div>
+                        <div class="az-range-multi xs" id="xsrange1-multi"></div>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
-                        <div class="slider"></div>
+                        <div class="az-range-multi" id="range1-multi"></div>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group sm">
-                        <div class="slider"></div>
+                        <div class="az-range-multi sm" id="smrange1-multi"></div>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group md">
-                        <div class="slider"></div>
+                        <div class="az-range-multi md" id="mdrange1-multi"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Input type range -->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group xs">
+                        <div class="az-range-multi az-round xs" id="xsrange2-multi"></div>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <div class="az-range-multi az-round" id="range2-multi"></div>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group sm">
+                        <div class="az-range-multi az-round sm" id="smrange2-multi"></div>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group md">
+                        <div class="az-range-multi az-round md" id="mdrange2-multi"></div>
                     </div>
                 </div>
             </div>

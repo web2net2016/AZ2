@@ -13,26 +13,27 @@
     <meta name="format-detection" content="email=no" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <title></title>
+    <title>AZ Slideshow</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
+
     <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
     <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
         $(document).ready(function ()
         {
-            initializeSlideshow(
+            initAZSlideshow(
                 {
-                    setArrows: true,
-                    timer: 3000,
-                    fadein: 1000,
+                    azSlideshowArrows: true,
+                    azSlideshowTimer: 3000,
+                    azSlideshowFadeIn: 1000,
                     fadeout: 1000
                 });
-            $("#section-container-1-col-1, #section-container-1-col-2, #section-container-1-col-3").matchHeight();
         });
 
     </script>
@@ -40,7 +41,6 @@
 <body>
 
     <form id="frmReg">
-
         <div id="section-1" class="az-section">
             <div class="az-container-fluid">
 
@@ -51,13 +51,13 @@
 
                             <div class="az-slides">
                                 <slide>
-                                    <img src="web2net/slideshow1.jpg">
+                                    <img src="/web2net/slideshow1.jpg">
                                 </slide>
                                 <slide>
-                                    <img src="web2net/slideshow2.jpg">
+                                    <img src="/web2net/slideshow2.jpg">
                                 </slide>
                                 <slide>
-                                    <img src="web2net/slideshow3.jpg">
+                                    <img src="/web2net/slideshow3.jpg">
                                 </slide>
                             </div>
 
@@ -76,7 +76,7 @@
 
                         <div id="section-container-1-col-1" class="az-margin-14 az-white az-bg-gray">
                             <h1 class="az-xs-text-xlarge az-sm-text-xxlarge az-text-uppercase az-text-center az-padding-7">Webmaster tools</h1>
-                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="web2net/webmastertools.png" /></p>
+                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="/web2net/webmastertools.png" /></p>
                             <p class="az-center az-padding-t-14 az-padding-b-14 az-xs-width-90 az-sm-width-80">Webmaster Tools - Google Search Console, er et verktøy Google har laget for å gi deg en generell oversikt over helsestatusen til dine hjemmesider. Dette er et kraftig verktøy som oppdateres jevnlig med ny funksjonalitet for å gi deg en bedre oversikt.</p>
                         </div>
 
@@ -85,7 +85,7 @@
 
                         <div id="section-container-1-col-2" class="az-margin-14 az-white az-bg-gray">
                             <h1 class="az-xs-text-xlarge az-sm-text-xxlarge az-text-uppercase az-text-center az-padding-7">Google analytics</h1>
-                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="web2net/analytics.png" /></p>
+                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="/web2net/analytics.png" /></p>
                             <p class="az-center az-padding-t-14 az-padding-b-14 az-xs-width-90 az-sm-width-80">Google Analytics utfører flere typer analyser av dine hjemmesider og gir deg statistikk og grunnleggende informasjon for markedsføring og søkemotoroptimalisering (SEO).</p>
                         </div>
 
@@ -94,7 +94,7 @@
 
                         <div id="section-container-1-col-3" class="az-margin-14 az-white az-bg-gray">
                             <h1 class="az-xs-text-xlarge az-sm-text-xxlarge az-text-uppercase az-text-center az-padding-7">Sosiale medier</h1>
-                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="web2net/sosial-media-1.png" /></p>
+                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="/web2net/sosial-media-1.png" /></p>
                             <p class="az-center az-padding-t-14 az-padding-b-14 az-xs-width-90 az-sm-width-80">Sosiale medier er et verktøy for å nå ut til dine eksisterende og nye kunder. Med enkle grep kan vi gjøre dine hjemmesider langt mer tilpasset den sosiale verden enn de kanskje er i dag.</p>
                         </div>
 

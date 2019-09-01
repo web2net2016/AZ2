@@ -21,6 +21,7 @@
 
     <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
     <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
@@ -403,7 +404,7 @@
             </div>
 
             <!--Input type text Date Picker-->
-            <div class="az-row az-margin-t-56 az-margin-b-14">
+            <div class="az-row az-margin-t-56">
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <label class="az-label">Datovelger - Tidligere datoer</label>
@@ -435,32 +436,97 @@
             </div>
 
             <!--Input type text Diverse-->
-            <div class="az-row az-margin-t-14 az-margin-b-14">
-                <div class="az-col xs-12 sm-6 md-3">
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-3">
                     <div class="az-form-group">
                         <label class="az-label">Tvinger store bokstaver</label>
                         <input type="text" class="az-input forceuppercase" />
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-6 md-3">
+            </div>
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12">
+                    <div class="az-code jsHigh notranslate">
+                        $(".forceuppercase").off("keypress focusout", azForceUppercaseKeypressFocusout).on("keypress focusout", azForceUppercaseKeypressFocusout);<br />
+                        <br />
+                        function azForceUppercaseKeypressFocusout(e)<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;var _Element = e.target || e.srcElement;<br />
+                        &emsp;&ensp;&emsp;&ensp;$(_Element).val($(_Element).val().toUpperCase());<br />
+                        }<br />
+                    </div>
+                </div>
+            </div>
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-3">
                     <div class="az-form-group">
                         <label class="az-label">Tvinger små bokstaver</label>
                         <input type="text" class="az-input forcelowercase" />
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-6 md-3">
+            </div>
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12">
+                    <div class="az-code jsHigh notranslate">
+                        $(".forcelowercase").off("keypress focusout", azForceLowercaseKeypressFocusout).on("keypress focusout", azForceLowercaseKeypressFocusout);<br />
+                        <br />
+                        function azForceLowercaseKeypressFocusout(e)<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;var _Element = e.target || e.srcElement;<br />
+                        &emsp;&ensp;&emsp;&ensp;$(_Element).val($(_Element).val().toLowerCase());<br />
+                        }<br />
+                    </div>
+                </div>
+            </div>
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-3">
                     <div class="az-form-group">
                         <label class="az-label">Kan ikke lime inn</label>
                         <input type="text" class="az-input donotpaste" />
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-6 md-3">
+            </div>
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12">
+                    <div class="az-code jsHigh notranslate">
+                        $(".donotpaste").off("keydown", azDoNotPaste).on("keydown", azDoNotPaste);<br />
+                        <br />
+                        function azDoNotPaste(e)<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;if (e.ctrlKey == true && (e.which == 118 || e.which == 86))<br />
+                        &emsp;&ensp;&emsp;&ensp;{<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;e.preventDefault ? e.preventDefault() : e.returnValue = false;<br />
+                        &emsp;&ensp;&emsp;&ensp;}<br />
+                        }<br />
+                    </div>
+                </div>
+            </div>
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-3">
                     <div class="az-form-group">
                         <label class="az-label">Kan ikke trykke <strong>Enter</strong></label>
                         <input type="text" class="az-input notenter" />
                     </div>
                 </div>
             </div>
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12">
+                    <div class="az-code jsHigh notranslate">
+                        $(".notenter").off("keydown", azNotEnter).on("keydown", azNotEnter);<br />
+                        <br />
+                        function azNotEnter(e)<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;if ((e.keyCode || e.which) == 13)<br />
+                        &emsp;&ensp;&emsp;&ensp;{<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;e.preventDefault ? e.preventDefault() : e.returnValue = false;<br />
+                        &emsp;&ensp;&emsp;&ensp;}<br />
+                        }<br />
+                    </div>
+                </div>
+            </div>
+
+
+
 
             <!--Input type text Diverse-->
             <div class="az-row az-margin-t-14 az-margin-b-56">
