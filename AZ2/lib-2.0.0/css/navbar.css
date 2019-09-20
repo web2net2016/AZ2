@@ -53,12 +53,12 @@
                         display: block;
                     }
 
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-left.mobile-only
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left.mobile-only
                 {
                     display: none;
                 }
 
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-right.mobile-only
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right.mobile-only
                 {
                     display: none;
                 }
@@ -120,22 +120,22 @@
         display: none;
     }
 
-    .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-left.mobile-only
+    .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left.mobile-only
     {
         display: block;
     }
 
-    .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-right.mobile-only
+    .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right.mobile-only
     {
         display: block;
     }
 
-    .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-left.desktop-only
+    .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left.desktop-only
     {
         display: none;
     }
 
-    .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-right.desktop-only
+    .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right.desktop-only
     {
         display: none;
     }

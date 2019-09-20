@@ -1,0 +1,123 @@
+﻿
+.az-slidein
+{
+    position: fixed;
+    z-index: 5000;
+    display: none;
+}
+
+    .az-slidein.transition-right
+    {
+        -webkit-transition: 0.5s ease right;
+        -moz-transition: 0.5s ease right;
+        -o-transition: 0.5s ease right;
+        transition: 0.5s ease right;
+    }
+
+    .az-slidein.transition-left
+    {
+        -webkit-transition: 0.5s ease left;
+        -moz-transition: 0.5s ease left;
+        -o-transition: 0.5s ease left;
+        transition: 0.5s ease left;
+    }
+
+    .az-slidein.display-right
+    {
+        right: 0px !important;
+    }
+
+    .az-slidein.display-left
+    {
+        left: 0px !important;
+    }
+
+    .az-slidein > .az-slidein-tab
+    {
+        position: absolute;
+        width: 40px;
+        background-color: #009688;
+        font-size: 14px;
+        color: #FFFFFF;
+        cursor: pointer;
+        -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+        .az-slidein > .az-slidein-tab > div
+        {
+            position: relative;
+            text-align: center;
+        }
+
+    .az-slidein.transition-right > .az-slidein-tab > *
+    {
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        transform: rotate(270deg);
+        writing-mode: lr-tb;
+    }
+
+    .az-slidein.transition-left > .az-slidein-tab > *
+    {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+        writing-mode: rl-tb;
+    }
+
+.az-slidein-card
+{
+    display: block;
+    position: relative;
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+    .az-slidein-card > header
+    {
+        padding: 7px;
+        background-color: #009688;
+    }
+
+        .az-slidein-card > header > *
+        {
+            color: #FFFFFF;
+            font-size: 14px;
+        }
+
+        .az-slidein-card > header > i
+        {
+            color: #FFFFFF;
+            font-size: 12px;
+            margin-right: 2px;
+            margin-top: 4px;
+        }
+
+    .az-slidein-card > article
+    {
+        padding: 7px;
+        background-color: #FFFFFF;
+    }
+
+        .az-slidein-card > article > *
+        {
+            color: #000000;
+            font-size: 14px;
+        }
+
+    .az-slidein-card > footer
+    {
+        padding: 7px;
+        background-color: #009688;
+    }
+
+        .az-slidein-card > footer > *
+        {
+            color: #FFFFFF;
+            font-size: 14px;
+        }

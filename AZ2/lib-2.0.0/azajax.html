@@ -35,16 +35,22 @@
                 azAjaxType: "GET",
                 azAjaxContentType: ""
             };
-            azAjaxFunction1 = new initAZAjax(_azAjaxOptions).always();
+            azAjaxFunction1 = new initAZAjax(_azAjaxOptions);
 
             azAjaxFunction1.done(function (data, textStatus, jqXHR)
             {
                 $.each(data.slice(0, 1), function (i, SelectedObj)
                 {
-                    console.log(JSON.stringify(SelectedObj))
+                    $("#ajaxDataResponse").text(JSON.stringify(SelectedObj));
                 });
-                console.log(textStatus)
-                console.log(jqXHR)
+                $("#ajaxTextStatusResponse").text("Text Status: " + textStatus);
+                $("#ajaxJQXHRResponse").text("HTTP Status: " + jqXHR.status);
+            });
+
+            azAjaxFunction1.always(function (data, textStatus, jqXHR)
+            {
+                console.log("jqXHR.status: " + jqXHR.status)
+                console.log("jqXHR.statusText: " + jqXHR.statusText)
             });
         });
 
@@ -54,6 +60,18 @@
 
     <form id="frmReg">
         <div class="az-container">
+
+            <div class="az-row az-margin-t-56 az-margin-b-14">
+                <div class="az-col xs-12">
+                    <div class="az-card">
+                        <article>
+                            <div class="az-margin-b-14" id="ajaxDataResponse"></div>
+                            <div class="az-margin-b-14" id="ajaxTextStatusResponse"></div>
+                            <div id="ajaxJQXHRResponse"></div>
+                        </article>
+                    </div>
+                </div>
+            </div>
 
             <div class="az-row az-margin-t-56 az-margin-b-56">
                 <div class="az-col xs-12">
@@ -70,7 +88,9 @@
                         &emsp;&ensp;&emsp;&ensp;azAjaxObjToSend: {},<br />
                         };<br />
                         <br />
-                        var azAjaxFunction1 = new initAZAjax(_azAjaxOptions).always(function (data, textStatus, jqXHR)<br />
+                        <strong>Det finnes flere måter å benytte AZ Ajax på:</strong><br />
+                        <br />
+                        new initAZAjax(_azAjaxOptions).always(function (data, textStatus, jqXHR)<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;// Her legges logikken for å håndtere "always", "done" og "fail", etc.<br />
                         });<br />
@@ -78,16 +98,25 @@
                         <br />
                         <strong>Man kan også ha funksjoner på utsiden som lytter på om AZ Ajax har mottatt data eller har feilet.</strong><br />
                         <br />
-                        var azAjaxFunction1 = new initAZAjax(_azAjaxOptions).always();<br />
+                        var azAjaxFunction1 = new initAZAjax(_azAjaxOptions);<br />
                         <br />
                         azAjaxFunction1.done(function (data, textStatus, jqXHR)<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;// Her legges logikken for å håndtere "done".<br />
+                        &emsp;&ensp;&emsp;&ensp;if (jqXHR.status === 200)<br />
+                        &emsp;&ensp;&emsp;&ensp;{<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;// Her legges logikk for å håndtere "done".<br />
+                        &emsp;&ensp;&emsp;&ensp;}<br />
                         });<br />
                         <br />
-                        azAjaxFunction1.fail(function (data, textStatus, jqXHR)<br />
+                        azAjaxFunction1.always(function (data, textStatus, jqXHR)<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;// Her legges logikken for å håndtere "fail".<br />
+                        &emsp;&ensp;&emsp;&ensp;// Her legges logikk for å håndtere eventuelle feil.<br />
+                        &emsp;&ensp;&emsp;&ensp;if (jqXHR.status === 404)<br />
+                        &emsp;&ensp;&emsp;&ensp;{<br />
+                        &emsp;&ensp;&emsp;&ensp;}<br />
+                        &emsp;&ensp;&emsp;&ensp;if (jqXHR.statusText === "timeout")<br />
+                        &emsp;&ensp;&emsp;&ensp;{<br />
+                        &emsp;&ensp;&emsp;&ensp;}<br />
                         });<br />
                         <br />
                     </div>

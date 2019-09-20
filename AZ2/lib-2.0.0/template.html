@@ -13,23 +13,69 @@
     <meta name="format-detection" content="email=no" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <title></title>
+    <title>AZ Template</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
+
     <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
-    <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <script src="/lib-2.0.0/lib/functionlib.js?id=123"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
+        var azModalDialogScrollTop = 0;
+
         $(document).ready(function ()
         {
-            initializePage({}, function ()
+            w3CodeColor();
+
+            var _$NavbarMenu = $(".az-navbar-bottom-content, #az-window-slider");
+            if (_$NavbarMenu.length > 0)
             {
-                $("#section-container-2-col-1, #section-container-2-col-2, #section-container-2-col-3").matchHeight();
-                hideCoverSpin();
-            });
+                _$NavbarMenu.off().on("click", function (e)
+                {
+                    e.stopPropagation();
+                    $("#az-window-slider").toggleClass('az-window-close');
+                    if ($("#az-window-slider").hasClass('az-window-close'))
+                    {
+                        azModalDialogScrollTop = $(window).scrollTop();
+                        $("body").addClass("az-no-parent-scroll");
+                    }
+                    else
+                    {  
+                        $("body").removeClass("az-no-parent-scroll");
+                        $(window).scrollTop(azModalDialogScrollTop);
+                        if ($("body").hasClass("") === true)
+                        {
+                            $("body").removeAttr("class");
+                        }
+                    }
+                });
+            }
+
+            //var _$NavbarBottomMenu = $(".az-navbar-bottom-content").find(".az-navbar-menu");
+            //var _NavbarBottomHeight = _$NavbarBottomMenu.parents(".az-navbar-bottom").height();
+            //_$NavbarBottomMenu.off().on("click", "li > a", function (e)
+            //{
+            //    var _Anchor = $(this).attr('href');
+            //    if (_Anchor.indexOf("#") === -1)
+            //    {
+            //        $("#az-window-slider").toggleClass('az-window-close');
+
+            //        if ($("#az-window-slider").hasClass('az-window-close'))
+            //        {
+            //            azModalDialogScrollTop = $(window).scrollTop();
+            //            $("body").addClass("az-no-parent-scroll").css('top', - azModalDialogScrollTop);
+            //        }
+            //        else
+            //        {
+            //            $(window).scrollTop(azModalDialogScrollTop);
+            //        }
+            //        e.preventDefault();
+            //    }
+            //});
         });
 
     </script>
@@ -231,6 +277,23 @@
                 padding: 160px 0 160px 0;
             }
         }
+
+        #az-window-slider
+        {
+            position: fixed;
+            z-index: 5001;
+            width: 100%;
+            height: 0;
+            bottom: 0;
+            overflow: hidden;
+            background-color: #FFFFFF;
+            transition: height .2s;
+        }
+
+            #az-window-slider.az-window-close
+            {
+                height: 100%;
+            }
     </style>
 </head>
 <body>
@@ -241,17 +304,17 @@
             <div class="az-navbar-top-content">
 
                 <button type="button" class="az-navbar-button">&#9776;</button>
-                <img class="az-navbar-branding mobile-only" alt="" src="web2net/web2net_logo_white.png" />
+                <img class="az-navbar-branding mobile-only" alt="" src="/web2net/web2net_logo_white.png" />
 
                 <div class="az-navbar-menu-wrapper">
-                    <ul class="az-navbar-menu az-left">
+                    <ul class="az-navbar-menu az-animated az-display-left">
                         <li><a href="#section-1">Section 1</a></li>
                         <li><a href="#section-2">Section 2</a></li>
                         <li><a href="#section-3">Section 3</a></li>
                         <li><a href="#section-4">Section 4</a></li>
                     </ul>
 
-                    <ul class="az-navbar-menu az-right">
+                    <ul class="az-navbar-menu az-display-right">
                         <li><a href="javascript:void(0);"><i class="fab fa-facebook-square fa-fw"></i></a></li>
                         <li><a href="javascript:void(0);"><i class="fab fa-twitter-square fa-fw"></i></a></li>
                     </ul>
@@ -262,7 +325,7 @@
         <div id="section-1" class="az-section">
             <div id="container-1" class="az-container">
 
-                <img onclick="test()" id="content-1" alt="" src="web2net/office365.png?id=21412" />
+                <img id="content-1" alt="" src="/web2net/office365.png" />
                 <h1 id="content-2" class="az-xs-text-xlarge az-sm-text-xxlarge az-md-text-xxxlarge az-lg-text-xxxxlarge az-xl-text-xxxxxlarge">Moderne og effektive hjemmesider</h1>
                 <h1 id="content-3" class="az-xs-text-xlarge az-sm-text-xxlarge az-md-text-xxxlarge az-lg-text-xxxxlarge az-xl-text-xxxxxlarge">Fungerer på alle plattformer</h1>
 
@@ -276,7 +339,7 @@
 
                         <div id="section-container-2-col-1" class="az-margin-14 az-white az-bg-gray">
                             <h1 class="az-xs-text-xlarge az-sm-text-xxlarge az-text-uppercase az-text-center az-padding-7">Webmaster tools</h1>
-                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="web2net/webmastertools.png" /></p>
+                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="/web2net/webmastertools.png" /></p>
                             <p class="az-center az-padding-t-14 az-padding-b-14 az-xs-width-90 az-sm-width-80">Webmaster Tools - Google Search Console, er et verktøy Google har laget for å gi deg en generell oversikt over helsestatusen til dine hjemmesider. Dette er et kraftig verktøy som oppdateres jevnlig med ny funksjonalitet for å gi deg en bedre oversikt.</p>
                         </div>
 
@@ -285,7 +348,7 @@
 
                         <div id="section-container-2-col-2" class="az-margin-14 az-white az-bg-gray">
                             <h1 class="az-xs-text-xlarge az-sm-text-xxlarge az-text-uppercase az-text-center az-padding-7">Google analytics</h1>
-                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="web2net/analytics.png" /></p>
+                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="/web2net/analytics.png" /></p>
                             <p class="az-center az-padding-t-14 az-padding-b-14 az-xs-width-90 az-sm-width-80">Google Analytics utfører flere typer analyser av dine hjemmesider og gir deg statistikk og grunnleggende informasjon for markedsføring og søkemotoroptimalisering (SEO).</p>
                         </div>
 
@@ -294,7 +357,7 @@
 
                         <div id="section-container-2-col-3" class="az-margin-14 az-white az-bg-gray">
                             <h1 class="az-xs-text-xlarge az-sm-text-xxlarge az-text-uppercase az-text-center az-padding-7">Sosiale medier</h1>
-                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="web2net/sosial-media-1.png" /></p>
+                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="/web2net/sosial-media-1.png" /></p>
                             <p class="az-center az-padding-t-14 az-padding-b-14 az-xs-width-90 az-sm-width-80">Sosiale medier er et verktøy for å nå ut til dine eksisterende og nye kunder. Med enkle grep kan vi gjøre dine hjemmesider langt mer tilpasset den sosiale verden enn de kanskje er i dag.</p>
                         </div>
 
@@ -308,7 +371,7 @@
                 <div class="az-row">
                     <div class="az-col xs-12 sm-6 lg-3">
 
-                        <div class="az-list-card adjust">
+                        <div class="az-list-card adjust az-xs-margin-l-21 az-xs-margin-r-21 az-sm-margin-l-7 az-sm-margin-r-7">
                             <article>
                                 <img class="az-image az-width-100" src="https://www.w3schools.com/w3css/img_snowtops.jpg" />
                                 <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.</p>
@@ -326,7 +389,7 @@
                     </div>
                     <div class="az-col xs-12 sm-6 lg-3 az-xs-margin-t-7 az-sm-margin-t-0">
 
-                        <div class="az-list-card adjust">
+                        <div class="az-list-card adjust az-xs-margin-l-21 az-xs-margin-r-21 az-sm-margin-l-7 az-sm-margin-r-7">
                             <article>
                                 <img class="az-image az-width-100" src="https://www.w3schools.com/w3css/img_vernazza.jpg" />
                                 <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.</p>
@@ -344,7 +407,7 @@
                     </div>
                     <div class="az-col xs-12 sm-6 lg-3 az-xs-margin-t-7 az-lg-margin-t-0">
 
-                        <div class="az-list-card adjust">
+                        <div class="az-list-card adjust az-xs-margin-l-21 az-xs-margin-r-21 az-sm-margin-l-7 az-sm-margin-r-7">
                             <article>
                                 <img class="az-image az-width-100" src="https://www.w3schools.com/w3css/img_snowtops.jpg" />
                                 <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.</p>
@@ -362,7 +425,7 @@
                     </div>
                     <div class="az-col xs-12 sm-6 lg-3 az-xs-margin-t-7 az-lg-margin-t-0">
 
-                        <div class="az-list-card adjust">
+                        <div class="az-list-card adjust az-xs-margin-l-21 az-xs-margin-r-21 az-sm-margin-l-7 az-sm-margin-r-7">
                             <article>
                                 <img class="az-image az-width-100" src="https://www.w3schools.com/w3css/img_vernazza.jpg" />
                                 <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.</p>
@@ -387,7 +450,7 @@
                 <div class="az-row">
                     <div class="az-col xs-12 sm-6 lg-3">
 
-                        <div class="az-card adjust">
+                        <div class="az-card adjust az-xs-margin-l-21 az-xs-margin-r-21 az-sm-margin-l-7 az-sm-margin-r-7">
                             <img class="az-image az-width-100" src="https://www.w3schools.com/w3css/img_avatar3.png" />
                             <article>
                                 <name><i class="fas fa-user fa-fw"></i>John Doe</name>
@@ -400,7 +463,7 @@
                     </div>
                     <div class="az-col xs-12 sm-6 lg-3 az-xs-margin-t-7 az-sm-margin-t-0">
 
-                        <div class="az-card adjust">
+                        <div class="az-card adjust az-xs-margin-l-21 az-xs-margin-r-21 az-sm-margin-l-7 az-sm-margin-r-7">
                             <img class="az-image az-width-100" src="https://www.w3schools.com/w3css/img_avatar4.png" />
                             <article>
                                 <name><i class="fas fa-user fa-fw"></i>Jane Doe</name>
@@ -413,7 +476,7 @@
                     </div>
                     <div class="az-col xs-12 sm-6 lg-3 az-xs-margin-t-7 az-lg-margin-t-0">
 
-                        <div class="az-card adjust">
+                        <div class="az-card adjust az-xs-margin-l-21 az-xs-margin-r-21 az-sm-margin-l-7 az-sm-margin-r-7">
                             <img class="az-image az-width-100" src="https://www.w3schools.com/w3css/img_avatar3.png" />
                             <article>
                                 <name><i class="fas fa-user fa-fw"></i>John Doe</name>
@@ -426,7 +489,7 @@
                     </div>
                     <div class="az-col xs-12 sm-6 lg-3 az-xs-margin-t-7 az-lg-margin-t-0">
 
-                        <div class="az-card adjust">
+                        <div class="az-card adjust az-xs-margin-l-21 az-xs-margin-r-21 az-sm-margin-l-7 az-sm-margin-r-7">
                             <img class="az-image az-width-100" src="https://www.w3schools.com/w3css/img_avatar4.png" />
                             <article>
                                 <name><i class="fas fa-user fa-fw"></i>Jane Doe</name>
@@ -438,6 +501,40 @@
 
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="az-navbar az-navbar-bottom az-navbar-sticky">
+            <div class="az-navbar-bottom-content">
+                <ul class="az-navbar-menu">
+                    <li><a href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><p>Søk</p></a></li>
+                    <li><a href="javascript:void(0);"><i class="fas fa-suitcase fa-fw"></i><p>Turer</p></a></li>
+                    <li><a href="javascript:void(0);"><i class="fas fa-inbox fa-fw"></i><p>Innboks</p></a></li>
+                    <li><a href="javascript:void(0);"><i class="fas fa-user fa-fw"></i><p>Profil</p></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="az-window-slider">
+            <div class="az-card">
+                <header>
+                    <h1 id="close">Header 1</h1>
+                </header>
+                <article style="height: 200px;">
+                    <name>Simon</name>
+                    <p>The boss of all bosses</p>
+                    <p>News <span class="az-badge az-bg-harley-davidson-orange">4</span></p>
+                    <rating>
+                        <i class="fas fa-star az-orange"></i>
+                        <i class="fas fa-star az-orange"></i>
+                        <i class="fas fa-star az-orange"></i>
+                        <i class="fas fa-star az-orange"></i>
+                        <i class="fas fa-star"></i>
+                    </rating>
+                </article>
+                <footer>
+                    <h1>Footer</h1>
+                </footer>
             </div>
         </div>
 

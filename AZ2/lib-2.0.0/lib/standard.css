@@ -574,31 +574,31 @@ navbar.css
     {
     }
 
-        .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-left
+        .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left
         {
         }
 
-            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-left > li > a
+            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li > a
             {
                 padding: 16px;
                 font-size: 16px;
                 color: #FFFFFF;
             }
 
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-left > li > a > i
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li > a > i
                 {
                 }
 
-        .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-right
+        .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right
         {
         }
 
-            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-right > li > a
+            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a
             {
                 color: #FFFFFF;
             }
 
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-right > li > a > i
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a > i
                 {
                     padding: 12px;
                     font-size: 30px;
@@ -658,28 +658,28 @@ navbar.css
     {
     }
 
-        .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-left
+        .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left
         {
         }
 
-            .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-left > li > a
+            .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li > a
             {
                 padding: 8px;
             }
 
-                .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-left > li > a > i
+                .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li > a > i
                 {
                 }
 
-        .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-right
+        .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right
         {
         }
 
-            .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-right > li > a
+            .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a
             {
             }
 
-                .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-right > li > a > i
+                .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a > i
                 {
                     padding: 4px;
                 }

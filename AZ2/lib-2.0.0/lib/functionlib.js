@@ -3,12 +3,13 @@
 // Transitions:
 //-webkit-transition
 //-moz-transition
+//-o-transition
 //transition
 
 // Transforms:
 //-webkit-transform
 //-moz-transform
-//-ms-transform
+//-o-transform
 //transform
 
 // Site info
@@ -17,6 +18,7 @@
 //var ApiVersion = "_1";
 
 var ThisLanguage = "nb-NO";
+
 
 $(document).ready(function ()
 {
@@ -416,14 +418,14 @@ $(document).ready(function ()
                 {
                     $.datepicker.setDefaults($.datepicker.regional[ThisLanguage]);
                 }
-            }                       
+            }
             if ($(this).is("[type='range']"))
             {
                 if ($(this).hasClass("az-range"))
                 {
                     $(this).off("input change", azRange).on("input change", azRange);
                 }
-            }            
+            }
             if ($(this).is("textarea"))
             {
                 $(this).attr("autocomplete", "false");
@@ -536,6 +538,44 @@ $(document).ready(function ()
 
         // Adjust Cards Height
         $('.az-accordion-card.adjust, .az-card.adjust, .az-list-card.adjust, .az-timeline-card.adjust').matchHeight();
+
+        // Navbar Top Menu
+        var _$NavbarTopMenu = $(".az-navbar-top-content").find(".az-navbar-menu");
+        var _NavbarTopHeight = _$NavbarTopMenu.parents(".az-navbar-top").height();
+        _$NavbarTopMenu.off().on("click", "li > a", function (e)
+        {
+            var _Anchor = $(this).attr('href');
+            if (_Anchor.indexOf("#") === 0)
+            {
+                e.preventDefault();
+                if (_$NavbarTopMenu.parents(".az-navbar-top").hasClass("az-navbar-sticky") === false)
+                {
+                    _NavbarTopHeight = 0;
+                }
+                if (_$NavbarTopMenu.hasClass("az-animated") === true)
+                {
+                    $('html, body').stop().animate(
+                        {
+                            scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
+                        },
+                        {
+                            easing: 'easeInOutExpo',
+                            duration: 1500
+                        });
+                }
+                else
+                {
+                    $('html, body').stop().animate(
+                        {
+                            scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
+                        },
+                        {
+                            duration: 0
+                        });
+                }
+                $(".az-navbar-top-content").removeClass("mobile");
+            }
+        });
     })(jQuery);
 });
 
@@ -775,6 +815,323 @@ function removeDropdownEvent(e)
         {
             _$ULDropdown.removeClass("az-dropdown-show");
         }
+    }
+}
+
+// AZ Page
+function initAZPage(Options)
+{
+    var _Main = this;
+    var _Defaults =
+    {
+        azPageLanguageClientStorage: false,
+        azPageCustomerInfo: false,
+        azPageSystemMenu: false,
+        azPageLanguage: false,
+        azPageValidation: false
+    };
+    _Main.Options = $.extend({}, _Defaults, Options || {});
+
+    _Main.ThisLocation = window.document.location.hostname;
+    _Main.ThisPage = window.document.location.pathname;
+    _Main.$ObjAZForm = (window.document.forms.length > 0) ? $(window.document.forms[0]) : "";
+    moment.locale(ThisLanguage);
+
+    _Main.azValidation = function ()
+    {
+        if (_Main.Options.azPageValidation === true)
+        {
+            $.subscribeonce("functionlib/initAZGetValidation", function (e)
+            {
+                $.subscribeonce("functionlib/initAZSetValidation", function (e)
+                {
+                    $.publish("functionlib/initAZPage");
+                });
+                new initAZSetValidation();
+            });
+            new initAZGetValidation(ValidationPage);
+        }
+        else
+        {
+            $.publish("functionlib/initAZPage");
+        }
+    }
+
+    _Main.azLanguage = function ()
+    {
+        if (_Main.Options.azPageLanguage === true)
+        {
+            $.subscribeonce("functionlib/initAZGetLanguage", function (e)
+            {
+                new initAZSetLanguage();
+                _Main.azValidation();
+            });
+            new initAZGetLanguage(LanguagePage);
+        }
+        else
+        {
+            _Main.azValidation();
+        }
+    }
+
+    if (_Main.Options.azPageLanguageClientStorage === true)
+    {
+        new initAZSetLanguageClientStorage();
+    }
+
+    if (_Main.Options.azPageCustomerInfo === true)
+    {
+        $.subscribeonce("functionlib/initAZGetCustomerInfo", function (e, data)
+        {
+            if (_Main.Options.azPageSystemMenu === true)
+            {
+                new initAZSetSystemMenu(data);
+                _Main.ObjCustomerInfo = data.ObjCustomerInfo;s
+            }
+            _Main.azLanguage();
+        });
+        new initAZGetCustomerInfo();
+    }
+    else
+    {
+        _Main.azLanguage();
+    }
+}
+
+// AZ Set Language Client Storage
+function initAZSetLanguageClientStorage()
+{
+    var _CurrentLanguage = clientStorage("get", "language", "");
+    if (_CurrentLanguage != null)
+    {
+        ThisLanguage = _CurrentLanguage;
+    }
+    else
+    {
+        clientStorage("set", "language", ThisLanguage);
+    }
+    consoleLog("initAZSetLanguageClientStorage");
+    $.publish("functionlib/initAZSetLanguageClientStorage");
+}
+
+// AZ Get Customer Info
+function initAZGetCustomerInfo()
+{
+    var _ObjCustomerInfo = JSON.parse(clientStorage("get", "customerinfo", ""));
+    if (isEmpty(_ObjCustomerInfo) === false && _ObjCustomerInfo.hasOwnProperty("UserSignIn"))
+    {
+        if (_ObjCustomerInfo.UserSignIn.hasOwnProperty("LanguageCode") && _ObjCustomerInfo.UserSignIn.LanguageCode != "")
+        {
+            moment.locale(_ObjCustomerInfo.UserSignIn.LanguageCode);
+        }
+        consoleLog("initAZGetCustomerInfo");
+        $.publish("functionlib/initAZGetCustomerInfo", { ObjCustomerInfo: _ObjCustomerInfo });
+    }
+    else
+    {
+        throwException("silent", "", "", "initAZGetCustomerInfo-1", "LoadData");
+    }
+}
+
+// AZ Set System Menu
+function initAZSetSystemMenu(data)
+{
+    var _ObjCustomerInfo = data.ObjCustomerInfo;
+    if (isEmpty(_ObjCustomerInfo) === false && _ObjCustomerInfo.hasOwnProperty("MainMenu"))
+    {
+        $.each(_ObjCustomerInfo.MainMenu, function (i, MainMenuContent)
+        {
+            if (MainMenuContent.RoleFeatureStatus == "block")
+            {
+                $("." + MainMenuContent.Name + "_" + MainMenuContent.Type + ", #" + MainMenuContent.Name + "_" + MainMenuContent.Type).css({ "display": "block" });
+            }
+        });
+        consoleLog("initAZSetSystemMenu");
+        $.publish("functionlib/initAZSetSystemMenu");
+    }
+    else
+    {
+        throwException("silent", "", "", "initAZSetSystemMenu-1", "LoadData");
+    }
+}
+
+// AZ Get Language
+function initAZGetLanguage(SelectedPage)
+{
+    $.ajaxSetup({ cache: false });
+    $.getJSON(SelectedPage).done(function (data)
+    {
+        if (isEmpty(data) === false)
+        {
+            ObjPageLanguage = data;
+            consoleLog("initAZGetLanguage");
+            $.publish("functionlib/initAZGetLanguage");
+        }
+        else
+        {
+            throwException("silent", "", "", "initAZGetLanguage-1", "Language");
+        }
+    }).fail(function (jqXHR, textStatus, err)
+    {
+        throwException("silent", "", "", "initAZGetLanguage-2", "Language");
+    });
+}
+
+// AZ Set Language
+function initAZSetLanguage()
+{
+    azSetFormLanguage(MyDefaultLanguage.ObjNonLanguageElements);
+    SingleNonLanguageElements = MyDefaultLanguage.SingleNonLanguageElements;
+    if (ThisLanguage != undefined)
+    {
+        azSetFormLanguage(MyDefaultLanguage.ObjDefaultElements[ThisLanguage]);
+        SingleDefaultElements = MyDefaultLanguage.SingleDefaultElements[ThisLanguage];
+        if (isEmpty(ObjPageLanguage) === false)
+        {
+            azSetFormLanguage(ObjPageLanguage.ObjElements[ThisLanguage]);
+            SingleElements = ObjPageLanguage.SingleElements[ThisLanguage];
+            if (SingleElements.labelPageTitle != undefined)
+            {
+                document.title = SingleElements.labelPageTitle;
+            }
+        }
+    }
+    consoleLog("initAZSetLanguage");
+    $.publish("functionlib/initAZSetLanguage");
+}
+
+
+function initAZGetValidation(SelectedPage)
+{
+    $.ajaxSetup({ cache: false });
+    $.getJSON(SelectedPage).done(function (data)
+    {
+        if (data instanceof Object && data != null && data != undefined)
+        {
+            ObjJsonValidation = data;
+            consoleLog("initAZGetValidation");
+            $.publish("functionlib/initAZGetValidation");
+        }
+        else
+        {
+            throwException("silent", "", "", "initAZGetValidation-1", "Validation");
+        }
+    }).fail(function (jqXHR, textStatus, err)
+    {
+        throwException("silent", "", "", "initAZGetValidation-2", "Validation");
+    });
+}
+
+function initAZSetValidation(SelectedArea)
+{
+    var _SelectedArea = "";
+    if (SelectedArea != "" && SelectedArea != undefined && SelectedArea != null)
+    {
+        _SelectedArea = $(SelectedArea);
+    }
+    else
+    {
+        _SelectedArea = "";
+    }
+
+    $.each(ObjJsonValidation, function (HTMLElement, ObjJsonSubValidation)
+    {
+        $("." + HTMLElement).each(function (AttrType, AttrValue)
+        {
+            if (AttrValue.id)
+            {
+                if (ObjJsonValidation.hasOwnProperty(AttrValue.id) == false)
+                {
+                    ObjJsonValidation[AttrValue.id] = ObjJsonSubValidation;
+                }
+            }
+        });
+    });
+
+    $.each(ObjJsonValidation, function (HTMLElement, ObjJsonSubValidation)
+    {
+        $.each(ObjJsonSubValidation, function (AttrType, AttrValue)
+        {
+            if (AttrType.toLowerCase() == "label")
+            {
+                $("label[for='" + HTMLElement + "']", _SelectedArea).addClass(AttrValue);
+            }
+            else if (AttrType.toLowerCase() == "data-attr" || AttrType.toLowerCase() == "minlength" || AttrType.toLowerCase() == "maxlength" || AttrType.toLowerCase() == "tabindex")
+            {
+                if ($('#' + HTMLElement, _SelectedArea).length > 0)
+                {
+                    $('#' + HTMLElement, _SelectedArea).attr(AttrType, AttrValue);
+                }
+                if ($('.' + HTMLElement, _SelectedArea).length > 0)
+                {
+                    $('.' + HTMLElement, _SelectedArea).attr(AttrType, AttrValue);
+                }
+            }
+            else if (AttrType.toLowerCase() == "class")
+            {
+                if ($('#' + HTMLElement, _SelectedArea).length > 0)
+                {
+                    $('#' + HTMLElement, _SelectedArea).addClass(AttrValue);
+                }
+                if ($('.' + HTMLElement, _SelectedArea).length > 0)
+                {
+                    $('.' + HTMLElement, _SelectedArea).addClass(AttrValue);
+                }
+            }
+        });
+    });
+    consoleLog("initAZSetValidation");
+    $.publish("functionlib/initAZSetValidation");
+}
+
+
+// Error exception
+function throwException(_Action, _ActionPath, _ErrorPage, _ErrorCode, _ErrorText)
+{
+    if (_Action === "navigate")
+    {
+        navigateTo(_ActionPath + "?ErrorPage=" + _ErrorPage + "&ErrorCode=" + _ErrorCode + "&ErrorText=" + _ErrorText, 0);
+    }
+    else if (_Action === "dialog")
+    {
+        hideCoverSpin();
+        initializeAZWindow(
+            {
+                dialogTitle: "Error",
+                dialogText: SingleDefaultElements[_ErrorText + "Error"] + "<br><br>" + _ErrorCode + " - " + _ErrorText
+            });
+    }
+    else if (_Action === "silent")
+    {
+        consoleLog({ consoleType: "error", consoleText: _ErrorCode });
+    }
+}
+
+function consoleLog(Options)
+{
+    var _Defaults =
+    {
+        consoleType: "log",
+    };
+
+    var _Options;
+    if (typeof Options === "string" || typeof Options === "number")
+    {
+        _Options = $.extend({}, _Defaults, { consoleText: Options });
+    }
+    else if (typeof Options === "object")
+    {
+        Options.hasOwnProperty("consoleType") === true ? _Defaults.consoleType = Options.consoleType : "";
+        Options.hasOwnProperty("consoleText") === true ? _Defaults.consoleText = JSON.parse(JSON.stringify(Options.consoleText)) : _Defaults.consoleText = JSON.parse(JSON.stringify(Options));
+        _Options = _Defaults;
+    }
+    else
+    {
+        _Options = $.extend({}, _Defaults, Options || {});
+    }
+    if (DebugMode)
+    {
+        console[_Options.consoleType](_Options.consoleText);
     }
 }
 

@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="no" class="az-bg-white">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,13 +12,15 @@
     <meta name="format-detection" content="email=no" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <title></title>
+    <title>AZ Form</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
+
     <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
     <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
@@ -30,13 +31,13 @@
         $(document).ready(function ()
         {
             azPageFunction = new initAZPage(
-            {
-                azPageLanguage: true,
-                azPageValidation: true
-            }, function ()
-            {
-                setContentInfo();
-            });
+                {
+                    azPageLanguage: true,
+                    azPageValidation: true
+                }, function ()
+                {
+                    setContentInfo();
+                });
         });
 
         function setContentInfo()
@@ -102,12 +103,12 @@
                     if (data.Transfer == "200")
                     {
                         initializeAZWindow(
-                        {
-                            dialogTitle: "Takk for din henvendelse",
-                            dialogText: "Vi har mottatt din henvendelse og vil kontakte deg så rask som mulig.",
-                            dialogButton1: "Avslutt",
-                            dialogClose: function () { parent.closeModalDialog(); }
-                        });
+                            {
+                                dialogTitle: "Takk for din henvendelse",
+                                dialogText: "Vi har mottatt din henvendelse og vil kontakte deg så rask som mulig.",
+                                dialogButton1: "Avslutt",
+                                dialogClose: function () { parent.closeModalDialog(); }
+                            });
                     }
                     else
                     {
