@@ -1,0 +1,313 @@
+﻿
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>AZ Circular Bar</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
+    <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
+
+    <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
+    <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
+    <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
+    <script>
+
+        $(document).ready(function ()
+        {
+            w3CodeColor();
+
+            var _ListCircularBar = [];
+            _ListCircularBar.push(
+                {
+                    azCircularBarId: "az-circularbar-1",
+                    azCircularBarSize: 220,
+                    azCircularBarColor: "",
+                    azCircularBarValue: 54,
+                    azCircularBarValueColor: "",
+                    azCircularBarLabel: "54 %"
+                },
+                {
+                    azCircularBarId: "az-circularbar-2",
+                    azCircularBarSize: 120,
+                    azCircularBarColor: "",
+                    azCircularBarValue: 76,
+                    azCircularBarValueColor: "",
+                    azCircularBarLabel: "76 %"
+                },
+                {
+                    azCircularBarId: "az-circularbar-3",
+                    azCircularBarSize: 220,
+                    azCircularBarColor: "",
+                    azCircularBarValue: 23,
+                    azCircularBarValueColor: "",
+                    azCircularBarLabel: "23 %"
+                },
+                {
+                    azCircularBarId: "az-circularbar-4",
+                    azCircularBarSize: 120,
+                    azCircularBarColor: "",
+                    azCircularBarValue: 89,
+                    azCircularBarValueColor: "",
+                    azCircularBarLabel: "89 %"
+                });
+
+            initAZCircularBar(_ListCircularBar);
+
+            initAZCircularBar(
+                {
+                    azCircularBarId: "az-circularbar-5",
+                    azCircularBarSize: 220,
+                    azCircularBarColor: "#777777",
+                    azCircularBarValue: 54,
+                    azCircularBarValueColor: "#dd9d22",
+                    azCircularBarLabel: "54 %",
+                    azCircularBarCaption: "Cleaned",
+                    azCircularBarCaptionColor: "#5fd400"
+                });
+
+            initAZCircularBar(
+                {
+                    azCircularBarId: "az-circularbar-6",
+                    azCircularBarSize: 120,
+                    azCircularBarColor: "",
+                    azCircularBarValue: 76,
+                    azCircularBarValueColor: "",
+                    azCircularBarLabel: "76 %",
+                    azCircularBarCaption: "Do Not Clean"
+                });
+
+            initAZCircularBar(
+                {
+                    azCircularBarId: "az-circularbar-7",
+                    azCircularBarSize: 220,
+                    azCircularBarColor: "",
+                    azCircularBarValue: 23,
+                    azCircularBarValueColor: "",
+                    azCircularBarLabel: "23 %",
+                    azCircularBarCaption: "Cleaned"
+                });
+
+            initAZCircularBar(
+                {
+                    azCircularBarId: "az-circularbar-8",
+                    azCircularBarSize: 120,
+                    azCircularBarColor: "",
+                    azCircularBarValue: 89,
+                    azCircularBarValueColor: "",
+                    azCircularBarLabel: "89 %",
+                    azCircularBarCaption: "Cleaned"
+                });
+        });
+
+    </script>
+</head>
+<body>
+
+    <form id="frmReg">
+        <div class="az-container">
+
+            <div class="az-row az-margin-t-56 az-margin-b-56">
+                <div class="az-col xs-12 sm-6 md-3">
+
+                    <div id="az-circularbar-1"></div>
+
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+
+                    <div id="az-circularbar-2"></div>
+
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+
+                    <div id="az-circularbar-3"></div>
+
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+
+                    <div id="az-circularbar-4"></div>
+
+                </div>
+            </div>
+
+
+            <div class="az-row az-margin-t-56 az-margin-b-56">
+                <div class="az-col xs-12 sm-6 md-3">
+
+                    <div id="az-circularbar-5"></div>
+
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+
+                    <div id="az-circularbar-6"></div>
+
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+
+                    <div id="az-circularbar-7"></div>
+
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+
+                    <div id="az-circularbar-8"></div>
+
+                </div>
+            </div>
+
+            <!--<div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+
+                    <div class="c100 p50 big green">
+                        <span>50%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <div class="c100 p25 green">
+                        <span>25%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <div class="c100 p12 small green">
+                        <span>12%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+
+                    <div class="c100 p50 big orange">
+                        <span>50%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <div class="c100 p25 orange">
+                        <span>25%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <div class="c100 p12 small orange">
+                        <span>12%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+
+                    <div class="c100 p50 big dark">
+                        <span>50%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <div class="c100 p25 dark">
+                        <span>25%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <div class="c100 p12 small dark">
+                        <span>12%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+
+                    <div class="c100 p50 big dark green">
+                        <span>50%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <div class="c100 p25 dark green">
+                        <span>25%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <div class="c100 p12 dark small green">
+                        <span>12%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+
+                    <div class="c100 p50 dark big orange">
+                        <span>50%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <div class="c100 p25 dark orange">
+                        <span>25%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <div class="c100 p12 dark small orange">
+                        <span>12%</span>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>-->
+
+        </div>
+    </form>
+
+</body>
+</html>

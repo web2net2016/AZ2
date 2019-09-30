@@ -21,9 +21,6 @@
         .az-navbar > .az-navbar-top-content > .az-navbar-button
         {
             display: none;
-            float: right;
-            outline: none;
-            cursor: pointer;
         }
 
         .az-navbar > .az-navbar-top-content > .az-navbar-branding.mobile-only
@@ -103,6 +100,9 @@
     .az-navbar > .az-navbar-top-content > .az-navbar-button
     {
         display: block;
+        float: right;
+        outline: none;
+        cursor: pointer;
     }
 
     .az-navbar > .az-navbar-top-content > .az-navbar-branding.mobile-only

@@ -576,6 +576,13 @@ $(document).ready(function ()
                 $(".az-navbar-top-content").removeClass("mobile");
             }
         });
+
+        // Dropdown Menu
+        if ($(".az-dropdown-button").is(":button"))
+        {
+            $(".az-dropdown-button").off("click", atDropdown).on("click", atDropdown);
+        }
+        $(".az-dropdown-button[href]").off("click", atDropdown).on("click", atDropdown);
     })(jQuery);
 });
 
@@ -783,37 +790,37 @@ function azCloseNavbarMobile()
     }
 }
 
-function setDropdownClickEvent(e)
+function atDropdown(e)
 {
     var _Element = e.target || e.srcElement;
-    var _$ULDropdown = $(_Element).closest(".az-dropdown-click").find(".az-ul-dropdown");
-    $(".az-dropdown-show").not(_$ULDropdown).each(function ()
+    var _$ULDropdown = $(_Element).closest(".az-dropdown-click").find("ul.az-dropdown-content");
+    $(".az-dropdown-display").not(_$ULDropdown).each(function ()
     {
-        $(this).removeClass("az-dropdown-show");
+        $(this).removeClass("az-dropdown-display");
     });
-    if (_$ULDropdown.hasClass("az-dropdown-show"))
+    if (_$ULDropdown.hasClass("az-dropdown-display"))
     {
-        _$ULDropdown.removeClass("az-dropdown-show");
+        _$ULDropdown.removeClass("az-dropdown-display");
     }
     else
     {
-        _$ULDropdown.addClass("az-dropdown-show");
+        _$ULDropdown.addClass("az-dropdown-display");
         window.setTimeout(function ()
         {
-            $(document).one("click", { ULDropdown: _$ULDropdown }, removeDropdownEvent);
+            $(document).one("click", { ULDropdown: _$ULDropdown }, azRemoveDropdown);
         }, 100);
     }
 }
 
-function removeDropdownEvent(e)
+function azRemoveDropdown(e)
 {
     var _Element = e.target || e.srcElement;
     var _$ULDropdown = e.data.ULDropdown;
     if ($(_Element) != _$ULDropdown)
     {
-        if (_$ULDropdown.hasClass("az-dropdown-show"))
+        if (_$ULDropdown.hasClass("az-dropdown-display"))
         {
-            _$ULDropdown.removeClass("az-dropdown-show");
+            _$ULDropdown.removeClass("az-dropdown-display");
         }
     }
 }

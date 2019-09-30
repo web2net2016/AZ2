@@ -436,100 +436,7 @@
             </div>
 
             <!--Input type text Diverse-->
-            <div class="az-row az-margin-t-56">
-                <div class="az-col xs-3">
-                    <div class="az-form-group">
-                        <label class="az-label">Tvinger store bokstaver</label>
-                        <input type="text" class="az-input forceuppercase" />
-                    </div>
-                </div>
-            </div>
             <div class="az-row az-margin-t-14">
-                <div class="az-col xs-12">
-                    <div class="az-code jsHigh notranslate">
-                        $(".forceuppercase").off("keypress focusout", azForceUppercaseKeypressFocusout).on("keypress focusout", azForceUppercaseKeypressFocusout);<br />
-                        <br />
-                        function azForceUppercaseKeypressFocusout(e)<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;var _Element = e.target || e.srcElement;<br />
-                        &emsp;&ensp;&emsp;&ensp;$(_Element).val($(_Element).val().toUpperCase());<br />
-                        }<br />
-                    </div>
-                </div>
-            </div>
-            <div class="az-row az-margin-t-14">
-                <div class="az-col xs-3">
-                    <div class="az-form-group">
-                        <label class="az-label">Tvinger små bokstaver</label>
-                        <input type="text" class="az-input forcelowercase" />
-                    </div>
-                </div>
-            </div>
-            <div class="az-row az-margin-t-14">
-                <div class="az-col xs-12">
-                    <div class="az-code jsHigh notranslate">
-                        $(".forcelowercase").off("keypress focusout", azForceLowercaseKeypressFocusout).on("keypress focusout", azForceLowercaseKeypressFocusout);<br />
-                        <br />
-                        function azForceLowercaseKeypressFocusout(e)<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;var _Element = e.target || e.srcElement;<br />
-                        &emsp;&ensp;&emsp;&ensp;$(_Element).val($(_Element).val().toLowerCase());<br />
-                        }<br />
-                    </div>
-                </div>
-            </div>
-            <div class="az-row az-margin-t-14">
-                <div class="az-col xs-3">
-                    <div class="az-form-group">
-                        <label class="az-label">Kan ikke lime inn</label>
-                        <input type="text" class="az-input donotpaste" />
-                    </div>
-                </div>
-            </div>
-            <div class="az-row az-margin-t-14">
-                <div class="az-col xs-12">
-                    <div class="az-code jsHigh notranslate">
-                        $(".donotpaste").off("keydown", azDoNotPaste).on("keydown", azDoNotPaste);<br />
-                        <br />
-                        function azDoNotPaste(e)<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;if (e.ctrlKey == true && (e.which == 118 || e.which == 86))<br />
-                        &emsp;&ensp;&emsp;&ensp;{<br />
-                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;e.preventDefault ? e.preventDefault() : e.returnValue = false;<br />
-                        &emsp;&ensp;&emsp;&ensp;}<br />
-                        }<br />
-                    </div>
-                </div>
-            </div>
-            <div class="az-row az-margin-t-14">
-                <div class="az-col xs-3">
-                    <div class="az-form-group">
-                        <label class="az-label">Kan ikke trykke <strong>Enter</strong></label>
-                        <input type="text" class="az-input notenter" />
-                    </div>
-                </div>
-            </div>
-            <div class="az-row az-margin-t-14">
-                <div class="az-col xs-12">
-                    <div class="az-code jsHigh notranslate">
-                        $(".notenter").off("keydown", azNotEnter).on("keydown", azNotEnter);<br />
-                        <br />
-                        function azNotEnter(e)<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;if ((e.keyCode || e.which) == 13)<br />
-                        &emsp;&ensp;&emsp;&ensp;{<br />
-                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;e.preventDefault ? e.preventDefault() : e.returnValue = false;<br />
-                        &emsp;&ensp;&emsp;&ensp;}<br />
-                        }<br />
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <!--Input type text Diverse-->
-            <div class="az-row az-margin-t-14 az-margin-b-56">
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <label class="az-label">Bare les</label>
@@ -550,6 +457,349 @@
                 </div>
                 <div class="az-col xs-12 sm-6 md-3"></div>
             </div>
+
+            <!--Input type text Diverse-->
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label">Tvinger store bokstaver</label>
+                        <input type="text" class="az-input forceuppercase" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label">Tvinger små bokstaver</label>
+                        <input type="text" class="az-input forcelowercase" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label">Kan ikke lime inn</label>
+                        <input type="text" class="az-input donotpaste" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label">Kan ikke trykke <strong>Enter</strong></label>
+                        <input type="text" class="az-input notenter" />
+                    </div>
+                </div>
+            </div>
+
+            <!--Input type text Diverse-->
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label">Bare les</label>
+                        <input type="text" class="az-input readonly" value="Dette er en test" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label">Deaktivert</label>
+                        <input type="text" class="az-input disabled" value="Dette er en test" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label">Markerer innholdet</label>
+                        <input type="text" class="az-input selecttext validate validate-numeric" data-attr="int" value="Dette er en test" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">&nbsp;</div>
+            </div>
+
+            <!--DropDown Menu-->
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group az-dropdown-hover">
+                        <button type="button" class="az-dropdown-button az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Meny Hover</button>
+                        <ul class="az-dropdown-content az-dropdown-layout">
+                            <li><a href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span>Søk</span></a></li>
+                            <li><a href="javascript:void(0);"><i class="fas fa-suitcase fa-fw"></i><span>Turer</span></a></li>
+                            <li><a href="javascript:void(0);"><i class="fas fa-inbox fa-fw"></i><span>Innboks</span></a></li>
+                            <li><a href="javascript:void(0);"><i class="fas fa-user fa-fw"></i><span>Profil</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group az-dropdown-click">
+                        <button type="button" class="az-dropdown-button az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Meny Klikk</button>
+                        <ul class="az-dropdown-content az-dropdown-layout">
+                            <li><a href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span>Søk</span></a></li>
+                            <li><a href="javascript:void(0);"><i class="fas fa-suitcase fa-fw"></i><span>Turer</span></a></li>
+                            <li><a href="javascript:void(0);"><i class="fas fa-inbox fa-fw"></i><span>Innboks</span></a></li>
+                            <li><a href="javascript:void(0);"><i class="fas fa-user fa-fw"></i><span>Profil</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3"></div>
+                <div class="az-col xs-12 sm-6 md-3"></div>
+            </div>
+
+            <!--Progress Bar Horizontal-->
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="xs az-bg-fire-engine az-text-center" style="width: 20%">20%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="xs az-bg-navy-blue az-text-center" style="width: 40%">40%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="xs az-bg-gray az-text-center" style="width: 60%">60%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="xs az-bg-teal az-text-center" style="width: 80%">80%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="az-bg-fire-engine az-text-center" style="width: 20%">20%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="az-bg-navy-blue az-text-center" style="width: 40%">40%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="az-bg-gray az-text-center" style="width: 60%">60%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="az-bg-teal az-text-center" style="width: 80%">80%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="sm az-bg-fire-engine az-text-center" style="width: 20%">20%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="sm az-bg-navy-blue az-text-center" style="width: 40%">40%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="sm az-bg-gray az-text-center" style="width: 60%">60%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="sm az-bg-teal az-text-center" style="width: 80%">80%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="md az-bg-fire-engine az-text-center" style="width: 20%">20%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="md az-bg-navy-blue az-text-center" style="width: 40%">40%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="md az-bg-gray az-text-center" style="width: 60%">60%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group">
+                        <div class="az-progress-bar-hor az-bg-white">
+                            <div class="md az-bg-teal az-text-center" style="width: 80%">80%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Progress Bar Vertical-->
+            <!--<div class="az-row az-margin-t-56">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group" style="height: 200px;">
+                        <div class="az-flex az-progress-bar-ver az-bg-white">
+                            <div class="az-flex-col az-flex-col-stretch az-bg-fire-engine az-text-center" style="height: 20%">20%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+
+                    </div>
+                </div>
+            </div>-->
+
+
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <!--<div class="az-row az-margin-t-14">
+        <div class="az-col xs-12">
+            <div class="az-code jsHigh notranslate">
+                $(".forceuppercase").off("keypress focusout", azForceUppercaseKeypressFocusout).on("keypress focusout", azForceUppercaseKeypressFocusout);<br />
+                <br />
+                function azForceUppercaseKeypressFocusout(e)<br />
+                {<br />
+                &emsp;&ensp;&emsp;&ensp;var _Element = e.target || e.srcElement;<br />
+                &emsp;&ensp;&emsp;&ensp;$(_Element).val($(_Element).val().toUpperCase());<br />
+                }<br />
+            </div>
+        </div>
+    </div>
+    <div class="az-row az-margin-t-14">
+        <div class="az-col xs-12">
+            <div class="az-code jsHigh notranslate">
+                $(".forcelowercase").off("keypress focusout", azForceLowercaseKeypressFocusout).on("keypress focusout", azForceLowercaseKeypressFocusout);<br />
+                <br />
+                function azForceLowercaseKeypressFocusout(e)<br />
+                {<br />
+                &emsp;&ensp;&emsp;&ensp;var _Element = e.target || e.srcElement;<br />
+                &emsp;&ensp;&emsp;&ensp;$(_Element).val($(_Element).val().toLowerCase());<br />
+                }<br />
+            </div>
+        </div>
+    </div>
+    <div class="az-row az-margin-t-14">
+        <div class="az-col xs-12">
+            <div class="az-code jsHigh notranslate">
+                $(".donotpaste").off("keydown", azDoNotPaste).on("keydown", azDoNotPaste);<br />
+                <br />
+                function azDoNotPaste(e)<br />
+                {<br />
+                &emsp;&ensp;&emsp;&ensp;if (e.ctrlKey == true && (e.which == 118 || e.which == 86))<br />
+                &emsp;&ensp;&emsp;&ensp;{<br />
+                &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;e.preventDefault ? e.preventDefault() : e.returnValue = false;<br />
+                &emsp;&ensp;&emsp;&ensp;}<br />
+                }<br />
+            </div>
+        </div>
+    </div>
+    <div class="az-row az-margin-t-14">
+        <div class="az-col xs-12">
+            <div class="az-code jsHigh notranslate">
+                $(".notenter").off("keydown", azNotEnter).on("keydown", azNotEnter);<br />
+                <br />
+                function azNotEnter(e)<br />
+                {<br />
+                &emsp;&ensp;&emsp;&ensp;if ((e.keyCode || e.which) == 13)<br />
+                &emsp;&ensp;&emsp;&ensp;{<br />
+                &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;e.preventDefault ? e.preventDefault() : e.returnValue = false;<br />
+                &emsp;&ensp;&emsp;&ensp;}<br />
+                }<br />
+            </div>
+        </div>
+    </div>-->
 
         </div>
     </form>

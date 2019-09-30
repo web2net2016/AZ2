@@ -475,7 +475,6 @@
             outline: none;
         }
 
-        /* Slider Track webkit-slider-runnable */
         .az-form-group .az-range::-webkit-slider-runnable-track
         {
             height: 20px;
@@ -516,7 +515,6 @@
             border-radius: 20px;
         }
 
-        /* Slider Track -moz-range */
         .az-form-group .az-range::-moz-range-track
         {
             height: 20px;
@@ -557,7 +555,6 @@
             border-radius: 20px;
         }
 
-        /* Slider Track -ms */
         .az-form-group .az-range::-ms-track
         {
             height: 10px;
@@ -598,7 +595,6 @@
             border-radius: 20px;
         }
 
-        /* Slider Thumb webkit-slider */
         .az-form-group .az-range::-webkit-slider-thumb
         {
             -webkit-appearance: none;
@@ -651,7 +647,6 @@
             height: 40px;
         }
 
-        /* Slider Thumb -moz-range */
         .az-form-group .az-range::-moz-range-thumb
         {
             width: 20px;
@@ -702,7 +697,6 @@
             height: 40px;
         }
 
-        /* Slider Thumb -ms */
         .az-form-group .az-range::-ms-thumb
         {
             width: 20px;
@@ -791,7 +785,6 @@
             font-size: 1.2em;
         }
 
-
         .az-form-group .az-button.az-button-round
         {
             -webkit-border-radius: 50%;
@@ -816,7 +809,6 @@
                 padding: 10px;
                 font-size: 15.6px;
             }
-
 
         .az-form-group .az-button.az-round
         {
@@ -998,10 +990,9 @@
                 border-radius: 20px;
             }
 
-/* Modal */
+/* Modal Background */
 #az-modal-background
 {
-    display: none;
     position: fixed;
     z-index: 5000;
     left: 0;
@@ -1047,18 +1038,23 @@
     }
 
 /* Dropdown */
-.az-dropdown-default-layout
+.az-dropdown-ul
+{
+    list-style-type: none;
+    padding: 0;
+}
+
+.az-dropdown-layout
 {
     min-width: 160px;
 }
 
-    .az-dropdown-default-layout li
+    .az-dropdown-layout > li
     {
-        width: 100%;
         cursor: pointer;
     }
 
-        .az-dropdown-default-layout li a
+        .az-dropdown-layout > li > a
         {
             display: block;
         }
@@ -1076,14 +1072,14 @@
 .az-dropdown-content
 {
     display: none;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     list-style-type: none;
     padding: 0;
     cursor: auto;
 }
 
-.az-dropdown-show
+.az-dropdown-display
 {
     display: block !important;
 }
@@ -1220,6 +1216,53 @@
         -o-animation: cover-spin .8s linear infinite;
         animation: cover-spin .8s linear infinite;
     }
+
+/* Fieldset */
+
+
+/* Lable Asterisk */
+
+
+
+/* Progress Bar */
+.az-form-group .az-progress-bar-hor
+{
+    width: 100%;
+}
+
+.az-form-group .az-progress-bar-hor > div
+{
+    padding: 4px;
+}
+
+    .az-form-group .az-progress-bar-hor > div.xs
+    {
+        padding: 3px;
+        font-size: 0.85em;
+    }
+
+    .az-form-group .az-progress-bar-hor > div.sm
+    {
+        padding: 5px;
+        font-size: 1.1em;
+    }
+
+    .az-form-group .az-progress-bar-hor > div.md
+    {
+        padding: 6px;
+        font-size: 1.2em;
+    }
+
+.az-form-group .az-progress-bar-ver
+{
+    width: 26px;
+}
+
+    .az-form-group .az-progress-bar-ver > div
+    {
+        padding: 4px;
+    }
+
 
 /* Animations Keyframes */
 /* #az-cover-spin::after */

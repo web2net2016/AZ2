@@ -75,8 +75,10 @@
     <Content Include="lib-2.0.0\azsnackbar.html" />
     <Content Include="lib-2.0.0\azslidein.html" />
     <Content Include="lib-2.0.0\azwindow.html" />
+    <Content Include="lib-2.0.0\azcircularbar.html" />
     <Content Include="lib-2.0.0\card.html" />
     <Content Include="lib-2.0.0\color.html" />
+    <Content Include="lib-2.0.0\css\circularbar.css" />
     <Content Include="lib-2.0.0\css\flex.css" />
     <Content Include="lib-2.0.0\css\slidein.css" />
     <Content Include="lib-2.0.0\css\snackbar.css" />
