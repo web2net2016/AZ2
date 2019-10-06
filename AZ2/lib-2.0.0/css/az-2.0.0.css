@@ -7570,7 +7570,7 @@ ul
             }
 
 /* Modal Background */
-#az-modal-background
+#az-background
 {
     position: fixed;
     z-index: 5000;
@@ -7582,11 +7582,11 @@ ul
     overflow: auto;
 }
 
-#az-modal
+#az-window
 {
     position: relative;
     margin: auto;
-    padding: 0;
+    padding: 0px;
     width: 450px;
     height: auto;
     -webkit-animation-name: animatetop;
@@ -7599,22 +7599,29 @@ ul
     animation-duration: 0.4s;
 }
 
-    #az-modal > .az-modal-card > header
+    #az-window > .az-window-card
     {
         padding: 7px;
     }
 
-        #az-modal > .az-modal-card > header > span
+    #az-window > .az-window-card > header
+    {
+        padding: 7px;
+    }
+
+        #az-window > .az-window-card > header > span
         {
             float: right;
             font-weight: bold;
             cursor: pointer;
         }
 
-    #az-modal > .az-modal-card > article > *
-    {
-        padding: 7px;
-    }
+        #az-window > .az-window-card > article
+        {
+            margin-top: 7px;
+            padding: 7px;
+            border: 1px solid #009688;
+        }
 
 /* Dropdown */
 .az-dropdown-ul
@@ -7745,7 +7752,6 @@ ul
     {
         font-size: 1.2em;
     }
-
 
 /* Cover Spin */
 #az-cover-spin
@@ -10706,7 +10712,7 @@ template
 
         .az-snackbar > .az-snackbar-table .az-snackbar-close
         {
-            padding-right: 14px;
+            width: 20px;
             font-weight: bold;
             cursor: pointer;
         }

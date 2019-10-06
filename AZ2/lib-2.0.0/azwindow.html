@@ -25,6 +25,10 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
+        var azWindow1;
+        var azWindow2;
+        var azWindow3;
+
         $(document).ready(function ()
         {
             w3CodeColor();
@@ -36,33 +40,136 @@
 
         function setAZWindow1()
         {
-            initializeAZWindow(
+            $.subscribeonce("functionlib/initAZWindow/azWindowAfterOpen", function (e)
+            {
+                $("#cmdButton1").off().on('click', function ()
                 {
-                    dialogTitle: "AZ Window",
-                    dialogText: "Dette er et AZ Window, hvor du har muligheten til å sende inn tekst, HTML, buttons, m.m."
+                    azWindow1.azWindowClose();
+                });
+            });
+
+            var _HTML = "";
+            _HTML += '<div class="az-row az-margin-t-28">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'var azWindow = new initAZWindow(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Window 1",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-form-group xs az-text-center">';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Lukk</button>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+
+            azWindow1 = new initAZWindow(
+                {
+                    azWindowTitle: "AZ Window 1",
+                    azWindowText: _HTML
                 });
         }
 
         function setAZWindow2()
         {
-            initializeAZWindow(
+            $.subscribeonce("functionlib/initAZWindow/azWindowAfterOpen", function (e)
+            {
+                $("#cmdButton1").off().on('click', function ()
                 {
-                    dialogModal: true,
-                    dialogTitle: "AZ Window",
-                    dialogText: "Dette er et AZ Window, hvor du har muligheten til å sende inn tekst, HTML, buttons, m.m.",
-                    dialogButton1: "OK",
-                    dialogLocationReload: true
+                    azWindow2.azWindowClose();
+                });
+            });
+
+            var _HTML = "";
+            _HTML += '<div class="az-row az-margin-t-28">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'var azWindow = new initAZWindow(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Window 2",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowModal: true<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-form-group xs az-text-center">';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Lukk</button>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+
+            azWindow2 = new initAZWindow(
+                {
+                    azWindowModal: true,
+                    azWindowTitle: "AZ Window 2",
+                    azWindowText: _HTML
                 });
         }
 
         function setAZWindow3()
         {
-            initializeAZWindow(
+            $.subscribeonce("functionlib/initAZWindow/azWindowAfterOpen", function (e)
+            {
+                $("#cmdButton1").off().on('click', function ()
                 {
-                    dialogTitle: "AZ Window",
-                    dialogText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                    dialogButton2: "Avslutt",
-                    dialogNoParentScroll: true
+                    azWindow3.azChangeWindowTitlebar({ azWindowTitle: "Ny tittel" });
+                });
+                $("#cmdButton2").off().on('click', function ()
+                {
+                    azWindow3.azWindowClose();
+                });
+            });
+
+            var _HTML = "";
+            _HTML += '<div class="az-row az-margin-t-28">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'azModalDialog.azChangeWindowTitlebar(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "Ny tittel"<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-form-group xs az-text-center">';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Skift tittel</button>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-form-group xs az-text-center">';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton2" style="width: 60%; margin-left: 4px;">Lukk</button>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+
+            azWindow3 = new initAZWindow(
+                {
+                    azWindowModal: true,
+                    azWindowTitle: "AZ Window",
+                    azWindowText: _HTML,
+                    azWindowTitlebar: true,
+                    azWindowTitlebarClose: false,
+                    azWindowWidth: 450,
+                    azWindowHeight: 0,
+                    azWindowNoParentScroll: true,
+                    azWindowBackground: false,
+                    azWindowBeforeOpen: function () { },
+                    azWindowAfterOpen: function () { }
                 });
         }
 
@@ -74,53 +181,24 @@
         <div class="az-container">
 
             <div class="az-row az-margin-t-56">
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        initializeAZWindow(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogTitle: "Din tittel",<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogText: "Din tekst"<br />
-                        });<br />
-                        <br />
-                    </div>
+                <div class="az-col xs-12 sm-4">
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow1">AZ Window 1</button>
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        initializeAZWindow(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogModal: true,<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogTitle: "Din tittel",<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogText: "Din tekst"<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogButton1: "OK"<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogLocationReload: true<br />
-                        });<br />
-                        <br />
-                    </div>
+                <div class="az-col xs-12 sm-4">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow2">AZ Window 2 (Modal - Location Reload)</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow2">AZ Window 2</button>
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        initializeAZWindow(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogTitle: "Din tittel"<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogText: "Din tekst"<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogButton2: "Avslutt"<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogNoParentScroll: true<br />
-                        });<br />
-                        <br />
-                    </div>
+                <div class="az-col xs-12 sm-4">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow3">AZ Window 3 (No Parent Scroll)</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow3">AZ Window 3</button>
                     </div>
                 </div>
             </div>
 
-            <div class="row az-margin-t-14">
+            <div class="row az-margin-t-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">AZ Window</h1>
                 </div>
@@ -128,27 +206,27 @@
             <div class="az-row">
                 <div class="az-col xs-12">
                     <div class="az-code jsHigh notranslate">
-                        initializeAZWindow(<br />
+                        <strong>Default settings</strong>
+                        <br />
+                        var azWindow = new initAZWindow(<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogModal: false,<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogTitle: "",<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogText: "",<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogTitlebar: true,<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogTitlebarClose: true,<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogButton1: "",<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogButton2: "",<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogWidth: 450,<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogHeight: 0,<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogLocationReload: false,<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogNoParentScroll: false,<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogBeforeOpen: function () { },<br />
-                        &emsp;&ensp;&emsp;&ensp;dialogAfterOpen: function () { }<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowModal: false,<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitle: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowText: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebar: true,<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarClose: true,<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowWidth: 450,<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowHeight: 0,<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowNoParentScroll: false,<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowBackground: true,<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowBeforeOpen: function () { },<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowAfterOpen: function () { }<br />
                         });<br />
                         <br />
                     </div>
                     <div class="az-code htmlHigh notranslate">
                         <div class="az-code-property-wrapper">
-                            <property>dialogModal</property>
+                            <property>azWindowModal</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>false</mediumblue></default>
                             <br />
@@ -156,7 +234,7 @@
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>dialogTitle</property>
+                            <property>azWindowTitle</property>
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>""</brown></default>
                             <br />
@@ -167,7 +245,7 @@
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>dialogText</property>
+                            <property>azWindowText</property>
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>""</brown></default>
                             <br />
@@ -175,7 +253,7 @@
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>dialogTitlebar</property>
+                            <property>azWindowTitlebar</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>true</mediumblue></default>
                             <br />
@@ -183,7 +261,7 @@
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>dialogTitlebarClose</property>
+                            <property>azWindowTitlebarClose</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>true</mediumblue></default>
                             <br />
@@ -191,65 +269,40 @@
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>dialogButton1</property>
-                            <type><span>Type:</span> <brown>String</brown></type>
-                            <default><span>Default:</span> <brown>""</brown></default>
-                            <br />
-                            Ved å oppgi en tekst vil det automatisk settes inn en knapp. Knappen har en <mediumblue>Event-Listner</mediumblue> - <brown>click</brown>, som trigger funksjonen <mediumblue>closeAZWindow();</mediumblue>
-                            Knappen har utformingen <strong>Primary</strong>.
-                            <br />
-                            <br />
-                            <strong>Tips:</strong> Egenskapene <strong>dialogLocationReload</strong> og <strong>dialogClose</strong> kan benyttes sammen med <strong>dialogButton1</strong>.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogButton2</property>
-                            <type><span>Type:</span> <brown>String</brown></type>
-                            <default><span>Default:</span> <brown>""</brown></default>
-                            <br />
-                            Ved å oppgi en tekst vil det automatisk settes inn en knapp. Knappen har en <mediumblue>Event-Listner</mediumblue> - <brown>click</brown>, som trigger funksjonen <mediumblue>closeAZWindow();</mediumblue>
-                            Knappen har utformingen <strong>Info</strong>.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogWidth</property>
+                            <property>azWindowWidth</property>
                             <type><span>Type:</span> <brown>Integer</brown></type>
                             <default><span>Default:</span> <red>450</red></default>
                             <units><span>Unit:</span> <red>px</red></units>
                             <br />
-                            Ved skjermstørrelser under <red>576</red>, vil <strong>dialogWidth</strong> tilpasses enhetens skjermstørrelse hvis <strong>dialogWidth</strong> er satt større enn skjermens bredde.
+                            Ved skjermstørrelser under <red>576</red>, vil <strong>azWindowWidth</strong> tilpasses enhetens skjermstørrelse hvis <strong>azWindowWidth</strong> er satt større enn skjermens bredde.
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>dialogHeight</property>
+                            <property>azWindowHeight</property>
                             <type><span>Type:</span> <brown>Integer</brown></type>
                             <default><span>Default:</span> <red>0</red></default>
                             <units><span>Unit:</span> <red>px</red></units>
                             <br />
                             Høyden på <strong>AZWindow</strong> tilpasses automatisk etter innholdet, men vil aldri gå under <red>120</red>.
-                            Ved skjermstørrelser under <red>576</red>, vil <strong>dialogHeight</strong> tilpasses enhetens skjermstørrelse hvis <strong>dialogHeight</strong> er satt større enn skjermens høyde.
+                            Ved skjermstørrelser under <red>576</red>, vil <strong>azWindowHeight</strong> tilpasses enhetens skjermstørrelse hvis <strong>azWindowHeight</strong> er satt større enn skjermens høyde.
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>dialogLocationReload</property>
+                            <property>azWindowNoParentScroll</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>false</mediumblue></default>
                             <br />
-                            Ved å endre verdien til <mediumblue>true</mediumblue>, vil hovedsiden, (vinduet) oppdateres rett etter <strong>AZWindow</strong> er lukket.
+                            Ved å endre verdiene til <mediumblue>true</mediumblue>, vil rullefeltet for hovedsiden fjernes og <strong>AZWindow</strong> vil beholde sin posisjon.
                             <br />
-                            <br />
-                            <strong>NB!</strong> Benyttes bare sammen med <strong>dialogButton1</strong>.
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>dialogNoParentScroll</property>
+                            <property>azWindowBackground</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
-                            <default><span>Default:</span> <mediumblue>false</mediumblue></default>
-                            <br />
-                            Ved å endre verdiene til <mediumblue>true</mediumblue>, vil rullefeltet for hovedsiden, (vinduet) fjernes ved skjermstørrelser under <red>576</red> og <strong>AZWindow</strong> vil beholde sin posisjon.
+                            <default><span>Default:</span> <mediumblue>true</mediumblue></default>
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>dialogBeforeOpen</property>
+                            <property>azWindowBeforeOpen</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
                             <default><span>Default:</span> <mediumblue>function () { }</mediumblue></default>
                             <br />
@@ -257,28 +310,18 @@
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>dialogAfterOpen</property>
+                            <property>azWindowAfterOpen</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
                             <default><span>Default:</span> <mediumblue>function () { }</mediumblue></default>
                             <br />
                             Hvis du ønsker å få utført en funksjon rett etter <strong>AZWindow</strong> er åpent.
                             <br />
                         </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogClose</property>
-                            <type><span>Type:</span> <brown>Function</brown></type>
-                            <default><span>Default:</span> <mediumblue>function () { }</mediumblue></default>
-                            <br />
-                            Hvis du ønsker å få utført en funksjon rett etter <strong>AZWindow</strong> er lukket.
-                            <br />
-                            <br />
-                            <strong>NB!</strong> Benyttes bare sammen med <strong>dialogButton1</strong>.
-                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row az-margin-t-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">AZ Window CSS</h1>
                 </div>

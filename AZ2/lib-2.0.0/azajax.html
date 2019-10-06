@@ -25,6 +25,8 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
+        var azAjax1;
+
         $(document).ready(function ()
         {
             w3CodeColor();
@@ -35,9 +37,9 @@
                 azAjaxType: "GET",
                 azAjaxContentType: ""
             };
-            azAjaxFunction1 = new initAZAjax(_azAjaxOptions);
+            azAjax1 = new initAZAjax(_azAjaxOptions);
 
-            azAjaxFunction1.done(function (data, textStatus, jqXHR)
+            azAjax1.done(function (data, textStatus, jqXHR)
             {
                 $.each(data.slice(0, 1), function (i, SelectedObj)
                 {
@@ -47,7 +49,7 @@
                 $("#ajaxJQXHRResponse").text("HTTP Status: " + jqXHR.status);
             });
 
-            azAjaxFunction1.always(function (data, textStatus, jqXHR)
+            azAjax1.always(function (data, textStatus, jqXHR)
             {
                 console.log("jqXHR.status: " + jqXHR.status)
                 console.log("jqXHR.statusText: " + jqXHR.statusText)
@@ -77,6 +79,8 @@
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">AZ Ajax</h1>
                     <div class="az-code jsHigh notranslate">
+                        <strong>Default settings</strong>
+                        <br />
                         var _azAjaxOptions =<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azAjaxUrl: "",<br />
@@ -98,9 +102,9 @@
                         <br />
                         <strong>Man kan også ha funksjoner på utsiden som lytter på om AZ Ajax har mottatt data eller har feilet.</strong><br />
                         <br />
-                        var azAjaxFunction1 = new initAZAjax(_azAjaxOptions);<br />
+                        var azAjax1 = new initAZAjax(_azAjaxOptions);<br />
                         <br />
-                        azAjaxFunction1.done(function (data, textStatus, jqXHR)<br />
+                        azAjax1.done(function (data, textStatus, jqXHR)<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;if (jqXHR.status === 200)<br />
                         &emsp;&ensp;&emsp;&ensp;{<br />
@@ -108,7 +112,7 @@
                         &emsp;&ensp;&emsp;&ensp;}<br />
                         });<br />
                         <br />
-                        azAjaxFunction1.always(function (data, textStatus, jqXHR)<br />
+                        azAjax1.always(function (data, textStatus, jqXHR)<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;// Her legges logikk for å håndtere eventuelle feil.<br />
                         &emsp;&ensp;&emsp;&ensp;if (jqXHR.status === 404)<br />

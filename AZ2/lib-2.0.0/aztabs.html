@@ -25,6 +25,10 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
+        var azTabs1;
+        var azTabs2;
+        var azTabs3;
+
         $(document).ready(function ()
         {
             w3CodeColor();
@@ -39,38 +43,27 @@
                 console.log("azTabsId: " + data.azTabsId + "\nazTabsJQElement: ", data.azTabsJQElement)
             });
 
-            $("#cmdAZTabs1").off().on("click", function (e) { azTabsFunction1.setAZTabs(0) });
-            $("#cmdAZTabs2").off().on("click", function (e) { azTabsFunction1.setAZTabs(1) });
-            $("#cmdAZTabs3").off().on("click", function (e) { azTabsFunction1.setAZTabs(2) });
+            $("#cmdAZTabs1").off().on("click", function (e) { azTabs1.azSetTabs(0) });
+            $("#cmdAZTabs2").off().on("click", function (e) { azTabs1.azSetTabs(1) });
+            $("#cmdAZTabs3").off().on("click", function (e) { azTabs1.azSetTabs(2) });
             $("#cmdAZTabsVertical").off().on("click", function (e)
             {
-                $("#az-tabs-1").toggleClass(function ()
-                {
-                    if ($(this).hasClass("az-tabs-vertical"))
-                    {
-                        $("#cmdAZTabsVertical").text("AZ Tabs 1 Horisontal");
-                    }
-                    else
-                    {
-                        $("#cmdAZTabsVertical").text("AZ Tabs 1 Vertikal");
-                    }
-                    return "az-tabs-vertical";
-                });
+                azTabs1.azToggleVertical()
             });
 
-            var azTabsFunction1 = new initAZTabs(
+            azTabs1 = new initAZTabs(
                 {
                     azTabsId: "az-tabs-1"
                 });
 
-            var azTabsFunction2 = new initAZTabs(
+            azTabs2 = new initAZTabs(
                 {
                     azTabsId: "az-tabs-2",
                     azTabsHeightStyle: "auto",
                     azTabsOpenEvent: "mouseover"
                 });
 
-            var azTabsFunction3 = new initAZTabs(
+            azTabs3 = new initAZTabs(
                 {
                     azTabsId: "az-tabs-3",
                     azTabsHeightStyle: "auto",
@@ -85,7 +78,7 @@
     <form id="frmReg">
         <div class="az-container">
 
-            <div class="az-row az-margin-t-56">
+            <div class="az-row az-margin-t-56" style="height: 520px;">
                 <div class="az-col xs-12 sm-6">
 
                     <div class="az-tabs" id="az-tabs-1">
@@ -161,9 +154,9 @@
                         Hvis du ønsker å bruke egne knapper eller linker til å åpne/lukke din Tab, bruker du JavaScript funksjonen under.
                     </div>
                     <div class="az-code jsHigh notranslate">
-                        azTabsFunction1.setAZTabs(0);<br />
-                        azTabsFunction1.setAZTabs(1);<br />
-                        azTabsFunction1.setAZTabs(2);<br />
+                        azTabs.azSetTabs(0);<br />
+                        azTabs.azSetTabs(1);<br />
+                        azTabs.azSetTabs(2);<br />
                         <br />
                     </div>
                     <div class="az-code htmlHigh notranslate">

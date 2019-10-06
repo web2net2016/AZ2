@@ -25,6 +25,13 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
+        var azSnackbar1;
+        var azSnackbar2;
+        var azSnackbar3;
+        var azSnackbar4;
+        var azSnackbar5;
+        var azSnackbar6;
+
         $(document).ready(function ()
         {
             w3CodeColor();
@@ -39,7 +46,7 @@
 
         function setSnackbar1()
         {
-            azSnackbarFunction1 = new initAZSnackbar(
+            azSnackbar1 = new initAZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-1",
                     azSnackbarText: "Dette er en tekst... left / top...",
@@ -49,7 +56,7 @@
 
         function setSnackbar2()
         {
-            azSnackbarFunction2 = new initAZSnackbar(
+            azSnackbar2 = new initAZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-2",
                     azSnackbarText: "Dette er en tekst... right / top...",
@@ -59,7 +66,7 @@
 
         function setSnackbar3()
         {
-            azSnackbarFunction3 = new initAZSnackbar(
+            azSnackbar3 = new initAZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-3",
                     azSnackbarText: 'Dette er en tekst... left / bottom...',
@@ -69,7 +76,7 @@
 
         function setSnackbar4()
         {
-            azSnackbarFunction4 = new initAZSnackbar(
+            azSnackbar4 = new initAZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-4",
                     azSnackbarText: "Dette er en tekst... right / bottom...",
@@ -79,20 +86,35 @@
 
         function setSnackbar5()
         {
-            azSnackbarFunction5 = new initAZSnackbar(
+            var _HTML = "";
+            _HTML += '<div class="az-row">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-form-group">';
+            _HTML += '<div class="az-input-group">';
+            _HTML += '<input type="text" placeholder="Navn" id="Navn" class="az-input" />';
+            _HTML += '<span class="az-input-group-addon az-cursor-pointer" style="border: none;"><i class="fas fa-user" style="color: #000000;"></i></span>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+
+            azSnackbar5 = new initAZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-5",
-                    azSnackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    azSnackbarText: _HTML,
                     azSnackbarPosition: "left-bottom",
-                    azSnackbarClose: true,
-                    azSnackbarBackgroundColor: "FF9F55",
-                    azSnackbarTextColor: "000000"
+                    azSnackbarClose: true
                 });
+
+            $(".az-input-group-addon").off().on('click', function ()
+            {
+                azSnackbar5.azSetSnackbarText("Takk for din respons, " + $("#Navn").val());
+            });
         }
 
         function setSnackbar6()
         {
-            azSnackbarFunction6 = new initAZSnackbar(
+            azSnackbar6 = new initAZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-6",
                     azSnackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br><br>Denne teksten vil skiftes ut om 5 sekunder.",
@@ -104,7 +126,7 @@
 
             window.setTimeout(function ()
             {
-                azSnackbarFunction6.setAZSnackbarText("Dette er en tekst... right / bottom...");
+                azSnackbar6.azSetSnackbarText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.");
             }, 5000);
         }
 
@@ -116,97 +138,34 @@
         <div class="az-container">
 
             <div class="az-row az-margin-t-56">
-                <div class="az-col xs-12 sm-6">
-                    <div class="az-code jsHigh notranslate">
-                        var azSnackbarFunction2 = new initAZSnackbar(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarId: "az-snackbar-1",<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarText: "Din tekst",<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarPosition: "left-top"<br />
-                        });<br />
-                        <br />
-                    </div>
+                <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar1">Snackbar 1</button>
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-6">
-
-                    <div class="az-code jsHigh notranslate">
-                        var azSnackbarFunction4 = new initAZSnackbar(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarId: "az-snackbar-1",<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarText: "Din tekst",<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarPosition: "right-top"<br />
-                        });<br />
-                        <br />
-                    </div>
+                <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar2">Snackbar 2</button>
                     </div>
                 </div>
-            </div>
-            <div class="az-row">
-                <div class="az-col xs-12 sm-6">
-                    <div class="az-code jsHigh notranslate">
-                        var azSnackbarFunction1 = new initAZSnackbar(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarId: "az-snackbar-1",<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarText: "Din tekst"<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarPosition: "left-bottom"<br />
-                        });<br />
-                        <br />
-                    </div>
+                <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar3">Snackbar 3</button>
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-6">
-                    <div class="az-code jsHigh notranslate">
-                        var azSnackbarFunction3 = new initAZSnackbar(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarId: "az-snackbar-1",<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarText: "Din tekst",<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarPosition: "right-bottom"<br />
-                        });<br />
-                        <br />
-                    </div>
+                <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar4">Snackbar 4</button>
                     </div>
                 </div>
             </div>
-            <div class="az-row">
+            <div class="az-row az-margin-t-14">
                 <div class="az-col xs-12 sm-6">
-                    <div class="az-code jsHigh notranslate">
-                        var azSnackbarFunction5 = new initAZSnackbar(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarId: "az-snackbar-1",<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarText: "Din tekst",<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarPosition: "left-bottom"<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarClose: true<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarBackgroundColor: "FF9F55"<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarTextColor: "000000"<br />
-                        });<br />
-                        <br />
-                    </div>
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar5">Snackbar 5</button>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6">
-                    <div class="az-code jsHigh notranslate">
-                        var azSnackbarFunction6 = new initAZSnackbar(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarId: "az-snackbar-1",<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarText: "Din tekst",<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarPosition: "right-bottom",<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarClose: true<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarBackgroundColor: "FF9F55"<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarTextColor: "000000"<br />
-                        });<br />
-                        <br />
-                    </div>
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar6">Snackbar 6</button>
                     </div>
@@ -218,10 +177,12 @@
                     <h1 class="az-code-header">AZ Snackbar</h1>
                 </div>
             </div>
-            <div class="az-row">
-                <div class="az-col xs-12">
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12 sm-6">
                     <div class="az-code jsHigh notranslate">
-                        var azSnackbarFunction1 = new initAZSnackbar(<br />
+                        <strong>Default settings</strong>
+                        <br />
+                        var azSnackbar = new initAZSnackbar(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azSnackbarId: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azSnackbarText: "",<br />
@@ -237,6 +198,31 @@
                         });<br />
                         <br />
                     </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-code jsHigh notranslate">
+                        <strong>Skift tekstinnhold</strong>
+                        <br />
+                        azSnackbar.azSetSnackbarText("Dette er en tekst...");<br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
                     <div class="az-code htmlHigh notranslate">
                         <div class="az-code-property-wrapper">
                             <property>azSnackbarId</property>

@@ -54,7 +54,7 @@
 
         .az-snackbar > .az-snackbar-table .az-snackbar-close
         {
-            padding-right: 14px;
+            width: 20px;
             font-weight: bold;
             cursor: pointer;
         }

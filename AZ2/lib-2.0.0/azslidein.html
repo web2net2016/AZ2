@@ -25,11 +25,14 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
+        var azSlideIn1;
+        var azSlideIn2;
+
         $(document).ready(function ()
         {
             w3CodeColor();
 
-            initAZSlideInFunction1 = new initAZSlideIn(
+            azSlideIn1 = new initAZSlideIn(
                 {
                     azSlideInId: "az-slidein-1",
                     azSlideInTop: 30,
@@ -38,29 +41,29 @@
                     azSlideInPosition: "right"
                 });
 
-            initAZSlideInFunction2 = new initAZSlideIn(
+            azSlideIn2 = new initAZSlideIn(
                 {
                     azSlideInId: "az-slidein-2",
                     azSlideInTop: 180,
-                    azSlideInWidth: 700,
-                    azSlideInHeight: 500,
-                    azSlideInPosition: "left"
+                    azSlideInWidth: 300,
+                    azSlideInHeight: 200,
+                    azSlideInPosition: "right"
                 });
 
             $.subscribe("functionlib/azWindowScroll", function (e, data)
             {
                 if (data.azWindowScrollDir == "down" && data.azWindowScrollTop > 1000)
                 {
-                    if (initAZSlideInFunction2.$SlideIn.hasClass("display-" + initAZSlideInFunction2.Options.azSlideInPosition) === false)
+                    if (azSlideIn2.$SlideIn.hasClass("display-" + azSlideIn2.Options.azSlideInPosition) === false)
                     {
-                        initAZSlideInFunction2.$SlideInTab.trigger("click");
+                        azSlideIn2.$SlideInTab.trigger("click");
                     }
                 }
                 if (data.azWindowScrollDir == "up" && data.azWindowScrollTop < 1000)
                 {
-                    if (initAZSlideInFunction2.$SlideIn.hasClass("display-" + initAZSlideInFunction2.Options.azSlideInPosition) === true)
+                    if (azSlideIn2.$SlideIn.hasClass("display-" + azSlideIn2.Options.azSlideInPosition) === true)
                     {
-                        initAZSlideInFunction2.$SlideInTab.trigger("click");
+                        azSlideIn2.$SlideInTab.trigger("click");
                     }
                 }
             });
@@ -88,9 +91,7 @@
     </div>
 
     <div id="az-slidein-2" class="az-slidein">
-        <div class="az-slidein-tab">
-            <div>Anne Irene Kne</div>
-        </div>
+        <div class="az-slidein-tab"></div>
         <div class="az-slidein-card">
             <header>
                 <h1>Dette er en tittel</h1>
@@ -115,7 +116,7 @@
             <div class="az-row">
                 <div class="az-col xs-12">
                     <div class="az-code jsHigh notranslate">
-                        initAZSlideIn(<br />
+                        var azSlideIn = new initAZSlideIn(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azSlideInId: "az-slidein-1",<br />
                         &emsp;&ensp;&emsp;&ensp;azSlideInTop: 30,<br />
@@ -126,176 +127,333 @@
                         });<br />
                         <br />
                     </div>
-                    <div class="az-code htmlHigh notranslate">
-                        <div class="az-code-property-wrapper">
-                            <property>dialogModal</property>
-                            <type><span>Type:</span> <brown>Boolean</brown></type>
-                            <default><span>Default:</span> <mediumblue>false</mediumblue></default>
-                            <br />
-                            Ved å endre verdien til <mediumblue>true</mediumblue>, vil ikke <strong>AZWindow</strong> automatisk lukke seg når brukeren klikker på utsiden av <strong>AZWindow</strong>.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogTitle</property>
-                            <type><span>Type:</span> <brown>String</brown></type>
-                            <default><span>Default:</span> <brown>""</brown></default>
-                            <br />
-                            Tekst eller enkle HTML- tags.
-                            <br />
-                            <br />
-                            <strong>Tips:</strong> Du kan også bruke et ikon i forbindelse med tittel - &lt;i class="far fa-icon"&gt&lt;/i&gt
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogText</property>
-                            <type><span>Type:</span> <brown>String</brown></type>
-                            <default><span>Default:</span> <brown>""</brown></default>
-                            <br />
-                            Tekst eller enkle HTML- tags.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogTitlebar</property>
-                            <type><span>Type:</span> <brown>Boolean</brown></type>
-                            <default><span>Default:</span> <mediumblue>true</mediumblue></default>
-                            <br />
-                            Ved å endre verdiene til <mediumblue>false</mediumblue>, har du har muligheten til å skjule hele tittellinjen.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogTitlebarClose</property>
-                            <type><span>Type:</span> <brown>Boolean</brown></type>
-                            <default><span>Default:</span> <mediumblue>true</mediumblue></default>
-                            <br />
-                            Ved å endre verdiene til <mediumblue>false</mediumblue>, har du har muligheten til å skjule selve lukkeknappen (X) i høyre del.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogButton1</property>
-                            <type><span>Type:</span> <brown>String</brown></type>
-                            <default><span>Default:</span> <brown>""</brown></default>
-                            <br />
-                            Ved å oppgi en tekst vil det automatisk settes inn en knapp. Knappen har en <mediumblue>Event-Listner</mediumblue> - <brown>click</brown>, som trigger funksjonen <mediumblue>closeAZWindow();</mediumblue>
-                            Knappen har utformingen <strong>Primary</strong>.
-                            <br />
-                            <br />
-                            <strong>Tips:</strong> Egenskapene <strong>dialogLocationReload</strong> og <strong>dialogClose</strong> kan benyttes sammen med <strong>dialogButton1</strong>.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogButton2</property>
-                            <type><span>Type:</span> <brown>String</brown></type>
-                            <default><span>Default:</span> <brown>""</brown></default>
-                            <br />
-                            Ved å oppgi en tekst vil det automatisk settes inn en knapp. Knappen har en <mediumblue>Event-Listner</mediumblue> - <brown>click</brown>, som trigger funksjonen <mediumblue>closeAZWindow();</mediumblue>
-                            Knappen har utformingen <strong>Info</strong>.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogWidth</property>
-                            <type><span>Type:</span> <brown>Integer</brown></type>
-                            <default><span>Default:</span> <red>450</red></default>
-                            <units><span>Unit:</span> <red>px</red></units>
-                            <br />
-                            Ved skjermstørrelser under <red>576</red>, vil <strong>dialogWidth</strong> tilpasses enhetens skjermstørrelse hvis <strong>dialogWidth</strong> er satt større enn skjermens bredde.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogHeight</property>
-                            <type><span>Type:</span> <brown>Integer</brown></type>
-                            <default><span>Default:</span> <red>0</red></default>
-                            <units><span>Unit:</span> <red>px</red></units>
-                            <br />
-                            Høyden på <strong>AZWindow</strong> tilpasses automatisk etter innholdet, men vil aldri gå under <red>120</red>.
-                            Ved skjermstørrelser under <red>576</red>, vil <strong>dialogHeight</strong> tilpasses enhetens skjermstørrelse hvis <strong>dialogHeight</strong> er satt større enn skjermens høyde.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogLocationReload</property>
-                            <type><span>Type:</span> <brown>Boolean</brown></type>
-                            <default><span>Default:</span> <mediumblue>false</mediumblue></default>
-                            <br />
-                            Ved å endre verdien til <mediumblue>true</mediumblue>, vil hovedsiden, (vinduet) oppdateres rett etter <strong>AZWindow</strong> er lukket.
-                            <br />
-                            <br />
-                            <strong>NB!</strong> Benyttes bare sammen med <strong>dialogButton1</strong>.
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogNoParentScroll</property>
-                            <type><span>Type:</span> <brown>Boolean</brown></type>
-                            <default><span>Default:</span> <mediumblue>false</mediumblue></default>
-                            <br />
-                            Ved å endre verdiene til <mediumblue>true</mediumblue>, vil rullefeltet for hovedsiden, (vinduet) fjernes ved skjermstørrelser under <red>576</red> og <strong>AZWindow</strong> vil beholde sin posisjon.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogBeforeOpen</property>
-                            <type><span>Type:</span> <brown>Function</brown></type>
-                            <default><span>Default:</span> <mediumblue>function () { }</mediumblue></default>
-                            <br />
-                            Hvis du ønsker å få utført en funksjon før <strong>AZWindow</strong> er åpent, dvs. i tiden mellom <strong>AZWindow</strong> trigges og det er helt åpent.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogAfterOpen</property>
-                            <type><span>Type:</span> <brown>Function</brown></type>
-                            <default><span>Default:</span> <mediumblue>function () { }</mediumblue></default>
-                            <br />
-                            Hvis du ønsker å få utført en funksjon rett etter <strong>AZWindow</strong> er åpent.
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>dialogClose</property>
-                            <type><span>Type:</span> <brown>Function</brown></type>
-                            <default><span>Default:</span> <mediumblue>function () { }</mediumblue></default>
-                            <br />
-                            Hvis du ønsker å få utført en funksjon rett etter <strong>AZWindow</strong> er lukket.
-                            <br />
-                            <br />
-                            <strong>NB!</strong> Benyttes bare sammen med <strong>dialogButton1</strong>.
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="az-col xs-12">
-                    <h1 class="az-code-header">AZ Window CSS</h1>
-                </div>
+            <!--<div class="az-code htmlHigh notranslate">
+            <div class="az-code-property-wrapper">
+            <property>dialogModal</property>
+            <type><span>Type:</span> <brown>Boolean</brown></type>
+            <default><span>Default:</span> <mediumblue>false</mediumblue></default>
+            <br />
+            Ved å endre verdien til <mediumblue>true</mediumblue>, vil ikke <strong>AZWindow</strong> automatisk lukke seg når brukeren klikker på utsiden av <strong>AZWindow</strong>.
+            <br />
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogTitle</property>
+            <type><span>Type:</span> <brown>String</brown></type>
+            <default><span>Default:</span> <brown>""</brown></default>
+            <br />
+            Tekst eller enkle HTML- tags.
+            <br />
+            <br />
+            <strong>Tips:</strong> Du kan også bruke et ikon i forbindelse med tittel - &lt;i class="far fa-icon"&gt&lt;/i&gt
+            <br />
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogText</property>
+            <type><span>Type:</span> <brown>String</brown></type>
+            <default><span>Default:</span> <brown>""</brown></default>
+            <br />
+            Tekst eller enkle HTML- tags.
+            <br />
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogTitlebar</property>
+            <type><span>Type:</span> <brown>Boolean</brown></type>
+            <default><span>Default:</span> <mediumblue>true</mediumblue></default>
+            <br />
+            Ved å endre verdiene til <mediumblue>false</mediumblue>, har du har muligheten til å skjule hele tittellinjen.
+            <br />
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogTitlebarClose</property>
+            <type><span>Type:</span> <brown>Boolean</brown></type>
+            <default><span>Default:</span> <mediumblue>true</mediumblue></default>
+            <br />
+            Ved å endre verdiene til <mediumblue>false</mediumblue>, har du har muligheten til å skjule selve lukkeknappen (X) i høyre del.
+            <br />
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogButton1</property>
+            <type><span>Type:</span> <brown>String</brown></type>
+            <default><span>Default:</span> <brown>""</brown></default>
+            <br />
+            Ved å oppgi en tekst vil det automatisk settes inn en knapp. Knappen har en <mediumblue>Event-Listner</mediumblue> - <brown>click</brown>, som trigger funksjonen <mediumblue>closeAZWindow();</mediumblue>
+            Knappen har utformingen <strong>Primary</strong>.
+            <br />
+            <br />
+            <strong>Tips:</strong> Egenskapene <strong>dialogLocationReload</strong> og <strong>dialogClose</strong> kan benyttes sammen med <strong>dialogButton1</strong>.
+            <br />
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogButton2</property>
+            <type><span>Type:</span> <brown>String</brown></type>
+            <default><span>Default:</span> <brown>""</brown></default>
+            <br />
+            Ved å oppgi en tekst vil det automatisk settes inn en knapp. Knappen har en <mediumblue>Event-Listner</mediumblue> - <brown>click</brown>, som trigger funksjonen <mediumblue>closeAZWindow();</mediumblue>
+            Knappen har utformingen <strong>Info</strong>.
+            <br />
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogWidth</property>
+            <type><span>Type:</span> <brown>Integer</brown></type>
+            <default><span>Default:</span> <red>450</red></default>
+            <units><span>Unit:</span> <red>px</red></units>
+            <br />
+            Ved skjermstørrelser under <red>576</red>, vil <strong>dialogWidth</strong> tilpasses enhetens skjermstørrelse hvis <strong>dialogWidth</strong> er satt større enn skjermens bredde.
+            <br />
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogHeight</property>
+            <type><span>Type:</span> <brown>Integer</brown></type>
+            <default><span>Default:</span> <red>0</red></default>
+            <units><span>Unit:</span> <red>px</red></units>
+            <br />
+            Høyden på <strong>AZWindow</strong> tilpasses automatisk etter innholdet, men vil aldri gå under <red>120</red>.
+            Ved skjermstørrelser under <red>576</red>, vil <strong>dialogHeight</strong> tilpasses enhetens skjermstørrelse hvis <strong>dialogHeight</strong> er satt større enn skjermens høyde.
+            <br />
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogLocationReload</property>
+            <type><span>Type:</span> <brown>Boolean</brown></type>
+            <default><span>Default:</span> <mediumblue>false</mediumblue></default>
+            <br />
+            Ved å endre verdien til <mediumblue>true</mediumblue>, vil hovedsiden, (vinduet) oppdateres rett etter <strong>AZWindow</strong> er lukket.
+            <br />
+            <br />
+            <strong>NB!</strong> Benyttes bare sammen med <strong>dialogButton1</strong>.
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogNoParentScroll</property>
+            <type><span>Type:</span> <brown>Boolean</brown></type>
+            <default><span>Default:</span> <mediumblue>false</mediumblue></default>
+            <br />
+            Ved å endre verdiene til <mediumblue>true</mediumblue>, vil rullefeltet for hovedsiden, (vinduet) fjernes ved skjermstørrelser under <red>576</red> og <strong>AZWindow</strong> vil beholde sin posisjon.
+            <br />
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogBeforeOpen</property>
+            <type><span>Type:</span> <brown>Function</brown></type>
+            <default><span>Default:</span> <mediumblue>function () { }</mediumblue></default>
+            <br />
+            Hvis du ønsker å få utført en funksjon før <strong>AZWindow</strong> er åpent, dvs. i tiden mellom <strong>AZWindow</strong> trigges og det er helt åpent.
+            <br />
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogAfterOpen</property>
+            <type><span>Type:</span> <brown>Function</brown></type>
+            <default><span>Default:</span> <mediumblue>function () { }</mediumblue></default>
+            <br />
+            Hvis du ønsker å få utført en funksjon rett etter <strong>AZWindow</strong> er åpent.
+            <br />
+            </div>
+            <div class="az-code-property-wrapper">
+            <property>dialogClose</property>
+            <type><span>Type:</span> <brown>Function</brown></type>
+            <default><span>Default:</span> <mediumblue>function () { }</mediumblue></default>
+            <br />
+            Hvis du ønsker å få utført en funksjon rett etter <strong>AZWindow</strong> er lukket.
+            <br />
+            <br />
+            <strong>NB!</strong> Benyttes bare sammen med <strong>dialogButton1</strong>.
+            </div>
+            </div>-->
+            <!--<div class="row">
+            <div class="az-col xs-12">
+            <h1 class="az-code-header">AZ Window CSS</h1>
+            </div>
             </div>
             <div class="az-row az-margin-b-56">
-                <div class="az-col xs-12">
-                    <div class="az-code htmlHigh notranslate">
-                        AZ Window har noe grunnleggende CSS som det i utgangspunktet ikke skal være nødvendig å justere på. <a href="/lib-2.0.0/css/snackbar.css" target="_blank" class="az-border-bottom-1-blue">snackbar.css</a>
-                        <br />
-                        CSS som du selv kan endre, finenr du i filen <a href="/lib-2.0.0/lib/standard.css" target="_blank" class="az-border-bottom-1-blue">standard.css</a>
-                        <br />
-                        <br />
-                        /*---------------------<br />
-                        Snackbar<br />
-                        snackbar.css<br />
-                        ---------------------*/<br />
-                        <br />
-                    </div>
-                    <div class="az-code cssHigh notranslate">
-                        .az-snackbar<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                        &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                        &emsp;&ensp;&emsp;&ensp;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                        }<br />
-                        <br />
-                        .az-snackbar > .az-snackbar-table .az-snackbar-text<br />
-                        {<br />
-                        }<br />
-                        <br />
-                        .az-snackbar > .az-snackbar-table .az-snackbar-close<br />
-                        {<br />
-                        }<br />
-                        <br />
-                    </div>
-                </div>
+            <div class="az-col xs-12">
+            <div class="az-code htmlHigh notranslate">
+            AZ Window har noe grunnleggende CSS som det i utgangspunktet ikke skal være nødvendig å justere på. <a href="/lib-2.0.0/css/snackbar.css" target="_blank" class="az-border-bottom-1-blue">snackbar.css</a>
+            <br />
+            CSS som du selv kan endre, finenr du i filen <a href="/lib-2.0.0/lib/standard.css" target="_blank" class="az-border-bottom-1-blue">standard.css</a>
+            <br />
+            <br />
+            /*---------------------<br />
+            Snackbar<br />
+            snackbar.css<br />
+            ---------------------*/<br />
+            <br />
             </div>
+            <div class="az-code cssHigh notranslate">
+            .az-snackbar<br />
+            {<br />
+            &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+            &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+            &emsp;&ensp;&emsp;&ensp;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+            }<br />
+            <br />
+            .az-snackbar > .az-snackbar-table .az-snackbar-text<br />
+            {<br />
+            }<br />
+            <br />
+            .az-snackbar > .az-snackbar-table .az-snackbar-close<br />
+            {<br />
+            }<br />
+            <br />
+            </div>
+            </div>
+            </div>-->
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
 
         </div>
     </form>

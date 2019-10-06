@@ -25,6 +25,16 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
+        var azModalDialog1;
+        var azModalDialog2;
+        var azModalDialog3;
+        var azModalDialogiFrame;
+        var azModalDialogPosition;
+        var azModalDialog4;
+        var azModalDialog5;
+        var azModalDialog6;
+        var azModalDialog7;
+
         $(document).ready(function ()
         {
             w3CodeColor();
@@ -32,10 +42,12 @@
             $("#cmdModalDialog1").off("click", setModalDialog1).on("click", setModalDialog1);
             $("#cmdModalDialog2").off("click", setModalDialog2).on("click", setModalDialog2);
             $("#cmdModalDialog3").off("click", setModalDialog3).on("click", setModalDialog3);
+            $("#cmdModalDialogiFrame").off("click", setModalDialogiFrame).on("click", setModalDialogiFrame);
             $("#cmdModalDialogPosition").off("click", setModalDialogPosition).on("click", setModalDialogPosition);
             $("#cmdModalDialog4").off("click", setModalDialog4).on("click", setModalDialog4);
             $("#cmdModalDialog5").off("click", setModalDialog5).on("click", setModalDialog5);
             $("#cmdModalDialog6").off("click", setModalDialog6).on("click", setModalDialog6);
+            $("#cmdModalDialog7").off("click", setModalDialog7).on("click", setModalDialog7);            
         });
 
         function validateDirty()
@@ -49,12 +61,26 @@
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    new azModalDialogClose();
+                    azModalDialog1.azModalDialogClose();
                 });
             });
 
             var _HTML = "";
-            _HTML += '<div class="az-row az-margin-t-28 az-margin-b-14">';
+            _HTML += '<div class="az-row az-margin-t-28">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'var azModalDialog = new initAZModalDialog(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog 1",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 550,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 400<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-form-group xs az-text-center">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Lukk</button>';
@@ -62,12 +88,12 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            new initAZModalDialog(
+            azModalDialog1 = new initAZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog 1",
                     azModalDialogText: _HTML,
-                    azModalDialogWidth: 450,
-                    azModalDialogHeight: 180
+                    azModalDialogWidth: 550,
+                    azModalDialogHeight: 400
                 });
         }
 
@@ -77,12 +103,27 @@
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    new azModalDialogClose();
+                    azModalDialog2.azModalDialogClose();
                 });
             });
 
             var _HTML = "";
-            _HTML += '<div class="az-row az-margin-t-28 az-margin-b-14">';
+            _HTML += '<div class="az-row az-margin-t-28">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'var azModalDialog = new initAZModalDialog(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog 2",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 550,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 400,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogModal: false<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-form-group xs az-text-center">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Lukk</button>';
@@ -90,13 +131,13 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            new initAZModalDialog(
+            azModalDialog2 = new initAZModalDialog(
                 {
-                    azModalDialogModal: false,
                     azModalDialogTitle: "AZ Modal Dialog 2",
                     azModalDialogText: _HTML,
-                    azModalDialogWidth: 450,
-                    azModalDialogHeight: 180
+                    azModalDialogWidth: 550,
+                    azModalDialogHeight: 400,
+                    azModalDialogModal: false
                 });
         }
 
@@ -106,12 +147,28 @@
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    new azModalDialogClose();
+                    azModalDialog3.azModalDialogClose();
                 });
             });
 
             var _HTML = "";
-            _HTML += '<div class="az-row az-margin-t-28 az-margin-b-14">';
+            _HTML += '<div class="az-row az-margin-t-28">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'var azModalDialog = new initAZModalDialog(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog 3",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 550,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 450,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogBackground: false,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogCloseOnEscape: false<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-form-group xs az-text-center">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Lukk</button>';
@@ -119,14 +176,25 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            new initAZModalDialog(
+            azModalDialog3 = new initAZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog 3",
                     azModalDialogText: _HTML,
-                    azModalDialogWidth: 450,
-                    azModalDialogHeight: 180,
+                    azModalDialogWidth: 550,
+                    azModalDialogHeight: 450,
                     azModalDialogBackground: false,
                     azModalDialogCloseOnEscape: false
+                });
+        }
+
+        function setModalDialogiFrame()
+        {
+            azModalDialogiFrame = new initAZModalDialog(
+                {
+                    azModalDialogTitle: "AZ Modal Dialog iFrame",
+                    azModalDialogWidth: 1024,
+                    azModalDialogHeight: 600,
+                    azModalDialogiFrameURL: "azcdn200.html"
                 });
         }
 
@@ -136,12 +204,36 @@
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    new azModalDialogClose();
+                    azModalDialogPosition.azModalDialogClose();
                 });
             });
 
             var _HTML = "";
-            _HTML += '<div class="az-row az-margin-t-28 az-margin-b-14">';
+            _HTML += '<div class="az-row az-margin-t-28">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'var azModalDialog = new initAZModalDialog(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog Position",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 700,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 600,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogPosition: true,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogPositionMy: "right top+30",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogPositionAt: "right bottom",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogPositionOf: $("#cmdModalDialogPosition")<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += 'azModalDialogPositionMy:<br />';
+            _HTML += '"right top+30"&emsp;&ensp;Øverste høyre hjørnet + 30px av AZModalDialog<br />';
+            _HTML += '<br />';
+            _HTML += 'azModalDialogPositionAt:<br />';
+            _HTML += '"right bottom"&emsp;&ensp;Nederste høyre hjørnet på objectet du sender inn.<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-form-group xs az-text-center">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Lukk</button>';
@@ -149,13 +241,15 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            new initAZModalDialog(
+            azModalDialogPosition = new initAZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog Position",
                     azModalDialogText: _HTML,
-                    azModalDialogWidth: 450,
-                    azModalDialogHeight: 180,
+                    azModalDialogWidth: 700,
+                    azModalDialogHeight: 600,
                     azModalDialogPosition: true,
+                    azModalDialogPositionMy: "right top+30",
+                    azModalDialogPositionAt: "right bottom",
                     azModalDialogPositionOf: $("#cmdModalDialogPosition")
                 });
         }
@@ -166,12 +260,20 @@
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialogClose();
+                    azModalDialog4.azModalDialogClose();
                 });
             });
 
             var _HTML = "";
-            _HTML += '<div class="az-row az-margin-t-28 az-margin-b-14">';
+            _HTML += '<div class="az-row az-margin-t-28">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'azModalDialog.azModalDialogClose()<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-form-group xs az-text-center">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Lukk</button>';
@@ -179,12 +281,10 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            new initAZModalDialog(
+            azModalDialog4 = new initAZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog 4",
-                    azModalDialogText: _HTML,
-                    azModalDialogWidth: 450,
-                    azModalDialogHeight: 180
+                    azModalDialogText: _HTML
                 });
         }
 
@@ -194,12 +294,23 @@
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialogClose({ azModalDialogLocationReload: true });
+                    azModalDialog5.azModalDialogClose({ azModalDialogLocationReload: true });
                 });
             });
 
             var _HTML = "";
-            _HTML += '<div class="az-row az-margin-t-28 az-margin-b-14">';
+            _HTML += '<div class="az-row az-margin-t-28">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'azModalDialog.azModalDialogClose(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogLocationReload: true<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-form-group xs az-text-center">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Lukk</button>';
@@ -207,12 +318,12 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            new initAZModalDialog(
+            azModalDialog5 = new initAZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog 5",
                     azModalDialogText: _HTML,
-                    azModalDialogWidth: 450,
-                    azModalDialogHeight: 180
+                    azModalDialogWidth: 550,
+                    azModalDialogHeight: 350
                 });
         }
 
@@ -222,12 +333,23 @@
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialogClose({ azModalDialogAfterClose: function () { window.location.href = "azcdn200.html" } });
+                    azModalDialog6.azModalDialogClose({ azModalDialogAfterClose: function () { window.location.href = "azcdn200.html" } });
                 });
             });
 
             var _HTML = "";
-            _HTML += '<div class="az-row az-margin-t-28 az-margin-b-14">';
+            _HTML += '<div class="az-row az-margin-t-28">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'azModalDialog.azModalDialogClose(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogAfterClose: function () { window.location.href = "index.html" }<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-form-group xs az-text-center">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Lukk</button>';
@@ -235,12 +357,62 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            new initAZModalDialog(
+            azModalDialog6 = new initAZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog 6",
                     azModalDialogText: _HTML,
-                    azModalDialogWidth: 450,
-                    azModalDialogHeight: 180
+                    azModalDialogWidth: 800,
+                    azModalDialogHeight: 350
+                });
+        }
+
+        function setModalDialog7()
+        {
+            $.subscribeonce("functionlib/initAZModalDialog/azModalDialogAfterOpen", function (e)
+            {
+                $("#cmdButton1").off().on('click', function ()
+                {
+                    setModalDialog7.azChangeModalTitlebar({ azModalDialogTitle: "Ny tittel" });
+                });
+                $("#cmdButton2").off().on('click', function ()
+                {
+                    setModalDialog7.azModalDialogClose();
+                });
+            });
+
+            var _HTML = "";
+            _HTML += '<div class="az-row az-margin-t-28">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'azModalDialog.azChangeModalTitlebar(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "Ny tittel"<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-form-group xs az-text-center">';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Skift tittel</button>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-row az-margin-t-14 az-margin-b-14">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-form-group xs az-text-center">';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton2" style="width: 60%; margin-left: 4px;">Lukk</button>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+
+            setModalDialog7 = new initAZModalDialog(
+                {
+                    azModalDialogTitle: "AZ Modal Dialog Tittel",
+                    azModalDialogText: _HTML,
+                    azModalDialogWidth: 550,
+                    azModalDialogHeight: 400
                 });
         }
 
@@ -252,10 +424,46 @@
         <div class="az-container">
 
             <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12 sm-4">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog1">AZ Modal Dialog 1</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-4">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog2">AZ Modal Dialog 2</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-4">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog3">AZ Modal Dialog 3</button>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialogiFrame">AZ Modal Dialog iFrame</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialogPosition">AZ Modal Dialog Position</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row az-margin-t-28">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">AZ Modal Dialog</h1>
+                </div>
+            </div>
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12">
                     <div class="az-code jsHigh notranslate">
-                        initAZModalDialog(<br />
+                        <strong>Default settings</strong>
+                        <br />
+                        var azModalDialog = new initAZModalDialog(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogModal: true,<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
@@ -277,7 +485,6 @@
                         &emsp;&ensp;&emsp;&ensp;azModalDialogBeforeOpen: function () { },<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogAfterOpen: function () { }<br />
                         });<br />
-                        <br />
                         <br />
                     </div>
                     <div class="az-code htmlHigh notranslate">
@@ -333,151 +540,91 @@
             </div>
 
             <!--<strong>iFrame</strong>
-            <br />
-            dialogiFrameURL: ""&emsp;&ensp;(default)<br />
-            <br />
-            Hvis du ønsker å vise en egen HTML side i 'AZModalDialog', legger du inn en URL her.
-            <br />
-            <br />
-            <strong>Størrelse</strong>
-            <br />
-            dialogWidth: 450&emsp;&ensp;(default)<br />
-            dialogHeight: 300&emsp;&ensp;(default)<br />
-            <br />
-            Ved skjermstørrelser under '576px', vil 'dialogWidth' og 'dialogHeight' tilpasses enhetens skjermstørrelse hvis 'dialogWidth' eller 'dialogHeight' er større enn skjermens bredde eller høyde.
-            <br />
-            <br />
-            <strong>Endre størrelsen</strong>
-            <br />
-            dialogResizable: false&emsp;&ensp;(default)<br />
-            <br />
-            Ved å endre verdiene til true, har brukeren muligheten til å endre størrelsen på 'AZModalDialog' utover det du har satt som standard.
-            <br />
-            <br />
-            <strong>Flyttbart vindu</strong>
-            <br />
-            dialogDraggable: true&emsp;&ensp;(default)<br />
-            <br />
-            Ved å endre verdiene til false, kan ikke brukeren flytte på 'AZModalDialog'.
-            <br />
-            <br />
-            <strong>Rullefelt - hovedsiden</strong>
-            <br />
-            dialogNoParentScroll: false&emsp;&ensp;(default)<br />
-            <br />
-            Ved å endre verdiene til true, vil rullefeltet for hovedsiden, (vinduet) fjernes og 'AZModalDialog' vil beholde sin posisjon.
-            <br />
-            <br />
-            <strong>Posisjonering</strong>
-            <br />
-            dialogPosition: false&emsp;&ensp;(default)<br />
-            dialogPositionOf: { }&emsp;&ensp;(default)<br />
-            dialogPositionMy: "left bottom-30"&emsp;&ensp;(default)<br />
-            dialogPositionAt: "left top"&emsp;&ensp;(default)<br />
-            <br />
-            Ved å endre verdien til true for 'dialogPosition', har du muligheten til å bestemme hvor på skjermen 'AZModalDialog' skal vises.
-            Se under for mer informasjon.
-            <br />
-            <br />
-            <strong>Før åpning</strong>
-            <br />
-            azModalDialogBeforeOpen: function () { }&emsp;&ensp;(default)<br />
-            <br />
-            Hvis du ønsker å få utført en funksjon før 'AZModalDialog' er åpent, dvs. i tiden mellom 'AZModalDialog' trigges og det er helt åpent, kan du legge til denne her.
-            <br />
-            <br />
-            <strong>Etter åpning</strong>
-            <br />
-            dialogAfterOpen: function () { }&emsp;&ensp;(default)<br />
-            <br />
-            Hvis du ønsker å få utført en funksjon rett etter 'AZModalDialog' er åpent, kan du legge til denne her.
-            <br />
-            <br />-->
-
-
-
-
-            <div class="az-row az-margin-t-14">
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        initAZModalDialog(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "Din tittel",<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogText: "Din tekst",<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 450<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 180<br />
-                        });<br />
-                        <br />
-                    </div>
-                    <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog1">AZ Modal Dialog 1</button>
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        initAZModalDialog(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogModal: false,<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "Din tittel",<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogText: "Din tekst",<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 450<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 180<br />
-                        });<br />
-                        <br />
-                    </div>
-                    <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog2">AZ Modal Dialog 2</button>
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        initAZModalDialog(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "Din tittel",<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogText: "Din tekst",<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 450,<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 180,<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogBackground: false,<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogCloseOnEscape: false<br />
-                        });<br />
-                        <br />
-                    </div>
-                    <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog3">AZ Modal Dialog 3</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="az-row az-margin-t-14">
-                <div class="az-col xs-12">
-                    <h1 class="az-note-header">Posisjonering</h1>
-                    <div class="az-note jsHigh notranslate">
-                        initAZModalDialog(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "Din tittel",<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogText: "Din tekst",<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 450<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 180<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogPosition: true<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogPositionOf: $("#cmdModalDialogPosition")<br />
-                        });<br />
-                        <br />
-                        <br />
-                        azModalDialogPositionMy: "left bottom-30"&emsp;&ensp;Nederste venstre hjørnet + 30px av 'AZModalDialog'<br />
-                        azModalDialogPositionAt: "left top"&emsp;&ensp;Øverste venstre hjørnet på objectet du sender inn.<br />
-                        <br />
-                    </div>
-                    <div class="az-form-group">
-                        <button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialogPosition">AZ Modal Dialog Position</button>
-                    </div>
-                </div>
-            </div>
+    <br />
+    dialogiFrameURL: ""&emsp;&ensp;(default)<br />
+    <br />
+    Hvis du ønsker å vise en egen HTML side i 'AZModalDialog', legger du inn en URL her.
+    <br />
+    <br />
+    <strong>Størrelse</strong>
+    <br />
+    dialogWidth: 450&emsp;&ensp;(default)<br />
+    dialogHeight: 300&emsp;&ensp;(default)<br />
+    <br />
+    Ved skjermstørrelser under '576px', vil 'dialogWidth' og 'dialogHeight' tilpasses enhetens skjermstørrelse hvis 'dialogWidth' eller 'dialogHeight' er større enn skjermens bredde eller høyde.
+    <br />
+    <br />
+    <strong>Endre størrelsen</strong>
+    <br />
+    dialogResizable: false&emsp;&ensp;(default)<br />
+    <br />
+    Ved å endre verdiene til true, har brukeren muligheten til å endre størrelsen på 'AZModalDialog' utover det du har satt som standard.
+    <br />
+    <br />
+    <strong>Flyttbart vindu</strong>
+    <br />
+    dialogDraggable: true&emsp;&ensp;(default)<br />
+    <br />
+    Ved å endre verdiene til false, kan ikke brukeren flytte på 'AZModalDialog'.
+    <br />
+    <br />
+    <strong>Rullefelt - hovedsiden</strong>
+    <br />
+    dialogNoParentScroll: false&emsp;&ensp;(default)<br />
+    <br />
+    Ved å endre verdiene til true, vil rullefeltet for hovedsiden, (vinduet) fjernes og 'AZModalDialog' vil beholde sin posisjon.
+    <br />
+    <br />
+    <strong>Posisjonering</strong>
+    <br />
+    dialogPosition: false&emsp;&ensp;(default)<br />
+    dialogPositionOf: { }&emsp;&ensp;(default)<br />
+    dialogPositionMy: "left bottom-30"&emsp;&ensp;(default)<br />
+    dialogPositionAt: "left top"&emsp;&ensp;(default)<br />
+    <br />
+    Ved å endre verdien til true for 'dialogPosition', har du muligheten til å bestemme hvor på skjermen 'AZModalDialog' skal vises.
+    Se under for mer informasjon.
+    <br />
+    <br />
+    <strong>Før åpning</strong>
+    <br />
+    azModalDialogBeforeOpen: function () { }&emsp;&ensp;(default)<br />
+    <br />
+    Hvis du ønsker å få utført en funksjon før 'AZModalDialog' er åpent, dvs. i tiden mellom 'AZModalDialog' trigges og det er helt åpent, kan du legge til denne her.
+    <br />
+    <br />
+    <strong>Etter åpning</strong>
+    <br />
+    dialogAfterOpen: function () { }&emsp;&ensp;(default)<br />
+    <br />
+    Hvis du ønsker å få utført en funksjon rett etter 'AZModalDialog' er åpent, kan du legge til denne her.
+    <br />
+    <br />-->
 
             <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12 sm-4">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog4">AZ Modal Dialog 4</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-4">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog5">AZ Modal Dialog 5</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-4">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog6">AZ Modal Dialog 6</button>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row az-margin-t-28">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">AZ Modal Dialog - Lukk</h1>
                     <div class="az-code jsHigh notranslate">
-                        azModalDialogClose(<br />
+                        <strong>Default settings</strong>
+                        <br />
+                        azModalDialog.azModalDialogClose(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogLocationReload: false,<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogAfterClose: function () { }<br />
@@ -504,47 +651,20 @@
                 </div>
             </div>
 
-            <div class="az-row az-margin-t-14">
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        azModalDialogClose();<br />
-                        <br />
-                    </div>
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12 sm-4">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog4">AZ Modal Dialog 4</button>
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        azModalDialogClose(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogLocationReload: true<br />
-                        });<br />
-                        <br />
-                    </div>
-                    <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog5">AZ Modal Dialog 5</button>
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-6 md-4">
-                    <div class="az-code jsHigh notranslate">
-                        azModalDialogClose(<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;{ azModalDialogAfterClose: function () { window.location.href = "index.html" } }<br />
-                        });<br />
-                        <br />
-                    </div>
-                    <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog6">AZ Modal Dialog 6</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog7">AZ Modal Dialog Tittel</button>
                     </div>
                 </div>
             </div>
-
-            <div class="az-row az-margin-t-56 az-margin-b-56">
+            <div class="az-row az-margin-t-28 az-margin-b-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">AZ Modal Dialog - Tittel</h1>
                     <div class="az-code jsHigh notranslate">
-                        changeModalTitlebar(<br />
+                        <strong>Default settings</strong>
+                        <br />
+                        azModalDialog.azChangeModalTitlebar(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogAlertClass: 'az-alert-danger',<br />
