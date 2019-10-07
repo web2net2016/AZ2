@@ -1,7 +1,7 @@
 .az-accordion-card
 {
-    display: block;
     position: relative;
+    display: block;
     overflow: visible;
     white-space: normal;
 }
@@ -3802,19 +3802,14 @@ ul
 }
 /* Size ALL ----------*/
 /* Display */
-/*.az-display-container
-{
-    position: relative;
-}
-
-.az-display-topleft
+.az-display-absolute-topleft
 {
     position: absolute;
     left: 0;
     top: 0;
 }
 
-.az-display-topmiddle
+.az-display-absolute-topmiddle
 {
     position: absolute;
     left: 50%;
@@ -3825,14 +3820,14 @@ ul
     transform: translate(-50%,0%);
 }
 
-.az-display-topright
+.az-display-absolute-topright
 {
     position: absolute;
     right: 0;
     top: 0;
 }
 
-.az-display-left
+.az-display-absolute-left
 {
     position: absolute;
     top: 50%;
@@ -3843,7 +3838,7 @@ ul
     transform: translate(0%,-50%);
 }
 
-.az-display-middle
+.az-display-absolute-middle
 {
     position: absolute;
     top: 50%;
@@ -3854,7 +3849,7 @@ ul
     transform: translate(-50%,-50%);
 }
 
-.az-display-right
+.az-display-absolute-right
 {
     position: absolute;
     top: 50%;
@@ -3865,14 +3860,14 @@ ul
     transform: translate(0%,-50%);
 }
 
-.az-display-bottomleft
+.az-display-absolute-bottomleft
 {
     position: absolute;
     left: 0;
     bottom: 0;
 }
 
-.az-display-bottommiddle
+.az-display-absolute-bottommiddle
 {
     position: absolute;
     left: 50%;
@@ -3883,12 +3878,12 @@ ul
     transform: translate(-50%,0%);
 }
 
-.az-display-bottomright
+.az-display-absolute-bottomright
 {
     position: absolute;
     right: 0;
     bottom: 0;
-}*/
+}
 
 .az-display-hidden
 {
@@ -10431,13 +10426,7 @@ template
     {
         position: absolute;
         width: 40px;
-        background-color: #009688;
-        font-size: 14px;
-        color: #FFFFFF;
         cursor: pointer;
-        -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-        -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
         .az-slidein > .az-slidein-tab > div
@@ -10468,54 +10457,12 @@ template
 {
     display: block;
     position: relative;
-    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
-
-    .az-slidein-card > header
-    {
-        padding: 7px;
-        background-color: #009688;
-    }
-
-        .az-slidein-card > header > *
-        {
-            color: #FFFFFF;
-            font-size: 14px;
-        }
-
-        .az-slidein-card > header > i
-        {
-            color: #FFFFFF;
-            font-size: 12px;
-            margin-right: 2px;
-            margin-top: 4px;
-        }
 
     .az-slidein-card > article
     {
         padding: 7px;
-        background-color: #FFFFFF;
     }
-
-        .az-slidein-card > article > *
-        {
-            color: #000000;
-            font-size: 14px;
-        }
-
-    .az-slidein-card > footer
-    {
-        padding: 7px;
-        background-color: #009688;
-    }
-
-        .az-slidein-card > footer > *
-        {
-            color: #FFFFFF;
-            font-size: 14px;
-        }
 .az-slideshow
 {
     position: relative;

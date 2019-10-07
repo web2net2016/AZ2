@@ -1,18 +1,13 @@
 ﻿/* Size ALL ----------*/
 /* Display */
-/*.az-display-container
-{
-    position: relative;
-}
-
-.az-display-topleft
+.az-display-absolute-topleft
 {
     position: absolute;
     left: 0;
     top: 0;
 }
 
-.az-display-topmiddle
+.az-display-absolute-topmiddle
 {
     position: absolute;
     left: 50%;
@@ -23,14 +18,14 @@
     transform: translate(-50%,0%);
 }
 
-.az-display-topright
+.az-display-absolute-topright
 {
     position: absolute;
     right: 0;
     top: 0;
 }
 
-.az-display-left
+.az-display-absolute-left
 {
     position: absolute;
     top: 50%;
@@ -41,7 +36,7 @@
     transform: translate(0%,-50%);
 }
 
-.az-display-middle
+.az-display-absolute-middle
 {
     position: absolute;
     top: 50%;
@@ -52,7 +47,7 @@
     transform: translate(-50%,-50%);
 }
 
-.az-display-right
+.az-display-absolute-right
 {
     position: absolute;
     top: 50%;
@@ -63,14 +58,14 @@
     transform: translate(0%,-50%);
 }
 
-.az-display-bottomleft
+.az-display-absolute-bottomleft
 {
     position: absolute;
     left: 0;
     bottom: 0;
 }
 
-.az-display-bottommiddle
+.az-display-absolute-bottommiddle
 {
     position: absolute;
     left: 50%;
@@ -81,12 +76,12 @@
     transform: translate(-50%,0%);
 }
 
-.az-display-bottomright
+.az-display-absolute-bottomright
 {
     position: absolute;
     right: 0;
     bottom: 0;
-}*/
+}
 
 .az-display-hidden
 {

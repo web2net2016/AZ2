@@ -52,6 +52,12 @@
                     azAccordionId: "az-accordion-2",
                     azAccordionHeightStyle: "auto",
                     azAccordionCollapsible: false,
+                    azAccordionHeaderColor: "#0078D7",
+                    azAccordionHeaderFontColor: "#FFFFFF",
+                    azAccordionHeaderHoverColor: "#FF4136",
+                    azAccordionHeaderHoverFontColor: "#FFFFFF",
+                    azAccordionArticleColor: "#DDDDDD",
+                    azAccordionArticleFontColor: "#000000",
                     azAccordionIconClosed: "fas fa-arrow-circle-down",
                     azAccordionIconOpen: "fas fa-arrow-circle-up",
                     azAccordionSlideDown: 400,
@@ -177,10 +183,16 @@
                         &emsp;&ensp;&emsp;&ensp;azAccordionHeightStyle: "content",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionCollapsible: true,<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionOpenEvent: "click",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionHeaderColor: "#009688",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionHeaderFontColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionHeaderHoverColor: "#607d8b",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionHeaderHoverFontColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionArticleColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionArticleFontColor: "#000000",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionIconClosed: "fas fa-plus",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionIconOpen: "fas fa-minus",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionSlideDown: 100,<br />
-                        &emsp;&ensp;&emsp;&ensp;azAccordionSlideUp: 100,<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionSlideUp: 100<br />
                         });<br />
                         <br />
                     </div>
@@ -191,6 +203,12 @@
                         <br />
                         <br />
                         azAccordion.azSetAccordion(0);<br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                         <br />
                         <br />
                         <br />
@@ -231,6 +249,54 @@
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>"click"</brown></default>
                             <values><span>Values:</span> <brown>"click"</brown> or <brown>"mouseover"</brown></values>
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azAccordionHeaderColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"009688"</brown></default>
+                            <br />
+                            Se også CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azAccordionHeaderFontColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
+                            <br />
+                            Se også CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azAccordionHeaderHoverColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"607d8b"</brown></default>
+                            <br />
+                            Se også CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azAccordionHeaderHoverFontColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
+                            <br />
+                            Se også CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azAccordionArticleColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
+                            <br />
+                            Se også CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azAccordionArticleFontColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"000000"</brown></default>
+                            <br />
+                            Se også CSS .az-accordion
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -342,17 +408,6 @@
                         .az-accordion-card > header<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;padding: 7px;<br />
-                        &emsp;&ensp;&emsp;&ensp;background-color: #009688;<br />
-                        &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
-                        }<br />
-                        <br />
-                        .az-accordion-card > header:hover<br />
-                        {<br />
-                        &emsp;&ensp;&emsp;&ensp;background-color: #FF9F55;<br />
-                        &emsp;&ensp;&emsp;&ensp;-webkit-transition: background-color 0.4s;<br />
-                        &emsp;&ensp;&emsp;&ensp;-moz-transition: background-color 0.4s;<br />
-                        &emsp;&ensp;&emsp;&ensp;-o-transition: background-color 0.4s;<br />
-                        &emsp;&ensp;&emsp;&ensp;transition: background-color 0.4s;<br />
                         }<br />
                         <br />
                         .az-accordion-card > header > *<br />
@@ -370,8 +425,6 @@
                         .az-accordion-card > article<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;padding: 7px;<br />
-                        &emsp;&ensp;&emsp;&ensp;background-color: #FFFFFF;<br />
-                        &emsp;&ensp;&emsp;&ensp;color: #000000;<br />
                         }<br />
                         <br />
                         .az-accordion-card > article > *<br />
@@ -381,7 +434,6 @@
                         <br />
                         .az-accordion-card > header.az-accordion-header-active<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;background-color: #607d8b;<br />
                         }<br />
                         <br />
                         .az-accordion-card > header.az-accordion-article-active<br />

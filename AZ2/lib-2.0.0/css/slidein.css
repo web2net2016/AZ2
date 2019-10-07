@@ -36,13 +36,7 @@
     {
         position: absolute;
         width: 40px;
-        background-color: #009688;
-        font-size: 14px;
-        color: #FFFFFF;
         cursor: pointer;
-        -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-        -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
         .az-slidein > .az-slidein-tab > div
@@ -73,51 +67,9 @@
 {
     display: block;
     position: relative;
-    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
-
-    .az-slidein-card > header
-    {
-        padding: 7px;
-        background-color: #009688;
-    }
-
-        .az-slidein-card > header > *
-        {
-            color: #FFFFFF;
-            font-size: 14px;
-        }
-
-        .az-slidein-card > header > i
-        {
-            color: #FFFFFF;
-            font-size: 12px;
-            margin-right: 2px;
-            margin-top: 4px;
-        }
 
     .az-slidein-card > article
     {
         padding: 7px;
-        background-color: #FFFFFF;
     }
-
-        .az-slidein-card > article > *
-        {
-            color: #000000;
-            font-size: 14px;
-        }
-
-    .az-slidein-card > footer
-    {
-        padding: 7px;
-        background-color: #009688;
-    }
-
-        .az-slidein-card > footer > *
-        {
-            color: #FFFFFF;
-            font-size: 14px;
-        }

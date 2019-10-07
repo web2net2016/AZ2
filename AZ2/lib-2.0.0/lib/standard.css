@@ -33,27 +33,15 @@ accordion.css
     .az-accordion-card > header
     {
         padding: 7px;
-        background-color: #009688;
     }
-
-        .az-accordion-card > header:hover
-        {
-            background-color: #FF9F55;
-            -webkit-transition: background-color 0.4s;
-            -moz-transition: background-color 0.4s;
-            -o-transition: background-color 0.4s;
-            transition: background-color 0.4s;
-        }
 
         .az-accordion-card > header > *
         {
-            color: #FFFFFF;
             font-size: 14px;
         }
 
         .az-accordion-card > header > i
         {
-            color: #FFFFFF;
             font-size: 12px;
             margin-right: 2px;
             margin-top: 4px;
@@ -62,18 +50,15 @@ accordion.css
     .az-accordion-card > article
     {
         padding: 7px;
-        background-color: #FFFFFF;
     }
 
         .az-accordion-card > article > *
         {
-            color: #000000;
             font-size: 14px;
         }
 
     .az-accordion-card > header.az-accordion-header-active
     {
-        background-color: #607d8b;
     }
 
     .az-accordion-card > article.az-accordion-article-active
@@ -113,11 +98,6 @@ card.css
         .az-card > article > h1
         {
             font-size: 14px;
-        }
-
-        .az-card > article > name
-        {
-            font-weight: bold;
         }
 
     .az-card > footer
@@ -852,6 +832,30 @@ sidebar.css
     margin: 7px;
 }
 
+
+/*--------------------------------------------------------
+Slidein 
+slidein.css    
+-----------------------------------------------------------*/
+.az-slidein > .az-slidein-tab
+{
+    font-size: 14px;
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.az-slidein-card
+{
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+    .az-slidein-card > article > *
+    {
+        font-size: 14px;
+    }
 
 /*--------------------------------------------------------
 Slideshow 

@@ -1080,6 +1080,12 @@ function initAZAccordion(Options)
         azAccordionHeightStyle: "content",
         azAccordionCollapsible: true,
         azAccordionOpenEvent: "click",
+        azAccordionHeaderColor: "#009688",
+        azAccordionHeaderFontColor: "#FFFFFF",
+        azAccordionHeaderHoverColor: "#607d8b",
+        azAccordionHeaderHoverFontColor: "#FFFFFF",
+        azAccordionArticleColor: "#FFFFFF",
+        azAccordionArticleFontColor: "#000000",
         azAccordionIconClosed: "fas fa-plus",
         azAccordionIconOpen: "fas fa-minus",
         azAccordionSlideDown: 100,
@@ -1091,8 +1097,16 @@ function initAZAccordion(Options)
     {
         _Main.$Accordion = $("#" + _Main.Options.azAccordionId);
         _Main.$AccordionCard = _Main.$Accordion.children(".az-accordion-card");
-        _Main.$Header = _Main.$AccordionCard.children("header").append('<i class="' + _Main.Options.azAccordionIconClosed + '"></i>');
-        _Main.$Article = _Main.$AccordionCard.children("article");
+        _Main.$Header = _Main.$AccordionCard.children("header").append('<i class="' + _Main.Options.azAccordionIconClosed + '"></i>').css({ "background-color": _Main.Options.azAccordionHeaderColor, "color": _Main.Options.azAccordionHeaderFontColor });
+        _Main.$Article = _Main.$AccordionCard.children("article").css({ "background-color": _Main.Options.azAccordionArticleColor, "color": _Main.Options.azAccordionArticleFontColor });
+
+        _Main.$Header.mouseenter(function ()
+        {
+            $(this).css({ "background-color": _Main.Options.azAccordionHeaderHoverColor, "color": _Main.Options.azAccordionHeaderHoverFontColor });
+        }).mouseleave(function ()
+        {
+            $(this).css({ "background-color": _Main.Options.azAccordionHeaderColor, "color": _Main.Options.azAccordionHeaderFontColor });
+        });
 
         _Main.MaxArticleHeight = 0;
         _Main.azArticleHeight = function ()
@@ -1254,7 +1268,6 @@ function initAZAjax(Options)
 // AZ Circular Bar
 function initAZCircularBar(Options)
 {
-    var _Main = this;
     var _Defaults =
     {
         azCircularBarId: "",
@@ -1266,35 +1279,79 @@ function initAZCircularBar(Options)
         azCircularBarCaption: "",
         azCircularBarCaptionColor: "",
     };
-    _Main.Options = $.extend({}, _Defaults, Options || {});
 
-    if (_Main.Options.azCircularBarId != "")
+    if (Options && Options.length > 0)
     {
-        _Main.$CircularBar = $("#" + _Main.Options.azCircularBarId);
-        _Main.$CircularBar.$Slice = $('<div></div>').addClass("slice");
-        _Main.$CircularBar.$Bar = $('<div></div>').addClass("bar").css({ "border-color": _Main.Options.azCircularBarValueColor });
-        _Main.$CircularBar.$Fill = $('<div></div>').addClass("fill").css({ "border-color": _Main.Options.azCircularBarValueColor });
-        _Main.$CircularBar.$Label = $('<span></span>').addClass("label").html(_Main.Options.azCircularBarLabel);
-        if (_Main.Options.azCircularBarCaption != "")
+        azCircularBarArray = [];
+        $.each(Options, function (Index, ObjCurrentOption)
         {
-            _Main.$CircularBar.$Caption = $('<span></span>').addClass("caption").css({ "top": _Main.Options.azCircularBarSize, "color": _Main.Options.azCircularBarCaptionColor }).html(_Main.Options.azCircularBarCaption);
-        }
-        _Main.$CircularBar.$Slice.append(_Main.$CircularBar.$Bar).append(_Main.$CircularBar.$Fill);
-        _Main.$CircularBar.append(_Main.$CircularBar.$Label).append(_Main.$CircularBar.$Slice).append(_Main.$CircularBar.$Caption).addClass("c100 p" + _Main.Options.azCircularBarValue).css({ "background-color": _Main.Options.azCircularBarColor, "font-size": _Main.Options.azCircularBarSize });
+            azCircularBarArray.push(new AktivateAZCircularBar(ObjCurrentOption));
+        });
+        return azCircularBarArray
+    }
+    else if (isEmpty(Options) === false)
+    {
+        return new AktivateAZCircularBar(Options);
+    }
 
-        _Main.azSetCircularBar = function (Options)
+    function AktivateAZCircularBar(ObjCurrentOption)
+    {
+        this.Options = $.extend({}, _Defaults, ObjCurrentOption || {});
+        if (this.Options.azCircularBarId != "")
         {
-            _Main.$CircularBar.$Bar.css({ "border-color": Options.azCircularBarValueColor });
-            _Main.$CircularBar.$Fill.css({ "border-color": Options.azCircularBarValueColor });
-            _Main.$CircularBar.$Label.html(Options.azCircularBarLabel);
-            _Main.$CircularBar.$Caption.css({ "top": Options.azCircularBarSize, "color": Options.azCircularBarCaptionColor }).html(Options.azCircularBarCaption);
-            _Main.$CircularBar.removeClass().addClass("c100 p" + Options.azCircularBarValue).css({ "background-color": Options.azCircularBarColor, "font-size": Options.azCircularBarSize });
+            this.$CircularBar = $("#" + this.Options.azCircularBarId);
+            this.$CircularBar.$Slice = $('<div></div>').addClass("slice");
+            this.$CircularBar.$Bar = $('<div></div>').addClass("bar").css({ "border-color": this.Options.azCircularBarValueColor });
+            this.$CircularBar.$Fill = $('<div></div>').addClass("fill").css({ "border-color": this.Options.azCircularBarValueColor });
+            this.$CircularBar.$Label = $('<span></span>').addClass("label").html(this.Options.azCircularBarLabel);
+            if (this.Options.azCircularBarCaption != "")
+            {
+                this.$CircularBar.$Caption = $('<span></span>').addClass("caption").css({ "top": this.Options.azCircularBarSize, "color": this.Options.azCircularBarCaptionColor }).html(this.Options.azCircularBarCaption);
+            }
+            this.$CircularBar.$Slice.append(this.$CircularBar.$Bar).append(this.$CircularBar.$Fill);
+            this.$CircularBar.append(this.$CircularBar.$Label).append(this.$CircularBar.$Slice).append(this.$CircularBar.$Caption).addClass("c100 p" + this.Options.azCircularBarValue).css({ "background-color": this.Options.azCircularBarColor, "font-size": this.Options.azCircularBarSize });
+
+            this.azSetCircularBar = function (Options)
+            {
+                this.$CircularBar.$Bar.css({ "border-color": Options.azCircularBarValueColor });
+                this.$CircularBar.$Fill.css({ "border-color": Options.azCircularBarValueColor });
+                this.$CircularBar.$Label.html(Options.azCircularBarLabel);
+                this.$CircularBar.$Caption.css({ "top": Options.azCircularBarSize, "color": Options.azCircularBarCaptionColor }).html(Options.azCircularBarCaption);
+                this.$CircularBar.removeClass().addClass("c100 p" + Options.azCircularBarValue).css({ "background-color": Options.azCircularBarColor, "font-size": Options.azCircularBarSize });
+            }
+            return this
         }
     }
-    return (
-        {
-            "azSetCircularBar": _Main.azSetCircularBar
-        });
+
+    //_Main.Options = $.extend({}, _Defaults, Options || {});
+
+    //if (_Main.Options.azCircularBarId != "")
+    //{
+    //    _Main.$CircularBar = $("#" + _Main.Options.azCircularBarId);
+    //    _Main.$CircularBar.$Slice = $('<div></div>').addClass("slice");
+    //    _Main.$CircularBar.$Bar = $('<div></div>').addClass("bar").css({ "border-color": _Main.Options.azCircularBarValueColor });
+    //    _Main.$CircularBar.$Fill = $('<div></div>').addClass("fill").css({ "border-color": _Main.Options.azCircularBarValueColor });
+    //    _Main.$CircularBar.$Label = $('<span></span>').addClass("label").html(_Main.Options.azCircularBarLabel);
+    //    if (_Main.Options.azCircularBarCaption != "")
+    //    {
+    //        _Main.$CircularBar.$Caption = $('<span></span>').addClass("caption").css({ "top": _Main.Options.azCircularBarSize, "color": _Main.Options.azCircularBarCaptionColor }).html(_Main.Options.azCircularBarCaption);
+    //    }
+    //    _Main.$CircularBar.$Slice.append(_Main.$CircularBar.$Bar).append(_Main.$CircularBar.$Fill);
+    //    _Main.$CircularBar.append(_Main.$CircularBar.$Label).append(_Main.$CircularBar.$Slice).append(_Main.$CircularBar.$Caption).addClass("c100 p" + _Main.Options.azCircularBarValue).css({ "background-color": _Main.Options.azCircularBarColor, "font-size": _Main.Options.azCircularBarSize });
+
+    //    _Main.azSetCircularBar = function (Options)
+    //    {
+    //        _Main.$CircularBar.$Bar.css({ "border-color": Options.azCircularBarValueColor });
+    //        _Main.$CircularBar.$Fill.css({ "border-color": Options.azCircularBarValueColor });
+    //        _Main.$CircularBar.$Label.html(Options.azCircularBarLabel);
+    //        _Main.$CircularBar.$Caption.css({ "top": Options.azCircularBarSize, "color": Options.azCircularBarCaptionColor }).html(Options.azCircularBarCaption);
+    //        _Main.$CircularBar.removeClass().addClass("c100 p" + Options.azCircularBarValue).css({ "background-color": Options.azCircularBarColor, "font-size": Options.azCircularBarSize });
+    //    }
+    //}
+    //return (
+    //    {
+    //        "azSetCircularBar": _Main.azSetCircularBar
+    //    });
 }
 
 // AZ Modal Dialog
@@ -1926,6 +1983,10 @@ function initAZSlideIn(Options)
         azSlideInTop: 30,
         azSlideInWidth: 300,
         azSlideInHeight: 500,
+        azSlideInTabColor: "#009688",
+        azSlideInTabFontColor: "#FFFFFF",
+        azSlideInArticleColor: "#FFFFFF",
+        azSlideInArticleFontColor: "#000000",
         azSlideInIcon: "fas fa-bars",
         azSlideInPosition: "right"
     };
@@ -1934,10 +1995,9 @@ function initAZSlideIn(Options)
     if (_Main.Options.azSlideInId != "")
     {
         _Main.$SlideIn = $("#" + _Main.Options.azSlideInId);
-        _Main.$SlideInTab = _Main.$SlideIn.children(".az-slidein-tab");
+        _Main.$SlideInTab = _Main.$SlideIn.children(".az-slidein-tab").css({ "background-color": _Main.Options.azSlideInTabColor, "color": _Main.Options.azSlideInTabFontColor });
         _Main.$SlideInCard = _Main.$SlideIn.children(".az-slidein-card");
-        _Main.$SlideInCard.$Header = _Main.$SlideInCard.children("header");
-        _Main.$SlideInCard.$Article = _Main.$SlideInCard.children("article");
+        _Main.$SlideInCard.$Article = _Main.$SlideInCard.children("article").css({ "height": (_Main.Options.azSlideInHeight - 14), "background-color": _Main.Options.azSlideInArticleColor, "color": _Main.Options.azSlideInArticleFontColor });
 
         if (_Main.$SlideInTab.find("div").length === 0)
         {
@@ -1959,7 +2019,6 @@ function initAZSlideIn(Options)
             {
                 _Main.$SlideInTab.children("div").css({ "width": _Main.TextLength, "height": _Main.TextLength, "left": - (_Main.TextLength - 30) });
             }
-            _Main.TextLength = (_Main.TextLength / 2);
         }
         else
         {
@@ -1972,7 +2031,7 @@ function initAZSlideIn(Options)
             {
                 _Main.$SlideInTab.children("div").css({ "width": 100, "height": 100, "left": - 70 }).append('<i class="' + _Main.Options.azSlideInIcon + ' fa-rotate-90"></i>');
             }
-            _Main.TextLength = 30;
+            _Main.TextLength = 100;
         }
 
         if (_Main.Options.azSlideInPosition == "right")
@@ -1986,7 +2045,6 @@ function initAZSlideIn(Options)
             _Main.SlideInTabOptions = $.extend(_Main.SlideInTabOptions, { "top": ((_Main.Options.azSlideInHeight / 2) - (_Main.TextLength / 2)), "left": _Main.Options.azSlideInWidth, "border-top-right-radius": 15, "border-bottom-right-radius": 15 });
         }
         _Main.$SlideInTab.css(_Main.SlideInTabOptions);
-        _Main.$SlideInCard.$Article.css({ "height": _Main.Options.azSlideInHeight });
 
         window.setTimeout(function ()
         {
