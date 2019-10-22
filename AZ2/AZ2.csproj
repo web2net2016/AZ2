@@ -88,8 +88,8 @@
     </Content>
     <Content Include="lib-2.0.0\default.html" />
     <Content Include="favicon.ico" />
-    <Content Include="lib-2.0.0\form2.html" />
-    <Content Include="lib-2.0.0\form.html" />
+    <Content Include="lib-2.0.0\azform2.html" />
+    <Content Include="lib-2.0.0\azform.html" />
     <Content Include="lib-2.0.0\flex.html" />
     <Content Include="lib-2.0.0\grid.html" />
     <Content Include="index.html" />
@@ -129,7 +129,7 @@
       <DependentUpon>az-2.0.0.js</DependentUpon>
     </Content>
     <Content Include="lib-2.0.0\js\clientstorage.js" />
-    <Content Include="lib-2.0.0\lib\default.lang.js" />
+    <Content Include="lib\default.lang.js" />
     <Content Include="lib-2.0.0\lib\functionlib - Copy.js" />
     <Content Include="lib-2.0.0\js\functionlib.js" />
     <Content Include="lib-2.0.0\js\jquery.3.3.1.js" />
@@ -214,9 +214,12 @@
     <Content Include="lib-2.0.0\fontawesome\webfonts\fa-solid-900.ttf" />
     <Content Include="lib-2.0.0\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="lib-2.0.0\fontawesome\webfonts\fa-solid-900.woff2" />
-    <Content Include="lib-2.0.0\lib\contact-form-lang.json" />
-    <Content Include="lib-2.0.0\lib\contact-form-val.json" />
+    <Content Include="lib\lang-val\index-lang.json" />
+    <Content Include="lib\lang-val\index-val.json" />
+    <Content Include="admin\index\lib\lang-val\index-lang.json" />
+    <Content Include="admin\index\lib\lang-val\index-val.json" />
     <None Include="bundleconfig.json" />
+    <Content Include="lib\settings.json" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

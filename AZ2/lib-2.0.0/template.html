@@ -30,31 +30,8 @@
         $(document).ready(function ()
         {
             w3CodeColor();
-            $('#section-container-2-col-1, #section-container-2-col-2, #section-container-2-col-3').matchHeight();
 
-            var _$NavbarMenu = $(".az-navbar-bottom-content, #az-window-slider");
-            if (_$NavbarMenu.length > 0)
-            {
-                _$NavbarMenu.off().on("click", function (e)
-                {
-                    e.stopPropagation();
-                    $("#az-window-slider").toggleClass('az-window-close');
-                    if ($("#az-window-slider").hasClass('az-window-close'))
-                    {
-                        azModalDialogScrollTop = $(window).scrollTop();
-                        $("body").addClass("az-no-parent-scroll");
-                    }
-                    else
-                    {  
-                        $("body").removeClass("az-no-parent-scroll");
-                        $(window).scrollTop(azModalDialogScrollTop);
-                        if ($("body").hasClass("") === true)
-                        {
-                            $("body").removeAttr("class");
-                        }
-                    }
-                });
-            }
+            $('#section-container-2-col-1, #section-container-2-col-2, #section-container-2-col-3').matchHeight();        
         });
 
     </script>
@@ -257,7 +234,7 @@
             }
         }
 
-        #az-window-slider
+        #az-full-window
         {
             position: fixed;
             z-index: 5001;
@@ -269,7 +246,7 @@
             transition: height .2s;
         }
 
-            #az-window-slider.az-window-close
+            #az-full-window.az-window-full
             {
                 height: 100%;
             }
@@ -316,7 +293,7 @@
                 <div class="az-row">
                     <div class="az-col xs-12 lg-4">
 
-                        <div id="section-container-2-col-1" class="az-margin-14 az-white az-bg-gray">
+                        <div id="section-container-2-col-1" class="az-margin-14 az-color-white">
                             <h1 class="az-xs-text-xlarge az-sm-text-xxlarge az-text-uppercase az-text-center az-padding-7">Webmaster tools</h1>
                             <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="/web2net/webmastertools.png" /></p>
                             <p class="az-display-center az-padding-t-14 az-padding-b-14 az-xs-width-90 az-sm-width-80">Webmaster Tools - Google Search Console, er et verktøy Google har laget for å gi deg en generell oversikt over helsestatusen til dine hjemmesider. Dette er et kraftig verktøy som oppdateres jevnlig med ny funksjonalitet for å gi deg en bedre oversikt.</p>
@@ -325,7 +302,7 @@
                     </div>
                     <div class="az-col xs-12 lg-4">
 
-                        <div id="section-container-2-col-2" class="az-margin-14 az-white az-bg-gray">
+                        <div id="section-container-2-col-2" class="az-margin-14 az-color-white">
                             <h1 class="az-xs-text-xlarge az-sm-text-xxlarge az-text-uppercase az-text-center az-padding-7">Google analytics</h1>
                             <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="/web2net/analytics.png" /></p>
                             <p class="az-display-center az-padding-t-14 az-padding-b-14 az-xs-width-90 az-sm-width-80">Google Analytics utfører flere typer analyser av dine hjemmesider og gir deg statistikk og grunnleggende informasjon for markedsføring og søkemotoroptimalisering (SEO).</p>
@@ -334,7 +311,7 @@
                     </div>
                     <div class="az-col xs-12 lg-4">
 
-                        <div id="section-container-2-col-3" class="az-margin-14 az-white az-bg-gray">
+                        <div id="section-container-2-col-3" class="az-margin-14 az-color-white">
                             <h1 class="az-xs-text-xlarge az-sm-text-xxlarge az-text-uppercase az-text-center az-padding-7">Sosiale medier</h1>
                             <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="/web2net/sosial-media-1.png" /></p>
                             <p class="az-display-center az-padding-t-14 az-padding-b-14 az-xs-width-90 az-sm-width-80">Sosiale medier er et verktøy for å nå ut til dine eksisterende og nye kunder. Med enkle grep kan vi gjøre dine hjemmesider langt mer tilpasset den sosiale verden enn de kanskje er i dag.</p>
@@ -491,29 +468,6 @@
                     <li><a href="javascript:void(0);"><i class="fas fa-inbox fa-fw"></i><p>Innboks</p></a></li>
                     <li><a href="javascript:void(0);"><i class="fas fa-user fa-fw"></i><p>Profil</p></a></li>
                 </ul>
-            </div>
-        </div>
-
-        <div id="az-window-slider">
-            <div class="az-card">
-                <header>
-                    <h1 id="close">Header 1</h1>
-                </header>
-                <article style="height: 200px;">
-                    <name>Simon</name>
-                    <p>The boss of all bosses</p>
-                    <p>News <span class="az-badge az-bg-harley-davidson-orange">4</span></p>
-                    <rating>
-                        <i class="fas fa-star az-orange"></i>
-                        <i class="fas fa-star az-orange"></i>
-                        <i class="fas fa-star az-orange"></i>
-                        <i class="fas fa-star az-orange"></i>
-                        <i class="fas fa-star"></i>
-                    </rating>
-                </article>
-                <footer>
-                    <h1>Footer</h1>
-                </footer>
             </div>
         </div>
 

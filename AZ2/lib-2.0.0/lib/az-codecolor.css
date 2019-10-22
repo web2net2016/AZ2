@@ -3,9 +3,38 @@
     width: auto;
     background-color: #4CAF50;
     color: #FFFFFF;
-    padding: 8px 12px;
+    padding: 4px 12px;
     font-family: Consolas, "courier new";
+}
+
+h1.az-code-header
+{
+    font-size: 26px;
+}
+
+h2.az-code-header
+{
+    font-size: 24px;
+}
+
+h3.az-code-header
+{
+    font-size: 22px;
+}
+
+h4.az-code-header
+{
     font-size: 20px;
+}
+
+h5.az-code-header
+{
+    font-size: 18px;
+}
+
+h6.az-code-header
+{
+    font-size: 16px;
 }
 
 .az-code

@@ -46,7 +46,7 @@
 
         function setSnackbar1()
         {
-            azSnackbar1 = new initAZSnackbar(
+            azSnackbar1 = new AZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-1",
                     azSnackbarText: "Dette er en tekst... left / top...",
@@ -56,7 +56,7 @@
 
         function setSnackbar2()
         {
-            azSnackbar2 = new initAZSnackbar(
+            azSnackbar2 = new AZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-2",
                     azSnackbarText: "Dette er en tekst... right / top...",
@@ -66,7 +66,7 @@
 
         function setSnackbar3()
         {
-            azSnackbar3 = new initAZSnackbar(
+            azSnackbar3 = new AZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-3",
                     azSnackbarText: 'Dette er en tekst... left / bottom...',
@@ -76,7 +76,7 @@
 
         function setSnackbar4()
         {
-            azSnackbar4 = new initAZSnackbar(
+            azSnackbar4 = new AZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-4",
                     azSnackbarText: "Dette er en tekst... right / bottom...",
@@ -98,7 +98,7 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azSnackbar5 = new initAZSnackbar(
+            azSnackbar5 = new AZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-5",
                     azSnackbarText: _HTML,
@@ -108,13 +108,13 @@
 
             $(".az-input-group-addon").off().on('click', function ()
             {
-                azSnackbar5.azSetSnackbarText("Takk for din respons, " + $("#Navn").val());
+                azSnackbar5.ChangeSnackbarText("Takk for din respons, " + $("#Navn").val());
             });
         }
 
         function setSnackbar6()
         {
-            azSnackbar6 = new initAZSnackbar(
+            azSnackbar6 = new AZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-6",
                     azSnackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br><br>Denne teksten vil skiftes ut om 5 sekunder.",
@@ -126,7 +126,7 @@
 
             window.setTimeout(function ()
             {
-                azSnackbar6.azSetSnackbarText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.");
+                azSnackbar6.ChangeSnackbarText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.");
             }, 5000);
         }
 
@@ -172,17 +172,17 @@
                 </div>
             </div>
 
-            <div class="row az-margin-t-56">
+            <div class="az-row az-margin-t-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">AZ Snackbar</h1>
                 </div>
             </div>
-            <div class="az-row az-margin-t-56">
+            <div class="az-row">
                 <div class="az-col xs-12 sm-6">
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />
-                        var azSnackbar = new initAZSnackbar(<br />
+                        var azSnackbar = new AZSnackbar(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azSnackbarId: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azSnackbarText: "",<br />
@@ -201,13 +201,13 @@
                 </div>
                 <div class="az-col xs-12 sm-6">
                     <div class="az-code jsHigh notranslate">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                         <strong>Skift tekstinnhold</strong>
                         <br />
-                        azSnackbar.azSetSnackbarText("Dette er en tekst...");<br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                        azSnackbar.ChangeSnackbarText("Dette er en tekst...");<br />
                         <br />
                         <br />
                         <br />

@@ -37,7 +37,7 @@
                 azAjaxType: "GET",
                 azAjaxContentType: ""
             };
-            azAjax1 = new initAZAjax(_azAjaxOptions);
+            azAjax1 = new AZAjax(_azAjaxOptions);
 
             azAjax1.done(function (data, textStatus, jqXHR)
             {
@@ -94,7 +94,7 @@
                         <br />
                         <strong>Det finnes flere måter å benytte AZ Ajax på:</strong><br />
                         <br />
-                        new initAZAjax(_azAjaxOptions).always(function (data, textStatus, jqXHR)<br />
+                        new AZAjax(_azAjaxOptions).always(function (data, textStatus, jqXHR)<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;// Her legges logikken for å håndtere "always", "done" og "fail", etc.<br />
                         });<br />
@@ -102,7 +102,7 @@
                         <br />
                         <strong>Man kan også ha funksjoner på utsiden som lytter på om AZ Ajax har mottatt data eller har feilet.</strong><br />
                         <br />
-                        var azAjax1 = new initAZAjax(_azAjaxOptions);<br />
+                        var azAjax1 = new AZAjax(_azAjaxOptions);<br />
                         <br />
                         azAjax1.done(function (data, textStatus, jqXHR)<br />
                         {<br />

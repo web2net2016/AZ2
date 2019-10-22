@@ -1,6 +1,7 @@
 ﻿/* Form Group */
 .az-form-group
 {
+    position: relative;
     margin: 4px;
 }
 
@@ -89,25 +90,25 @@
 
         .az-form-group .az-input.az-round
         {
-            border-radius: 10px;
+            border-radius: 4px;
             padding: 0 10px 0 10px;
         }
 
             .az-form-group .az-input.az-round.xs
             {
-                border-radius: 5px;
+                border-radius: 4px;
                 padding: 0 9px 0 9px;
             }
 
             .az-form-group .az-input.az-round.sm
             {
-                border-radius: 15px;
+                border-radius: 4px;
                 padding: 0 11px 0 11px;
             }
 
             .az-form-group .az-input.az-round.md
             {
-                border-radius: 20px;
+                border-radius: 4px;
                 padding: 0 12px 0 12px;
             }
 
@@ -138,37 +139,28 @@
             font-size: 1.2em;
         }
 
-    .az-form-group > .az-input ~ i
+    .az-form-group .az-input ~ .az-input-icons i
     {
         position: relative;
         z-index: 2;
         float: right;
-        margin: -22px 7px 0 0;
+        margin: -22px 9px 0 0;
     }
 
-    .az-form-group .az-input.xs ~ i
+    .az-form-group .az-input.xs ~ .az-input-icons i
     {
-        position: relative;
-        z-index: 2;
-        float: right;
-        margin: -18px 6px 0 0;
+        margin: -18px 9px 0 0;
         font-size: 11px;
     }
 
-    .az-form-group .az-input.sm ~ i
+    .az-form-group .az-input.sm ~ .az-input-icons i
     {
-        position: relative;
-        z-index: 2;
-        float: right;
-        margin: -24px 8px 0 0;
+        margin: -24px 9px 0 0;
         font-size: 15px;
     }
 
-    .az-form-group .az-input.md ~ i
+    .az-form-group .az-input.md ~ .az-input-icons i
     {
-        position: relative;
-        z-index: 2;
-        float: right;
         margin: -28px 9px 0 0;
         font-size: 17px;
     }
@@ -209,25 +201,25 @@
 
         .az-form-group .az-textarea.az-round
         {
-            border-radius: 10px;
+            border-radius: 4px;
             padding: 0 10px 0 10px;
         }
 
             .az-form-group .az-textarea.az-round.xs
             {
-                border-radius: 5px;
+                border-radius: 4px;
                 padding: 0 9px 0 9px;
             }
 
             .az-form-group .az-textarea.az-round.sm
             {
-                border-radius: 15px;
+                border-radius: 4px;
                 padding: 0 11px 0 11px;
             }
 
             .az-form-group .az-textarea.az-round.md
             {
-                border-radius: 20px;
+                border-radius: 4px;
                 padding: 0 12px 0 12px;
             }
 
@@ -268,22 +260,22 @@
 
         .az-form-group .az-select.az-round
         {
-            border-radius: 10px;
+            border-radius: 4px;
         }
 
             .az-form-group .az-select.az-round.xs
             {
-                border-radius: 5px;
+                border-radius: 4px;
             }
 
             .az-form-group .az-select.az-round.sm
             {
-                border-radius: 15px;
+                border-radius: 4px;
             }
 
             .az-form-group .az-select.az-round.md
             {
-                border-radius: 20px;
+                border-radius: 4px;
             }
 
         .az-form-group .az-select:focus
@@ -333,6 +325,72 @@
             -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
             box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
         }
+
+    /* Input Spinner */
+    .az-form-group .az-input-spinner
+    {
+        width: 100%;
+        height: 30px;
+        padding: 0 7px 0 7px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+        .az-form-group .az-input-spinner.xs
+        {
+            height: 25px;
+            padding: 0 6px 0 6px;
+            font-size: 0.85em;
+        }
+
+        .az-form-group .az-input-spinner.sm
+        {
+            height: 35px;
+            padding: 0 8px 0 8px;
+            font-size: 1.1em;
+        }
+
+        .az-form-group .az-input-spinner.md
+        {
+            height: 40px;
+            padding: 0 9px 0 9px;
+            font-size: 1.2em;
+        }
+
+        .az-form-group .az-input-spinner.az-round
+        {
+            border-radius: 4px;
+            padding: 0 10px 0 10px;
+        }
+
+            .az-form-group .az-input-spinner.az-round.xs
+            {
+                border-radius: 4px;
+                padding: 0 9px 0 9px;
+            }
+
+            .az-form-group .az-input-spinner.az-round.sm
+            {
+                border-radius: 4px;
+                padding: 0 11px 0 11px;
+            }
+
+            .az-form-group .az-input-spinner.az-round.md
+            {
+                border-radius: 4px;
+                padding: 0 12px 0 12px;
+            }
+
+        .az-form-group .az-input-spinner:focus
+        {
+            outline: 0;
+        }
+
+    .az-form-group .az-input-group .az-spinner-decrement,
+    .az-form-group .az-input-group .az-spinner-increment
+    {
+        cursor: pointer;
+    }
 
     /* Toggle Switch */
     .az-form-group .az-switch
@@ -455,7 +513,7 @@
         /* Rounded Toggle Switch */
         .az-form-group .az-switch .az-slider.az-round
         {
-            border-radius: 34px;
+            border-radius: 50px;
         }
 
             .az-form-group .az-switch .az-slider.az-round:before
@@ -497,22 +555,22 @@
 
         .az-form-group .az-range.az-round::-webkit-slider-runnable-track
         {
-            border-radius: 10px;
+            border-radius: 50px;
         }
 
         .az-form-group .az-range.az-round.xs::-webkit-slider-runnable-track
         {
-            border-radius: 5px;
+            border-radius: 50px;
         }
 
         .az-form-group .az-range.az-round.sm::-webkit-slider-runnable-track
         {
-            border-radius: 15px;
+            border-radius: 50px;
         }
 
         .az-form-group .az-range.az-round.md::-webkit-slider-runnable-track
         {
-            border-radius: 20px;
+            border-radius: 50px;
         }
 
         .az-form-group .az-range::-moz-range-track
@@ -537,22 +595,22 @@
 
         .az-form-group .az-range.az-round::-moz-range-track
         {
-            border-radius: 10px;
+            border-radius: 50px;
         }
 
         .az-form-group .az-range.az-round.xs::-moz-range-track
         {
-            border-radius: 5px;
+            border-radius: 50px;
         }
 
         .az-form-group .az-range.az-round.sm::-moz-range-track
         {
-            border-radius: 15px;
+            border-radius: 50px;
         }
 
         .az-form-group .az-range.az-round.md::-moz-range-track
         {
-            border-radius: 20px;
+            border-radius: 50px;
         }
 
         .az-form-group .az-range::-ms-track
@@ -577,22 +635,22 @@
 
         .az-form-group .az-range.az-round::-ms-track
         {
-            border-radius: 10px;
+            border-radius: 50px;
         }
 
         .az-form-group .az-range.az-round.xs::-ms-track
         {
-            border-radius: 5px;
+            border-radius: 50px;
         }
 
         .az-form-group .az-range.az-round.sm::-ms-track
         {
-            border-radius: 15px;
+            border-radius: 50px;
         }
 
         .az-form-group .az-range.az-round.md::-ms-track
         {
-            border-radius: 20px;
+            border-radius: 50px;
         }
 
         .az-form-group .az-range::-webkit-slider-thumb
@@ -747,6 +805,104 @@
             height: 40px;
         }
 
+    /* Multi Range (Slider) */
+    .az-form-group .az-range-multi
+    {
+        height: 20px !important;
+        border: none !important;
+    }
+
+        .az-form-group .az-range-multi .ui-slider-handle:focus
+        {
+            outline: none;
+        }
+
+        .az-form-group .az-range-multi.xs
+        {
+            height: 15px !important;
+        }
+
+        .az-form-group .az-range-multi.sm
+        {
+            height: 25px !important;
+        }
+
+        .az-form-group .az-range-multi.md
+        {
+            height: 30px !important;
+        }
+
+        .az-form-group .az-range-multi.az-round
+        {
+            border-radius: 10px !important;
+        }
+
+            .az-form-group .az-range-multi.az-round.xs
+            {
+                border-radius: 5px !important;
+            }
+
+            .az-form-group .az-range-multi.az-round.sm
+            {
+                border-radius: 15px !important;
+            }
+
+            .az-form-group .az-range-multi.az-round.md
+            {
+                border-radius: 20px !important;
+            }
+
+        .az-form-group .az-range-multi .ui-slider-handle
+        {
+            width: 20px !important;
+            height: 30px !important;
+            border: none !important;
+            cursor: pointer !important;
+        }
+
+        .az-form-group .az-range-multi.xs .ui-slider-handle
+        {
+            width: 15px !important;
+            height: 25px !important;
+        }
+
+        .az-form-group .az-range-multi.sm .ui-slider-handle
+        {
+            width: 25px !important;
+            height: 35px !important;
+        }
+
+        .az-form-group .az-range-multi.md .ui-slider-handle
+        {
+            width: 30px !important;
+            height: 40px !important;
+        }
+
+        .az-form-group .az-range-multi.az-round .ui-slider-handle
+        {
+            width: 30px !important;
+            height: 30px !important;
+            border-radius: 50% !important;
+        }
+
+        .az-form-group .az-range-multi.az-round.xs .ui-slider-handle
+        {
+            width: 25px !important;
+            height: 25px !important;
+        }
+
+        .az-form-group .az-range-multi.az-round.sm .ui-slider-handle
+        {
+            width: 35px !important;
+            height: 35px !important;
+        }
+
+        .az-form-group .az-range-multi.az-round.md .ui-slider-handle
+        {
+            width: 40px !important;
+            height: 40px !important;
+        }
+
     /* Buttons */
     .az-form-group .az-button
     {
@@ -785,7 +941,7 @@
             font-size: 1.2em;
         }
 
-        .az-form-group .az-button.az-button-round
+        /*.az-form-group .az-button.az-button-round
         {
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
@@ -808,26 +964,26 @@
             {
                 padding: 10px;
                 font-size: 15.6px;
-            }
+            }*/
 
         .az-form-group .az-button.az-round
         {
-            border-radius: 10px;
+            border-radius: 4px;
         }
 
             .az-form-group .az-button.az-round.xs
             {
-                border-radius: 5px;
+                border-radius: 4px;
             }
 
             .az-form-group .az-button.az-round.sm
             {
-                border-radius: 15px;
+                border-radius: 4px;
             }
 
             .az-form-group .az-button.az-round.md
             {
-                border-radius: 20px;
+                border-radius: 4px;
             }
 
         .az-form-group .az-button.az-button-block
@@ -912,14 +1068,14 @@
 
             .az-form-group .az-input-animated:focus ~ .az-label-animated
             {
-                top: -10px;
+                top: -15px;
                 opacity: 1;
             }
 
     .az-form-group .az-label-animated
     {
         position: absolute;
-        top: 13px;
+        top: 7px;
         opacity: 0.5;
         -webkit-transition: 0.2s ease top;
         -moz-transition: 0.2s ease top;
@@ -929,19 +1085,19 @@
 
         .az-form-group .az-label-animated.xs
         {
-            top: 11px;
+            top: 5px;
             font-size: 0.85em;
         }
 
         .az-form-group .az-label-animated.sm
         {
-            top: 15px;
+            top: 9px;
             font-size: 1.1em;
         }
 
         .az-form-group .az-label-animated.md
         {
-            top: 17px;
+            top: 11px;
             font-size: 1.2em;
         }
 
@@ -972,23 +1128,68 @@
 
         .az-form-group .az-alert.az-round
         {
-            border-radius: 10px;
+            border-radius: 4px;
         }
 
             .az-form-group .az-alert.az-round.xs
             {
-                border-radius: 5px;
+                border-radius: 4px;
             }
 
             .az-form-group .az-alert.az-round.sm
             {
-                border-radius: 15px;
+                border-radius: 4px;
             }
 
             .az-form-group .az-alert.az-round.md
             {
-                border-radius: 20px;
+                border-radius: 4px;
             }
+
+    .az-form-group .az-alert-icons:first-child i
+    {
+        float: left;
+        margin: 9px 0 0 9px;
+    }
+
+    .az-form-group.xs .az-alert-icons:first-child i
+    {
+        font-size: 0.85em;
+    }
+
+    .az-form-group.sm .az-alert-icons:first-child i
+    {
+        font-size: 1.4em;
+    }
+
+    .az-form-group.md .az-alert-icons:first-child i
+    {
+        font-size: 1.7em;
+    }
+
+    .az-form-group .az-alert-icons:last-child i
+    {
+        float: right;
+        margin: -21px 9px 0 0;
+    }
+
+    .az-form-group.xs .az-alert-icons:last-child i
+    {
+        font-size: 0.85em;
+        margin: -17px 9px 0 0;
+    }
+
+    .az-form-group.sm .az-alert-icons:last-child i
+    {
+        font-size: 1.4em;
+        margin: -26px 9px 0 0;
+    }
+
+    .az-form-group.md .az-alert-icons:last-child i
+    {
+        font-size: 1.7em;
+        margin: -30px 9px 0 0;
+    }
 
 /* Modal Background */
 #az-background
@@ -999,10 +1200,26 @@
     top: 0;
     width: 100%;
     height: 100%;
-    padding-top: 30px;
     overflow: auto;
 }
 
+/* Modal Dialog */
+#az-modal-dialog
+{
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+    #az-modal-dialog > .az-modal-card
+    {
+    }
+
+        #az-modal-dialog > .az-modal-card > article
+        {
+        }
+
+/* Window */
 #az-window
 {
     position: relative;
@@ -1010,39 +1227,80 @@
     padding: 0px;
     width: 450px;
     height: auto;
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    -moz-animation-name: animatetop;
-    -moz-animation-duration: 0.4s;
-    -o-animation-name: animatetop;
-    -o-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
 }
+
+    #az-window.az-window-animation
+    {
+        -webkit-animation-name: az-window-animation;
+        -webkit-animation-duration: 0.4s;
+        -moz-animation-name: az-window-animation;
+        -moz-animation-duration: 0.4s;
+        -o-animation-name: az-window-animation;
+        -o-animation-duration: 0.4s;
+        animation-name: az-window-animation;
+        animation-duration: 0.4s;
+    }
 
     #az-window > .az-window-card
     {
-        padding: 7px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
     }
 
-    #az-window > .az-window-card > header
-    {
-        padding: 7px;
-    }
-
-        #az-window > .az-window-card > header > span
+        #az-window > .az-window-card > header
         {
-            float: right;
-            font-weight: bold;
-            cursor: pointer;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
         }
+
+            #az-window > .az-window-card > header > h1
+            {
+                display: inline-block;
+            }
+
+            #az-window > .az-window-card > header > span
+            {
+                float: right;
+                margin-right: 4px;
+                font-weight: bold;
+                cursor: pointer;
+            }
 
         #az-window > .az-window-card > article
         {
             margin-top: 7px;
             padding: 7px;
-            border: 1px solid #009688;
         }
+
+/* Full Window */
+#az-full-window
+{
+    position: fixed;
+    z-index: 5001;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+    #az-full-window.az-window-full
+    {
+        height: 100%;
+    }
+
+#az-full-window-close
+{
+    cursor: pointer;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    -webkit-transform: translateX(0%, -50%);
+    -moz-transform: translateX(0%, -50%);
+    -ms-transform: translateX(0%, -50%);
+    transform: translate(0%, -50%);
+}
 
 /* Dropdown */
 .az-dropdown-ul
@@ -1097,25 +1355,42 @@
     display: inline-block;
     padding: 7px;
     text-align: center;
+    cursor: pointer;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    outline: none;
+}
+
+.az-form-group .az-badge-hover:hover
+{
+    padding: 14px 7px 14px 7px;
+    background-color: #DDDDDD;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
 }
 
-    .az-form-group .az-badge.xs
-    {
-        font-size: 0.85em;
-    }
+.az-form-group .az-badge-hover:active
+{
+    outline: none;
+    font-size: 0.85em;
+}
 
-    .az-form-group .az-badge.sm
-    {
-        font-size: 1.1em;
-    }
+.az-form-group .az-badge.xs
+{
+    font-size: 0.85em;
+}
 
-    .az-form-group .az-badge.md
-    {
-        font-size: 1.2em;
-    }
+.az-form-group .az-badge.sm
+{
+    font-size: 1.1em;
+}
+
+.az-form-group .az-badge.md
+{
+    font-size: 1.2em;
+}
 
 .az-form-group.az-badge-wrapper
 {
@@ -1173,6 +1448,7 @@
     {
         font-size: 1.2em;
     }
+
 
 /* Cover Spin */
 #az-cover-spin
@@ -1236,28 +1512,28 @@
     width: 100%;
 }
 
-.az-form-group .az-progress-bar-hor > div
-{
-    padding: 4px;
-}
-
-    .az-form-group .az-progress-bar-hor > div.xs
+    .az-form-group .az-progress-bar-hor > div
     {
-        padding: 3px;
-        font-size: 0.85em;
+        padding: 4px;
     }
 
-    .az-form-group .az-progress-bar-hor > div.sm
-    {
-        padding: 5px;
-        font-size: 1.1em;
-    }
+        .az-form-group .az-progress-bar-hor > div.xs
+        {
+            padding: 3px;
+            font-size: 0.85em;
+        }
 
-    .az-form-group .az-progress-bar-hor > div.md
-    {
-        padding: 6px;
-        font-size: 1.2em;
-    }
+        .az-form-group .az-progress-bar-hor > div.sm
+        {
+            padding: 5px;
+            font-size: 1.1em;
+        }
+
+        .az-form-group .az-progress-bar-hor > div.md
+        {
+            padding: 6px;
+            font-size: 1.2em;
+        }
 
 .az-form-group .az-progress-bar-ver
 {
@@ -1377,8 +1653,8 @@
     }
 }
 
-/* #az-modal */
-@-webkit-keyframes animatetop
+/* #az-window */
+@-webkit-keyframes az-window-animation
 {
     from
     {
@@ -1393,7 +1669,7 @@
     }
 }
 
-@-moz-keyframes animatetop
+@-moz-keyframes az-window-animation
 {
     from
     {
@@ -1408,7 +1684,7 @@
     }
 }
 
-@-o-keyframes animatetop
+@-o-keyframes az-window-animation
 {
     from
     {
@@ -1423,7 +1699,7 @@
     }
 }
 
-@keyframes animatetop
+@keyframes az-window-animation
 {
     from
     {

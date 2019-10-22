@@ -1,4 +1,27 @@
-﻿/* Size ALL ----------*/
+﻿/*To support all modern browsers, the following styles should be used:
+
+Transitions:
+-webkit-transition
+-moz-transition
+-o-transition
+transition
+
+Transforms:
+-webkit-transform
+-moz-transform
+-o-transform
+transform
+
+xs - (0 - 576)
+sm - (577 - 767)
+md - (768 - 991)
+lg - (992 - 1199)
+xl - (1200 - )
+
+*/
+
+
+/* Size ALL ----------*/
 html
 {
     height: 100%;
@@ -10,6 +33,7 @@ html
 
 body
 {
+    height: 100%;
     padding: 0;
     outline: 0;
 }

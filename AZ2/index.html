@@ -16,16 +16,110 @@
     <title>AZ Framework</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
+    <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
+
+    <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
+    <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
+    <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
+    <script src="/lib/default.lang.js"></script>
+    <script>
+
+        $(document).ready(function ()
+        {
+            w3CodeColor();
+
+            $.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
+            {
+                console.log("azInputId: " + data.azInputId + "\nazInputValidType: " + data.azInputValidType + "\nazInputKey: " + data.azInputKey + "\nazInputJQElement: ", data.azInputJQElement)
+            });
+            $.subscribe("functionlib/AZPage", function (e, data)
+            {
+                console.log(data)
+            });
+
+            new AZPage(
+                {
+                    azPageInputTypeEvents: true,
+                    azPageLanguage: true,
+                    azPageValidation: true
+                });
+        });
+
+    </script>
 </head>
 <body>
 
-    <form id="frmReg">
+    <form class="disabled-enter" id="frmContact">
+        <div class="az-container-fluid">
 
-        <h1 style="width: 50%; float: left;"><a href="https://cdn.web2net.no/lib-1.0.0/azcdn100.html">AZ 1.0.0 Framework</a></h1>
+            <div class="az-row az-padding-t-14">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="CustomerName" id="labelCustomerName"></label>
+                        <input type="text" class="az-input" id="CustomerName" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="Contact" id="labelContact"></label>
+                        <input type="text" class="az-input" id="Contact" />
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="Email" id="labelEmail"></label>
+                        <input type="text" class="az-input" id="Email" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="RequestReasonId" id="labelRequestReasonId"></label>
+                        <select class="az-select" id="RequestReasonId">
+                            <option value="1">Nettsider - WordPress</option>
+                            <option value="2">Nettsider - Statiske</option>
+                            <option value="3">Nettbutikk</option>
+                            <option value="4">Serviceavtale</option>
+                            <option value="5">Design</option>
+                            <option value="6">SEO</option>
+                            <option value="7">Google Analytics</option>
+                            <option value="8">Sosiale medier</option>
+                            <option value="9">Annet</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="Comment" id="labelComment"></label>
+                        <textarea class="az-textarea" id="Comment"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <button type="button" class="az-button az-button-block info az-shadow-1 az-shadow-hover-2 cancel" id="cmdClose"></button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 submit" id="cmdSubmit"></button>
+                    </div>
+                </div>
+            </div>
 
-        <h1 style="width: 50%; float: left;"><a href="https://cdn.web2net.no/lib-2.0.0/azcdn200.html">AZ 2.0.0 Framework</a></h1>
-
+        </div>
     </form>
+
+    <!--<form id="frmReg">
+        <h1 style="width: 50%; float: left;"><a href="https://cdn.web2net.no/lib-1.0.0/azcdn100.html">AZ 1.0.0 Framework</a></h1>
+        <h1 style="width: 50%; float: left;"><a href="https://cdn.web2net.no/lib-2.0.0/azcdn200.html">AZ 2.0.0 Framework</a></h1>
+    </form>-->
 
 </body>
 </html>

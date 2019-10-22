@@ -105,19 +105,44 @@ function initAZPage(Options, Callback)
     //    }
     //}
 
+
+
+    //if (_Main.Options.azPageLanguageClientStorage === true)
+    //{
+    //    new AZSetLanguageClientStorage();
+    //}
+
+    //if (_Main.Options.azPageCustomerInfo === true)
+    //{
+    //    $.subscribeonce("functionlib/AZGetCustomerInfo", function (e, data)
+    //    {
+    //        if (_Main.Options.azPageSystemMenu === true)
+    //        {
+    //            new AZSetSystemMenu(data);
+    //            _Main.ObjCustomerInfo = data.ObjCustomerInfo;s
+    //        }
+    //        _Main.azLanguage();
+    //    });
+    //    new AZGetCustomerInfo();
+    //}
+    //else
+    //{
+    //    _Main.azLanguage();
+    //}
+
     main.azValidation = function ()
     {
         if (main.Options.azPageValidation)
         {
-            $.subscribeonce("functionlib/initAZGetValidation", function (e)
+            $.subscribeonce("functionlib/AZGetValidation", function (e)
             {
-                $.subscribeonce("functionlib/initAZSetValidation", function (e)
+                $.subscribeonce("functionlib/AZSetValidation", function (e)
                 {
                     main.azFormStyle();
                 });
-                new initAZSetValidation();
+                new AZSetValidation();
             });
-            new initAZGetValidation(ValidationPage);
+            new AZGetValidation(ValidationPage);
         }
         else
         {
@@ -511,7 +536,7 @@ function initGridView(SelectedArea)
     }
 }
 
-function checkValidateDirty(e)
+function AZValidateDirty(e)
 {
     if (typeof validateDirty == 'function')
     {
@@ -653,7 +678,7 @@ function azLabelAnimatedClick(e)
     $(_Element).siblings(":input").focus();
 }
 
-function initAZGetValidation(SelectedPage)
+function AZGetValidation(SelectedPage)
 {
     $.ajaxSetup({ cache: false });
     $.getJSON(SelectedPage).done(function (data)
@@ -661,20 +686,20 @@ function initAZGetValidation(SelectedPage)
         if (data instanceof Object && data != null && data != undefined)
         {
             ObjJsonValidation = data;
-            consoleLog("initAZGetValidation");
-            $.publish("functionlib/initAZGetValidation");
+            consoleLog("AZGetValidation");
+            $.publish("functionlib/AZGetValidation");
         }
         else
         {
-            throwException("silent", "", ThisPage, "initAZGetValidation-1", "Validation");
+            throwException("silent", "", ThisPage, "AZGetValidation-1", "Validation");
         }
     }).fail(function (jqXHR, textStatus, err)
     {
-        throwException("silent", "", ThisPage, "initAZGetValidation-2", "Validation");
+        throwException("silent", "", ThisPage, "AZGetValidation-2", "Validation");
     });
 }
 
-function initAZSetValidation(SelectedArea)
+function AZSetValidation(SelectedArea)
 {
     var _SelectedArea = "";
     if (SelectedArea != "" && SelectedArea != undefined && SelectedArea != null)
@@ -732,8 +757,8 @@ function initAZSetValidation(SelectedArea)
             }
         });
     });
-    consoleLog("initAZSetValidation");
-    $.publish("functionlib/initAZSetValidation");
+    consoleLog("AZSetValidation");
+    $.publish("functionlib/AZSetValidation");
 }
 
 function getValidateType(SelectedType)

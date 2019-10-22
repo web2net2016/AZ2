@@ -28,6 +28,8 @@
         var azWindow1;
         var azWindow2;
         var azWindow3;
+        var azFullWindow1;
+        var azFullWindow2;
 
         $(document).ready(function ()
         {
@@ -36,15 +38,17 @@
             $("#cmdAZWindow1").off("click", setAZWindow1).on("click", setAZWindow1);
             $("#cmdAZWindow2").off("click", setAZWindow2).on("click", setAZWindow2);
             $("#cmdAZWindow3").off("click", setAZWindow3).on("click", setAZWindow3);
+            $("#cmdAZFullWindow1").off("click", setAZFullWindow1).on("click", setAZFullWindow1);
+            $("#cmdAZFullWindow2").off("click", setAZFullWindow2).on("click", setAZFullWindow2);
         });
 
         function setAZWindow1()
         {
-            $.subscribeonce("functionlib/initAZWindow/azWindowAfterOpen", function (e)
+            $.subscribeonce("functionlib/azWindowAfterOpen", function (e)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azWindow1.azWindowClose();
+                    azWindow1.WindowClose();
                 });
             });
 
@@ -52,10 +56,10 @@
             _HTML += '<div class="az-row az-margin-t-28">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'var azWindow = new initAZWindow(<br />';
+            _HTML += 'var azWindow = new AZWindow(<br />';
             _HTML += '{<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Window 1",<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "AZ Window 1",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowText: _HTML<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
@@ -69,7 +73,7 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azWindow1 = new initAZWindow(
+            azWindow1 = new AZWindow(
                 {
                     azWindowTitle: "AZ Window 1",
                     azWindowText: _HTML
@@ -78,11 +82,11 @@
 
         function setAZWindow2()
         {
-            $.subscribeonce("functionlib/initAZWindow/azWindowAfterOpen", function (e)
+            $.subscribeonce("functionlib/azWindowAfterOpen", function (e)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azWindow2.azWindowClose();
+                    azWindow2.WindowClose();
                 });
             });
 
@@ -90,11 +94,17 @@
             _HTML += '<div class="az-row az-margin-t-28">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'var azWindow = new initAZWindow(<br />';
+            _HTML += 'var azWindow = new AZWindow(<br />';
             _HTML += '{<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Window 2",<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowModal: true<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowModal: true,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "AZ Window 2",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowText: _HTML,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowWidth: 550,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "#607D8B",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowBackgroundColor: "#607D8B",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowAnimation: false,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTopPosition: 100,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowNoParentScroll: true<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
@@ -108,25 +118,31 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azWindow2 = new initAZWindow(
+            azWindow2 = new AZWindow(
                 {
                     azWindowModal: true,
                     azWindowTitle: "AZ Window 2",
-                    azWindowText: _HTML
+                    azWindowText: _HTML,
+                    azWindowWidth: 550,
+                    azWindowTitlebarBackgroundColor: "#607D8B",
+                    azWindowBackgroundColor: "#607D8B",
+                    azWindowAnimation: false,
+                    azWindowTopPosition: 100,
+                    azWindowNoParentScroll: true
                 });
         }
 
         function setAZWindow3()
         {
-            $.subscribeonce("functionlib/initAZWindow/azWindowAfterOpen", function (e)
+            $.subscribeonce("functionlib/azWindowAfterOpen", function (e)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azWindow3.azChangeWindowTitlebar({ azWindowTitle: "Ny tittel" });
+                    azWindow3.ChangeWindowTitlebar({ azWindowTitle: "Ny tittel", azWindowTitlebarBackgroundColor: "#FF4136" });
                 });
                 $("#cmdButton2").off().on('click', function ()
                 {
-                    azWindow3.azWindowClose();
+                    azWindow3.WindowClose();
                 });
             });
 
@@ -134,9 +150,10 @@
             _HTML += '<div class="az-row az-margin-t-28">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialog.azChangeWindowTitlebar(<br />';
+            _HTML += 'azModalDialog.ChangeWindowTitlebar(<br />';
             _HTML += '{<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "Ny tittel"<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "Ny tittel",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "#FF4136"<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
@@ -157,19 +174,65 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azWindow3 = new initAZWindow(
+            azWindow3 = new AZWindow(
                 {
-                    azWindowModal: true,
                     azWindowTitle: "AZ Window",
                     azWindowText: _HTML,
-                    azWindowTitlebar: true,
-                    azWindowTitlebarClose: false,
-                    azWindowWidth: 450,
-                    azWindowHeight: 0,
-                    azWindowNoParentScroll: true,
-                    azWindowBackground: false,
-                    azWindowBeforeOpen: function () { },
-                    azWindowAfterOpen: function () { }
+                    azWindowWidth: 500,
+                    azWindowTopPosition: 100,
+                    azWindowBackground: false
+                });
+        }
+
+        function setAZFullWindow1()
+        {
+            var _HTML = "";
+            _HTML += '<div class="az-container">';
+            _HTML += '<div class="az-row az-margin-t-56">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'var azFullWindow = new AZFullWindow(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowText: _HTML<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+
+            azFullWindow1 = new AZFullWindow(
+                {
+                    azFullWindowText: _HTML
+                });
+        }
+
+        function setAZFullWindow2()
+        {
+            var _HTML = "";
+            _HTML += '<div class="az-container">';
+            _HTML += '<div class="az-row az-margin-t-56">';
+            _HTML += '<div class="az-col xs-12">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'var azFullWindow = new AZFullWindow(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowText: _HTML<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowPosition: "top"<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowFadeIn: 700<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowFadeOut: 700<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+
+            azFullWindow2 = new AZFullWindow(
+                {
+                    azFullWindowText: _HTML,
+                    azFullWindowPosition: "top",
+                    azFullWindowFadeIn: 700,
+                    azFullWindowFadeOut: 700
                 });
         }
 
@@ -197,18 +260,33 @@
                     </div>
                 </div>
             </div>
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZFullWindow1">AZ Full Window 1</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZFullWindow2">AZ Full Window 1</button>
+                    </div>
+                </div>
+            </div>
 
             <div class="row az-margin-t-56">
-                <div class="az-col xs-12">
+                <div class="az-col xs-12 sm-6">
                     <h1 class="az-code-header">AZ Window</h1>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <h1 class="az-code-header">AZ Full Window</h1>
                 </div>
             </div>
             <div class="az-row">
-                <div class="az-col xs-12">
+                <div class="az-col xs-12 sm-6">
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />
-                        var azWindow = new initAZWindow(<br />
+                        var azWindow = new AZWindow(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowModal: false,<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowTitle: "",<br />
@@ -217,6 +295,12 @@
                         &emsp;&ensp;&emsp;&ensp;azWindowTitlebarClose: true,<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowWidth: 450,<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowHeight: 0,<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowAnimation: true,<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTopPosition: 0,<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowBackgroundColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowColor: "#000000",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "#009688",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarColor: "#FFFFFF",<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowNoParentScroll: false,<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowBackground: true,<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowBeforeOpen: function () { },<br />
@@ -224,6 +308,37 @@
                         });<br />
                         <br />
                     </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-code jsHigh notranslate">
+                        <strong>Default settings</strong>
+                        <br />
+                        var azFullWindow = new initAZFullWindow(<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;azFullWindowText: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azFullWindowPosition: "bottom",<br />
+                        &emsp;&ensp;&emsp;&ensp;azFullWindowFadeIn: 400,<br />
+                        &emsp;&ensp;&emsp;&ensp;azFullWindowFadeOut: 400,<br />
+                        &emsp;&ensp;&emsp;&ensp;azFullWindowBackgroundColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azFullWindowColor: "#000000",<br />
+                        &emsp;&ensp;&emsp;&ensp;azFullWindowBeforeOpen: function () { },<br />
+                        &emsp;&ensp;&emsp;&ensp;azFullWindowAfterOpen: function () { }<br />
+                        });<br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
                     <div class="az-code htmlHigh notranslate">
                         <div class="az-code-property-wrapper">
                             <property>azWindowModal</property>
@@ -285,6 +400,55 @@
                             <br />
                             Høyden på <strong>AZWindow</strong> tilpasses automatisk etter innholdet, men vil aldri gå under <red>120</red>.
                             Ved skjermstørrelser under <red>576</red>, vil <strong>azWindowHeight</strong> tilpasses enhetens skjermstørrelse hvis <strong>azWindowHeight</strong> er satt større enn skjermens høyde.
+                            <br />
+                        </div>
+
+                        <div class="az-code-property-wrapper">
+                            <property>azWindowAnimation</property>
+                            <type><span>Type:</span> <brown>Boolean</brown></type>
+                            <default><span>Default:</span> <mediumblue>true</mediumblue></default>
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azWindowTopPosition</property>
+                            <type><span>Type:</span> <brown>Integer</brown></type>
+                            <default><span>Default:</span> <red>0</red></default>
+                            <units><span>Unit:</span> <red>px</red></units>
+                            <br />
+                            <br />
+                        </div>
+
+
+                        <div class="az-code-property-wrapper">
+                            <property>azWindowBackgroundColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
+                            <br />
+                            Se også CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azWindowColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"000000"</brown></default>
+                            <br />
+                            Se også CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azWindowTitlebarBackgroundColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"FF4136"</brown></default>
+                            <br />
+                            Se også CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azWindowTitlebarColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
+                            <br />
+                            Se også CSS .az-accordion
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">

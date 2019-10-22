@@ -29,6 +29,11 @@
         {
             w3CodeColor();
 
+            $.subscribe("functionlib/azSetDate", function (e, data)
+            {
+                console.log("azDateId: " + data.azDateId + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement)
+            });
+
             $.subscribe("functionlib/azCheckboxClick", function (e, data)
             {
                 console.log("azCheckboxId: " + data.azCheckboxId + "\nazCheckboxValue: " + data.azCheckboxValue + "\nazCheckboxChecked: " + data.azCheckboxChecked + "\nazCheckboxJQElement: ", data.azCheckboxJQElement)
@@ -44,65 +49,103 @@
                 console.log("azSwitchId: " + data.azSwitchId + "\nazSwitchValue: " + data.azSwitchValue + "\nazSwitchChecked: " + data.azSwitchChecked + "\nazSwitchJQElement: ", data.azSwitchJQElement)
             });
 
+            //$.subscribe("functionlib/azRangeCreate", function (e, data)
+            //{
+            //    //console.log("azRangeId: " + data.azRangeId + "\nazRangeValue: " + data.azRangeValue + "\nazRangeJQElement: ", data.azRangeJQElement)
+            //    //data.azRangeJQElement.siblings("div").text(data.azRangeValue);
+            //});
+
             $.subscribe("functionlib/azRangeSlide", function (e, data)
             {
-                console.log("azRangeId: " + data.azRangeId + "\nazRangeValue: " + data.azRangeValue + "\nazRangeJQElement: ", data.azRangeJQElement)
+                //console.log("azRangeId: " + data.azRangeId + "\nazRangeValue: " + data.azRangeValue + "\nazRangeJQElement: ", data.azRangeJQElement)
+                //data.azRangeJQElement.siblings("div").text(data.azRangeValue);
             });
 
             $.subscribe("functionlib/azRangeStop", function (e, data)
             {
-                console.log("azRangeId: " + data.azRangeId + "\nazRangeValue: " + data.azRangeValue + "\nazRangeJQElement: ", data.azRangeJQElement)
+                //console.log("azRangeId: " + data.azRangeId + "\nazRangeValue: " + data.azRangeValue + "\nazRangeJQElement: ", data.azRangeJQElement)
+            });
+
+            $.subscribe("functionlib/azRangeMultiCreate", function (e, data)
+            {
+                //console.log("azRangeMultiId: " + data.azRangeMultiId + "\nazRangeMultiValueLeft: " + data.azRangeMultiValueLeft + "\nazRangeMultiValueRight: " + data.azRangeMultiValueRight + "\nazRangeMultiJQElement: ", data.azRangeMultiJQElement)
+                data.azRangeMultiJQElement.siblings("div").text(data.azRangeMultiValueLeft + " - " + data.azRangeMultiValueRight);
             });
 
             $.subscribe("functionlib/azRangeMultiSlide", function (e, data)
             {
-                console.log("azRangeMultiId: " + data.azRangeMultiId + "\nazRangeMultiValueLeft: " + data.azRangeMultiValueLeft + "\nazRangeMultiValueRight: " + data.azRangeMultiValueRight + "\nazRangeMultiJQElement: ", data.azRangeMultiJQElement)
+                //console.log("azRangeMultiId: " + data.azRangeMultiId + "\nazRangeMultiValueLeft: " + data.azRangeMultiValueLeft + "\nazRangeMultiValueRight: " + data.azRangeMultiValueRight + "\nazRangeMultiJQElement: ", data.azRangeMultiJQElement)
+                data.azRangeMultiJQElement.siblings("div").text(data.azRangeMultiValueLeft + " - " + data.azRangeMultiValueRight);
             });
 
             $.subscribe("functionlib/azRangeMultiStop", function (e, data)
             {
-                console.log("azRangeMultiId: " + data.azRangeMultiId + "\nazRangeMultiValueLeft: " + data.azRangeMultiValueLeft + "\nazRangeMultiValueRight: " + data.azRangeMultiValueRight + "\nazRangeMultiJQElement: ", data.azRangeMultiJQElement)
+                //console.log("azRangeMultiId: " + data.azRangeMultiId + "\nazRangeMultiValueLeft: " + data.azRangeMultiValueLeft + "\nazRangeMultiValueRight: " + data.azRangeMultiValueRight + "\nazRangeMultiJQElement: ", data.azRangeMultiJQElement)
             });
 
-            new initAZRangeMulti(
+            new AZRangeMulti(
                 {
-                    azRangeMultiId: "xsrange1-multi"
+                    azRangeMultiId: "xsrange1-multi",
+                    azRangeMultiValues: [25, 75]
                 });
 
-            new initAZRangeMulti(
+            new AZRangeMulti(
                 {
-                    azRangeMultiId: "range1-multi"
+                    azRangeMultiId: "range1-multi",
+                    azRangeMultiValues: [25, 75]
                 });
 
-            new initAZRangeMulti(
+            new AZRangeMulti(
                 {
-                    azRangeMultiId: "smrange1-multi"
+                    azRangeMultiId: "smrange1-multi",
+                    azRangeMultiValues: [25, 75]
                 });
 
-            new initAZRangeMulti(
+            new AZRangeMulti(
                 {
-                    azRangeMultiId: "mdrange1-multi"
+                    azRangeMultiId: "mdrange1-multi",
+                    azRangeMultiValues: [25, 75]
                 });
 
-            new initAZRangeMulti(
+            new AZRangeMulti(
                 {
-                    azRangeMultiId: "xsrange2-multi"
+                    azRangeMultiId: "xsrange2-multi",
+                    azRangeMultiBackgroundColor: "#FFFFFF",
+                    azRangeMultiHandlerRightBackgroundColor: "#FF4136",
+                    azRangeMultiValues: [25, 75]
                 });
 
-            new initAZRangeMulti(
+            new AZRangeMulti(
                 {
-                    azRangeMultiId: "range2-multi"
+                    azRangeMultiId: "range2-multi",
+                    azRangeMultiBackgroundColor: "#FFFFFF",
+                    azRangeMultiHandlerRightBackgroundColor: "#FF4136",
+                    azRangeMultiMin: 0,
+                    azRangeMultiMax: 1000,
+                    azRangeMultiStep: 10,
+                    azRangeMultiValues: [0, 500]
                 });
 
-            new initAZRangeMulti(
+            new AZRangeMulti(
                 {
-                    azRangeMultiId: "smrange2-multi"
+                    azRangeMultiId: "smrange2-multi",
+                    azRangeMultiBackgroundColor: "#FFFFFF",
+                    azRangeMultiHandlerRightBackgroundColor: "#FF4136",
+                    azRangeMultiValues: [25, 75]
                 });
 
-            new initAZRangeMulti(
+            new AZRangeMulti(
                 {
-                    azRangeMultiId: "mdrange2-multi"
+                    azRangeMultiId: "mdrange2-multi",
+                    azRangeMultiBackgroundColor: "#FFFFFF",
+                    azRangeMultiHandlerRightBackgroundColor: "#FF4136",
+                    azRangeMultiValues: [25, 75]
                 });
+
+            $.subscribe("functionlib/azInputSpinner", function (e, data)
+            {
+                console.log("azInputSpinnerId: " + data.azInputSpinnerId + "\nazInputSpinnerValue: " + data.azInputSpinnerValue + "\nazInputSpinnerJQElement: ", data.azInputSpinnerJQElement)
+            });
         });        
 
     </script>
@@ -130,22 +173,26 @@
             <!--Alert-->
             <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
-                    <div class="az-form-group">
+                    <div class="az-form-group xs">
+                        <span class="az-alert-icons"><i class="fas fa-exclamation"></i></span>
                         <p class="az-alert xs az-alert-info" role="alert">Alert</p>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
+                        <span class="az-alert-icons"><i class="fas fa-exclamation"></i></span>
                         <p class="az-alert az-alert-info" role="alert">Alert</p>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-                    <div class="az-form-group">
+                    <div class="az-form-group sm">
+                        <span class="az-alert-icons"><i class="fas fa-exclamation"></i></span>
                         <p class="az-alert sm az-alert-info" role="alert">Alert</p>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-                    <div class="az-form-group">
+                    <div class="az-form-group md">
+                        <span class="az-alert-icons"><i class="fas fa-exclamation"></i></span>
                         <p class="az-alert md az-alert-info" role="alert">Alert</p>
                     </div>
                 </div>
@@ -154,23 +201,27 @@
             <!--Alert-->
             <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6 md-3">
-                    <div class="az-form-group">
+                    <div class="az-form-group xs">
                         <p class="az-alert az-round xs az-alert-info" role="alert">Alert</p>
+                        <span class="az-alert-icons"><i class="fas fa-exclamation"></i></span>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <p class="az-alert az-round az-alert-info" role="alert">Alert</p>
+                        <span class="az-alert-icons"><i class="fas fa-exclamation"></i></span>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-                    <div class="az-form-group">
+                    <div class="az-form-group sm">
                         <p class="az-alert az-round sm az-alert-info" role="alert">Alert</p>
+                        <span class="az-alert-icons"><i class="fas fa-exclamation"></i></span>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
-                    <div class="az-form-group">
+                    <div class="az-form-group md">
                         <p class="az-alert az-round md az-alert-info" role="alert">Alert</p>
+                        <span class="az-alert-icons"><i class="fas fa-exclamation"></i></span>
                     </div>
                 </div>
             </div>
@@ -236,29 +287,29 @@
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <label class="az-label xs">Datovelger</label>
-                        <input type="text" class="az-input xs date" />
-                        <i class="fas fa-calendar-alt"></i>
+                        <input type="text" class="az-input xs date" id="xsdate1" />
+                        <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <label class="az-label">Datovelger</label>
-                        <input type="text" class="az-input date" />
-                        <i class="fas fa-calendar-alt"></i>
+                        <input type="text" class="az-input date" id="date1" />
+                        <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <label class="az-label sm">Datovelger</label>
-                        <input type="text" class="az-input sm date" />
-                        <i class="fas fa-calendar-alt"></i>
+                        <input type="text" class="az-input sm date" id="smdate1" />
+                        <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <label class="az-label md">Datovelger</label>
-                        <input type="text" class="az-input md date" />
-                        <i class="fas fa-calendar-alt"></i>
+                        <input type="text" class="az-input md date" id="mddate1" />
+                        <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                     </div>
                 </div>
             </div>
@@ -268,29 +319,29 @@
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <label class="az-label xs">Datovelger</label>
-                        <input type="text" class="az-input az-round xs date" />
-                        <i class="fas fa-calendar-alt"></i>
+                        <input type="text" class="az-input az-round xs date" id="xsdate2" />
+                        <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <label class="az-label">Datovelger</label>
-                        <input type="text" class="az-input az-round date" />
-                        <i class="fas fa-calendar-alt"></i>
+                        <input type="text" class="az-input az-round date" id="date2" />
+                        <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <label class="az-label sm">Datovelger</label>
-                        <input type="text" class="az-input az-round sm date" />
-                        <i class="fas fa-calendar-alt"></i>
+                        <input type="text" class="az-input az-round sm date" id="smdate2" />
+                        <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <label class="az-label md">Datovelger</label>
-                        <input type="text" class="az-input az-round md date" />
-                        <i class="fas fa-calendar-alt"></i>
+                        <input type="text" class="az-input az-round md date" id="mddate2" />
+                        <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                     </div>
                 </div>
             </div>
@@ -612,21 +663,25 @@
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group xs">
                         <input class="az-range az-round xs" type="range" min="0" max="10" id="xsrange2">
+                        <div style="margin-top: 14px; text-align: center;"></div>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <input class="az-range az-round" type="range" min="0" max="10" id="range2">
+                        <div style="margin-top: 14px; text-align: center;"></div>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group sm">
                         <input class="az-range az-round sm" type="range" min="0" max="10" id="smrange2">
+                        <div style="margin-top: 14px; text-align: center;"></div>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group md">
                         <input class="az-range az-round md" type="range" min="0" max="10" id="mdrange2">
+                        <div style="margin-top: 14px; text-align: center;"></div>
                     </div>
                 </div>
             </div>
@@ -660,21 +715,61 @@
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group xs">
                         <div class="az-range-multi az-round xs" id="xsrange2-multi"></div>
+                        <div style="margin-top: 14px; text-align: center;"></div>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group">
                         <div class="az-range-multi az-round" id="range2-multi"></div>
+                        <div style="margin-top: 14px; text-align: center;"></div>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group sm">
                         <div class="az-range-multi az-round sm" id="smrange2-multi"></div>
+                        <div style="margin-top: 14px; text-align: center;"></div>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6 md-3">
                     <div class="az-form-group md">
                         <div class="az-range-multi az-round md" id="mdrange2-multi"></div>
+                        <div style="margin-top: 14px; text-align: center;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Input spinner -->
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group xs">
+                        <label class="az-label">Størrelse XS</label>
+                        <div class="az-input-group">
+                            <input type="text" class="az-input-spinner xs" value="0" min="0" max="100" step="10" />
+                        </div>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group">
+                        <label class="az-label">Størrelse Normal</label>
+                        <div class="az-input-group">
+                            <input type="text" class="az-input-spinner" data-decimals="2" value="0" min="0" max="20" step="2.50" />
+                        </div>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group sm">
+                        <label class="az-label">Størrelse SM</label>
+                        <div class="az-input-group">
+                            <input type="text" class="az-input-spinner sm" value="0" min="0" max="100" step="10" />
+                        </div>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-form-group md">
+                        <label class="az-label">Størrelse MD</label>
+                        <div class="az-input-group">
+                            <input type="text" class="az-input-spinner md" value="0" min="0" max="1000" step="10" />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -43,27 +43,27 @@
                 console.log("azTabsId: " + data.azTabsId + "\nazTabsJQElement: ", data.azTabsJQElement)
             });
 
-            $("#cmdAZTabs1").off().on("click", function (e) { azTabs1.azSetTabs(0) });
-            $("#cmdAZTabs2").off().on("click", function (e) { azTabs1.azSetTabs(1) });
-            $("#cmdAZTabs3").off().on("click", function (e) { azTabs1.azSetTabs(2) });
+            $("#cmdAZTabs1").off().on("click", function (e) { azTabs1.SelectTab(0) });
+            $("#cmdAZTabs2").off().on("click", function (e) { azTabs1.SelectTab(1) });
+            $("#cmdAZTabs3").off().on("click", function (e) { azTabs1.SelectTab(2) });
             $("#cmdAZTabsVertical").off().on("click", function (e)
             {
-                azTabs1.azToggleVertical()
+                azTabs1.ToggleVertical()
             });
 
-            azTabs1 = new initAZTabs(
+            azTabs1 = new AZTabs(
                 {
                     azTabsId: "az-tabs-1"
                 });
 
-            azTabs2 = new initAZTabs(
+            azTabs2 = new AZTabs(
                 {
                     azTabsId: "az-tabs-2",
                     azTabsHeightStyle: "auto",
                     azTabsOpenEvent: "mouseover"
                 });
 
-            azTabs3 = new initAZTabs(
+            azTabs3 = new AZTabs(
                 {
                     azTabsId: "az-tabs-3",
                     azTabsHeightStyle: "auto",
@@ -151,12 +151,10 @@
             <div class="az-row az-margin-t-14">
                 <div class="az-col xs-12">
                     <div class="az-code htmlHigh notranslate">
-                        Hvis du ønsker å bruke egne knapper eller linker til å åpne/lukke din Tab, bruker du JavaScript funksjonen under.
+                        Hvis du ønsker å bruke egne knapper eller linker til å åpne/lukke din AZTabs, bruker du JavaScript funksjonen under.
                     </div>
                     <div class="az-code jsHigh notranslate">
-                        azTabs.azSetTabs(0);<br />
-                        azTabs.azSetTabs(1);<br />
-                        azTabs.azSetTabs(2);<br />
+                        azTabs.SelectTab(0);<br />
                         <br />
                     </div>
                     <div class="az-code htmlHigh notranslate">
@@ -229,7 +227,7 @@
             <div class="az-row">
                 <div class="az-col xs-12 sm-6">
                     <div class="az-code jsHigh notranslate">
-                        var azTabsFunction1 = new initAZTabs(<br />
+                        var azTabs = new AZTabs(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azTabsId: "az-tabs-1"<br />
                         });<br />
@@ -240,7 +238,7 @@
                 </div>
                 <div class="az-col xs-12 sm-6">
                     <div class="az-code jsHigh notranslate">
-                        var azTabsFunction2 = new initAZTabs(<br />
+                        var azTabs = new AZTabs(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azTabsId: "az-tabs-2",<br />
                         &emsp;&ensp;&emsp;&ensp;azTabsHeightStyle: "content",<br />
@@ -254,7 +252,7 @@
             <div class="az-row">
                 <div class="az-col xs-12">
                     <div class="az-code jsHigh notranslate">
-                        var azTabsFunction1 = new initAZTabs(<br />
+                        var azTabs = new AZTabs(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azTabsId: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azTabsHeightStyle: "content",<br />

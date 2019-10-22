@@ -1,581 +1,644 @@
 ﻿/* Font Color */
-.az-text-color-default
+.az-color-default
 {
     color: #FFFFFF !important;
 }
 
-.az-text-color-primary
+.az-color-primary
 {
     color: #0078D7 !important;
 }
 
-.az-text-color-success
+.az-color-success
 {
     color: #28a745 !important;
 }
 
-.az-text-color-info
+.az-color-info
 {
     color: #0bb2d4 !important;
 }
 
-.az-text-color-warning
+.az-color-warning
 {
     color: #FF851B !important;
 }
 
-.az-text-color-danger
+.az-color-danger
 {
     color: #FF4136 !important;
 }
 
+.az-color-fire-engine
+{
+    color: #E81123 !important;
+}
+
+.az-color-harley-davidson-orange
+{
+    color: #D83B01 !important;
+}
+
+.az-color-selective-yellow
+{
+    color: #FFB900 !important;
+}
+
+.az-color-green
+{
+    color: #107C10 !important;
+}
+
+.az-color-pine-green
+{
+    color: #008272 !important;
+}
+
+.az-color-navy-blue
+{
+    color: #0078D7 !important;
+}
+
+.az-color-kelly-green
+{
+    color: #5DC21E !important;
+}
+
+.az-color-navy
+{
+    color: #001F3F !important;
+}
+
+.az-color-blue
+{
+    color: #0074D9 !important;
+}
+
+.az-color-aqua
+{
+    color: #7FDBFF !important;
+}
+
+.az-color-olive
+{
+    color: #3D9970 !important;
+}
+
+.az-color-lime
+{
+    color: #01FF70 !important;
+}
+
+.az-color-orange
+{
+    color: #FF851B !important;
+}
+
+.az-color-red
+{
+    color: #FF4136 !important;
+}
+
+.az-color-fuchsia
+{
+    color: #F012BE !important;
+}
+
+.az-color-purple
+{
+    color: #B10DC9 !important;
+}
+
+.az-color-maroon
+{
+    color: #85144B !important;
+}
+
+.az-color-white
+{
+    color: #FFFFFF !important;
+}
+
+.az-color-silver
+{
+    color: #DDDDDD !important;
+}
+
+.az-color-gray
+{
+    color: #AAAAAA !important;
+}
+
+.az-color-black
+{
+    color: #000000 !important;
+}
+
+.az-color-teal
+{
+    color: #009688 !important;
+}
+
+.az-color-blue-grey
+{
+    color: #607d8b !important;
+}
+
+/* Hover Font Color */
+.az-color-default:hover
+{
+    color: #FFFFFF !important;
+}
+
+.az-color-primary:hover
+{
+    color: #0078D7 !important;
+}
+
+.az-color-success:hover
+{
+    color: #28a745 !important;
+}
+
+.az-color-info:hover
+{
+    color: #0bb2d4 !important;
+}
+
+.az-color-warning:hover
+{
+    color: #FF851B !important;
+}
+
+.az-color-danger:hover
+{
+    color: #FF4136 !important;
+}
+
+.az-color-fire-engine-hover:hover
+{
+    color: #E81123 !important;
+}
+
+.az-color-harley-davidson-orange-hover:hover
+{
+    color: #D83B01 !important;
+}
+
+.az-color-selective-yellow-hover:hover
+{
+    color: #FFB900 !important;
+}
+
+.az-color-green-hover:hover
+{
+    color: #107C10 !important;
+}
+
+.az-color-pine-green-hover:hover
+{
+    color: #008272 !important;
+}
+
+.az-color-navy-blue-hover:hover
+{
+    color: #0078D7 !important;
+}
+
+.az-color-kelly-green-hover:hover
+{
+    color: #5DC21E !important;
+}
+
+.az-color-navy-hover:hover
+{
+    color: #001F3F !important;
+}
+
+.az-color-blue-hover:hover
+{
+    color: #0074D9 !important;
+}
+
+.az-color-aqua-hover:hover
+{
+    color: #7FDBFF !important;
+}
+
+.az-color-olive-hover:hover
+{
+    color: #3D9970 !important;
+}
+
+.az-color-lime-hover:hover
+{
+    color: #01FF70 !important;
+}
+
+.az-color-orange-hover:hover
+{
+    color: #FF851B !important;
+}
+
+.az-color-red-hover:hover
+{
+    color: #FF4136 !important;
+}
+
+.az-color-fuchsia-hover:hover
+{
+    color: #F012BE !important;
+}
+
+.az-color-purple-hover:hover
+{
+    color: #B10DC9 !important;
+}
+
+.az-color-maroon-hover:hover
+{
+    color: #85144B !important;
+}
+
+.az-color-white-hover:hover
+{
+    color: #FFFFFF !important;
+}
+
+.az-color-silver-hover:hover
+{
+    color: #DDDDDD !important;
+}
+
+.az-color-gray-hover:hover
+{
+    color: #AAAAAA !important;
+}
+
+.az-color-black-hover:hover
+{
+    color: #000000 !important;
+}
+
+.az-color-teal-hover:hover
+{
+    color: #009688 !important;
+}
+
+.az-color-blue-grey-hover:hover
+{
+    color: #607d8b !important;
+}
 
 /* Backgrounds */
-.az-bg-default
+.az-background-default
 {
     background-color: #FFFFFF !important;
     color: #000000 !important;
 }
-.az-bg-primary
+
+.az-background-primary
 {
     background-color: #0078D7 !important;
     color: #FFFFFF !important;
 }
-.az-bg-success
+
+.az-background-success
 {
     background-color: #28a745 !important;
     color: #FFFFFF !important;
 }
-.az-bg-info
+
+.az-background-info
 {
     background-color: #0bb2d4 !important;
     color: #FFFFFF !important;
 }
-.az-bg-warning
+
+.az-background-warning
 {
     background-color: #FF851B !important;
     color: #FFFFFF !important;
 }
-.az-bg-danger
+
+.az-background-danger
 {
     background-color: #FF4136 !important;
     color: #FFFFFF !important;
 }
 
-
-/* Font Color */
-.az-fire-engine
-{
-    color: #E81123 !important;
-}
-
-.az-harley-davidson-orange
-{
-    color: #D83B01 !important;
-}
-
-.az-selective-yellow
-{
-    color: #FFB900 !important;
-}
-
-.az-green
-{
-    color: #107C10 !important;
-}
-
-.az-pine-green
-{
-    color: #008272 !important;
-}
-
-.az-navy-blue
-{
-    color: #0078D7 !important;
-}
-
-.az-kelly-green
-{
-    color: #5DC21E !important;
-}
-
-.az-navy
-{
-    color: #001F3F !important;
-}
-
-.az-blue
-{
-    color: #0074D9 !important;
-}
-
-.az-aqua
-{
-    color: #7FDBFF !important;
-}
-
-.az-olive
-{
-    color: #3D9970 !important;
-}
-
-.az-lime
-{
-    color: #01FF70 !important;
-}
-
-.az-orange
-{
-    color: #FF851B !important;
-}
-
-.az-red
-{
-    color: #FF4136 !important;
-}
-
-.az-fuchsia
-{
-    color: #F012BE !important;
-}
-
-.az-purple
-{
-    color: #B10DC9 !important;
-}
-
-.az-maroon
-{
-    color: #85144B !important;
-}
-
-.az-white
-{
-    color: #FFFFFF !important;
-}
-
-.az-silver
-{
-    color: #DDDDDD !important;
-}
-
-.az-gray
-{
-    color: #AAAAAA !important;
-}
-
-.az-black
-{
-    color: #000000 !important;
-}
-
-.az-teal
-{
-    color: #009688 !important;
-}
-
-.az-blue-grey
-{
-    color: #607d8b !important;
-}
-
-
-/* Hover Font Color */
-.az-fire-engine-hover:hover
-{
-    color: #E81123 !important;
-}
-
-.az-harley-davidson-orange-hover:hover
-{
-    color: #D83B01 !important;
-}
-
-.az-selective-yellow-hover:hover
-{
-    color: #FFB900 !important;
-}
-
-.az-green-hover:hover
-{
-    color: #107C10 !important;
-}
-
-.az-pine-green-hover:hover
-{
-    color: #008272 !important;
-}
-
-.az-navy-blue-hover:hover
-{
-    color: #0078D7 !important;
-}
-
-.az-kelly-green-hover:hover
-{
-    color: #5DC21E !important;
-}
-
-.az-navy-hover:hover
-{
-    color: #001F3F !important;
-}
-
-.az-blue-hover:hover
-{
-    color: #0074D9 !important;
-}
-
-.az-aqua-hover:hover
-{
-    color: #7FDBFF !important;
-}
-
-.az-olive-hover:hover
-{
-    color: #3D9970 !important;
-}
-
-.az-lime-hover:hover
-{
-    color: #01FF70 !important;
-}
-
-.az-orange-hover:hover
-{
-    color: #FF851B !important;
-}
-
-.az-red-hover:hover
-{
-    color: #FF4136 !important;
-}
-
-.az-fuchsia-hover:hover
-{
-    color: #F012BE !important;
-}
-
-.az-purple-hover:hover
-{
-    color: #B10DC9 !important;
-}
-
-.az-maroon-hover:hover
-{
-    color: #85144B !important;
-}
-
-.az-white-hover:hover
-{
-    color: #FFFFFF !important;
-}
-
-.az-silver-hover:hover
-{
-    color: #DDDDDD !important;
-}
-
-.az-gray-hover:hover
-{
-    color: #AAAAAA !important;
-}
-
-.az-black-hover:hover
-{
-    color: #000000 !important;
-}
-
-.az-teal-hover:hover
-{
-    color: #009688 !important;
-}
-
-.az-blue-grey-hover:hover
-{
-    color: #607d8b !important;
-}
-
-
-/* Backgrounds */
-.az-bg-fire-engine
+.az-background-fire-engine
 {
 	background-color: #E81123 !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-harley-davidson-orange
+.az-background-harley-davidson-orange
 {
 	background-color: #D83B01 !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-selective-yellow
+.az-background-selective-yellow
 {
 	background-color: #FFB900 !important;
 	color: #000000 !important;
 }
 
-.az-bg-green
+.az-background-green
 {
 	background-color: #107C10 !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-pine-green
+.az-background-pine-green
 {
 	background-color: #008272 !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-navy-blue
+.az-background-navy-blue
 {
 	background-color: #0078D7 !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-kelly-green
+.az-background-kelly-green
 {
 	background-color: #5DC21E !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-navy
+.az-background-navy
 {
 	background-color: #001F3F !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-blue
+.az-background-blue
 {
 	background-color: #0074D9 !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-aqua
+.az-background-aqua
 {
 	background-color: #7FDBFF !important;
 	color: #000000 !important;
 }
 
-.az-bg-olive
+.az-background-olive
 {
 	background-color: #3D9970 !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-lime
+.az-background-lime
 {
 	background-color: #01FF70 !important;
 	color: #000000 !important;
 }
 
-.az-bg-orange
+.az-background-orange
 {
 	background-color: #FF851B !important;
 	color: #000000 !important;
 }
 
-.az-bg-red
+.az-background-red
 {
 	background-color: #FF4136 !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-fuchsia
+.az-background-fuchsia
 {
 	background-color: #F012BE !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-purple
+.az-background-purple
 {
 	background-color: #B10DC9 !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-maroon
+.az-background-maroon
 {
 	background-color: #85144B !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-white
+.az-background-white
 {
 	background-color: #FFFFFF !important;
 	color: #000000 !important;
 }
 
-.az-bg-silver
+.az-background-silver
 {
     background-color: #DDDDDD !important;
     color: #000000 !important;
 }
 
-.az-bg-gray
+.az-background-gray
 {
 	background-color: #AAAAAA !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-black
+.az-background-black
 {
 	background-color: #000000 !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-teal
+.az-background-teal
 {
 	background-color: #009688 !important;
 	color: #FFFFFF !important;
 }
 
-.az-bg-blue-grey
+.az-background-blue-grey
 {
 	background-color: #607d8b !important;
 	color: #FFFFFF !important;
 }
 
-
 /* Hover Background */
-.az-bg-hover-fire-engine:hover
+.az-background-hover-default:hover
+{
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+}
+
+.az-background-hover-primary:hover
+{
+    background-color: #0078D7 !important;
+    color: #FFFFFF !important;
+}
+
+.az-background-hover-success:hover
+{
+    background-color: #28a745 !important;
+    color: #FFFFFF !important;
+}
+
+.az-background-hover-info:hover
+{
+    background-color: #0bb2d4 !important;
+    color: #FFFFFF !important;
+}
+
+.az-background-hover-warning:hover
+{
+    background-color: #FF851B !important;
+    color: #FFFFFF !important;
+}
+
+.az-background-hover-danger:hover
+{
+    background-color: #FF4136 !important;
+    color: #FFFFFF !important;
+}
+
+.az-background-hover-fire-engine:hover
 {
 	background-color: #E81123;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-harley-davidson-orange:hover
+.az-background-hover-harley-davidson-orange:hover
 {
 	background-color: #D83B01;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-selective-yellow:hover
+.az-background-hover-selective-yellow:hover
 {
 	background-color: #FFB900;
 	color: #000000;
 }
 
-.az-bg-hover-green:hover
+.az-background-hover-green:hover
 {
 	background-color: #107C10;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-pine-green:hover
+.az-background-hover-pine-green:hover
 {
 	background-color: #008272;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-navy-blue:hover
+.az-background-hover-navy-blue:hover
 {
 	background-color: #0078D7;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-kelly-green:hover
+.az-background-hover-kelly-green:hover
 {
 	background-color: #5DC21E;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-navy:hover
+.az-background-hover-navy:hover
 {
 	background-color: #001F3F;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-blue:hover
+.az-background-hover-blue:hover
 {
 	background-color: #0074D9;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-aqua:hover
+.az-background-hover-aqua:hover
 {
 	background-color: #7FDBFF;
 	color: #000000;
 }
 
-.az-bg-hover-olive:hover
+.az-background-hover-olive:hover
 {
 	background-color: #3D9970;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-lime:hover
+.az-background-hover-lime:hover
 {
 	background-color: #01FF70;
 	color: #000000;
 }
 
-.az-bg-hover-orange:hover
+.az-background-hover-orange:hover
 {
 	background-color: #FF851B;
 	color: #000000;
 }
 
-.az-bg-hover-red:hover
+.az-background-hover-red:hover
 {
 	background-color: #FF4136;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-fuchsia:hover
+.az-background-hover-fuchsia:hover
 {
 	background-color: #F012BE;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-purple:hover
+.az-background-hover-purple:hover
 {
 	background-color: #B10DC9;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-maroon:hover
+.az-background-hover-maroon:hover
 {
 	background-color: #85144B;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-white:hover
+.az-background-hover-white:hover
 {
 	background-color: #FFFFFF;
 	color: #000000;
 }
 
-.az-bg-hover-gray:hover
+.az-background-hover-gray:hover
 {
 	background-color: #AAAAAA;
 	color: #000000;
 }
 
-.az-bg-hover-silver:hover
+.az-background-hover-silver:hover
 {
 	background-color: #DDDDDD;
 	color: #000000;
 }
 
-.az-bg-hover-black:hover
+.az-background-hover-black:hover
 {
 	background-color: #000000;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-teal:hover
+.az-background-hover-teal:hover
 {
 	background-color: #009688;
 	color: #FFFFFF;
 }
 
-.az-bg-hover-blue-grey:hover
+.az-background-hover-blue-grey:hover
 {
 	background-color: #607d8b;
 	color: #FFFFFF;
 }
-
 
 /* Border 1 */
 .az-border-1-fire-engine
@@ -693,7 +756,6 @@
     border: 1px solid #607d8b;
 }
 
-
 /* Border Left 1 */
 .az-border-left-1-fire-engine
 {
@@ -809,7 +871,6 @@
 {
     border-left: 1px solid #607d8b;
 }
-
 
 /* Border Top 1 */
 .az-border-top-1-fire-engine
@@ -927,7 +988,6 @@
     border-top: 1px solid #607d8b;
 }
 
-
 /* Border Right 1 */
 .az-border-right-1-fire-engine
 {
@@ -1043,7 +1103,6 @@
 {
     border-right: 1px solid #607d8b;
 }
-
 
 /* Border Bottom 1 */
 .az-border-bottom-1-fire-engine
@@ -1161,7 +1220,6 @@
     border-bottom: 1px solid #607d8b;
 }
 
-
 /* Border Hover 1 */
 .az-border-hover-1-fire-engine:hover
 {
@@ -1278,7 +1336,6 @@
     border: 1px solid #607d8b;
 }
 
-
 /* Border Left Hover 1 */
 .az-border-left-hover-1-fire-engine:hover
 {
@@ -1394,7 +1451,6 @@
 {
     border-left: 1px solid #607d8b;
 }
-
 
 /* Border Top Hover 1 */
 .az-border-top-hover-1-fire-engine:hover
@@ -1745,7 +1801,6 @@
 {
     border-bottom: 1px solid #607d8b;
 }
-
 
 /* Border Outline 1 */
 .az-border-outline-1-fire-engine

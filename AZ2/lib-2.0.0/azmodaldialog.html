@@ -57,11 +57,11 @@
 
         function setModalDialog1()
         {
-            $.subscribeonce("functionlib/initAZModalDialog/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialog1.azModalDialogClose();
+                    azModalDialog1.ModalDialogClose();
                 });
             });
 
@@ -69,7 +69,7 @@
             _HTML += '<div class="az-row az-margin-t-28">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'var azModalDialog = new initAZModalDialog(<br />';
+            _HTML += 'var azModalDialog = new AZModalDialog(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog 1",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
@@ -88,7 +88,7 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azModalDialog1 = new initAZModalDialog(
+            azModalDialog1 = new AZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog 1",
                     azModalDialogText: _HTML,
@@ -99,11 +99,11 @@
 
         function setModalDialog2()
         {
-            $.subscribeonce("functionlib/initAZModalDialog/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialog2.azModalDialogClose();
+                    azModalDialog2.ModalDialogClose();
                 });
             });
 
@@ -111,13 +111,16 @@
             _HTML += '<div class="az-row az-margin-t-28">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'var azModalDialog = new initAZModalDialog(<br />';
+            _HTML += 'var azModalDialog = new AZModalDialog(<br />';
             _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogModal: false,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog 2",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 550,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 400,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogModal: false<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 500,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "#607D8B",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarColor: "#FFFFFF",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogBackgroundColor: "#607D8B"<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
@@ -131,23 +134,26 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azModalDialog2 = new initAZModalDialog(
+            azModalDialog2 = new AZModalDialog(
                 {
+                    azModalDialogModal: false,
                     azModalDialogTitle: "AZ Modal Dialog 2",
                     azModalDialogText: _HTML,
                     azModalDialogWidth: 550,
-                    azModalDialogHeight: 400,
-                    azModalDialogModal: false
+                    azModalDialogHeight: 500,
+                    azModalDialogTitlebarBackgroundColor: "#607D8B",
+                    azModalDialogTitlebarColor: "#FFFFFF",
+                    azModalDialogBackgroundColor: "#607D8B"
                 });
         }
 
         function setModalDialog3()
         {
-            $.subscribeonce("functionlib/initAZModalDialog/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialog3.azModalDialogClose();
+                    azModalDialog3.ModalDialogClose();
                 });
             });
 
@@ -155,14 +161,15 @@
             _HTML += '<div class="az-row az-margin-t-28">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'var azModalDialog = new initAZModalDialog(<br />';
+            _HTML += 'var azModalDialog = new AZModalDialog(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog 3",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 550,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 450,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogBackground: false,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogCloseOnEscape: false<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogCloseOnEscape: false,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogNoParentScroll: true<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
@@ -176,20 +183,21 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azModalDialog3 = new initAZModalDialog(
+            azModalDialog3 = new AZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog 3",
                     azModalDialogText: _HTML,
                     azModalDialogWidth: 550,
                     azModalDialogHeight: 450,
                     azModalDialogBackground: false,
-                    azModalDialogCloseOnEscape: false
+                    azModalDialogCloseOnEscape: false,
+                    azModalDialogNoParentScroll: true
                 });
         }
 
         function setModalDialogiFrame()
         {
-            azModalDialogiFrame = new initAZModalDialog(
+            azModalDialogiFrame = new AZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog iFrame",
                     azModalDialogWidth: 1024,
@@ -200,11 +208,11 @@
 
         function setModalDialogPosition()
         {
-            $.subscribeonce("functionlib/initAZModalDialog/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialogPosition.azModalDialogClose();
+                    azModalDialogPosition.ModalDialogClose();
                 });
             });
 
@@ -212,7 +220,7 @@
             _HTML += '<div class="az-row az-margin-t-28">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'var azModalDialog = new initAZModalDialog(<br />';
+            _HTML += 'var azModalDialog = new AZModalDialog(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog Position",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
@@ -241,7 +249,7 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azModalDialogPosition = new initAZModalDialog(
+            azModalDialogPosition = new AZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog Position",
                     azModalDialogText: _HTML,
@@ -256,11 +264,11 @@
 
         function setModalDialog4()
         {
-            $.subscribeonce("functionlib/initAZModalDialog/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialog4.azModalDialogClose();
+                    azModalDialog4.ModalDialogClose();
                 });
             });
 
@@ -268,7 +276,7 @@
             _HTML += '<div class="az-row az-margin-t-28">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialog.azModalDialogClose()<br />';
+            _HTML += 'azModalDialog.ModalDialogClose()<br />';
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '</div>';
@@ -281,7 +289,7 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azModalDialog4 = new initAZModalDialog(
+            azModalDialog4 = new AZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog 4",
                     azModalDialogText: _HTML
@@ -290,11 +298,11 @@
 
         function setModalDialog5()
         {
-            $.subscribeonce("functionlib/initAZModalDialog/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialog5.azModalDialogClose({ azModalDialogLocationReload: true });
+                    azModalDialog5.ModalDialogClose({ azModalDialogLocationReload: true });
                 });
             });
 
@@ -302,7 +310,7 @@
             _HTML += '<div class="az-row az-margin-t-28">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialog.azModalDialogClose(<br />';
+            _HTML += 'azModalDialog.ModalDialogClose(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogLocationReload: true<br />';
             _HTML += '});<br />';
@@ -318,7 +326,7 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azModalDialog5 = new initAZModalDialog(
+            azModalDialog5 = new AZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog 5",
                     azModalDialogText: _HTML,
@@ -329,11 +337,11 @@
 
         function setModalDialog6()
         {
-            $.subscribeonce("functionlib/initAZModalDialog/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialog6.azModalDialogClose({ azModalDialogAfterClose: function () { window.location.href = "azcdn200.html" } });
+                    azModalDialog6.ModalDialogClose({ azModalDialogAfterClose: function () { window.location.href = "azcdn200.html" } });
                 });
             });
 
@@ -341,7 +349,7 @@
             _HTML += '<div class="az-row az-margin-t-28">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialog.azModalDialogClose(<br />';
+            _HTML += 'azModalDialog.ModalDialogClose(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogAfterClose: function () { window.location.href = "index.html" }<br />';
             _HTML += '});<br />';
@@ -357,7 +365,7 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azModalDialog6 = new initAZModalDialog(
+            azModalDialog6 = new AZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog 6",
                     azModalDialogText: _HTML,
@@ -368,15 +376,15 @@
 
         function setModalDialog7()
         {
-            $.subscribeonce("functionlib/initAZModalDialog/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    setModalDialog7.azChangeModalTitlebar({ azModalDialogTitle: "Ny tittel" });
+                    setModalDialog7.ChangeModalTitlebar({ azModalDialogTitle: "Ny tittel", azModalDialogTitlebarBackgroundColor: "#FF4136" });
                 });
                 $("#cmdButton2").off().on('click', function ()
                 {
-                    setModalDialog7.azModalDialogClose();
+                    setModalDialog7.ModalDialogClose();
                 });
             });
 
@@ -384,9 +392,10 @@
             _HTML += '<div class="az-row az-margin-t-28">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialog.azChangeModalTitlebar(<br />';
+            _HTML += 'azModalDialog.ChangeModalTitlebar(<br />';
             _HTML += '{<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "Ny tittel"<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "Ny tittel",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "#FF4136"<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
@@ -407,7 +416,7 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            setModalDialog7 = new initAZModalDialog(
+            setModalDialog7 = new AZModalDialog(
                 {
                     azModalDialogTitle: "AZ Modal Dialog Tittel",
                     azModalDialogText: _HTML,
@@ -463,7 +472,7 @@
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />
-                        var azModalDialog = new initAZModalDialog(<br />
+                        var azModalDialog = new AZModalDialog(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogModal: true,<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
@@ -480,6 +489,10 @@
                         &emsp;&ensp;&emsp;&ensp;azModalDialogCloseOnEscape: true,<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogPosition: false,<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogPositionOf: {},<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogBackgroundColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogColor: "#000000",<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "#009688",<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarColor: "#FFFFFF",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogPositionMy: "left bottom-30",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogPositionAt: "left top"<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogBeforeOpen: function () { },<br />
@@ -624,7 +637,7 @@
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />
-                        azModalDialog.azModalDialogClose(<br />
+                        azModalDialog.ModalDialogClose(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogLocationReload: false,<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogAfterClose: function () { }<br />
@@ -667,7 +680,8 @@
                         azModalDialog.azChangeModalTitlebar(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogAlertClass: 'az-alert-danger',<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "#009688",<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarColor: "#FFFFFF",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogAlertTimeout: 3000<br />
                         });<br />
                         <br />

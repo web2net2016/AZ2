@@ -91,8 +91,6 @@ card.css
 
     .az-card > article
     {
-        background-color: #FFFFFF;
-        color: #000000;
     }
 
         .az-card > article > h1
@@ -169,10 +167,14 @@ form.css
 - Toggle Switch
 - Rounded Toggle Switch
 - Range (Slider)
+- Multi Range (Slider)
 - Buttons
 - Input Animated
 - Alert
 - Modal Background
+- Modal Dialog
+- Window
+- Full Window
 - Dropdown
 - Badge
 - Cover Spin
@@ -260,6 +262,9 @@ form.css
     {
         background-color: #0078D7;
     }
+
+/* Multi Range (Slider) */
+
 
 /* Buttons */
 .az-form-group .az-button.default
@@ -363,16 +368,20 @@ form.css
     color: #FFFFFF;
 }
 
-/* Modal */
+/* Modal Background */
 #az-background
 {
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
 
+/* Modal Dialog */
+
+
+/* Window */
 #az-window > .az-window-card
 {
-    background-color: #FFFFFF;
+    padding: 7px;
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -380,19 +389,16 @@ form.css
 
     #az-window > .az-window-card > header
     {
-        background-color: #FF4136;
-        color: #FFFFFF;
+        padding: 7px;
     }
 
         #az-window > .az-window-card > header > h1
         {
-            display: inline-block;
             font-size: 16px;
         }
 
         #az-window > .az-window-card > header > span
         {
-            margin-right: 4px;
             font-size: 16px;
         }
 
@@ -400,6 +406,18 @@ form.css
             {
                 color: #FFFFFF;
             }
+
+/* Full Window */
+#az-full-window-close
+{
+    padding: 7px 14px;
+    font-size: 35px;
+}
+
+    #az-full-window-close:hover
+    {
+        background: #DDDDDD;
+    }
 
 /* Dropdown */
 .az-dropdown-layout
@@ -428,9 +446,9 @@ form.css
                 color: #FFFFFF;
             }
 
-            .az-dropdown-layout > li > a > i 
+            .az-dropdown-layout > li > a > i
             {
-                margin-right: 7px;
+                margin-right: 7px !important;
             }
 
 /* Badge */
@@ -441,7 +459,7 @@ form.css
 #az-cover-spin > div
 {
     margin-top: 60px;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 /* Fieldset */
@@ -505,8 +523,6 @@ list.css
 
     .az-list-card > article
     {
-        background-color: #FFFFFF;
-        color: #000000;
     }
 
         .az-list-card > article > h1
@@ -1074,15 +1090,12 @@ jqueryui/jquery-ui.min.css
 {
     margin-bottom: 7px !important;
     border: 0 !important;
-    background-color: transparent !important;
     font-weight: normal !important
 }
 
 .ui-dialog-titlebar
 {
     padding: 0px !important;
-    background-color: #009688 !important;
-    color: #FFFFFF !important;
 }
 
 .ui-dialog-title
@@ -1098,118 +1111,17 @@ jqueryui/jquery-ui.min.css
 
 .ui-corner-all
 {
-    -webkit-border-radius: 0 !important;
-    -moz-border-radius: 0 !important;
-    border-radius: 0 !important;
+    -webkit-border-radius: 4px !important;
+    -moz-border-radius: 4px !important;
+    border-radius: 4px !important;
 }
 
 .ui-dialog-content
 {
-    border: 1px solid #009688 !important;
     padding: 7px !important;
-    background-color: #FFFFFF !important;
 }
 
 .ui-widget.ui-widget-content
 {
     border: 1px solid #dddddd !important;
 }
-
-.az-form-group .az-range-multi
-{
-    height: 20px !important;
-    border: none !important;
-    background-color: #CCCCCC !important;
-}
-
-    .az-form-group .az-range-multi .ui-slider-handle:focus
-    {
-        outline: none;
-    }
-
-    .az-form-group .az-range-multi.xs
-    {
-        height: 15px !important;
-    }
-
-    .az-form-group .az-range-multi.sm
-    {
-        height: 25px !important;
-    }
-
-    .az-form-group .az-range-multi.md
-    {
-        height: 30px !important;
-    }
-
-    .az-form-group .az-range-multi.az-round
-    {
-        border-radius: 10px !important;
-    }
-
-        .az-form-group .az-range-multi.az-round.xs
-        {
-            border-radius: 5px !important;
-        }
-
-        .az-form-group .az-range-multi.az-round.sm
-        {
-            border-radius: 15px !important;
-        }
-
-        .az-form-group .az-range-multi.az-round.md
-        {
-            border-radius: 20px !important;
-        }
-
-    .az-form-group .az-range-multi .ui-slider-handle
-    {
-        width: 20px !important;
-        height: 30px !important;
-        border: none !important;
-        background: #0078D7 !important;
-        cursor: pointer !important;
-    }
-
-    .az-form-group .az-range-multi.xs .ui-slider-handle
-    {
-        width: 15px !important;
-        height: 25px !important;
-    }
-
-    .az-form-group .az-range-multi.sm .ui-slider-handle
-    {
-        width: 25px !important;
-        height: 35px !important;
-    }
-
-    .az-form-group .az-range-multi.md .ui-slider-handle
-    {
-        width: 30px !important;
-        height: 40px !important;
-    }
-
-    .az-form-group .az-range-multi.az-round .ui-slider-handle
-    {
-        width: 30px !important;
-        height: 30px !important;
-        border-radius: 50% !important;
-    }
-
-    .az-form-group .az-range-multi.az-round.xs .ui-slider-handle
-    {
-        width: 25px !important;
-        height: 25px !important;
-    }
-
-    .az-form-group .az-range-multi.az-round.sm .ui-slider-handle
-    {
-        width: 35px !important;
-        height: 35px !important;
-    }
-
-    .az-form-group .az-range-multi.az-round.md .ui-slider-handle
-    {
-        width: 40px !important;
-        height: 40px !important;
-    }
