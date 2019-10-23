@@ -62,7 +62,6 @@
     }
 }
 
-// Local Storeage
 function checkLocalStorage()
 {
     try
@@ -98,7 +97,6 @@ function removeLocalStorage(LSName)
     localStorage.removeItem(LSName);
 }
 
-// Cookies
 function checkCookie()
 {
     try

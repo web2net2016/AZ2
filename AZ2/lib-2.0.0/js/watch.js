@@ -1,18 +1,3 @@
-/**
- * DEVELOPED BY
- * GIL LOPES BUENO
- * gilbueno.mail@gmail.com
- *
- * WORKS WITH:
- * IE8*, IE 9+, FF 4+, SF 5+, WebKit, CH 7+, OP 12+, BESEN, Rhino 1.7+
- * For IE8 (and other legacy browsers) WatchJS will use dirty checking  
- *
- * FORK:
- * https://github.com/melanke/Watch.JS
- *
- * LICENSE: MIT
- */
-
 "use strict";
 (function (factory)
 {

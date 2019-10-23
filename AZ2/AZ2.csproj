@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\index\index.html" />
     <Content Include="lib-2.0.0\aztabs.html" />
     <Content Include="lib-2.0.0\azaccordion.html" />
     <Content Include="lib-2.0.0\azajax.html" />
@@ -121,6 +122,7 @@
     <Content Include="lib-2.0.0\jqueryui\images\ui-icons_777777_256x240.png" />
     <Content Include="lib-2.0.0\jqueryui\images\ui-icons_cc0000_256x240.png" />
     <Content Include="lib-2.0.0\jqueryui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="lib-2.0.0\jqueryui\jquery.ui.touch-punch.min.js" />
     <Content Include="lib-2.0.0\jqueryui\jquery-ui.min.css" />
     <Content Include="lib-2.0.0\jqueryui\jquery-ui.min.js" />
     <Content Include="lib-2.0.0\jqueryui\jquery_ui_langs.min.js" />
@@ -129,7 +131,7 @@
       <DependentUpon>az-2.0.0.js</DependentUpon>
     </Content>
     <Content Include="lib-2.0.0\js\clientstorage.js" />
-    <Content Include="lib\default.lang.js" />
+    <None Include="lib\default.lang.json" />
     <Content Include="lib-2.0.0\lib\functionlib - Copy.js" />
     <Content Include="lib-2.0.0\js\functionlib.js" />
     <Content Include="lib-2.0.0\js\jquery.3.3.1.js" />

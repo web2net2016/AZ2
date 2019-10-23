@@ -826,6 +826,7 @@ function AZPage(Options)
     _Main.ObjPageAttributes = {};
     _Main.ObjLanguage = {};
     _Main.JsonUrl = "";
+    _Main.DefaultLanguageFile = "";
 
     _Main.ObjPageAttributes = new AZCheckPageAttributes();
     if (IsEmpty(_Main.ObjPageAttributes) === false)
@@ -901,7 +902,7 @@ function AZPage(Options)
                 {
                     if (IsEmpty(data) === false && textStatus === "success")
                     {
-                        new AZSetLanguage(data);
+                        new AZSetLanguage(data, _Main.DefaultLanguageFile);
                     }
                     else
                     {
@@ -920,6 +921,7 @@ function AZPage(Options)
         {
             if (IsEmpty(data) === false && textStatus === "success")
             {
+                _Main.DefaultLanguageFile = data.DefaultLanguageFile;
                 ThisLanguage = AZGetLanguageClientStorage();
                 if (ThisLanguage == null)
                 {
@@ -927,13 +929,21 @@ function AZPage(Options)
                 }
                 moment.locale(ThisLanguage);
                 AZSetLanguageClientStorage(ThisLanguage);
-                if ((data.LanguageValidationFolder.match(new RegExp("/", "g")) || []).length > 1)
+
+                if (_Main.ObjPageAttributes.Rooth === true)
                 {
-                    _Main.JsonUrl = data.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName;
+                    _Main.JsonUrl = "/lib/lang-val/" + _Main.ObjPageAttributes.PageFirstName;
                 }
                 else
                 {
-                    _Main.JsonUrl = data.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName + "/lib/lang-val/" + _Main.ObjPageAttributes.PageFirstName;
+                    if ((data.LanguageValidationFolder.match(new RegExp("/", "g")) || []).length > 1)
+                    {
+                        _Main.JsonUrl = data.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName;
+                    }
+                    else
+                    {
+                        _Main.JsonUrl = data.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName + "/lib/lang-val/" + _Main.ObjPageAttributes.PageFirstName;
+                    }
                 }
                 _Main.Language();
             }
@@ -969,8 +979,10 @@ function AZCheckPageAttributes()
         }
         if (_Main.PageName != "" || _Main.PageName.length === 0)
         {
+            _Main.ObjPageAttributes.Rooth = false;
             if (_Main.PageName.length === 0)
             {
+                _Main.ObjPageAttributes.Rooth = true;
                 _Main.ObjPageAttributes.PageName = "index.html";
             }
             else
@@ -1035,26 +1047,65 @@ function AZSetLanguageClientStorage(Language)
 }
 
 // AZ Set Language
-function AZSetLanguage(ObjPageLanguage)
+function AZSetLanguage(ObjPageLanguage, DefaultLanguageFile)
 {
     var _Main = this;
-    _Main.ObjLanguage =
-        {
-            ObjNonLanguageElements: MyDefaultLanguage.ObjNonLanguageElements,
-            SingleNonLanguageElements: MyDefaultLanguage.SingleNonLanguageElements,
-            ObjDefaultElements: MyDefaultLanguage.ObjDefaultElements[ThisLanguage],
-            SingleDefaultElements: MyDefaultLanguage.SingleDefaultElements[ThisLanguage],
-            ObjElements: ObjPageLanguage.ObjElements[ThisLanguage],
-            SingleElements: ObjPageLanguage.SingleElements[ThisLanguage]
-        }
-    if (_Main.ObjLanguage.SingleElements.hasOwnProperty("labelPageTitle"))
+    _Main.SetFullLanguage = function (ObjDefaultLanguage)
     {
-        document.title = _Main.ObjLanguage.SingleElements.labelPageTitle;
+        _Main.ObjLanguage =
+            {
+                ObjNonLanguageElements: ObjDefaultLanguage.ObjNonLanguageElements,
+                SingleNonLanguageElements: ObjDefaultLanguage.SingleNonLanguageElements,
+                ObjDefaultElements: ObjDefaultLanguage.ObjDefaultElements[ThisLanguage],
+                SingleDefaultElements: ObjDefaultLanguage.SingleDefaultElements[ThisLanguage],
+                ObjElements: ObjPageLanguage.ObjElements[ThisLanguage],
+                SingleElements: ObjPageLanguage.SingleElements[ThisLanguage]
+            }
+        $.publish("AZSetLanguage");
     }
-    AZSetFormLanguage(_Main.ObjLanguage.ObjNonLanguageElements);
-    AZSetFormLanguage(_Main.ObjLanguage.ObjDefaultElements);
-    AZSetFormLanguage(_Main.ObjLanguage.ObjElements);
-    $.publish("functionlib/AZSetLanguage", _Main.ObjLanguage);
+
+    _Main.SetSingleLanguage = function ()
+    {
+        _Main.ObjLanguage =
+            {
+                ObjElements: ObjPageLanguage.ObjElements[ThisLanguage],
+                SingleElements: ObjPageLanguage.SingleElements[ThisLanguage]
+            }
+        $.publish("AZSetLanguage");
+        consoleLog({ consoleType: "error", consoleText: "No Default Language File" });
+    }
+
+    $.subscribeonce("AZSetLanguage", function (e, data)
+    {
+        if (_Main.ObjLanguage.SingleElements.hasOwnProperty("labelPageTitle"))
+        {
+            document.title = _Main.ObjLanguage.SingleElements.labelPageTitle;
+        }
+        AZSetFormLanguage(_Main.ObjLanguage.ObjNonLanguageElements);
+        AZSetFormLanguage(_Main.ObjLanguage.ObjDefaultElements);
+        AZSetFormLanguage(_Main.ObjLanguage.ObjElements);
+        $.publish("functionlib/AZSetLanguage", _Main.ObjLanguage);
+    });
+
+    if (DefaultLanguageFile != "")
+    {
+        _Main.$DefaultLanguage = new AZGetJSON({ azJsonUrl: DefaultLanguageFile });
+        _Main.$DefaultLanguage.always(function (data, textStatus, jqXHR)
+        {
+            if (IsEmpty(data) === false && textStatus === "success")
+            {
+                _Main.SetFullLanguage(data);
+            }
+            else
+            {
+                _Main.SetSingleLanguage();
+            }
+        });
+    }
+    else
+    {
+        _Main.SetSingleLanguage();
+    }
 }
 
 // AZ Set Form Language
@@ -1258,7 +1309,7 @@ function AZSetInputTypeEvents()
             if (_ValidType !== null)
             {
                 $(this).off("keypress", AZValidateInputValueKeypress).on("keypress", { ValidType: _ValidType }, AZValidateInputValueKeypress);
-            }           
+            }
         }
         if ($(this).is("[type='range']") && $(this).hasClass("az-range") && $(this).hasClass("validate"))
         {

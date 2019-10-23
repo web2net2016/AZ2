@@ -59,7 +59,8 @@
             _HTML += 'var azWindow = new AZWindow(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "AZ Window 1",<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowText: _HTML<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowText: _HTML,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowHeight: 350<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
@@ -76,7 +77,8 @@
             azWindow1 = new AZWindow(
                 {
                     azWindowTitle: "AZ Window 1",
-                    azWindowText: _HTML
+                    azWindowText: _HTML,
+                    azWindowHeight: 350
                 });
         }
 
@@ -100,11 +102,13 @@
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "AZ Window 2",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowText: _HTML,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowWidth: 550,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowHeight: 550,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowPositionTop: 100,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowAnimation: false,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowNoParentScroll: true<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowBorderColor: "#607D8B",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "#607D8B",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowBackgroundColor: "#607D8B",<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowAnimation: false,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTopPosition: 100,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowNoParentScroll: true<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
@@ -124,11 +128,13 @@
                     azWindowTitle: "AZ Window 2",
                     azWindowText: _HTML,
                     azWindowWidth: 550,
-                    azWindowTitlebarBackgroundColor: "#607D8B",
-                    azWindowBackgroundColor: "#607D8B",
+                    azWindowHeight: 550,
+                    azWindowPositionTop: 100,
                     azWindowAnimation: false,
-                    azWindowTopPosition: 100,
-                    azWindowNoParentScroll: true
+                    azWindowNoParentScroll: true,
+                    azWindowBorderColor: "#607D8B",
+                    azWindowTitlebarBackgroundColor: "#607D8B",
+                    azWindowBackgroundColor: "#607D8B"
                 });
         }
 
@@ -178,8 +184,8 @@
                 {
                     azWindowTitle: "AZ Window",
                     azWindowText: _HTML,
-                    azWindowWidth: 500,
-                    azWindowTopPosition: 100,
+                    azWindowWidth: 550,
+                    azWindowHeight: 400,
                     azWindowBackground: false
                 });
         }
@@ -295,14 +301,15 @@
                         &emsp;&ensp;&emsp;&ensp;azWindowTitlebarClose: true,<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowWidth: 450,<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowHeight: 0,<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowPositionTop: 0,<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowAnimation: true,<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowTopPosition: 0,<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowBackgroundColor: "#FFFFFF",<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowColor: "#000000",<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "#009688",<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarColor: "#FFFFFF",<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowNoParentScroll: false,<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowBackground: true,<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowBorderColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "#009688",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowBackgroundColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowColor: "#000000",<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowBeforeOpen: function () { },<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowAfterOpen: function () { }<br />
                         });<br />
@@ -324,6 +331,7 @@
                         &emsp;&ensp;&emsp;&ensp;azFullWindowBeforeOpen: function () { },<br />
                         &emsp;&ensp;&emsp;&ensp;azFullWindowAfterOpen: function () { }<br />
                         });<br />
+                        <br />
                         <br />
                         <br />
                         <br />
@@ -395,30 +403,18 @@
                         <div class="az-code-property-wrapper">
                             <property>azWindowHeight</property>
                             <type><span>Type:</span> <brown>Integer</brown></type>
-                            <default><span>Default:</span> <red>0</red></default>
+                            <default><span>Default:</span> <red>150</red></default>
                             <units><span>Unit:</span> <red>px</red></units>
                             <br />
-                            Høyden på <strong>AZWindow</strong> tilpasses automatisk etter innholdet, men vil aldri gå under <red>120</red>.
                             Ved skjermstørrelser under <red>576</red>, vil <strong>azWindowHeight</strong> tilpasses enhetens skjermstørrelse hvis <strong>azWindowHeight</strong> er satt større enn skjermens høyde.
                             <br />
                         </div>
-
                         <div class="az-code-property-wrapper">
                             <property>azWindowAnimation</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>true</mediumblue></default>
                             <br />
                         </div>
-                        <div class="az-code-property-wrapper">
-                            <property>azWindowTopPosition</property>
-                            <type><span>Type:</span> <brown>Integer</brown></type>
-                            <default><span>Default:</span> <red>0</red></default>
-                            <units><span>Unit:</span> <red>px</red></units>
-                            <br />
-                            <br />
-                        </div>
-
-
                         <div class="az-code-property-wrapper">
                             <property>azWindowBackgroundColor</property>
                             <type><span>Type:</span> <brown>Color Hex</brown></type>
