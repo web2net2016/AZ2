@@ -1026,11 +1026,1178 @@ jQuery(function (e) { e.datepicker.regional["en-US"] = { showWeek: !0, showOther
     return WatchJS;
 
 }));
+function clientStorage(ActionType, Name, Value)
+{
+    var _ThisLocation = window.document.location.hostname;
+    var _LocalStorageEnabled = checkLocalStorage();
+    if (typeof Value === "object")
+    {
+        Value = JSON.stringify(Value);
+    }
+    if (_LocalStorageEnabled == true)
+    {
+        if (ActionType == "set")
+        {
+            setLocalStorage(_ThisLocation + "-" + Name, Value);
+        }
+        else if (ActionType == "get")
+        {
+            return getLocalStorage(_ThisLocation + "-" + Name);
+        }
+        else if (ActionType == "remove")
+        {
+            removeLocalStorage(_ThisLocation + "-" + Name);
+        }
+        else if (ActionType == "delete")
+        {
+            removeLocalStorage(_ThisLocation + "-" + Name);
+        }
+        else
+        {
+            clientStorageError("Local Storage: Wrong action type.");
+        }
+    }
+    else
+    {
+        var _CookieEnabled = checkCookie();
+        if (_CookieEnabled == true)
+        {
+            if (ActionType == "set")
+            {
+                setCookie(_ThisLocation + "-" + Name, Value);
+            }
+            else if (ActionType == "get")
+            {
+                return getCookie(_ThisLocation + "-" + Name);
+            }
+            else if (ActionType == "remove")
+            {
+                removeCookie(_ThisLocation + "-" + Name);
+            }
+            else if (ActionType == "delete")
+            {
+                removeCookie(_ThisLocation + "-" + Name);
+            }
+            else
+            {
+                clientStorageError("Cookies: Wrong action type.");
+            }
+        }
+        else
+        {
+            clientStorageError("Local Storage / Cookies not supported.");
+        }
+    }
+}
+
+function checkLocalStorage()
+{
+    try
+    {
+        var _SupportsLocalStorage = !!window.localStorage && typeof localStorage.getItem === 'function' && typeof localStorage.setItem === 'function' && typeof localStorage.removeItem === 'function';
+        if (_SupportsLocalStorage)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    catch (e)
+    {
+        return false;
+    }
+}
+
+function setLocalStorage(LSName, LSValue)
+{
+    localStorage.setItem(LSName, LSValue);
+}
+
+function getLocalStorage(LSName)
+{
+    return localStorage.getItem(LSName);
+}
+
+function removeLocalStorage(LSName)
+{
+    localStorage.removeItem(LSName);
+}
+
+function checkCookie()
+{
+    try
+    {
+        if (navigator.cookieEnabled)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    catch (e)
+    {
+        return false;
+    }
+}
+
+function setCookie(CName, CValue)
+{
+    var _Date = new Date();
+    _Date.setTime(_Date.getTime() + (365 * 24 * 60 * 60 * 1000));
+    var _Expires = "expires=" + _Date.toUTCString();
+    document.cookie = CName + "=" + CValue + "; " + _Expires;
+}
+
+function getCookie(CName)
+{
+    var _Name = CName + "=";
+    var _DecodedCookie = decodeURIComponent(document.cookie);
+    var _CA = _DecodedCookie.split(';');
+    for (var i = 0; i < _CA.length; i++)
+    {
+        var _C = _CA[i];
+        while (_C.charAt(0) == ' ')
+        {
+            _C = _C.substring(1);
+        }
+        if (_C.indexOf(_Name) == 0)
+        {
+            return _C.substring(_Name.length, _C.length);
+        }
+    }
+    return "";
+}
+
+function removeCookie(CName)
+{
+    document.cookie = CName + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+function clientStorageError(consoleText)
+{
+    console.error("Client Storage Error\n" + consoleText);
+}
 // AZ-Functionlib v2.0.0 | (c) web2net AS
 
-var azModalDialogScrollTop = 0;
-var ObjInitializePageOptions = {};
-var DebugMode = true;
+var ModalDialogScrollTop = 0;
+
+$(document).ready(function ()
+{
+    (function ($)
+    {
+        var _$Obj = $({});
+        $.each(
+            {
+                trigger: "publish",
+                on: "subscribe",
+                one: "subscribeonce",
+                off: "unsubscribe"
+            }, function (key, val)
+            {
+                jQuery[val] = function ()
+                {
+                    _$Obj[key].apply(_$Obj, arguments);
+                };
+            });
+
+        var _azLastScrollTop = 0;
+        $(window).scroll(function ()
+        {
+            $.publish("functionlib/azWindowScroll",
+                {
+                    azWindowScrollTop: parseInt($(window).scrollTop()),
+                    azWindowScrollDir: ($(window).scrollTop() > _azLastScrollTop) ? "down" : "up"
+                });
+            _azLastScrollTop = $(this).scrollTop();
+        });
+
+        window.setTimeout(function ()
+        {
+            $.publish("functionlib/azWindowResize",
+                {
+                    azWindowWidth: parseInt(window.innerWidth),
+                    azWindowHeight: parseInt(window.innerHeight),
+                    azWindowScrollTop: parseInt($(window).scrollTop()),
+                    azWindowScrollLeft: parseInt($(window).scrollLeft()),
+                    azWindowOrientation: (window.innerHeight > window.innerWidth) ? "portrait" : "landscape"
+                });
+        }, 100);
+        $(window).resize(function ()
+        {
+            $.publish("functionlib/azWindowResize",
+                {
+                    azWindowWidth: parseInt(window.innerWidth),
+                    azWindowHeight: parseInt(window.innerHeight),
+                    azWindowScrollTop: parseInt($(window).scrollTop()),
+                    azWindowScrollLeft: parseInt($(window).scrollLeft()),
+                    azWindowOrientation: (window.innerHeight > window.innerWidth) ? "portrait" : "landscape"
+                });
+        });
+
+        var _DefaultLanguage = clientStorage("get", "language", "");
+        if (_DefaultLanguage === null)
+        {
+            _DefaultLanguage = "nb-NO";
+        }
+        var _DatePicker = false;
+        $(":input").each(function ()
+        {
+            if ($(this).is("[type='text'], [type='password'], [type='datetime'], [type='datetime-local'], [type='date'], [type='month'], [type='time'], [type='week'], [type='number'], [type='email'], [type='url'], [type='search'], [type='tel'], [type='color']"))
+            {
+                _DatePicker = false;
+                $(this).attr("autocomplete", "off");
+                if ($(this).hasClass("az-input-animated"))
+                {
+                    $(this).off("focusout", AZInputAnimatedFocusout).on("focusout", AZInputAnimatedFocusout);
+                }
+                if ($(this).hasClass("forceuppercase"))
+                {
+                    $(this).off("keypress focusout", AZForceUppercaseKeypressFocusout).on("keypress focusout", AZForceUppercaseKeypressFocusout);
+                }
+                if ($(this).hasClass("forcelowercase"))
+                {
+                    $(this).off("keypress focusout", AZForceLowercaseKeypressFocusout).on("keypress focusout", AZForceLowercaseKeypressFocusout);
+                }
+                if ($(this).hasClass("donotpaste"))
+                {
+                    $(this).off("keydown", AZDoNotPaste).on("keydown", AZDoNotPaste);
+                }
+                if ($(this).hasClass("notenter"))
+                {
+                    $(this).off("keydown", AZNotEnter).on("keydown", AZNotEnter);
+                }
+                if ($(this).hasClass("readonly"))
+                {
+                    $(this).attr("readOnly", true);
+                }
+                if ($(this).hasClass("disabled"))
+                {
+                    $(this).attr("disabled", true);
+                }
+                if ($(this).hasClass("selecttext"))
+                {
+                    $(this).click(function (e)
+                    {
+                        $(this).select();
+                    });
+                }
+                if ($(this).hasClass("date"))
+                {
+                    _DatePicker = true;
+                    $(this).datepicker
+                        ({
+                            beforeShow: function ()
+                            {
+                                if ($(this).hasClass("xs") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                }
+                                else if ($(this).hasClass("sm") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                }
+                                else if ($(this).hasClass("md") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                }
+                                else
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                }
+                            },
+                            onSelect: function (curDate, instance)
+                            {
+                                $.publish("functionlib/azSetDate",
+                                    {
+                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                        azDateLocalDate: curDate,
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateJQElement: $(this)
+                                    });
+                            }
+                        });
+                }
+                if ($(this).hasClass("pastdate"))
+                {
+                    _DatePicker = true;
+                    $(this).datepicker(
+                        {
+                            beforeShow: function ()
+                            {
+                                if ($(this).hasClass("xs") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                }
+                                else if ($(this).hasClass("sm") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                }
+                                else if ($(this).hasClass("md") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                }
+                                else
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                }
+                            },
+                            maxDate: 0,
+                            yearRange: "-60:+0",
+                            onSelect: function (curDate, instance)
+                            {
+                                $.publish("functionlib/azSetDate",
+                                    {
+                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                        azDateLocalDate: curDate,
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateJQElement: $(this)
+                                    });
+                            }
+                        });
+                }
+                if ($(this).hasClass("nopastdate"))
+                {
+                    _DatePicker = true;
+                    $(this).datepicker(
+                        {
+                            beforeShow: function ()
+                            {
+                                if ($(this).hasClass("xs") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                }
+                                else if ($(this).hasClass("sm") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                }
+                                else if ($(this).hasClass("md") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                }
+                                else
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                }
+                            },
+                            minDate: 0,
+                            onSelect: function (curDate, instance)
+                            {
+                                $.publish("functionlib/azSetDate",
+                                    {
+                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                        azDateLocalDate: curDate,
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateJQElement: $(this)
+                                    });
+                            }
+                        });
+                }
+                if ($(this).hasClass("fromdate"))
+                {
+                    _DatePicker = true;
+                    $(this).datepicker(
+                        {
+                            beforeShow: function ()
+                            {
+                                if ($(this).hasClass("xs") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                }
+                                else if ($(this).hasClass("sm") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                }
+                                else if ($(this).hasClass("md") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                }
+                                else
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                }
+                            },
+                            numberOfMonths: 2,
+                            onSelect: function (curDate, instance)
+                            {
+                                $(".todate").datepicker("option", "minDate", curDate);
+                                $.publish("functionlib/azSetDate",
+                                    {
+                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                        azDateLocalDate: curDate,
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateJQElement: $(this)
+                                    });
+                            }
+                        });
+                }
+                if ($(this).hasClass("todate"))
+                {
+                    _DatePicker = true;
+                    $(this).datepicker(
+                        {
+                            beforeShow: function ()
+                            {
+                                if ($(this).hasClass("xs") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                }
+                                else if ($(this).hasClass("sm") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                }
+                                else if ($(this).hasClass("md") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                }
+                                else
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                }
+                            },
+                            numberOfMonths: 2,
+                            onSelect: function (curDate, instance)
+                            {
+                                $(".fromdate").datepicker("option", "maxDate", curDate);
+                                $.publish("functionlib/azSetDate",
+                                    {
+                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                        azDateLocalDate: curDate,
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateJQElement: $(this)
+                                    });
+                            }
+                        });
+                }
+                if ($(this).hasClass("frompastdate"))
+                {
+                    _DatePicker = true;
+                    $(this).datepicker(
+                        {
+                            beforeShow: function ()
+                            {
+                                if ($(this).hasClass("xs") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                }
+                                else if ($(this).hasClass("sm") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                }
+                                else if ($(this).hasClass("md") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                }
+                                else
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                }
+                            },
+                            maxDate: 0,
+                            numberOfMonths: 2,
+                            onSelect: function (curDate, instance)
+                            {
+                                $(".topastdate").datepicker("option", "minDate", curDate);
+                                $.publish("functionlib/azSetDate",
+                                    {
+                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                        azDateLocalDate: curDate,
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateJQElement: $(this)
+                                    });
+                            }
+                        });
+                }
+                if ($(this).hasClass("topastdate"))
+                {
+                    _DatePicker = true;
+                    $(this).datepicker(
+                        {
+                            beforeShow: function ()
+                            {
+                                if ($(this).hasClass("xs") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                }
+                                else if ($(this).hasClass("sm") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                }
+                                else if ($(this).hasClass("md") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                }
+                                else
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                }
+                            },
+                            maxDate: 0,
+                            numberOfMonths: 2,
+                            onSelect: function (curDate, instance)
+                            {
+                                $(".frompastdate").datepicker("option", "maxDate", curDate);
+                                $.publish("functionlib/azSetDate",
+                                    {
+                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                        azDateLocalDate: curDate,
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateJQElement: $(this)
+                                    });
+                            }
+                        });
+                }
+                if ($(this).hasClass("fromnopastdate"))
+                {
+                    _DatePicker = true;
+                    $(this).datepicker(
+                        {
+                            beforeShow: function ()
+                            {
+                                if ($(this).hasClass("xs") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                }
+                                else if ($(this).hasClass("sm") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                }
+                                else if ($(this).hasClass("md") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                }
+                                else
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                }
+                            },
+                            minDate: 0,
+                            numberOfMonths: 2,
+                            onSelect: function (curDate, instance)
+                            {
+                                $(".tonopastdate").datepicker("option", "minDate", curDate);
+                                $.publish("functionlib/azSetDate",
+                                    {
+                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                        azDateLocalDate: curDate,
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateJQElement: $(this)
+                                    });
+                            }
+                        });
+                }
+                if ($(this).hasClass("tonopastdate"))
+                {
+                    _DatePicker = true;
+                    $(this).datepicker(
+                        {
+                            beforeShow: function ()
+                            {
+                                if ($(this).hasClass("xs") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                }
+                                else if ($(this).hasClass("sm") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                }
+                                else if ($(this).hasClass("md") == true)
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                }
+                                else
+                                {
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                }
+                            },
+                            minDate: 0,
+                            numberOfMonths: 2,
+                            onSelect: function (curDate, instance)
+                            {
+                                $(".fromnopastdate").datepicker("option", "maxDate", curDate);
+                                $.publish("functionlib/azSetDate",
+                                    {
+                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                        azDateLocalDate: curDate,
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateJQElement: $(this)
+                                    });
+                            }
+                        });
+                }
+                if (_DatePicker == true)
+                {
+                    $.datepicker.setDefaults($.datepicker.regional[_DefaultLanguage]);
+                }
+            }
+            if ($(this).is("[type='range']") && $(this).hasClass("az-range"))
+            {
+                $(this).off("input change", AZRange).on("input change", AZRange);
+            }
+            if ($(this).is("textarea"))
+            {
+                $(this).attr("autocomplete", "false");
+                if ($(this).hasClass("forceuppercase"))
+                {
+                    $(this).off("keypress focusout", AZForceUppercaseKeypressFocusout).on("keypress focusout", AZForceUppercaseKeypressFocusout);
+                }
+                if ($(this).hasClass("forcelowercase"))
+                {
+                    $(this).off("keypress focusout", AZForceLowercaseKeypressFocusout).on("keypress focusout", AZForceLowercaseKeypressFocusout);
+                }
+                if ($(this).hasClass("donotpaste"))
+                {
+                    $(this).off("keydown", AZDoNotPaste).on("keydown", AZDoNotPaste);
+                }
+                if ($(this).hasClass("notenter"))
+                {
+                    $(this).off("keydown", AZNotEnter).on("keydown", AZNotEnter);
+                }
+                if ($(this).hasClass("readonly"))
+                {
+                    $(this).attr("readOnly", true);
+                }
+                if ($(this).hasClass("disabled"))
+                {
+                    $(this).attr("disabled", true);
+                }
+                if ($(this).hasClass("selecttext"))
+                {
+                    $(this).click(function (e)
+                    {
+                        $(this).select();
+                    });
+                }
+            }
+            if ($(this).is("[type='checkbox']"))
+            {
+                if ($(this).hasClass("disabled"))
+                {
+                    $(this).attr("disabled", true);
+                }
+                if ($(this).hasClass("az-checkbox"))
+                {
+                    $(this).off("click", AZCheckboxClick).on("click", AZCheckboxClick);
+                }
+                if ($(this).parent("label").hasClass("az-switch"))
+                {
+                    $(this).off("click", AZSwitchClick).on("click", AZSwitchClick);
+                }
+            }
+            if ($(this).is("[type='radio']"))
+            {
+                if ($(this).hasClass("disabled"))
+                {
+                    $(this).attr("disabled", true);
+                }
+                if ($(this).hasClass("az-radio"))
+                {
+                    $(this).off("click", AZRadioClick).on("click", AZRadioClick);
+                }
+            }
+            if ($(this).is("select"))
+            {
+                if ($(this).hasClass("readonly"))
+                {
+                    $(this).attr("readOnly", true);
+                }
+                if ($(this).hasClass("disabled"))
+                {
+                    $(this).attr("disabled", true);
+                }
+            }
+            if ($(this).is("button"))
+            {
+                if ($(this).hasClass("cancel"))
+                {
+                    if (typeof AZCancel == 'function')
+                    {
+                        $(this).off("click", AZCancel).on("click", AZCancel);
+                    }
+                }
+                if ($(this).hasClass("submit"))
+                {
+                    if (typeof AZSubmit == 'function')
+                    {
+                        $(this).off("click", AZSubmit).on("click", AZSubmit);
+                    }
+                }
+                if ($(this).hasClass("delete"))
+                {
+                    if (typeof AZDelete == 'function')
+                    {
+                        $(this).off("click", AZDelete).on("click", AZDelete);
+                    }
+                }
+                if ($(this).hasClass("az-navbar-button"))
+                {
+                    $(this).off("click", AZToggleNavbarMobile).on("click", AZToggleNavbarMobile);
+                }
+                if ($(this).hasClass("disabled"))
+                {
+                    AZDisableButton(this);
+                }
+            }
+        });
+
+        // Password Eye
+        $(".passwordeye").off("click", AZHideShowPassword).on("click", AZHideShowPassword);
+
+        // Animated Label
+        $(".az-label-animated").off("click", AZLabelAnimatedClick).on("click", AZLabelAnimatedClick);
+
+        // Adjust Cards Height
+        $('.az-accordion-card.adjust, .az-card.adjust, .az-list-card.adjust, .az-timeline-card.adjust').matchHeight();
+
+        // Navbar Top Menu
+        var _$NavbarTopMenu = $(".az-navbar-top-content").find(".az-navbar-menu");
+        var _NavbarTopHeight = _$NavbarTopMenu.parents(".az-navbar-top").height();
+        _$NavbarTopMenu.off().on("click", "li > a", function (e)
+        {
+            var _Anchor = $(this).attr('href');
+            if (_Anchor.indexOf("#") === 0)
+            {
+                e.preventDefault();
+                if (_$NavbarTopMenu.parents(".az-navbar-top").hasClass("az-navbar-sticky") === false)
+                {
+                    _NavbarTopHeight = 0;
+                }
+                if (_$NavbarTopMenu.hasClass("az-animated") === true)
+                {
+                    $('html, body').stop().animate(
+                        {
+                            scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
+                        },
+                        {
+                            easing: 'easeInOutExpo',
+                            duration: 1500
+                        });
+                }
+                else
+                {
+                    $('html, body').stop().animate(
+                        {
+                            scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
+                        },
+                        {
+                            duration: 0
+                        });
+                }
+                $(".az-navbar-top-content").removeClass("mobile");
+            }
+        });
+
+        // Dropdown Menu
+        if ($(".az-dropdown-button").is(":button"))
+        {
+            $(".az-dropdown-button").off("click", AZDropdown).on("click", AZDropdown);
+        }
+        $(".az-dropdown-button[href]").off("click", AZDropdown).on("click", AZDropdown);
+
+        // Input Spinner
+        var _ObjAttributes = {};
+        var _$CurrentSpinner = null;
+        var _$ParentElement = null;
+        $(".az-input-spinner").each(function ()
+        {
+            _$CurrentSpinner = $(this).attr("disabled", true);
+            _$ParentElement = $(this).parent(".az-input-group");
+            _ObjAttributes = AZCheckSpinnerAttributes(this);
+
+            if (IsEmpty(_ObjAttributes) === false)
+            {
+                if ((_ObjAttributes.Value < _ObjAttributes.Min) || (_ObjAttributes.Value > _ObjAttributes.Max))
+                {
+                    _$CurrentSpinner.remove();
+                    _$ParentElement.html('<div>Her er det en feil</div>');
+                }
+                else
+                {
+                    if (_ObjAttributes.hasOwnProperty("Decimals"))
+                    {
+                        _$CurrentSpinner.val(numeral(_ObjAttributes.Value).format('0.00'));
+                    }
+                    _$ParentElement.append('<span class="az-input-group-addon az-spinner-decrement"><i class="fas fa-minus"></i></span>').append(_$CurrentSpinner).append('<span class="az-input-group-addon az-spinner-increment"><i class="fas fa-plus"></i></span>');
+                    AZSetSpinnerEvents(_$ParentElement, _ObjAttributes);
+                }
+            }
+            else
+            {
+                _$CurrentSpinner.remove();
+                _$ParentElement.html('<div>Her er det en feil</div>');
+            }
+        });
+    })(jQuery);
+});
+
+function AZInputAnimatedFocusout(e)
+{
+    var _Element = e.target || e.srcElement;
+    if ($(_Element).val() != "")
+    {
+        $('label[for="' + _Element.id + '"]').css({ "top": "-15px" });
+    }
+    else
+    {
+        $('label[for="' + _Element.id + '"]').removeAttr('style');
+    }
+}
+
+function AZForceUppercaseKeypressFocusout(e)
+{
+    var _Element = e.target || e.srcElement;
+    $(_Element).val($(_Element).val().toUpperCase());
+}
+
+function AZForceLowercaseKeypressFocusout(e)
+{
+    var _Element = e.target || e.srcElement;
+    $(_Element).val($(_Element).val().toLowerCase());
+}
+
+function AZDoNotPaste(e)
+{
+    if (e.ctrlKey == true && (e.which == 118 || e.which == 86))
+    {
+        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+    }
+}
+
+function AZNotEnter(e)
+{
+    if ((e.keyCode || e.which) == 13)
+    {
+        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+    }
+}
+
+function AZCheckboxClick(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _$SelectedCheckbox = $(this);
+    $.publish("functionlib/azCheckboxClick",
+        {
+            azCheckboxId: _$SelectedCheckbox.attr("id") === undefined ? "" : _$SelectedCheckbox.attr("id"),
+            azCheckboxValue: _$SelectedCheckbox.attr("value") === undefined ? "" : _$SelectedCheckbox.attr("value"),
+            azCheckboxChecked: _$SelectedCheckbox.is(":checked"),
+            azCheckboxJQElement: $(_Element)
+        });
+}
+
+function AZRadioClick(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _$SelectedRadio = $(this);
+    $.publish("functionlib/azRadioClick",
+        {
+            azRadioId: _$SelectedRadio.attr("id") === undefined ? "" : _$SelectedRadio.attr("id"),
+            azRadioName: _$SelectedRadio.attr("name") === undefined ? "" : _$SelectedRadio.attr("name"),
+            azRadioValue: _$SelectedRadio.attr("value") === undefined ? "" : _$SelectedRadio.attr("value"),
+            azRadioChecked: _$SelectedRadio.is(":checked"),
+            azRadioJQElement: $(_Element)
+        });
+}
+
+function AZSwitchClick(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _$SelectedSwitch = $(this);
+    $.publish("functionlib/azSwitchClick",
+        {
+            azSwitchId: _$SelectedSwitch.attr("id") === undefined ? "" : _$SelectedSwitch.attr("id"),
+            azSwitchValue: _$SelectedSwitch.attr("value") === undefined ? "" : _$SelectedSwitch.attr("value"),
+            azSwitchChecked: _$SelectedSwitch.is(":checked"),
+            azSwitchJQElement: $(_Element)
+        });
+}
+
+function AZRange(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _$SelectedRange = $(this);
+    if (e.type === "input")
+    {
+        $.publish("functionlib/azRangeSlide",
+            {
+                azRangeId: _$SelectedRange.attr("id") === undefined ? "" : _$SelectedRange.attr("id"),
+                azRangeValue: _$SelectedRange.val(),
+                azRangeJQElement: $(_Element)
+            });
+    }
+    else if (e.type === "change")
+    {
+        $.publish("functionlib/azRangeStop",
+            {
+                azRangeId: _$SelectedRange.attr("id") === undefined ? "" : _$SelectedRange.attr("id"),
+                azRangeValue: _$SelectedRange.val(),
+                azRangeJQElement: $(_Element)
+            });
+    }
+}
+
+function AZDisableButton(Element)
+{
+    var _$SelectedButton = $(Element);
+    if (!_$SelectedButton.hasClass("az-button-disabled"))
+    {
+        _$SelectedButton.addClass("az-button-disabled");
+        _$SelectedButton.attr("disabled", true);
+    }
+}
+
+function AZEnableButton(Element)
+{
+    var _$SelectedButton = $(Element);
+    if (_$SelectedButton.hasClass("az-button-disabled"))
+    {
+        _$SelectedButton.removeClass("az-button-disabled");
+        _$SelectedButton.attr("disabled", false);
+    }
+}
+
+function AZShowCoverSpin(CoverSpinText)
+{
+    var _CoverSpinText = CoverSpinText === undefined ? "" : CoverSpinText;
+    var _$CoverSpin = $("#az-cover-spin");
+    if (_$CoverSpin.length == 0)
+    {
+        $("body").append('<div id="az-cover-spin"><div>' + _CoverSpinText + '</div></div>');
+    }
+}
+
+function AZHideCoverSpin()
+{
+    var _$CoverSpin = $("#az-cover-spin");
+    if (_$CoverSpin.length > 0)
+    {
+        _$CoverSpin.remove();
+    }
+}
+
+function AZToggleNavbarMobile(e)
+{
+    var _$NavbarTopContent = $(".az-navbar-top-content");
+    if (_$NavbarTopContent.hasClass("mobile"))
+    {
+        _$NavbarTopContent.removeClass("mobile");
+    }
+    else
+    {
+        _$NavbarTopContent.addClass("mobile");
+    }
+}
+
+function AZCloseNavbarMobile()
+{
+    var _$NavbarTopContent = $(".az-navbar-top-content");
+    if (_$NavbarTopContent.hasClass("mobile"))
+    {
+        _$NavbarTopContent.removeClass("mobile");
+    }
+}
+
+function AZDropdown(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _$ULDropdown = $(_Element).closest(".az-dropdown-click").find("ul.az-dropdown-content");
+    $(".az-dropdown-display").not(_$ULDropdown).each(function ()
+    {
+        $(this).removeClass("az-dropdown-display");
+    });
+    if (_$ULDropdown.hasClass("az-dropdown-display"))
+    {
+        _$ULDropdown.removeClass("az-dropdown-display");
+    }
+    else
+    {
+        _$ULDropdown.addClass("az-dropdown-display");
+        window.setTimeout(function ()
+        {
+            $(document).one("click", { ULDropdown: _$ULDropdown }, AZRemoveDropdown);
+        }, 100);
+    }
+}
+
+function AZRemoveDropdown(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _$ULDropdown = e.data.ULDropdown;
+    if ($(_Element) != _$ULDropdown)
+    {
+        if (_$ULDropdown.hasClass("az-dropdown-display"))
+        {
+            _$ULDropdown.removeClass("az-dropdown-display");
+        }
+    }
+}
+
+function AZHideShowPassword(e)
+{
+    var _Element = e.target || e.srcElement;
+    var _SelectedElementId = "";
+    if ($(_Element).hasClass("passwordeye"))
+    {
+        _SelectedElementId = $(_Element).attr("data-connectedid");
+    }
+    else
+    {
+        if ($(_Element).parent().hasClass("passwordeye"))
+        {
+            _SelectedElementId = $(_Element).parent().attr("data-connectedid");
+        }
+    }
+    if (_SelectedElementId != "")
+    {
+        var _$PasswordField = $("#" + _SelectedElementId)[0];
+        if (_$PasswordField.type == "password")
+        {
+            if (_$PasswordField.value != "")
+            {
+                _$PasswordField.type = "text";
+            }
+        }
+        else
+        {
+            _$PasswordField.type = "password";
+        }
+    }
+}
+
+function AZLabelAnimatedClick(e)
+{
+    var _Element = e.target || e.srcElement;
+    $(_Element).siblings(":input").focus();
+}
+
+function AZSetSpinnerEvents(Element, ObjAttributes)
+{
+    var _SpinnerTimeOut;
+    Element.children().eq(0).off("mousedown touchstart mouseup mouseleave touchend").on("mousedown touchstart", function (e)
+    {
+        _SpinnerTimeOut = setInterval(function ()
+        {
+            var _CurrentSpinnerValue = (parseFloat(Element.children().eq(1).val()) - ObjAttributes.Step);
+            if (_CurrentSpinnerValue >= ObjAttributes.Min)
+            {
+                if (ObjAttributes.hasOwnProperty("Decimals"))
+                {
+                    _CurrentSpinnerValue = numeral(_CurrentSpinnerValue).format('0.00');
+                }
+                Element.children().eq(1).val(_CurrentSpinnerValue);
+                $.publish("functionlib/azInputSpinner",
+                    {
+                        azInputSpinnerId: Element.attr("id") === undefined ? "" : Element.attr("id"),
+                        azInputSpinnerValue: _CurrentSpinnerValue,
+                        azInputSpinnerJQElement: Element
+                    });
+            }
+        }, 100);
+    }).on("mouseup mouseleave touchend", function ()
+    {
+        clearInterval(_SpinnerTimeOut);
+    });
+    Element.children().eq(2).off("mousedown touchstart mouseup mouseleave touchend").on("mousedown touchstart", function (e)
+    {
+        _SpinnerTimeOut = setInterval(function ()
+        {
+            var _CurrentSpinnerValue = (parseFloat(Element.children().eq(1).val()) + ObjAttributes.Step);
+            if (_CurrentSpinnerValue <= ObjAttributes.Max)
+            {
+                if (ObjAttributes.hasOwnProperty("Decimals"))
+                {
+                    _CurrentSpinnerValue = numeral(_CurrentSpinnerValue).format('0.00');
+                }
+                Element.children().eq(1).val(_CurrentSpinnerValue);
+                $.publish("functionlib/azInputSpinner",
+                    {
+                        azInputSpinnerId: Element.attr("id") === undefined ? "" : Element.attr("id"),
+                        azInputSpinnerValue: _CurrentSpinnerValue,
+                        azInputSpinnerJQElement: Element
+                    });
+            }
+        }, 100);
+    }).on("mouseup mouseleave touchend", function ()
+    {
+        clearInterval(_SpinnerTimeOut);
+    });
+    Element.children().eq(0).off("click").on("click", function (e)
+    {
+        var _CurrentSpinnerValue = (parseFloat(Element.children().eq(1).val()) - ObjAttributes.Step);
+        if (_CurrentSpinnerValue >= ObjAttributes.Min)
+        {
+            if (ObjAttributes.hasOwnProperty("Decimals"))
+            {
+                _CurrentSpinnerValue = numeral(_CurrentSpinnerValue).format('0.00');
+            }
+            Element.children().eq(1).val(_CurrentSpinnerValue);
+            $.publish("functionlib/azInputSpinner",
+                {
+                    azInputSpinnerId: Element.attr("id") === undefined ? "" : Element.attr("id"),
+                    azInputSpinnerValue: _CurrentSpinnerValue,
+                    azInputSpinnerJQElement: Element
+                });
+        }
+    });
+    Element.children().eq(2).off("click").on("click", function (e)
+    {
+        var _CurrentSpinnerValue = (parseFloat(Element.children().eq(1).val()) + ObjAttributes.Step);
+        if (_CurrentSpinnerValue <= ObjAttributes.Max)
+        {
+            if (ObjAttributes.hasOwnProperty("Decimals"))
+            {
+                _CurrentSpinnerValue = numeral(_CurrentSpinnerValue).format('0.00');
+            }
+            Element.children().eq(1).val(_CurrentSpinnerValue);
+            $.publish("functionlib/azInputSpinner",
+                {
+                    azInputSpinnerId: Element.attr("id") === undefined ? "" : Element.attr("id"),
+                    azInputSpinnerValue: _CurrentSpinnerValue,
+                    azInputSpinnerJQElement: Element
+                });
+        }
+    });
+}
+
+function AZCheckSpinnerAttributes(Element)
+{
+    var _Attributes = 0;
+    var _ObjAttributes = {};
+    $.each(Element.attributes, function ()
+    {
+        if (this.name == "min" && this.value != "")
+        {
+            _ObjAttributes.Min = parseFloat(this.value);
+            _Attributes += 1;
+        }
+        if (this.name == "max" && this.value != "")
+        {
+            _ObjAttributes.Max = parseFloat(this.value);
+            _Attributes += 1;
+        }
+        if (this.name == "step" && this.value != "")
+        {
+            _ObjAttributes.Step = parseFloat(this.value);
+            _Attributes += 1;
+        }
+        if (this.name == "value" && this.value != "")
+        {
+            _ObjAttributes.Value = parseFloat(this.value);
+            _Attributes += 1;
+        }
+        if (this.name == "data-decimals" && this.value != "")
+        {
+            _ObjAttributes.Decimals = parseFloat(this.value);
+        }
+    });
+    if (_Attributes !== 4)
+    {
+        _ObjAttributes = {};
+    }
+    return _ObjAttributes;
+}
 
 // AZ Accordion
 function AZAccordion(Options)
@@ -1298,212 +2465,265 @@ function AZCircularBar(Options)
 // AZ Modal Dialog
 function AZModalDialog(Options)
 {
-    var _Main = this;
-    var _Defaults =
+    if (this instanceof AZModalDialog === true)
     {
-        azModalDialogModal: true,
-        azModalDialogTitle: "",
-        azModalDialogText: "",
-        azModalDialogTitlebar: true,
-        azModalDialogTitlebarClose: true,
-        azModalDialogiFrameURL: "",
-        azModalDialogWidth: 450,
-        azModalDialogHeight: 300,
-        azModalDialogResizable: false,
-        azModalDialogDraggable: true,
-        azModalDialogNoParentScroll: false,
-        azModalDialogBackground: true,
-        azModalDialogCloseOnEscape: true,
-        azModalDialogPosition: false,
-        azModalDialogPositionOf: {},
-        azModalDialogPositionMy: "left bottom-30",
-        azModalDialogPositionAt: "left top",
-        azModalDialogBackgroundColor: "#FFFFFF",
-        azModalDialogColor: "#000000",
-        azModalDialogTitlebarBackgroundColor: "#009688",
-        azModalDialogTitlebarColor: "#FFFFFF",
-        azModalDialogBeforeOpen: function () { },
-        azModalDialogAfterOpen: function () { }
-    };
-    _Main.Options = $.extend({}, _Defaults, Options || {});
-
-    if ($('#az-modal-dialog').length == 0)
-    {
-        $.subscribeonce("functionlib/azModalDialogBeforeOpen", function ()
+        var _Main = this;
+        var _Defaults =
         {
-            azModalDialogScrollTop = 0;
-            _Main.$Body = $("body");
-            _Main.$Background = $("<div></div>").attr("id", "az-background");
-            _Main.$Dialog = $("<div></div>").attr("id", "az-modal-dialog").css({ "background-color": _Main.Options.azModalDialogBackgroundColor + " !important", "color": _Main.Options.azModalDialogColor + " !important" });
-            _Main.$Card = $("<div></div>").addClass("az-modal-card");
-            _Main.$Article = $("<article></article>").html(_Main.Options.azModalDialogText);
-            _Main.$Card.append(_Main.$Article);
-            _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe");
+            azModalDialogId: "",
+            azModalDialogTitle: "",
+            azModalDialogText: "",
+            azModalDialogiFrameURL: "",
+            azModalDialogWidth: 450,
+            azModalDialogHeight: 300,
+            azModalDialogNoParentScroll: false,
+            azModalDialogBackground: true,
+            azModalDialogModal: true,
+            azModalDialogTitlebar: true,
+            azModalDialogTitlebarClose: true,
+            azModalDialogResizable: false,
+            azModalDialogDraggable: true,
+            azModalDialogCloseOnEscape: true,
+            azModalDialogPosition: false,
+            azModalDialogPositionOf: {},
+            azModalDialogPositionMy: "left bottom-30",
+            azModalDialogPositionAt: "left top",
+            azModalDialogBackgroundColor: "#FFFFFF",
+            azModalDialogColor: "#000000",
+            azModalDialogTitlebarBackgroundColor: "#009688",
+            azModalDialogTitlebarColor: "#FFFFFF",
+            azModalDialogBeforeOpen: function () {},
+            azModalDialogAfterOpen: function () { },
+            azModalDialogReturnVariable: ""
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
 
-            if (_Main.Options.azModalDialogWidth > window.innerWidth)
+        if (_Main.Options.azModalDialogReturnVariable !== "" && _Main.Options.azModalDialogId !== "" && $("#" + _Main.Options.azModalDialogId).length === 0)
+        {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function ()
             {
-                _Main.Options.azModalDialogWidth = (window.innerWidth - 20);
-            }
-            if (_Main.Options.azModalDialogHeight > window.innerHeight)
-            {
-                _Main.Options.azModalDialogHeight = (window.innerHeight - 20);
-            }
-            if (_Main.Options.azModalDialogNoParentScroll)
-            {
-                azModalDialogScrollTop = $(window).scrollTop();
-                _Main.$Body.addClass("az-no-parent-scroll");
-            }
-            if (_Main.Options.azModalDialogiFrameURL != "")
-            {
-                _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": (_Main.Options.azModalDialogHeight - 80) });
-                _Main.$Card.append(_Main.$Iframe);
-            }
-            _Main.$Dialog.append(_Main.$Card);
-            _Main.$CurrentDialog = _Main.$Dialog.dialog(
+                ModalDialogScrollTop = 0;
+                _Main.$Body = $("body");
+                _Main.$Background = {};
+                _Main.$Iframe;
+
+                _Main.$Dialog = $("<div></div>").attr("id", _Main.Options.azModalDialogId).addClass("az-modal-dialog").css({ "background-color": _Main.Options.azModalDialogBackgroundColor + " !important", "color": _Main.Options.azModalDialogColor + " !important" });
+                _Main.$Card = $("<div></div>").addClass("az-modal-card");
+                _Main.$Article = $("<article></article>").html(_Main.Options.azModalDialogText);
+                _Main.$Card.append(_Main.$Article);
+
+                // AZ Size
+                if (_Main.Options.azModalDialogWidth > (window.innerWidth - 20))
                 {
-                    autoOpen: false,
-                    modal: false,
-                    width: (_Main.Options.azModalDialogWidth - 16),
-                    height: _Main.Options.azModalDialogHeight,
-                    resizable: _Main.Options.azModalDialogResizable,
-                    draggable: _Main.Options.azModalDialogDraggable,
-                    closeOnEscape: _Main.Options.azModalDialogCloseOnEscape
-                });
-            if (_Main.Options.azModalDialogPosition && IsEmpty(_Main.Options.azModalDialogPositionOf) === false && window.innerWidth > 576)
-            {
+                    _Main.Options.azModalDialogWidth = (window.innerWidth - 20);
+                }
+                if (_Main.Options.azModalDialogHeight > (window.innerHeight - 20))
+                {
+                    _Main.Options.azModalDialogHeight = (window.innerHeight - 20);
+                }
+
+                // AZ iFrame
+                if (_Main.Options.azModalDialogiFrameURL != "")
+                {
+                    _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe-" + _Main.Options.azModalDialogId);
+                    _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": (_Main.Options.azModalDialogHeight - 80) });
+                    _Main.$Card.append(_Main.$Iframe);
+                }
+
+                // UI Dialog
+                _Main.$Dialog.append(_Main.$Card);
+                _Main.$CurrentDialog = _Main.$Dialog.dialog(
+                    {
+                        autoOpen: false,
+                        modal: false,
+                        width: (_Main.Options.azModalDialogWidth - 16),
+                        height: _Main.Options.azModalDialogHeight,
+                        resizable: _Main.Options.azModalDialogResizable,
+                        draggable: _Main.Options.azModalDialogDraggable,
+                        closeOnEscape: _Main.Options.azModalDialogCloseOnEscape
+                    });
+                if (_Main.Options.azModalDialogPosition && IsEmpty(_Main.Options.azModalDialogPositionOf) === false && window.innerWidth > 576)
+                {
+                    _Main.$CurrentDialog.dialog(
+                        {
+                            position:
+                            {
+                                my: _Main.Options.azModalDialogPositionMy,
+                                at: _Main.Options.azModalDialogPositionAt,
+                                of: _Main.Options.azModalDialogPositionOf
+                            }
+                        });
+                }
+                _Main.$UIDialog = _Main.$Dialog.parent(".ui-dialog");
+                _Main.$UIDialogTitlebar = _Main.$UIDialog.children(".ui-dialog-titlebar").css({ "background-color": _Main.Options.azModalDialogTitlebarBackgroundColor + " !important", "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
+                _Main.$UIDialogTitlebar.children(".ui-dialog-title").html(_Main.Options.azModalDialogTitle);
+                _Main.$UIDialogTitlebar.children(".ui-dialog-titlebar-close").removeAttr("title");
+                if (_Main.Options.azModalDialogTitlebar === false)
+                {
+                    _Main.$UIDialogTitlebar.hide();
+                }
+                if (_Main.Options.azModalDialogTitlebarClose === false)
+                {
+                    _Main.$UIDialogTitlebar.children(".ui-dialog-titlebar-close").hide();
+                }
+                _Main.$CurrentDialog.dialog("open");
                 _Main.$CurrentDialog.dialog(
                     {
-                        position:
+                        focus: function (e, ui)
                         {
-                            my: _Main.Options.azModalDialogPositionMy,
-                            at: _Main.Options.azModalDialogPositionAt,
-                            of: _Main.Options.azModalDialogPositionOf
+                            var _Element = e.target || e.srcElement;
+                            $(".ui-dialog").not($(_Element).parent(".ui-dialog")).css({ "z-index": "5000" });
+                            $(_Element).parent(".ui-dialog").css({ "z-index": "5001" });
+                        },
+                        close: function (e, ui)
+                        {
+                            if (e.originalEvent)
+                            {
+                                _Main.azModalDialogClose();
+                            }
                         }
                     });
-            }
-            if (_Main.Options.azModalDialogBackground === false)
-            {
-                _Main.$Background.css({ "background-color": "transparent" });
-            }
-            if (_Main.Options.azModalDialogModal === false)
-            {
-                _Main.$Background.off("click").on("click", function (e)
+
+                var _$ListUIDialog = $(".ui-dialog").not(_Main.$UIDialog);
+                if (_$ListUIDialog.length === 0)
                 {
-                    var _Element = e.target || e.srcElement;
-                    if ($(_Element).attr("id") == "az-background")
+                    // AZ No Parent Scroll
+                    if (_Main.$Body.hasClass("az-no-parent-scroll") === false)
                     {
-                        _Main.azModalDialogClose();
-                    }
-                });
-            }
-            _Main.$UIDialog = _Main.$Dialog.parent(".ui-dialog");
-            _Main.$UIDialogTitlebar = _Main.$UIDialog.children(".ui-dialog-titlebar").css({ "background-color": _Main.Options.azModalDialogTitlebarBackgroundColor + " !important", "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
-            _Main.$UIDialogTitlebar.children(".ui-dialog-title").html(_Main.Options.azModalDialogTitle);
-            _Main.$UIDialogTitlebar.children(".ui-dialog-titlebar-close").removeAttr("title");
-            if (_Main.Options.azModalDialogTitlebar === false)
-            {
-                _Main.$UIDialogTitlebar.hide();
-            }
-            if (_Main.Options.azModalDialogTitlebarClose === false)
-            {
-                _Main.$UIDialogTitlebar.children(".ui-dialog-titlebar-close").hide();
-            }
-            _Main.$CurrentDialog.dialog("open");
-            _Main.$CurrentDialog.dialog(
-                {
-                    close: function (e, ui)
-                    {
-                        if (e.originalEvent)
+                        if (_Main.Options.azModalDialogNoParentScroll === true)
                         {
-                            _Main.azModalDialogClose();
+                            ModalDialogScrollTop = $(window).scrollTop();
+                            _Main.$Body.addClass("az-no-parent-scroll");
                         }
                     }
-                });
-            _Main.$Body.append(_Main.$Background);
-            AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterOpen, "functionlib/azModalDialogAfterOpen");
 
-            _Main.azModalDialogClose = function (Options)
-            {
-                var _Defaults =
-                {
-                    azModalDialogLocationReload: false,
-                    azModalDialogAfterClose: function () { }
-                };
-                _Main.Options = $.extend({}, _Defaults, Options || {}, _Main.Options);
-
-                $.subscribeonce("functionlib/azModalDialogAfterClose", function ()
-                {
-                    if (_Main.Options.azModalDialogLocationReload === true)
+                    // AZ Background
+                    _Main.$Background = $("<div></div>").attr("id", "az-background");
+                    if (_Main.Options.azModalDialogBackground === true)
                     {
-                        $.subscribeonce("functionlib/azModalDialogBackgroundRemoved", function ()
+                        _Main.$Body.append(_Main.$Background);
+                    }
+
+                    // AZ Modal
+                    if (_Main.Options.azModalDialogModal === false)
+                    {
+                        _Main.$Background.off("click").on("click", function (e)
                         {
-                            location.reload();
+                            var _Element = e.target || e.srcElement;
+                            if ($(_Element).attr("id") == "az-background")
+                            {
+                                _Main.azModalDialogClose();
+                            }
                         });
                     }
-                    _Main.$Body.removeClass("az-no-parent-scroll");
-                    if (_Main.$Body.hasClass("") === true)
-                    {
-                        _Main.$Body.removeAttr("class");
-                    }
-                    _Main.$Iframe.attr("src", "");
-                    _Main.$Dialog.dialog("close");
-                    if (_Main.$Dialog.length > 0)
-                    {
-                        _Main.$Dialog.remove();
-                    }
-                    if (_Main.$Background.length > 0)
-                    {
-                        _Main.$Background.remove();
-                        $.publish("functionlib/azModalDialogBackgroundRemoved");
-                    }
-                    if (_Main.Options.azModalDialogLocationReload === false)
-                    {
-                        if (azModalDialogScrollTop > 0)
-                        {
-                            $(window).scrollTop(azModalDialogScrollTop);
-                        }
-                    }
-                });
-                AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterClose, "functionlib/azModalDialogAfterClose");
-            }
-            _Main.azChangeModalTitlebar = function (Options)
-            {
-                var _Defaults =
-                {
-                    azModalDialogTitle: "",
-                    azModalDialogTitlebarBackgroundColor: "#009688",
-                    azModalDialogTitlebarColor: "#FFFFFF",
-                    azModalDialogAlertTimeout: 3000
-                };
-                _Main.Options = $.extend({}, _Defaults, Options || {});
-
-                if ($(".az-dialog-titlebar").length === 0)
-                {
-                    _Main.$NewUIDialogTitlebar = $('<div></div>').addClass("ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle").css({ "background-color": _Main.Options.azModalDialogTitlebarBackgroundColor + " !important", "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
-                    _Main.$NewUIDialogTitlebar.append('<span class="ui-dialog-title">' + _Main.Options.azModalDialogTitle + '</span>');
-                    _Main.$UIDialogTitlebar.hide();
-                    _Main.$UIDialog.prepend(_Main.$NewUIDialogTitlebar);
-                    _Main.$Body.addClass("az-dialog-titlebar");
-                    window.setTimeout(function ()
-                    {
-                        _Main.$NewUIDialogTitlebar.remove();
-                        _Main.$UIDialogTitlebar.show();
-                        _Main.$Body.removeClass("az-dialog-titlebar");
-                        if (_Main.$Body.hasClass("") === true)
-                        {
-                            _Main.$Body.removeAttr("class");
-                        }
-                    }, _Main.Options.azModalDialogAlertTimeout);
                 }
+                AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterOpen, "functionlib/azModalDialogAfterOpen");
+
+                // AZ Modal Dialog Close 
+                _Main.azModalDialogClose = function (Options)
+                {
+                    var _Defaults =
+                    {
+                        azModalDialogLocationReload: false,
+                        azModalDialogAfterClose: function () { }
+                    };
+                    _Main.Options = $.extend({}, _Defaults, Options || {}, _Main.Options);
+
+                    $.subscribeonce("functionlib/azModalDialogAfterClose", function ()
+                    {
+                        if (_Main.Options.azModalDialogLocationReload === true)
+                        {
+                            location.reload();
+                        }
+                        else
+                        {
+                            // AZ iFrame
+                            if (_Main.Options.azModalDialogiFrameURL !== "" && _Main.$Iframe !== undefined)
+                            {
+                                _Main.$Iframe.attr("src", "");
+                            }
+
+                            // UI Dialog
+                            _Main.$Dialog.dialog("close");
+                            if (_Main.$Dialog.length > 0)
+                            {
+                                _Main.$Dialog.remove();
+                            }
+                            window[_Main.Options.azModalDialogReturnVariable] = undefined;
+
+                            var _$ListUIDialog = $(".ui-dialog");
+                            if (_$ListUIDialog.length === 0)
+                            {
+                                $("#az-background").remove();
+                                if (ModalDialogScrollTop > 0)
+                                {
+                                    $(window).scrollTop(ModalDialogScrollTop);
+                                }
+
+                                $("body").removeClass("az-no-parent-scroll");
+                                if ($("body").hasClass("") === true)
+                                {
+                                    $("body").removeAttr("class");
+                                }
+                            }
+                        }
+                    });
+                    AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterClose, "functionlib/azModalDialogAfterClose");
+                }
+
+                // AZ Change Modal Dialog Titlebar
+                _Main.azChangeModalTitlebar = function (Options)
+                {
+                    var _Defaults =
+                    {
+                        azModalDialogTitle: "",
+                        azModalDialogTitlebarBackgroundColor: "#009688",
+                        azModalDialogTitlebarColor: "#FFFFFF",
+                        azModalDialogAlertTimeout: 3000
+                    };
+                    _Main.Options = $.extend({}, _Defaults, Options || {});
+
+                    if ($(".az-dialog-titlebar").length === 0)
+                    {
+                        _Main.$NewUIDialogTitlebar = $('<div></div>').addClass("ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle").css({ "background-color": _Main.Options.azModalDialogTitlebarBackgroundColor + " !important", "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
+                        _Main.$NewUIDialogTitlebar.append('<span class="ui-dialog-title">' + _Main.Options.azModalDialogTitle + '</span>');
+                        _Main.$UIDialogTitlebar.hide();
+                        _Main.$UIDialog.prepend(_Main.$NewUIDialogTitlebar);
+                        _Main.$Body.addClass("az-dialog-titlebar");
+                        window.setTimeout(function ()
+                        {
+                            _Main.$NewUIDialogTitlebar.remove();
+                            _Main.$UIDialogTitlebar.show();
+                            _Main.$Body.removeClass("az-dialog-titlebar");
+                            if (_Main.$Body.hasClass("") === true)
+                            {
+                                _Main.$Body.removeAttr("class");
+                            }
+                        }, _Main.Options.azModalDialogAlertTimeout);
+                    }
+                }
+            });
+            AZCheckAsyncAndPublish(_Main.Options.azModalDialogBeforeOpen, "functionlib/azModalDialogBeforeOpen");
+
+            if (_Main.Options.azModalDialogiFrameURL !== "" && _Main.$Iframe !== undefined)
+            {
+                return (
+                    {
+                        "ModalDialogClose": _Main.azModalDialogClose,
+                        "ChangeModalTitlebar": _Main.azChangeModalTitlebar,
+                        "IFrame": _Main.$Iframe[0].contentWindow
+                    });
             }
-        });
-        AZCheckAsyncAndPublish(_Main.Options.azModalDialogBeforeOpen, "functionlib/azModalDialogBeforeOpen");
+            else
+            {
+                return (
+                    {
+                        "ModalDialogClose": _Main.azModalDialogClose,
+                        "ChangeModalTitlebar": _Main.azChangeModalTitlebar
+                    });
+            }
+        }
     }
-    return (
-        {
-            "ModalDialogClose": _Main.azModalDialogClose,
-            "ChangeModalTitlebar": _Main.azChangeModalTitlebar
-        });
 }
 
 function AZCheckAsyncAndPublish(FunctionToRun, Publish)
@@ -1543,16 +2763,17 @@ function AZSnackbar(Options)
         azSnackbarMobileMinHeight: 0,
         azSnackbarClose: false,
         azSnackbarTimeout: 3000,
-        azSnackbarBackgroundColor: "333333",
-        azSnackbarTextColor: "FFFFFF",
-        azSnackbarCloseColor: "FFFFFF"
+        azSnackbarBackgroundColor: "#333333",
+        azSnackbarColor: "#FFFFFF",
+        azSnackbarCloseColor: "#FFFFFF",
+        azSnackbarAfterOpen: function () { }
     };
     _Main.Options = $.extend({}, _Defaults, Options || {});
 
     if (_Main.Options.azSnackbarId != "" && $("#" + _Main.Options.azSnackbarId).length === 0)
     {
         _Main.$Body = $("body");
-        _Main.$Wrapper = $('<div></div>').attr({ "id": _Main.Options.azSnackbarId }).addClass("az-snackbar");
+        _Main.$Wrapper = $('<div></div>').attr({ "id": _Main.Options.azSnackbarId }).addClass("az-snackbar").css({ "background-color": _Main.Options.azSnackbarBackgroundColor });
         _Main.$Table = $('<table></table>').addClass("az-snackbar-table");
 
         _Main.AnimateOpenOptions = {};
@@ -1567,12 +2788,32 @@ function AZSnackbar(Options)
             _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
             _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
         }
+        else if (_Main.Options.azSnackbarPosition == "center-top")
+        {
+            _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
+            _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
+        }
+        else if (_Main.Options.azSnackbarPosition == "center-bottom")
+        {
+            _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
+            _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
+        }
         else if (_Main.Options.azSnackbarPosition == "right-top")
         {
             _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
             _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
         }
         else if (_Main.Options.azSnackbarPosition == "right-bottom")
+        {
+            _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
+            _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
+        }
+        else if (_Main.Options.azSnackbarPosition == "full-width-top")
+        {
+            _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
+            _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
+        }
+        else if (_Main.Options.azSnackbarPosition == "full-width-bottom")
         {
             _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
             _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
@@ -1584,23 +2825,89 @@ function AZSnackbar(Options)
             _Main.$Wrapper.addClass("az-snackbar-mobile");
             if (_Main.AnimateOpenOptions.hasOwnProperty("top") === true)
             {
-                _Main.AnimateOpenOptions.top = 10;
+                _Main.AnimateOpenOptions.top = 20;
             }
             if (_Main.AnimateOpenOptions.hasOwnProperty("bottom") === true)
             {
-                _Main.AnimateOpenOptions.bottom = 10;
+                _Main.AnimateOpenOptions.bottom = 20;
             }
             if (_Main.Options.azSnackbarMobileMinHeight > 0)
             {
+                if (_Main.Options.azSnackbarMobileMinHeight > (window.innerHeight - 70))
+                {
+                    _Main.Options.azSnackbarMobileMinHeight = (window.innerHeight - 70);
+                }
                 _Main.$Wrapper.css({ "min-height": _Main.Options.azSnackbarMobileMinHeight })
             }
         }
 
-        _Main.closeAZSnackbar = function ()
+        //_Main.azRecalcSnackbarPosition = function ()
+        //{
+        //    var _TotalHeight = 0;
+        //    var _Position = "";
+        //    $(".az-snackbar").not(_Main.$Wrapper).each(function ()
+        //    {
+        //        if (_Main.Options.azSnackbarPosition == "left-top" || _Main.Options.azSnackbarPosition == "full-width-top")
+        //        {
+        //            if ($(this).hasClass("az-snackbar-left-top") || $(this).hasClass("az-snackbar-full-width-top"))
+        //            {
+        //                _TotalHeight = _TotalHeight + $(this).height() + 16;
+        //            }
+        //            _Position = "top";
+        //        }
+        //        else if (_Main.Options.azSnackbarPosition == "right-top" || _Main.Options.azSnackbarPosition == "full-width-top")
+        //        {
+        //            if ($(this).hasClass("az-snackbar-right-top") || $(this).hasClass("az-snackbar-full-width-top"))
+        //            {
+        //                _TotalHeight = _TotalHeight + $(this).height() + 16;
+        //            }
+        //            _Position = "top";
+        //        }
+        //        else if (_Main.Options.azSnackbarPosition == "center-top" || _Main.Options.azSnackbarPosition == "full-width-top")
+        //        {
+        //            if ($(this).hasClass("az-snackbar-center-top") || $(this).hasClass("az-snackbar-full-width-top"))
+        //            {
+        //                _TotalHeight = _TotalHeight + $(this).height() + 16;
+        //            }
+        //            _Position = "top";
+        //        }
+        //        else if (_Main.Options.azSnackbarPosition == "left-bottom" || _Main.Options.azSnackbarPosition == "full-width-bottom")
+        //        {
+        //            if ($(this).hasClass("az-snackbar-left-bottom") || $(this).hasClass("az-snackbar-full-width-bottom"))
+        //            {
+        //                _TotalHeight = _TotalHeight + $(this).height() + _Main.Options.azSnackbarBottomMargin + 16;
+        //            }
+        //            _Position = "bottom";
+        //        }
+        //        else if (_Main.Options.azSnackbarPosition == "center-bottom" || _Main.Options.azSnackbarPosition == "full-width-bottom")
+        //        {
+        //            if ($(this).hasClass("az-snackbar-center-bottom") || $(this).hasClass("az-snackbar-full-width-bottom"))
+        //            {
+        //                _TotalHeight = _TotalHeight + $(this).height() + _Main.Options.azSnackbarBottomMargin + 16;
+        //            }
+        //            _Position = "bottom";
+        //        }
+        //        else if (_Main.Options.azSnackbarPosition == "right-bottom" || _Main.Options.azSnackbarPosition == "full-width-bottom")
+        //        {
+        //            if ($(this).hasClass("az-snackbar-right-bottom") || $(this).hasClass("az-snackbar-full-width-bottom"))
+        //            {
+        //                _TotalHeight = _TotalHeight + $(this).height() + _Main.Options.azSnackbarBottomMargin + 16;
+        //            }
+        //            _Position = "bottom";
+        //        }
+        //    });
+        //    if (_TotalHeight > 0 && _Position !== "")
+        //    {
+        //        _Main.AnimateOpenOptions[_Position] = _TotalHeight;
+        //    }
+        //}
+
+        _Main.azCloseSnackbar = function ()
         {
             _Main.$Wrapper.animate(_Main.AnimateCloseOptions, 500, function ()
             {
                 $("#" + _Main.Options.azSnackbarId).remove();
+                //_Main.azRecalcSnackbarPosition();
             });
         }
 
@@ -1611,10 +2918,10 @@ function AZSnackbar(Options)
 
         if (_Main.Options.azSnackbarClose === true)
         {
-            _Main.$Close = $('<td></td>').html("X").addClass("az-snackbar-close").css({ "color": "#" + _Main.Options.azSnackbarCloseColor + "" });
+            _Main.$Close = $('<td></td>').html("X").addClass("az-snackbar-close").css({ "color": _Main.Options.azSnackbarCloseColor });
             _Main.$Close.off("click").on("click", function ()
             {
-                _Main.closeAZSnackbar();
+                _Main.azCloseSnackbar();
             });
         }
         else
@@ -1622,16 +2929,21 @@ function AZSnackbar(Options)
             _Main.$Close = "";
             window.setTimeout(function ()
             {
-                _Main.closeAZSnackbar();
+                _Main.azCloseSnackbar();
             }, _Main.Options.azSnackbarTimeout);
         }
 
-        _Main.$TextCell = $('<td></td>').html(_Main.Options.azSnackbarText).addClass("az-snackbar-text").css({ "color": "#" + _Main.Options.azSnackbarTextColor + "" });
+        _Main.$TextCell = $('<td></td>').html(_Main.Options.azSnackbarText).addClass("az-snackbar-text").css({ "color": _Main.Options.azSnackbarColor });
         _Main.$TableRow = $('<tr></tr>').append(_Main.$TextCell).append(_Main.$Close);
         _Main.$Table.append(_Main.$TableRow);
-        _Main.$Wrapper.append(_Main.$Table).css({ "background-color": "#" + _Main.Options.azSnackbarBackgroundColor + "" });
+        _Main.$Wrapper.append(_Main.$Table);
         _Main.$Body.append(_Main.$Wrapper);
-        _Main.$Wrapper.animate(_Main.AnimateOpenOptions, 500);
+        //_Main.azRecalcSnackbarPosition();
+
+        _Main.$Wrapper.animate(_Main.AnimateOpenOptions, 500, function ()
+        {
+            AZCheckAsyncAndPublish(_Main.Options.azSnackbarAfterOpen, "functionlib/azSnackbarAfterOpen");
+        });
     }
     return (
         {
@@ -1740,214 +3052,218 @@ function AZTabs(Options)
 
 function AZWindow(Options)
 {
-    var _Main = this;
-    var _Defaults =
+    if (this instanceof AZWindow === true)
     {
-        azWindowModal: false,
-        azWindowTitle: "",
-        azWindowText: "",
-        azWindowTitlebar: true,
-        azWindowTitlebarClose: true,
-        azWindowWidth: 450,
-        azWindowHeight: 0,
-        azWindowPositionTop: 0,
-        azWindowAnimation: true,
-        azWindowNoParentScroll: false,
-        azWindowBackground: true,
-        azWindowBorderColor: "#FFFFFF",
-        azWindowTitlebarBackgroundColor: "#009688",
-        azWindowTitlebarColor: "#FFFFFF",
-        azWindowBackgroundColor: "#FFFFFF",
-        azWindowColor: "#000000",
-        azWindowBeforeOpen: function () { },
-        azWindowAfterOpen: function () { }
-    };
-    _Main.Options = $.extend({}, _Defaults, Options || {});
-
-    if ($('#az-window').length === 0)
-    {
-        $.subscribeonce("functionlib/azWindowBeforeOpen", function ()
+        var _Main = this;
+        var _Defaults =
         {
-            azModalDialogScrollTop = 0;
-            _Main.$Body = $("body");
-            _Main.$Background = $("<div></div>").attr("id", "az-background");
-            _Main.$Window = $("<div></div>").attr("id", "az-window").css({ "background-color": _Main.Options.azWindowBorderColor + " !important" });
-            _Main.$Titlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + _Main.Options.azWindowTitle + "</h1><span>X</span>").css({ "background-color": _Main.Options.azWindowTitlebarBackgroundColor + " !important", "color": _Main.Options.azWindowTitlebarColor + " !important" });
-            _Main.$Dialog = $("<div></div>").addClass("az-window-dialog").css({ "background-color": _Main.Options.azWindowBackgroundColor + " !important", "color": _Main.Options.azWindowColor + " !important" });
-            _Main.$Article = $("<article></article>").html(_Main.Options.azWindowText);
-            _Main.$Dialog.append(_Main.$Article);
-            _Main.$Window.append(_Main.$Titlebar).append(_Main.$Dialog);
+            azWindowTitle: "",
+            azWindowText: "",
+            azWindowWidth: 450,
+            azWindowHeight: 150,
+            azWindowPositionTop: 0,
+            azWindowModal: false,
+            azWindowTitlebar: true,
+            azWindowTitlebarClose: true,
+            azWindowAnimation: true,
+            azWindowNoParentScroll: false,
+            azWindowBackground: true,
+            azWindowBorderColor: "#FFFFFF",
+            azWindowTitlebarBackgroundColor: "#009688",
+            azWindowTitlebarColor: "#FFFFFF",
+            azWindowBackgroundColor: "#FFFFFF",
+            azWindowColor: "#000000",
+            azWindowBeforeOpen: function () {},
+            azWindowAfterOpen: function () {}
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
 
-            _Main.Options.azWindowWidth = (_Main.Options.azWindowWidth - 14);
-            if (_Main.Options.azWindowWidth > (window.innerWidth - 20))
+        if ($('#az-window').length === 0)
+        {
+            $.subscribeonce("functionlib/azWindowBeforeOpen", function ()
             {
-                _Main.Options.azWindowWidth = (window.innerWidth - 20);
-            }
-            if (_Main.Options.azWindowHeight > 0)
-            {
-                if (_Main.Options.azWindowHeight > (window.innerHeight - 20))
+                ModalDialogScrollTop = 0;
+                _Main.$Body = $("body");
+                _Main.$Background = {};
+
+                _Main.$Window = $("<div></div>").attr("id", "az-window").css({ "background-color": _Main.Options.azWindowBorderColor + " !important" });
+                _Main.$Titlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + _Main.Options.azWindowTitle + "</h1><span>X</span>").css({ "background-color": _Main.Options.azWindowTitlebarBackgroundColor + " !important", "color": _Main.Options.azWindowTitlebarColor + " !important" });
+                _Main.$Dialog = $("<div></div>").addClass("az-window-dialog").css({ "background-color": _Main.Options.azWindowBackgroundColor + " !important", "color": _Main.Options.azWindowColor + " !important" });
+                _Main.$Article = $("<article></article>").html(_Main.Options.azWindowText);
+                _Main.$Dialog.append(_Main.$Article);
+                _Main.$Window.append(_Main.$Titlebar).append(_Main.$Dialog);
+
+                // AZ Size
+                _Main.Options.azWindowWidth = (_Main.Options.azWindowWidth - 14);
+                if (_Main.Options.azWindowWidth > (window.innerWidth - 20))
                 {
-                    _Main.Options.azWindowHeight = (window.innerHeight - 20);
+                    _Main.Options.azWindowWidth = (window.innerWidth - 20);
                 }
-            }
-            else
-            {
-                _Main.Options.azWindowHeight = 150;
-            }
-            if (_Main.Options.azWindowNoParentScroll === true)
-            {
-                azModalDialogScrollTop = $(window).scrollTop();
-                _Main.$Body.addClass("az-no-parent-scroll");
-            }
-            if (_Main.Options.azWindowBackground === false)
-            {
-                _Main.$Background.css({ "background-color": "transparent" });
-            }
-            if (_Main.Options.azWindowModal === false)
-            {
-                _Main.$Background.off().on("click", function (e)
+                if (_Main.Options.azWindowHeight > 150)
                 {
-                    var _Element = e.target || e.srcElement;
-                    if ($(_Element).attr("id") == "az-background")
+                    if (_Main.Options.azWindowHeight > (window.innerHeight - 20))
+                    {
+                        _Main.Options.azWindowHeight = (window.innerHeight - 20);
+                    }
+                }
+
+                // AZ No Parent Scroll
+                if (_Main.Options.azWindowNoParentScroll === true)
+                {
+                    ModalDialogScrollTop = $(window).scrollTop();
+                    _Main.$Body.addClass("az-no-parent-scroll");
+                }
+
+                // AZ Background
+                _Main.$Background = $("<div></div>").attr("id", "az-background");
+                if (_Main.Options.azWindowBackground === true)
+                {
+                    _Main.$Body.append(_Main.$Background);
+                }
+
+                // AZ Modal
+                if (_Main.Options.azWindowModal === false)
+                {
+                    _Main.$Background.off().on("click", function (e)
+                    {
+                        var _Element = e.target || e.srcElement;
+                        if ($(_Element).attr("id") == "az-background")
+                        {
+                            _Main.azWindowClose();
+                        }
+                    });
+                }
+                if (_Main.Options.azWindowTitlebar === false)
+                {
+                    _Main.$Titlebar.hide();
+                    _Main.$Dialog.height(_Main.Options.azWindowHeight - 28);
+                }
+                else
+                {
+                    _Main.$Dialog.height(_Main.Options.azWindowHeight - 69);
+                }
+                if (_Main.Options.azWindowTitlebarClose === false)
+                {
+                    _Main.$Titlebar.children("span").hide();
+                }
+                else
+                {
+                    _Main.$Titlebar.children("span").off().on("click", function ()
                     {
                         _Main.azWindowClose();
-                    }
-                });
-            }
-            if (_Main.Options.azWindowTitlebar === false)
-            {
-                _Main.$Titlebar.hide();
-                _Main.$Dialog.height(_Main.Options.azWindowHeight - 28);
-            }
-            else
-            {
-                _Main.$Dialog.height(_Main.Options.azWindowHeight - 69);
-            }
-            if (_Main.Options.azWindowTitlebarClose === false)
-            {
-                _Main.$Titlebar.children("span").hide();
-            }
-            else
-            {
-                _Main.$Titlebar.children("span").off().on("click", function ()
-                {
-                    _Main.azWindowClose();
-                });
-            }
-            _Main.$Window.width(_Main.Options.azWindowWidth);
-            _Main.$Window.height(_Main.Options.azWindowHeight - 14);
-            if (_Main.Options.azWindowPositionTop === 0 || ((_Main.Options.azWindowPositionTop + _Main.$Window.height()) > ($(window).scrollTop() + $(window).height()))           )
-            {
-                _Main.$Window.css({ "top": ($(window).scrollTop() + $(window).height() / 2) - (_Main.$Window.height() / 2) });
-            }
-            else
-            {
-                _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
-            }
-            _Main.$Body.append(_Main.$Background).append(_Main.$Window);
-            _Main.$Window.hide();
-            if (_Main.Options.azWindowAnimation === true)
-            {
-                _Main.$Window.fadeIn();
-            }
-            else
-            {
-                _Main.$Window.show();
-            }
-            AZCheckAsyncAndPublish(_Main.Options.azWindowAfterOpen, "functionlib/azWindowAfterOpen");
+                    });
+                }
 
-            _Main.azWindowClose = function (Options)
-            {
-                var _Defaults =
+                _Main.$Window.width(_Main.Options.azWindowWidth);
+                _Main.$Window.height(_Main.Options.azWindowHeight - 14);
+                if (_Main.Options.azWindowPositionTop === 0 || ((_Main.Options.azWindowPositionTop + _Main.$Window.height()) > ($(window).scrollTop() + $(window).height())))
                 {
-                    azWindowLocationReload: false,
-                    azWindowAfterClose: function () { }
-                };
-                _Main.Options = $.extend({}, _Defaults, Options || {}, _Main.Options);
+                    _Main.$Window.css({ "top": ($(window).scrollTop() + $(window).height() / 2) - (_Main.$Window.height() / 2) });
+                }
+                else
+                {
+                    _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
+                }
+                _Main.$Body.append(_Main.$Window);
+                _Main.$Window.hide();
+                if (_Main.Options.azWindowAnimation === true)
+                {
+                    _Main.$Window.fadeIn();
+                }
+                else
+                {
+                    _Main.$Window.show();
+                }
+                AZCheckAsyncAndPublish(_Main.Options.azWindowAfterOpen, "functionlib/azWindowAfterOpen");
 
-                $.subscribeonce("functionlib/azWindowAfterClose", function ()
+                // AZ Window Close 
+                _Main.azWindowClose = function (Options)
                 {
-                    if (_Main.Options.azWindowLocationReload === true)
+                    var _Defaults =
                     {
-                        $.subscribeonce("functionlib/azWindowBackgroundRemoved", function ()
+                        azWindowLocationReload: false,
+                        azWindowAfterClose: function () { }
+                    };
+                    _Main.Options = $.extend({}, _Defaults, Options || {}, _Main.Options);
+
+                    $.subscribeonce("functionlib/azWindowAfterClose", function ()
+                    {
+                        if (_Main.Options.azWindowLocationReload === true)
                         {
                             location.reload();
-                        });
-                    }
-                    _Main.$Body.removeClass("az-no-parent-scroll");
-                    if (_Main.$Body.hasClass("") === true)
-                    {
-                        _Main.$Body.removeAttr("class");
-                    }
-                    if (_Main.$Background.length > 0)
-                    {
-                        _Main.$Background.remove();
-                        $.publish("functionlib/azWindowBackgroundRemoved");
-                    }
-                    if (_Main.$Window.length > 0)
-                    {
-                        if (_Main.Options.azWindowAnimation === true)
-                        {
-                            _Main.$Window.fadeOut(function ()
-                            {
-                                _Main.$Window.remove();
-                                $.publish("functionlib/azWindowRemoved");
-                            });
                         }
                         else
                         {
-                            _Main.$Window.remove();
-                            $.publish("functionlib/azWindowRemoved");
-                        }
-                    }
-                    if (_Main.Options.azWindowLocationReload === false)
-                    {
-                        if (azModalDialogScrollTop > 0)
-                        {
-                            $(window).scrollTop(azModalDialogScrollTop);
-                        }
-                    }
-                });
-                AZCheckAsyncAndPublish(_Main.Options.azWindowAfterClose, "functionlib/azWindowAfterClose");
-            }
+                            _Main.$Background.remove();
+                            if (ModalDialogScrollTop > 0)
+                            {
+                                $(window).scrollTop(ModalDialogScrollTop);
+                            }
 
-            _Main.azChangeWindowTitlebar = function (Options)
-            {
-                var _Defaults =
-                {
-                    azWindowTitle: "",
-                    azWindowTitlebarBackgroundColor: "#009688",
-                    azWindowTitlebarColor: "#FFFFFF",
-                    azWindowAlertTimeout: 3000
-                };
-                _Main.Options = $.extend({}, _Defaults, Options || {});
+                            _Main.$Body.removeClass("az-no-parent-scroll");
+                            if (_Main.$Body.hasClass("") === true)
+                            {
+                                _Main.$Body.removeAttr("class");
+                            }
 
-                if ($(".az-window-titlebar-active").length === 0)
-                {
-                    _Main.$NewTitlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + _Main.Options.azWindowTitle + "</h1>").css({ "background-color": _Main.Options.azWindowTitlebarBackgroundColor + " !important", "color": _Main.Options.azWindowTitlebarColor + " !important" });
-                    _Main.$Titlebar.hide();
-                    _Main.$Window.prepend(_Main.$NewTitlebar);
-                    _Main.$Body.addClass("az-window-titlebar-active");
-                    window.setTimeout(function ()
-                    {
-                        _Main.$NewTitlebar.remove();
-                        _Main.$Titlebar.show();
-                        _Main.$Body.removeClass("az-window-titlebar-active");
-                        if (_Main.$Body.hasClass("") === true)
-                        {
-                            _Main.$Body.removeAttr("class");
-                        }
-                    }, _Main.Options.azWindowAlertTimeout);
+                            if (_Main.Options.azWindowAnimation === true)
+                            {
+                                _Main.$Window.fadeOut(function ()
+                                {
+                                    _Main.$Window.remove();
+                                    $.publish("functionlib/azWindowRemoved");
+                                });
+                            }
+                            else
+                            {
+                                _Main.$Window.remove();
+                                $.publish("functionlib/azWindowRemoved");
+                            }
+                        }                        
+                    });
+                    AZCheckAsyncAndPublish(_Main.Options.azWindowAfterClose, "functionlib/azWindowAfterClose");
                 }
-            }
-        });
-        AZCheckAsyncAndPublish(_Main.Options.azWindowBeforeOpen, "functionlib/azWindowBeforeOpen");
-    }
-    return (
-        {
-            "WindowClose": _Main.azWindowClose,
-            "ChangeWindowTitlebar": _Main.azChangeWindowTitlebar
-        });
+
+                // AZ Change Window Titlebar
+                _Main.azChangeWindowTitlebar = function (Options)
+                {
+                    var _Defaults =
+                    {
+                        azWindowTitle: "",
+                        azWindowTitlebarBackgroundColor: "#009688",
+                        azWindowTitlebarColor: "#FFFFFF",
+                        azWindowAlertTimeout: 3000
+                    };
+                    _Main.Options = $.extend({}, _Defaults, Options || {});
+
+                    if ($(".az-window-titlebar-active").length === 0)
+                    {
+                        _Main.$NewTitlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + _Main.Options.azWindowTitle + "</h1>").css({ "background-color": _Main.Options.azWindowTitlebarBackgroundColor + " !important", "color": _Main.Options.azWindowTitlebarColor + " !important" });
+                        _Main.$Titlebar.hide();
+                        _Main.$Window.prepend(_Main.$NewTitlebar);
+                        _Main.$Body.addClass("az-window-titlebar-active");
+                        window.setTimeout(function ()
+                        {
+                            _Main.$NewTitlebar.remove();
+                            _Main.$Titlebar.show();
+                            _Main.$Body.removeClass("az-window-titlebar-active");
+                            if (_Main.$Body.hasClass("") === true)
+                            {
+                                _Main.$Body.removeAttr("class");
+                            }
+                        }, _Main.Options.azWindowAlertTimeout);
+                    }
+                }
+            });
+            AZCheckAsyncAndPublish(_Main.Options.azWindowBeforeOpen, "functionlib/azWindowBeforeOpen");
+        }
+
+        return (
+            {
+                "WindowClose": _Main.azWindowClose,
+                "ChangeWindowTitlebar": _Main.azChangeWindowTitlebar
+            });
+    }   
 }
 
 function AZFullWindow(Options)
@@ -1961,8 +3277,8 @@ function AZFullWindow(Options)
         azFullWindowFadeOut: 400,
         azFullWindowBackgroundColor: "#FFFFFF",
         azFullWindowColor: "#000000",
-        azFullWindowBeforeOpen: function () { },
-        azFullWindowAfterOpen: function () { }
+        azFullWindowBeforeOpen: function () {},
+        azFullWindowAfterOpen: function () {}
     };
     _Main.Options = $.extend({}, _Defaults, Options || {});
 
@@ -1970,7 +3286,7 @@ function AZFullWindow(Options)
     {
         $.subscribeonce("functionlib/azFullWindowBeforeOpen", function ()
         {
-            azModalDialogScrollTop = 0;
+            ModalDialogScrollTop = 0;
             _Main.$Body = $("body");
             _Main.$Window = $("<div></div>").attr("id", "az-full-window").css({ "background-color": _Main.Options.azFullWindowBackgroundColor + " !important", "color": _Main.Options.azFullWindowColor + " !important" });
             _Main.$Close = $("<div>&times;</div>").attr("id", "az-full-window-close");
@@ -1996,7 +3312,7 @@ function AZFullWindow(Options)
 
             _Main.$Window.animate(_Main.AnimateOpenOptions, _Main.Options.azFullWindowFadeIn, function ()
             {
-                azModalDialogScrollTop = $(window).scrollTop();
+                ModalDialogScrollTop = $(window).scrollTop();
                 _Main.$Body.addClass("az-no-parent-scroll");
             });
             AZCheckAsyncAndPublish(_Main.Options.azFullWindowAfterOpen, "functionlib/azFullWindowAfterOpen");
@@ -2010,9 +3326,9 @@ function AZFullWindow(Options)
             {
                 _Main.$Body.removeAttr("class");
             }
-            if (azModalDialogScrollTop > 0)
+            if (ModalDialogScrollTop > 0)
             {
-                $(window).scrollTop(azModalDialogScrollTop);
+                $(window).scrollTop(ModalDialogScrollTop);
             }
             _Main.$Window.animate(_Main.AnimateCloseOptions, _Main.Options.azFullWindowFadeOut, function ()
             {
@@ -2118,6 +3434,10 @@ function AZSlideIn(Options)
             {
                 _Main.$SlideInTab.children("div").css({ "width": 100, "height": 100, "left": - 70 }).append('<i class="' + _Main.Options.azSlideInTabIcon + ' fa-rotate-90"></i>');
             }
+        }
+        if (_Main.Options.azSlideInWidth > (window.innerWidth - 40))
+        {
+            _Main.Options.azSlideInWidth = (window.innerWidth - 40);
         }
         if (_Main.Options.azSlideInPosition == "right")
         {
@@ -2544,676 +3864,4 @@ function CalcChildrenHeight($Element)
         }
     });
     return (bottomOffset - topOffset - $Element.offset().top);
-}
-
-function azGetEvents(element)
-{
-    var elemEvents = $._data(element[0], "events");
-    var allDocEvnts = $._data(document, "events");
-    for (var evntType in allDocEvnts)
-    {
-        if (allDocEvnts.hasOwnProperty(evntType))
-        {
-            var evts = allDocEvnts[evntType];
-            for (var i = 0; i < evts.length; i++)
-            {
-                if ($(element).is(evts[i].selector))
-                {
-                    if (elemEvents == null)
-                    {
-                        elemEvents = {};
-                    }
-                    if (!elemEvents.hasOwnProperty(evntType))
-                    {
-                        elemEvents[evntType] = [];
-                    }
-                    elemEvents[evntType].push(evts[i]);
-                }
-            }
-        }
-    }
-    return elemEvents;
-}
-
-//////////////////////////////////////////////
-
-
-    //_Main.azCircularBarArray = [];
-    //if (Options && Options.length > 0)
-    //{
-    //    $.each(Options, function (Index, ObjCurrentOption)
-    //    {
-    //        _Main.azCircularBarArray.push(new AktivateAZCircularBar(ObjCurrentOption));
-    //    });
-    //}
-    //else if (IsEmpty(Options) === false)
-    //{
-    //    _Main.azCircularBarArray.push(new AktivateAZCircularBar(Options));
-    //}
-
-    //function AktivateAZCircularBar(ObjCurrentOption)
-    //{
-    //    this.Options = $.extend({}, _Defaults, ObjCurrentOption || {});
-    //    if (this.Options.azCircularBarId != "")
-    //    {
-    //        this.$CircularBar = $("#" + this.Options.azCircularBarId);
-    //        this.$CircularBar.$Slice = $('<div></div>').addClass("slice");
-    //        this.$CircularBar.$Bar = $('<div></div>').addClass("bar").css({ "border-color": this.Options.azCircularBarValueColor });
-    //        this.$CircularBar.$Fill = $('<div></div>').addClass("fill").css({ "border-color": this.Options.azCircularBarValueColor });
-    //        this.$CircularBar.$Label = $('<span></span>').addClass("label").html(this.Options.azCircularBarLabel);
-    //        if (this.Options.azCircularBarCaption != "")
-    //        {
-    //            this.$CircularBar.$Caption = $('<span></span>').addClass("caption").css({ "top": this.Options.azCircularBarSize, "color": this.Options.azCircularBarCaptionColor }).html(this.Options.azCircularBarCaption);
-    //        }
-    //        this.$CircularBar.$Slice.append(this.$CircularBar.$Bar).append(this.$CircularBar.$Fill);
-    //        this.$CircularBar.append(this.$CircularBar.$Label).append(this.$CircularBar.$Slice).append(this.$CircularBar.$Caption).addClass("c100 p" + this.Options.azCircularBarValue).css({ "background-color": this.Options.azCircularBarColor, "font-size": this.Options.azCircularBarSize });
-
-    //        this.azSetCircularBar = function (Options)
-    //        {
-    //            this.$CircularBar.$Bar.css({ "border-color": Options.azCircularBarValueColor });
-    //            this.$CircularBar.$Fill.css({ "border-color": Options.azCircularBarValueColor });
-    //            this.$CircularBar.$Label.html(Options.azCircularBarLabel);
-    //            this.$CircularBar.$Caption.css({ "top": Options.azCircularBarSize, "color": Options.azCircularBarCaptionColor }).html(Options.azCircularBarCaption);
-    //            this.$CircularBar.removeClass().addClass("c100 p" + Options.azCircularBarValue).css({ "background-color": Options.azCircularBarColor, "font-size": Options.azCircularBarSize });
-    //        }
-    //        return this;
-    //    }
-    //}
-    //return (
-    //    {
-    //        "azSetCircularBar": _Main.azCircularBarArray
-    //    });
-
-
-
-//function closeAZWindow(Options)
-//{
-//    var _Defaults =
-//    {
-//        azWindowLocationReload: false,
-//        azWindowClose: function () { }
-//    };
-//    _Main.Options = $.extend({}, _Defaults, Options || {});
-
-//    $.subscribeonce("functionlib/closeAZWindow", function ()
-//    {
-//        if (_Main.Options.azWindowLocationReload)
-//        {
-//            $.subscribeonce("functionlib/backgroundRemovedAZWindow", function ()
-//            {
-//                location.reload();
-//            });
-//        }
-//        $("body").removeClass("az-alert-active az-no-parent-scroll");
-//        if ($("body").hasClass("") === true)
-//        {
-//            $("body").removeAttr("class");
-//        }
-//        var _$Background = $("#az-background");
-//        if (_$Background.length > 0)
-//        {
-//            $("#az-modal").slideUp(function ()
-//            {
-//                _$Background.remove();
-//                $.publish("functionlib/backgroundRemovedAZWindow");
-//            });
-//        }
-//        if (_Main.Options.azWindowLocationReload == false)
-//        {
-//            if (azModalazWindowScrollTop > 0)
-//            {
-//                $(window).scrollTop(azModalazWindowScrollTop);
-//            }
-//        }
-//    });
-//    AZCheckAsyncAndPublish(_Main.Options.azWindowClose, "functionlib/closeAZWindow");
-//}
-
-//function createAZWindowButton(Options)
-//{
-//    var _Defaults =
-//    {
-//        azWindowButton1: "",
-//        azWindowButton2: ""
-//    };
-//    var _Main.Options = $.extend({}, _Defaults, Options || {});
-
-//    var _HTML = "";
-//    if (_Main.Options.azWindowButton1 != "" && _Main.Options.azWindowButton2 != "")
-//    {
-//        _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
-//        _HTML += '<div class="az-col xs-6 az-text-right">';
-//        _HTML += '<div class="az-form-group">';
-//        _HTML += '<button type="button" class="az-button info az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton2" style="width: 60%; margin-right: 4px;">' + _Main.Options.azWindowButton2 + '</button>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '<div class="az-col xs-6 az-text-left">';
-//        _HTML += '<div class="az-form-group">';
-//        _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton1" style="width: 60%; margin-left: 4px;">' + _Main.Options.azWindowButton1 + '</button>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//    }
-//    else if (_Main.Options.azWindowButton1 != "" && _Main.Options.azWindowButton2 == "")
-//    {
-//        _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
-//        _HTML += '<div class="az-col xs-12 az-text-center">';
-//        _HTML += '<div class="az-form-group">';
-//        _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton1" style="width: 60%; margin-left: 4px;">' + _Main.Options.azWindowButton1 + '</button>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//    }
-//    else if (_Main.Options.azWindowButton1 == "" && _Main.Options.azWindowButton2 != "")
-//    {
-//        _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
-//        _HTML += '<div class="az-col xs-12 az-text-center">';
-//        _HTML += '<div class="az-form-group">';
-//        _HTML += '<button type="button" class="az-button info az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton2" style="width: 60%; margin-right: 4px;">' + _Main.Options.azWindowButton2 + '</button>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//    }
-//    return _HTML;
-//}
-
-
-//var _WindowWidth = 0;
-//function adjustStyle()
-//{
-//    if ($("#div-window-size").length == 0)
-//    {
-//        $("body").append('<div id="div-window-size" style="position: fixed; z-index: 499999; left: 0; bottom: 0; width: 100%; height: 20px; text-align: center;"></div>');
-//    }
-
-//    _WindowWidth = parseInt(window.innerWidth);
-//    if (_WindowWidth > 1199)
-//    {
-//        $("#div-window-size").css({ "background-color": "#337ab7", "color": "#ffffff" }).html("xl - (1200 - &#8734) - " + _WindowWidth + " px");
-//    }
-//    else if (_WindowWidth > 991 && _WindowWidth < 1200)
-//    {
-//        $("#div-window-size").css({ "background-color": "#5cb85c", "color": "#ffffff" }).html("lg - (992 - 1199) - " + _WindowWidth + " px");
-//    }
-//    else if (_WindowWidth > 767 && _WindowWidth < 993)
-//    {
-//        $("#div-window-size").css({ "background-color": "#5bc0de", "color": "#ffffff" }).html("md - (768 - 991) - " + _WindowWidth + " px");
-//    }
-
-//    else if (_WindowWidth > 576 && _WindowWidth < 768)
-//    {
-//        $("#div-window-size").css({ "background-color": "#f0ad4e", "color": "#ffffff" }).html("sm - (577 - 767) - " + _WindowWidth + " px");
-//    }
-//    else
-//    {
-//        $("#div-window-size").css({ "background-color": "#d9534f", "color": "#ffffff" }).html("xs - (0 - 576) - " + _WindowWidth + " px");
-//    }
-//}
-
-//var initializeAjax = function (Options, ObjData)
-//{
-//    var _Defaults =
-//    {
-//        dataType: "json",
-//        type: "POST",
-//        contentType: "application/json; charset=utf-8",
-//        timeout: 15000,
-//        exceptionAction: "silent",
-//        exceptionErrorText: "",
-//        transferType: ""
-//    };
-//    var _Main.Options = $.extend({}, _Defaults, Options || {});
-
-//    if (typeof ObjData === "object")
-//    {
-//        _Main.Options.transferType = ObjData.hasOwnProperty("TransferType") === true ? ObjData.TransferType : "";
-//        _Main.Options.data = JSON.stringify(ObjData);
-//        consoleLog(JSON.stringify(ObjData));
-//    }
-
-//    $.ajaxSetup({ cache: false });
-//    var _CurrentAjax = $.ajax(_Main.Options).promise();
-
-//    _CurrentAjax.fail(function (jqXHR, textStatus, errorThrown)
-//    {
-//        var _statusText = jqXHR.statusText == "timeout" ? "Timeout" : _Main.Options.exceptionErrorText;
-//        throwException(_Main.Options.exceptionAction, "", ThisPage, _Main.Options.transferType + ":Status:" + jqXHR.statusText, _statusText);
-//    });
-
-//    return _CurrentAjax;
-//}
-
-//function initializeModalTitlebar(Options)
-//{
-//    var _Defaults =
-//    {
-//        titlebarText: "",
-//        titlebarTimeout: 3000
-//    };
-//    var _Main.Options = $.extend({}, _Defaults, Options || {});
-
-//    var _$NewTitleBar = $('<div class="ui-azWindow-titlebar ui-widget-header"><div class="az-form-group" style="margin: 0;"><p class="az-alert az-alert-danger" style="padding: 7px;" role="alert">' + _Main.Options.titlebarText + '</p></div></div>');
-//    var _$azWindowRoleAlert = window.parent.$(".ui-azWindow-titlebar");
-//    _$azWindowRoleAlert.hide();
-//    _$azWindowRoleAlert.parents(".ui-azWindow").prepend(_$NewTitleBar);
-//    $("body").addClass("az-alert-active");
-//    window.setTimeout(function ()
-//    {
-//        _$NewTitleBar.remove();
-//        _$azWindowRoleAlert.show();
-//        $("body").removeClass("az-alert-active");
-//    }, _Main.Options.titlebarTimeout);
-//}
-
-//function openStandardAlert(SelectedTitle, SelectedText, SelectedAdditional, Modal)
-//{
-//    Modal = Modal === true ? true : false;
-//    if ($('#az-modal').length == 0)
-//    {
-//        var _Defaults =
-//        {
-//            azWindowWidth: 450,
-//            azWindowHeight: 150
-//        };
-//        var _Main.Options = _Defaults;
-
-//        var _HTML = "";
-//        _HTML = '<div id="az-background">';
-//        _HTML += '<div id="az-modal">';
-//        _HTML += '<div class="az-modal-card">';
-//        _HTML += '<header>';
-//        _HTML += '<h1>' + SelectedTitle + '</h1>';
-//        _HTML += '</header>';
-//        _HTML += '<article style="overflow-y: auto;">';
-//        _HTML += '<div>' + SelectedText + '</div>';
-//        _HTML += '<div>' + SelectedAdditional + '</div>';
-//        _HTML += '</article>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        $("body").append(_HTML);
-//        $("#az-background").css({ "display": "block" });
-//        var _$AzModal = $("#az-modal");
-
-//        if (_Main.Options.azWindowWidth > window.innerWidth)
-//        {
-//            _Main.Options.azWindowWidth = (window.innerWidth - 60);
-//        }
-//        if (_Main.Options.azWindowHeight > window.innerHeight)
-//        {
-//            _Main.Options.azWindowHeight = (window.innerHeight - 144);
-//        }
-//        _$AzModal.css({ "width": _Main.Options.azWindowWidth });
-//        $(".az-modal-card > article", _$AzModal).css({ "min-height": _Main.Options.azWindowHeight });
-
-//        if (Modal == false)
-//        {
-//            $("#az-background").off("click", closeStandardAlert).on("click", closeStandardAlert);
-//        }
-//        $(".az-modal-card > header", _$AzModal).off("click").on("click", function ()
-//        {
-//            closeStandardAlert();
-//        });
-//        $.publish("functionlib/openStandardAlert");
-//    }
-//}
-
-//function closeStandardAlert()
-//{
-//    var _$Background = $("#az-background");
-//    if (_$Background.length > 0)
-//    {
-//        $("#az-modal").slideUp(function ()
-//        {
-//            _$Background.remove();
-//            $("body").removeClass("az-alert-active");
-//        });
-//    }
-//}
-
-//function openStandardConfirm(SelectedTitle, SelectedText, SelectedButton1, SelectedButton2, FunctionToRun)
-//{
-//    if ($('#az-modal').length == 0)
-//    {
-//        var _Defaults =
-//        {
-//            azWindowWidth: 450,
-//            azWindowHeight: 150
-//        };
-//        var _Main.Options = _Defaults;
-
-//        var _HTML = "";
-//        var _Button1ColClass = ' xs-6 az-text-left';
-//        if (SelectedButton2 == "")
-//        {
-//            var _Button1ColClass = ' xs-12 az-text-center';
-//        }
-//        _HTML = '<div id="az-background">';
-//        _HTML += '<div id="az-modal">';
-//        _HTML += '<div class="az-modal-card">';
-//        _HTML += '<header>';
-//        _HTML += '<h1>' + SelectedTitle + '</h1>';
-//        _HTML += '</header>';
-//        _HTML += '<article style="overflow-y: auto;">';
-//        _HTML += '<div>' + SelectedText + '</div>';
-//        _HTML += '<div>';
-//        _HTML += '<div class="az-row az-margin-t-28 az-margin-b-14">';
-//        if (SelectedButton2 != "")
-//        {
-//            _HTML += '<div class="az-col xs-6 az-text-right">';
-//            _HTML += '<div class="az-form-group">';
-//            _HTML += '<button type="button" class="az-button info az-shadow-1 az-shadow-hover-2" id="cmdStandardConfirmButton2" style="width: 60%; margin-right: 4px;">' + SelectedButton2 + '</button>';
-//            _HTML += '</div>';
-//            _HTML += '</div>';
-//        }
-//        _HTML += '<div class="az-col' + _Button1ColClass + '">';
-//        _HTML += '<div class="az-form-group">';
-//        _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdStandardConfirmButton1" style="width: 60%; margin-left: 4px;">' + SelectedButton1 + '</button>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</article>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        $("body").append(_HTML);
-//        $("#az-background").css({ "display": "block" });
-//        var _$AzModal = $("#az-modal");
-
-//        if (_Main.Options.azWindowWidth > window.innerWidth)
-//        {
-//            _Main.Options.azWindowWidth = (window.innerWidth - 60);
-//        }
-//        if (_Main.Options.azWindowHeight > window.innerHeight)
-//        {
-//            _Main.Options.azWindowHeight = (window.innerHeight - 144);
-//        }
-//        _$AzModal.css({ "width": _Main.Options.azWindowWidth });
-//        $(".az-modal-card > article", _$AzModal).css({ "min-height": _Main.Options.azWindowHeight });
-
-//        $("#cmdStandardConfirmButton2").off().on('click', function ()
-//        {
-//            closeStandardConfirm();
-//        });
-//        $("#cmdStandardConfirmButton1").off().on('click', function ()
-//        {
-//            closeStandardConfirm();
-//            if (FunctionToRun)
-//            {
-//                FunctionToRun();
-//            }
-//        });
-//        $(".az-modal-card > header", _$AzModal).off("click").on("click", function ()
-//        {
-//            closeStandardConfirm();
-//        });
-//        $.publish("functionlib/openStandardConfirm");
-//    }
-//}
-
-//function closeStandardConfirm()
-//{
-//    var _$Background = $("#az-background");
-//    if (_$Background.length > 0)
-//    {
-//        $("#az-modal").slideUp(function ()
-//        {
-//            _$Background.remove();
-//            $("body").removeClass("az-alert-active");
-//        });
-//    }
-//}
-
-//$("#myInput").on("keyup", function ()
-//{
-//    var value = $(this).val().toLowerCase();
-//    $("#az-css li").filter(function ()
-//    {
-//        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-//    });
-//});
-
-//function setAccordion(SelectedIndex)
-//{
-//    var _$Accordion = $(".az-accordion");
-//    var _$AllAccordionCard = _$Accordion.children(".az-accordion-card");
-//    _$Accordion.off().on("click", ".az-accordion-card > header", function (e)
-//    {
-//        var _$SelectedHeader = $(this);
-//        if (_$SelectedHeader.siblings("article").is(":hidden"))
-//        {
-//            _$AllAccordionCard.children("article").slideUp(100);
-//            _$AllAccordionCard.children("header").removeClass("accordion-active");
-//            _$SelectedHeader.siblings("article").slideDown(100);
-//            _$SelectedHeader.addClass("accordion-active");
-//        }
-//        else
-//        {
-//            _$AllAccordionCard.children("article").slideUp(100);
-//            _$AllAccordionCard.children("header").removeClass("accordion-active");
-//        }
-//    });
-//    if (SelectedIndex != undefined && typeof SelectedIndex === "number")
-//    {
-//        var _$SelectedAccordionCard = $(".az-accordion > .az-accordion-card").eq(SelectedIndex);
-//        var _$SelectedHeader = _$SelectedAccordionCard.children("header");
-//        if (_$SelectedHeader.siblings("article").is(":hidden"))
-//        {
-//            _$AllAccordionCard.children("article").slideUp(100);
-//            _$AllAccordionCard.children("header").removeClass("accordion-active");
-//            _$SelectedHeader.siblings("article").slideDown(100);
-//            _$SelectedHeader.addClass("accordion-active");
-//        }
-//        else
-//        {
-//            _$AllAccordionCard.children("article").slideUp(100);
-//            _$AllAccordionCard.children("header").removeClass("accordion-active");
-//        }
-//    }
-//}
-
-//function confirmCancel(FunctionToRun)
-//{
-//    if (formdirty == true)
-//    {
-//        openStandardConfirm(SingleDefaultElements.cancelazWindowConfirmTitle, SingleDefaultElements.cancelazWindowConfirmText, SingleDefaultElements.cancelazWindowConfirmButton1, SingleDefaultElements.cancelazWindowConfirmButton2, FunctionToRun);
-//    }
-//    else
-//    {
-//        showCoverSpin();
-//        if (FunctionToRun)
-//        {
-//            FunctionToRun();
-//        }
-//    }
-//}
-
-//function submitCancel(FunctionToRun)
-//{
-//    showCoverSpin();
-//    FunctionToRun();
-//}
-
-// Modal Help
-//function modalHelp(SelectedPage)
-//{
-//    $("#modalStandardTitle, #modalStandardText, #modalStandardAdditional").empty();
-//    var _ModalHelpAdditional = $("#modalHelpAdditional").html();
-//    if (_ModalHelpAdditional != "" && _ModalHelpAdditional != null && _ModalHelpAdditional != undefined)
-//    {
-//        $("#modalStandardText").html(SingleElements[SelectedPage + "-text"] + _ModalHelpAdditional);
-//        if (typeof modalHelpAdditional == "function")
-//        {
-//            modalHelpAdditional();
-//            setModalHelp();
-//        }
-//    }
-//    else
-//    {
-//        $("#modalStandardText").html(SingleElements[SelectedPage + "-text"]);
-//        setModalHelp();
-//    }
-
-//    function setModalHelp()
-//    {
-//        $("#modalStandardTitle").text(SingleElements[SelectedPage + "-title"]);
-//        $("#modalStandardAdditional").html(AppName + " " + AppVersion);
-//        $('#modalStandard').modal("show");
-//    }
-//}
-function clientStorage(ActionType, Name, Value)
-{
-    var _ThisLocation = window.document.location.hostname;
-    var _LocalStorageEnabled = checkLocalStorage();
-    if (typeof Value === "object")
-    {
-        Value = JSON.stringify(Value);
-    }
-    if (_LocalStorageEnabled == true)
-    {
-        if (ActionType == "set")
-        {
-            setLocalStorage(_ThisLocation + "-" + Name, Value);
-        }
-        else if (ActionType == "get")
-        {
-            return getLocalStorage(_ThisLocation + "-" + Name);
-        }
-        else if (ActionType == "remove")
-        {
-            removeLocalStorage(_ThisLocation + "-" + Name);
-        }
-        else if (ActionType == "delete")
-        {
-            removeLocalStorage(_ThisLocation + "-" + Name);
-        }
-        else
-        {
-            clientStorageError("Local Storage: Wrong action type.");
-        }
-    }
-    else
-    {
-        var _CookieEnabled = checkCookie();
-        if (_CookieEnabled == true)
-        {
-            if (ActionType == "set")
-            {
-                setCookie(_ThisLocation + "-" + Name, Value);
-            }
-            else if (ActionType == "get")
-            {
-                return getCookie(_ThisLocation + "-" + Name);
-            }
-            else if (ActionType == "remove")
-            {
-                removeCookie(_ThisLocation + "-" + Name);
-            }
-            else if (ActionType == "delete")
-            {
-                removeCookie(_ThisLocation + "-" + Name);
-            }
-            else
-            {
-                clientStorageError("Cookies: Wrong action type.");
-            }
-        }
-        else
-        {
-            clientStorageError("Local Storage / Cookies not supported.");
-        }
-    }
-}
-
-function checkLocalStorage()
-{
-    try
-    {
-        var _SupportsLocalStorage = !!window.localStorage && typeof localStorage.getItem === 'function' && typeof localStorage.setItem === 'function' && typeof localStorage.removeItem === 'function';
-        if (_SupportsLocalStorage)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    catch (e)
-    {
-        return false;
-    }
-}
-
-function setLocalStorage(LSName, LSValue)
-{
-    localStorage.setItem(LSName, LSValue);
-}
-
-function getLocalStorage(LSName)
-{
-    return localStorage.getItem(LSName);
-}
-
-function removeLocalStorage(LSName)
-{
-    localStorage.removeItem(LSName);
-}
-
-function checkCookie()
-{
-    try
-    {
-        if (navigator.cookieEnabled)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    catch (e)
-    {
-        return false;
-    }
-}
-
-function setCookie(CName, CValue)
-{
-    var _Date = new Date();
-    _Date.setTime(_Date.getTime() + (365 * 24 * 60 * 60 * 1000));
-    var _Expires = "expires=" + _Date.toUTCString();
-    document.cookie = CName + "=" + CValue + "; " + _Expires;
-}
-
-function getCookie(CName)
-{
-    var _Name = CName + "=";
-    var _DecodedCookie = decodeURIComponent(document.cookie);
-    var _CA = _DecodedCookie.split(';');
-    for (var i = 0; i < _CA.length; i++)
-    {
-        var _C = _CA[i];
-        while (_C.charAt(0) == ' ')
-        {
-            _C = _C.substring(1);
-        }
-        if (_C.indexOf(_Name) == 0)
-        {
-            return _C.substring(_Name.length, _C.length);
-        }
-    }
-    return "";
-}
-
-function removeCookie(CName)
-{
-    document.cookie = CName + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
-
-function clientStorageError(consoleText)
-{
-    console.error("Client Storage Error\n" + consoleText);
 }

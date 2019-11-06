@@ -25,79 +25,95 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
-        var ListPeople =
-            [{
-                "id": 5,
-                "name": "Basecamp",
-                "city": "Chicago",
-                "state": "IL",
-                "url": "https://basecamp.com/"
-            },{
-                "id": 17,
-                "name": "Google",
-                "city": "Mountain View",
-                "state": "CA",
-                "url": "http://google.com/"
-            }]
-
-        //var ObjPeople = {
-        //    0: { "id": 5, "name": "Basecamp", "city": "Chicago", "state": "IL", "url": "https://basecamp.com/" },
-        //    1: { "id": 17, "name": "Google", "city": "Mountain View", "state": "CA", "url": "http://google.com/" }
-        //};
+        var AZPageLanguage;
+        var AZWindowReturn;
 
         $(document).ready(function ()
         {
             w3CodeColor();
 
-            var _$Template = $("#template-list-item")[0].innerHTML;
-
-            var _$Ul = $("<ul></ul>").attr("id", "ul-list");
-
-            $.each(ListPeople, function (Index, ObjPeople)
+            $.subscribe("functionlib/azSetDate", function (e, data)
             {
-                ObjPeople.Element = $(_$Template);
-                $.each(ObjPeople, function (Key, Value)
-                {
-                    console.log($(ObjPeople.Element).attr("data-" + Key))
-
-                    $(ObjPeople.Element).data(Key, Value);
-                });
-                _$Ul.append(ObjPeople.Element);
+                console.log("azDateId: " + data.azDateId + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement)
             });
-            $("#div-list").html(_$Ul);
 
-            console.log(ListPeople)
+            $.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
+            {
+                InvalidCharacterAlert(data);
+            });
 
-            //for (var key in dataObject)
-            //{
-            //    listHtml += templateHtml.replace(/{{id}}/g, dataObject[key].id)
-            //        .replace(/{{name}}/g, dataObject[key].name)
-            //        .replace(/{{city}}/g, dataObject[key].city)
-            //        .replace(/{{state}}/g, dataObject[key].state)
-            //        .replace(/{{url}}/g, dataObject[key].url);
-            //}
-
-            //document.getElementById("list").innerHTML = listHtml;
-
-
-
-
-            //$.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
-            //{
-            //    console.log("azInputId: " + data.azInputId + "\nazInputValidType: " + data.azInputValidType + "\nazInputKey: " + data.azInputKey + "\nazInputJQElement: ", data.azInputJQElement)
-            //});
-            //$.subscribe("functionlib/AZPage", function (e, data)
-            //{
-            //    console.log(data)
-            //});
-
-            //new AZPage(
-            //    {
-            //        azPageInputTypeEvents: true,
-            //        azPageLanguage: true,
-            //        azPageValidation: true
-            //    });
+            $.subscribe("functionlib/AZPage", function (e, data)
+            {
+                AZPageLanguage = data.Language;
+            });
+            new AZPage(
+                {
+                    azPageInputTypeEvents: true,
+                    azPageLanguage: true,
+                    azPageValidation: true
+                });
         });
+
+        function InvalidCharacterAlert(data)
+        {
+            $.subscribeonce("functionlib/azWindowAfterOpen", function (e)
+            {
+                $("#cmdAZWindowClose").off().on('click', function ()
+                {
+                    AZWindowReturn.WindowClose();
+                    data.azInputJQElement.focus();
+                });
+            });
+
+            var _HTML = "";
+            _HTML = '<div class="az-margin-t-7 az-margin-b-7">';
+            _HTML += '<div>' + AZPageLanguage.SingleDefaultElements.invalidCharacterText + '   ' + data.azInputKey + '</div>';
+            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-56">';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindowClose" style="width: 60%; margin-left: 4px;">' + AZPageLanguage.SingleDefaultElements.cmdCloseText + '</button>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            AZWindowReturn = new AZWindow(
+                {
+                    azWindowTitle: AZPageLanguage.SingleDefaultElements.invalidCharacterTitle,
+                    azWindowText: _HTML,
+                    azWindowHeight: 200
+                });
+        }
+
+        //var ListPlaces =
+        //    [{
+        //        "id": 1,
+        //        "name": "Basecamp",
+        //        "city": "Chicago",
+        //        "state": "IL",
+        //        "url": "https://basecamp.com/"
+        //    },{
+        //        "id": 2,
+        //        "name": "Google",
+        //        "city": "Mountain View",
+        //        "state": "CA",
+        //        "url": "http://google.com/"
+        //        }]
+
+        //var _TemplatePlaces = $("#template-places").text().split(/\$\{(.+?)\}/g);
+
+        //var _LI = $.map(ListPlaces, function (Places)
+        //{
+        //    return $.map(_TemplatePlaces, Render(Places)).join('');
+        //});
+
+        //function Render(Places)
+        //{
+        //    return function (Key, i)
+        //    {
+        //        return (i % 2) ? Places[Key] : Key;
+        //    };
+        //}
+
+        //var _$Ul = $("<ul></ul>").attr("id", "ul-list");
+        //_$Ul.append(_LI);
+
+        //$("#div-list").html(_$Ul);
 
     </script>
 </head>
@@ -106,84 +122,89 @@
     <form class="disabled-enter" id="frmContact">
         <div class="az-container-fluid">
 
-            <div id="div-list"></div>
-
-            <script id="template-list-item" type="text/template">
-                <li data-id>
-
-                </li>
-            </script>
-
-            <!--<a href="{{url}}">{{name}}</a>, {{city}}, {{state}}-->
-
-
-
-            <!--<div class="az-row az-padding-t-14">
-        <div class="az-col xs-12 sm-6">
-            <div class="az-form-group xs">
-                <label class="az-label" for="CustomerName" id="labelCustomerName"></label>
-                <input type="text" class="az-input" id="CustomerName" />
+            <div class="az-row az-padding-t-14">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="CustomerName" id="labelCustomerName"></label>
+                        <input type="text" class="az-input" id="CustomerName" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="Contact" id="labelContact"></label>
+                        <input type="text" class="az-input" id="Contact" />
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="az-col xs-12 sm-6">
-            <div class="az-form-group xs">
-                <label class="az-label" for="Contact" id="labelContact"></label>
-                <input type="text" class="az-input" id="Contact" />
+            <div class="az-row">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="Email" id="labelEmail"></label>
+                        <input type="text" class="az-input" id="Email" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="RequestReasonId" id="labelRequestReasonId"></label>
+                        <select class="az-select" id="RequestReasonId">
+                            <option value="1">Nettsider - WordPress</option>
+                            <option value="2">Nettsider - Statiske</option>
+                            <option value="3">Nettbutikk</option>
+                            <option value="4">Serviceavtale</option>
+                            <option value="5">Design</option>
+                            <option value="6">SEO</option>
+                            <option value="7">Google Analytics</option>
+                            <option value="8">Sosiale medier</option>
+                            <option value="9">Annet</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="az-row">
-        <div class="az-col xs-12 sm-6">
-            <div class="az-form-group xs">
-                <label class="az-label" for="Email" id="labelEmail"></label>
-                <input type="text" class="az-input" id="Email" />
+            <div class="az-row">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="Date" id="labelDate"></label>
+                        <input type="text" class="az-input" id="Date" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="Comment" id="labelComment"></label>
+                        <textarea class="az-textarea" id="Comment"></textarea>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="az-col xs-12 sm-6">
-            <div class="az-form-group xs">
-                <label class="az-label" for="RequestReasonId" id="labelRequestReasonId"></label>
-                <select class="az-select" id="RequestReasonId">
-                    <option value="1">Nettsider - WordPress</option>
-                    <option value="2">Nettsider - Statiske</option>
-                    <option value="3">Nettbutikk</option>
-                    <option value="4">Serviceavtale</option>
-                    <option value="5">Design</option>
-                    <option value="6">SEO</option>
-                    <option value="7">Google Analytics</option>
-                    <option value="8">Sosiale medier</option>
-                    <option value="9">Annet</option>
-                </select>
+            <div class="az-row az-margin-t-14 az-margin-b-14">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <button type="button" class="az-button az-button-block info az-shadow-1 az-shadow-hover-2 cancel" id="cmdClose"></button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-form-group xs">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 submit" id="cmdSubmit"></button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="az-row">
-        <div class="az-col xs-12">
-            <div class="az-form-group xs">
-                <label class="az-label" for="Comment" id="labelComment"></label>
-                <textarea class="az-textarea" id="Comment"></textarea>
-            </div>
-        </div>
-    </div>
-    <div class="az-row az-margin-t-14 az-margin-b-14">
-        <div class="az-col xs-12 sm-6">
-            <div class="az-form-group xs">
-                <button type="button" class="az-button az-button-block info az-shadow-1 az-shadow-hover-2 cancel" id="cmdClose"></button>
-            </div>
-        </div>
-        <div class="az-col xs-12 sm-6">
-            <div class="az-form-group xs">
-                <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 submit" id="cmdSubmit"></button>
-            </div>
-        </div>
-    </div>-->
 
         </div>
     </form>
 
-    <!--<form id="frmReg">
-        <h1 style="width: 50%; float: left;"><a href="https://cdn.web2net.no/lib-1.0.0/azcdn100.html">AZ 1.0.0 Framework</a></h1>
-        <h1 style="width: 50%; float: left;"><a href="https://cdn.web2net.no/lib-2.0.0/azcdn200.html">AZ 2.0.0 Framework</a></h1>
-    </form>-->
+    <!--
+    <form id="frmReg">
+    <h1 style="width: 50%; float: left;"><a href="https://cdn.web2net.no/lib-1.0.0/azcdn100.html">AZ 1.0.0 Framework</a></h1>
+    <h1 style="width: 50%; float: left;"><a href="https://cdn.web2net.no/lib-2.0.0/azcdn200.html">AZ 2.0.0 Framework</a></h1>
+    </form>
+
+
+    <div id="div-list"></div>
+
+    <script id="template-places" type="text/template">
+    <li data-id="${id}">
+    <a href="${url}">${name}</a>, ${city}, ${state}
+    </li>
+    </script>
+    -->
 
 </body>
 </html>

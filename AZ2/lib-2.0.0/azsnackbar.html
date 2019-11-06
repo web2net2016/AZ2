@@ -31,6 +31,10 @@
         var azSnackbar4;
         var azSnackbar5;
         var azSnackbar6;
+        var azSnackbar7;
+        var azSnackbar8;
+        var azSnackbar9;
+        var azSnackbar10;
 
         $(document).ready(function ()
         {
@@ -42,6 +46,10 @@
             $("#cmdSnackbar4").off("click", setSnackbar4).on("click", setSnackbar4);
             $("#cmdSnackbar5").off("click", setSnackbar5).on("click", setSnackbar5);
             $("#cmdSnackbar6").off("click", setSnackbar6).on("click", setSnackbar6);
+            $("#cmdSnackbar7").off("click", setSnackbar7).on("click", setSnackbar7);
+            $("#cmdSnackbar8").off("click", setSnackbar8).on("click", setSnackbar8);
+            $("#cmdSnackbar9").off("click", setSnackbar9).on("click", setSnackbar9);
+            $("#cmdSnackbar10").off("click", setSnackbar10).on("click", setSnackbar10);
         });
 
         function setSnackbar1()
@@ -49,7 +57,7 @@
             azSnackbar1 = new AZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-1",
-                    azSnackbarText: "Dette er en tekst... left / top...",
+                    azSnackbarText: "Dette er en tekst...",
                     azSnackbarPosition: "left-top"
                 });
         }
@@ -59,8 +67,8 @@
             azSnackbar2 = new AZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-2",
-                    azSnackbarText: "Dette er en tekst... right / top...",
-                    azSnackbarPosition: "right-top"
+                    azSnackbarText: 'Dette er en tekst...',
+                    azSnackbarPosition: "center-top"
                 });
         }
 
@@ -69,8 +77,8 @@
             azSnackbar3 = new AZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-3",
-                    azSnackbarText: 'Dette er en tekst... left / bottom...',
-                    azSnackbarPosition: "left-bottom"
+                    azSnackbarText: "Dette er en tekst...",
+                    azSnackbarPosition: "right-top"
                 });
         }
 
@@ -79,37 +87,23 @@
             azSnackbar4 = new AZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-4",
-                    azSnackbarText: "Dette er en tekst... right / bottom...",
-                    azSnackbarPosition: "right-bottom"
+                    azSnackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    azSnackbarPosition: "full-width-top",
+                    azSnackbarClose: true,
+                    azSnackbarBackgroundColor: "#FF9F55",
+                    azSnackbarColor: "#000000",
+                    azSnackbarAfterOpen: function () { }
                 });
         }
 
         function setSnackbar5()
         {
-            var _HTML = "";
-            _HTML += '<div class="az-row">';
-            _HTML += '<div class="az-col xs-12">';
-            _HTML += '<div class="az-form-group">';
-            _HTML += '<div class="az-input-group">';
-            _HTML += '<input type="text" placeholder="Navn" id="Navn" class="az-input" />';
-            _HTML += '<span class="az-input-group-addon az-cursor-pointer" style="border: none;"><i class="fas fa-user" style="color: #000000;"></i></span>';
-            _HTML += '</div>';
-            _HTML += '</div>';
-            _HTML += '</div>';
-            _HTML += '</div>';
-
             azSnackbar5 = new AZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-5",
-                    azSnackbarText: _HTML,
-                    azSnackbarPosition: "left-bottom",
-                    azSnackbarClose: true
+                    azSnackbarText: 'Dette er en tekst...',
+                    azSnackbarPosition: "left-bottom"
                 });
-
-            $(".az-input-group-addon").off().on('click', function ()
-            {
-                azSnackbar5.ChangeSnackbarText("Takk for din respons, " + $("#Navn").val());
-            });
         }
 
         function setSnackbar6()
@@ -117,17 +111,71 @@
             azSnackbar6 = new AZSnackbar(
                 {
                     azSnackbarId: "az-snackbar-6",
-                    azSnackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br><br>Denne teksten vil skiftes ut om 5 sekunder.",
-                    azSnackbarPosition: "right-bottom",
-                    azSnackbarClose: true,
-                    azSnackbarBackgroundColor: "FF9F55",
-                    azSnackbarTextColor: "000000"
+                    azSnackbarText: "Dette er en tekst...",
+                    azSnackbarPosition: "center-bottom"
                 });
+        }
 
-            window.setTimeout(function ()
+        function setSnackbar7()
+        {
+            azSnackbar7 = new AZSnackbar(
+                {
+                    azSnackbarId: "az-snackbar-7",
+                    azSnackbarText: "Dette er en tekst...",
+                    azSnackbarPosition: "right-bottom"
+                });
+        }
+
+        function setSnackbar8()
+        {
+            azSnackbar8 = new AZSnackbar(
+                {
+                    azSnackbarId: "az-snackbar-8",
+                    azSnackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    azSnackbarPosition: "full-width-bottom",
+                    azSnackbarClose: true,
+                    azSnackbarBackgroundColor: "#FF9F55",
+                    azSnackbarColor: "#000000",
+                    azSnackbarAfterOpen: function () { }
+                });
+        }
+
+        function setSnackbar9()
+        {
+            $.subscribeonce("functionlib/azSnackbarAfterOpen", function (e)
             {
-                azSnackbar6.ChangeSnackbarText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.");
-            }, 5000);
+                $(".az-input-group-addon").off().on('click', function ()
+                {
+                    azSnackbar9.ChangeSnackbarText("Takk for din respons, " + $("#Navn").val());
+                });
+            });
+
+            var _HTML = "";
+            _HTML += '<div class="az-form-group">';
+            _HTML += '<div class="az-input-group">';
+            _HTML += '<input type="text" placeholder="Navn" id="Navn" class="az-input" />';
+            _HTML += '<span class="az-input-group-addon az-cursor-pointer" style="border: none;"><i class="fas fa-user" style="color: #000000;"></i></span>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+
+            azSnackbar9 = new AZSnackbar(
+                {
+                    azSnackbarId: "az-snackbar-9",
+                    azSnackbarText: _HTML,
+                    azSnackbarPosition: "left-bottom",
+                    azSnackbarClose: true
+                });
+        }
+
+        function setSnackbar10()
+        {
+            azSnackbar10 = new AZSnackbar(
+                {
+                    azSnackbarId: "az-snackbar-10",
+                    azSnackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    azSnackbarPosition: "full-width-bottom",
+                    azSnackbarClose: true
+                });
         }
 
     </script>
@@ -135,39 +183,61 @@
 <body>
 
     <form id="frmReg">
-        <div class="az-container">
+        <div class="az-container az-xs-margin-l-14 az-xs-margin-r-14" style="width: auto;">
 
             <div class="az-row az-margin-t-56">
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar1">Snackbar 1</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar1">Snackbar - Left / Top</button>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar2">Snackbar 2</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar2">Snackbar - Center / Top</button>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar3">Snackbar 3</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar3">Snackbar - Right / Top</button>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar4">Snackbar 4</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar4">Snackbar Full Width Top</button>
                     </div>
                 </div>
             </div>
-            <div class="az-row az-margin-t-14">
+            <div class="az-row">
+                <div class="az-col xs-12 sm-3">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar5">Snackbar - Left / Bottom</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-3">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar6">Snackbar - Center / Bottom</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-3">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar7">Snackbar - Right / Bottom</button>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-3">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar8">Snackbar Full Width Bottom</button>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
                 <div class="az-col xs-12 sm-6">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar5">Snackbar 5</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar9">Snackbar Form</button>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar6">Snackbar 6</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar10">Snackbar Close</button>
                     </div>
                 </div>
             </div>
@@ -192,15 +262,19 @@
                         &emsp;&ensp;&emsp;&ensp;azSnackbarMobileMinHeight: 0,<br />
                         &emsp;&ensp;&emsp;&ensp;azSnackbarClose: false,<br />
                         &emsp;&ensp;&emsp;&ensp;azSnackbarTimeout: 3000<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarBackgroundColor: "333333"<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarTextColor: "FFFFFF"<br />
-                        &emsp;&ensp;&emsp;&ensp;azSnackbarCloseColor: "FFFFFF"<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarBackgroundColor: "#333333"<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarColor: "#FFFFFF"<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarCloseColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azSnackbarAfterOpen: function () { }<br />
                         });<br />
+                        <br />
                         <br />
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6">
                     <div class="az-code jsHigh notranslate">
+                        <br />
+                        <br />
                         <br />
                         <br />
                         <br />
@@ -241,7 +315,7 @@
                             <property>azSnackbarPosition</property>
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>"left-top"</brown></default>
-                            <values><span>Values:</span> <brown>"left-top"</brown> or <brown>"left-bottom"</brown> or <brown>"right-top"</brown> or <brown>"right-bottom"</brown></values>
+                            <values><span>Values:</span> <brown>"left-top"</brown> or <brown>"center-top"</brown> or <brown>"right-top"</brown> or <brown>"full-width-top"</brown> or <brown>"left-bottom"</brown> or <brown>"center-bottom"</brown> or <brown>"right-bottom"</brown> or <brown>"full-width-bottom"</brown></values>
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -296,7 +370,7 @@
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>azSnackbarTextColor</property>
+                            <property>azSnackbarColor</property>
                             <type><span>Type:</span> <brown>Color Hex</brown></type>
                             <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
                             <br />

@@ -1,841 +1,57 @@
-﻿
-var ThisLanguage = "nb-NO";
+﻿// Functionlib v2.0.0 | (c) web2net AS
 
-$(document).ready(function ()
+var AZSettings =
 {
-    (function ($)
-    {
-        var _$Obj = $({});
-        $.each(
-            {
-                trigger: "publish",
-                on: "subscribe",
-                one: "subscribeonce",
-                off: "unsubscribe"
-            }, function (key, val)
-            {
-                jQuery[val] = function ()
-                {
-                    _$Obj[key].apply(_$Obj, arguments);
-                };
-            });
-
-        var _azLastScrollTop = 0;
-        $(window).scroll(function ()
-        {
-            $.publish("functionlib/azWindowScroll",
-                {
-                    azWindowScrollTop: parseInt($(window).scrollTop()),
-                    azWindowScrollDir: ($(window).scrollTop() > _azLastScrollTop) ? "down" : "up"
-                });
-            _azLastScrollTop = $(this).scrollTop();
-        });
-
-        window.setTimeout(function ()
-        {
-            $.publish("functionlib/azWindowResize",
-                {
-                    azWindowWidth: parseInt(window.innerWidth),
-                    azWindowHeight: parseInt(window.innerHeight),
-                    azWindowScrollTop: parseInt($(window).scrollTop()),
-                    azWindowScrollLeft: parseInt($(window).scrollLeft()),
-                    azWindowOrientation: (window.innerHeight > window.innerWidth) ? "portrait" : "landscape"
-                });
-        }, 100);
-        $(window).resize(function ()
-        {
-            $.publish("functionlib/azWindowResize",
-                {
-                    azWindowWidth: parseInt(window.innerWidth),
-                    azWindowHeight: parseInt(window.innerHeight),
-                    azWindowScrollTop: parseInt($(window).scrollTop()),
-                    azWindowScrollLeft: parseInt($(window).scrollLeft()),
-                    azWindowOrientation: (window.innerHeight > window.innerWidth) ? "portrait" : "landscape"
-                });
-        });
-
-        var _azDatePicker = false;
-        $(":input").each(function ()
-        {
-            if ($(this).is("[type='text'], [type='password'], [type='datetime'], [type='datetime-local'], [type='date'], [type='month'], [type='time'], [type='week'], [type='number'], [type='email'], [type='url'], [type='search'], [type='tel'], [type='color']"))
-            {
-                $(this).attr("autocomplete", "off");
-                if ($(this).hasClass("az-input-animated"))
-                {
-                    $(this).off("focusout", AZInputAnimatedFocusout).on("focusout", AZInputAnimatedFocusout);
-                }
-                if ($(this).hasClass("forceuppercase"))
-                {
-                    $(this).off("keypress focusout", AZForceUppercaseKeypressFocusout).on("keypress focusout", AZForceUppercaseKeypressFocusout);
-                }
-                if ($(this).hasClass("forcelowercase"))
-                {
-                    $(this).off("keypress focusout", AZForceLowercaseKeypressFocusout).on("keypress focusout", AZForceLowercaseKeypressFocusout);
-                }
-                if ($(this).hasClass("donotpaste"))
-                {
-                    $(this).off("keydown", AZDoNotPaste).on("keydown", AZDoNotPaste);
-                }
-                if ($(this).hasClass("notenter"))
-                {
-                    $(this).off("keydown", AZNotEnter).on("keydown", AZNotEnter);
-                }
-                if ($(this).hasClass("readonly"))
-                {
-                    $(this).attr("readOnly", true);
-                }
-                if ($(this).hasClass("disabled"))
-                {
-                    $(this).attr("disabled", true);
-                }
-                if ($(this).hasClass("selecttext"))
-                {
-                    $(this).click(function (e)
-                    {
-                        $(this).select();
-                    });
-                }
-
-                _azDatePicker = false;
-                if ($(this).hasClass("date"))
-                {
-                    _azDatePicker = true;
-                    $(this).datepicker
-                        ({
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
-                                }
-                            },
-                            onSelect: function (curDate, instance)
-                            {
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("pastdate"))
-                {
-                    _azDatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
-                                }
-                            },
-                            maxDate: 0,
-                            yearRange: "-60:+0",
-                            onSelect: function (curDate, instance)
-                            {
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("nopastdate"))
-                {
-                    _azDatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
-                                }
-                            },
-                            minDate: 0,
-                            onSelect: function (curDate, instance)
-                            {
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("fromdate"))
-                {
-                    _azDatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
-                                }
-                            },
-                            numberOfMonths: 2,
-                            onSelect: function (curDate, instance)
-                            {
-                                $(".todate").datepicker("option", "minDate", curDate);
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("todate"))
-                {
-                    _azDatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
-                                }
-                            },
-                            numberOfMonths: 2,
-                            onSelect: function (curDate, instance)
-                            {
-                                $(".fromdate").datepicker("option", "maxDate", curDate);
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("frompastdate"))
-                {
-                    _azDatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
-                                }
-                            },
-                            maxDate: 0,
-                            numberOfMonths: 2,
-                            onSelect: function (curDate, instance)
-                            {
-                                $(".topastdate").datepicker("option", "minDate", curDate);
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("topastdate"))
-                {
-                    _azDatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
-                                }
-                            },
-                            maxDate: 0,
-                            numberOfMonths: 2,
-                            onSelect: function (curDate, instance)
-                            {
-                                $(".frompastdate").datepicker("option", "maxDate", curDate);
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("fromnopastdate"))
-                {
-                    _azDatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
-                                }
-                            },
-                            minDate: 0,
-                            numberOfMonths: 2,
-                            onSelect: function (curDate, instance)
-                            {
-                                $(".tonopastdate").datepicker("option", "minDate", curDate);
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("tonopastdate"))
-                {
-                    _azDatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
-                                }
-                            },
-                            minDate: 0,
-                            numberOfMonths: 2,
-                            onSelect: function (curDate, instance)
-                            {
-                                $(".fromnopastdate").datepicker("option", "maxDate", curDate);
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if (_azDatePicker == true)
-                {
-                    $.datepicker.setDefaults($.datepicker.regional[ThisLanguage]);
-                }
-            }
-            if ($(this).is("[type='range']") && $(this).hasClass("az-range"))
-            {
-                $(this).off("input change", AZRange).on("input change", AZRange);
-            }
-            if ($(this).is("textarea"))
-            {
-                $(this).attr("autocomplete", "false");
-                if ($(this).hasClass("forceuppercase"))
-                {
-                    $(this).off("keypress focusout", AZForceUppercaseKeypressFocusout).on("keypress focusout", AZForceUppercaseKeypressFocusout);
-                }
-                if ($(this).hasClass("forcelowercase"))
-                {
-                    $(this).off("keypress focusout", AZForceLowercaseKeypressFocusout).on("keypress focusout", AZForceLowercaseKeypressFocusout);
-                }
-                if ($(this).hasClass("donotpaste"))
-                {
-                    $(this).off("keydown", AZDoNotPaste).on("keydown", AZDoNotPaste);
-                }
-                if ($(this).hasClass("notenter"))
-                {
-                    $(this).off("keydown", azNotEnter).on("keydown", azNotEnter);
-                }
-                if ($(this).hasClass("readonly"))
-                {
-                    $(this).attr("readOnly", true);
-                }
-                if ($(this).hasClass("disabled"))
-                {
-                    $(this).attr("disabled", true);
-                }
-                if ($(this).hasClass("selecttext"))
-                {
-                    $(this).click(function (e)
-                    {
-                        $(this).select();
-                    });
-                }
-            }
-            if ($(this).is("[type='checkbox']"))
-            {
-                if ($(this).hasClass("disabled"))
-                {
-                    $(this).attr("disabled", true);
-                }
-                if ($(this).hasClass("az-checkbox"))
-                {
-                    $(this).off("click", AZCheckboxClick).on("click", AZCheckboxClick);
-                }
-                if ($(this).parent("label").hasClass("az-switch"))
-                {
-                    $(this).off("click", AZSwitchClick).on("click", AZSwitchClick);
-                }
-            }
-            if ($(this).is("[type='radio']"))
-            {
-                if ($(this).hasClass("disabled"))
-                {
-                    $(this).attr("disabled", true);
-                }
-                if ($(this).hasClass("az-radio"))
-                {
-                    $(this).off("click", AZRadioClick).on("click", AZRadioClick);
-                }
-            }
-            if ($(this).is("select"))
-            {
-                if ($(this).hasClass("readonly"))
-                {
-                    $(this).attr("readOnly", true);
-                }
-                if ($(this).hasClass("disabled"))
-                {
-                    $(this).attr("disabled", true);
-                }
-            }
-            if ($(this).is("button"))
-            {
-                if ($(this).hasClass("cancel"))
-                {
-                    if (typeof AZCancel == 'function')
-                    {
-                        $(this).off("click", AZCancel).on("click", AZCancel);
-                    }
-                }
-                if ($(this).hasClass("submit"))
-                {
-                    if (typeof AZSubmit == 'function')
-                    {
-                        $(this).off("click", AZSubmit).on("click", AZSubmit);
-                    }
-                }
-                if ($(this).hasClass("delete"))
-                {
-                    if (typeof AZDelete == 'function')
-                    {
-                        $(this).off("click", AZDelete).on("click", AZDelete);
-                    }
-                }
-                if ($(this).hasClass("az-navbar-button"))
-                {
-                    $(this).off("click", AZToggleNavbarMobile).on("click", AZToggleNavbarMobile);
-                }
-                if ($(this).hasClass("disabled"))
-                {
-                    AZDisableButton(this);
-                }
-            }
-        });
-
-        // Password Eye
-        $(".passwordeye").off("click", AZHideShowPassword).on("click", AZHideShowPassword);
-
-        // Animated Label
-        $(".az-label-animated").off("click", AZLabelAnimatedClick).on("click", AZLabelAnimatedClick);
-
-        // Adjust Cards Height
-        $('.az-accordion-card.adjust, .az-card.adjust, .az-list-card.adjust, .az-timeline-card.adjust').matchHeight();
-
-        // Navbar Top Menu
-        var _$NavbarTopMenu = $(".az-navbar-top-content").find(".az-navbar-menu");
-        var _NavbarTopHeight = _$NavbarTopMenu.parents(".az-navbar-top").height();
-        _$NavbarTopMenu.off().on("click", "li > a", function (e)
-        {
-            var _Anchor = $(this).attr('href');
-            if (_Anchor.indexOf("#") === 0)
-            {
-                e.preventDefault();
-                if (_$NavbarTopMenu.parents(".az-navbar-top").hasClass("az-navbar-sticky") === false)
-                {
-                    _NavbarTopHeight = 0;
-                }
-                if (_$NavbarTopMenu.hasClass("az-animated") === true)
-                {
-                    $('html, body').stop().animate(
-                        {
-                            scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
-                        },
-                        {
-                            easing: 'easeInOutExpo',
-                            duration: 1500
-                        });
-                }
-                else
-                {
-                    $('html, body').stop().animate(
-                        {
-                            scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
-                        },
-                        {
-                            duration: 0
-                        });
-                }
-                $(".az-navbar-top-content").removeClass("mobile");
-            }
-        });
-
-        // Dropdown Menu
-        if ($(".az-dropdown-button").is(":button"))
-        {
-            $(".az-dropdown-button").off("click", AZDropdown).on("click", AZDropdown);
-        }
-        $(".az-dropdown-button[href]").off("click", AZDropdown).on("click", AZDropdown);
-
-        // Input Spinner
-        var _ObjAttributes = {};
-        var _$CurrentSpinner = null;
-        var _$ParentElement = null;
-        $(".az-input-spinner").each(function ()
-        {
-            _$CurrentSpinner = $(this).attr("disabled", true);
-            _$ParentElement = $(this).parent(".az-input-group");
-            _ObjAttributes = AZCheckSpinnerAttributes(this);
-
-            if (IsEmpty(_ObjAttributes) === false)
-            {
-                if ((_ObjAttributes.Value < _ObjAttributes.Min) || (_ObjAttributes.Value > _ObjAttributes.Max))
-                {
-                    _$CurrentSpinner.remove();
-                    _$ParentElement.html('<div>Her er det en feil</div>');
-                }
-                else
-                {
-                    if (_ObjAttributes.hasOwnProperty("Decimals"))
-                    {
-                        _$CurrentSpinner.val(numeral(_ObjAttributes.Value).format('0.00'));
-                    }
-                    _$ParentElement.append('<span class="az-input-group-addon az-spinner-decrement"><i class="fas fa-minus"></i></span>').append(_$CurrentSpinner).append('<span class="az-input-group-addon az-spinner-increment"><i class="fas fa-plus"></i></span>');
-                    AZSetSpinnerEvents(_$ParentElement, _ObjAttributes);
-                }
-            }
-            else
-            {
-                _$CurrentSpinner.remove();
-                _$ParentElement.html('<div>Her er det en feil</div>');
-            }
-        });
-    })(jQuery);
-});
-
-function AZHideShowPassword(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _SelectedElementId = "";
-    if ($(_Element).hasClass("passwordeye"))
-    {
-        _SelectedElementId = $(_Element).attr("data-connectedid");
-    }
-    else
-    {
-        if ($(_Element).parent().hasClass("passwordeye"))
-        {
-            _SelectedElementId = $(_Element).parent().attr("data-connectedid");
-        }
-    }
-    if (_SelectedElementId != "")
-    {
-        var _$PasswordField = $("#" + _SelectedElementId)[0];
-        if (_$PasswordField.type == "password")
-        {
-            if (_$PasswordField.value != "")
-            {
-                _$PasswordField.type = "text";
-            }
-        }
-        else
-        {
-            _$PasswordField.type = "password";
-        }
-    }
-}
-
-function AZLabelAnimatedClick(e)
-{
-    var _Element = e.target || e.srcElement;
-    $(_Element).siblings(":input").focus();
-}
-
-function AZSetSpinnerEvents(Element, ObjAttributes)
-{
-    var _SpinnerTimeOut;
-    Element.children().eq(0).off("mousedown touchstart mouseup mouseleave touchend").on("mousedown touchstart", function (e)
-    {
-        _SpinnerTimeOut = setInterval(function ()
-        {
-            var _CurrentSpinnerValue = (parseFloat(Element.children().eq(1).val()) - ObjAttributes.Step);
-            if (_CurrentSpinnerValue >= ObjAttributes.Min)
-            {
-                if (ObjAttributes.hasOwnProperty("Decimals"))
-                {
-                    _CurrentSpinnerValue = numeral(_CurrentSpinnerValue).format('0.00');
-                }
-                Element.children().eq(1).val(_CurrentSpinnerValue);
-                $.publish("functionlib/azInputSpinner",
-                    {
-                        azInputSpinnerId: Element.attr("id") === undefined ? "" : Element.attr("id"),
-                        azInputSpinnerValue: _CurrentSpinnerValue,
-                        azInputSpinnerJQElement: Element
-                    });
-            }
-        }, 100);
-    }).on("mouseup mouseleave touchend", function ()
-    {
-        clearInterval(_SpinnerTimeOut);
-    });
-    Element.children().eq(2).off("mousedown touchstart mouseup mouseleave touchend").on("mousedown touchstart", function (e)
-    {
-        _SpinnerTimeOut = setInterval(function ()
-        {
-            var _CurrentSpinnerValue = (parseFloat(Element.children().eq(1).val()) + ObjAttributes.Step);
-            if (_CurrentSpinnerValue <= ObjAttributes.Max)
-            {
-                if (ObjAttributes.hasOwnProperty("Decimals"))
-                {
-                    _CurrentSpinnerValue = numeral(_CurrentSpinnerValue).format('0.00');
-                }
-                Element.children().eq(1).val(_CurrentSpinnerValue);
-                $.publish("functionlib/azInputSpinner",
-                    {
-                        azInputSpinnerId: Element.attr("id") === undefined ? "" : Element.attr("id"),
-                        azInputSpinnerValue: _CurrentSpinnerValue,
-                        azInputSpinnerJQElement: Element
-                    });
-            }
-        }, 100);
-    }).on("mouseup mouseleave touchend", function ()
-    {
-        clearInterval(_SpinnerTimeOut);
-    });
-    Element.children().eq(0).off("click").on("click", function (e)
-    {
-        var _CurrentSpinnerValue = (parseFloat(Element.children().eq(1).val()) - ObjAttributes.Step);
-        if (_CurrentSpinnerValue >= ObjAttributes.Min)
-        {
-            if (ObjAttributes.hasOwnProperty("Decimals"))
-            {
-                _CurrentSpinnerValue = numeral(_CurrentSpinnerValue).format('0.00');
-            }
-            Element.children().eq(1).val(_CurrentSpinnerValue);
-            $.publish("functionlib/azInputSpinner",
-                {
-                    azInputSpinnerId: Element.attr("id") === undefined ? "" : Element.attr("id"),
-                    azInputSpinnerValue: _CurrentSpinnerValue,
-                    azInputSpinnerJQElement: Element
-                });
-        }
-    });
-    Element.children().eq(2).off("click").on("click", function (e)
-    {
-        var _CurrentSpinnerValue = (parseFloat(Element.children().eq(1).val()) + ObjAttributes.Step);
-        if (_CurrentSpinnerValue <= ObjAttributes.Max)
-        {
-            if (ObjAttributes.hasOwnProperty("Decimals"))
-            {
-                _CurrentSpinnerValue = numeral(_CurrentSpinnerValue).format('0.00');
-            }
-            Element.children().eq(1).val(_CurrentSpinnerValue);
-            $.publish("functionlib/azInputSpinner",
-                {
-                    azInputSpinnerId: Element.attr("id") === undefined ? "" : Element.attr("id"),
-                    azInputSpinnerValue: _CurrentSpinnerValue,
-                    azInputSpinnerJQElement: Element
-                });
-        }
-    });
-}
-
-function AZCheckSpinnerAttributes(Element)
-{
-    var _Attributes = 0;
-    var _ObjAttributes = {};
-    $.each(Element.attributes, function ()
-    {
-        if (this.name == "min" && this.value != "")
-        {
-            _ObjAttributes.Min = parseFloat(this.value);
-            _Attributes += 1;
-        }
-        if (this.name == "max" && this.value != "")
-        {
-            _ObjAttributes.Max = parseFloat(this.value);
-            _Attributes += 1;
-        }
-        if (this.name == "step" && this.value != "")
-        {
-            _ObjAttributes.Step = parseFloat(this.value);
-            _Attributes += 1;
-        }
-        if (this.name == "value" && this.value != "")
-        {
-            _ObjAttributes.Value = parseFloat(this.value);
-            _Attributes += 1;
-        }
-        if (this.name == "data-decimals" && this.value != "")
-        {
-            _ObjAttributes.Decimals = parseFloat(this.value);
-        }
-    });
-    if (_Attributes !== 4)
-    {
-        _ObjAttributes = {};
-    }
-    return _ObjAttributes;
+    LanguageValidationFolder: "/admin",
+    DefaultLanguageFile: "/lib/default.lang.json",
+    DefaultLanguage: "nb-NO",
+    DebugMode: true,
+    AppName: "AZ Team",
+    AppVersion: "1.0.0",
+    ApiVersion: "_1"
 }
 
 // AZ Page
 function AZPage(Options)
 {
-    var _Main = this;
-    var _Defaults =
+    if (this instanceof AZPage === true)
     {
-        azPageSettingsFile: "/lib/settings.json",
-        azPageInputTypeEvents: false,
-        azPageLanguage: false,
-        azPageValidation: false
-    };
-    _Main.Options = $.extend({}, _Defaults, Options || {});
-
-    _Main.ObjPageAttributes = {};
-    _Main.ObjLanguage = {};
-    _Main.JsonUrl = "";
-    _Main.DefaultLanguageFile = "";
-
-    _Main.ObjPageAttributes = new AZCheckPageAttributes();
-    if (IsEmpty(_Main.ObjPageAttributes) === false)
-    {
-        _Main.InputTypeEvents = function ()
+        var _Main = this;
+        var _Defaults =
         {
-            if (_Main.Options.azPageInputTypeEvents === true)
+            azPageInputTypeEvents: false,
+            azPageLanguage: false,
+            azPageValidation: false
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
+
+        _Main.ObjPageAttributes = {};
+        _Main.ObjLanguage = {};
+        _Main.JsonUrl = "";
+        _Main.DefaultLanguageFile = "";
+        _Main.DefaultLanguage = "";
+
+        _Main.ObjPageAttributes = new AZCheckPageAttributes();
+        if (IsEmpty(_Main.ObjPageAttributes) === false)
+        {
+            _Main.InputTypeEvents = function ()
             {
-                $.subscribeonce("functionlib/AZSetInputTypeEvents", function (e, data)
+                if (_Main.Options.azPageInputTypeEvents === true)
+                {
+                    $.subscribeonce("functionlib/AZSetInputTypeEvents", function (e, data)
+                    {
+                        $.publish("functionlib/AZPage",
+                            {
+                                Form: _Main.ObjPageAttributes.$ObjAZForm,
+                                Location: _Main.ObjPageAttributes.Location,
+                                PageName: _Main.ObjPageAttributes.PageName,
+                                PageFirstName: _Main.ObjPageAttributes.PageFirstName,
+                                Language: _Main.ObjLanguage
+                            });
+                    });
+                    AZSetInputTypeEvents();
+                }
+                else
                 {
                     $.publish("functionlib/AZPage",
                         {
@@ -845,90 +61,74 @@ function AZPage(Options)
                             PageFirstName: _Main.ObjPageAttributes.PageFirstName,
                             Language: _Main.ObjLanguage
                         });
-                });
-                AZSetInputTypeEvents();
+                }
             }
-            else
-            {
-                $.publish("functionlib/AZPage",
-                    {
-                        Form: _Main.ObjPageAttributes.$ObjAZForm,
-                        Location: _Main.ObjPageAttributes.Location,
-                        PageName: _Main.ObjPageAttributes.PageName,
-                        PageFirstName: _Main.ObjPageAttributes.PageFirstName,
-                        Language: _Main.ObjLanguage
-                    });
-            }
-        }
 
-        _Main.Validation = function ()
-        {
-            if (_Main.Options.azPageValidation === true)
+            _Main.Validation = function ()
             {
-                $.subscribeonce("functionlib/AZSetValidation", function (e, data)
+                if (_Main.Options.azPageValidation === true)
+                {
+                    $.subscribeonce("functionlib/AZSetValidation", function (e, data)
+                    {
+                        _Main.InputTypeEvents();
+                    });
+                    _Main.$Validation = new AZGetJSON({ azJsonUrl: _Main.JsonUrl + "-val.json" });
+                    _Main.$Validation.done(function (data, textStatus, jqXHR)
+                    {
+                        if (IsEmpty(data) === false && textStatus === "success")
+                        {
+                            new AZSetValidation(_Main.ObjPageAttributes.$ObjAZForm, data);
+                        }
+                        else
+                        {
+                            consoleLog({ consoleType: "error", consoleText: "AZSetValidation" });
+                        }
+                    });
+                }
+                else
                 {
                     _Main.InputTypeEvents();
-                });
-                _Main.$Validation = new AZGetJSON({ azJsonUrl: _Main.JsonUrl + "-val.json" });
-                _Main.$Validation.done(function (data, textStatus, jqXHR)
-                {
-                    if (IsEmpty(data) === false && textStatus === "success")
-                    {
-                        new AZSetValidation(_Main.ObjPageAttributes.$ObjAZForm, data);
-                    }
-                    else
-                    {
-                        consoleLog({ consoleType: "error", consoleText: "AZSetValidation" });
-                    }
-                });
-            }
-            else
-            {
-                _Main.InputTypeEvents();
-            }
-        }
-
-        _Main.Language = function ()
-        {
-            if (_Main.Options.azPageLanguage === true)
-            {
-                $.subscribeonce("functionlib/AZSetLanguage", function (e, data)
-                {
-                    _Main.ObjLanguage = data;
-                    _Main.Validation();
-                });
-                _Main.$Language = new AZGetJSON({ azJsonUrl: _Main.JsonUrl + "-lang.json" });
-                _Main.$Language.always(function (data, textStatus, jqXHR)
-                {
-                    if (IsEmpty(data) === false && textStatus === "success")
-                    {
-                        new AZSetLanguage(data, _Main.DefaultLanguageFile);
-                    }
-                    else
-                    {
-                        consoleLog({ consoleType: "error", consoleText: "AZSetLanguage" });
-                    }
-                });
-            }
-            else
-            {
-                _Main.Validation();
-            }
-        }
-
-        _Main.$DefaultSettings = new AZGetJSON({ azJsonUrl: _Main.Options.azPageSettingsFile });
-        _Main.$DefaultSettings.always(function (data, textStatus, jqXHR)
-        {
-            if (IsEmpty(data) === false && textStatus === "success")
-            {
-                _Main.DefaultLanguageFile = data.DefaultLanguageFile;
-                ThisLanguage = AZGetLanguageClientStorage();
-                if (ThisLanguage == null)
-                {
-                    ThisLanguage = data.DefaultLanguage;
                 }
-                moment.locale(ThisLanguage);
-                AZSetLanguageClientStorage(ThisLanguage);
+            }
+
+            _Main.Language = function ()
+            {
+                if (_Main.Options.azPageLanguage === true)
+                {
+                    $.subscribeonce("functionlib/AZSetLanguage", function (e, data)
+                    {
+                        _Main.ObjLanguage = data;
+                        _Main.Validation();
+                    });
+                    _Main.$Language = new AZGetJSON({ azJsonUrl: _Main.JsonUrl + "-lang.json" });
+                    _Main.$Language.always(function (data, textStatus, jqXHR)
+                    {
+                        if (IsEmpty(data) === false && textStatus === "success")
+                        {
+                            new AZSetLanguage(data, _Main.DefaultLanguageFile, _Main.DefaultLanguage);
+                        }
+                        else
+                        {
+                            consoleLog({ consoleType: "error", consoleText: "AZSetLanguage" });
+                        }
+                    });
+                }
+                else
+                {
+                    _Main.Validation();
+                }
+            }
+
+            if (IsEmpty(AZSettings) === false)
+            {
+                _Main.DefaultLanguageFile = AZSettings.DefaultLanguageFile;
+                _Main.DefaultLanguage = clientStorage("get", "language", "");
+                if (_Main.DefaultLanguage === null)
+                {
+                    _Main.DefaultLanguage = AZSettings.DefaultLanguage;
+                }
+                moment.locale(_Main.DefaultLanguage);
+                clientStorage("set", "language", _Main.DefaultLanguage)
 
                 if (_Main.ObjPageAttributes.Rooth === true)
                 {
@@ -936,26 +136,27 @@ function AZPage(Options)
                 }
                 else
                 {
-                    if ((data.LanguageValidationFolder.match(new RegExp("/", "g")) || []).length > 1)
+                    if ((AZSettings.LanguageValidationFolder.match(new RegExp("/", "g")) || []).length > 1)
                     {
-                        _Main.JsonUrl = data.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName;
+                        _Main.JsonUrl = AZSettings.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName;
                     }
                     else
                     {
-                        _Main.JsonUrl = data.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName + "/lib/lang-val/" + _Main.ObjPageAttributes.PageFirstName;
+                        _Main.JsonUrl = AZSettings.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName + "/lib/lang-val/" + _Main.ObjPageAttributes.PageFirstName;
                     }
                 }
                 _Main.Language();
             }
             else
             {
-                consoleLog({ consoleType: "error", consoleText: "AZDefaultSettings" });
+                consoleLog({ consoleType: "error", consoleText: "AZSettings" });
             }
-        });
-    }
-    else
-    {
-        consoleLog({ consoleType: "error", consoleText: "AZPage" });
+        }
+        else
+        {
+            consoleLog({ consoleType: "error", consoleText: "AZPage - AZCheckPageAttributes" });
+        }
+        return ({});
     }
 }
 
@@ -1035,19 +236,8 @@ function AZGetJSON(Options)
     }
 }
 
-// AZ Get / Set Language Client Storage
-function AZGetLanguageClientStorage()
-{
-    return clientStorage("get", "language", "");
-}
-
-function AZSetLanguageClientStorage(Language)
-{
-    clientStorage("set", "language", Language);
-}
-
 // AZ Set Language
-function AZSetLanguage(ObjPageLanguage, DefaultLanguageFile)
+function AZSetLanguage(ObjPageLanguage, DefaultLanguageFile, DefaultLanguage)
 {
     var _Main = this;
     _Main.SetFullLanguage = function (ObjDefaultLanguage)
@@ -1056,10 +246,10 @@ function AZSetLanguage(ObjPageLanguage, DefaultLanguageFile)
             {
                 ObjNonLanguageElements: ObjDefaultLanguage.ObjNonLanguageElements,
                 SingleNonLanguageElements: ObjDefaultLanguage.SingleNonLanguageElements,
-                ObjDefaultElements: ObjDefaultLanguage.ObjDefaultElements[ThisLanguage],
-                SingleDefaultElements: ObjDefaultLanguage.SingleDefaultElements[ThisLanguage],
-                ObjElements: ObjPageLanguage.ObjElements[ThisLanguage],
-                SingleElements: ObjPageLanguage.SingleElements[ThisLanguage]
+                ObjDefaultElements: ObjDefaultLanguage.ObjDefaultElements[DefaultLanguage],
+                SingleDefaultElements: ObjDefaultLanguage.SingleDefaultElements[DefaultLanguage],
+                ObjElements: ObjPageLanguage.ObjElements[DefaultLanguage],
+                SingleElements: ObjPageLanguage.SingleElements[DefaultLanguage]
             }
         $.publish("AZSetLanguage");
     }
@@ -1068,8 +258,8 @@ function AZSetLanguage(ObjPageLanguage, DefaultLanguageFile)
     {
         _Main.ObjLanguage =
             {
-                ObjElements: ObjPageLanguage.ObjElements[ThisLanguage],
-                SingleElements: ObjPageLanguage.SingleElements[ThisLanguage]
+                ObjElements: ObjPageLanguage.ObjElements[DefaultLanguage],
+                SingleElements: ObjPageLanguage.SingleElements[DefaultLanguage]
             }
         $.publish("AZSetLanguage");
         consoleLog({ consoleType: "error", consoleText: "No Default Language File" });
@@ -1299,16 +489,370 @@ function AZSetValidation(Area, ObjValidation)
 
 function AZSetInputTypeEvents()
 {
+    var _DefaultLanguage = clientStorage("get", "language", "");
+    if (_DefaultLanguage === null)
+    {
+        _DefaultLanguage = "nb-NO";
+    }
+    var _DatePicker = false;
     var _ValidType = "";
     $(":input").each(function ()
     {
         if ($(this).is("[type='text'], [type='password'], [type='datetime'], [type='datetime-local'], [type='date'], [type='month'], [type='time'], [type='week'], [type='number'], [type='email'], [type='url'], [type='search'], [type='tel'], [type='color']") && $(this).hasClass("validate"))
         {
+            _DatePicker = false;
             $(this).off("keyup", AZValidateDirtyKeyup).on("keyup", AZValidateDirtyKeyup);
             _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
             if (_ValidType !== null)
             {
                 $(this).off("keypress", AZValidateInputValueKeypress).on("keypress", { ValidType: _ValidType }, AZValidateInputValueKeypress);
+            }
+            if ($(this).hasClass("date"))
+            {
+                _DatePicker = true;
+                $(this).datepicker
+                    ({
+                        beforeShow: function ()
+                        {
+                            if ($(this).hasClass("xs") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.85em" })
+                            }
+                            else if ($(this).hasClass("sm") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.10em" })
+                            }
+                            else if ($(this).hasClass("md") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.20em" })
+                            }
+                            else
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.95em" })
+                            }
+                        },
+                        onSelect: function (curDate, instance)
+                        {
+                            $.publish("functionlib/azSetDate",
+                                {
+                                    azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                    azDateLocalDate: curDate,
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateJQElement: $(this)
+                                });
+                        }
+                    });
+            }
+            if ($(this).hasClass("pastdate"))
+            {
+                _DatePicker = true;
+                $(this).datepicker(
+                    {
+                        beforeShow: function ()
+                        {
+                            if ($(this).hasClass("xs") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.85em" })
+                            }
+                            else if ($(this).hasClass("sm") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.10em" })
+                            }
+                            else if ($(this).hasClass("md") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.20em" })
+                            }
+                            else
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.95em" })
+                            }
+                        },
+                        maxDate: 0,
+                        yearRange: "-60:+0",
+                        onSelect: function (curDate, instance)
+                        {
+                            $.publish("functionlib/azSetDate",
+                                {
+                                    azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                    azDateLocalDate: curDate,
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateJQElement: $(this)
+                                });
+                        }
+                    });
+            }
+            if ($(this).hasClass("nopastdate"))
+            {
+                _DatePicker = true;
+                $(this).datepicker(
+                    {
+                        beforeShow: function ()
+                        {
+                            if ($(this).hasClass("xs") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.85em" })
+                            }
+                            else if ($(this).hasClass("sm") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.10em" })
+                            }
+                            else if ($(this).hasClass("md") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.20em" })
+                            }
+                            else
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.95em" })
+                            }
+                        },
+                        minDate: 0,
+                        onSelect: function (curDate, instance)
+                        {
+                            $.publish("functionlib/azSetDate",
+                                {
+                                    azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                    azDateLocalDate: curDate,
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateJQElement: $(this)
+                                });
+                        }
+                    });
+            }
+            if ($(this).hasClass("fromdate"))
+            {
+                _DatePicker = true;
+                $(this).datepicker(
+                    {
+                        beforeShow: function ()
+                        {
+                            if ($(this).hasClass("xs") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.85em" })
+                            }
+                            else if ($(this).hasClass("sm") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.10em" })
+                            }
+                            else if ($(this).hasClass("md") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.20em" })
+                            }
+                            else
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.95em" })
+                            }
+                        },
+                        numberOfMonths: 2,
+                        onSelect: function (curDate, instance)
+                        {
+                            $(".todate").datepicker("option", "minDate", curDate);
+                            $.publish("functionlib/azSetDate",
+                                {
+                                    azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                    azDateLocalDate: curDate,
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateJQElement: $(this)
+                                });
+                        }
+                    });
+            }
+            if ($(this).hasClass("todate"))
+            {
+                _DatePicker = true;
+                $(this).datepicker(
+                    {
+                        beforeShow: function ()
+                        {
+                            if ($(this).hasClass("xs") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.85em" })
+                            }
+                            else if ($(this).hasClass("sm") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.10em" })
+                            }
+                            else if ($(this).hasClass("md") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.20em" })
+                            }
+                            else
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.95em" })
+                            }
+                        },
+                        numberOfMonths: 2,
+                        onSelect: function (curDate, instance)
+                        {
+                            $(".fromdate").datepicker("option", "maxDate", curDate);
+                            $.publish("functionlib/azSetDate",
+                                {
+                                    azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                    azDateLocalDate: curDate,
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateJQElement: $(this)
+                                });
+                        }
+                    });
+            }
+            if ($(this).hasClass("frompastdate"))
+            {
+                _DatePicker = true;
+                $(this).datepicker(
+                    {
+                        beforeShow: function ()
+                        {
+                            if ($(this).hasClass("xs") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.85em" })
+                            }
+                            else if ($(this).hasClass("sm") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.10em" })
+                            }
+                            else if ($(this).hasClass("md") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.20em" })
+                            }
+                            else
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.95em" })
+                            }
+                        },
+                        maxDate: 0,
+                        numberOfMonths: 2,
+                        onSelect: function (curDate, instance)
+                        {
+                            $(".topastdate").datepicker("option", "minDate", curDate);
+                            $.publish("functionlib/azSetDate",
+                                {
+                                    azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                    azDateLocalDate: curDate,
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateJQElement: $(this)
+                                });
+                        }
+                    });
+            }
+            if ($(this).hasClass("topastdate"))
+            {
+                _DatePicker = true;
+                $(this).datepicker(
+                    {
+                        beforeShow: function ()
+                        {
+                            if ($(this).hasClass("xs") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.85em" })
+                            }
+                            else if ($(this).hasClass("sm") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.10em" })
+                            }
+                            else if ($(this).hasClass("md") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.20em" })
+                            }
+                            else
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.95em" })
+                            }
+                        },
+                        maxDate: 0,
+                        numberOfMonths: 2,
+                        onSelect: function (curDate, instance)
+                        {
+                            $(".frompastdate").datepicker("option", "maxDate", curDate);
+                            $.publish("functionlib/azSetDate",
+                                {
+                                    azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                    azDateLocalDate: curDate,
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateJQElement: $(this)
+                                });
+                        }
+                    });
+            }
+            if ($(this).hasClass("fromnopastdate"))
+            {
+                _DatePicker = true;
+                $(this).datepicker(
+                    {
+                        beforeShow: function ()
+                        {
+                            if ($(this).hasClass("xs") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.85em" })
+                            }
+                            else if ($(this).hasClass("sm") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.10em" })
+                            }
+                            else if ($(this).hasClass("md") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.20em" })
+                            }
+                            else
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.95em" })
+                            }
+                        },
+                        minDate: 0,
+                        numberOfMonths: 2,
+                        onSelect: function (curDate, instance)
+                        {
+                            $(".tonopastdate").datepicker("option", "minDate", curDate);
+                            $.publish("functionlib/azSetDate",
+                                {
+                                    azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                    azDateLocalDate: curDate,
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateJQElement: $(this)
+                                });
+                        }
+                    });
+            }
+            if ($(this).hasClass("tonopastdate"))
+            {
+                _DatePicker = true;
+                $(this).datepicker(
+                    {
+                        beforeShow: function ()
+                        {
+                            if ($(this).hasClass("xs") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.85em" })
+                            }
+                            else if ($(this).hasClass("sm") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.10em" })
+                            }
+                            else if ($(this).hasClass("md") == true)
+                            {
+                                $(".ui-datepicker").css({ "font-size": "1.20em" })
+                            }
+                            else
+                            {
+                                $(".ui-datepicker").css({ "font-size": "0.95em" })
+                            }
+                        },
+                        minDate: 0,
+                        numberOfMonths: 2,
+                        onSelect: function (curDate, instance)
+                        {
+                            $(".fromnopastdate").datepicker("option", "maxDate", curDate);
+                            $.publish("functionlib/azSetDate",
+                                {
+                                    azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                                    azDateLocalDate: curDate,
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateJQElement: $(this)
+                                });
+                        }
+                    });
+            }
+            if (_DatePicker == true)
+            {
+                $.datepicker.setDefaults($.datepicker.regional[_DefaultLanguage]);
             }
         }
         if ($(this).is("[type='range']") && $(this).hasClass("az-range") && $(this).hasClass("validate"))
@@ -1407,207 +951,6 @@ function AZGetValidType(SelectedType)
     return _ValidTypes[SelectedType];
 }
 
-function AZInputAnimatedFocusout(e)
-{
-    var _Element = e.target || e.srcElement;
-    if ($(_Element).val() != "")
-    {
-        $('label[for="' + _Element.id + '"]').css({ "top": "-15px" });
-    }
-    else
-    {
-        $('label[for="' + _Element.id + '"]').removeAttr('style');
-    }
-}
-
-function AZForceUppercaseKeypressFocusout(e)
-{
-    var _Element = e.target || e.srcElement;
-    $(_Element).val($(_Element).val().toUpperCase());
-}
-
-function AZForceLowercaseKeypressFocusout(e)
-{
-    var _Element = e.target || e.srcElement;
-    $(_Element).val($(_Element).val().toLowerCase());
-}
-
-function AZDoNotPaste(e)
-{
-    if (e.ctrlKey == true && (e.which == 118 || e.which == 86))
-    {
-        e.preventDefault ? e.preventDefault() : e.returnValue = false;
-    }
-}
-
-function AZNotEnter(e)
-{
-    if ((e.keyCode || e.which) == 13)
-    {
-        e.preventDefault ? e.preventDefault() : e.returnValue = false;
-    }
-}
-
-function AZCheckboxClick(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _$SelectedCheckbox = $(this);
-    $.publish("functionlib/azCheckboxClick",
-        {
-            azCheckboxId: _$SelectedCheckbox.attr("id") === undefined ? "" : _$SelectedCheckbox.attr("id"),
-            azCheckboxValue: _$SelectedCheckbox.attr("value") === undefined ? "" : _$SelectedCheckbox.attr("value"),
-            azCheckboxChecked: _$SelectedCheckbox.is(":checked"),
-            azCheckboxJQElement: $(_Element)
-        });
-}
-
-function AZRadioClick(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _$SelectedRadio = $(this);
-    $.publish("functionlib/azRadioClick",
-        {
-            azRadioId: _$SelectedRadio.attr("id") === undefined ? "" : _$SelectedRadio.attr("id"),
-            azRadioName: _$SelectedRadio.attr("name") === undefined ? "" : _$SelectedRadio.attr("name"),
-            azRadioValue: _$SelectedRadio.attr("value") === undefined ? "" : _$SelectedRadio.attr("value"),
-            azRadioChecked: _$SelectedRadio.is(":checked"),
-            azRadioJQElement: $(_Element)
-        });
-}
-
-function AZSwitchClick(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _$SelectedSwitch = $(this);
-    $.publish("functionlib/azSwitchClick",
-        {
-            azSwitchId: _$SelectedSwitch.attr("id") === undefined ? "" : _$SelectedSwitch.attr("id"),
-            azSwitchValue: _$SelectedSwitch.attr("value") === undefined ? "" : _$SelectedSwitch.attr("value"),
-            azSwitchChecked: _$SelectedSwitch.is(":checked"),
-            azSwitchJQElement: $(_Element)
-        });
-}
-
-function AZRange(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _$SelectedRange = $(this);
-    if (e.type === "input")
-    {
-        $.publish("functionlib/azRangeSlide",
-            {
-                azRangeId: _$SelectedRange.attr("id") === undefined ? "" : _$SelectedRange.attr("id"),
-                azRangeValue: _$SelectedRange.val(),
-                azRangeJQElement: $(_Element)
-            });
-    }
-    else if (e.type === "change")
-    {
-        $.publish("functionlib/azRangeStop",
-            {
-                azRangeId: _$SelectedRange.attr("id") === undefined ? "" : _$SelectedRange.attr("id"),
-                azRangeValue: _$SelectedRange.val(),
-                azRangeJQElement: $(_Element)
-            });
-    }
-}
-
-function AZDisableButton(Element)
-{
-    var _$SelectedButton = $(Element);
-    if (!_$SelectedButton.hasClass("az-button-disabled"))
-    {
-        _$SelectedButton.addClass("az-button-disabled");
-        _$SelectedButton.attr("disabled", true);
-    }
-}
-
-function AZEnableButton(Element)
-{
-    var _$SelectedButton = $(Element);
-    if (_$SelectedButton.hasClass("az-button-disabled"))
-    {
-        _$SelectedButton.removeClass("az-button-disabled");
-        _$SelectedButton.attr("disabled", false);
-    }
-}
-
-function AZShowCoverSpin(CoverSpinText)
-{
-    var _CoverSpinText = CoverSpinText === undefined ? "" : CoverSpinText;
-    var _$CoverSpin = $("#az-cover-spin");
-    if (_$CoverSpin.length == 0)
-    {
-        $("body").append('<div id="az-cover-spin"><div>' + _CoverSpinText + '</div></div>');
-    }
-}
-
-function AZHideCoverSpin()
-{
-    var _$CoverSpin = $("#az-cover-spin");
-    if (_$CoverSpin.length > 0)
-    {
-        _$CoverSpin.remove();
-    }
-}
-
-function AZToggleNavbarMobile(e)
-{
-    var _$NavbarTopContent = $(".az-navbar-top-content");
-    if (_$NavbarTopContent.hasClass("mobile"))
-    {
-        _$NavbarTopContent.removeClass("mobile");
-    }
-    else
-    {
-        _$NavbarTopContent.addClass("mobile");
-    }
-}
-
-function AZCloseNavbarMobile()
-{
-    var _$NavbarTopContent = $(".az-navbar-top-content");
-    if (_$NavbarTopContent.hasClass("mobile"))
-    {
-        _$NavbarTopContent.removeClass("mobile");
-    }
-}
-
-function AZDropdown(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _$ULDropdown = $(_Element).closest(".az-dropdown-click").find("ul.az-dropdown-content");
-    $(".az-dropdown-display").not(_$ULDropdown).each(function ()
-    {
-        $(this).removeClass("az-dropdown-display");
-    });
-    if (_$ULDropdown.hasClass("az-dropdown-display"))
-    {
-        _$ULDropdown.removeClass("az-dropdown-display");
-    }
-    else
-    {
-        _$ULDropdown.addClass("az-dropdown-display");
-        window.setTimeout(function ()
-        {
-            $(document).one("click", { ULDropdown: _$ULDropdown }, AZRemoveDropdown);
-        }, 100);
-    }
-}
-
-function AZRemoveDropdown(e)
-{
-    var _Element = e.target || e.srcElement;
-    var _$ULDropdown = e.data.ULDropdown;
-    if ($(_Element) != _$ULDropdown)
-    {
-        if (_$ULDropdown.hasClass("az-dropdown-display"))
-        {
-            _$ULDropdown.removeClass("az-dropdown-display");
-        }
-    }
-}
-
 function consoleLog(Options)
 {
     var _Defaults =
@@ -1630,7 +973,7 @@ function consoleLog(Options)
     {
         _Options = $.extend({}, _Defaults, Options || {});
     }
-    if (DebugMode)
+    if (AZSettings.DebugMode === true)
     {
         console[_Options.consoleType](_Options.consoleText);
     }
@@ -1641,6 +984,496 @@ function consoleLog(Options)
 
 
 
+
+
+
+//////////////////////////////////////////////
+
+
+    //_Main.azCircularBarArray = [];
+    //if (Options && Options.length > 0)
+    //{
+    //    $.each(Options, function (Index, ObjCurrentOption)
+    //    {
+    //        _Main.azCircularBarArray.push(new AktivateAZCircularBar(ObjCurrentOption));
+    //    });
+    //}
+    //else if (IsEmpty(Options) === false)
+    //{
+    //    _Main.azCircularBarArray.push(new AktivateAZCircularBar(Options));
+    //}
+
+    //function AktivateAZCircularBar(ObjCurrentOption)
+    //{
+    //    this.Options = $.extend({}, _Defaults, ObjCurrentOption || {});
+    //    if (this.Options.azCircularBarId != "")
+    //    {
+    //        this.$CircularBar = $("#" + this.Options.azCircularBarId);
+    //        this.$CircularBar.$Slice = $('<div></div>').addClass("slice");
+    //        this.$CircularBar.$Bar = $('<div></div>').addClass("bar").css({ "border-color": this.Options.azCircularBarValueColor });
+    //        this.$CircularBar.$Fill = $('<div></div>').addClass("fill").css({ "border-color": this.Options.azCircularBarValueColor });
+    //        this.$CircularBar.$Label = $('<span></span>').addClass("label").html(this.Options.azCircularBarLabel);
+    //        if (this.Options.azCircularBarCaption != "")
+    //        {
+    //            this.$CircularBar.$Caption = $('<span></span>').addClass("caption").css({ "top": this.Options.azCircularBarSize, "color": this.Options.azCircularBarCaptionColor }).html(this.Options.azCircularBarCaption);
+    //        }
+    //        this.$CircularBar.$Slice.append(this.$CircularBar.$Bar).append(this.$CircularBar.$Fill);
+    //        this.$CircularBar.append(this.$CircularBar.$Label).append(this.$CircularBar.$Slice).append(this.$CircularBar.$Caption).addClass("c100 p" + this.Options.azCircularBarValue).css({ "background-color": this.Options.azCircularBarColor, "font-size": this.Options.azCircularBarSize });
+
+    //        this.azSetCircularBar = function (Options)
+    //        {
+    //            this.$CircularBar.$Bar.css({ "border-color": Options.azCircularBarValueColor });
+    //            this.$CircularBar.$Fill.css({ "border-color": Options.azCircularBarValueColor });
+    //            this.$CircularBar.$Label.html(Options.azCircularBarLabel);
+    //            this.$CircularBar.$Caption.css({ "top": Options.azCircularBarSize, "color": Options.azCircularBarCaptionColor }).html(Options.azCircularBarCaption);
+    //            this.$CircularBar.removeClass().addClass("c100 p" + Options.azCircularBarValue).css({ "background-color": Options.azCircularBarColor, "font-size": Options.azCircularBarSize });
+    //        }
+    //        return this;
+    //    }
+    //}
+    //return (
+    //    {
+    //        "azSetCircularBar": _Main.azCircularBarArray
+    //    });
+
+
+
+//function closeAZWindow(Options)
+//{
+//    var _Defaults =
+//    {
+//        azWindowLocationReload: false,
+//        azWindowClose: function () { }
+//    };
+//    _Main.Options = $.extend({}, _Defaults, Options || {});
+
+//    $.subscribeonce("functionlib/closeAZWindow", function ()
+//    {
+//        if (_Main.Options.azWindowLocationReload)
+//        {
+//            $.subscribeonce("functionlib/backgroundRemovedAZWindow", function ()
+//            {
+//                location.reload();
+//            });
+//        }
+//        $("body").removeClass("az-alert-active az-no-parent-scroll");
+//        if ($("body").hasClass("") === true)
+//        {
+//            $("body").removeAttr("class");
+//        }
+//        var _$Background = $("#az-background");
+//        if (_$Background.length > 0)
+//        {
+//            $("#az-modal").slideUp(function ()
+//            {
+//                _$Background.remove();
+//                $.publish("functionlib/backgroundRemovedAZWindow");
+//            });
+//        }
+//        if (_Main.Options.azWindowLocationReload == false)
+//        {
+//            if (azModalazWindowScrollTop > 0)
+//            {
+//                $(window).scrollTop(azModalazWindowScrollTop);
+//            }
+//        }
+//    });
+//    AZCheckAsyncAndPublish(_Main.Options.azWindowClose, "functionlib/closeAZWindow");
+//}
+
+//function createAZWindowButton(Options)
+//{
+//    var _Defaults =
+//    {
+//        azWindowButton1: "",
+//        azWindowButton2: ""
+//    };
+//    var _Main.Options = $.extend({}, _Defaults, Options || {});
+
+//    var _HTML = "";
+//    if (_Main.Options.azWindowButton1 != "" && _Main.Options.azWindowButton2 != "")
+//    {
+//        _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
+//        _HTML += '<div class="az-col xs-6 az-text-right">';
+//        _HTML += '<div class="az-form-group">';
+//        _HTML += '<button type="button" class="az-button info az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton2" style="width: 60%; margin-right: 4px;">' + _Main.Options.azWindowButton2 + '</button>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//        _HTML += '<div class="az-col xs-6 az-text-left">';
+//        _HTML += '<div class="az-form-group">';
+//        _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton1" style="width: 60%; margin-left: 4px;">' + _Main.Options.azWindowButton1 + '</button>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//    }
+//    else if (_Main.Options.azWindowButton1 != "" && _Main.Options.azWindowButton2 == "")
+//    {
+//        _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
+//        _HTML += '<div class="az-col xs-12 az-text-center">';
+//        _HTML += '<div class="az-form-group">';
+//        _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton1" style="width: 60%; margin-left: 4px;">' + _Main.Options.azWindowButton1 + '</button>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//    }
+//    else if (_Main.Options.azWindowButton1 == "" && _Main.Options.azWindowButton2 != "")
+//    {
+//        _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
+//        _HTML += '<div class="az-col xs-12 az-text-center">';
+//        _HTML += '<div class="az-form-group">';
+//        _HTML += '<button type="button" class="az-button info az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton2" style="width: 60%; margin-right: 4px;">' + _Main.Options.azWindowButton2 + '</button>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//    }
+//    return _HTML;
+//}
+
+
+//var _WindowWidth = 0;
+//function adjustStyle()
+//{
+//    if ($("#div-window-size").length == 0)
+//    {
+//        $("body").append('<div id="div-window-size" style="position: fixed; z-index: 499999; left: 0; bottom: 0; width: 100%; height: 20px; text-align: center;"></div>');
+//    }
+
+//    _WindowWidth = parseInt(window.innerWidth);
+//    if (_WindowWidth > 1199)
+//    {
+//        $("#div-window-size").css({ "background-color": "#337ab7", "color": "#ffffff" }).html("xl - (1200 - &#8734) - " + _WindowWidth + " px");
+//    }
+//    else if (_WindowWidth > 991 && _WindowWidth < 1200)
+//    {
+//        $("#div-window-size").css({ "background-color": "#5cb85c", "color": "#ffffff" }).html("lg - (992 - 1199) - " + _WindowWidth + " px");
+//    }
+//    else if (_WindowWidth > 767 && _WindowWidth < 993)
+//    {
+//        $("#div-window-size").css({ "background-color": "#5bc0de", "color": "#ffffff" }).html("md - (768 - 991) - " + _WindowWidth + " px");
+//    }
+
+//    else if (_WindowWidth > 576 && _WindowWidth < 768)
+//    {
+//        $("#div-window-size").css({ "background-color": "#f0ad4e", "color": "#ffffff" }).html("sm - (577 - 767) - " + _WindowWidth + " px");
+//    }
+//    else
+//    {
+//        $("#div-window-size").css({ "background-color": "#d9534f", "color": "#ffffff" }).html("xs - (0 - 576) - " + _WindowWidth + " px");
+//    }
+//}
+
+//var initializeAjax = function (Options, ObjData)
+//{
+//    var _Defaults =
+//    {
+//        dataType: "json",
+//        type: "POST",
+//        contentType: "application/json; charset=utf-8",
+//        timeout: 15000,
+//        exceptionAction: "silent",
+//        exceptionErrorText: "",
+//        transferType: ""
+//    };
+//    var _Main.Options = $.extend({}, _Defaults, Options || {});
+
+//    if (typeof ObjData === "object")
+//    {
+//        _Main.Options.transferType = ObjData.hasOwnProperty("TransferType") === true ? ObjData.TransferType : "";
+//        _Main.Options.data = JSON.stringify(ObjData);
+//        consoleLog(JSON.stringify(ObjData));
+//    }
+
+//    $.ajaxSetup({ cache: false });
+//    var _CurrentAjax = $.ajax(_Main.Options).promise();
+
+//    _CurrentAjax.fail(function (jqXHR, textStatus, errorThrown)
+//    {
+//        var _statusText = jqXHR.statusText == "timeout" ? "Timeout" : _Main.Options.exceptionErrorText;
+//        throwException(_Main.Options.exceptionAction, "", ThisPage, _Main.Options.transferType + ":Status:" + jqXHR.statusText, _statusText);
+//    });
+
+//    return _CurrentAjax;
+//}
+
+//function initializeModalTitlebar(Options)
+//{
+//    var _Defaults =
+//    {
+//        titlebarText: "",
+//        titlebarTimeout: 3000
+//    };
+//    var _Main.Options = $.extend({}, _Defaults, Options || {});
+
+//    var _$NewTitleBar = $('<div class="ui-azWindow-titlebar ui-widget-header"><div class="az-form-group" style="margin: 0;"><p class="az-alert az-alert-danger" style="padding: 7px;" role="alert">' + _Main.Options.titlebarText + '</p></div></div>');
+//    var _$azWindowRoleAlert = window.parent.$(".ui-azWindow-titlebar");
+//    _$azWindowRoleAlert.hide();
+//    _$azWindowRoleAlert.parents(".ui-azWindow").prepend(_$NewTitleBar);
+//    $("body").addClass("az-alert-active");
+//    window.setTimeout(function ()
+//    {
+//        _$NewTitleBar.remove();
+//        _$azWindowRoleAlert.show();
+//        $("body").removeClass("az-alert-active");
+//    }, _Main.Options.titlebarTimeout);
+//}
+
+//function openStandardAlert(SelectedTitle, SelectedText, SelectedAdditional, Modal)
+//{
+//    Modal = Modal === true ? true : false;
+//    if ($('#az-modal').length == 0)
+//    {
+//        var _Defaults =
+//        {
+//            azWindowWidth: 450,
+//            azWindowHeight: 150
+//        };
+//        var _Main.Options = _Defaults;
+
+//        var _HTML = "";
+//        _HTML = '<div id="az-background">';
+//        _HTML += '<div id="az-modal">';
+//        _HTML += '<div class="az-modal-card">';
+//        _HTML += '<header>';
+//        _HTML += '<h1>' + SelectedTitle + '</h1>';
+//        _HTML += '</header>';
+//        _HTML += '<article style="overflow-y: auto;">';
+//        _HTML += '<div>' + SelectedText + '</div>';
+//        _HTML += '<div>' + SelectedAdditional + '</div>';
+//        _HTML += '</article>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//        $("body").append(_HTML);
+//        $("#az-background").css({ "display": "block" });
+//        var _$AzModal = $("#az-modal");
+
+//        if (_Main.Options.azWindowWidth > window.innerWidth)
+//        {
+//            _Main.Options.azWindowWidth = (window.innerWidth - 60);
+//        }
+//        if (_Main.Options.azWindowHeight > window.innerHeight)
+//        {
+//            _Main.Options.azWindowHeight = (window.innerHeight - 144);
+//        }
+//        _$AzModal.css({ "width": _Main.Options.azWindowWidth });
+//        $(".az-modal-card > article", _$AzModal).css({ "min-height": _Main.Options.azWindowHeight });
+
+//        if (Modal == false)
+//        {
+//            $("#az-background").off("click", closeStandardAlert).on("click", closeStandardAlert);
+//        }
+//        $(".az-modal-card > header", _$AzModal).off("click").on("click", function ()
+//        {
+//            closeStandardAlert();
+//        });
+//        $.publish("functionlib/openStandardAlert");
+//    }
+//}
+
+//function closeStandardAlert()
+//{
+//    var _$Background = $("#az-background");
+//    if (_$Background.length > 0)
+//    {
+//        $("#az-modal").slideUp(function ()
+//        {
+//            _$Background.remove();
+//            $("body").removeClass("az-alert-active");
+//        });
+//    }
+//}
+
+//function openStandardConfirm(SelectedTitle, SelectedText, SelectedButton1, SelectedButton2, FunctionToRun)
+//{
+//    if ($('#az-modal').length == 0)
+//    {
+//        var _Defaults =
+//        {
+//            azWindowWidth: 450,
+//            azWindowHeight: 150
+//        };
+//        var _Main.Options = _Defaults;
+
+//        var _HTML = "";
+//        var _Button1ColClass = ' xs-6 az-text-left';
+//        if (SelectedButton2 == "")
+//        {
+//            var _Button1ColClass = ' xs-12 az-text-center';
+//        }
+//        _HTML = '<div id="az-background">';
+//        _HTML += '<div id="az-modal">';
+//        _HTML += '<div class="az-modal-card">';
+//        _HTML += '<header>';
+//        _HTML += '<h1>' + SelectedTitle + '</h1>';
+//        _HTML += '</header>';
+//        _HTML += '<article style="overflow-y: auto;">';
+//        _HTML += '<div>' + SelectedText + '</div>';
+//        _HTML += '<div>';
+//        _HTML += '<div class="az-row az-margin-t-28 az-margin-b-14">';
+//        if (SelectedButton2 != "")
+//        {
+//            _HTML += '<div class="az-col xs-6 az-text-right">';
+//            _HTML += '<div class="az-form-group">';
+//            _HTML += '<button type="button" class="az-button info az-shadow-1 az-shadow-hover-2" id="cmdStandardConfirmButton2" style="width: 60%; margin-right: 4px;">' + SelectedButton2 + '</button>';
+//            _HTML += '</div>';
+//            _HTML += '</div>';
+//        }
+//        _HTML += '<div class="az-col' + _Button1ColClass + '">';
+//        _HTML += '<div class="az-form-group">';
+//        _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdStandardConfirmButton1" style="width: 60%; margin-left: 4px;">' + SelectedButton1 + '</button>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//        _HTML += '</article>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//        _HTML += '</div>';
+//        $("body").append(_HTML);
+//        $("#az-background").css({ "display": "block" });
+//        var _$AzModal = $("#az-modal");
+
+//        if (_Main.Options.azWindowWidth > window.innerWidth)
+//        {
+//            _Main.Options.azWindowWidth = (window.innerWidth - 60);
+//        }
+//        if (_Main.Options.azWindowHeight > window.innerHeight)
+//        {
+//            _Main.Options.azWindowHeight = (window.innerHeight - 144);
+//        }
+//        _$AzModal.css({ "width": _Main.Options.azWindowWidth });
+//        $(".az-modal-card > article", _$AzModal).css({ "min-height": _Main.Options.azWindowHeight });
+
+//        $("#cmdStandardConfirmButton2").off().on('click', function ()
+//        {
+//            closeStandardConfirm();
+//        });
+//        $("#cmdStandardConfirmButton1").off().on('click', function ()
+//        {
+//            closeStandardConfirm();
+//            if (FunctionToRun)
+//            {
+//                FunctionToRun();
+//            }
+//        });
+//        $(".az-modal-card > header", _$AzModal).off("click").on("click", function ()
+//        {
+//            closeStandardConfirm();
+//        });
+//        $.publish("functionlib/openStandardConfirm");
+//    }
+//}
+
+//function closeStandardConfirm()
+//{
+//    var _$Background = $("#az-background");
+//    if (_$Background.length > 0)
+//    {
+//        $("#az-modal").slideUp(function ()
+//        {
+//            _$Background.remove();
+//            $("body").removeClass("az-alert-active");
+//        });
+//    }
+//}
+
+//$("#myInput").on("keyup", function ()
+//{
+//    var value = $(this).val().toLowerCase();
+//    $("#az-css li").filter(function ()
+//    {
+//        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+//    });
+//});
+
+//function setAccordion(SelectedIndex)
+//{
+//    var _$Accordion = $(".az-accordion");
+//    var _$AllAccordionCard = _$Accordion.children(".az-accordion-card");
+//    _$Accordion.off().on("click", ".az-accordion-card > header", function (e)
+//    {
+//        var _$SelectedHeader = $(this);
+//        if (_$SelectedHeader.siblings("article").is(":hidden"))
+//        {
+//            _$AllAccordionCard.children("article").slideUp(100);
+//            _$AllAccordionCard.children("header").removeClass("accordion-active");
+//            _$SelectedHeader.siblings("article").slideDown(100);
+//            _$SelectedHeader.addClass("accordion-active");
+//        }
+//        else
+//        {
+//            _$AllAccordionCard.children("article").slideUp(100);
+//            _$AllAccordionCard.children("header").removeClass("accordion-active");
+//        }
+//    });
+//    if (SelectedIndex != undefined && typeof SelectedIndex === "number")
+//    {
+//        var _$SelectedAccordionCard = $(".az-accordion > .az-accordion-card").eq(SelectedIndex);
+//        var _$SelectedHeader = _$SelectedAccordionCard.children("header");
+//        if (_$SelectedHeader.siblings("article").is(":hidden"))
+//        {
+//            _$AllAccordionCard.children("article").slideUp(100);
+//            _$AllAccordionCard.children("header").removeClass("accordion-active");
+//            _$SelectedHeader.siblings("article").slideDown(100);
+//            _$SelectedHeader.addClass("accordion-active");
+//        }
+//        else
+//        {
+//            _$AllAccordionCard.children("article").slideUp(100);
+//            _$AllAccordionCard.children("header").removeClass("accordion-active");
+//        }
+//    }
+//}
+
+//function confirmCancel(FunctionToRun)
+//{
+//    if (formdirty == true)
+//    {
+//        openStandardConfirm(SingleDefaultElements.cancelazWindowConfirmTitle, SingleDefaultElements.cancelazWindowConfirmText, SingleDefaultElements.cancelazWindowConfirmButton1, SingleDefaultElements.cancelazWindowConfirmButton2, FunctionToRun);
+//    }
+//    else
+//    {
+//        showCoverSpin();
+//        if (FunctionToRun)
+//        {
+//            FunctionToRun();
+//        }
+//    }
+//}
+
+//function submitCancel(FunctionToRun)
+//{
+//    showCoverSpin();
+//    FunctionToRun();
+//}
+
+// Modal Help
+//function modalHelp(SelectedPage)
+//{
+//    $("#modalStandardTitle, #modalStandardText, #modalStandardAdditional").empty();
+//    var _ModalHelpAdditional = $("#modalHelpAdditional").html();
+//    if (_ModalHelpAdditional != "" && _ModalHelpAdditional != null && _ModalHelpAdditional != undefined)
+//    {
+//        $("#modalStandardText").html(SingleElements[SelectedPage + "-text"] + _ModalHelpAdditional);
+//        if (typeof modalHelpAdditional == "function")
+//        {
+//            modalHelpAdditional();
+//            setModalHelp();
+//        }
+//    }
+//    else
+//    {
+//        $("#modalStandardText").html(SingleElements[SelectedPage + "-text"]);
+//        setModalHelp();
+//    }
+
+//    function setModalHelp()
+//    {
+//        $("#modalStandardTitle").text(SingleElements[SelectedPage + "-title"]);
+//        $("#modalStandardAdditional").html(AppName + " " + AppVersion);
+//        $('#modalStandard').modal("show");
+//    }
+//}
 
 //// AZ Get Customer Info
 //function AZGetCustomerInfo()
@@ -1726,3 +1559,32 @@ function consoleLog(Options)
 //        return " (" + this.href + ")";
 //    });
 //};
+
+//function azGetEvents(element)
+//{
+//    var elemEvents = $._data(element[0], "events");
+//    var allDocEvnts = $._data(document, "events");
+//    for (var evntType in allDocEvnts)
+//    {
+//        if (allDocEvnts.hasOwnProperty(evntType))
+//        {
+//            var evts = allDocEvnts[evntType];
+//            for (var i = 0; i < evts.length; i++)
+//            {
+//                if ($(element).is(evts[i].selector))
+//                {
+//                    if (elemEvents == null)
+//                    {
+//                        elemEvents = {};
+//                    }
+//                    if (!elemEvents.hasOwnProperty(evntType))
+//                    {
+//                        elemEvents[evntType] = [];
+//                    }
+//                    elemEvents[evntType].push(evts[i]);
+//                }
+//            }
+//        }
+//    }
+//    return elemEvents;
+//}

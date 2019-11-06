@@ -375,6 +375,12 @@ form.css
     background-color: rgba(0,0,0,0.4);
 }
 
+.az-background
+{
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
 /* Modal Dialog */
 
 
@@ -1069,7 +1075,7 @@ jqueryui/jquery-ui.min.css
 -----------------------------------------------------------*/
 .ui-front
 {
-    z-index: 50001 !important;
+    z-index: 5000;
 }
 
 .ui-dialog

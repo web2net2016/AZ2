@@ -30,12 +30,19 @@
     "datatype": "int",
     "tabindex": 3
   },
+  "Date": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "class": "validate validate-date date readonly",
+    "datatype": "date",
+    "tabindex": 4
+  },
   "Comment": {
     "label": "optional",
     "data-attr": "val",
     "maxlength": "255",
     "class": "validate validate-alpha",
     "datatype": "string",
-    "tabindex": 4
+    "tabindex": 5
   }
 }

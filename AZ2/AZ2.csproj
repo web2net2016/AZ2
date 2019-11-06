@@ -68,6 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\index\index.html" />
+    <Content Include="side1.html" />
+    <Content Include="side2.html" />
     <Content Include="lib-2.0.0\aztabs.html" />
     <Content Include="lib-2.0.0\azaccordion.html" />
     <Content Include="lib-2.0.0\azajax.html" />
@@ -221,7 +223,6 @@
     <Content Include="admin\index\lib\lang-val\index-lang.json" />
     <Content Include="admin\index\lib\lang-val\index-val.json" />
     <None Include="bundleconfig.json" />
-    <Content Include="lib\settings.json" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
