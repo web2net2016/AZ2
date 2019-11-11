@@ -25,26 +25,57 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
-        var AZPageLanguage;
-        var AZWindowReturn;
+        var InputData =
+        {
+            CustomerName: "John Doe AS",
+            Contact: "John Doe",
+            Email: "john@doe.com",
+            Web: "www.johndoe.com",
+            RequestReasonId: 1,
+            Date: "11/15/2019",
+            Time: "11:10:00",
+            DateTime: "11/15/2019 11:10:00",
+            Decimal: 11.5,
+            Numeric: 12345,
+            Comment: "Comment"
+        }
 
         $(document).ready(function ()
         {
             w3CodeColor();
+            SetContentInfo();
+        });
 
-            $.subscribe("functionlib/azSetDate", function (e, data)
-            {
-                console.log("azDateId: " + data.azDateId + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement)
-            });
-
-            $.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
-            {
-                InvalidCharacterAlert(data);
-            });
-
+        function SetContentInfo()
+        {
             $.subscribe("functionlib/AZPage", function (e, data)
             {
-                AZPageLanguage = data.Language;
+                ObjPageData.Values.AZPage = data;
+                ObjPageData.Values.AZSettings = AZSettings;
+                var _AZPopulateFormOptions =
+                {
+                    $Area: ObjPageData.Values.AZPage.$Form,
+                    ObjInputData: InputData,
+                    ObjValidation: ObjPageData.Values.AZPage.ObjValidation
+                }
+                AZPopulateForm(_AZPopulateFormOptions);
+                $.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
+                {
+                    var _AZInvalidCharacterAlertOptions =
+                    {
+                        $Area: ObjPageData.Values.AZPage.$Form,
+                        $Input: data.azInputJQElement,
+                        InputKey: data.azInputKey,
+                        ObjLanguage: ObjPageData.Values.AZPage.ObjLanguage
+                    }
+                    AZInvalidCharacterAlert(_AZInvalidCharacterAlertOptions);
+                });
+                $.subscribe("functionlib/azValidateInputValidChar", function (e, data)
+                {
+                    console.log(data)
+                });
+                formdirty = false;
+                AZHideCoverSpin();
             });
             new AZPage(
                 {
@@ -52,101 +83,69 @@
                     azPageLanguage: true,
                     azPageValidation: true
                 });
-        });
-
-        function InvalidCharacterAlert(data)
-        {
-            $.subscribeonce("functionlib/azWindowAfterOpen", function (e)
-            {
-                $("#cmdAZWindowClose").off().on('click', function ()
-                {
-                    AZWindowReturn.WindowClose();
-                    data.azInputJQElement.focus();
-                });
-            });
-
-            var _HTML = "";
-            _HTML = '<div class="az-margin-t-7 az-margin-b-7">';
-            _HTML += '<div>' + AZPageLanguage.SingleDefaultElements.invalidCharacterText + '   ' + data.azInputKey + '</div>';
-            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-56">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindowClose" style="width: 60%; margin-left: 4px;">' + AZPageLanguage.SingleDefaultElements.cmdCloseText + '</button>';
-            _HTML += '</div>';
-            _HTML += '</div>';
-            AZWindowReturn = new AZWindow(
-                {
-                    azWindowTitle: AZPageLanguage.SingleDefaultElements.invalidCharacterTitle,
-                    azWindowText: _HTML,
-                    azWindowHeight: 200
-                });
         }
 
-        //var ListPlaces =
-        //    [{
-        //        "id": 1,
-        //        "name": "Basecamp",
-        //        "city": "Chicago",
-        //        "state": "IL",
-        //        "url": "https://basecamp.com/"
-        //    },{
-        //        "id": 2,
-        //        "name": "Google",
-        //        "city": "Mountain View",
-        //        "state": "CA",
-        //        "url": "http://google.com/"
-        //        }]
-
-        //var _TemplatePlaces = $("#template-places").text().split(/\$\{(.+?)\}/g);
-
-        //var _LI = $.map(ListPlaces, function (Places)
-        //{
-        //    return $.map(_TemplatePlaces, Render(Places)).join('');
-        //});
-
-        //function Render(Places)
-        //{
-        //    return function (Key, i)
-        //    {
-        //        return (i % 2) ? Places[Key] : Key;
-        //    };
-        //}
-
-        //var _$Ul = $("<ul></ul>").attr("id", "ul-list");
-        //_$Ul.append(_LI);
-
-        //$("#div-list").html(_$Ul);
+        function AZSubmit()
+        {
+            var _AZSerializeFormOptions =
+            {
+                $Area: ObjPageData.Values.AZPage.$Form,
+                ObjLanguage: ObjPageData.Values.AZPage.ObjLanguage,
+                ObjValidation: ObjPageData.Values.AZPage.ObjValidation
+            }
+            var _ObjReturnForm = AZSerializeForm(_AZSerializeFormOptions);
+            if (IsEmpty(_ObjReturnForm) === false)
+            {
+                console.log(_ObjReturnForm)
+            }
+        }
 
     </script>
 </head>
 <body>
 
     <form class="disabled-enter" id="frmContact">
-        <div class="az-container-fluid">
+        <div class="az-container">
 
+            <!--<div class="az-row az-padding-t-14">
+                <div class="az-col xs-12">
+                    <div class="az-form-group xs">
+                        <p class="az-alert az-alert-info" role="alert" id="signinInfo"></p>
+                    </div>
+                </div>
+            </div>-->
             <div class="az-row az-padding-t-14">
-                <div class="az-col xs-12 sm-6">
+                <div class="az-col xs-12 sm-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="CustomerName" id="labelCustomerName"></label>
                         <input type="text" class="az-input" id="CustomerName" />
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-6">
+                <div class="az-col xs-12 sm-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Contact" id="labelContact"></label>
                         <input type="text" class="az-input" id="Contact" />
                     </div>
                 </div>
-            </div>
-            <div class="az-row">
-                <div class="az-col xs-12 sm-6">
+                <div class="az-col xs-12 sm-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Email" id="labelEmail"></label>
                         <input type="text" class="az-input" id="Email" />
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-6">
+                <div class="az-col xs-12 sm-3">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="Web" id="labelWeb"></label>
+                        <input type="text" class="az-input" id="Web" />
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12 sm-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="RequestReasonId" id="labelRequestReasonId"></label>
                         <select class="az-select" id="RequestReasonId">
+                            <option value="0">Hva gjelder henvendelsen</option>
                             <option value="1">Nettsider - WordPress</option>
                             <option value="2">Nettsider - Statiske</option>
                             <option value="3">Nettbutikk</option>
@@ -159,15 +158,39 @@
                         </select>
                     </div>
                 </div>
-            </div>
-            <div class="az-row">
-                <div class="az-col xs-12 sm-6">
+                <div class="az-col xs-12 sm-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Date" id="labelDate"></label>
                         <input type="text" class="az-input" id="Date" />
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-6">
+                <div class="az-col xs-12 sm-3">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="Time" id="labelTime"></label>
+                        <input type="text" class="az-input" id="Time" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-3">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="DateTime" id="labelDateTime"></label>
+                        <input type="text" class="az-input" id="DateTime" />
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12 sm-3">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="Decimal" id="labelDecimal"></label>
+                        <input type="text" class="az-input" id="Decimal" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-3">
+                    <div class="az-form-group xs">
+                        <label class="az-label" for="Numeric" id="labelNumeric"></label>
+                        <input type="text" class="az-input" id="Numeric" />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Comment" id="labelComment"></label>
                         <textarea class="az-textarea" id="Comment"></textarea>
@@ -195,15 +218,6 @@
     <h1 style="width: 50%; float: left;"><a href="https://cdn.web2net.no/lib-1.0.0/azcdn100.html">AZ 1.0.0 Framework</a></h1>
     <h1 style="width: 50%; float: left;"><a href="https://cdn.web2net.no/lib-2.0.0/azcdn200.html">AZ 2.0.0 Framework</a></h1>
     </form>
-
-
-    <div id="div-list"></div>
-
-    <script id="template-places" type="text/template">
-    <li data-id="${id}">
-    <a href="${url}">${name}</a>, ${city}, ${state}
-    </li>
-    </script>
     -->
 
 </body>

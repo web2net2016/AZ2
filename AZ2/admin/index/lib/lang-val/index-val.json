@@ -1,11 +1,11 @@
 ﻿{
   "CustomerName": {
-    "label": "optional",
+    "label": "mandatory",
     "data-attr": "val",
     "maxlength": "100",
     "class": "validate validate-alpha",
     "datatype": "string",
-    "tabindex": 0
+    "tabindex": 1
   },
   "Contact": {
     "label": "mandatory",
@@ -13,7 +13,7 @@
     "maxlength": "50",
     "class": "validate validate-alpha",
     "datatype": "string",
-    "tabindex": 1
+    "tabindex": 2
   },
   "Email": {
     "label": "mandatory",
@@ -21,14 +21,64 @@
     "maxlength": "100",
     "class": "validate validate-email",
     "datatype": "string",
-    "tabindex": 2
+    "tabindex": 3
+  },
+  "Web": {
+    "label": "optional",
+    "data-attr": "val",
+    "maxlength": "100",
+    "class": "validate validate-web",
+    "datatype": "string",
+    "tabindex": 4
   },
   "RequestReasonId": {
     "label": "mandatory",
     "data-attr": "val",
     "class": "validate validate-numeric",
     "datatype": "int",
-    "tabindex": 3
+    "tabindex": 5
+  },
+  "Date": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date date",
+    "datatype": "date",
+    "tabindex": 6
+  },
+  "Time": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "5",
+    "minlength": "5",
+    "class": "validate validate-time",
+    "datatype": "time",
+    "tabindex": 7
+  },
+  "DateTime": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "16",
+    "minlength": "16",
+    "class": "validate validate-datetime",
+    "datatype": "datetime",
+    "tabindex": 8
+  },
+  "Decimal": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "5",
+    "class": "validate validate-decimal",
+    "datatype": "decimal",
+    "tabindex": 9
+  },
+  "Numeric": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-numeric",
+    "datatype": "int",
+    "tabindex": 10
   },
   "Comment": {
     "label": "optional",
@@ -36,6 +86,6 @@
     "maxlength": "255",
     "class": "validate validate-alpha",
     "datatype": "string",
-    "tabindex": 4
+    "tabindex": 11
   }
 }
