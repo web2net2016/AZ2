@@ -1209,7 +1209,7 @@ function AZAjax(Options)
             };
         if (IsEmpty(_Main.Options.azAjaxObjToSend) === false)
         {
-            _Main.azAjaxOptions.data = JSON.stringify(_Main.Options.azAjaxObjToSend);
+            _Main.AjaxOptions.data = JSON.stringify(_Main.Options.azAjaxObjToSend);
         }
         $.ajaxSetup({ cache: false });
         return $.ajax(_Main.AjaxOptions).promise();

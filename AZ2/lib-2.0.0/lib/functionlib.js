@@ -59,6 +59,7 @@ function AZPage(Options)
                                 Location: _Main.ObjPageAttributes.Location,
                                 PageName: _Main.ObjPageAttributes.PageName,
                                 PageFirstName: _Main.ObjPageAttributes.PageFirstName,
+                                Language: _Main.DefaultLanguage,
                                 ObjLanguage: _Main.ObjLanguage,
                                 ObjValidation: _Main.ObjPageAttributes.Validation
                             });
@@ -73,6 +74,7 @@ function AZPage(Options)
                             Location: _Main.ObjPageAttributes.Location,
                             PageName: _Main.ObjPageAttributes.PageName,
                             PageFirstName: _Main.ObjPageAttributes.PageFirstName,
+                            Language: _Main.DefaultLanguage,
                             ObjLanguage: _Main.ObjLanguage,
                             ObjValidation: _Main.ObjPageAttributes.Validation
                         });
@@ -1166,8 +1168,6 @@ function AZSerializeForm(Options)
                 if (IsEmpty(_ObjReturnValidation) === false)
                 {
                     _ObjReturnValidation.Input = _$Input.attr("id");
-                    console.log(_ObjReturnValidation)
-
                     if ($(".az-alert-active").length === 0)
                     {
                         var _$RoleAlert = $("[role='alert']", _$Area);
