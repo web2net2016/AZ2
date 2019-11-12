@@ -1320,11 +1320,6 @@
             display: block;
         }
 
-.az-dropdown-click, .az-dropdown-hover
-{
-    position: relative;
-}
-
     .az-dropdown-hover:hover .az-dropdown-content
     {
         display: block;
@@ -1449,7 +1444,7 @@
 /* Cover Spin */
 #az-cover-spin
 {
-    z-index: 6000;
+    z-index: 5000;
     position: fixed;
     width: 100%;
     left: 0;
