@@ -1287,6 +1287,7 @@ function AZModalDialog(Options)
         var _Main = this;
         var _Defaults =
         {
+            azModalDialogReturnVariable: "",
             azModalDialogId: "",
             azModalDialogTitle: "",
             azModalDialogText: "",
@@ -1311,7 +1312,8 @@ function AZModalDialog(Options)
             azModalDialogTitlebarColor: "#FFFFFF",
             azModalDialogBeforeOpen: function () {},
             azModalDialogAfterOpen: function () { },
-            azModalDialogReturnVariable: ""
+            azModalDialogAfterClose: function () { },
+            azModalDialogAfterCloseReload: false
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
@@ -1396,7 +1398,7 @@ function AZModalDialog(Options)
                         {
                             if (e.originalEvent)
                             {
-                                _Main.azModalDialogClose();
+                                _Main.azModalDialogClose(e, _Main.Options);
                             }
                         }
                     });
@@ -1429,7 +1431,7 @@ function AZModalDialog(Options)
                             var _Element = e.target || e.srcElement;
                             if ($(_Element).attr("id") == "az-background")
                             {
-                                _Main.azModalDialogClose();
+                                _Main.azModalDialogClose(e, _Main.Options);
                             }
                         });
                     }
@@ -1437,18 +1439,24 @@ function AZModalDialog(Options)
                 AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterOpen, "functionlib/azModalDialogAfterOpen");
 
                 // AZ Modal Dialog Close 
-                _Main.azModalDialogClose = function (Options)
+                _Main.azModalDialogClose = function (e, Options)
                 {
                     var _Defaults =
                     {
-                        azModalDialogLocationReload: false,
-                        azModalDialogAfterClose: function () { }
+                        azModalDialogAfterClose: function () { },
+                        azModalDialogAfterCloseReload: false
                     };
-                    _Main.Options = $.extend({}, _Defaults, Options || {}, _Main.Options);
+
+                    if (e.type === undefined)
+                    {
+                        var _Options = $.extend({}, _Defaults, e || {});
+                        _Main.Options.azModalDialogAfterClose = _Options.azModalDialogAfterClose;
+                        _Main.Options.azModalDialogAfterCloseReload = _Options.azModalDialogAfterCloseReload;
+                    }
 
                     $.subscribeonce("functionlib/azModalDialogAfterClose", function ()
                     {
-                        if (_Main.Options.azModalDialogLocationReload === true)
+                        if (_Main.Options.azModalDialogAfterCloseReload === true)
                         {
                             location.reload();
                         }
@@ -1891,7 +1899,9 @@ function AZWindow(Options)
             azWindowBackgroundColor: "#FFFFFF",
             azWindowColor: "#000000",
             azWindowBeforeOpen: function () {},
-            azWindowAfterOpen: function () {}
+            azWindowAfterOpen: function () { },
+            azWindowAfterClose: function () { },
+            azWindowAfterCloseReload: false
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
@@ -1946,7 +1956,7 @@ function AZWindow(Options)
                         var _Element = e.target || e.srcElement;
                         if ($(_Element).attr("id") == "az-background")
                         {
-                            _Main.azWindowClose();
+                            _Main.azWindowClose(e, _Main.Options);
                         }
                     });
                 }
@@ -1967,7 +1977,7 @@ function AZWindow(Options)
                 {
                     _Main.$Titlebar.children("span").off().on("click", function ()
                     {
-                        _Main.azWindowClose();
+                        _Main.azWindowClose(e, _Main.Options);
                     });
                 }
 
@@ -1998,14 +2008,20 @@ function AZWindow(Options)
                 {
                     var _Defaults =
                     {
-                        azWindowLocationReload: false,
-                        azWindowAfterClose: function () { }
+                        azWindowAfterClose: function () { },
+                        azWindowAfterCloseReload: false
                     };
-                    _Main.Options = $.extend({}, _Defaults, Options || {}, _Main.Options);
+
+                    if (e.type === undefined)
+                    {
+                        var _Options = $.extend({}, _Defaults, e || {});
+                        _Main.Options.azWindowAfterClose = _Options.azWindowAfterClose;
+                        _Main.Options.azWindowAfterCloseReload = _Options.azWindowAfterCloseReload;
+                    }
 
                     $.subscribeonce("functionlib/azWindowAfterClose", function ()
                     {
-                        if (_Main.Options.azWindowLocationReload === true)
+                        if (_Main.Options.azWindowAfterCloseReload === true)
                         {
                             location.reload();
                         }
@@ -2095,7 +2111,8 @@ function AZFullWindow(Options)
         azFullWindowBackgroundColor: "#FFFFFF",
         azFullWindowColor: "#000000",
         azFullWindowBeforeOpen: function () {},
-        azFullWindowAfterOpen: function () {}
+        azFullWindowAfterOpen: function () { },
+        azFullWindowAfterClose: function () { }
     };
     _Main.Options = $.extend({}, _Defaults, Options || {});
 
@@ -2138,20 +2155,24 @@ function AZFullWindow(Options)
 
         _Main.$Close.on('click', function ()
         {
-            _Main.$Body.removeClass("az-no-parent-scroll");
-            if (_Main.$Body.hasClass("") === true)
+            $.subscribeonce("functionlib/azFullWindowAfterClose", function ()
             {
-                _Main.$Body.removeAttr("class");
-            }
-            if (ModalDialogScrollTop > 0)
-            {
-                $(window).scrollTop(ModalDialogScrollTop);
-            }
-            _Main.$Window.animate(_Main.AnimateCloseOptions, _Main.Options.azFullWindowFadeOut, function ()
-            {
-                $(this).remove();
-                $.publish("functionlib/azFullWindowClosed");
+                _Main.$Body.removeClass("az-no-parent-scroll");
+                if (_Main.$Body.hasClass("") === true)
+                {
+                    _Main.$Body.removeAttr("class");
+                }
+                if (ModalDialogScrollTop > 0)
+                {
+                    $(window).scrollTop(ModalDialogScrollTop);
+                }
+                _Main.$Window.animate(_Main.AnimateCloseOptions, _Main.Options.azFullWindowFadeOut, function ()
+                {
+                    $(this).remove();
+                    $.publish("functionlib/azFullWindowClosed");
+                });
             });
+            AZCheckAsyncAndPublish(_Main.Options.azFullWindowAfterClose, "functionlib/azFullWindowAfterClose");
         });
     }
 }

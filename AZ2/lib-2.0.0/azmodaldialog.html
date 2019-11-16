@@ -49,7 +49,7 @@
             $("#cmdModalDialog4").off("click", setModalDialog4).on("click", setModalDialog4);
             $("#cmdModalDialog5").off("click", setModalDialog5).on("click", setModalDialog5);
             $("#cmdModalDialog6").off("click", setModalDialog6).on("click", setModalDialog6);
-            $("#cmdModalDialog7").off("click", setModalDialog7).on("click", setModalDialog7);            
+            $("#cmdModalDialog7").off("click", setModalDialog7).on("click", setModalDialog7);
         });
 
         function validateDirty()
@@ -338,7 +338,7 @@
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialog5.ModalDialogClose({ azModalDialogLocationReload: true });
+                    azModalDialog5.ModalDialogClose({ azModalDialogAfterCloseReload: true });
                 });
             });
 
@@ -347,7 +347,7 @@
             _HTML += '<div class="az-code jsHigh notranslate">';
             _HTML += 'azModalDialog.ModalDialogClose(<br />';
             _HTML += '{<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogLocationReload: true<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogAfterCloseReload: true<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
@@ -499,6 +499,7 @@
                         <br />
                         var azModalDialog = new AZModalDialog(<br />
                         {<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogReturnVariable: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogId: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogText: "",<br />
@@ -523,7 +524,8 @@
                         &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarColor: "#FFFFFF",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogBeforeOpen: function () {},<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogAfterOpen: function () {},<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogReturnVariable: ""<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogAfterClose: function () { },<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogAfterCloseReload: false<br />
                         });<br />
                         <br />
                     </div>
@@ -587,66 +589,66 @@
             </div>
 
             <!--<strong>iFrame</strong>
-        <br />
-        dialogiFrameURL: ""&emsp;&ensp;(default)<br />
-        <br />
-        Hvis du ønsker å vise en egen HTML side i 'AZModalDialog', legger du inn en URL her.
-        <br />
-        <br />
-        <strong>Størrelse</strong>
-        <br />
-        dialogWidth: 450&emsp;&ensp;(default)<br />
-        dialogHeight: 300&emsp;&ensp;(default)<br />
-        <br />
-        Ved skjermstørrelser under '576px', vil 'dialogWidth' og 'dialogHeight' tilpasses enhetens skjermstørrelse hvis 'dialogWidth' eller 'dialogHeight' er større enn skjermens bredde eller høyde.
-        <br />
-        <br />
-        <strong>Endre størrelsen</strong>
-        <br />
-        dialogResizable: false&emsp;&ensp;(default)<br />
-        <br />
-        Ved å endre verdiene til true, har brukeren muligheten til å endre størrelsen på 'AZModalDialog' utover det du har satt som standard.
-        <br />
-        <br />
-        <strong>Flyttbart vindu</strong>
-        <br />
-        dialogDraggable: true&emsp;&ensp;(default)<br />
-        <br />
-        Ved å endre verdiene til false, kan ikke brukeren flytte på 'AZModalDialog'.
-        <br />
-        <br />
-        <strong>Rullefelt - hovedsiden</strong>
-        <br />
-        dialogNoParentScroll: false&emsp;&ensp;(default)<br />
-        <br />
-        Ved å endre verdiene til true, vil rullefeltet for hovedsiden, (vinduet) fjernes og 'AZModalDialog' vil beholde sin posisjon.
-        <br />
-        <br />
-        <strong>Posisjonering</strong>
-        <br />
-        dialogPosition: false&emsp;&ensp;(default)<br />
-        dialogPositionOf: { }&emsp;&ensp;(default)<br />
-        dialogPositionMy: "left bottom-30"&emsp;&ensp;(default)<br />
-        dialogPositionAt: "left top"&emsp;&ensp;(default)<br />
-        <br />
-        Ved å endre verdien til true for 'dialogPosition', har du muligheten til å bestemme hvor på skjermen 'AZModalDialog' skal vises.
-        Se under for mer informasjon.
-        <br />
-        <br />
-        <strong>Før åpning</strong>
-        <br />
-        azModalDialogBeforeOpen: function () { }&emsp;&ensp;(default)<br />
-        <br />
-        Hvis du ønsker å få utført en funksjon før 'AZModalDialog' er åpent, dvs. i tiden mellom 'AZModalDialog' trigges og det er helt åpent, kan du legge til denne her.
-        <br />
-        <br />
-        <strong>Etter åpning</strong>
-        <br />
-        dialogAfterOpen: function () { }&emsp;&ensp;(default)<br />
-        <br />
-        Hvis du ønsker å få utført en funksjon rett etter 'AZModalDialog' er åpent, kan du legge til denne her.
-        <br />
-        <br />-->
+            <br />
+            dialogiFrameURL: ""&emsp;&ensp;(default)<br />
+            <br />
+            Hvis du ønsker å vise en egen HTML side i 'AZModalDialog', legger du inn en URL her.
+            <br />
+            <br />
+            <strong>Størrelse</strong>
+            <br />
+            dialogWidth: 450&emsp;&ensp;(default)<br />
+            dialogHeight: 300&emsp;&ensp;(default)<br />
+            <br />
+            Ved skjermstørrelser under '576px', vil 'dialogWidth' og 'dialogHeight' tilpasses enhetens skjermstørrelse hvis 'dialogWidth' eller 'dialogHeight' er større enn skjermens bredde eller høyde.
+            <br />
+            <br />
+            <strong>Endre størrelsen</strong>
+            <br />
+            dialogResizable: false&emsp;&ensp;(default)<br />
+            <br />
+            Ved å endre verdiene til true, har brukeren muligheten til å endre størrelsen på 'AZModalDialog' utover det du har satt som standard.
+            <br />
+            <br />
+            <strong>Flyttbart vindu</strong>
+            <br />
+            dialogDraggable: true&emsp;&ensp;(default)<br />
+            <br />
+            Ved å endre verdiene til false, kan ikke brukeren flytte på 'AZModalDialog'.
+            <br />
+            <br />
+            <strong>Rullefelt - hovedsiden</strong>
+            <br />
+            dialogNoParentScroll: false&emsp;&ensp;(default)<br />
+            <br />
+            Ved å endre verdiene til true, vil rullefeltet for hovedsiden, (vinduet) fjernes og 'AZModalDialog' vil beholde sin posisjon.
+            <br />
+            <br />
+            <strong>Posisjonering</strong>
+            <br />
+            dialogPosition: false&emsp;&ensp;(default)<br />
+            dialogPositionOf: { }&emsp;&ensp;(default)<br />
+            dialogPositionMy: "left bottom-30"&emsp;&ensp;(default)<br />
+            dialogPositionAt: "left top"&emsp;&ensp;(default)<br />
+            <br />
+            Ved å endre verdien til true for 'dialogPosition', har du muligheten til å bestemme hvor på skjermen 'AZModalDialog' skal vises.
+            Se under for mer informasjon.
+            <br />
+            <br />
+            <strong>Før åpning</strong>
+            <br />
+            azModalDialogBeforeOpen: function () { }&emsp;&ensp;(default)<br />
+            <br />
+            Hvis du ønsker å få utført en funksjon før 'AZModalDialog' er åpent, dvs. i tiden mellom 'AZModalDialog' trigges og det er helt åpent, kan du legge til denne her.
+            <br />
+            <br />
+            <strong>Etter åpning</strong>
+            <br />
+            dialogAfterOpen: function () { }&emsp;&ensp;(default)<br />
+            <br />
+            Hvis du ønsker å få utført en funksjon rett etter 'AZModalDialog' er åpent, kan du legge til denne her.
+            <br />
+            <br />-->
 
             <div class="az-row az-margin-t-56">
                 <div class="az-col xs-12 sm-4">
@@ -673,14 +675,14 @@
                         <br />
                         azModalDialog.ModalDialogClose(<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogLocationReload: false,<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogAfterClose: function () { }<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogAfterClose: function () { },<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogAfterCloseReload: false<br />
                         });<br />
                         <br />
                     </div>
                     <div class="az-code htmlHigh notranslate">
                         <div class="az-code-property-wrapper">
-                            <property>azModalDialogLocationReload</property>
+                            <property>azModalDialogAfterCloseReload</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>false</mediumblue></default>
                             <br />
