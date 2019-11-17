@@ -2581,7 +2581,7 @@ function AZModalDialog(Options)
                         {
                             if (e.originalEvent)
                             {
-                                _Main.azModalDialogClose(e, _Main.Options);
+                                _Main.azModalDialogClose(e);
                             }
                         }
                     });
@@ -2614,7 +2614,7 @@ function AZModalDialog(Options)
                             var _Element = e.target || e.srcElement;
                             if ($(_Element).attr("id") == "az-background")
                             {
-                                _Main.azModalDialogClose(e, _Main.Options);
+                                _Main.azModalDialogClose(e);
                             }
                         });
                     }
@@ -2622,19 +2622,16 @@ function AZModalDialog(Options)
                 AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterOpen, "functionlib/azModalDialogAfterOpen");
 
                 // AZ Modal Dialog Close 
-                _Main.azModalDialogClose = function (e, Options)
+                _Main.azModalDialogClose = function (Options)
                 {
                     var _Defaults =
                     {
                         azModalDialogAfterClose: function () { },
                         azModalDialogAfterCloseReload: false
                     };
-
-                    if (e.type === undefined)
+                    if (!Options.type)
                     {
-                        var _Options = $.extend({}, _Defaults, e || {});
-                        _Main.Options.azModalDialogAfterClose = _Options.azModalDialogAfterClose;
-                        _Main.Options.azModalDialogAfterCloseReload = _Options.azModalDialogAfterCloseReload;
+                        _Main.Options = $.extend({}, _Defaults, Options || {});
                     }
 
                     $.subscribeonce("functionlib/azModalDialogAfterClose", function ()
@@ -3139,7 +3136,7 @@ function AZWindow(Options)
                         var _Element = e.target || e.srcElement;
                         if ($(_Element).attr("id") == "az-background")
                         {
-                            _Main.azWindowClose(e, _Main.Options);
+                            _Main.azWindowClose(e);
                         }
                     });
                 }
@@ -3158,9 +3155,9 @@ function AZWindow(Options)
                 }
                 else
                 {
-                    _Main.$Titlebar.children("span").off().on("click", function ()
+                    _Main.$Titlebar.children("span").off().on("click", function (e)
                     {
-                        _Main.azWindowClose(e, _Main.Options);
+                        _Main.azWindowClose(e);
                     });
                 }
 
@@ -3194,12 +3191,9 @@ function AZWindow(Options)
                         azWindowAfterClose: function () { },
                         azWindowAfterCloseReload: false
                     };
-
-                    if (e.type === undefined)
+                    if (!Options.type)
                     {
-                        var _Options = $.extend({}, _Defaults, e || {});
-                        _Main.Options.azWindowAfterClose = _Options.azWindowAfterClose;
-                        _Main.Options.azWindowAfterCloseReload = _Options.azWindowAfterCloseReload;
+                        _Main.Options = $.extend({}, _Defaults, Options || {});
                     }
 
                     $.subscribeonce("functionlib/azWindowAfterClose", function ()
