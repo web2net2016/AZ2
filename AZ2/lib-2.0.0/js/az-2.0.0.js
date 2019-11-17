@@ -2624,12 +2624,13 @@ function AZModalDialog(Options)
                 // AZ Modal Dialog Close 
                 _Main.azModalDialogClose = function (Options)
                 {
+                    window[_Main.Options.azModalDialogReturnVariable] = undefined;
                     var _Defaults =
                     {
                         azModalDialogAfterClose: function () { },
                         azModalDialogAfterCloseReload: false
                     };
-                    if (!Options.type)
+                    if (Options === undefined || !Options.type)
                     {
                         _Main.Options = $.extend({}, _Defaults, Options || {});
                     }
@@ -2654,7 +2655,6 @@ function AZModalDialog(Options)
                             {
                                 _Main.$Dialog.remove();
                             }
-                            window[_Main.Options.azModalDialogReturnVariable] = undefined;
 
                             var _$ListUIDialog = $(".ui-dialog");
                             if (_$ListUIDialog.length === 0)
@@ -3191,7 +3191,7 @@ function AZWindow(Options)
                         azWindowAfterClose: function () { },
                         azWindowAfterCloseReload: false
                     };
-                    if (!Options.type)
+                    if (Options === undefined || !Options.type)
                     {
                         _Main.Options = $.extend({}, _Defaults, Options || {});
                     }
