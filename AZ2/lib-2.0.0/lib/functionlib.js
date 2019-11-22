@@ -1,12 +1,13 @@
 ﻿// Functionlib v2.0.0 | (c) web2net AS
 
+
 var AZSettings =
 {
     LanguageValidationFolder: "/admin",
     DefaultLanguageFile: "/lib/lang-val/default-lang.json",
     DefaultLanguage: "nb-NO",
     DebugMode: true,
-    AppName: "AZ Team",
+    AppName: "web2net",
     AppVersion: "1.0.0",
     ApiVersion: "_1"
 }
@@ -29,12 +30,14 @@ function AZPage(Options)
             azPageLanguage: false,
             azPageLanguageUrl: "",
             azPageValidation: false,
-            azPageValidationUrl: ""
+            azPageValidationUrl: "",
+            azPageGridView: false
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
         _Main.ObjPageAttributes = {};
         _Main.ObjLanguage = {};
+        _Main.ObjValidation = {};
         _Main.JsonUrl = "";
         _Main.DefaultLanguageFile = "";
         _Main.DefaultLanguage = "";
@@ -55,13 +58,16 @@ function AZPage(Options)
                     {
                         $.publish("functionlib/AZPage",
                             {
+                                AppName: AZSettings.AppName,
+                                AppVersion: AZSettings.AppVersion,
+                                ApiVersion: AZSettings.ApiVersion,
                                 $Form: _Main.ObjPageAttributes.$ObjAZForm,
                                 Location: _Main.ObjPageAttributes.Location,
                                 PageName: _Main.ObjPageAttributes.PageName,
                                 PageFirstName: _Main.ObjPageAttributes.PageFirstName,
                                 Language: _Main.DefaultLanguage,
                                 ObjLanguage: _Main.ObjLanguage,
-                                ObjValidation: _Main.ObjPageAttributes.Validation
+                                ObjValidation: _Main.ObjValidation
                             });
                     });
                     AZSetInputTypeEvents();
@@ -70,14 +76,39 @@ function AZPage(Options)
                 {
                     $.publish("functionlib/AZPage",
                         {
+                            AppName: AZSettings.AppName,
+                            AppVersion: AZSettings.AppVersion,
+                            ApiVersion: AZSettings.ApiVersion,
                             $Form: _Main.ObjPageAttributes.$ObjAZForm,
                             Location: _Main.ObjPageAttributes.Location,
                             PageName: _Main.ObjPageAttributes.PageName,
                             PageFirstName: _Main.ObjPageAttributes.PageFirstName,
                             Language: _Main.DefaultLanguage,
                             ObjLanguage: _Main.ObjLanguage,
-                            ObjValidation: _Main.ObjPageAttributes.Validation
+                            ObjValidation: _Main.ObjValidation
                         });
+                }
+            }
+
+            _Main.GridView = function ()
+            {
+                if (_Main.Options.azPageGridView === true)
+                {
+                    $.subscribeonce("functionlib/AZGridView", function (e, data)
+                    {
+                        _Main.InputTypeEvents();
+                    });
+                    var _AZGridViewOptions =
+                    {
+                        $Area: _Main.ObjPageAttributes.$ObjAZForm,
+                        ObjLanguage: _Main.ObjLanguage,
+                        ObjValidation: _Main.ObjValidation
+                    }
+                    new AZGridView(_AZGridViewOptions);
+                }
+                else
+                {
+                    _Main.InputTypeEvents();
                 }
             }
 
@@ -87,7 +118,7 @@ function AZPage(Options)
                 {
                     $.subscribeonce("functionlib/AZSetValidation", function (e, data)
                     {
-                        _Main.InputTypeEvents();
+                        _Main.GridView();
                     });
                     if (_Main.Options.azPageValidationUrl !== "")
                     {
@@ -98,7 +129,7 @@ function AZPage(Options)
                     {
                         if (IsEmpty(data) === false && textStatus === "success")
                         {
-                            _Main.ObjPageAttributes.Validation = data;
+                            _Main.ObjValidation = data;
                             var _AZSetValidationOptions =
                             {
                                 $Area: _Main.ObjPageAttributes.$ObjAZForm,
@@ -108,13 +139,13 @@ function AZPage(Options)
                         }
                         else
                         {
-                            consoleLog({ consoleType: "error", consoleText: "AZSetValidation" });
+                            consoleLog({ consoleType: "error", consoleText: "AZPage - AZSetValidation is empty or missing some properties" });
                         }
                     });
                 }
                 else
                 {
-                    _Main.InputTypeEvents();
+                    _Main.GridView();
                 }
             }
 
@@ -146,7 +177,7 @@ function AZPage(Options)
                         }
                         else
                         {
-                            consoleLog({ consoleType: "error", consoleText: "AZSetLanguage" });
+                            consoleLog({ consoleType: "error", consoleText: "AZPage - AZSetLanguage is empty or missing some properties" });
                         }
                     });
                 }
@@ -179,12 +210,12 @@ function AZPage(Options)
             }
             else
             {
-                consoleLog({ consoleType: "error", consoleText: "AZPage - AZSettings" });
+                consoleLog({ consoleType: "error", consoleText: "AZPage - AZSettings is empty or missing some properties" });
             }
         }
         else
         {
-            consoleLog({ consoleType: "error", consoleText: "AZPage - AZCheckPageAttributes" });
+            consoleLog({ consoleType: "error", consoleText: "AZPage - AZPageAttributes is empty or missing some properties" });
         }
         return ({});
     }
@@ -315,7 +346,7 @@ function AZSetLanguage(Options)
                         SingleElements: _Main.ObjPageLanguage.SingleElements[_Main.DefaultLanguage]
                     }
                 $.publish("AZSetLanguage");
-                consoleLog({ consoleType: "error", consoleText: "AZSetLanguage - No Default Language File" });
+                consoleLog({ consoleType: "error", consoleText: "AZSetLanguage - Missing default language file" });
             }
 
             $.subscribeonce("AZSetLanguage", function (e, data)
@@ -1459,85 +1490,186 @@ function AZCheckDateTimeFormat(DateTime)
     }
 }
 
-function AZInvalidCharacterAlert(Options)
+function AZStandardAlert(Options)
 {
-    if (IsEmpty(Options) === false && Options.hasOwnProperty("$Input") && Options.hasOwnProperty("InputKey") && Options.hasOwnProperty("ObjLanguage"))
+    if (this instanceof AZStandardAlert === true)
     {
-        if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
-        {
-            _$Area = Options.$Area;
-        }
-        else
-        {
-            _$Area = "";
-        }
+        var _Main = this;
 
-        if ($(".az-alert-active").length === 0)
+        if (IsEmpty(Options) === false)
         {
-            var _$RoleAlert = $("[role='alert']", _$Area);
-            var _$UIDialog = window.top.$(".ui-dialog");
-            var _$Window = $("#az-window");
-
-            if (_$RoleAlert.length > 0)
+            if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
             {
-                var _CurrentText = _$RoleAlert.text();
-                _$RoleAlert.text(Options.ObjLanguage.SingleDefaultElements.invalidCharacterText + '   ' + Options.InputKey).removeClass("az-alert-info").addClass("az-alert-danger").show();
-                Options.$Input.focus();
-                $("body").addClass("az-alert-active");
-                window.setTimeout(function ()
-                {
-                    _$RoleAlert.text(_CurrentText).removeClass("az-alert-danger").addClass("az-alert-info").show();
-                    $("body").removeClass("az-alert-active");
-                }, 3000);
-            }
-            else if (_$UIDialog.length > 0)
-            {
-                var _$NewUIDialogTitlebar = $('<div></div>').addClass("ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle").css({ "background-color": "#FF4136 ", "color": "#FFFFFF" });
-                _$NewUIDialogTitlebar.append('<span class="ui-dialog-title">' + Options.ObjLanguage.SingleDefaultElements.invalidCharacterText + '   ' + Options.InputKey + '</span>');
-                _$UIDialog.children(".ui-dialog-titlebar").hide();
-                _$UIDialog.prepend(_$NewUIDialogTitlebar);
-                Options.$Input.focus();
-                $("body").addClass("az-alert-active");
-                window.setTimeout(function ()
-                {
-                    _$NewUIDialogTitlebar.remove();
-                    _$UIDialog.children(".ui-dialog-titlebar").show();
-                    $("body").removeClass("az-alert-active");
-                }, 3000);
-            }
-            else if (_$Window.length > 0)
-            {
-                var _$NewTitlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + Options.ObjLanguage.SingleDefaultElements.invalidCharacterText + '   ' + Options.InputKey + "</h1>").css({ "background-color": "#FF4136", "color": "#FFFFFF" });
-                _$Window.children(".az-window-titlebar").hide();
-                _$Window.prepend(_$NewTitlebar);
-                Options.$Input.focus();
-                $("body").addClass("az-alert-active");
-                window.setTimeout(function ()
-                {
-                    _$NewTitlebar.remove();
-                    _$Window.children(".az-window-titlebar").show();
-                    $("body").removeClass("az-alert-active");
-                }, 3000);
+                _Main.$Area = Options.$Area;
             }
             else
             {
-                $("body").addClass("az-alert-active");
-                $.subscribeonce("functionlib/azWindowAfterClose", function (e)
-                {
-                    Options.$Input.focus();
-                    $("body").removeClass("az-alert-active");
-                });
-                new AZWindow(
-                    {
-                        azWindowTitle: Options.ObjLanguage.SingleDefaultElements.invalidCharacterTitle,
-                        azWindowText: Options.ObjLanguage.SingleDefaultElements.invalidCharacterText + '   ' + Options.InputKey
-                    });
+                _Main.$Area = "";
             }
+
+            _Main.Title = Options.Title;
+            _Main.Text = Options.Text;
+
+            if ($(".az-alert-active").length === 0)
+            {
+                var _$RoleAlert = $("[role='alert']", _Main.$Area);
+                var _$UIDialog = window.top.$(".ui-dialog");
+                var _$Window = $("#az-window");
+
+                if (_$RoleAlert.length > 0)
+                {
+                    var _CurrentText = _$RoleAlert.text();
+                    _$RoleAlert.text(_Main.Text).removeClass("az-alert-info").addClass("az-alert-danger").show();
+                    $("body").addClass("az-alert-active");
+                    window.setTimeout(function ()
+                    {
+                        _$RoleAlert.text(_CurrentText).removeClass("az-alert-danger").addClass("az-alert-info").show();
+                        $("body").removeClass("az-alert-active");
+                    }, 3000);
+                }
+                else if (_$UIDialog.length > 0)
+                {
+                    var _$NewUIDialogTitlebar = $('<div></div>').addClass("ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle").css({ "background-color": "#FF4136 ", "color": "#FFFFFF" });
+                    _$NewUIDialogTitlebar.append('<span class="ui-dialog-title">' + _Main.Text + '</span>');
+                    _$UIDialog.children(".ui-dialog-titlebar").hide();
+                    _$UIDialog.prepend(_$NewUIDialogTitlebar);
+                    $("body").addClass("az-alert-active");
+                    window.setTimeout(function ()
+                    {
+                        _$NewUIDialogTitlebar.remove();
+                        _$UIDialog.children(".ui-dialog-titlebar").show();
+                        $("body").removeClass("az-alert-active");
+                    }, 3000);
+                }
+                else if (_$Window.length > 0)
+                {
+                    var _$NewTitlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + _Main.Text + "</h1>").css({ "background-color": "#FF4136", "color": "#FFFFFF" });
+                    _$Window.children(".az-window-titlebar").hide();
+                    _$Window.prepend(_$NewTitlebar);
+                    $("body").addClass("az-alert-active");
+                    window.setTimeout(function ()
+                    {
+                        _$NewTitlebar.remove();
+                        _$Window.children(".az-window-titlebar").show();
+                        $("body").removeClass("az-alert-active");
+                    }, 3000);
+                }
+                else
+                {
+                    $("body").addClass("az-alert-active");
+                    $.subscribeonce("functionlib/azWindowAfterClose", function (e)
+                    {
+                        $("body").removeClass("az-alert-active");
+                    });
+                    new AZWindow(
+                        {
+                            azWindowTitle: _Main.Title,
+                            azWindowText: _Main.Text
+                        });
+                }
+            }
+        }
+        else
+        {
+            consoleLog({ consoleType: "error", consoleText: "AZStandardAlert - Options is empty or missing some properties" });
         }
     }
     else
     {
-        consoleLog({ consoleType: "error", consoleText: "AZInvalidCharacterAlert - Options is empty or missing some properties" });
+        consoleLog({ consoleType: "error", consoleText: "AZStandardAlert - Missing instance of this" });
+    }
+}
+
+function AZGridView(Options)
+{
+    if (this instanceof AZGridView === true)
+    {
+        var _Main = this;
+
+        if (IsEmpty(Options) === false && Options.hasOwnProperty("ObjLanguage") && Options.hasOwnProperty("ObjValidation"))
+        {
+            if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
+            {
+                _Main.$Area = Options.$Area;
+            }
+            else
+            {
+                _Main.$Area = "";
+            }
+
+            _Main.ObjLanguage = Options.ObjLanguage;
+            _Main.ObjValidation = Options.ObjValidation;
+
+            var _$Header = "";
+            $(".HeaderStyle > th", _Main.$Area).each(function (index) 
+            {
+                _$Header = $(this);
+                if (_Main.ObjValidation.hasOwnProperty($("a", _$Header).text()) && _Main.ObjValidation[$("a", _$Header).text()].sort == true)
+                {
+                    $("a", _$Header).text(_Main.ObjLanguage.SingleElements["labelHeader" + $("a", _$Header).text()]);
+                }
+                else
+                {
+                    _$Header.text(_Main.ObjLanguage.SingleElements["labelHeader" + $("a", _$Header).text()]);
+                }
+            });
+
+            var _ObjJsonReturn = {};
+            var _ObjSpanCheckBox = {};
+            var _ObjCheckBox = {};
+            $(".RowStyle > td, .AlternatingRowStyle > td", _Main.$Area).each(function (index)
+            {
+                _ObjJsonReturn = getSelectedObj(_Main.ObjValidation, "tabindex", $(this).index());
+                if (_ObjJsonReturn.datatype == "date")
+                {
+                    $(this).text(moment($(this).text()).format('L'));
+                }
+                else if (_ObjJsonReturn.datatype == "datetime")
+                {
+                    $(this).text(moment($(this).text()).format('L') + " - " + moment($(this).text()).format('LT'));
+                }
+                else if (_ObjJsonReturn.datatype == "time")
+                {
+                    $(this).text(moment('01/01/1900 ' + $(this).text()).format('LT'));
+                }
+                else if (_ObjJsonReturn.datatype == "militarytime")
+                {
+                    $(this).text(moment('01/01/1900 ' + $(this).text()).format('HH:mm'));
+                }
+                else if (_ObjJsonReturn.datatype == "decimal")
+                {
+                    $(this).text(numeral($(this).text()).format('0.00'));
+                }
+                else if (_ObjJsonReturn.datatype == "bytes")
+                {
+                    $(this).text(bytesToSize($(this).text()));
+                }
+                else if (_ObjJsonReturn.datatype == "int")
+                {
+                    $(this).text(_Main.ObjLanguage.SingleElements["labelRow" + $(this).text()]);
+                }
+                if ($(this).children().is("span") == true)
+                {
+                    _ObjSpanCheckBox = $(this).children();
+                    _ObjCheckBox = _ObjSpanCheckBox.find(":input");
+                    if (_ObjCheckBox.is(":input") == true)
+                    {
+                        _ObjCheckBox.attr("id", _ObjSpanCheckBox.attr("data-id"));
+                        _ObjCheckBox.addClass("az-checkbox");
+                    }
+                }
+            });
+            $(window).one("beforeunload", function (e) { AZShowCoverSpin() });
+            $.publish("functionlib/AZGridView");
+        }
+        else
+        {
+            consoleLog({ consoleType: "error", consoleText: "AZGridView - Options is empty or missing some properties" });
+        }
+    }
+    else
+    {
+        consoleLog({ consoleType: "error", consoleText: "AZGridView - Missing instance of this" });
     }
 }
 
@@ -1569,15 +1701,20 @@ function consoleLog(Options)
     }
 }
 
-
-
-
-
-
-
-
-
 //////////////////////////////////////////////
+
+
+//function AZIsInViewport(elem)
+//{
+//    var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+//    var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+//    var DIV = document.getElementById('A');
+//    console.log(AZIsInViewport(DIV))
+
+//    var bounding = elem.getBoundingClientRect();
+//    return (bounding.top >= 0 && bounding.left >= 0 && bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) && bounding.right <= (window.innerWidth || document.documentElement.clientWidth));
+//}
 
         //var ListPlaces =
         //    [{

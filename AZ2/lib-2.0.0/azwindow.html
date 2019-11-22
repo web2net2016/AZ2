@@ -46,7 +46,7 @@
         {
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e)
             {
-                $("#cmdButton1").off().on('click', function ()
+                $("#cmdAZWindowButton1").off().on('click', function ()
                 {
                     azWindow1.WindowClose();
                 });
@@ -63,16 +63,17 @@
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
-            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Lukk</button>';
-            _HTML += '</div>';
             _HTML += '</div>';
 
             azWindow1 = new AZWindow(
                 {
                     azWindowTitle: "AZ Window 1",
                     azWindowText: _HTML,
-                    azWindowHeight: 400
+                    azWindowHeight: 400,
+                    azWindowButton: {
+                        Button1: true,
+                        TextButton1: "Lukk"
+                    }
                 });
         }
 
@@ -80,7 +81,7 @@
         {
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e)
             {
-                $("#cmdButton1").off().on('click', function ()
+                $("#cmdAZWindowButton1").off().on('click', function ()
                 {
                     azWindow2.WindowClose();
                 });
@@ -105,9 +106,6 @@
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
-            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Lukk</button>';
-            _HTML += '</div>';
             _HTML += '</div>';
 
             azWindow2 = new AZWindow(
@@ -122,7 +120,11 @@
                     azWindowNoParentScroll: true,
                     azWindowBorderColor: "#607D8B",
                     azWindowTitlebarBackgroundColor: "#607D8B",
-                    azWindowBackgroundColor: "#607D8B"
+                    azWindowBackgroundColor: "#607D8B",
+                    azWindowButton: {
+                        Button1: true,
+                        TextButton1: "Lukk"
+                    }
                 });
         }
 
@@ -280,6 +282,16 @@
                         &emsp;&ensp;&emsp;&ensp;azWindowTitlebarColor: "#FFFFFF",<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowBackgroundColor: "#FFFFFF",<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowColor: "#000000",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowButton: {<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Button1: false,<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TypeButton1: "primary",<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;SizeButton1: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton1: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Button2: false,<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TypeButton2: "info",<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;SizeButton2: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton2: ""<br />
+                        &emsp;&ensp;&emsp;&ensp;}<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowBeforeOpen: function () {},<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowAfterOpen: function () {},<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowAfterClose: function () {},<br />
@@ -304,6 +316,16 @@
                         &emsp;&ensp;&emsp;&ensp;azFullWindowAfterOpen: function () {},<br />
                         &emsp;&ensp;&emsp;&ensp;azFullWindowAfterClose: function () {}<br />
                         });<br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                         <br />
                         <br />
                         <br />

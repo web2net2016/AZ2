@@ -2493,7 +2493,7 @@ function AZModalDialog(Options)
             azModalDialogColor: "#000000",
             azModalDialogTitlebarBackgroundColor: "#009688",
             azModalDialogTitlebarColor: "#FFFFFF",
-            azModalDialogBeforeOpen: function () {},
+            azModalDialogBeforeOpen: function () { },
             azModalDialogAfterOpen: function () { },
             azModalDialogAfterClose: function () { },
             azModalDialogAfterCloseReload: false
@@ -3078,7 +3078,8 @@ function AZWindow(Options)
             azWindowTitlebarColor: "#FFFFFF",
             azWindowBackgroundColor: "#FFFFFF",
             azWindowColor: "#000000",
-            azWindowBeforeOpen: function () {},
+            azWindowButton: {},
+            azWindowBeforeOpen: function () { },
             azWindowAfterOpen: function () { },
             azWindowAfterClose: function () { },
             azWindowAfterCloseReload: false
@@ -3096,7 +3097,7 @@ function AZWindow(Options)
                 _Main.$Window = $("<div></div>").attr("id", "az-window").css({ "background-color": _Main.Options.azWindowBorderColor + " !important" });
                 _Main.$Titlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + _Main.Options.azWindowTitle + "</h1><span>X</span>").css({ "background-color": _Main.Options.azWindowTitlebarBackgroundColor + " !important", "color": _Main.Options.azWindowTitlebarColor + " !important" });
                 _Main.$Dialog = $("<div></div>").addClass("az-window-dialog").css({ "background-color": _Main.Options.azWindowBackgroundColor + " !important", "color": _Main.Options.azWindowColor + " !important" });
-                _Main.$Article = $("<article></article>").html(_Main.Options.azWindowText);
+                _Main.$Article = $("<article></article>").html(_Main.Options.azWindowText).append(AZWindowButton(_Main.Options.azWindowButton));
                 _Main.$Dialog.append(_Main.$Article);
                 _Main.$Window.append(_Main.$Titlebar).append(_Main.$Dialog);
 
@@ -3229,7 +3230,7 @@ function AZWindow(Options)
                                 _Main.$Window.remove();
                                 $.publish("functionlib/azWindowRemoved");
                             }
-                        }                        
+                        }
                     });
                     AZCheckAsyncAndPublish(_Main.Options.azWindowAfterClose, "functionlib/azWindowAfterClose");
                 }
@@ -3273,6 +3274,53 @@ function AZWindow(Options)
                 "WindowClose": _Main.azWindowClose,
                 "ChangeWindowTitlebar": _Main.azChangeWindowTitlebar
             });
+    }
+}
+
+function AZWindowButton(Options)
+{
+    if (IsEmpty(Options) === false)
+    {
+        var _Defaults =
+        {
+            Button1: false,
+            TypeButton1: "primary",
+            SizeButton1: "",
+            TextButton1: "",
+            Button2: false,
+            TypeButton2: "info",
+            SizeButton2: "",
+            TextButton2: ""
+        };
+        var Option = $.extend({}, _Defaults, Options || {});
+
+        var _HTML = "";
+        if (Option.Button1 === true && Option.Button2 === true)
+        {
+            _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
+            _HTML += '<div class="az-col xs-6 az-text-right">';
+            _HTML += '<div class="az-form-group ' + Option.SizeButton2 + '">';
+            _HTML += '<button type="button" class="az-button ' + Option.TypeButton2 + ' ' + Option.SizeButton2 + ' az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton2" style="width: 60%; margin-right: 4px;">' + Option.TextButton2 + '</button>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-col xs-6 az-text-left">';
+            _HTML += '<div class="az-form-group ' + Option.SizeButton1 + '">';
+            _HTML += '<button type="button" class="az-button ' + Option.TypeButton1 + ' ' + Option.SizeButton1 + ' az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton1" style="width: 60%; margin-left: 4px;">' + Option.TextButton1 + '</button>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+        }
+        else if (Option.Button1 === true && Option.Button2 === false)
+        {
+            _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
+            _HTML += '<div class="az-col xs-12 az-text-center">';
+            _HTML += '<div class="az-form-group ' + Option.SizeButton1 + '">';
+            _HTML += '<button type="button" class="az-button ' + Option.TypeButton1 + ' ' + Option.SizeButton1 + ' az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton1" style="width: 60%; margin-left: 4px;">' + Option.TextButton1 + '</button>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+        }
+        return _HTML;
     }   
 }
 
@@ -3287,7 +3335,7 @@ function AZFullWindow(Options)
         azFullWindowFadeOut: 400,
         azFullWindowBackgroundColor: "#FFFFFF",
         azFullWindowColor: "#000000",
-        azFullWindowBeforeOpen: function () {},
+        azFullWindowBeforeOpen: function () { },
         azFullWindowAfterOpen: function () { },
         azFullWindowAfterClose: function () { }
     };

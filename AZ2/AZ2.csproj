@@ -68,6 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\index\index.html" />
+    <Content Include="authentication.js" />
+    <Content Include="fingerprint.js" />
+    <Content Include="http-errors.txt" />
     <Content Include="side1.html" />
     <Content Include="side2.html" />
     <Content Include="lib-2.0.0\aztabs.html" />
