@@ -1,13 +1,12 @@
 ﻿// Functionlib v2.0.0 | (c) web2net AS
 
-
 var AZSettings =
 {
     LanguageValidationFolder: "/admin",
     DefaultLanguageFile: "/lib/lang-val/default-lang.json",
     DefaultLanguage: "nb-NO",
     DebugMode: true,
-    AppName: "web2net",
+    AppName: "AZ Team",
     AppVersion: "1.0.0",
     ApiVersion: "_1"
 }
@@ -603,7 +602,7 @@ function AZSetInputTypeEvents()
     var _ValidType = "";
     $(":input").each(function ()
     {
-        if ($(this).is("[type='text'], [type='password'], [type='datetime'], [type='datetime-local'], [type='date'], [type='month'], [type='time'], [type='week'], [type='number'], [type='email'], [type='url'], [type='search'], [type='tel'], [type='color']") && $(this).hasClass("validate"))
+        if ($(this).is("[type='text'], [type='password'], [type='datetime'], [type='datetime-local'], [type='date'], [type='month'], [type='time'], [type='week'], [type='number'], [type='email'], [type='url'], [type='search'], [type='tel'], [type='color']"))
         {
             _DatePicker = false;
             _ValidType = "";
@@ -992,11 +991,11 @@ function AZSetInputTypeEvents()
                 $.datepicker.setDefaults($.datepicker.regional[_DefaultLanguage]);
             }
         }
-        if ($(this).is("[type='range']") && $(this).hasClass("az-range") && $(this).hasClass("validate"))
+        if ($(this).is("[type='range']") && $(this).hasClass("az-range"))
         {
             $(this).off("change", AZValidateDirtyKeyup).on("change", AZValidateDirtyKeyup);
         }
-        if ($(this).is("textarea") && $(this).hasClass("validate"))
+        if ($(this).is("textarea"))
         {
             $(this).off("keyup", AZValidateDirtyKeyup).on("keyup", AZValidateDirtyKeyup);
             _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
@@ -1036,7 +1035,7 @@ function AZSetInputTypeEvents()
                 });
             }
         }
-        if ($(this).is("[type='checkbox']") && $(this).hasClass("validate"))
+        if ($(this).is("[type='checkbox']"))
         {
             $(this).off("click", AZValidateDirtyKeyup).on("click", AZValidateDirtyKeyup);
             if ($(this).hasClass("disabled"))
@@ -1044,7 +1043,7 @@ function AZSetInputTypeEvents()
                 $(this).attr("disabled", true);
             }
         }
-        if ($(this).is("[type='radio']") && $(this).hasClass("validate"))
+        if ($(this).is("[type='radio']"))
         {
             $(this).off("click", AZValidateDirtyKeyup).on("click", AZValidateDirtyKeyup);
             if ($(this).hasClass("disabled"))
@@ -1052,7 +1051,7 @@ function AZSetInputTypeEvents()
                 $(this).attr("disabled", true);
             }
         }
-        if ($(this).is("select") && $(this).hasClass("validate"))
+        if ($(this).is("select"))
         {
             $(this).off("change", AZValidateDirtyKeyup).on("change", AZValidateDirtyKeyup);
             if ($(this).hasClass("readonly"))
@@ -1064,10 +1063,10 @@ function AZSetInputTypeEvents()
                 $(this).attr("disabled", true);
             }
         }
-        if ($(this).is("button") && $(this).hasClass("validate"))
-        {
-            $(this).off("click", AZValidateDirtyKeyup).on("click", AZValidateDirtyKeyup);
-        }
+        //if ($(this).is("button"))
+        //{
+        //    $(this).off("click", AZValidateDirtyKeyup).on("click", AZValidateDirtyKeyup);
+        //}
     });
 
     // Mandatory Asterisk
@@ -1138,38 +1137,29 @@ function AZGetValidType(SelectedType)
 
 // Empty
 // InvalidChar
+// MaxLength
+// MinLength
 // Date
 // Email
 // Web
 // Float
-// MaxLength
-// MinLength
 
 function AZSerializeForm(Options)
 {
     if (IsEmpty(Options) === false && Options.hasOwnProperty("ObjLanguage") && Options.hasOwnProperty("ObjValidation"))
     {
-        if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
-        {
-            _$Area = Options.$Area;
-        }
-        else
-        {
-            _$Area = "";
-        }
-
         var _InputError = false;
         var _$Input = {};
         var _ObjCurrentValidation = {};
         var _ObjReturnValidation = {};
         var _ObjOutputData = {};
 
-        $(":input", _$Area).each(function ()
+        $.each(Options.ObjValidation, function (HTMLElement, Value)
         {
-            if ($(this).hasClass("validate"))
+            if ($('#' + HTMLElement).length > 0 && Value.class.indexOf("validate") > -1)
             {
-                _$Input = $(this);
-                _ObjCurrentValidation = Options.ObjValidation[_$Input.attr("id")]
+                _$Input = $('#' + HTMLElement);
+                _ObjCurrentValidation = Value;
 
                 if (_ObjCurrentValidation.datatype.toLowerCase() === "int")
                 {
@@ -1199,6 +1189,7 @@ function AZSerializeForm(Options)
                 if (IsEmpty(_ObjReturnValidation) === false)
                 {
                     _ObjReturnValidation.Input = _$Input.attr("id");
+                    consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + _ObjReturnValidation.Input + " - " + _ObjReturnValidation.Error });
                     if ($(".az-alert-active").length === 0)
                     {
                         var _$RoleAlert = $("[role='alert']", _$Area);
@@ -1700,661 +1691,3 @@ function consoleLog(Options)
         console[_Options.consoleType](_Options.consoleText);
     }
 }
-
-//////////////////////////////////////////////
-
-
-//function AZIsInViewport(elem)
-//{
-//    var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-//    var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
-//    var DIV = document.getElementById('A');
-//    console.log(AZIsInViewport(DIV))
-
-//    var bounding = elem.getBoundingClientRect();
-//    return (bounding.top >= 0 && bounding.left >= 0 && bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) && bounding.right <= (window.innerWidth || document.documentElement.clientWidth));
-//}
-
-        //var ListPlaces =
-        //    [{
-        //        "id": 1,
-        //        "name": "Basecamp",
-        //        "city": "Chicago",
-        //        "state": "IL",
-        //        "url": "https://basecamp.com/"
-        //    },{
-        //        "id": 2,
-        //        "name": "Google",
-        //        "city": "Mountain View",
-        //        "state": "CA",
-        //        "url": "http://google.com/"
-        //        }]
-
-        //var _TemplatePlaces = $("#template-places").text().split(/\$\{(.+?)\}/g);
-
-        //var _LI = $.map(ListPlaces, function (Places)
-        //{
-        //    return $.map(_TemplatePlaces, Render(Places)).join('');
-        //});
-
-        //function Render(Places)
-        //{
-        //    return function (Key, i)
-        //    {
-        //        return (i % 2) ? Places[Key] : Key;
-        //    };
-        //}
-
-        //var _$Ul = $("<ul></ul>").attr("id", "ul-list");
-        //_$Ul.append(_LI);
-
-        //$("#div-list").html(_$Ul);
-
-        //<div id="div-list"></div>
-
-        //<script id="template-places" type="text/template">
-        //<li data-id="${id}">
-        //<a href="${url}">${name}</a>, ${city}, ${state}
-        //</li>
-        //</script>
-
-
-//_Main.azCircularBarArray = [];
-    //if (Options && Options.length > 0)
-    //{
-    //    $.each(Options, function (Index, ObjCurrentOption)
-    //    {
-    //        _Main.azCircularBarArray.push(new AktivateAZCircularBar(ObjCurrentOption));
-    //    });
-    //}
-    //else if (IsEmpty(Options) === false)
-    //{
-    //    _Main.azCircularBarArray.push(new AktivateAZCircularBar(Options));
-    //}
-
-    //function AktivateAZCircularBar(ObjCurrentOption)
-    //{
-    //    this.Options = $.extend({}, _Defaults, ObjCurrentOption || {});
-    //    if (this.Options.azCircularBarId != "")
-    //    {
-    //        this.$CircularBar = $("#" + this.Options.azCircularBarId);
-    //        this.$CircularBar.$Slice = $('<div></div>').addClass("slice");
-    //        this.$CircularBar.$Bar = $('<div></div>').addClass("bar").css({ "border-color": this.Options.azCircularBarValueColor });
-    //        this.$CircularBar.$Fill = $('<div></div>').addClass("fill").css({ "border-color": this.Options.azCircularBarValueColor });
-    //        this.$CircularBar.$Label = $('<span></span>').addClass("label").html(this.Options.azCircularBarLabel);
-    //        if (this.Options.azCircularBarCaption != "")
-    //        {
-    //            this.$CircularBar.$Caption = $('<span></span>').addClass("caption").css({ "top": this.Options.azCircularBarSize, "color": this.Options.azCircularBarCaptionColor }).html(this.Options.azCircularBarCaption);
-    //        }
-    //        this.$CircularBar.$Slice.append(this.$CircularBar.$Bar).append(this.$CircularBar.$Fill);
-    //        this.$CircularBar.append(this.$CircularBar.$Label).append(this.$CircularBar.$Slice).append(this.$CircularBar.$Caption).addClass("c100 p" + this.Options.azCircularBarValue).css({ "background-color": this.Options.azCircularBarColor, "font-size": this.Options.azCircularBarSize });
-
-    //        this.azSetCircularBar = function (Options)
-    //        {
-    //            this.$CircularBar.$Bar.css({ "border-color": Options.azCircularBarValueColor });
-    //            this.$CircularBar.$Fill.css({ "border-color": Options.azCircularBarValueColor });
-    //            this.$CircularBar.$Label.html(Options.azCircularBarLabel);
-    //            this.$CircularBar.$Caption.css({ "top": Options.azCircularBarSize, "color": Options.azCircularBarCaptionColor }).html(Options.azCircularBarCaption);
-    //            this.$CircularBar.removeClass().addClass("c100 p" + Options.azCircularBarValue).css({ "background-color": Options.azCircularBarColor, "font-size": Options.azCircularBarSize });
-    //        }
-    //        return this;
-    //    }
-    //}
-    //return (
-    //    {
-    //        "azSetCircularBar": _Main.azCircularBarArray
-    //    });
-
-
-
-//function closeAZWindow(Options)
-//{
-//    var _Defaults =
-//    {
-//        azWindowLocationReload: false,
-//        azWindowClose: function () { }
-//    };
-//    _Main.Options = $.extend({}, _Defaults, Options || {});
-
-//    $.subscribeonce("functionlib/closeAZWindow", function ()
-//    {
-//        if (_Main.Options.azWindowLocationReload)
-//        {
-//            $.subscribeonce("functionlib/backgroundRemovedAZWindow", function ()
-//            {
-//                location.reload();
-//            });
-//        }
-//        $("body").removeClass("az-alert-active az-no-parent-scroll");
-//        if ($("body").hasClass("") === true)
-//        {
-//            $("body").removeAttr("class");
-//        }
-//        var _$Background = $("#az-background");
-//        if (_$Background.length > 0)
-//        {
-//            $("#az-modal").slideUp(function ()
-//            {
-//                _$Background.remove();
-//                $.publish("functionlib/backgroundRemovedAZWindow");
-//            });
-//        }
-//        if (_Main.Options.azWindowLocationReload == false)
-//        {
-//            if (azModalazWindowScrollTop > 0)
-//            {
-//                $(window).scrollTop(azModalazWindowScrollTop);
-//            }
-//        }
-//    });
-//    AZCheckAsyncAndPublish(_Main.Options.azWindowClose, "functionlib/closeAZWindow");
-//}
-
-//function createAZWindowButton(Options)
-//{
-//    var _Defaults =
-//    {
-//        azWindowButton1: "",
-//        azWindowButton2: ""
-//    };
-//    var _Main.Options = $.extend({}, _Defaults, Options || {});
-
-//    var _HTML = "";
-//    if (_Main.Options.azWindowButton1 != "" && _Main.Options.azWindowButton2 != "")
-//    {
-//        _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
-//        _HTML += '<div class="az-col xs-6 az-text-right">';
-//        _HTML += '<div class="az-form-group">';
-//        _HTML += '<button type="button" class="az-button info az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton2" style="width: 60%; margin-right: 4px;">' + _Main.Options.azWindowButton2 + '</button>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '<div class="az-col xs-6 az-text-left">';
-//        _HTML += '<div class="az-form-group">';
-//        _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton1" style="width: 60%; margin-left: 4px;">' + _Main.Options.azWindowButton1 + '</button>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//    }
-//    else if (_Main.Options.azWindowButton1 != "" && _Main.Options.azWindowButton2 == "")
-//    {
-//        _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
-//        _HTML += '<div class="az-col xs-12 az-text-center">';
-//        _HTML += '<div class="az-form-group">';
-//        _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton1" style="width: 60%; margin-left: 4px;">' + _Main.Options.azWindowButton1 + '</button>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//    }
-//    else if (_Main.Options.azWindowButton1 == "" && _Main.Options.azWindowButton2 != "")
-//    {
-//        _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
-//        _HTML += '<div class="az-col xs-12 az-text-center">';
-//        _HTML += '<div class="az-form-group">';
-//        _HTML += '<button type="button" class="az-button info az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton2" style="width: 60%; margin-right: 4px;">' + _Main.Options.azWindowButton2 + '</button>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//    }
-//    return _HTML;
-//}
-
-
-//var _WindowWidth = 0;
-//function adjustStyle()
-//{
-//    if ($("#div-window-size").length == 0)
-//    {
-//        $("body").append('<div id="div-window-size" style="position: fixed; z-index: 499999; left: 0; bottom: 0; width: 100%; height: 20px; text-align: center;"></div>');
-//    }
-
-//    _WindowWidth = parseInt(window.innerWidth);
-//    if (_WindowWidth > 1199)
-//    {
-//        $("#div-window-size").css({ "background-color": "#337ab7", "color": "#ffffff" }).html("xl - (1200 - &#8734) - " + _WindowWidth + " px");
-//    }
-//    else if (_WindowWidth > 991 && _WindowWidth < 1200)
-//    {
-//        $("#div-window-size").css({ "background-color": "#5cb85c", "color": "#ffffff" }).html("lg - (992 - 1199) - " + _WindowWidth + " px");
-//    }
-//    else if (_WindowWidth > 767 && _WindowWidth < 993)
-//    {
-//        $("#div-window-size").css({ "background-color": "#5bc0de", "color": "#ffffff" }).html("md - (768 - 991) - " + _WindowWidth + " px");
-//    }
-
-//    else if (_WindowWidth > 576 && _WindowWidth < 768)
-//    {
-//        $("#div-window-size").css({ "background-color": "#f0ad4e", "color": "#ffffff" }).html("sm - (577 - 767) - " + _WindowWidth + " px");
-//    }
-//    else
-//    {
-//        $("#div-window-size").css({ "background-color": "#d9534f", "color": "#ffffff" }).html("xs - (0 - 576) - " + _WindowWidth + " px");
-//    }
-//}
-
-//var initializeAjax = function (Options, ObjData)
-//{
-//    var _Defaults =
-//    {
-//        dataType: "json",
-//        type: "POST",
-//        contentType: "application/json; charset=utf-8",
-//        timeout: 15000,
-//        exceptionAction: "silent",
-//        exceptionErrorText: "",
-//        transferType: ""
-//    };
-//    var _Main.Options = $.extend({}, _Defaults, Options || {});
-
-//    if (typeof ObjData === "object")
-//    {
-//        _Main.Options.transferType = ObjData.hasOwnProperty("TransferType") === true ? ObjData.TransferType : "";
-//        _Main.Options.data = JSON.stringify(ObjData);
-//        consoleLog(JSON.stringify(ObjData));
-//    }
-
-//    $.ajaxSetup({ cache: false });
-//    var _CurrentAjax = $.ajax(_Main.Options).promise();
-
-//    _CurrentAjax.fail(function (jqXHR, textStatus, errorThrown)
-//    {
-//        var _statusText = jqXHR.statusText == "timeout" ? "Timeout" : _Main.Options.exceptionErrorText;
-//        throwException(_Main.Options.exceptionAction, "", ThisPage, _Main.Options.transferType + ":Status:" + jqXHR.statusText, _statusText);
-//    });
-
-//    return _CurrentAjax;
-//}
-
-//function initializeModalTitlebar(Options)
-//{
-//    var _Defaults =
-//    {
-//        titlebarText: "",
-//        titlebarTimeout: 3000
-//    };
-//    var _Main.Options = $.extend({}, _Defaults, Options || {});
-
-//    var _$NewTitleBar = $('<div class="ui-azWindow-titlebar ui-widget-header"><div class="az-form-group" style="margin: 0;"><p class="az-alert az-alert-danger" style="padding: 7px;" role="alert">' + _Main.Options.titlebarText + '</p></div></div>');
-//    var _$azWindowRoleAlert = window.parent.$(".ui-azWindow-titlebar");
-//    _$azWindowRoleAlert.hide();
-//    _$azWindowRoleAlert.parents(".ui-azWindow").prepend(_$NewTitleBar);
-//    $("body").addClass("az-alert-active");
-//    window.setTimeout(function ()
-//    {
-//        _$NewTitleBar.remove();
-//        _$azWindowRoleAlert.show();
-//        $("body").removeClass("az-alert-active");
-//    }, _Main.Options.titlebarTimeout);
-//}
-
-//function openStandardAlert(SelectedTitle, SelectedText, SelectedAdditional, Modal)
-//{
-//    Modal = Modal === true ? true : false;
-//    if ($('#az-modal').length == 0)
-//    {
-//        var _Defaults =
-//        {
-//            azWindowWidth: 450,
-//            azWindowHeight: 150
-//        };
-//        var _Main.Options = _Defaults;
-
-//        var _HTML = "";
-//        _HTML = '<div id="az-background">';
-//        _HTML += '<div id="az-modal">';
-//        _HTML += '<div class="az-modal-card">';
-//        _HTML += '<header>';
-//        _HTML += '<h1>' + SelectedTitle + '</h1>';
-//        _HTML += '</header>';
-//        _HTML += '<article style="overflow-y: auto;">';
-//        _HTML += '<div>' + SelectedText + '</div>';
-//        _HTML += '<div>' + SelectedAdditional + '</div>';
-//        _HTML += '</article>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        $("body").append(_HTML);
-//        $("#az-background").css({ "display": "block" });
-//        var _$AzModal = $("#az-modal");
-
-//        if (_Main.Options.azWindowWidth > window.innerWidth)
-//        {
-//            _Main.Options.azWindowWidth = (window.innerWidth - 60);
-//        }
-//        if (_Main.Options.azWindowHeight > window.innerHeight)
-//        {
-//            _Main.Options.azWindowHeight = (window.innerHeight - 144);
-//        }
-//        _$AzModal.css({ "width": _Main.Options.azWindowWidth });
-//        $(".az-modal-card > article", _$AzModal).css({ "min-height": _Main.Options.azWindowHeight });
-
-//        if (Modal == false)
-//        {
-//            $("#az-background").off("click", closeStandardAlert).on("click", closeStandardAlert);
-//        }
-//        $(".az-modal-card > header", _$AzModal).off("click").on("click", function ()
-//        {
-//            closeStandardAlert();
-//        });
-//        $.publish("functionlib/openStandardAlert");
-//    }
-//}
-
-//function closeStandardAlert()
-//{
-//    var _$Background = $("#az-background");
-//    if (_$Background.length > 0)
-//    {
-//        $("#az-modal").slideUp(function ()
-//        {
-//            _$Background.remove();
-//            $("body").removeClass("az-alert-active");
-//        });
-//    }
-//}
-
-//function openStandardConfirm(SelectedTitle, SelectedText, SelectedButton1, SelectedButton2, FunctionToRun)
-//{
-//    if ($('#az-modal').length == 0)
-//    {
-//        var _Defaults =
-//        {
-//            azWindowWidth: 450,
-//            azWindowHeight: 150
-//        };
-//        var _Main.Options = _Defaults;
-
-//        var _HTML = "";
-//        var _Button1ColClass = ' xs-6 az-text-left';
-//        if (SelectedButton2 == "")
-//        {
-//            var _Button1ColClass = ' xs-12 az-text-center';
-//        }
-//        _HTML = '<div id="az-background">';
-//        _HTML += '<div id="az-modal">';
-//        _HTML += '<div class="az-modal-card">';
-//        _HTML += '<header>';
-//        _HTML += '<h1>' + SelectedTitle + '</h1>';
-//        _HTML += '</header>';
-//        _HTML += '<article style="overflow-y: auto;">';
-//        _HTML += '<div>' + SelectedText + '</div>';
-//        _HTML += '<div>';
-//        _HTML += '<div class="az-row az-margin-t-28 az-margin-b-14">';
-//        if (SelectedButton2 != "")
-//        {
-//            _HTML += '<div class="az-col xs-6 az-text-right">';
-//            _HTML += '<div class="az-form-group">';
-//            _HTML += '<button type="button" class="az-button info az-shadow-1 az-shadow-hover-2" id="cmdStandardConfirmButton2" style="width: 60%; margin-right: 4px;">' + SelectedButton2 + '</button>';
-//            _HTML += '</div>';
-//            _HTML += '</div>';
-//        }
-//        _HTML += '<div class="az-col' + _Button1ColClass + '">';
-//        _HTML += '<div class="az-form-group">';
-//        _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdStandardConfirmButton1" style="width: 60%; margin-left: 4px;">' + SelectedButton1 + '</button>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</article>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        _HTML += '</div>';
-//        $("body").append(_HTML);
-//        $("#az-background").css({ "display": "block" });
-//        var _$AzModal = $("#az-modal");
-
-//        if (_Main.Options.azWindowWidth > window.innerWidth)
-//        {
-//            _Main.Options.azWindowWidth = (window.innerWidth - 60);
-//        }
-//        if (_Main.Options.azWindowHeight > window.innerHeight)
-//        {
-//            _Main.Options.azWindowHeight = (window.innerHeight - 144);
-//        }
-//        _$AzModal.css({ "width": _Main.Options.azWindowWidth });
-//        $(".az-modal-card > article", _$AzModal).css({ "min-height": _Main.Options.azWindowHeight });
-
-//        $("#cmdStandardConfirmButton2").off().on('click', function ()
-//        {
-//            closeStandardConfirm();
-//        });
-//        $("#cmdStandardConfirmButton1").off().on('click', function ()
-//        {
-//            closeStandardConfirm();
-//            if (FunctionToRun)
-//            {
-//                FunctionToRun();
-//            }
-//        });
-//        $(".az-modal-card > header", _$AzModal).off("click").on("click", function ()
-//        {
-//            closeStandardConfirm();
-//        });
-//        $.publish("functionlib/openStandardConfirm");
-//    }
-//}
-
-//function closeStandardConfirm()
-//{
-//    var _$Background = $("#az-background");
-//    if (_$Background.length > 0)
-//    {
-//        $("#az-modal").slideUp(function ()
-//        {
-//            _$Background.remove();
-//            $("body").removeClass("az-alert-active");
-//        });
-//    }
-//}
-
-//$("#myInput").on("keyup", function ()
-//{
-//    var value = $(this).val().toLowerCase();
-//    $("#az-css li").filter(function ()
-//    {
-//        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-//    });
-//});
-
-//function setAccordion(SelectedIndex)
-//{
-//    var _$Accordion = $(".az-accordion");
-//    var _$AllAccordionCard = _$Accordion.children(".az-accordion-card");
-//    _$Accordion.off().on("click", ".az-accordion-card > header", function (e)
-//    {
-//        var _$SelectedHeader = $(this);
-//        if (_$SelectedHeader.siblings("article").is(":hidden"))
-//        {
-//            _$AllAccordionCard.children("article").slideUp(100);
-//            _$AllAccordionCard.children("header").removeClass("accordion-active");
-//            _$SelectedHeader.siblings("article").slideDown(100);
-//            _$SelectedHeader.addClass("accordion-active");
-//        }
-//        else
-//        {
-//            _$AllAccordionCard.children("article").slideUp(100);
-//            _$AllAccordionCard.children("header").removeClass("accordion-active");
-//        }
-//    });
-//    if (SelectedIndex != undefined && typeof SelectedIndex === "number")
-//    {
-//        var _$SelectedAccordionCard = $(".az-accordion > .az-accordion-card").eq(SelectedIndex);
-//        var _$SelectedHeader = _$SelectedAccordionCard.children("header");
-//        if (_$SelectedHeader.siblings("article").is(":hidden"))
-//        {
-//            _$AllAccordionCard.children("article").slideUp(100);
-//            _$AllAccordionCard.children("header").removeClass("accordion-active");
-//            _$SelectedHeader.siblings("article").slideDown(100);
-//            _$SelectedHeader.addClass("accordion-active");
-//        }
-//        else
-//        {
-//            _$AllAccordionCard.children("article").slideUp(100);
-//            _$AllAccordionCard.children("header").removeClass("accordion-active");
-//        }
-//    }
-//}
-
-//function confirmCancel(FunctionToRun)
-//{
-//    if (formdirty == true)
-//    {
-//        openStandardConfirm(SingleDefaultElements.cancelazWindowConfirmTitle, SingleDefaultElements.cancelazWindowConfirmText, SingleDefaultElements.cancelazWindowConfirmButton1, SingleDefaultElements.cancelazWindowConfirmButton2, FunctionToRun);
-//    }
-//    else
-//    {
-//        showCoverSpin();
-//        if (FunctionToRun)
-//        {
-//            FunctionToRun();
-//        }
-//    }
-//}
-
-//function submitCancel(FunctionToRun)
-//{
-//    showCoverSpin();
-//    FunctionToRun();
-//}
-
-// Modal Help
-//function modalHelp(SelectedPage)
-//{
-//    $("#modalStandardTitle, #modalStandardText, #modalStandardAdditional").empty();
-//    var _ModalHelpAdditional = $("#modalHelpAdditional").html();
-//    if (_ModalHelpAdditional != "" && _ModalHelpAdditional != null && _ModalHelpAdditional != undefined)
-//    {
-//        $("#modalStandardText").html(SingleElements[SelectedPage + "-text"] + _ModalHelpAdditional);
-//        if (typeof modalHelpAdditional == "function")
-//        {
-//            modalHelpAdditional();
-//            setModalHelp();
-//        }
-//    }
-//    else
-//    {
-//        $("#modalStandardText").html(SingleElements[SelectedPage + "-text"]);
-//        setModalHelp();
-//    }
-
-//    function setModalHelp()
-//    {
-//        $("#modalStandardTitle").text(SingleElements[SelectedPage + "-title"]);
-//        $("#modalStandardAdditional").html(AppName + " " + AppVersion);
-//        $('#modalStandard').modal("show");
-//    }
-//}
-
-//// AZ Get Customer Info
-//function AZGetCustomerInfo()
-//{
-//    var _ObjCustomerInfo = JSON.parse(clientStorage("get", "customerinfo", ""));
-//    if (IsEmpty(_ObjCustomerInfo) === false && _ObjCustomerInfo.hasOwnProperty("UserSignIn"))
-//    {
-//        if (_ObjCustomerInfo.UserSignIn.hasOwnProperty("LanguageCode") && _ObjCustomerInfo.UserSignIn.LanguageCode != "")
-//        {
-//            moment.locale(_ObjCustomerInfo.UserSignIn.LanguageCode);
-//        }
-//        consoleLog("AZGetCustomerInfo");
-//        $.publish("functionlib/AZGetCustomerInfo", { ObjCustomerInfo: _ObjCustomerInfo });
-//    }
-//    else
-//    {
-//        throwException("silent", "", "", "AZGetCustomerInfo-1", "LoadData");
-//    }
-//}
-
-//// AZ Set System Menu
-//function AZSetSystemMenu(data)
-//{
-//    var _ObjCustomerInfo = data.ObjCustomerInfo;
-//    if (IsEmpty(_ObjCustomerInfo) === false && _ObjCustomerInfo.hasOwnProperty("MainMenu"))
-//    {
-//        $.each(_ObjCustomerInfo.MainMenu, function (i, MainMenuContent)
-//        {
-//            if (MainMenuContent.RoleFeatureStatus == "block")
-//            {
-//                $("." + MainMenuContent.Name + "_" + MainMenuContent.Type + ", #" + MainMenuContent.Name + "_" + MainMenuContent.Type).css({ "display": "block" });
-//            }
-//        });
-//        consoleLog("AZSetSystemMenu");
-//        $.publish("functionlib/AZSetSystemMenu");
-//    }
-//    else
-//    {
-//        throwException("silent", "", "", "AZSetSystemMenu-1", "LoadData");
-//    }
-//}
-
-//// Error exception
-//function throwException(_Action, _ActionPath, _ErrorPage, _ErrorCode, _ErrorText)
-//{
-//    if (_Action === "navigate")
-//    {
-//        navigateTo(_ActionPath + "?ErrorPage=" + _ErrorPage + "&ErrorCode=" + _ErrorCode + "&ErrorText=" + _ErrorText, 0);
-//    }
-//    else if (_Action === "dialog")
-//    {
-//        hideCoverSpin();
-//        initializeAZWindow(
-//            {
-//                dialogTitle: "Error",
-//                dialogText: SingleDefaultElements[_ErrorText + "Error"] + "<br><br>" + _ErrorCode + " - " + _ErrorText
-//            });
-//    }
-//    else if (_Action === "silent")
-//    {
-//        consoleLog({ consoleType: "error", consoleText: _ErrorCode });
-//    }
-//}
-
-//$.fn.greenText = function ()
-//{
-//    return this.each(function ()
-//    {
-//        $(this).css("color", "green");
-//    });
-//};
-//$.fn.redText = function ()
-//{
-//    return this.each(function ()
-//    {
-//        $(this).css("color", "red");
-//    });
-//};
-//$.fn.showLinkLocation = function ()
-//{
-//    return this.filter("a").append(function ()
-//    {
-//        return " (" + this.href + ")";
-//    });
-//};
-
-//function azGetEvents(element)
-//{
-//    var elemEvents = $._data(element[0], "events");
-//    var allDocEvnts = $._data(document, "events");
-//    for (var evntType in allDocEvnts)
-//    {
-//        if (allDocEvnts.hasOwnProperty(evntType))
-//        {
-//            var evts = allDocEvnts[evntType];
-//            for (var i = 0; i < evts.length; i++)
-//            {
-//                if ($(element).is(evts[i].selector))
-//                {
-//                    if (elemEvents == null)
-//                    {
-//                        elemEvents = {};
-//                    }
-//                    if (!elemEvents.hasOwnProperty(evntType))
-//                    {
-//                        elemEvents[evntType] = [];
-//                    }
-//                    elemEvents[evntType].push(evts[i]);
-//                }
-//            }
-//        }
-//    }
-//    return elemEvents;
-//}

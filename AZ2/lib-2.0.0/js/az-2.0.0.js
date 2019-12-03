@@ -2964,7 +2964,8 @@ function AZTabs(Options)
     {
         azTabsId: "",
         azTabsHeightStyle: "content",
-        azTabsOpenEvent: "click"
+        azTabsOpenEvent: "click",
+        azTabsIndex: 0
     };
     _Main.Options = $.extend({}, _Defaults, Options || {});
 
@@ -3024,9 +3025,11 @@ function AZTabs(Options)
         function azExecTabs($SelectedTab)
         {
             var _MenuIndex = $($SelectedTab).index();
-            _Main.$Tabs.children("ul").children("li").removeClass("az-tabs-tab-active");
+            _Main.$Tabs.children("ul").children("li").removeAttr("class");
             _Main.$Tabs.children("ul").children("li").eq(_MenuIndex).addClass("az-tabs-tab-active");
-            _Main.$Article.removeClass("az-tabs-article-active");
+            _Main.$TabsCard.removeClass("az-tabs-card-active");
+            _Main.$TabsCard.eq(_MenuIndex).addClass("az-tabs-card-active");
+            _Main.$Article.removeAttr("class");
             _Main.$TabsCard.eq(_MenuIndex).children("article").addClass("az-tabs-article-active");
             $.publish("functionlib/azTabsActivate",
                 {
@@ -3045,7 +3048,7 @@ function AZTabs(Options)
                 _Main.azArticleHeight();
             });
         }
-        _Main.azSelectTabs(0);
+        _Main.azSelectTabs(_Main.Options.azTabsIndex);
     }
     return (
         {
