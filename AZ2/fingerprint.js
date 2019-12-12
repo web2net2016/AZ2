@@ -17,6 +17,7 @@ function AZFingerprint()
             Event: "",
             Fingerprint: "",
             Host: "",
+            Href: "",
             Referer: "",
             UnitType: "",
             OS: "",
@@ -24,8 +25,8 @@ function AZFingerprint()
             Unit: "",
             Language: "",
             Duration: 0,
-            Position: 0.0,
-            Href: ""
+            Position: "",
+            Link: ""
         };
 
     _Main.azFingerprintOptions = { excludeUserAgent: true };
@@ -33,6 +34,7 @@ function AZFingerprint()
     {
         _Main.ObjClientInfo = detect.parse(navigator.userAgent);
         _Main.ObjFingerprint.Host = window.document.location.hostname;
+        _Main.ObjFingerprint.Href = window.document.location.href;
         _Main.ObjFingerprint.Referer = document.referrer;
         _Main.ObjFingerprint.UnitType = _Main.ObjClientInfo.device.type;
         _Main.ObjFingerprint.OS = _Main.ObjClientInfo.os.family;
@@ -66,8 +68,8 @@ function AZFingerprint()
                 var targetElement = event.target || event.srcElement;
                 if (targetElement.getAttribute("href"))
                 {
-                    _Main.ObjFingerprint.Href = targetElement.getAttribute("href");
-                    AZSendEvent(0, event.pageY, "href");
+                    _Main.ObjFingerprint.Link = targetElement.getAttribute("href");
+                    AZSendEvent(0, (event.pageX + "-" + event.pageY), "link");
                 }
             });
             window.addEventListener("beforeunload", function (event)
