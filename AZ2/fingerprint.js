@@ -155,7 +155,8 @@ function AZFingerprint()
         _Main.TransferClass.ObjFingerprint = _Main.ObjFingerprint;
         AZLoadXMLHttpRequest(_Main.ServerDomain + "/api/fingerprint/fingerprint_1", _Main.TransferClass, function (response)
         {
-            console.log(response)
+            _Main.ObjFingerprint.Position = "";
+            _Main.ObjFingerprint.Link = "";
         });
     }
 
