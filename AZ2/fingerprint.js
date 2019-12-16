@@ -10,7 +10,7 @@ function AZFingerprint()
     _Main.StopScrollTimer = null;
     _Main.StopScrollTime = 0;
     _Main.StopScrollPosition = 0;
-    _Main.ServerDomain = "http://api.web2net.no";
+    _Main.ServerDomain = "//api.web2net.no";
     _Main.TransferClass = {};
     _Main.ObjFingerprint =
         {
@@ -85,7 +85,7 @@ function AZFingerprint()
         _Main.TransferClass.ObjFingerprint = _Main.ObjFingerprint;
         AZLoadXMLHttpRequest(_Main.ServerDomain + "/api/fingerprint/fingerprint_1", _Main.TransferClass, function (response)
         {
-            console.log(response)
+            console.log("Fingerprint - OK")
         });
     }
 
