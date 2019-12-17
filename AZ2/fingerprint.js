@@ -24,7 +24,6 @@ function AZFingerprint()
             Browser: "",
             Unit: "",
             Language: "",
-            IP: "",
             Duration: 0,
             Position: "",
             Link: ""
@@ -84,14 +83,10 @@ function AZFingerprint()
     function AZInitFingerprint()
     {
         _Main.ObjFingerprint.Event = "fingerprint";
-        AZLoadIPRequest(function (response)
+        _Main.TransferClass.ObjFingerprint = _Main.ObjFingerprint;
+        AZLoadAPIRequest(_Main.ServerDomain + "/api/fingerprint/fingerprint_1", _Main.TransferClass, function (response)
         {
-            _Main.ObjFingerprint.IP = response.ip;
-            _Main.TransferClass.ObjFingerprint = _Main.ObjFingerprint;
-            AZLoadAPIRequest(_Main.ServerDomain + "/api/fingerprint/fingerprint_1", _Main.TransferClass, function (response)
-            {
-                console.log("Fingerprint - OK")
-            });
+            console.log("Fingerprint - OK")
         });
     }
 
@@ -196,35 +191,6 @@ function AZFingerprint()
         xmlhttp.setRequestHeader('Authorization', 'Basic ' + btoa(_Token));
         xmlhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
         xmlhttp.send(JSON.stringify(data));
-    }
-
-    function AZLoadIPRequest(callback)
-    {
-        if (window.XMLHttpRequest)
-        {
-            var xmlhttp = new XMLHttpRequest();
-        }
-        else
-        {
-            var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function ()
-        {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-            {
-                if (callback != "")
-                {
-                    var response = "";
-                    if (xmlhttp.responseText != "")
-                    {
-                        response = JSON.parse(xmlhttp.responseText);
-                    }
-                    callback(response);
-                }
-            }
-        }
-        xmlhttp.open("GET", "https://api.ipify.org?format=json", true);
-        xmlhttp.send();
     }
 
     function AZCheckDeviceLanguage()
