@@ -530,21 +530,21 @@ $(document).ready(function ()
             {
                 if ($(this).hasClass("cancel"))
                 {
-                    if (typeof AZCancel == 'function')
+                    if (typeof AZCancel == "function")
                     {
                         $(this).off("click", AZCancel).on("click", AZCancel);
                     }
                 }
                 if ($(this).hasClass("submit"))
                 {
-                    if (typeof AZSubmit == 'function')
+                    if (typeof AZSubmit == "function")
                     {
                         $(this).off("click", AZSubmit).on("click", AZSubmit);
                     }
                 }
                 if ($(this).hasClass("delete"))
                 {
-                    if (typeof AZDelete == 'function')
+                    if (typeof AZDelete == "function")
                     {
                         $(this).off("click", AZDelete).on("click", AZDelete);
                     }
@@ -644,7 +644,7 @@ $(document).ready(function ()
             else
             {
                 _$CurrentSpinner.remove();
-                _$ParentElement.html('<div>Her er det en feil</div>');
+                _$ParentElement.html('<div>#Error</div>');
             }
         });
     })(jQuery);
@@ -1019,106 +1019,134 @@ function AZCheckSpinnerAttributes(Element)
 // AZ Accordion
 function AZAccordion(Options)
 {
-    var _Main = this;
-    var _Defaults =
+    if (this instanceof AZAccordion === true)
     {
-        azAccordionId: "",
-        azAccordionHeightStyle: "content",
-        azAccordionCollapsible: true,
-        azAccordionOpenEvent: "click",
-        azAccordionHeaderBackgroundColor: "#009688",
-        azAccordionHeaderColor: "#FFFFFF",
-        azAccordionHeaderHoverBackgroundColor: "#607D8B",
-        azAccordionHeaderHoverColor: "#FFFFFF",
-        azAccordionArticleBackgroundColor: "#FFFFFF",
-        azAccordionArticleColor: "#000000",
-        azAccordionIconClosed: "fas fa-plus",
-        azAccordionIconOpen: "fas fa-minus",
-        azAccordionSlideDown: 100,
-        azAccordionSlideUp: 100
-    };
-    _Main.Options = $.extend({}, _Defaults, Options || {});
 
-    if (_Main.Options.azAccordionId != "")
-    {
-        _Main.$Accordion = $("#" + _Main.Options.azAccordionId);
-        _Main.$AccordionCard = _Main.$Accordion.children(".az-accordion-card");
-        _Main.$Header = _Main.$AccordionCard.children("header").append('<i class="' + _Main.Options.azAccordionIconClosed + '"></i>').css({ "background-color": _Main.Options.azAccordionHeaderBackgroundColor, "color": _Main.Options.azAccordionHeaderColor });
-        _Main.$Article = _Main.$AccordionCard.children("article").css({ "background-color": _Main.Options.azAccordionArticleBackgroundColor, "color": _Main.Options.azAccordionArticleColor });
+        var _Main = this;
+        var _Defaults =
+        {
+            azAccordionId: "",
+            azAccordionHeightStyle: "content",
+            azAccordionCollapsible: true,
+            azAccordionOpenEvent: "click",
+            azAccordionHeaderBackgroundColor: "#009688",
+            azAccordionHeaderColor: "#FFFFFF",
+            azAccordionHeaderHoverBackgroundColor: "#607D8B",
+            azAccordionHeaderHoverColor: "#FFFFFF",
+            azAccordionArticleBackgroundColor: "#FFFFFF",
+            azAccordionArticleColor: "#000000",
+            azAccordionIconClosed: "fas fa-plus",
+            azAccordionIconOpen: "fas fa-minus",
+            azAccordionSlideDown: 100,
+            azAccordionSlideUp: 100
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
 
-        _Main.$Header.mouseenter(function ()
+        if (_Main.Options.azAccordionId != "")
         {
-            $(this).css({ "background-color": _Main.Options.azAccordionHeaderHoverBackgroundColor, "color": _Main.Options.azAccordionHeaderHoverColor });
-        }).mouseleave(function ()
-        {
-            $(this).css({ "background-color": _Main.Options.azAccordionHeaderBackgroundColor, "color": _Main.Options.azAccordionHeaderColor });
-        });
+            _Main.$Accordion = $("#" + _Main.Options.azAccordionId);
+            _Main.$AccordionCard = _Main.$Accordion.children(".az-accordion-card");
+            _Main.$Header = _Main.$AccordionCard.children("header").append('<i class="' + _Main.Options.azAccordionIconClosed + '"></i>').css({ "background-color": _Main.Options.azAccordionHeaderBackgroundColor, "color": _Main.Options.azAccordionHeaderColor });
+            _Main.$Article = _Main.$AccordionCard.children("article").css({ "background-color": _Main.Options.azAccordionArticleBackgroundColor, "color": _Main.Options.azAccordionArticleColor });
 
-        _Main.MaxArticleHeight = 0;
-        _Main.azArticleHeight = function ()
-        {
-            _Main.MaxArticleHeight = 0;
-            _Main.$Article.css({ height: "inherit" });
-            _Main.$Article.each(function ()
+            _Main.$Header.mouseenter(function ()
             {
-                _Main.MaxArticleHeight = Math.max(_Main.MaxArticleHeight, $(this).height());
+                $(this).css({ "background-color": _Main.Options.azAccordionHeaderHoverBackgroundColor, "color": _Main.Options.azAccordionHeaderHoverColor });
+            }).mouseleave(function ()
+            {
+                $(this).css({ "background-color": _Main.Options.azAccordionHeaderBackgroundColor, "color": _Main.Options.azAccordionHeaderColor });
             });
-            if (_Main.MaxArticleHeight > 0)
+
+            _Main.MaxArticleHeight = 0;
+            _Main.azArticleHeight = function ()
             {
-                _Main.$Article.height(_Main.MaxArticleHeight);
+                _Main.MaxArticleHeight = 0;
+                _Main.$Article.css({ height: "inherit" });
+                _Main.$Article.each(function ()
+                {
+                    _Main.MaxArticleHeight = Math.max(_Main.MaxArticleHeight, $(this).height());
+                });
+                if (_Main.MaxArticleHeight > 0)
+                {
+                    _Main.$Article.height(_Main.MaxArticleHeight);
+                }
             }
-        }
 
-        _Main.azSelectAccordion = function (SelectedIndex)
-        {
-            azExecAccordion(_Main.$AccordionCard.eq(SelectedIndex).children("header"));
-        }
-
-        _Main.azChangeText = function (SelectedIndex, SelectedText)
-        {
-            _Main.azSelectAccordion(SelectedIndex);
-            window.setTimeout(function ()
+            _Main.azSelectAccordion = function (SelectedIndex)
             {
-                _Main.$AccordionCard.eq(SelectedIndex).children("article").fadeOut(function ()
-                {
-                    _Main.$AccordionCard.eq(SelectedIndex).children("article").html(SelectedText);
-                }).fadeIn();
-            }, 500);
-        }
+                azExecAccordion(_Main.$AccordionCard.eq(SelectedIndex).children("header"));
+            }
 
-        _Main.$Accordion.off().on(_Main.Options.azAccordionOpenEvent, ".az-accordion-card > header", function (e)
-        {
-            azExecAccordion($(this));
-        });
-
-        _Main.AccordionActivated = "";
-        _Main.AccordionDeactivated = "";
-        function azExecAccordion($SelectedAccordionHeader)
-        {
-            if ($SelectedAccordionHeader.hasClass("az-accordion-header-active") === true)
+            _Main.azChangeText = function (SelectedIndex, SelectedText)
             {
-                if (_Main.Options.azAccordionCollapsible === true)
+                _Main.azSelectAccordion(SelectedIndex);
+                window.setTimeout(function ()
                 {
-                    $SelectedAccordionHeader.removeClass("az-accordion-header-active");
-                    $SelectedAccordionHeader.siblings("article").slideUp(_Main.Options.azAccordionSlideUp).removeClass("az-accordion-article-active");
-                    $("i", $SelectedAccordionHeader).removeClass(_Main.Options.azAccordionIconOpen).addClass(_Main.Options.azAccordionIconClosed);
-
-                    if (_Main.AccordionActivated == $SelectedAccordionHeader.parent().index())
+                    _Main.$AccordionCard.eq(SelectedIndex).children("article").fadeOut(function ()
                     {
-                        _Main.AccordionActivated = "";
-                    }
-                    $.publish("functionlib/azAccordionHeader",
+                        _Main.$AccordionCard.eq(SelectedIndex).children("article").html(SelectedText);
+                    }).fadeIn();
+                }, 500);
+            }
+
+            _Main.$Accordion.off().on(_Main.Options.azAccordionOpenEvent, ".az-accordion-card > header", function (e)
+            {
+                azExecAccordion($(this));
+            });
+
+            _Main.AccordionActivated = "";
+            _Main.AccordionDeactivated = "";
+            function azExecAccordion($SelectedAccordionHeader)
+            {
+                if ($SelectedAccordionHeader.hasClass("az-accordion-header-active") === true)
+                {
+                    if (_Main.Options.azAccordionCollapsible === true)
+                    {
+                        $SelectedAccordionHeader.removeClass("az-accordion-header-active");
+                        $SelectedAccordionHeader.siblings("article").slideUp(_Main.Options.azAccordionSlideUp).removeClass("az-accordion-article-active");
+                        $("i", $SelectedAccordionHeader).removeClass(_Main.Options.azAccordionIconOpen).addClass(_Main.Options.azAccordionIconClosed);
+
+                        if (_Main.AccordionActivated == $SelectedAccordionHeader.parent().index())
                         {
-                            azAccordionId: _Main.Options.azAccordionId,
-                            azAccordionStatus: "closed",
-                            azAccordionActivated: _Main.AccordionActivated,
-                            azAccordionDeactivated: _Main.AccordionDeactivated,
-                            azAccordionHeaderJQElement: $($SelectedAccordionHeader)
-                        });
-                    _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
+                            _Main.AccordionActivated = "";
+                        }
+                        $.publish("functionlib/azAccordionHeader",
+                            {
+                                azAccordionId: _Main.Options.azAccordionId,
+                                azAccordionStatus: "closed",
+                                azAccordionActivated: _Main.AccordionActivated,
+                                azAccordionDeactivated: _Main.AccordionDeactivated,
+                                azAccordionHeaderJQElement: $($SelectedAccordionHeader)
+                            });
+                        _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
+                    }
+                    else
+                    {
+                        if (_Main.AccordionDeactivated == $SelectedAccordionHeader.parent().index())
+                        {
+                            _Main.AccordionDeactivated = "";
+                        }
+                        $.publish("functionlib/azAccordionHeader",
+                            {
+                                azAccordionId: _Main.Options.azAccordionId,
+                                azAccordionStatus: "open",
+                                azAccordionActivated: $SelectedAccordionHeader.parent().index(),
+                                azAccordionDeactivated: _Main.AccordionDeactivated,
+                                azAccordionHeaderJQElement: $($SelectedAccordionHeader)
+                            });
+                        _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
+                    }
                 }
                 else
                 {
+                    _Main.$Header.removeClass("az-accordion-header-active");
+                    _Main.$Article.slideUp(_Main.Options.azAccordionSlideUp).removeClass("az-accordion-article-active");
+                    $("i", _Main.$Header).removeClass(_Main.Options.azAccordionIconOpen).addClass(_Main.Options.azAccordionIconClosed);
+
+                    $SelectedAccordionHeader.addClass("az-accordion-header-active");
+                    $SelectedAccordionHeader.siblings("article").slideDown(_Main.Options.azAccordionSlideDown).addClass("az-accordion-article-active");
+                    $("i", $SelectedAccordionHeader).removeClass(_Main.Options.azAccordionIconClosed).addClass(_Main.Options.azAccordionIconOpen);
+
                     if (_Main.AccordionDeactivated == $SelectedAccordionHeader.parent().index())
                     {
                         _Main.AccordionDeactivated = "";
@@ -1134,89 +1162,68 @@ function AZAccordion(Options)
                     _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
                 }
             }
-            else
-            {
-                _Main.$Header.removeClass("az-accordion-header-active");
-                _Main.$Article.slideUp(_Main.Options.azAccordionSlideUp).removeClass("az-accordion-article-active");
-                $("i", _Main.$Header).removeClass(_Main.Options.azAccordionIconOpen).addClass(_Main.Options.azAccordionIconClosed);
 
-                $SelectedAccordionHeader.addClass("az-accordion-header-active");
-                $SelectedAccordionHeader.siblings("article").slideDown(_Main.Options.azAccordionSlideDown).addClass("az-accordion-article-active");
-                $("i", $SelectedAccordionHeader).removeClass(_Main.Options.azAccordionIconClosed).addClass(_Main.Options.azAccordionIconOpen);
-
-                if (_Main.AccordionDeactivated == $SelectedAccordionHeader.parent().index())
-                {
-                    _Main.AccordionDeactivated = "";
-                }
-                $.publish("functionlib/azAccordionHeader",
-                    {
-                        azAccordionId: _Main.Options.azAccordionId,
-                        azAccordionStatus: "open",
-                        azAccordionActivated: $SelectedAccordionHeader.parent().index(),
-                        azAccordionDeactivated: _Main.AccordionDeactivated,
-                        azAccordionHeaderJQElement: $($SelectedAccordionHeader)
-                    });
-                _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
-            }
-        }
-
-        if (_Main.Options.azAccordionHeightStyle == "auto")
-        {
-            _Main.azArticleHeight();
-            $(window).resize(function ()
+            if (_Main.Options.azAccordionHeightStyle == "auto")
             {
                 _Main.azArticleHeight();
+                $(window).resize(function ()
+                {
+                    _Main.azArticleHeight();
+                });
+            }
+            if (_Main.Options.azAccordionCollapsible == false)
+            {
+                _Main.azSelectAccordion(0);
+            }
+        }
+        return (
+            {
+                "SelectAccordion": _Main.azSelectAccordion,
+                "ChangeText": _Main.azChangeText
             });
-        }
-        if (_Main.Options.azAccordionCollapsible == false)
-        {
-            _Main.azSelectAccordion(0);
-        }
     }
-    return (
-        {
-            "SelectAccordion": _Main.azSelectAccordion,
-            "ChangeText": _Main.azChangeText
-        });
 }
 
 // AZ Ajax
 function AZAjax(Options)
 {
-    var _Main = this;
-    var _Defaults =
+    if (this instanceof AZAjax === true)
     {
-        azAjaxUrl: "",
-        azAjaxDataType: "json",
-        azAjaxType: "POST",
-        azAjaxContentType: "application/json; charset=utf-8",
-        azAjaxObjHeaders: {},
-        azAjaxTimeout: 15000,
-        azAjaxObjToSend: {}
-    };
-    _Main.Options = $.extend({}, _Defaults, Options || {});
-
-    if (_Main.Options.azAjaxUrl != "")
-    {
-        _Main.AjaxOptions =
-            {
-                url: _Main.Options.azAjaxUrl,
-                dataType: _Main.Options.azAjaxDataType,
-                type: _Main.Options.azAjaxType,
-                contentType: _Main.Options.azAjaxContentType,
-                headers: _Main.Options.azAjaxObjHeaders,
-                timeout: _Main.Options.azAjaxTimeout
-            };
-        if (IsEmpty(_Main.Options.azAjaxObjToSend) === false)
+        var _Main = this;
+        var _Defaults =
         {
-            _Main.AjaxOptions.data = JSON.stringify(_Main.Options.azAjaxObjToSend);
+            azAjaxUrl: "",
+            azAjaxDataType: "json",
+            azAjaxType: "POST",
+            azAjaxContentType: "application/json; charset=utf-8",
+            azAjaxObjHeaders: {},
+            azAjaxTimeout: 15000,
+            azAjaxObjToSend: {}
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
+
+        if (_Main.Options.azAjaxUrl != "")
+        {
+            _Main.AjaxOptions =
+                {
+                    url: _Main.Options.azAjaxUrl,
+                    dataType: _Main.Options.azAjaxDataType,
+                    type: _Main.Options.azAjaxType,
+                    contentType: _Main.Options.azAjaxContentType,
+                    headers: _Main.Options.azAjaxObjHeaders,
+                    timeout: _Main.Options.azAjaxTimeout
+                };
+            if (IsEmpty(_Main.Options.azAjaxObjToSend) === false)
+            {
+                _Main.AjaxOptions.data = JSON.stringify(_Main.Options.azAjaxObjToSend);
+            }
+            $.ajaxSetup({ cache: false });
+            return $.ajax(_Main.AjaxOptions).promise();
         }
-        $.ajaxSetup({ cache: false });
-        return $.ajax(_Main.AjaxOptions).promise();
-    }
-    else
-    {
-        return $.Deferred().resolve("");
+        else
+        {
+            return $.Deferred().resolve("");
+        }
     }
 }
 
@@ -1574,305 +1581,311 @@ function AZCheckAsyncAndPublish(FunctionToRun, Publish)
 // AZ Snackbar
 function AZSnackbar(Options)
 {
-    var _Main = this;
-    var _Defaults =
+    if (this instanceof AZSnackbar === true)
     {
-        azSnackbarId: "",
-        azSnackbarText: "",
-        azSnackbarPosition: "left-top",
-        azSnackbarTopMargin: 20,
-        azSnackbarBottomMargin: 20,
-        azSnackbarMobileMinHeight: 0,
-        azSnackbarClose: false,
-        azSnackbarTimeout: 3000,
-        azSnackbarBackgroundColor: "#333333",
-        azSnackbarColor: "#FFFFFF",
-        azSnackbarCloseColor: "#FFFFFF",
-        azSnackbarAfterOpen: function () { }
-    };
-    _Main.Options = $.extend({}, _Defaults, Options || {});
+        var _Main = this;
+        var _Defaults =
+        {
+            azSnackbarId: "",
+            azSnackbarText: "",
+            azSnackbarPosition: "left-top",
+            azSnackbarTopMargin: 20,
+            azSnackbarBottomMargin: 20,
+            azSnackbarMobileMinHeight: 0,
+            azSnackbarClose: false,
+            azSnackbarTimeout: 3000,
+            azSnackbarBackgroundColor: "#333333",
+            azSnackbarColor: "#FFFFFF",
+            azSnackbarCloseColor: "#FFFFFF",
+            azSnackbarAfterOpen: function () { }
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
 
-    if (_Main.Options.azSnackbarId != "" && $("#" + _Main.Options.azSnackbarId).length === 0)
-    {
-        _Main.$Body = $("body");
-        _Main.$Wrapper = $('<div></div>').attr({ "id": _Main.Options.azSnackbarId }).addClass("az-snackbar").css({ "background-color": _Main.Options.azSnackbarBackgroundColor });
-        _Main.$Table = $('<table></table>').addClass("az-snackbar-table");
+        if (_Main.Options.azSnackbarId != "" && $("#" + _Main.Options.azSnackbarId).length === 0)
+        {
+            _Main.$Body = $("body");
+            _Main.$Wrapper = $('<div></div>').attr({ "id": _Main.Options.azSnackbarId }).addClass("az-snackbar").css({ "background-color": _Main.Options.azSnackbarBackgroundColor });
+            _Main.$Table = $('<table></table>').addClass("az-snackbar-table");
 
-        _Main.AnimateOpenOptions = {};
-        _Main.AnimateCloseOptions = {};
-        if (_Main.Options.azSnackbarPosition == "left-top")
-        {
-            _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
-            _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
-        }
-        else if (_Main.Options.azSnackbarPosition == "left-bottom")
-        {
-            _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
-            _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
-        }
-        else if (_Main.Options.azSnackbarPosition == "center-top")
-        {
-            _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
-            _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
-        }
-        else if (_Main.Options.azSnackbarPosition == "center-bottom")
-        {
-            _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
-            _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
-        }
-        else if (_Main.Options.azSnackbarPosition == "right-top")
-        {
-            _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
-            _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
-        }
-        else if (_Main.Options.azSnackbarPosition == "right-bottom")
-        {
-            _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
-            _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
-        }
-        else if (_Main.Options.azSnackbarPosition == "full-width-top")
-        {
-            _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
-            _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
-        }
-        else if (_Main.Options.azSnackbarPosition == "full-width-bottom")
-        {
-            _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
-            _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
-        }
-        _Main.$Wrapper.addClass("az-snackbar-" + _Main.Options.azSnackbarPosition);
-
-        if (window.innerWidth < 576)
-        {
-            _Main.$Wrapper.addClass("az-snackbar-mobile");
-            if (_Main.AnimateOpenOptions.hasOwnProperty("top") === true)
+            _Main.AnimateOpenOptions = {};
+            _Main.AnimateCloseOptions = {};
+            if (_Main.Options.azSnackbarPosition == "left-top")
             {
-                _Main.AnimateOpenOptions.top = 20;
+                _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
+                _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
             }
-            if (_Main.AnimateOpenOptions.hasOwnProperty("bottom") === true)
+            else if (_Main.Options.azSnackbarPosition == "left-bottom")
             {
-                _Main.AnimateOpenOptions.bottom = 20;
+                _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
+                _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
             }
-            if (_Main.Options.azSnackbarMobileMinHeight > 0)
+            else if (_Main.Options.azSnackbarPosition == "center-top")
             {
-                if (_Main.Options.azSnackbarMobileMinHeight > (window.innerHeight - 70))
+                _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
+                _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
+            }
+            else if (_Main.Options.azSnackbarPosition == "center-bottom")
+            {
+                _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
+                _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
+            }
+            else if (_Main.Options.azSnackbarPosition == "right-top")
+            {
+                _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
+                _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
+            }
+            else if (_Main.Options.azSnackbarPosition == "right-bottom")
+            {
+                _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
+                _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
+            }
+            else if (_Main.Options.azSnackbarPosition == "full-width-top")
+            {
+                _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
+                _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
+            }
+            else if (_Main.Options.azSnackbarPosition == "full-width-bottom")
+            {
+                _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
+                _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
+            }
+            _Main.$Wrapper.addClass("az-snackbar-" + _Main.Options.azSnackbarPosition);
+
+            if (window.innerWidth < 576)
+            {
+                _Main.$Wrapper.addClass("az-snackbar-mobile");
+                if (_Main.AnimateOpenOptions.hasOwnProperty("top") === true)
                 {
-                    _Main.Options.azSnackbarMobileMinHeight = (window.innerHeight - 70);
+                    _Main.AnimateOpenOptions.top = 20;
                 }
-                _Main.$Wrapper.css({ "min-height": _Main.Options.azSnackbarMobileMinHeight })
+                if (_Main.AnimateOpenOptions.hasOwnProperty("bottom") === true)
+                {
+                    _Main.AnimateOpenOptions.bottom = 20;
+                }
+                if (_Main.Options.azSnackbarMobileMinHeight > 0)
+                {
+                    if (_Main.Options.azSnackbarMobileMinHeight > (window.innerHeight - 70))
+                    {
+                        _Main.Options.azSnackbarMobileMinHeight = (window.innerHeight - 70);
+                    }
+                    _Main.$Wrapper.css({ "min-height": _Main.Options.azSnackbarMobileMinHeight })
+                }
             }
-        }
 
-        //_Main.azRecalcSnackbarPosition = function ()
-        //{
-        //    var _TotalHeight = 0;
-        //    var _Position = "";
-        //    $(".az-snackbar").not(_Main.$Wrapper).each(function ()
-        //    {
-        //        if (_Main.Options.azSnackbarPosition == "left-top" || _Main.Options.azSnackbarPosition == "full-width-top")
-        //        {
-        //            if ($(this).hasClass("az-snackbar-left-top") || $(this).hasClass("az-snackbar-full-width-top"))
-        //            {
-        //                _TotalHeight = _TotalHeight + $(this).height() + 16;
-        //            }
-        //            _Position = "top";
-        //        }
-        //        else if (_Main.Options.azSnackbarPosition == "right-top" || _Main.Options.azSnackbarPosition == "full-width-top")
-        //        {
-        //            if ($(this).hasClass("az-snackbar-right-top") || $(this).hasClass("az-snackbar-full-width-top"))
-        //            {
-        //                _TotalHeight = _TotalHeight + $(this).height() + 16;
-        //            }
-        //            _Position = "top";
-        //        }
-        //        else if (_Main.Options.azSnackbarPosition == "center-top" || _Main.Options.azSnackbarPosition == "full-width-top")
-        //        {
-        //            if ($(this).hasClass("az-snackbar-center-top") || $(this).hasClass("az-snackbar-full-width-top"))
-        //            {
-        //                _TotalHeight = _TotalHeight + $(this).height() + 16;
-        //            }
-        //            _Position = "top";
-        //        }
-        //        else if (_Main.Options.azSnackbarPosition == "left-bottom" || _Main.Options.azSnackbarPosition == "full-width-bottom")
-        //        {
-        //            if ($(this).hasClass("az-snackbar-left-bottom") || $(this).hasClass("az-snackbar-full-width-bottom"))
-        //            {
-        //                _TotalHeight = _TotalHeight + $(this).height() + _Main.Options.azSnackbarBottomMargin + 16;
-        //            }
-        //            _Position = "bottom";
-        //        }
-        //        else if (_Main.Options.azSnackbarPosition == "center-bottom" || _Main.Options.azSnackbarPosition == "full-width-bottom")
-        //        {
-        //            if ($(this).hasClass("az-snackbar-center-bottom") || $(this).hasClass("az-snackbar-full-width-bottom"))
-        //            {
-        //                _TotalHeight = _TotalHeight + $(this).height() + _Main.Options.azSnackbarBottomMargin + 16;
-        //            }
-        //            _Position = "bottom";
-        //        }
-        //        else if (_Main.Options.azSnackbarPosition == "right-bottom" || _Main.Options.azSnackbarPosition == "full-width-bottom")
-        //        {
-        //            if ($(this).hasClass("az-snackbar-right-bottom") || $(this).hasClass("az-snackbar-full-width-bottom"))
-        //            {
-        //                _TotalHeight = _TotalHeight + $(this).height() + _Main.Options.azSnackbarBottomMargin + 16;
-        //            }
-        //            _Position = "bottom";
-        //        }
-        //    });
-        //    if (_TotalHeight > 0 && _Position !== "")
-        //    {
-        //        _Main.AnimateOpenOptions[_Position] = _TotalHeight;
-        //    }
-        //}
+            //_Main.azRecalcSnackbarPosition = function ()
+            //{
+            //    var _TotalHeight = 0;
+            //    var _Position = "";
+            //    $(".az-snackbar").not(_Main.$Wrapper).each(function ()
+            //    {
+            //        if (_Main.Options.azSnackbarPosition == "left-top" || _Main.Options.azSnackbarPosition == "full-width-top")
+            //        {
+            //            if ($(this).hasClass("az-snackbar-left-top") || $(this).hasClass("az-snackbar-full-width-top"))
+            //            {
+            //                _TotalHeight = _TotalHeight + $(this).height() + 16;
+            //            }
+            //            _Position = "top";
+            //        }
+            //        else if (_Main.Options.azSnackbarPosition == "right-top" || _Main.Options.azSnackbarPosition == "full-width-top")
+            //        {
+            //            if ($(this).hasClass("az-snackbar-right-top") || $(this).hasClass("az-snackbar-full-width-top"))
+            //            {
+            //                _TotalHeight = _TotalHeight + $(this).height() + 16;
+            //            }
+            //            _Position = "top";
+            //        }
+            //        else if (_Main.Options.azSnackbarPosition == "center-top" || _Main.Options.azSnackbarPosition == "full-width-top")
+            //        {
+            //            if ($(this).hasClass("az-snackbar-center-top") || $(this).hasClass("az-snackbar-full-width-top"))
+            //            {
+            //                _TotalHeight = _TotalHeight + $(this).height() + 16;
+            //            }
+            //            _Position = "top";
+            //        }
+            //        else if (_Main.Options.azSnackbarPosition == "left-bottom" || _Main.Options.azSnackbarPosition == "full-width-bottom")
+            //        {
+            //            if ($(this).hasClass("az-snackbar-left-bottom") || $(this).hasClass("az-snackbar-full-width-bottom"))
+            //            {
+            //                _TotalHeight = _TotalHeight + $(this).height() + _Main.Options.azSnackbarBottomMargin + 16;
+            //            }
+            //            _Position = "bottom";
+            //        }
+            //        else if (_Main.Options.azSnackbarPosition == "center-bottom" || _Main.Options.azSnackbarPosition == "full-width-bottom")
+            //        {
+            //            if ($(this).hasClass("az-snackbar-center-bottom") || $(this).hasClass("az-snackbar-full-width-bottom"))
+            //            {
+            //                _TotalHeight = _TotalHeight + $(this).height() + _Main.Options.azSnackbarBottomMargin + 16;
+            //            }
+            //            _Position = "bottom";
+            //        }
+            //        else if (_Main.Options.azSnackbarPosition == "right-bottom" || _Main.Options.azSnackbarPosition == "full-width-bottom")
+            //        {
+            //            if ($(this).hasClass("az-snackbar-right-bottom") || $(this).hasClass("az-snackbar-full-width-bottom"))
+            //            {
+            //                _TotalHeight = _TotalHeight + $(this).height() + _Main.Options.azSnackbarBottomMargin + 16;
+            //            }
+            //            _Position = "bottom";
+            //        }
+            //    });
+            //    if (_TotalHeight > 0 && _Position !== "")
+            //    {
+            //        _Main.AnimateOpenOptions[_Position] = _TotalHeight;
+            //    }
+            //}
 
-        _Main.azCloseSnackbar = function ()
-        {
-            _Main.$Wrapper.animate(_Main.AnimateCloseOptions, 500, function ()
+            _Main.azCloseSnackbar = function ()
             {
-                $("#" + _Main.Options.azSnackbarId).remove();
-                //_Main.azRecalcSnackbarPosition();
+                _Main.$Wrapper.animate(_Main.AnimateCloseOptions, 500, function ()
+                {
+                    $("#" + _Main.Options.azSnackbarId).remove();
+                    //_Main.azRecalcSnackbarPosition();
+                });
+            }
+
+            _Main.azChangeSnackbarText = function (SnackbarText)
+            {
+                _Main.$TextCell.html(SnackbarText)
+            }
+
+            if (_Main.Options.azSnackbarClose === true)
+            {
+                _Main.$Close = $('<td></td>').html("X").addClass("az-snackbar-close").css({ "color": _Main.Options.azSnackbarCloseColor });
+                _Main.$Close.off("click").on("click", function ()
+                {
+                    _Main.azCloseSnackbar();
+                });
+            }
+            else
+            {
+                _Main.$Close = "";
+                window.setTimeout(function ()
+                {
+                    _Main.azCloseSnackbar();
+                }, _Main.Options.azSnackbarTimeout);
+            }
+
+            _Main.$TextCell = $('<td></td>').html(_Main.Options.azSnackbarText).addClass("az-snackbar-text").css({ "color": _Main.Options.azSnackbarColor });
+            _Main.$TableRow = $('<tr></tr>').append(_Main.$TextCell).append(_Main.$Close);
+            _Main.$Table.append(_Main.$TableRow);
+            _Main.$Wrapper.append(_Main.$Table);
+            _Main.$Body.append(_Main.$Wrapper);
+            //_Main.azRecalcSnackbarPosition();
+
+            _Main.$Wrapper.animate(_Main.AnimateOpenOptions, 500, function ()
+            {
+                AZCheckAsyncAndPublish(_Main.Options.azSnackbarAfterOpen, "functionlib/azSnackbarAfterOpen");
             });
         }
-
-        _Main.azChangeSnackbarText = function (SnackbarText)
-        {
-            _Main.$TextCell.html(SnackbarText)
-        }
-
-        if (_Main.Options.azSnackbarClose === true)
-        {
-            _Main.$Close = $('<td></td>').html("X").addClass("az-snackbar-close").css({ "color": _Main.Options.azSnackbarCloseColor });
-            _Main.$Close.off("click").on("click", function ()
+        return (
             {
-                _Main.azCloseSnackbar();
+                "ChangeSnackbarText": _Main.azChangeSnackbarText
             });
-        }
-        else
-        {
-            _Main.$Close = "";
-            window.setTimeout(function ()
-            {
-                _Main.azCloseSnackbar();
-            }, _Main.Options.azSnackbarTimeout);
-        }
-
-        _Main.$TextCell = $('<td></td>').html(_Main.Options.azSnackbarText).addClass("az-snackbar-text").css({ "color": _Main.Options.azSnackbarColor });
-        _Main.$TableRow = $('<tr></tr>').append(_Main.$TextCell).append(_Main.$Close);
-        _Main.$Table.append(_Main.$TableRow);
-        _Main.$Wrapper.append(_Main.$Table);
-        _Main.$Body.append(_Main.$Wrapper);
-        //_Main.azRecalcSnackbarPosition();
-
-        _Main.$Wrapper.animate(_Main.AnimateOpenOptions, 500, function ()
-        {
-            AZCheckAsyncAndPublish(_Main.Options.azSnackbarAfterOpen, "functionlib/azSnackbarAfterOpen");
-        });
     }
-    return (
-        {
-            "ChangeSnackbarText": _Main.azChangeSnackbarText
-        });
 }
 
 // AZ Tabs
 function AZTabs(Options)
 {
-    var _Main = this;
-    var _Defaults =
+    if (this instanceof AZTabs === true)
     {
-        azTabsId: "",
-        azTabsHeightStyle: "content",
-        azTabsOpenEvent: "click",
-        azTabsIndex: 0
-    };
-    _Main.Options = $.extend({}, _Defaults, Options || {});
-
-    if (_Main.Options.azTabsId != "")
-    {
-        _Main.$Tabs = $("#" + _Main.Options.azTabsId);
-        _Main.$TabsCard = _Main.$Tabs.children(".az-tabs-card");
-        _Main.$Article = _Main.$TabsCard.children("article");
-
-        _Main.MaxArticleHeight = 0;
-        _Main.azArticleHeight = function ()
+        var _Main = this;
+        var _Defaults =
         {
+            azTabsId: "",
+            azTabsHeightStyle: "content",
+            azTabsOpenEvent: "click",
+            azTabsIndex: 0
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
+
+        if (_Main.Options.azTabsId != "")
+        {
+            _Main.$Tabs = $("#" + _Main.Options.azTabsId);
+            _Main.$TabsCard = _Main.$Tabs.children(".az-tabs-card");
+            _Main.$Article = _Main.$TabsCard.children("article");
+
             _Main.MaxArticleHeight = 0;
-            _Main.$Article.css({ height: "inherit" });
-            _Main.$Article.each(function ()
+            _Main.azArticleHeight = function ()
             {
-                _Main.MaxArticleHeight = Math.max(_Main.MaxArticleHeight, $(this).height());
-            });
-            if (_Main.MaxArticleHeight > 0)
-            {
-                _Main.$Article.height(_Main.MaxArticleHeight);
+                _Main.MaxArticleHeight = 0;
+                _Main.$Article.css({ height: "inherit" });
+                _Main.$Article.each(function ()
+                {
+                    _Main.MaxArticleHeight = Math.max(_Main.MaxArticleHeight, $(this).height());
+                });
+                if (_Main.MaxArticleHeight > 0)
+                {
+                    _Main.$Article.height(_Main.MaxArticleHeight);
+                }
             }
-        }
 
-        _Main.azSelectTabs = function (SelectedIndex)
-        {
-            azExecTabs(_Main.$Tabs.children("ul").children("li").eq(SelectedIndex));
-        }
+            _Main.azSelectTabs = function (SelectedIndex)
+            {
+                azExecTabs(_Main.$Tabs.children("ul").children("li").eq(SelectedIndex));
+            }
 
-        _Main.azChangeText = function (SelectedIndex, SelectedText)
-        {
-            _Main.$TabsCard.children("article").eq(SelectedIndex).html(SelectedText);
-        }
+            _Main.azChangeText = function (SelectedIndex, SelectedText)
+            {
+                _Main.$TabsCard.children("article").eq(SelectedIndex).html(SelectedText);
+            }
 
-        _Main.azToggleVertical = function ()
-        {
-            _Main.$Tabs.toggleClass("az-tabs-vertical");
-        }
+            _Main.azToggleVertical = function ()
+            {
+                _Main.$Tabs.toggleClass("az-tabs-vertical");
+            }
 
-        _Main.$Tabs.off().on(_Main.Options.azTabsOpenEvent, " > ul > li", function (e)
-        {
-            azExecTabs($(this));
-            var _Element = e.target || e.srcElement;
-            $.publish("functionlib/azTabs",
-                {
-                    azTabsId: _Main.Options.azTabsId,
-                    azTabsJQElement: $(_Element)
-                });
-        });
+            _Main.$Tabs.off().on(_Main.Options.azTabsOpenEvent, " > ul > li", function (e)
+            {
+                azExecTabs($(this));
+                var _Element = e.target || e.srcElement;
+                $.publish("functionlib/azTabs",
+                    {
+                        azTabsId: _Main.Options.azTabsId,
+                        azTabsJQElement: $(_Element)
+                    });
+            });
 
-        if (window.innerWidth < 576)
-        {
-            _Main.$Tabs.removeClass("az-tabs-vertical");
-        }
+            if (window.innerWidth < 576)
+            {
+                _Main.$Tabs.removeClass("az-tabs-vertical");
+            }
 
-        _Main.azTabsDeactivated = "";
-        function azExecTabs($SelectedTab)
-        {
-            var _MenuIndex = $($SelectedTab).index();
-            _Main.$Tabs.children("ul").children("li").removeAttr("class");
-            _Main.$Tabs.children("ul").children("li").eq(_MenuIndex).addClass("az-tabs-tab-active");
-            _Main.$TabsCard.removeClass("az-tabs-card-active");
-            _Main.$TabsCard.eq(_MenuIndex).addClass("az-tabs-card-active");
-            _Main.$Article.removeAttr("class");
-            _Main.$TabsCard.eq(_MenuIndex).children("article").addClass("az-tabs-article-active");
-            $.publish("functionlib/azTabsActivate",
-                {
-                    azTabsId: _Main.Options.azTabsId,
-                    azTabsActivated: _MenuIndex,
-                    azTabsDeactivated: _Main.azTabsDeactivated
-                });
-            _Main.azTabsDeactivated = _MenuIndex;
-        }
+            _Main.azTabsDeactivated = "";
+            function azExecTabs($SelectedTab)
+            {
+                var _MenuIndex = $($SelectedTab).index();
+                _Main.$Tabs.children("ul").children("li").removeAttr("class");
+                _Main.$Tabs.children("ul").children("li").eq(_MenuIndex).addClass("az-tabs-tab-active");
+                _Main.$TabsCard.removeClass("az-tabs-card-active");
+                _Main.$TabsCard.eq(_MenuIndex).addClass("az-tabs-card-active");
+                _Main.$Article.removeAttr("class");
+                _Main.$TabsCard.eq(_MenuIndex).children("article").addClass("az-tabs-article-active");
+                $.publish("functionlib/azTabsActivate",
+                    {
+                        azTabsId: _Main.Options.azTabsId,
+                        azTabsActivated: _MenuIndex,
+                        azTabsDeactivated: _Main.azTabsDeactivated
+                    });
+                _Main.azTabsDeactivated = _MenuIndex;
+            }
 
-        if (_Main.Options.azTabsHeightStyle == "auto")
-        {
-            _Main.azArticleHeight();
-            $(window).resize(function ()
+            if (_Main.Options.azTabsHeightStyle == "auto")
             {
                 _Main.azArticleHeight();
-            });
+                $(window).resize(function ()
+                {
+                    _Main.azArticleHeight();
+                });
+            }
+            _Main.azSelectTabs(_Main.Options.azTabsIndex);
         }
-        _Main.azSelectTabs(_Main.Options.azTabsIndex);
+        return (
+            {
+                "SelectTab": _Main.azSelectTabs,
+                "ChangeText": _Main.azChangeText,
+                "ToggleVertical": _Main.azToggleVertical
+            });
     }
-    return (
-        {
-            "SelectTab": _Main.azSelectTabs,
-            "ChangeText": _Main.azChangeText,
-            "ToggleVertical": _Main.azToggleVertical
-        });
 }
 
 function AZWindow(Options)
@@ -2141,84 +2154,87 @@ function AZWindowButton(Options)
             _HTML += '</div>';
         }
         return _HTML;
-    }   
+    }
 }
 
 function AZFullWindow(Options)
 {
-    var _Main = this;
-    var _Defaults =
+    if (this instanceof AZFullWindow === true)
     {
-        azFullWindowText: "",
-        azFullWindowPosition: "bottom",
-        azFullWindowFadeIn: 400,
-        azFullWindowFadeOut: 400,
-        azFullWindowBackgroundColor: "#FFFFFF",
-        azFullWindowColor: "#000000",
-        azFullWindowBeforeOpen: function () { },
-        azFullWindowAfterOpen: function () { },
-        azFullWindowAfterClose: function () { }
-    };
-    _Main.Options = $.extend({}, _Defaults, Options || {});
-
-    if ($("#az-full-window").length === 0)
-    {
-        $.subscribeonce("functionlib/azFullWindowBeforeOpen", function ()
+        var _Main = this;
+        var _Defaults =
         {
-            ModalDialogScrollTop = 0;
-            _Main.$Body = $("body");
-            _Main.$Window = $("<div></div>").attr("id", "az-full-window").css({ "background-color": _Main.Options.azFullWindowBackgroundColor + " !important", "color": _Main.Options.azFullWindowColor + " !important" });
-            _Main.$Close = $("<div>&times;</div>").attr("id", "az-full-window-close");
+            azFullWindowText: "",
+            azFullWindowPosition: "bottom",
+            azFullWindowFadeIn: 400,
+            azFullWindowFadeOut: 400,
+            azFullWindowBackgroundColor: "#FFFFFF",
+            azFullWindowColor: "#000000",
+            azFullWindowBeforeOpen: function () { },
+            azFullWindowAfterOpen: function () { },
+            azFullWindowAfterClose: function () { }
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
 
-            _Main.AnimateOpenOptions = {};
-            _Main.AnimateCloseOptions = {};
-            if (_Main.Options.azFullWindowPosition == "top")
-            {
-                _Main.AnimateOpenOptions = { "height": "100%", "opacity": 1 };
-                _Main.AnimateCloseOptions = { "height": 0, "opacity": 0 };
-                _Main.$Window.css({ "top": 0 });
-            }
-            else if (_Main.Options.azFullWindowPosition == "bottom")
-            {
-                _Main.AnimateOpenOptions = { "height": "100%", "opacity": 1 };
-                _Main.AnimateCloseOptions = { "height": 0, "opacity": 0 };
-                _Main.$Window.css({ "bottom": 0 });
-            }
-
-            _Main.$Window.html(_Main.Options.azFullWindowText);
-            _Main.$Window.append(_Main.$Close);
-            _Main.$Body.append(_Main.$Window);
-
-            _Main.$Window.animate(_Main.AnimateOpenOptions, _Main.Options.azFullWindowFadeIn, function ()
-            {
-                ModalDialogScrollTop = $(window).scrollTop();
-                _Main.$Body.addClass("az-no-parent-scroll");
-            });
-            AZCheckAsyncAndPublish(_Main.Options.azFullWindowAfterOpen, "functionlib/azFullWindowAfterOpen");
-        });
-        AZCheckAsyncAndPublish(_Main.Options.azFullWindowBeforeOpen, "functionlib/azFullWindowBeforeOpen");
-
-        _Main.$Close.on('click', function ()
+        if ($("#az-full-window").length === 0)
         {
-            $.subscribeonce("functionlib/azFullWindowAfterClose", function ()
+            $.subscribeonce("functionlib/azFullWindowBeforeOpen", function ()
             {
-                _Main.$Body.removeClass("az-no-parent-scroll");
-                if (_Main.$Body.hasClass("") === true)
+                ModalDialogScrollTop = 0;
+                _Main.$Body = $("body");
+                _Main.$Window = $("<div></div>").attr("id", "az-full-window").css({ "background-color": _Main.Options.azFullWindowBackgroundColor + " !important", "color": _Main.Options.azFullWindowColor + " !important" });
+                _Main.$Close = $("<div>&times;</div>").attr("id", "az-full-window-close");
+
+                _Main.AnimateOpenOptions = {};
+                _Main.AnimateCloseOptions = {};
+                if (_Main.Options.azFullWindowPosition == "top")
                 {
-                    _Main.$Body.removeAttr("class");
+                    _Main.AnimateOpenOptions = { "height": "100%", "opacity": 1 };
+                    _Main.AnimateCloseOptions = { "height": 0, "opacity": 0 };
+                    _Main.$Window.css({ "top": 0 });
                 }
-                if (ModalDialogScrollTop > 0)
+                else if (_Main.Options.azFullWindowPosition == "bottom")
                 {
-                    $(window).scrollTop(ModalDialogScrollTop);
+                    _Main.AnimateOpenOptions = { "height": "100%", "opacity": 1 };
+                    _Main.AnimateCloseOptions = { "height": 0, "opacity": 0 };
+                    _Main.$Window.css({ "bottom": 0 });
                 }
-                _Main.$Window.animate(_Main.AnimateCloseOptions, _Main.Options.azFullWindowFadeOut, function ()
+
+                _Main.$Window.html(_Main.Options.azFullWindowText);
+                _Main.$Window.append(_Main.$Close);
+                _Main.$Body.append(_Main.$Window);
+
+                _Main.$Window.animate(_Main.AnimateOpenOptions, _Main.Options.azFullWindowFadeIn, function ()
                 {
-                    $(this).remove();
-                    $.publish("functionlib/azFullWindowClosed");
+                    ModalDialogScrollTop = $(window).scrollTop();
+                    _Main.$Body.addClass("az-no-parent-scroll");
                 });
+                AZCheckAsyncAndPublish(_Main.Options.azFullWindowAfterOpen, "functionlib/azFullWindowAfterOpen");
             });
-            AZCheckAsyncAndPublish(_Main.Options.azFullWindowAfterClose, "functionlib/azFullWindowAfterClose");
-        });
+            AZCheckAsyncAndPublish(_Main.Options.azFullWindowBeforeOpen, "functionlib/azFullWindowBeforeOpen");
+
+            _Main.$Close.on('click', function ()
+            {
+                $.subscribeonce("functionlib/azFullWindowAfterClose", function ()
+                {
+                    _Main.$Body.removeClass("az-no-parent-scroll");
+                    if (_Main.$Body.hasClass("") === true)
+                    {
+                        _Main.$Body.removeAttr("class");
+                    }
+                    if (ModalDialogScrollTop > 0)
+                    {
+                        $(window).scrollTop(ModalDialogScrollTop);
+                    }
+                    _Main.$Window.animate(_Main.AnimateCloseOptions, _Main.Options.azFullWindowFadeOut, function ()
+                    {
+                        $(this).remove();
+                        $.publish("functionlib/azFullWindowClosed");
+                    });
+                });
+                AZCheckAsyncAndPublish(_Main.Options.azFullWindowAfterClose, "functionlib/azFullWindowAfterClose");
+            });
+        }
     }
 }
 
@@ -2261,207 +2277,213 @@ function setParallaxImages(ParallaxImages)
 // AZ SlideIn
 function AZSlideIn(Options)
 {
-    var _Main = this;
-    var _Defaults =
+    if (this instanceof AZSlideIn === true)
     {
-        azSlideInId: "",
-        azSlideInText: "",
-        azSlideInTop: 30,
-        azSlideInWidth: 300,
-        azSlideInHeight: 0,
-        azSlideInPosition: "right",
-        azSlideInTabText: "",
-        azSlideInTabIcon: "fas fa-bars",
-        azSlideInTabBackgroundColor: "#009688",
-        azSlideInTabColor: "#FFFFFF",
-        azSlideInArticleBackgroundColor: "#FFFFFF",
-        azSlideInArticleColor: "#000000"
-    };
-    _Main.Options = $.extend({}, _Defaults, Options || {});
-
-    if (_Main.Options.azSlideInId != "" && $("#" + _Main.Options.azSlideInId).length == 0)
-    {
-        _Main.$Body = $("body");
-        _Main.$SlideIn = $("<div></div>").attr("id", _Main.Options.azSlideInId).addClass("az-slidein");
-        _Main.$SlideInTab = $("<div><div></div></div>").addClass("az-slidein-tab").css({ "background-color": _Main.Options.azSlideInTabBackgroundColor, "color": _Main.Options.azSlideInTabColor });
-        _Main.$SlideInCard = $("<div></div>").addClass("az-slidein-card");
-        _Main.$Article = $("<article></article>").html(_Main.Options.azSlideInText).css({ "background-color": _Main.Options.azSlideInArticleBackgroundColor, "color": _Main.Options.azSlideInArticleColor });
-        _Main.TextLength = _Main.Options.azSlideInTabText.length;
-
-        _Main.SlideInArticleOptions = {};
-        _Main.SlideInOptions = {};
-        _Main.SlideInTabOptions = {};
-        if (_Main.TextLength > 0)
+        var _Main = this;
+        var _Defaults =
         {
-            _Main.TextLength = (_Main.TextLength * 8);
-            _Main.SlideInTabOptions = { "height": _Main.TextLength };
-            _Main.$SlideInTab.children("div").text(_Main.Options.azSlideInTabText)
+            azSlideInId: "",
+            azSlideInText: "",
+            azSlideInTop: 30,
+            azSlideInWidth: 300,
+            azSlideInHeight: 0,
+            azSlideInPosition: "right",
+            azSlideInTabText: "",
+            azSlideInTabIcon: "fas fa-bars",
+            azSlideInTabBackgroundColor: "#009688",
+            azSlideInTabColor: "#FFFFFF",
+            azSlideInArticleBackgroundColor: "#FFFFFF",
+            azSlideInArticleColor: "#000000"
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
+
+        if (_Main.Options.azSlideInId != "" && $("#" + _Main.Options.azSlideInId).length == 0)
+        {
+            _Main.$Body = $("body");
+            _Main.$SlideIn = $("<div></div>").attr("id", _Main.Options.azSlideInId).addClass("az-slidein");
+            _Main.$SlideInTab = $("<div><div></div></div>").addClass("az-slidein-tab").css({ "background-color": _Main.Options.azSlideInTabBackgroundColor, "color": _Main.Options.azSlideInTabColor });
+            _Main.$SlideInCard = $("<div></div>").addClass("az-slidein-card");
+            _Main.$Article = $("<article></article>").html(_Main.Options.azSlideInText).css({ "background-color": _Main.Options.azSlideInArticleBackgroundColor, "color": _Main.Options.azSlideInArticleColor });
+            _Main.TextLength = _Main.Options.azSlideInTabText.length;
+
+            _Main.SlideInArticleOptions = {};
+            _Main.SlideInOptions = {};
+            _Main.SlideInTabOptions = {};
+            if (_Main.TextLength > 0)
+            {
+                _Main.TextLength = (_Main.TextLength * 8);
+                _Main.SlideInTabOptions = { "height": _Main.TextLength };
+                _Main.$SlideInTab.children("div").text(_Main.Options.azSlideInTabText)
+                if (_Main.Options.azSlideInPosition == "right")
+                {
+                    _Main.$SlideInTab.children("div").css({ "width": _Main.TextLength, "height": _Main.TextLength, "right": - 11 });
+                }
+                else if (_Main.Options.azSlideInPosition == "left")
+                {
+                    _Main.$SlideInTab.children("div").css({ "width": _Main.TextLength, "height": _Main.TextLength, "left": - (_Main.TextLength - 30) });
+                }
+            }
+            else
+            {
+                _Main.TextLength = 0;
+                _Main.SlideInTabOptions = { "height": 100 };
+                if (_Main.Options.azSlideInPosition == "right")
+                {
+                    _Main.$SlideInTab.children("div").css({ "width": 100, "height": 100, "right": - 11 }).append('<i class="' + _Main.Options.azSlideInTabIcon + ' fa-rotate-90"></i>');
+                }
+                else if (_Main.Options.azSlideInPosition == "left")
+                {
+                    _Main.$SlideInTab.children("div").css({ "width": 100, "height": 100, "left": - 70 }).append('<i class="' + _Main.Options.azSlideInTabIcon + ' fa-rotate-90"></i>');
+                }
+            }
+            if (_Main.Options.azSlideInWidth > (window.innerWidth - 40))
+            {
+                _Main.Options.azSlideInWidth = (window.innerWidth - 40);
+            }
             if (_Main.Options.azSlideInPosition == "right")
             {
-                _Main.$SlideInTab.children("div").css({ "width": _Main.TextLength, "height": _Main.TextLength, "right": - 11 });
+                _Main.SlideInTabOptions = $.extend(_Main.SlideInTabOptions, { "top": 0, "left": - 40, "border-top-left-radius": 15, "border-bottom-left-radius": 15 });
+                _Main.SlideInOptions = { "top": _Main.Options.azSlideInTop, "width": _Main.Options.azSlideInWidth, "right": - _Main.Options.azSlideInWidth };
             }
             else if (_Main.Options.azSlideInPosition == "left")
             {
-                _Main.$SlideInTab.children("div").css({ "width": _Main.TextLength, "height": _Main.TextLength, "left": - (_Main.TextLength - 30) });
+                _Main.SlideInTabOptions = $.extend(_Main.SlideInTabOptions, { "top": 0, "left": _Main.Options.azSlideInWidth, "border-top-right-radius": 15, "border-bottom-right-radius": 15 });
+                _Main.SlideInOptions = { "top": _Main.Options.azSlideInTop, "width": _Main.Options.azSlideInWidth, "left": - _Main.Options.azSlideInWidth };
             }
-        }
-        else
-        {
-            _Main.TextLength = 0;
-            _Main.SlideInTabOptions = { "height": 100 };
-            if (_Main.Options.azSlideInPosition == "right")
+            if (_Main.Options.azSlideInHeight > _Main.TextLength)
             {
-                _Main.$SlideInTab.children("div").css({ "width": 100, "height": 100, "right": - 11 }).append('<i class="' + _Main.Options.azSlideInTabIcon + ' fa-rotate-90"></i>');
+                _Main.SlideInArticleOptions = { "height": (_Main.Options.azSlideInHeight - 14) };
             }
-            else if (_Main.Options.azSlideInPosition == "left")
+            else
             {
-                _Main.$SlideInTab.children("div").css({ "width": 100, "height": 100, "left": - 70 }).append('<i class="' + _Main.Options.azSlideInTabIcon + ' fa-rotate-90"></i>');
+                _Main.SlideInArticleOptions = { "min-height": _Main.TextLength };
             }
-        }
-        if (_Main.Options.azSlideInWidth > (window.innerWidth - 40))
-        {
-            _Main.Options.azSlideInWidth = (window.innerWidth - 40);
-        }
-        if (_Main.Options.azSlideInPosition == "right")
-        {
-            _Main.SlideInTabOptions = $.extend(_Main.SlideInTabOptions, { "top": 0, "left": - 40, "border-top-left-radius": 15, "border-bottom-left-radius": 15 });
-            _Main.SlideInOptions = { "top": _Main.Options.azSlideInTop, "width": _Main.Options.azSlideInWidth, "right": - _Main.Options.azSlideInWidth };
-        }
-        else if (_Main.Options.azSlideInPosition == "left")
-        {
-            _Main.SlideInTabOptions = $.extend(_Main.SlideInTabOptions, { "top": 0, "left": _Main.Options.azSlideInWidth, "border-top-right-radius": 15, "border-bottom-right-radius": 15 });
-            _Main.SlideInOptions = { "top": _Main.Options.azSlideInTop, "width": _Main.Options.azSlideInWidth, "left": - _Main.Options.azSlideInWidth };
-        }
-        if (_Main.Options.azSlideInHeight > _Main.TextLength)
-        {
-            _Main.SlideInArticleOptions = { "height": (_Main.Options.azSlideInHeight - 14) };
-        }
-        else
-        {
-            _Main.SlideInArticleOptions = { "min-height": _Main.TextLength };
-        }
 
-        _Main.azChangeText = function (SelectedText)
-        {
-            _Main.$Article.html(SelectedText);
-        }
-
-        _Main.$SlideInTab.css(_Main.SlideInTabOptions);
-        _Main.$Article.css(_Main.SlideInArticleOptions);
-        _Main.$SlideInCard.append(_Main.$Article);
-        _Main.$SlideIn.append(_Main.$SlideInTab).append(_Main.$SlideInCard);
-        _Main.$Body.append(_Main.$SlideIn);
-        $.publish("functionlib/azSlideInAfterInit");
-
-        window.setTimeout(function ()
-        {
-            _Main.$SlideIn.css(_Main.SlideInOptions).addClass("transition-" + _Main.Options.azSlideInPosition).show();
-        }, 100);
-
-        _Main.$SlideInTab.on('click', function ()
-        {
-            if (_Main.Options.azSlideInPosition == "right")
+            _Main.azChangeText = function (SelectedText)
             {
-                _Main.$SlideIn.toggleClass('az-slidein-active display-right');
+                _Main.$Article.html(SelectedText);
             }
-            else if (_Main.Options.azSlideInPosition == "left")
+
+            _Main.$SlideInTab.css(_Main.SlideInTabOptions);
+            _Main.$Article.css(_Main.SlideInArticleOptions);
+            _Main.$SlideInCard.append(_Main.$Article);
+            _Main.$SlideIn.append(_Main.$SlideInTab).append(_Main.$SlideInCard);
+            _Main.$Body.append(_Main.$SlideIn);
+            $.publish("functionlib/azSlideInAfterInit");
+
+            window.setTimeout(function ()
             {
-                _Main.$SlideIn.toggleClass('az-slidein-active display-left');
-            }
-        });
+                _Main.$SlideIn.css(_Main.SlideInOptions).addClass("transition-" + _Main.Options.azSlideInPosition).show();
+            }, 100);
+
+            _Main.$SlideInTab.on('click', function ()
+            {
+                if (_Main.Options.azSlideInPosition == "right")
+                {
+                    _Main.$SlideIn.toggleClass('az-slidein-active display-right');
+                }
+                else if (_Main.Options.azSlideInPosition == "left")
+                {
+                    _Main.$SlideIn.toggleClass('az-slidein-active display-left');
+                }
+            });
+        }
+        return (
+            {
+                "ChangeText": _Main.azChangeText,
+                "SlideInTab": _Main.$SlideInTab,
+                "SlideIn": _Main.$SlideIn,
+                "SlideOptions": _Main.Options
+            });
     }
-    return (
-        {
-            "ChangeText": _Main.azChangeText,
-            "SlideInTab": _Main.$SlideInTab,
-            "SlideIn": _Main.$SlideIn,
-            "SlideOptions": _Main.Options
-        });
 }
 
 // AZ Slideshow
 function AZSlideshow(Options)
 {
-    var _Main = this;
-    var _Defaults =
+    if (this instanceof AZSlideshow === true)
     {
-        azSlideshowId: "",
-        azSlideshowArrows: false,
-        azSlideshowTimer: 3000,
-        azSlideshowFadeIn: 1000,
-        azSlideshowFadeOut: 1000
-    };
-    _Main.Options = $.extend({}, _Defaults, Options || {});
-
-    if (_Main.Options.azSlideshowId != "")
-    {
-        _Main.$Slideshow = $("#" + _Main.Options.azSlideshowId);
-        _Main.$Slides = $(".az-slides", _Main.$Slideshow);
-        _Main.SlideShowTimer = 0;
-        _Main.SlideIndex = 0;
-
-        if (_Main.Options.azSlideshowArrows)
+        var _Main = this;
+        var _Defaults =
         {
-            _Main.$Slideshow.append('<div class="az-arrows az-arrow-left az-display-left" onclick="plusDivs(-1)">&#10094;</div><div class="az-arrows az-arrow-right az-display-right" onclick="plusDivs(1)">&#10095;</div>');
-            $(".az-arrows", _Main.$Slideshow).on("mouseenter", function ()
+            azSlideshowId: "",
+            azSlideshowArrows: false,
+            azSlideshowTimer: 3000,
+            azSlideshowFadeIn: 1000,
+            azSlideshowFadeOut: 1000
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
+
+        if (_Main.Options.azSlideshowId != "")
+        {
+            _Main.$Slideshow = $("#" + _Main.Options.azSlideshowId);
+            _Main.$Slides = $(".az-slides", _Main.$Slideshow);
+            _Main.SlideShow;
+            _Main.SlideIndex = 0;
+
+            if (_Main.Options.azSlideshowArrows)
+            {
+                _Main.$Slideshow.append('<div class="az-arrows az-arrow-left az-display-left" onclick="plusDivs(-1)">&#10094;</div><div class="az-arrows az-arrow-right az-display-right" onclick="plusDivs(1)">&#10095;</div>');
+                _Main.$Slideshow.off().on("mouseenter", "slide, .az-arrows", function ()
+                {
+                    $.unsubscribe("runSlides");
+                    window.clearTimeout(_Main.SlideShow);
+
+                }).on("mouseleave", function ()
+                {
+                    $.subscribe("runSlides", function (e, data)
+                    {
+                        _Main.SlideShow = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
+                    });
+                    _Main.SlideShow = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
+                })
+            }
+
+            $.subscribe("functionlib/azWindowResize", function (e, data)
+            {
+                _Main.$Slideshow.height($("slide:first", _Main.$Slides).height());
+            });
+
+            $.subscribe("runSlides", function (e, data)
+            {
+                _Main.SlideShow = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
+            });
+
+            _Main.$Slideshow.height($("slide:first", _Main.$Slides).height());
+            $("slide:gt(0)", _Main.$Slides).hide();
+            _Main.SlideShow = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
+
+            function runSlides()
+            {
+                $("slide", _Main.$Slides).eq(_Main.SlideIndex).fadeOut(_Main.Options.azSlideshowFadeOut);
+                _Main.SlideIndex = (_Main.SlideIndex != $("slide", _Main.$Slides).length - 1) ? _Main.SlideIndex + 1 : 0;
+                $("slide", _Main.$Slides).eq(_Main.SlideIndex).fadeIn(_Main.Options.azSlideshowFadeIn, function ()
+                {
+                    $.publish("runSlides");
+                });
+            }
+
+            plusDivs = function (n)
             {
                 $.unsubscribe("runSlides");
-                window.clearTimeout(_Main.SlideShowTimer);
-
-            }).on("mouseleave", function ()
-            {
-                $.subscribe("runSlides", function (e, data)
-                {
-                    _Main.SlideShowTimer = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
-                });
-                window.setTimeout(runSlides, _Main.SlideShowTimer);
-            })
-        }
-
-        $.subscribe("functionlib/azWindowResize", function (e, data)
-        {
-            _Main.$Slideshow.height($("slide:first", _Main.$Slides).height());
-        });
-
-        $.subscribe("runSlides", function (e, data)
-        {
-            _Main.SlideShowTimer = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
-        });
-
-        _Main.$Slideshow.height($("slide:first", _Main.$Slides).height());
-        $("slide:gt(0)", _Main.$Slides).hide();
-        window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
-
-        function runSlides()
-        {
-            $("slide", _Main.$Slides).eq(_Main.SlideIndex).fadeOut(_Main.Options.azSlideshowFadeOut);
-            _Main.SlideIndex = (_Main.SlideIndex != $("slide", _Main.$Slides).length - 1) ? _Main.SlideIndex + 1 : 0;
-            $("slide", _Main.$Slides).eq(_Main.SlideIndex).fadeIn(_Main.Options.azSlideshowFadeIn, function ()
-            {
-                $.publish("runSlides");
-            });
-        }
-
-        plusDivs = function (n)
-        {
-            $.unsubscribe("runSlides");
-            window.clearTimeout(_Main.SlideShowTimer);
-            _Main.SlideIndex += n;
-            showDivs();
-        }
-
-        showDivs = function ()
-        {
-            if (_Main.SlideIndex > $("slide", _Main.$Slides).length - 1)
-            {
-                _Main.SlideIndex = 0;
+                window.clearTimeout(_Main.SlideShow);
+                _Main.SlideIndex += n;
+                showDivs();
             }
-            if (_Main.SlideIndex < 0)
+
+            showDivs = function ()
             {
-                _Main.SlideIndex = $("slide", _Main.$Slides).length - 1;
-            };
-            $("slide", _Main.$Slides).hide();
-            $("slide", _Main.$Slides).eq(_Main.SlideIndex).show();
+                if (_Main.SlideIndex > $("slide", _Main.$Slides).length - 1)
+                {
+                    _Main.SlideIndex = 0;
+                }
+                if (_Main.SlideIndex < 0)
+                {
+                    _Main.SlideIndex = $("slide", _Main.$Slides).length - 1;
+                };
+                $("slide", _Main.$Slides).fadeOut(100);
+                $("slide", _Main.$Slides).eq(_Main.SlideIndex).fadeIn(100);
+            }
         }
     }
 }
@@ -2469,65 +2491,116 @@ function AZSlideshow(Options)
 // AZ Range Multi
 function AZRangeMulti(Options)
 {
-    var _Main = this;
-    var _Defaults =
+    if (this instanceof AZRangeMulti === true)
     {
-        azRangeMultiId: "",
-        azRangeMultiBackgroundColor: "#CCCCCC",
-        azRangeMultiHandlerLeftBackgroundColor: "#0078D7",
-        azRangeMultiHandlerRightBackgroundColor: "#259EFF",
-        azRangeMultiMin: 0,
-        azRangeMultiMax: 100,
-        azRangeMultiStep: 1,
-        azRangeMultiValues: [0, 50]
-    };
-    _Main.Options = $.extend({}, _Defaults, Options || {});
+        var _Main = this;
+        var _Defaults =
+        {
+            azRangeMultiId: "",
+            azRangeMultiBackgroundColor: "#CCCCCC",
+            azRangeMultiHandlerLeftBackgroundColor: "#0078D7",
+            azRangeMultiHandlerRightBackgroundColor: "#259EFF",
+            azRangeMultiMin: 0,
+            azRangeMultiMax: 100,
+            azRangeMultiStep: 1,
+            azRangeMultiValues: [0, 50]
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
 
-    if (_Main.Options.azRangeMultiId != "")
+        if (_Main.Options.azRangeMultiId != "")
+        {
+            _Main.$MultiRange = $("#" + _Main.Options.azRangeMultiId);
+            _Main.$MultiRange.slider(
+                {
+                    range: true,
+                    min: _Main.Options.azRangeMultiMin,
+                    max: _Main.Options.azRangeMultiMax,
+                    step: _Main.Options.azRangeMultiStep,
+                    values: _Main.Options.azRangeMultiValues,
+                    create: function (event, ui)
+                    {
+                        $.publish("functionlib/azRangeMultiCreate",
+                            {
+                                azRangeMultiId: _Main.Options.azRangeMultiId,
+                                azRangeMultiValueLeft: _Main.Options.azRangeMultiValues[0],
+                                azRangeMultiValueRight: _Main.Options.azRangeMultiValues[1],
+                                azRangeMultiJQElement: _Main.$MultiRange
+                            });
+                    },
+                    slide: function (event, ui)
+                    {
+                        $.publish("functionlib/azRangeMultiSlide",
+                            {
+                                azRangeMultiId: _Main.Options.azRangeMultiId,
+                                azRangeMultiValueLeft: ui.values[0],
+                                azRangeMultiValueRight: ui.values[1],
+                                azRangeMultiJQElement: _Main.$MultiRange
+                            });
+                    },
+                    stop: function (event, ui)
+                    {
+                        $.publish("functionlib/azRangeMultiStop",
+                            {
+                                azRangeMultiId: _Main.Options.azRangeMultiId,
+                                azRangeMultiValueLeft: ui.values[0],
+                                azRangeMultiValueRight: ui.values[1],
+                                azRangeMultiJQElement: _Main.$MultiRange
+                            });
+                    }
+                });
+            _Main.$MultiRange.children(".ui-slider-handle:nth-child(2)").css({ "background-color": _Main.Options.azRangeMultiHandlerLeftBackgroundColor + " !important" });
+            _Main.$MultiRange.children(".ui-slider-handle:nth-child(3)").css({ "background-color": _Main.Options.azRangeMultiHandlerRightBackgroundColor + " !important" });
+            _Main.$MultiRange.css({ "background-color": _Main.Options.azRangeMultiBackgroundColor + " !important" });
+            _Main.$MultiRange.children(".ui-widget-header").css({ "background-color": _Main.Options.azRangeMultiBackgroundColor + " !important" });
+        }
+    }
+}
+
+// AZ Sort JSON
+function AZSortJSONArray(arr, prop, order)
+{
+    if (arr == null || Array.isArray(arr) === false || prop == null || prop == "")
     {
-        _Main.$MultiRange = $("#" + _Main.Options.azRangeMultiId);
-        _Main.$MultiRange.slider(
+        return [];
+    }
+    else
+    {
+        _Order = "asc";
+        if (order != null && order != "" && order.length > 2)
+        {
+            _Order = order.toLowerCase();
+        }
+
+        if (_Order === "asc")
+        {
+            return arr.sort(Compare(prop, 1));
+        }
+        else if (_Order == "desc")
+        {
+            return arr.sort(Compare(prop, 0));
+        }
+
+        function Compare(Attr, Value)
+        {
+            if (Value === 1)
             {
-                range: true,
-                min: _Main.Options.azRangeMultiMin,
-                max: _Main.Options.azRangeMultiMax,
-                step: _Main.Options.azRangeMultiStep,
-                values: _Main.Options.azRangeMultiValues,
-                create: function (event, ui)
+                return function (a, b)
                 {
-                    $.publish("functionlib/azRangeMultiCreate",
-                        {
-                            azRangeMultiId: _Main.Options.azRangeMultiId,
-                            azRangeMultiValueLeft: _Main.Options.azRangeMultiValues[0],
-                            azRangeMultiValueRight: _Main.Options.azRangeMultiValues[1],
-                            azRangeMultiJQElement: _Main.$MultiRange
-                        });
-                },
-                slide: function (event, ui)
-                {
-                    $.publish("functionlib/azRangeMultiSlide",
-                        {
-                            azRangeMultiId: _Main.Options.azRangeMultiId,
-                            azRangeMultiValueLeft: ui.values[0],
-                            azRangeMultiValueRight: ui.values[1],
-                            azRangeMultiJQElement: _Main.$MultiRange
-                        });
-                },
-                stop: function (event, ui)
-                {
-                    $.publish("functionlib/azRangeMultiStop",
-                        {
-                            azRangeMultiId: _Main.Options.azRangeMultiId,
-                            azRangeMultiValueLeft: ui.values[0],
-                            azRangeMultiValueRight: ui.values[1],
-                            azRangeMultiJQElement: _Main.$MultiRange
-                        });
+                    var x = parseInt((a[Attr] === null) ? "" : "" + a[Attr]);
+                    var y = parseInt((b[Attr] === null) ? "" : "" + b[Attr]);
+                    return x < y ? -1 : (x > y ? 1 : 0);
                 }
-            });
-        _Main.$MultiRange.children(".ui-slider-handle:nth-child(2)").css({ "background-color": _Main.Options.azRangeMultiHandlerLeftBackgroundColor + " !important" });
-        _Main.$MultiRange.children(".ui-slider-handle:nth-child(3)").css({ "background-color": _Main.Options.azRangeMultiHandlerRightBackgroundColor + " !important" });
-        _Main.$MultiRange.css({ "background-color": _Main.Options.azRangeMultiBackgroundColor + " !important" });
-        _Main.$MultiRange.children(".ui-widget-header").css({ "background-color": _Main.Options.azRangeMultiBackgroundColor + " !important" });
+            }
+            else
+            {
+                return function (a, b)
+                {
+                    var x = parseInt((a[Attr] === null) ? "" : "" + a[Attr]);
+                    var y = parseInt((b[Attr] === null) ? "" : "" + b[Attr]);
+                    return x < y ? 1 : (x > y ? -1 : 0);
+                }
+            }
+        }
     }
 }
 

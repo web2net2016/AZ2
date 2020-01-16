@@ -139,7 +139,7 @@
     <None Include="lib\lang-val\default-lang.json" />
     <Content Include="lib-2.0.0\lib\functionlib - Copy.js" />
     <Content Include="lib-2.0.0\js\functionlib.js" />
-    <Content Include="lib-2.0.0\js\jquery.3.3.1.js" />
+    <Content Include="lib-2.0.0\js\jquery.3.4.1.js" />
     <Content Include="lib-2.0.0\js\jquery.matchHeight.js" />
     <Content Include="lib-2.0.0\js\moment.locales.js" />
     <Content Include="lib-2.0.0\js\numeral.js" />

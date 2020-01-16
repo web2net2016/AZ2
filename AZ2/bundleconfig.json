@@ -31,7 +31,7 @@
   {
     "outputFileName": "lib-2.0.0/js/az-2.0.0.js",
     "inputFiles": [
-      "lib-2.0.0/js/jquery.3.3.1.js",
+      "lib-2.0.0/js/jquery.3.4.1.js",
       "lib-2.0.0/js/jquery.matchHeight.js",
       "lib-2.0.0/js/moment.locales.js",
       "lib-2.0.0/jqueryui/jquery-ui.min.js",

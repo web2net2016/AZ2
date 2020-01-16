@@ -142,7 +142,7 @@
     .az-form-group .az-input ~ .az-input-icons i
     {
         position: relative;
-        z-index: 2;
+        z-index: 1;
         float: right;
         margin: -22px 9px 0 0;
     }

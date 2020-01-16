@@ -39,11 +39,7 @@
 
             $.subscribe("functionlib/azAccordionHeader", function (e, data)
             {
-                $("#azAccordionId").text(data.azAccordionId);
-                $("#azAccordionStatus").text(data.azAccordionStatus);
-                $("#azAccordionActivated").text(data.azAccordionActivated);
-                $("#azAccordionDeactivated").text(data.azAccordionDeactivated);
-                $("#azAccordionHeaderJQElement").text(data.azAccordionHeaderJQElement);
+                console.log("azAccordionId: " + data.azAccordionId + "\nazAccordionStatus: " + data.azAccordionStatus + "\nazAccordionActivated: " + data.azAccordionActivated + "\nazAccordionDeactivated: " + data.azAccordionDeactivated + "\nazAccordionHeaderJQElement: ", data.azAccordionHeaderJQElement)
             });
 
             azAccordion1 = new AZAccordion(
@@ -179,27 +175,6 @@
                     </div>
                 </div>
             </div>
-            <div class="az-row az-margin-t-14">
-                <div class="az-col xs-12 sm-6">
-                    <div class="az-form-group az-code">
-                        <span>azAccordionId: </span><span id="azAccordionId"></span>
-                        <br />
-                        <span>azAccordionStatus: </span><span id="azAccordionStatus"></span>
-                        <br />
-                        <span>azAccordionActivated: </span><span id="azAccordionActivated"></span>
-                        <br />
-                        <span>azAccordionDeactivated: </span><span id="azAccordionDeactivated"></span>
-                        <br />
-                        <span>azAccordionHeaderJQElement: </span><span id="azAccordionHeaderJQElement"></span>
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-6">
-                    <div class="az-form-group az-code">
-
-                    </div>
-                </div>
-            </div>
-
             <div class="az-row az-margin-t-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header">AZ Accordion</h1>
