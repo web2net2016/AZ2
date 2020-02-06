@@ -2204,7 +2204,6 @@ function AZAccordion(Options)
 {
     if (this instanceof AZAccordion === true)
     {
-
         var _Main = this;
         var _Defaults =
         {
@@ -2365,6 +2364,10 @@ function AZAccordion(Options)
                 "ChangeText": _Main.azChangeText
             });
     }
+    else
+    {
+        return new AZAccordion(Options);
+    }
 }
 
 // AZ Ajax
@@ -2407,6 +2410,10 @@ function AZAjax(Options)
         {
             return $.Deferred().resolve("");
         }
+    }
+    else
+    {
+        return new AZAjax(Options);
     }
 }
 
@@ -2736,6 +2743,10 @@ function AZModalDialog(Options)
             }
         }
     }
+    else
+    {
+        return new AZModalDialog(Options);
+    }
 }
 
 function AZCheckAsyncAndPublish(FunctionToRun, Publish)
@@ -2964,6 +2975,10 @@ function AZSnackbar(Options)
                 "ChangeSnackbarText": _Main.azChangeSnackbarText
             });
     }
+    else
+    {
+        return new AZSnackbar(Options);
+    }
 }
 
 // AZ Tabs
@@ -3068,6 +3083,10 @@ function AZTabs(Options)
                 "ChangeText": _Main.azChangeText,
                 "ToggleVertical": _Main.azToggleVertical
             });
+    }
+    else
+    {
+        return new AZTabs(Options);
     }
 }
 
@@ -3291,6 +3310,10 @@ function AZWindow(Options)
                 "ChangeWindowTitlebar": _Main.azChangeWindowTitlebar
             });
     }
+    else
+    {
+        return new AZWindow(Options);
+    }
 }
 
 function AZWindowButton(Options)
@@ -3418,6 +3441,10 @@ function AZFullWindow(Options)
                 AZCheckAsyncAndPublish(_Main.Options.azFullWindowAfterClose, "functionlib/azFullWindowAfterClose");
             });
         }
+    }
+    else
+    {
+        return new AZFullWindow(Options);
     }
 }
 
@@ -3579,6 +3606,10 @@ function AZSlideIn(Options)
                 "SlideOptions": _Main.Options
             });
     }
+    else
+    {
+        return new AZSlideIn(Options);
+    }
 }
 
 // AZ Slideshow
@@ -3669,6 +3700,10 @@ function AZSlideshow(Options)
             }
         }
     }
+    else
+    {
+        return new AZSlideshow(Options);
+    }
 }
 
 // AZ Range Multi
@@ -3736,6 +3771,10 @@ function AZRangeMulti(Options)
             _Main.$MultiRange.css({ "background-color": _Main.Options.azRangeMultiBackgroundColor + " !important" });
             _Main.$MultiRange.children(".ui-widget-header").css({ "background-color": _Main.Options.azRangeMultiBackgroundColor + " !important" });
         }
+    }
+    else
+    {
+        return new AZRangeMulti(Options);
     }
 }
 
