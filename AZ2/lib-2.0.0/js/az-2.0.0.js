@@ -2476,272 +2476,292 @@ function AZCircularBar(Options)
     }
 }
 
+function ExistsObj(SelectedList, SelectedKey)
+{
+    var _Found = false;
+    for (var i = 0; i < SelectedList.length; i++)
+    {
+        if (SelectedList[i] == SelectedKey)
+        {
+            _Found = true;
+            break;
+        }
+    }
+    return _Found;
+}
+
 // AZ Modal Dialog
+ListAZModalDialog = [];
 function AZModalDialog(Options)
 {
     if (this instanceof AZModalDialog === true)
     {
-        var _Main = this;
-        var _Defaults =
+        if (ExistsObj(ListAZModalDialog, this) === false)
         {
-            azModalDialogReturnVariable: "",
-            azModalDialogId: "",
-            azModalDialogTitle: "",
-            azModalDialogText: "",
-            azModalDialogiFrameURL: "",
-            azModalDialogWidth: 450,
-            azModalDialogHeight: 300,
-            azModalDialogNoParentScroll: false,
-            azModalDialogBackground: true,
-            azModalDialogModal: true,
-            azModalDialogTitlebar: true,
-            azModalDialogTitlebarClose: true,
-            azModalDialogResizable: false,
-            azModalDialogDraggable: true,
-            azModalDialogCloseOnEscape: true,
-            azModalDialogPosition: false,
-            azModalDialogPositionOf: {},
-            azModalDialogPositionMy: "left bottom-30",
-            azModalDialogPositionAt: "left top",
-            azModalDialogBackgroundColor: "#FFFFFF",
-            azModalDialogColor: "#000000",
-            azModalDialogTitlebarBackgroundColor: "#009688",
-            azModalDialogTitlebarColor: "#FFFFFF",
-            azModalDialogBeforeOpen: function () { },
-            azModalDialogAfterOpen: function () { },
-            azModalDialogAfterClose: function () { },
-            azModalDialogAfterCloseReload: false
-        };
-        _Main.Options = $.extend({}, _Defaults, Options || {});
+            ListAZModalDialog.push(this);
 
-        if (_Main.Options.azModalDialogReturnVariable !== "" && _Main.Options.azModalDialogId !== "" && $("#" + _Main.Options.azModalDialogId).length === 0)
-        {
-            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function ()
+            var _Main = this;
+            var _Defaults =
             {
-                ModalDialogScrollTop = 0;
-                _Main.$Body = $("body");
-                _Main.$Background = {};
-                _Main.$Iframe;
+                azModalDialogReturnVariable: "",
+                azModalDialogId: "",
+                azModalDialogTitle: "",
+                azModalDialogText: "",
+                azModalDialogiFrameURL: "",
+                azModalDialogWidth: 450,
+                azModalDialogHeight: 300,
+                azModalDialogNoParentScroll: false,
+                azModalDialogBackground: true,
+                azModalDialogModal: true,
+                azModalDialogTitlebar: true,
+                azModalDialogTitlebarClose: true,
+                azModalDialogResizable: false,
+                azModalDialogDraggable: true,
+                azModalDialogCloseOnEscape: true,
+                azModalDialogPosition: false,
+                azModalDialogPositionOf: {},
+                azModalDialogPositionMy: "left bottom-30",
+                azModalDialogPositionAt: "left top",
+                azModalDialogBackgroundColor: "#FFFFFF",
+                azModalDialogColor: "#000000",
+                azModalDialogTitlebarBackgroundColor: "#009688",
+                azModalDialogTitlebarColor: "#FFFFFF",
+                azModalDialogBeforeOpen: function () { },
+                azModalDialogAfterOpen: function () { },
+                azModalDialogAfterClose: function () { },
+                azModalDialogAfterCloseReload: false
+            };
+            _Main.Options = $.extend({}, _Defaults, Options || {});
 
-                _Main.$Dialog = $("<div></div>").attr("id", _Main.Options.azModalDialogId).addClass("az-modal-dialog").css({ "background-color": _Main.Options.azModalDialogBackgroundColor + " !important", "color": _Main.Options.azModalDialogColor + " !important" });
-                _Main.$Card = $("<div></div>").addClass("az-modal-card");
-                _Main.$Article = $("<article></article>").html(_Main.Options.azModalDialogText);
-                _Main.$Card.append(_Main.$Article);
-
-                // AZ Size
-                if (_Main.Options.azModalDialogWidth > (window.innerWidth - 20))
+            if (_Main.Options.azModalDialogReturnVariable !== "" && _Main.Options.azModalDialogId !== "" && $("#" + _Main.Options.azModalDialogId).length === 0)
+            {
+                $.subscribeonce("functionlib/azModalDialogBeforeOpen", function ()
                 {
-                    _Main.Options.azModalDialogWidth = (window.innerWidth - 20);
-                }
-                if (_Main.Options.azModalDialogHeight > (window.innerHeight - 20))
-                {
-                    _Main.Options.azModalDialogHeight = (window.innerHeight - 20);
-                }
+                    ModalDialogScrollTop = 0;
+                    _Main.$Body = $("body");
+                    _Main.$Background = {};
+                    _Main.$Iframe;
 
-                // AZ iFrame
-                if (_Main.Options.azModalDialogiFrameURL != "")
-                {
-                    _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe-" + _Main.Options.azModalDialogId);
-                    _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": (_Main.Options.azModalDialogHeight - 80) });
-                    _Main.$Card.append(_Main.$Iframe);
-                }
+                    _Main.$Dialog = $("<div></div>").attr("id", _Main.Options.azModalDialogId).addClass("az-modal-dialog").css({ "background-color": _Main.Options.azModalDialogBackgroundColor + " !important", "color": _Main.Options.azModalDialogColor + " !important" });
+                    _Main.$Card = $("<div></div>").addClass("az-modal-card");
+                    _Main.$Article = $("<article></article>").html(_Main.Options.azModalDialogText);
+                    _Main.$Card.append(_Main.$Article);
 
-                // UI Dialog
-                _Main.$Dialog.append(_Main.$Card);
-                _Main.$CurrentDialog = _Main.$Dialog.dialog(
+                    // AZ Size
+                    if (_Main.Options.azModalDialogWidth > (window.innerWidth - 20))
                     {
-                        autoOpen: false,
-                        modal: false,
-                        width: (_Main.Options.azModalDialogWidth - 16),
-                        height: _Main.Options.azModalDialogHeight,
-                        resizable: _Main.Options.azModalDialogResizable,
-                        draggable: _Main.Options.azModalDialogDraggable,
-                        closeOnEscape: _Main.Options.azModalDialogCloseOnEscape
-                    });
-                if (_Main.Options.azModalDialogPosition && IsEmpty(_Main.Options.azModalDialogPositionOf) === false && window.innerWidth > 576)
-                {
+                        _Main.Options.azModalDialogWidth = (window.innerWidth - 20);
+                    }
+                    if (_Main.Options.azModalDialogHeight > (window.innerHeight - 20))
+                    {
+                        _Main.Options.azModalDialogHeight = (window.innerHeight - 20);
+                    }
+
+                    // AZ iFrame
+                    if (_Main.Options.azModalDialogiFrameURL != "")
+                    {
+                        _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe-" + _Main.Options.azModalDialogId);
+                        _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": (_Main.Options.azModalDialogHeight - 80) });
+                        _Main.$Card.append(_Main.$Iframe);
+                    }
+
+                    // UI Dialog
+                    _Main.$Dialog.append(_Main.$Card);
+                    _Main.$CurrentDialog = _Main.$Dialog.dialog(
+                        {
+                            autoOpen: false,
+                            modal: false,
+                            width: (_Main.Options.azModalDialogWidth - 16),
+                            height: _Main.Options.azModalDialogHeight,
+                            resizable: _Main.Options.azModalDialogResizable,
+                            draggable: _Main.Options.azModalDialogDraggable,
+                            closeOnEscape: _Main.Options.azModalDialogCloseOnEscape
+                        });
+                    if (_Main.Options.azModalDialogPosition && IsEmpty(_Main.Options.azModalDialogPositionOf) === false && window.innerWidth > 576)
+                    {
+                        _Main.$CurrentDialog.dialog(
+                            {
+                                position:
+                                {
+                                    my: _Main.Options.azModalDialogPositionMy,
+                                    at: _Main.Options.azModalDialogPositionAt,
+                                    of: _Main.Options.azModalDialogPositionOf
+                                }
+                            });
+                    }
+                    _Main.$UIDialog = _Main.$Dialog.parent(".ui-dialog");
+                    _Main.$UIDialogTitlebar = _Main.$UIDialog.children(".ui-dialog-titlebar").css({ "background-color": _Main.Options.azModalDialogTitlebarBackgroundColor + " !important", "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
+                    _Main.$UIDialogTitlebar.children(".ui-dialog-title").html(_Main.Options.azModalDialogTitle);
+                    _Main.$UIDialogTitlebar.children(".ui-dialog-titlebar-close").removeAttr("title");
+                    if (_Main.Options.azModalDialogTitlebar === false)
+                    {
+                        _Main.$UIDialogTitlebar.hide();
+                    }
+                    if (_Main.Options.azModalDialogTitlebarClose === false)
+                    {
+                        _Main.$UIDialogTitlebar.children(".ui-dialog-titlebar-close").hide();
+                    }
+                    _Main.$CurrentDialog.dialog("open");
                     _Main.$CurrentDialog.dialog(
                         {
-                            position:
+                            focus: function (e, ui)
                             {
-                                my: _Main.Options.azModalDialogPositionMy,
-                                at: _Main.Options.azModalDialogPositionAt,
-                                of: _Main.Options.azModalDialogPositionOf
+                                var _Element = e.target || e.srcElement;
+                                $(".ui-dialog").not($(_Element).parent(".ui-dialog")).css({ "z-index": "5000" });
+                                $(_Element).parent(".ui-dialog").css({ "z-index": "5001" });
+                            },
+                            close: function (e, ui)
+                            {
+                                if (e.originalEvent)
+                                {
+                                    _Main.azModalDialogClose(e);
+                                }
                             }
                         });
-                }
-                _Main.$UIDialog = _Main.$Dialog.parent(".ui-dialog");
-                _Main.$UIDialogTitlebar = _Main.$UIDialog.children(".ui-dialog-titlebar").css({ "background-color": _Main.Options.azModalDialogTitlebarBackgroundColor + " !important", "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
-                _Main.$UIDialogTitlebar.children(".ui-dialog-title").html(_Main.Options.azModalDialogTitle);
-                _Main.$UIDialogTitlebar.children(".ui-dialog-titlebar-close").removeAttr("title");
-                if (_Main.Options.azModalDialogTitlebar === false)
-                {
-                    _Main.$UIDialogTitlebar.hide();
-                }
-                if (_Main.Options.azModalDialogTitlebarClose === false)
-                {
-                    _Main.$UIDialogTitlebar.children(".ui-dialog-titlebar-close").hide();
-                }
-                _Main.$CurrentDialog.dialog("open");
-                _Main.$CurrentDialog.dialog(
+
+                    var _$ListUIDialog = $(".ui-dialog").not(_Main.$UIDialog);
+                    if (_$ListUIDialog.length === 0)
                     {
-                        focus: function (e, ui)
+                        // AZ No Parent Scroll
+                        if (_Main.$Body.hasClass("az-no-parent-scroll") === false)
                         {
-                            var _Element = e.target || e.srcElement;
-                            $(".ui-dialog").not($(_Element).parent(".ui-dialog")).css({ "z-index": "5000" });
-                            $(_Element).parent(".ui-dialog").css({ "z-index": "5001" });
-                        },
-                        close: function (e, ui)
-                        {
-                            if (e.originalEvent)
+                            if (_Main.Options.azModalDialogNoParentScroll === true)
                             {
-                                _Main.azModalDialogClose(e);
+                                ModalDialogScrollTop = $(window).scrollTop();
+                                _Main.$Body.addClass("az-no-parent-scroll");
                             }
                         }
-                    });
 
-                var _$ListUIDialog = $(".ui-dialog").not(_Main.$UIDialog);
-                if (_$ListUIDialog.length === 0)
-                {
-                    // AZ No Parent Scroll
-                    if (_Main.$Body.hasClass("az-no-parent-scroll") === false)
-                    {
-                        if (_Main.Options.azModalDialogNoParentScroll === true)
+                        // AZ Background
+                        _Main.$Background = $("<div></div>").attr("id", "az-background");
+                        if (_Main.Options.azModalDialogBackground === true)
                         {
-                            ModalDialogScrollTop = $(window).scrollTop();
-                            _Main.$Body.addClass("az-no-parent-scroll");
+                            _Main.$Body.append(_Main.$Background);
+                        }
+
+                        // AZ Modal
+                        if (_Main.Options.azModalDialogModal === false)
+                        {
+                            _Main.$Background.off("click").on("click", function (e)
+                            {
+                                var _Element = e.target || e.srcElement;
+                                if ($(_Element).attr("id") == "az-background")
+                                {
+                                    _Main.azModalDialogClose(e);
+                                }
+                            });
                         }
                     }
+                    AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterOpen, "functionlib/azModalDialogAfterOpen");
 
-                    // AZ Background
-                    _Main.$Background = $("<div></div>").attr("id", "az-background");
-                    if (_Main.Options.azModalDialogBackground === true)
+                    // AZ Modal Dialog Close 
+                    _Main.azModalDialogClose = function (Options)
                     {
-                        _Main.$Body.append(_Main.$Background);
-                    }
-
-                    // AZ Modal
-                    if (_Main.Options.azModalDialogModal === false)
-                    {
-                        _Main.$Background.off("click").on("click", function (e)
+                        window[_Main.Options.azModalDialogReturnVariable] = undefined;
+                        var _Defaults =
                         {
-                            var _Element = e.target || e.srcElement;
-                            if ($(_Element).attr("id") == "az-background")
+                            azModalDialogAfterClose: function () { },
+                            azModalDialogAfterCloseReload: false
+                        };
+                        if (Options === undefined || !Options.type)
+                        {
+                            _Main.Options = $.extend({}, _Defaults, Options || {});
+                        }
+
+                        $.subscribeonce("functionlib/azModalDialogAfterClose", function ()
+                        {
+                            if (_Main.Options.azModalDialogAfterCloseReload === true)
                             {
-                                _Main.azModalDialogClose(e);
+                                location.reload();
+                            }
+                            else
+                            {
+                                // AZ iFrame
+                                if (_Main.Options.azModalDialogiFrameURL !== "" && _Main.$Iframe !== undefined)
+                                {
+                                    _Main.$Iframe.attr("src", "");
+                                }
+
+                                // UI Dialog
+                                _Main.$Dialog.dialog("close");
+                                if (_Main.$Dialog.length > 0)
+                                {
+                                    _Main.$Dialog.remove();
+                                }
+
+                                var _$ListUIDialog = $(".ui-dialog");
+                                if (_$ListUIDialog.length === 0)
+                                {
+                                    $("#az-background").remove();
+                                    if (ModalDialogScrollTop > 0)
+                                    {
+                                        $(window).scrollTop(ModalDialogScrollTop);
+                                    }
+
+                                    $("body").removeClass("az-no-parent-scroll");
+                                    if ($("body").hasClass("") === true)
+                                    {
+                                        $("body").removeAttr("class");
+                                    }
+                                }
                             }
                         });
+                        AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterClose, "functionlib/azModalDialogAfterClose");
                     }
-                }
-                AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterOpen, "functionlib/azModalDialogAfterOpen");
 
-                // AZ Modal Dialog Close 
-                _Main.azModalDialogClose = function (Options)
-                {
-                    window[_Main.Options.azModalDialogReturnVariable] = undefined;
-                    var _Defaults =
+                    // AZ Change Modal Dialog Titlebar
+                    _Main.azChangeModalTitlebar = function (Options)
                     {
-                        azModalDialogAfterClose: function () { },
-                        azModalDialogAfterCloseReload: false
-                    };
-                    if (Options === undefined || !Options.type)
-                    {
+                        var _Defaults =
+                        {
+                            azModalDialogTitle: "",
+                            azModalDialogTitlebarBackgroundColor: "#009688",
+                            azModalDialogTitlebarColor: "#FFFFFF",
+                            azModalDialogAlertTimeout: 3000
+                        };
                         _Main.Options = $.extend({}, _Defaults, Options || {});
+
+                        if ($(".az-dialog-titlebar").length === 0)
+                        {
+                            _Main.$NewUIDialogTitlebar = $('<div></div>').addClass("ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle").css({ "background-color": _Main.Options.azModalDialogTitlebarBackgroundColor + " !important", "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
+                            _Main.$NewUIDialogTitlebar.append('<span class="ui-dialog-title">' + _Main.Options.azModalDialogTitle + '</span>');
+                            _Main.$UIDialogTitlebar.hide();
+                            _Main.$UIDialog.prepend(_Main.$NewUIDialogTitlebar);
+                            _Main.$Body.addClass("az-dialog-titlebar");
+                            window.setTimeout(function ()
+                            {
+                                _Main.$NewUIDialogTitlebar.remove();
+                                _Main.$UIDialogTitlebar.show();
+                                _Main.$Body.removeClass("az-dialog-titlebar");
+                                if (_Main.$Body.hasClass("") === true)
+                                {
+                                    _Main.$Body.removeAttr("class");
+                                }
+                            }, _Main.Options.azModalDialogAlertTimeout);
+                        }
                     }
+                });
+                AZCheckAsyncAndPublish(_Main.Options.azModalDialogBeforeOpen, "functionlib/azModalDialogBeforeOpen");
 
-                    $.subscribeonce("functionlib/azModalDialogAfterClose", function ()
-                    {
-                        if (_Main.Options.azModalDialogAfterCloseReload === true)
-                        {
-                            location.reload();
-                        }
-                        else
-                        {
-                            // AZ iFrame
-                            if (_Main.Options.azModalDialogiFrameURL !== "" && _Main.$Iframe !== undefined)
-                            {
-                                _Main.$Iframe.attr("src", "");
-                            }
-
-                            // UI Dialog
-                            _Main.$Dialog.dialog("close");
-                            if (_Main.$Dialog.length > 0)
-                            {
-                                _Main.$Dialog.remove();
-                            }
-
-                            var _$ListUIDialog = $(".ui-dialog");
-                            if (_$ListUIDialog.length === 0)
-                            {
-                                $("#az-background").remove();
-                                if (ModalDialogScrollTop > 0)
-                                {
-                                    $(window).scrollTop(ModalDialogScrollTop);
-                                }
-
-                                $("body").removeClass("az-no-parent-scroll");
-                                if ($("body").hasClass("") === true)
-                                {
-                                    $("body").removeAttr("class");
-                                }
-                            }
-                        }
-                    });
-                    AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterClose, "functionlib/azModalDialogAfterClose");
-                }
-
-                // AZ Change Modal Dialog Titlebar
-                _Main.azChangeModalTitlebar = function (Options)
+                if (_Main.Options.azModalDialogiFrameURL !== "" && _Main.$Iframe !== undefined)
                 {
-                    var _Defaults =
-                    {
-                        azModalDialogTitle: "",
-                        azModalDialogTitlebarBackgroundColor: "#009688",
-                        azModalDialogTitlebarColor: "#FFFFFF",
-                        azModalDialogAlertTimeout: 3000
-                    };
-                    _Main.Options = $.extend({}, _Defaults, Options || {});
-
-                    if ($(".az-dialog-titlebar").length === 0)
-                    {
-                        _Main.$NewUIDialogTitlebar = $('<div></div>').addClass("ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle").css({ "background-color": _Main.Options.azModalDialogTitlebarBackgroundColor + " !important", "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
-                        _Main.$NewUIDialogTitlebar.append('<span class="ui-dialog-title">' + _Main.Options.azModalDialogTitle + '</span>');
-                        _Main.$UIDialogTitlebar.hide();
-                        _Main.$UIDialog.prepend(_Main.$NewUIDialogTitlebar);
-                        _Main.$Body.addClass("az-dialog-titlebar");
-                        window.setTimeout(function ()
+                    return (
                         {
-                            _Main.$NewUIDialogTitlebar.remove();
-                            _Main.$UIDialogTitlebar.show();
-                            _Main.$Body.removeClass("az-dialog-titlebar");
-                            if (_Main.$Body.hasClass("") === true)
-                            {
-                                _Main.$Body.removeAttr("class");
-                            }
-                        }, _Main.Options.azModalDialogAlertTimeout);
-                    }
+                            "ModalDialogClose": _Main.azModalDialogClose,
+                            "ChangeModalTitlebar": _Main.azChangeModalTitlebar,
+                            "IFrame": _Main.$Iframe[0].contentWindow
+                        });
                 }
-            });
-            AZCheckAsyncAndPublish(_Main.Options.azModalDialogBeforeOpen, "functionlib/azModalDialogBeforeOpen");
-
-            if (_Main.Options.azModalDialogiFrameURL !== "" && _Main.$Iframe !== undefined)
-            {
-                return (
-                    {
-                        "ModalDialogClose": _Main.azModalDialogClose,
-                        "ChangeModalTitlebar": _Main.azChangeModalTitlebar,
-                        "IFrame": _Main.$Iframe[0].contentWindow
-                    });
+                else
+                {
+                    return (
+                        {
+                            "ModalDialogClose": _Main.azModalDialogClose,
+                            "ChangeModalTitlebar": _Main.azChangeModalTitlebar
+                        });
+                }
             }
-            else
-            {
-                return (
-                    {
-                        "ModalDialogClose": _Main.azModalDialogClose,
-                        "ChangeModalTitlebar": _Main.azChangeModalTitlebar
-                    });
-            }
-        }
+        }        
     }
     else
     {
