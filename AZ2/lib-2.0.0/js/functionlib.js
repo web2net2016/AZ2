@@ -14,12 +14,12 @@ $(document).ready(function ()
                 one: "subscribeonce",
                 off: "unsubscribe"
             }, function (key, val)
+        {
+            jQuery[val] = function ()
             {
-                jQuery[val] = function ()
-                {
-                    _$Obj[key].apply(_$Obj, arguments);
-                };
-            });
+                _$Obj[key].apply(_$Obj, arguments);
+            };
+        });
 
         var _azLastScrollTop = 0;
         $(window).scroll(function ()
@@ -1048,13 +1048,13 @@ function AZAccordion(Options)
             _Main.$Header = _Main.$AccordionCard.children("header").append('<i class="' + _Main.Options.azAccordionIconClosed + '"></i>').css({ "background-color": _Main.Options.azAccordionHeaderBackgroundColor, "color": _Main.Options.azAccordionHeaderColor });
             _Main.$Article = _Main.$AccordionCard.children("article").css({ "background-color": _Main.Options.azAccordionArticleBackgroundColor, "color": _Main.Options.azAccordionArticleColor });
 
-            _Main.$Header.mouseenter(function ()
+            _Main.$Header.off().on("mouseenter", function ()
             {
                 $(this).css({ "background-color": _Main.Options.azAccordionHeaderHoverBackgroundColor, "color": _Main.Options.azAccordionHeaderHoverColor });
-            }).mouseleave(function ()
+            }).on("mouseleave", function ()
             {
                 $(this).css({ "background-color": _Main.Options.azAccordionHeaderBackgroundColor, "color": _Main.Options.azAccordionHeaderColor });
-            });
+            })
 
             _Main.MaxArticleHeight = 0;
             _Main.azArticleHeight = function ()
@@ -1208,14 +1208,14 @@ function AZAjax(Options)
         if (_Main.Options.azAjaxUrl != "")
         {
             _Main.AjaxOptions =
-                {
-                    url: _Main.Options.azAjaxUrl,
-                    dataType: _Main.Options.azAjaxDataType,
-                    type: _Main.Options.azAjaxType,
-                    contentType: _Main.Options.azAjaxContentType,
-                    headers: _Main.Options.azAjaxObjHeaders,
-                    timeout: _Main.Options.azAjaxTimeout
-                };
+            {
+                url: _Main.Options.azAjaxUrl,
+                dataType: _Main.Options.azAjaxDataType,
+                type: _Main.Options.azAjaxType,
+                contentType: _Main.Options.azAjaxContentType,
+                headers: _Main.Options.azAjaxObjHeaders,
+                timeout: _Main.Options.azAjaxTimeout
+            };
             if (IsEmpty(_Main.Options.azAjaxObjToSend) === false)
             {
                 _Main.AjaxOptions.data = JSON.stringify(_Main.Options.azAjaxObjToSend);
@@ -2716,68 +2716,101 @@ function navigateTo(SelectedPage, SelectedTarget)
 
 function getSelectedObj(SelectedList1, SelectedKey1, SelectedVal1, SelectedList2, SelectedKey2, SelectedVal2)
 {
-    var _ObjReturn = "";
-    $.each(SelectedList1, function (index1, Selected1Content)
+    var _ObjReturn = {};
+    if (SelectedList1 !== undefined && SelectedList1 !== null)
     {
-        if (SelectedList2 !== undefined && SelectedList2 !== "")
+        $.each(SelectedList1, function (index1, Selected1Content)
         {
-            if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
+            if (SelectedList2 !== undefined && SelectedList2 !== "")
             {
-                $.each(Selected1Content[SelectedList2], function (index2, Selected2Content)
+                if (Selected1Content.hasOwnProperty(SelectedKey1) && Selected1Content[SelectedKey1] !== null && SelectedVal1 !== undefined && SelectedVal1 !== null)
                 {
-                    $.each(Selected2Content, function (Key, Value)
+                    if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
                     {
-                        if (SelectedKey2.toString().toLowerCase() == Key.toString().toLowerCase() && SelectedVal2.toString().toLowerCase() == Value.toString().toLowerCase())
+                        if (Selected1Content.hasOwnProperty(SelectedList2) && Selected1Content[SelectedList2] !== null)
                         {
-                            _ObjReturn = Selected2Content;
+                            $.each(Selected1Content[SelectedList2], function (index2, Selected2Content)
+                            {
+                                if (Selected2Content !== undefined && Selected2Content !== null)
+                                {
+                                    $.each(Selected2Content, function (Key, Value)
+                                    {
+                                        if (SelectedKey2 !== undefined && SelectedKey2 !== null && Key !== undefined && Key !== null && SelectedVal2 !== undefined && SelectedVal2 !== null && Value !== undefined && Value !== null)
+                                        {
+                                            if (SelectedKey2.toString().toLowerCase() == Key.toString().toLowerCase() && SelectedVal2.toString().toLowerCase() == Value.toString().toLowerCase())
+                                            {
+                                                _ObjReturn = Selected2Content;
+                                                return false;
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $.each(Selected1Content, function (Key, Value)
+                {
+                    if (SelectedKey1 !== undefined && SelectedKey1 !== null && Key !== undefined && Key !== null && SelectedVal1 !== undefined && SelectedVal1 !== null && Value !== undefined && Value !== null)
+                    {
+                        if (SelectedKey1.toString().toLowerCase() == Key.toString().toLowerCase() && SelectedVal1.toString().toLowerCase() == Value.toString().toLowerCase())
+                        {
+                            _ObjReturn = Selected1Content;
                             return false;
                         }
-                    });
+                    }
                 });
             }
-        }
-        else
-        {
-            $.each(Selected1Content, function (Key, Value)
-            {
-                if (SelectedKey1.toString().toLowerCase() == Key.toString().toLowerCase() && SelectedVal1.toString().toLowerCase() == Value.toString().toLowerCase())
-                {
-                    _ObjReturn = Selected1Content;
-                    return false;
-                }
-            });
-        }
-    });
+        });
+    }
     return _ObjReturn;
 }
 
 function removeSelectedObj(SelectedList1, SelectedKey1, SelectedVal1, SelectedList2, SelectedKey2, SelectedVal2)
 {
-    $.each(SelectedList1, function (index1, Selected1Content)
+    if (SelectedList1 !== undefined && SelectedList1 !== null)
     {
-        if (SelectedList2 !== undefined && SelectedList2 !== "")
+        $.each(SelectedList1, function (index1, Selected1Content)
         {
-            if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
+            if (SelectedList2 !== undefined && SelectedList2 !== null)
             {
-                $.each(Selected1Content[SelectedList2], function (index2, Selected2Content)
+                if (Selected1Content.hasOwnProperty(SelectedKey1) && Selected1Content[SelectedKey1] !== null && SelectedVal1 !== undefined && SelectedVal1 !== null)
                 {
-                    if (Selected2Content[SelectedKey2].toString().toLowerCase() == SelectedVal2.toString().toLowerCase())
+                    if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
                     {
-                        Selected1Content[SelectedList2].splice(index2, 1);
+                        if (Selected1Content.hasOwnProperty(SelectedList2) && Selected1Content[SelectedList2] !== null)
+                        {
+                            $.each(Selected1Content[SelectedList2], function (index2, Selected2Content)
+                            {
+                                if (Selected2Content.hasOwnProperty(SelectedKey2) && Selected2Content[SelectedKey2] !== null && SelectedVal2 !== undefined && SelectedVal2 !== null)
+                                {
+                                    if (Selected2Content[SelectedKey2].toString().toLowerCase() == SelectedVal2.toString().toLowerCase())
+                                    {
+                                        Selected1Content[SelectedList2].splice(index2, 1);
+                                        return false;
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (Selected1Content.hasOwnProperty(SelectedKey1) && Selected1Content[SelectedKey1] !== null && SelectedVal1 !== undefined && SelectedVal1 !== null)
+                {
+                    if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
+                    {
+                        SelectedList1.splice(index1, 1);
                         return false;
                     }
-                });
+                }
             }
-        }
-        else
-        {
-            if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
-            {
-                SelectedList1.splice(index1, 1);
-                return false;
-            }
-        }
-    });
+        });
+    }
 }
 
 function existsSelectedObj(SelectedList, SelectedKey, SelectedVal)
@@ -2785,10 +2818,13 @@ function existsSelectedObj(SelectedList, SelectedKey, SelectedVal)
     var _Found = false;
     for (var i = 0; i < SelectedList.length; i++)
     {
-        if (SelectedList[i][SelectedKey].toString().toLowerCase() == SelectedVal.toString().toLowerCase())
+        if (SelectedList[i].hasOwnProperty(SelectedKey) && SelectedList[i][SelectedKey] !== null && SelectedVal !== undefined && SelectedVal !== null)
         {
-            _Found = true;
-            break;
+            if (SelectedList[i][SelectedKey].toString().toLowerCase() == SelectedVal.toString().toLowerCase())
+            {
+                _Found = true;
+                break;
+            }
         }
     }
     return _Found;

@@ -1197,12 +1197,12 @@ $(document).ready(function ()
                 one: "subscribeonce",
                 off: "unsubscribe"
             }, function (key, val)
+        {
+            jQuery[val] = function ()
             {
-                jQuery[val] = function ()
-                {
-                    _$Obj[key].apply(_$Obj, arguments);
-                };
-            });
+                _$Obj[key].apply(_$Obj, arguments);
+            };
+        });
 
         var _azLastScrollTop = 0;
         $(window).scroll(function ()
@@ -2231,13 +2231,13 @@ function AZAccordion(Options)
             _Main.$Header = _Main.$AccordionCard.children("header").append('<i class="' + _Main.Options.azAccordionIconClosed + '"></i>').css({ "background-color": _Main.Options.azAccordionHeaderBackgroundColor, "color": _Main.Options.azAccordionHeaderColor });
             _Main.$Article = _Main.$AccordionCard.children("article").css({ "background-color": _Main.Options.azAccordionArticleBackgroundColor, "color": _Main.Options.azAccordionArticleColor });
 
-            _Main.$Header.mouseenter(function ()
+            _Main.$Header.off().on("mouseenter", function ()
             {
                 $(this).css({ "background-color": _Main.Options.azAccordionHeaderHoverBackgroundColor, "color": _Main.Options.azAccordionHeaderHoverColor });
-            }).mouseleave(function ()
+            }).on("mouseleave", function ()
             {
                 $(this).css({ "background-color": _Main.Options.azAccordionHeaderBackgroundColor, "color": _Main.Options.azAccordionHeaderColor });
-            });
+            })
 
             _Main.MaxArticleHeight = 0;
             _Main.azArticleHeight = function ()
@@ -2391,14 +2391,14 @@ function AZAjax(Options)
         if (_Main.Options.azAjaxUrl != "")
         {
             _Main.AjaxOptions =
-                {
-                    url: _Main.Options.azAjaxUrl,
-                    dataType: _Main.Options.azAjaxDataType,
-                    type: _Main.Options.azAjaxType,
-                    contentType: _Main.Options.azAjaxContentType,
-                    headers: _Main.Options.azAjaxObjHeaders,
-                    timeout: _Main.Options.azAjaxTimeout
-                };
+            {
+                url: _Main.Options.azAjaxUrl,
+                dataType: _Main.Options.azAjaxDataType,
+                type: _Main.Options.azAjaxType,
+                contentType: _Main.Options.azAjaxContentType,
+                headers: _Main.Options.azAjaxObjHeaders,
+                timeout: _Main.Options.azAjaxTimeout
+            };
             if (IsEmpty(_Main.Options.azAjaxObjToSend) === false)
             {
                 _Main.AjaxOptions.data = JSON.stringify(_Main.Options.azAjaxObjToSend);
@@ -2476,292 +2476,272 @@ function AZCircularBar(Options)
     }
 }
 
-function ExistsObj(SelectedList, SelectedKey)
-{
-    var _Found = false;
-    for (var i = 0; i < SelectedList.length; i++)
-    {
-        if (SelectedList[i] == SelectedKey)
-        {
-            _Found = true;
-            break;
-        }
-    }
-    return _Found;
-}
-
 // AZ Modal Dialog
-ListAZModalDialog = [];
 function AZModalDialog(Options)
 {
     if (this instanceof AZModalDialog === true)
     {
-        if (ExistsObj(ListAZModalDialog, this) === false)
+        var _Main = this;
+        var _Defaults =
         {
-            ListAZModalDialog.push(this);
+            azModalDialogReturnVariable: "",
+            azModalDialogId: "",
+            azModalDialogTitle: "",
+            azModalDialogText: "",
+            azModalDialogiFrameURL: "",
+            azModalDialogWidth: 450,
+            azModalDialogHeight: 300,
+            azModalDialogNoParentScroll: false,
+            azModalDialogBackground: true,
+            azModalDialogModal: true,
+            azModalDialogTitlebar: true,
+            azModalDialogTitlebarClose: true,
+            azModalDialogResizable: false,
+            azModalDialogDraggable: true,
+            azModalDialogCloseOnEscape: true,
+            azModalDialogPosition: false,
+            azModalDialogPositionOf: {},
+            azModalDialogPositionMy: "left bottom-30",
+            azModalDialogPositionAt: "left top",
+            azModalDialogBackgroundColor: "#FFFFFF",
+            azModalDialogColor: "#000000",
+            azModalDialogTitlebarBackgroundColor: "#009688",
+            azModalDialogTitlebarColor: "#FFFFFF",
+            azModalDialogBeforeOpen: function () { },
+            azModalDialogAfterOpen: function () { },
+            azModalDialogAfterClose: function () { },
+            azModalDialogAfterCloseReload: false
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
 
-            var _Main = this;
-            var _Defaults =
+        if (_Main.Options.azModalDialogReturnVariable !== "" && _Main.Options.azModalDialogId !== "" && $("#" + _Main.Options.azModalDialogId).length === 0)
+        {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function ()
             {
-                azModalDialogReturnVariable: "",
-                azModalDialogId: "",
-                azModalDialogTitle: "",
-                azModalDialogText: "",
-                azModalDialogiFrameURL: "",
-                azModalDialogWidth: 450,
-                azModalDialogHeight: 300,
-                azModalDialogNoParentScroll: false,
-                azModalDialogBackground: true,
-                azModalDialogModal: true,
-                azModalDialogTitlebar: true,
-                azModalDialogTitlebarClose: true,
-                azModalDialogResizable: false,
-                azModalDialogDraggable: true,
-                azModalDialogCloseOnEscape: true,
-                azModalDialogPosition: false,
-                azModalDialogPositionOf: {},
-                azModalDialogPositionMy: "left bottom-30",
-                azModalDialogPositionAt: "left top",
-                azModalDialogBackgroundColor: "#FFFFFF",
-                azModalDialogColor: "#000000",
-                azModalDialogTitlebarBackgroundColor: "#009688",
-                azModalDialogTitlebarColor: "#FFFFFF",
-                azModalDialogBeforeOpen: function () { },
-                azModalDialogAfterOpen: function () { },
-                azModalDialogAfterClose: function () { },
-                azModalDialogAfterCloseReload: false
-            };
-            _Main.Options = $.extend({}, _Defaults, Options || {});
+                ModalDialogScrollTop = 0;
+                _Main.$Body = $("body");
+                _Main.$Background = {};
+                _Main.$Iframe;
 
-            if (_Main.Options.azModalDialogReturnVariable !== "" && _Main.Options.azModalDialogId !== "" && $("#" + _Main.Options.azModalDialogId).length === 0)
-            {
-                $.subscribeonce("functionlib/azModalDialogBeforeOpen", function ()
+                _Main.$Dialog = $("<div></div>").attr("id", _Main.Options.azModalDialogId).addClass("az-modal-dialog").css({ "background-color": _Main.Options.azModalDialogBackgroundColor + " !important", "color": _Main.Options.azModalDialogColor + " !important" });
+                _Main.$Card = $("<div></div>").addClass("az-modal-card");
+                _Main.$Article = $("<article></article>").html(_Main.Options.azModalDialogText);
+                _Main.$Card.append(_Main.$Article);
+
+                // AZ Size
+                if (_Main.Options.azModalDialogWidth > (window.innerWidth - 20))
                 {
-                    ModalDialogScrollTop = 0;
-                    _Main.$Body = $("body");
-                    _Main.$Background = {};
-                    _Main.$Iframe;
+                    _Main.Options.azModalDialogWidth = (window.innerWidth - 20);
+                }
+                if (_Main.Options.azModalDialogHeight > (window.innerHeight - 20))
+                {
+                    _Main.Options.azModalDialogHeight = (window.innerHeight - 20);
+                }
 
-                    _Main.$Dialog = $("<div></div>").attr("id", _Main.Options.azModalDialogId).addClass("az-modal-dialog").css({ "background-color": _Main.Options.azModalDialogBackgroundColor + " !important", "color": _Main.Options.azModalDialogColor + " !important" });
-                    _Main.$Card = $("<div></div>").addClass("az-modal-card");
-                    _Main.$Article = $("<article></article>").html(_Main.Options.azModalDialogText);
-                    _Main.$Card.append(_Main.$Article);
+                // AZ iFrame
+                if (_Main.Options.azModalDialogiFrameURL != "")
+                {
+                    _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe-" + _Main.Options.azModalDialogId);
+                    _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": (_Main.Options.azModalDialogHeight - 80) });
+                    _Main.$Card.append(_Main.$Iframe);
+                }
 
-                    // AZ Size
-                    if (_Main.Options.azModalDialogWidth > (window.innerWidth - 20))
+                // UI Dialog
+                _Main.$Dialog.append(_Main.$Card);
+                _Main.$CurrentDialog = _Main.$Dialog.dialog(
                     {
-                        _Main.Options.azModalDialogWidth = (window.innerWidth - 20);
-                    }
-                    if (_Main.Options.azModalDialogHeight > (window.innerHeight - 20))
-                    {
-                        _Main.Options.azModalDialogHeight = (window.innerHeight - 20);
-                    }
-
-                    // AZ iFrame
-                    if (_Main.Options.azModalDialogiFrameURL != "")
-                    {
-                        _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe-" + _Main.Options.azModalDialogId);
-                        _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": (_Main.Options.azModalDialogHeight - 80) });
-                        _Main.$Card.append(_Main.$Iframe);
-                    }
-
-                    // UI Dialog
-                    _Main.$Dialog.append(_Main.$Card);
-                    _Main.$CurrentDialog = _Main.$Dialog.dialog(
-                        {
-                            autoOpen: false,
-                            modal: false,
-                            width: (_Main.Options.azModalDialogWidth - 16),
-                            height: _Main.Options.azModalDialogHeight,
-                            resizable: _Main.Options.azModalDialogResizable,
-                            draggable: _Main.Options.azModalDialogDraggable,
-                            closeOnEscape: _Main.Options.azModalDialogCloseOnEscape
-                        });
-                    if (_Main.Options.azModalDialogPosition && IsEmpty(_Main.Options.azModalDialogPositionOf) === false && window.innerWidth > 576)
-                    {
-                        _Main.$CurrentDialog.dialog(
-                            {
-                                position:
-                                {
-                                    my: _Main.Options.azModalDialogPositionMy,
-                                    at: _Main.Options.azModalDialogPositionAt,
-                                    of: _Main.Options.azModalDialogPositionOf
-                                }
-                            });
-                    }
-                    _Main.$UIDialog = _Main.$Dialog.parent(".ui-dialog");
-                    _Main.$UIDialogTitlebar = _Main.$UIDialog.children(".ui-dialog-titlebar").css({ "background-color": _Main.Options.azModalDialogTitlebarBackgroundColor + " !important", "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
-                    _Main.$UIDialogTitlebar.children(".ui-dialog-title").html(_Main.Options.azModalDialogTitle);
-                    _Main.$UIDialogTitlebar.children(".ui-dialog-titlebar-close").removeAttr("title");
-                    if (_Main.Options.azModalDialogTitlebar === false)
-                    {
-                        _Main.$UIDialogTitlebar.hide();
-                    }
-                    if (_Main.Options.azModalDialogTitlebarClose === false)
-                    {
-                        _Main.$UIDialogTitlebar.children(".ui-dialog-titlebar-close").hide();
-                    }
-                    _Main.$CurrentDialog.dialog("open");
+                        autoOpen: false,
+                        modal: false,
+                        width: (_Main.Options.azModalDialogWidth - 16),
+                        height: _Main.Options.azModalDialogHeight,
+                        resizable: _Main.Options.azModalDialogResizable,
+                        draggable: _Main.Options.azModalDialogDraggable,
+                        closeOnEscape: _Main.Options.azModalDialogCloseOnEscape
+                    });
+                if (_Main.Options.azModalDialogPosition && IsEmpty(_Main.Options.azModalDialogPositionOf) === false && window.innerWidth > 576)
+                {
                     _Main.$CurrentDialog.dialog(
                         {
-                            focus: function (e, ui)
+                            position:
                             {
-                                var _Element = e.target || e.srcElement;
-                                $(".ui-dialog").not($(_Element).parent(".ui-dialog")).css({ "z-index": "5000" });
-                                $(_Element).parent(".ui-dialog").css({ "z-index": "5001" });
-                            },
-                            close: function (e, ui)
-                            {
-                                if (e.originalEvent)
-                                {
-                                    _Main.azModalDialogClose(e);
-                                }
+                                my: _Main.Options.azModalDialogPositionMy,
+                                at: _Main.Options.azModalDialogPositionAt,
+                                of: _Main.Options.azModalDialogPositionOf
                             }
                         });
-
-                    var _$ListUIDialog = $(".ui-dialog").not(_Main.$UIDialog);
-                    if (_$ListUIDialog.length === 0)
+                }
+                _Main.$UIDialog = _Main.$Dialog.parent(".ui-dialog");
+                _Main.$UIDialogTitlebar = _Main.$UIDialog.children(".ui-dialog-titlebar").css({ "background-color": _Main.Options.azModalDialogTitlebarBackgroundColor + " !important", "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
+                _Main.$UIDialogTitlebar.children(".ui-dialog-title").html(_Main.Options.azModalDialogTitle);
+                _Main.$UIDialogTitlebar.children(".ui-dialog-titlebar-close").removeAttr("title");
+                if (_Main.Options.azModalDialogTitlebar === false)
+                {
+                    _Main.$UIDialogTitlebar.hide();
+                }
+                if (_Main.Options.azModalDialogTitlebarClose === false)
+                {
+                    _Main.$UIDialogTitlebar.children(".ui-dialog-titlebar-close").hide();
+                }
+                _Main.$CurrentDialog.dialog("open");
+                _Main.$CurrentDialog.dialog(
                     {
-                        // AZ No Parent Scroll
-                        if (_Main.$Body.hasClass("az-no-parent-scroll") === false)
+                        focus: function (e, ui)
                         {
-                            if (_Main.Options.azModalDialogNoParentScroll === true)
+                            var _Element = e.target || e.srcElement;
+                            $(".ui-dialog").not($(_Element).parent(".ui-dialog")).css({ "z-index": "5000" });
+                            $(_Element).parent(".ui-dialog").css({ "z-index": "5001" });
+                        },
+                        close: function (e, ui)
+                        {
+                            if (e.originalEvent)
                             {
-                                ModalDialogScrollTop = $(window).scrollTop();
-                                _Main.$Body.addClass("az-no-parent-scroll");
+                                _Main.azModalDialogClose(e);
                             }
                         }
+                    });
 
-                        // AZ Background
-                        _Main.$Background = $("<div></div>").attr("id", "az-background");
-                        if (_Main.Options.azModalDialogBackground === true)
+                var _$ListUIDialog = $(".ui-dialog").not(_Main.$UIDialog);
+                if (_$ListUIDialog.length === 0)
+                {
+                    // AZ No Parent Scroll
+                    if (_Main.$Body.hasClass("az-no-parent-scroll") === false)
+                    {
+                        if (_Main.Options.azModalDialogNoParentScroll === true)
                         {
-                            _Main.$Body.append(_Main.$Background);
-                        }
-
-                        // AZ Modal
-                        if (_Main.Options.azModalDialogModal === false)
-                        {
-                            _Main.$Background.off("click").on("click", function (e)
-                            {
-                                var _Element = e.target || e.srcElement;
-                                if ($(_Element).attr("id") == "az-background")
-                                {
-                                    _Main.azModalDialogClose(e);
-                                }
-                            });
+                            ModalDialogScrollTop = $(window).scrollTop();
+                            _Main.$Body.addClass("az-no-parent-scroll");
                         }
                     }
-                    AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterOpen, "functionlib/azModalDialogAfterOpen");
 
-                    // AZ Modal Dialog Close 
-                    _Main.azModalDialogClose = function (Options)
+                    // AZ Background
+                    _Main.$Background = $("<div></div>").attr("id", "az-background");
+                    if (_Main.Options.azModalDialogBackground === true)
                     {
-                        window[_Main.Options.azModalDialogReturnVariable] = undefined;
-                        var _Defaults =
-                        {
-                            azModalDialogAfterClose: function () { },
-                            azModalDialogAfterCloseReload: false
-                        };
-                        if (Options === undefined || !Options.type)
-                        {
-                            _Main.Options = $.extend({}, _Defaults, Options || {});
-                        }
+                        _Main.$Body.append(_Main.$Background);
+                    }
 
-                        $.subscribeonce("functionlib/azModalDialogAfterClose", function ()
+                    // AZ Modal
+                    if (_Main.Options.azModalDialogModal === false)
+                    {
+                        _Main.$Background.off("click").on("click", function (e)
                         {
-                            if (_Main.Options.azModalDialogAfterCloseReload === true)
+                            var _Element = e.target || e.srcElement;
+                            if ($(_Element).attr("id") == "az-background")
                             {
-                                location.reload();
-                            }
-                            else
-                            {
-                                // AZ iFrame
-                                if (_Main.Options.azModalDialogiFrameURL !== "" && _Main.$Iframe !== undefined)
-                                {
-                                    _Main.$Iframe.attr("src", "");
-                                }
-
-                                // UI Dialog
-                                _Main.$Dialog.dialog("close");
-                                if (_Main.$Dialog.length > 0)
-                                {
-                                    _Main.$Dialog.remove();
-                                }
-
-                                var _$ListUIDialog = $(".ui-dialog");
-                                if (_$ListUIDialog.length === 0)
-                                {
-                                    $("#az-background").remove();
-                                    if (ModalDialogScrollTop > 0)
-                                    {
-                                        $(window).scrollTop(ModalDialogScrollTop);
-                                    }
-
-                                    $("body").removeClass("az-no-parent-scroll");
-                                    if ($("body").hasClass("") === true)
-                                    {
-                                        $("body").removeAttr("class");
-                                    }
-                                }
+                                _Main.azModalDialogClose(e);
                             }
                         });
-                        AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterClose, "functionlib/azModalDialogAfterClose");
                     }
+                }
+                AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterOpen, "functionlib/azModalDialogAfterOpen");
 
-                    // AZ Change Modal Dialog Titlebar
-                    _Main.azChangeModalTitlebar = function (Options)
+                // AZ Modal Dialog Close 
+                _Main.azModalDialogClose = function (Options)
+                {
+                    window[_Main.Options.azModalDialogReturnVariable] = undefined;
+                    var _Defaults =
                     {
-                        var _Defaults =
-                        {
-                            azModalDialogTitle: "",
-                            azModalDialogTitlebarBackgroundColor: "#009688",
-                            azModalDialogTitlebarColor: "#FFFFFF",
-                            azModalDialogAlertTimeout: 3000
-                        };
+                        azModalDialogAfterClose: function () { },
+                        azModalDialogAfterCloseReload: false
+                    };
+                    if (Options === undefined || !Options.type)
+                    {
                         _Main.Options = $.extend({}, _Defaults, Options || {});
-
-                        if ($(".az-dialog-titlebar").length === 0)
-                        {
-                            _Main.$NewUIDialogTitlebar = $('<div></div>').addClass("ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle").css({ "background-color": _Main.Options.azModalDialogTitlebarBackgroundColor + " !important", "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
-                            _Main.$NewUIDialogTitlebar.append('<span class="ui-dialog-title">' + _Main.Options.azModalDialogTitle + '</span>');
-                            _Main.$UIDialogTitlebar.hide();
-                            _Main.$UIDialog.prepend(_Main.$NewUIDialogTitlebar);
-                            _Main.$Body.addClass("az-dialog-titlebar");
-                            window.setTimeout(function ()
-                            {
-                                _Main.$NewUIDialogTitlebar.remove();
-                                _Main.$UIDialogTitlebar.show();
-                                _Main.$Body.removeClass("az-dialog-titlebar");
-                                if (_Main.$Body.hasClass("") === true)
-                                {
-                                    _Main.$Body.removeAttr("class");
-                                }
-                            }, _Main.Options.azModalDialogAlertTimeout);
-                        }
                     }
-                });
-                AZCheckAsyncAndPublish(_Main.Options.azModalDialogBeforeOpen, "functionlib/azModalDialogBeforeOpen");
 
-                if (_Main.Options.azModalDialogiFrameURL !== "" && _Main.$Iframe !== undefined)
-                {
-                    return (
+                    $.subscribeonce("functionlib/azModalDialogAfterClose", function ()
+                    {
+                        if (_Main.Options.azModalDialogAfterCloseReload === true)
                         {
-                            "ModalDialogClose": _Main.azModalDialogClose,
-                            "ChangeModalTitlebar": _Main.azChangeModalTitlebar,
-                            "IFrame": _Main.$Iframe[0].contentWindow
-                        });
-                }
-                else
-                {
-                    return (
+                            location.reload();
+                        }
+                        else
                         {
-                            "ModalDialogClose": _Main.azModalDialogClose,
-                            "ChangeModalTitlebar": _Main.azChangeModalTitlebar
-                        });
+                            // AZ iFrame
+                            if (_Main.Options.azModalDialogiFrameURL !== "" && _Main.$Iframe !== undefined)
+                            {
+                                _Main.$Iframe.attr("src", "");
+                            }
+
+                            // UI Dialog
+                            _Main.$Dialog.dialog("close");
+                            if (_Main.$Dialog.length > 0)
+                            {
+                                _Main.$Dialog.remove();
+                            }
+
+                            var _$ListUIDialog = $(".ui-dialog");
+                            if (_$ListUIDialog.length === 0)
+                            {
+                                $("#az-background").remove();
+                                if (ModalDialogScrollTop > 0)
+                                {
+                                    $(window).scrollTop(ModalDialogScrollTop);
+                                }
+
+                                $("body").removeClass("az-no-parent-scroll");
+                                if ($("body").hasClass("") === true)
+                                {
+                                    $("body").removeAttr("class");
+                                }
+                            }
+                        }
+                    });
+                    AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterClose, "functionlib/azModalDialogAfterClose");
                 }
+
+                // AZ Change Modal Dialog Titlebar
+                _Main.azChangeModalTitlebar = function (Options)
+                {
+                    var _Defaults =
+                    {
+                        azModalDialogTitle: "",
+                        azModalDialogTitlebarBackgroundColor: "#009688",
+                        azModalDialogTitlebarColor: "#FFFFFF",
+                        azModalDialogAlertTimeout: 3000
+                    };
+                    _Main.Options = $.extend({}, _Defaults, Options || {});
+
+                    if ($(".az-dialog-titlebar").length === 0)
+                    {
+                        _Main.$NewUIDialogTitlebar = $('<div></div>').addClass("ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle").css({ "background-color": _Main.Options.azModalDialogTitlebarBackgroundColor + " !important", "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
+                        _Main.$NewUIDialogTitlebar.append('<span class="ui-dialog-title">' + _Main.Options.azModalDialogTitle + '</span>');
+                        _Main.$UIDialogTitlebar.hide();
+                        _Main.$UIDialog.prepend(_Main.$NewUIDialogTitlebar);
+                        _Main.$Body.addClass("az-dialog-titlebar");
+                        window.setTimeout(function ()
+                        {
+                            _Main.$NewUIDialogTitlebar.remove();
+                            _Main.$UIDialogTitlebar.show();
+                            _Main.$Body.removeClass("az-dialog-titlebar");
+                            if (_Main.$Body.hasClass("") === true)
+                            {
+                                _Main.$Body.removeAttr("class");
+                            }
+                        }, _Main.Options.azModalDialogAlertTimeout);
+                    }
+                }
+            });
+            AZCheckAsyncAndPublish(_Main.Options.azModalDialogBeforeOpen, "functionlib/azModalDialogBeforeOpen");
+
+            if (_Main.Options.azModalDialogiFrameURL !== "" && _Main.$Iframe !== undefined)
+            {
+                return (
+                    {
+                        "ModalDialogClose": _Main.azModalDialogClose,
+                        "ChangeModalTitlebar": _Main.azChangeModalTitlebar,
+                        "IFrame": _Main.$Iframe[0].contentWindow
+                    });
             }
-        }        
+            else
+            {
+                return (
+                    {
+                        "ModalDialogClose": _Main.azModalDialogClose,
+                        "ChangeModalTitlebar": _Main.azChangeModalTitlebar
+                    });
+            }
+        }
     }
     else
     {
@@ -3919,68 +3899,101 @@ function navigateTo(SelectedPage, SelectedTarget)
 
 function getSelectedObj(SelectedList1, SelectedKey1, SelectedVal1, SelectedList2, SelectedKey2, SelectedVal2)
 {
-    var _ObjReturn = "";
-    $.each(SelectedList1, function (index1, Selected1Content)
+    var _ObjReturn = {};
+    if (SelectedList1 !== undefined && SelectedList1 !== null)
     {
-        if (SelectedList2 !== undefined && SelectedList2 !== "")
+        $.each(SelectedList1, function (index1, Selected1Content)
         {
-            if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
+            if (SelectedList2 !== undefined && SelectedList2 !== "")
             {
-                $.each(Selected1Content[SelectedList2], function (index2, Selected2Content)
+                if (Selected1Content.hasOwnProperty(SelectedKey1) && Selected1Content[SelectedKey1] !== null && SelectedVal1 !== undefined && SelectedVal1 !== null)
                 {
-                    $.each(Selected2Content, function (Key, Value)
+                    if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
                     {
-                        if (SelectedKey2.toString().toLowerCase() == Key.toString().toLowerCase() && SelectedVal2.toString().toLowerCase() == Value.toString().toLowerCase())
+                        if (Selected1Content.hasOwnProperty(SelectedList2) && Selected1Content[SelectedList2] !== null)
                         {
-                            _ObjReturn = Selected2Content;
+                            $.each(Selected1Content[SelectedList2], function (index2, Selected2Content)
+                            {
+                                if (Selected2Content !== undefined && Selected2Content !== null)
+                                {
+                                    $.each(Selected2Content, function (Key, Value)
+                                    {
+                                        if (SelectedKey2 !== undefined && SelectedKey2 !== null && Key !== undefined && Key !== null && SelectedVal2 !== undefined && SelectedVal2 !== null && Value !== undefined && Value !== null)
+                                        {
+                                            if (SelectedKey2.toString().toLowerCase() == Key.toString().toLowerCase() && SelectedVal2.toString().toLowerCase() == Value.toString().toLowerCase())
+                                            {
+                                                _ObjReturn = Selected2Content;
+                                                return false;
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $.each(Selected1Content, function (Key, Value)
+                {
+                    if (SelectedKey1 !== undefined && SelectedKey1 !== null && Key !== undefined && Key !== null && SelectedVal1 !== undefined && SelectedVal1 !== null && Value !== undefined && Value !== null)
+                    {
+                        if (SelectedKey1.toString().toLowerCase() == Key.toString().toLowerCase() && SelectedVal1.toString().toLowerCase() == Value.toString().toLowerCase())
+                        {
+                            _ObjReturn = Selected1Content;
                             return false;
                         }
-                    });
+                    }
                 });
             }
-        }
-        else
-        {
-            $.each(Selected1Content, function (Key, Value)
-            {
-                if (SelectedKey1.toString().toLowerCase() == Key.toString().toLowerCase() && SelectedVal1.toString().toLowerCase() == Value.toString().toLowerCase())
-                {
-                    _ObjReturn = Selected1Content;
-                    return false;
-                }
-            });
-        }
-    });
+        });
+    }
     return _ObjReturn;
 }
 
 function removeSelectedObj(SelectedList1, SelectedKey1, SelectedVal1, SelectedList2, SelectedKey2, SelectedVal2)
 {
-    $.each(SelectedList1, function (index1, Selected1Content)
+    if (SelectedList1 !== undefined && SelectedList1 !== null)
     {
-        if (SelectedList2 !== undefined && SelectedList2 !== "")
+        $.each(SelectedList1, function (index1, Selected1Content)
         {
-            if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
+            if (SelectedList2 !== undefined && SelectedList2 !== null)
             {
-                $.each(Selected1Content[SelectedList2], function (index2, Selected2Content)
+                if (Selected1Content.hasOwnProperty(SelectedKey1) && Selected1Content[SelectedKey1] !== null && SelectedVal1 !== undefined && SelectedVal1 !== null)
                 {
-                    if (Selected2Content[SelectedKey2].toString().toLowerCase() == SelectedVal2.toString().toLowerCase())
+                    if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
                     {
-                        Selected1Content[SelectedList2].splice(index2, 1);
+                        if (Selected1Content.hasOwnProperty(SelectedList2) && Selected1Content[SelectedList2] !== null)
+                        {
+                            $.each(Selected1Content[SelectedList2], function (index2, Selected2Content)
+                            {
+                                if (Selected2Content.hasOwnProperty(SelectedKey2) && Selected2Content[SelectedKey2] !== null && SelectedVal2 !== undefined && SelectedVal2 !== null)
+                                {
+                                    if (Selected2Content[SelectedKey2].toString().toLowerCase() == SelectedVal2.toString().toLowerCase())
+                                    {
+                                        Selected1Content[SelectedList2].splice(index2, 1);
+                                        return false;
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (Selected1Content.hasOwnProperty(SelectedKey1) && Selected1Content[SelectedKey1] !== null && SelectedVal1 !== undefined && SelectedVal1 !== null)
+                {
+                    if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
+                    {
+                        SelectedList1.splice(index1, 1);
                         return false;
                     }
-                });
+                }
             }
-        }
-        else
-        {
-            if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
-            {
-                SelectedList1.splice(index1, 1);
-                return false;
-            }
-        }
-    });
+        });
+    }
 }
 
 function existsSelectedObj(SelectedList, SelectedKey, SelectedVal)
@@ -3988,10 +4001,13 @@ function existsSelectedObj(SelectedList, SelectedKey, SelectedVal)
     var _Found = false;
     for (var i = 0; i < SelectedList.length; i++)
     {
-        if (SelectedList[i][SelectedKey].toString().toLowerCase() == SelectedVal.toString().toLowerCase())
+        if (SelectedList[i].hasOwnProperty(SelectedKey) && SelectedList[i][SelectedKey] !== null && SelectedVal !== undefined && SelectedVal !== null)
         {
-            _Found = true;
-            break;
+            if (SelectedList[i][SelectedKey].toString().toLowerCase() == SelectedVal.toString().toLowerCase())
+            {
+                _Found = true;
+                break;
+            }
         }
     }
     return _Found;

@@ -36,10 +36,22 @@ ObjPageData.Values = {};
 
 $(document).ready(function ()
 {
-    if (typeof SetContentInfo == "function")
+    if (typeof SetAZPage == "function")
     {
-        SetContentInfo();
+        SetAZPage();
     }
+
+    // AZ Input Keypress Validation
+    $.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
+    {
+        var _AZStandardAlertOptions =
+        {
+            $Area: ObjPageData.Values.AZPage.$Form,
+            Title: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.invalidCharacterTitle,
+            Text: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.invalidCharacterText + " " + data.azInputKey
+        }
+        new AZStandardAlert(_AZStandardAlertOptions);
+    });
 });
 
 // AZ Page
@@ -249,7 +261,7 @@ function AZPage(Options)
     }
     else
     {
-        consoleLog({ consoleType: "error", consoleText: "AZPage - Missing instance of this" });
+        return new AZPage(Options);
     }
 }
 
@@ -306,7 +318,7 @@ function AZCheckPageAttributes()
     }
     else
     {
-        consoleLog({ consoleType: "error", consoleText: "AZCheckPageAttributes - Missing instance of this" });
+        return new AZCheckPageAttributes();
     }
 }
 
@@ -334,7 +346,7 @@ function AZGetJSON(Options)
     }
     else
     {
-        consoleLog({ consoleType: "error", consoleText: "AZGetJSON - Missing instance of this" });
+        return new AZGetJSON(Options);
     }
 }
 
@@ -354,25 +366,25 @@ function AZSetLanguage(Options)
             _Main.SetFullLanguage = function (ObjDefaultLanguage)
             {
                 _Main.ObjLanguage =
-                    {
-                        ObjActiveLanguages: ObjDefaultLanguage.ActiveLanguages,
-                        ObjNonLanguageElements: ObjDefaultLanguage.ObjNonLanguageElements,
-                        SingleNonLanguageElements: ObjDefaultLanguage.SingleNonLanguageElements,
-                        ObjDefaultElements: ObjDefaultLanguage.ObjDefaultElements[_Main.DefaultLanguage],
-                        SingleDefaultElements: ObjDefaultLanguage.SingleDefaultElements[_Main.DefaultLanguage],
-                        ObjElements: _Main.ObjPageLanguage.ObjElements[_Main.DefaultLanguage],
-                        SingleElements: _Main.ObjPageLanguage.SingleElements[_Main.DefaultLanguage]
-                    }
+                {
+                    ObjActiveLanguages: ObjDefaultLanguage.ActiveLanguages,
+                    ObjNonLanguageElements: ObjDefaultLanguage.ObjNonLanguageElements,
+                    SingleNonLanguageElements: ObjDefaultLanguage.SingleNonLanguageElements,
+                    ObjDefaultElements: ObjDefaultLanguage.ObjDefaultElements[_Main.DefaultLanguage],
+                    SingleDefaultElements: ObjDefaultLanguage.SingleDefaultElements[_Main.DefaultLanguage],
+                    ObjElements: _Main.ObjPageLanguage.ObjElements[_Main.DefaultLanguage],
+                    SingleElements: _Main.ObjPageLanguage.SingleElements[_Main.DefaultLanguage]
+                }
                 $.publish("AZSetLanguage");
             }
 
             _Main.SetSingleLanguage = function ()
             {
                 _Main.ObjLanguage =
-                    {
-                        ObjElements: _Main.ObjPageLanguage.ObjElements[_Main.DefaultLanguage],
-                        SingleElements: _Main.ObjPageLanguage.SingleElements[_Main.DefaultLanguage]
-                    }
+                {
+                    ObjElements: _Main.ObjPageLanguage.ObjElements[_Main.DefaultLanguage],
+                    SingleElements: _Main.ObjPageLanguage.SingleElements[_Main.DefaultLanguage]
+                }
                 $.publish("AZSetLanguage");
                 consoleLog({ consoleType: "error", consoleText: "AZSetLanguage - Missing default language file" });
             }
@@ -416,7 +428,7 @@ function AZSetLanguage(Options)
     }
     else
     {
-        consoleLog({ consoleType: "error", consoleText: "AZSetLanguage - Missing instance of this" });
+        return new AZSetLanguage(Options);
     }
 }
 
@@ -616,7 +628,7 @@ function AZSetValidation(Options)
     }
     else
     {
-        consoleLog({ consoleType: "error", consoleText: "AZSetValidation - Missing instance of this" });
+        return new AZSetValidation(Options);
     }
 }
 
@@ -1189,34 +1201,34 @@ function AZGetValidType(SelectedType)
     if (_DefaultLanguage === "nb-NO")
     {
         _ValidTypes =
-            {
-                "validate-alpha": "1234567890abcdefghijklmnopqrstuvwxyzæøå!@#%&()?*+-_,;.:/\u0020\u0027\u000a",
-                "validate-numeric": "1234567890",
-                "validate-decimal": "1234567890,",
-                "validate-date": "1234567890./",
-                "validate-time": "1234567890:",
-                "validate-datetime": "1234567890./:\u0020",
-                "validate-email": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
-                "validate-web": "1234567890abcdefghijklmnopqrstuvwxyz-_.:/",
-                "validate-userpass": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
-                "validate-connectionid": "abcdefghijklmnopqrstuvwxyz"
-            }
+        {
+            "validate-alpha": "1234567890abcdefghijklmnopqrstuvwxyzæøå!@#%&()?*+-_,;.:/\u0020\u0027\u000a",
+            "validate-numeric": "1234567890",
+            "validate-decimal": "1234567890,",
+            "validate-date": "1234567890./",
+            "validate-time": "1234567890:",
+            "validate-datetime": "1234567890./:\u0020",
+            "validate-email": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
+            "validate-web": "1234567890abcdefghijklmnopqrstuvwxyz-_.:/",
+            "validate-userpass": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
+            "validate-connectionid": "abcdefghijklmnopqrstuvwxyz"
+        }
     }
     else
     {
         _ValidTypes =
-            {
-                "validate-alpha": "1234567890abcdefghijklmnopqrstuvwxyzæøå!@#%&()?*+-_,;.:/\u0020\u0027\u000a",
-                "validate-numeric": "1234567890",
-                "validate-decimal": "1234567890.",
-                "validate-date": "1234567890./",
-                "validate-time": "1234567890:",
-                "validate-datetime": "1234567890./:\u0020",
-                "validate-email": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
-                "validate-web": "1234567890abcdefghijklmnopqrstuvwxyz-_.:/",
-                "validate-userpass": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
-                "validate-connectionid": "abcdefghijklmnopqrstuvwxyz"
-            }
+        {
+            "validate-alpha": "1234567890abcdefghijklmnopqrstuvwxyzæøå!@#%&()?*+-_,;.:/\u0020\u0027\u000a",
+            "validate-numeric": "1234567890",
+            "validate-decimal": "1234567890.",
+            "validate-date": "1234567890./",
+            "validate-time": "1234567890:",
+            "validate-datetime": "1234567890./:\u0020",
+            "validate-email": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
+            "validate-web": "1234567890abcdefghijklmnopqrstuvwxyz-_.:/",
+            "validate-userpass": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
+            "validate-connectionid": "abcdefghijklmnopqrstuvwxyz"
+        }
     }
     return _ValidTypes[SelectedType];
 }
@@ -1653,122 +1665,108 @@ function AZStandardAlert(Options)
     }
     else
     {
-        consoleLog({ consoleType: "error", consoleText: "AZStandardAlert - Missing instance of this" });
+        return new AZStandardAlert(Options);
     }
 }
 
-function AZGridView(Options)
+function AZAjaxSuccess(Options)
 {
-    if (this instanceof AZGridView === true)
+    var _Defaults =
     {
-        var _Main = this;
+        Request: "AZWindow",
+        Title: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.informationTitle,
+        Text: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.alertTransferError,
+        WindowModal: true,
+        WindowBeforeOpen: function () { },
+        WindowAfterClose: function () { },
+        WindowAfterCloseReload: false,
+        FunctionToRun: function () { }
+    };
+    _Options = $.extend({}, _Defaults, Options || {});
 
-        if (IsEmpty(Options) === false && Options.hasOwnProperty("ObjLanguage") && Options.hasOwnProperty("ObjValidation"))
-        {
-            if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
-            {
-                _Main.$Area = Options.$Area;
-            }
-            else
-            {
-                _Main.$Area = "";
-            }
-
-            _Main.ObjLanguage = Options.ObjLanguage;
-            _Main.ObjValidation = Options.ObjValidation;
-
-            var _$Header = "";
-            $(".HeaderStyle > th", _Main.$Area).each(function (index) 
-            {
-                _$Header = $(this);
-                if (_Main.ObjValidation.hasOwnProperty($("a", _$Header).text()) && _Main.ObjValidation[$("a", _$Header).text()].sort == true)
-                {
-                    $("a", _$Header).text(_Main.ObjLanguage.SingleElements["labelHeader" + $("a", _$Header).text()]);
-                }
-                else
-                {
-                    _$Header.text(_Main.ObjLanguage.SingleElements["labelHeader" + $("a", _$Header).text()]);
-                }
-            });
-
-            var _ObjJsonReturn = {};
-            var _ObjSpanCheckBox = {};
-            var _ObjCheckBox = {};
-            $(".RowStyle > td, .AlternatingRowStyle > td", _Main.$Area).each(function (index)
-            {
-                _ObjJsonReturn = getSelectedObj(_Main.ObjValidation, "tabindex", $(this).index());
-                if (_ObjJsonReturn.datatype === "date")
-                {
-                    $(this).text(moment($(this).text()).format('L'));
-                }
-                else if (_ObjJsonReturn.datatype === "datetime")
-                {
-                    $(this).text(moment($(this).text()).format('L') + " - " + moment($(this).text()).format('LT'));
-                }
-                else if (_ObjJsonReturn.datatype === "time")
-                {
-                    $(this).text(moment('01/01/1900 ' + $(this).text()).format('LT'));
-                }
-                else if (_ObjJsonReturn.datatype === "militarytime")
-                {
-                    $(this).text(moment('01/01/1900 ' + $(this).text()).format('HH:mm'));
-                }
-                else if (_ObjJsonReturn.datatype === "decimal")
-                {
-                    $(this).text(numeral($(this).text()).format('0.00'));
-                }
-                else if (_ObjJsonReturn.datatype === "bytes")
-                {
-                    $(this).text(bytesToSize($(this).text()));
-                }
-                else if (_ObjJsonReturn.datatype === "int")
-                {
-                    $(this).text(_Main.ObjLanguage.SingleElements["labelRow" + $(this).text()]);
-                }
-                if ($(this).children().is("span") === true)
-                {
-                    _ObjSpanCheckBox = $(this).children();
-                    _ObjCheckBox = _ObjSpanCheckBox.find(":input");
-                    if (_ObjCheckBox.is(":input") === true)
-                    {
-                        _ObjCheckBox.attr("id", _ObjSpanCheckBox.attr("data-id"));
-                        _ObjCheckBox.addClass("az-checkbox");
-                    }
-                }
-            });
-            $(window).one("beforeunload", function (e) { AZShowCoverSpin() });
-            $.publish("functionlib/AZGridView");
-        }
-        else
-        {
-            consoleLog({ consoleType: "error", consoleText: "AZGridView - Options is empty or missing some properties" });
-        }
-    }
-    else
+    if (_Options.Request === "AZWindow")
     {
-        consoleLog({ consoleType: "error", consoleText: "AZGridView - Missing instance of this" });
+        new AZWindow(
+            {
+                azWindowTitle: _Options.Title,
+                azWindowText: _Options.Text,
+                azWindowModal: _Options.WindowModal,
+                azWindowBeforeOpen: _Options.WindowBeforeOpen,
+                azWindowAfterClose: _Options.WindowAfterClose,
+                azWindowAfterCloseReload: _Options.WindowAfterCloseReload
+            });
     }
+    if (_Options.Request === "SignIn")
+    {
+        var _ObjCustomerInfo = _Options.Data;
+        delete _ObjCustomerInfo.Transfer;
+        clientStorage("set", "customerinfo", JSON.stringify(_ObjCustomerInfo));
+        ObjPageData.Elements.$Token.val(_ObjCustomerInfo.UserSignIn.Token);
+        $(ObjPageData.Values.AZPage.$Form).submit();
+    }
+    if (_Options.Request === "GetSubscriptionData")
+    {
+        ObjPageData.Values.ObjCustomerInfo.LocalData.ListSubscriptionReturn = _Options.Data.ListSubscriptionReturn;
+        clientStorage("set", "customerinfo", JSON.stringify(ObjPageData.Values.ObjCustomerInfo));
+        $.publish("GetSubscriptionDataSuccess");
+    }
+    if (_Options.Request === "GetInvoiceData")
+    {
+        ObjPageData.Values.ObjCustomerInfo.LocalData.ListInvoiceReturn = _Options.Data.ListInvoiceReturn;
+        clientStorage("set", "customerinfo", JSON.stringify(ObjPageData.Values.ObjCustomerInfo));
+        $.publish("GetInvoiceDataSuccess");
+    }
+    if (_Options.Request === "AZSubmitCustomerAdd")
+    {
+        ObjPageData.Values.ObjCustomerInfo.LocalData.OrgUnitId = _Options.Data.ObjOrgUnit.OrgUnitId;
+        clientStorage("set", "customerinfo", JSON.stringify(ObjPageData.Values.ObjCustomerInfo));
+        $(ObjPageData.Values.AZPage.$Form).submit();
+    }
+    if (_Options.Request === "AZSubmitCustomerAdd1")
+    {
+        ObjPageData.Values.ObjCustomerInfo.LocalData.CustomerId = _Options.Data.ObjCustomer.CustomerId;
+        ObjPageData.Values.ObjCustomerInfo.LocalData.LanguageId = _Options.Data.ObjCustomer.LanguageId;
+        clientStorage("set", "customerinfo", JSON.stringify(ObjPageData.Values.ObjCustomerInfo));
+        $(ObjPageData.Values.AZPage.$Form).submit();
+    }
+    AZCheckAsyncAndPublish(_Options.FunctionToRun, "");
 }
 
-function setCheckbox()
+function AZAjaxError(Options)
 {
-    var $chkboxes = $('.az-checkbox');
-    var lastChecked = null;
-    $chkboxes.click(function (e) 
+    var _Defaults =
     {
-        if (!lastChecked) 
+        Request: "AZWindow",
+        Title: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.informationTitle,
+        Text: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.alertTransferError,
+        WindowModal: true,
+        WindowBeforeOpen: function () { },
+        WindowAfterClose: function () { },
+        WindowAfterCloseReload: false
+    };
+    _Options = $.extend({}, _Defaults, Options || {});
+
+    if (_Options.Request === "AZWindow")
+    {
+        new AZWindow(
+            {
+                azWindowTitle: _Options.Title,
+                azWindowText: _Options.Text,
+                azWindowModal: _Options.WindowModal,
+                azWindowBeforeOpen: _Options.WindowBeforeOpen,
+                azWindowAfterClose: _Options.WindowAfterClose,
+                azWindowAfterCloseReload: _Options.WindowAfterCloseReload
+            });
+    }
+    if (_Options.Request === "RoleAlert")
+    {
+        AZHideCoverSpin();
+        $('[role="alert"]').text(Options.Text).removeClass('az-alert-info').addClass('az-alert-danger').show();
+        window.setTimeout(function ()
         {
-            lastChecked = this;
-            return;
-        }
-        if (e.shiftKey)
-        {
-            var start = $chkboxes.index(this);
-            var end = $chkboxes.index(lastChecked);
-            $chkboxes.slice(Math.min(start, end), Math.max(start, end) + 1).prop('checked', lastChecked.checked);
-        }
-        lastChecked = this;
-    });
+            $('[role="alert"]').text(ObjPageData.Values.AZPage.ObjLanguage.SingleElements.DefaultMessage).removeClass('az-alert-danger').addClass('az-alert-info').show();
+        }, 3000);
+    }
 }
 
 function consoleLog(Options)
