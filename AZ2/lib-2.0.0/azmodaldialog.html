@@ -35,6 +35,7 @@
         var azModalDialog5;
         var azModalDialog6;
         var azModalDialog7;
+        window.objects = [];
 
         $(document).ready(function ()
         {
@@ -71,7 +72,7 @@
                 });
                 $("#cmdModalDialog13").off().on('click', function ()
                 {
-                    azModalDialog1.ModalDialogClose();
+                    window.objects[0].ModalDialogClose();
                 });
             });
 
@@ -100,18 +101,32 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            if (azModalDialog1 === undefined)
-            {
-                azModalDialog1 = new AZModalDialog(
-                    {
-                        azModalDialogId: "ModalDialog1",
-                        azModalDialogTitle: "AZ Modal Dialog 1",
-                        azModalDialogText: _HTML,
-                        azModalDialogWidth: 550,
-                        azModalDialogHeight: 500,
-                        azModalDialogReturnVariable: "azModalDialog1"
-                    });
-            }
+
+            azModalDialog1 = new AZModalDialog(
+                {
+                    azModalDialogId: "ModalDialog1",
+                    azModalDialogTitle: "AZ Modal Dialog 1",
+                    azModalDialogText: _HTML,
+                    azModalDialogWidth: 550,
+                    azModalDialogHeight: 500,
+                    azModalDialogBackground: false,
+                    azModalDialogReturnVariable: "azModalDialog1"
+                });
+
+
+
+            //if (azModalDialog1 === undefined)
+            //{
+            //    azModalDialog1 = new AZModalDialog(
+            //        {
+            //            azModalDialogId: "ModalDialog1",
+            //            azModalDialogTitle: "AZ Modal Dialog 1",
+            //            azModalDialogText: _HTML,
+            //            azModalDialogWidth: 550,
+            //            azModalDialogHeight: 500,
+            //            azModalDialogReturnVariable: "azModalDialog1"
+            //        });
+            //}
         }
 
         function setModalDialog2()

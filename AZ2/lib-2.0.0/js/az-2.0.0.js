@@ -2476,11 +2476,70 @@ function AZCircularBar(Options)
     }
 }
 
+
+//function createnewobject(SelectedObject)
+//{
+//    new Cust(SelectedObject);
+//}
+
+//function Cust(SelectedObject)
+//{
+//    SelectedObject.guid = Math.floor(Math.random() * 10000);
+//    window.objects.push(SelectedObject);
+//}
+
+//function deletelatestobject()
+//{
+//    if (window.objects.length > 0)
+//    {
+//        window.objects[0].destroy();
+//    }
+//}
+
+//Cust.prototype.destroy = function ()
+//{
+//    var index = -1;
+//    for (var i = 0; i < window.objects.length; i++)
+//    {
+//        if (window.objects[i].guid == this.guid)
+//        {
+//            index = i;
+//        }
+//    }
+//    console.log(index);
+//    if (index > -1)
+//    {
+//        window.objects.splice(index, 1);
+//    }
+//    console.log(window.objects);
+//};
+
+
+function CheckObjects(SelectedObject)
+{
+    for (var i = 0; i < window.objects.length; i++)
+    {
+        if (window.objects[i] === SelectedObject)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 // AZ Modal Dialog
 function AZModalDialog(Options)
 {
     if (this instanceof AZModalDialog === true)
     {
+        console.log(CheckObjects(this))
+
+        window.objects.push(this);
+
+        console.log(window.objects)
+
+
         var _Main = this;
         var _Defaults =
         {
@@ -3138,15 +3197,15 @@ function AZWindow(Options)
 
                 // AZ Size
                 _Main.Options.azWindowWidth = (_Main.Options.azWindowWidth - 14);
-                if (_Main.Options.azWindowWidth > (window.innerWidth - 20))
+                if (_Main.Options.azWindowWidth > (window.innerWidth - 40))
                 {
-                    _Main.Options.azWindowWidth = (window.innerWidth - 20);
+                    _Main.Options.azWindowWidth = (window.innerWidth - 40);
                 }
                 if (_Main.Options.azWindowHeight > 150)
                 {
-                    if (_Main.Options.azWindowHeight > (window.innerHeight - 20))
+                    if (_Main.Options.azWindowHeight > (window.innerHeight - 40))
                     {
-                        _Main.Options.azWindowHeight = (window.innerHeight - 20);
+                        _Main.Options.azWindowHeight = (window.innerHeight - 40);
                     }
                 }
 

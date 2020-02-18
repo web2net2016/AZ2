@@ -316,7 +316,7 @@
         {
             width: 30px;
             height: 30px;
-            top: 8px;
+            top: 9px;
         }
 
         .az-form-group .az-checkbox:focus, .az-form-group .az-radio:focus
@@ -405,18 +405,21 @@
         {
             width: 28px;
             height: 15px;
+            top: 3px;
         }
 
         .az-form-group .az-switch.sm
         {
             width: 44px;
             height: 25px;
+            top: -3px;
         }
 
         .az-form-group .az-switch.md
         {
             width: 52px;
             height: 30px;
+            top: -7px;
         }
 
         .az-form-group .az-switch input
