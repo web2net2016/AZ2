@@ -28,10 +28,13 @@
         $(document).ready(function ()
         {
             w3CodeColor();
-
-            $("#cmdModalDialog1").off().on('click', function ()
+            $.subscribe("functionlib/azModalDialogiFrame", function (e, data)
             {
-                window.top.azModalDialogiFrame2.IFrame.AZSide2("Side 1");
+                $("#cmdModalDialog1").off().on('click', function ()
+                {
+                    console.log(data)
+                    //data.$Iframe[0].contentWindow.AZSide2("Side 1");
+                });
             });
         });
 

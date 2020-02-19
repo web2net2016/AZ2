@@ -25,18 +25,6 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
-        var azModalDialog1;
-        var azModalDialog2;
-        var azModalDialog3;
-        var azModalDialogiFrame1;
-        var azModalDialogiFrame2;
-        var azModalDialogPosition;
-        var azModalDialog4;
-        var azModalDialog5;
-        var azModalDialog6;
-        var azModalDialog7;
-        window.objects = [];
-
         $(document).ready(function ()
         {
             w3CodeColor();
@@ -60,8 +48,10 @@
 
         function setModalDialog1()
         {
-            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
+                console.log(data)
+
                 $("#cmdModalDialog11").off().on('click', function ()
                 {
                     setModalDialog2();
@@ -72,21 +62,20 @@
                 });
                 $("#cmdModalDialog13").off().on('click', function ()
                 {
-                    window.objects[0].ModalDialogClose();
+                    data.azModalDialogClose();
                 });
             });
 
             var _HTML = "";
             _HTML = '<div class="az-margin-t-28 az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'var azModalDialog = new AZModalDialog(<br />';
+            _HTML += 'new AZModalDialog(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogId: "ModalDialog1",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog 1",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 550,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 500,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogReturnVariable: "azModalDialog1"<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 500<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
@@ -101,59 +90,38 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-
-            azModalDialog1 = new AZModalDialog(
+            new AZModalDialog(
                 {
                     azModalDialogId: "ModalDialog1",
                     azModalDialogTitle: "AZ Modal Dialog 1",
                     azModalDialogText: _HTML,
                     azModalDialogWidth: 550,
                     azModalDialogHeight: 500,
-                    azModalDialogBackground: false,
-                    azModalDialogReturnVariable: "azModalDialog1"
+                    azModalDialogBackground: false
                 });
-
-
-
-            //if (azModalDialog1 === undefined)
-            //{
-            //    azModalDialog1 = new AZModalDialog(
-            //        {
-            //            azModalDialogId: "ModalDialog1",
-            //            azModalDialogTitle: "AZ Modal Dialog 1",
-            //            azModalDialogText: _HTML,
-            //            azModalDialogWidth: 550,
-            //            azModalDialogHeight: 500,
-            //            azModalDialogReturnVariable: "azModalDialog1"
-            //        });
-            //}
         }
 
         function setModalDialog2()
         {
-            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
                 $("#cmdModalDialog21").off().on('click', function ()
                 {
-                    if (azModalDialog2 !== undefined)
-                    {
-                        azModalDialog2.ModalDialogClose();
-                    }
+                    data.azModalDialogClose();
                 });
             });
 
             var _HTML = "";
             _HTML = '<div class="az-margin-t-28 az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'var azModalDialog = new AZModalDialog(<br />';
+            _HTML += 'new AZModalDialog(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogId: "ModalDialog2",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog 2",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 550,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 450,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogModal: false,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogReturnVariable: "azModalDialog2"<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogModal: false<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
@@ -162,35 +130,31 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            if (azModalDialog2 === undefined)
-            {
-                azModalDialog2 = new AZModalDialog(
-                    {
-                        azModalDialogId: "ModalDialog2",
-                        azModalDialogTitle: "AZ Modal Dialog 2",
-                        azModalDialogText: _HTML,
-                        azModalDialogWidth: 550,
-                        azModalDialogHeight: 450,
-                        azModalDialogModal: false,
-                        azModalDialogReturnVariable: "azModalDialog2"
-                    });
-            }
+            new AZModalDialog(
+                {
+                    azModalDialogId: "ModalDialog2",
+                    azModalDialogTitle: "AZ Modal Dialog 2",
+                    azModalDialogText: _HTML,
+                    azModalDialogWidth: 550,
+                    azModalDialogHeight: 450,
+                    azModalDialogModal: false
+                });
         }
 
         function setModalDialog3()
         {
-            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
                 $("#cmdModalDialog31").off().on('click', function ()
                 {
-                    azModalDialog3.ModalDialogClose();
+                    data.azModalDialogClose();
                 });
             });
 
             var _HTML = "";
             _HTML = '<div class="az-margin-t-28 az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'var azModalDialog = new AZModalDialog(<br />';
+            _HTML += 'new AZModalDialog(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogId: "ModalDialog3",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog 3",<br />';
@@ -199,8 +163,7 @@
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 500,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogBackground: false,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogCloseOnEscape: false,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogNoParentScroll: true,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogReturnVariable: "azModalDialog3"<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogNoParentScroll: true<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
@@ -209,71 +172,59 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            if (azModalDialog3 === undefined)
-            {
-                azModalDialog3 = new AZModalDialog(
-                    {
-                        azModalDialogId: "ModalDialog3",
-                        azModalDialogTitle: "AZ Modal Dialog 3",
-                        azModalDialogText: _HTML,
-                        azModalDialogWidth: 550,
-                        azModalDialogHeight: 500,
-                        azModalDialogBackground: false,
-                        azModalDialogCloseOnEscape: false,
-                        azModalDialogNoParentScroll: true,
-                        azModalDialogReturnVariable: "azModalDialog3"
-                    });
-            }
+            new AZModalDialog(
+                {
+                    azModalDialogId: "ModalDialog3",
+                    azModalDialogTitle: "AZ Modal Dialog 3",
+                    azModalDialogText: _HTML,
+                    azModalDialogWidth: 550,
+                    azModalDialogHeight: 500,
+                    azModalDialogBackground: false,
+                    azModalDialogCloseOnEscape: false,
+                    azModalDialogNoParentScroll: true
+                });
         }
 
         function setModalDialogiFrame1()
         {
-            if (azModalDialogiFrame1 === undefined)
-            {
-                azModalDialogiFrame1 = new AZModalDialog(
-                    {
-                        azModalDialogId: "azModalDialogiFrame1",
-                        azModalDialogTitle: "AZ Modal Dialog iFrame 1",
-                        azModalDialogWidth: 600,
-                        azModalDialogHeight: 500,
-                        azModalDialogiFrameURL: "/side1.html",
-                        azModalDialogBackground: false,
-                        azModalDialogReturnVariable: "azModalDialogiFrame1"
-                    });
-            }
+            new AZModalDialog(
+                {
+                    azModalDialogId: "azModalDialogiFrame1",
+                    azModalDialogTitle: "AZ Modal Dialog iFrame 1",
+                    azModalDialogWidth: 600,
+                    azModalDialogHeight: 500,
+                    azModalDialogiFrameURL: "/side1.html",
+                    azModalDialogBackground: false
+                });
         }
 
         function setModalDialogiFrame2()
         {
-            if (azModalDialogiFrame2 === undefined)
-            {
-                azModalDialogiFrame2 = new AZModalDialog(
-                    {
-                        azModalDialogId: "azModalDialogiFrame2",
-                        azModalDialogTitle: "AZ Modal Dialog iFrame 2",
-                        azModalDialogWidth: 600,
-                        azModalDialogHeight: 500,
-                        azModalDialogiFrameURL: "/side2.html",
-                        azModalDialogBackground: false,
-                        azModalDialogReturnVariable: "azModalDialogiFrame2"
-                    });
-            }
+            new AZModalDialog(
+                {
+                    azModalDialogId: "azModalDialogiFrame2",
+                    azModalDialogTitle: "AZ Modal Dialog iFrame 2",
+                    azModalDialogWidth: 600,
+                    azModalDialogHeight: 500,
+                    azModalDialogiFrameURL: "/side2.html",
+                    azModalDialogBackground: false
+                });
         }
 
         function setModalDialogPosition()
         {
-            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
                 $("#cmdModalDialogPosition1").off().on('click', function ()
                 {
-                    azModalDialogPosition.ModalDialogClose();
+                    data.azModalDialogClose();
                 });
             });
 
             var _HTML = "";
             _HTML = '<div class="az-margin-t-28 az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'var azModalDialog = new AZModalDialog(<br />';
+            _HTML += 'new AZModalDialog(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogId: "ModalDialogPosition",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog Position",<br />';
@@ -283,8 +234,7 @@
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogPosition: true,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogPositionMy: "right top+30",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogPositionAt: "right bottom",<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogPositionOf: $("#cmdModalDialogPosition"),<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogReturnVariable: "azModalDialogPosition",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogPositionOf: $("#cmdModalDialogPosition")<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += 'azModalDialogPositionMy:<br />';
@@ -299,31 +249,27 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            if (azModalDialogPosition === undefined)
-            {
-                azModalDialogPosition = new AZModalDialog(
-                    {
-                        azModalDialogId: "ModalDialogPosition",
-                        azModalDialogTitle: "AZ Modal Dialog Position",
-                        azModalDialogText: _HTML,
-                        azModalDialogWidth: 700,
-                        azModalDialogHeight: 650,
-                        azModalDialogPosition: true,
-                        azModalDialogPositionMy: "right top+30",
-                        azModalDialogPositionAt: "right bottom",
-                        azModalDialogPositionOf: $("#cmdModalDialogPosition"),
-                        azModalDialogReturnVariable: "azModalDialogPosition"
-                    });
-            }
+            new AZModalDialog(
+                {
+                    azModalDialogId: "ModalDialogPosition",
+                    azModalDialogTitle: "AZ Modal Dialog Position",
+                    azModalDialogText: _HTML,
+                    azModalDialogWidth: 700,
+                    azModalDialogHeight: 650,
+                    azModalDialogPosition: true,
+                    azModalDialogPositionMy: "right top+30",
+                    azModalDialogPositionAt: "right bottom",
+                    azModalDialogPositionOf: $("#cmdModalDialogPosition")
+                });
         }
 
         function setModalDialog4()
         {
-            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialog4.ModalDialogClose();
+                    data.azModalDialogClose();
                 });
             });
 
@@ -338,22 +284,21 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azModalDialog4 = new AZModalDialog(
+            new AZModalDialog(
                 {
                     azModalDialogId: "ModalDialog4",
                     azModalDialogTitle: "AZ Modal Dialog 4",
-                    azModalDialogText: _HTML,
-                    azModalDialogReturnVariable: "azModalDialog4"
+                    azModalDialogText: _HTML
                 });
         }
 
         function setModalDialog5()
         {
-            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialog5.ModalDialogClose({ azModalDialogAfterCloseReload: true });
+                    data.azModalDialogClose({ azModalDialogAfterCloseReload: true });
                 });
             });
 
@@ -371,24 +316,23 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azModalDialog5 = new AZModalDialog(
+            new AZModalDialog(
                 {
                     azModalDialogId: "ModalDialog5",
                     azModalDialogTitle: "AZ Modal Dialog 5",
                     azModalDialogText: _HTML,
                     azModalDialogWidth: 550,
-                    azModalDialogHeight: 350,
-                    azModalDialogReturnVariable: "azModalDialog5"
+                    azModalDialogHeight: 350
                 });
         }
 
         function setModalDialog6()
         {
-            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialog6.ModalDialogClose({ azModalDialogAfterClose: function () { window.location.href = "azcdn200.html" } });
+                    data.azModalDialogClose({ azModalDialogAfterClose: function () { window.location.href = "azcdn200.html" } });
                 });
             });
 
@@ -406,28 +350,27 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azModalDialog6 = new AZModalDialog(
+            new AZModalDialog(
                 {
                     azModalDialogId: "ModalDialog6",
                     azModalDialogTitle: "AZ Modal Dialog 6",
                     azModalDialogText: _HTML,
                     azModalDialogWidth: 800,
-                    azModalDialogHeight: 350,
-                    azModalDialogReturnVariable: "azModalDialog6"
+                    azModalDialogHeight: 350
                 });
         }
 
         function setModalDialog7()
         {
-            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e)
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    azModalDialog7.ChangeModalTitlebar({ azModalDialogTitle: "Ny tittel", azModalDialogTitlebarBackgroundColor: "#FF4136" });
+                    data.azChangeModalTitlebar({ azModalDialogTitle: "Ny tittel", azModalDialogTitlebarBackgroundColor: "#FF4136" });
                 });
                 $("#cmdButton2").off().on('click', function ()
                 {
-                    azModalDialog7.ModalDialogClose();
+                    data.azModalDialogClose();
                 });
             });
 
@@ -449,14 +392,13 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azModalDialog7 = new AZModalDialog(
+            new AZModalDialog(
                 {
                     azModalDialogId: "ModalDialog7",
                     azModalDialogTitle: "AZ Modal Dialog Tittel",
                     azModalDialogText: _HTML,
                     azModalDialogWidth: 550,
-                    azModalDialogHeight: 400,
-                    azModalDialogReturnVariable: "azModalDialog7"
+                    azModalDialogHeight: 400
                 });
         }
 
@@ -504,7 +446,7 @@
 
             <div class="row az-margin-t-28">
                 <div class="az-col xs-12">
-                    <h1 class="az-code-header">AZ Modal Dialog</h1>
+                    <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog</h1>
                 </div>
             </div>
             <div class="az-row az-margin-t-56">
@@ -512,9 +454,8 @@
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />
-                        var azModalDialog = new AZModalDialog(<br />
+                        new AZModalDialog(<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;azModalDialogReturnVariable: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogId: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogText: "",<br />
@@ -684,7 +625,7 @@
             </div>
             <div class="az-row az-margin-t-28">
                 <div class="az-col xs-12">
-                    <h1 class="az-code-header">AZ Modal Dialog - Lukk</h1>
+                    <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog - Lukk</h1>
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />
@@ -724,7 +665,7 @@
             </div>
             <div class="az-row az-margin-t-28 az-margin-b-56">
                 <div class="az-col xs-12">
-                    <h1 class="az-code-header">AZ Modal Dialog - Tittel</h1>
+                    <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog - Tittel</h1>
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />

@@ -25,29 +25,47 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
-        var azAccordion1;
-        var azAccordion2;
-
         $(document).ready(function ()
         {
             w3CodeColor();
-
-            $(".cmdAZAccordion1").off().on("click", function (e) { azAccordion1.SelectAccordion(0) });
-            $(".cmdAZAccordion2").off().on("click", function (e) { azAccordion1.SelectAccordion(1) });
-            $(".cmdAZAccordion3").off().on("click", function (e) { azAccordion1.SelectAccordion(2) });
-            $(".cmdAZAccordion4").off().on("click", function (e) { ChangeText() });
 
             $.subscribe("functionlib/azAccordionHeader", function (e, data)
             {
                 console.log("azAccordionId: " + data.azAccordionId + "\nazAccordionStatus: " + data.azAccordionStatus + "\nazAccordionActivated: " + data.azAccordionActivated + "\nazAccordionDeactivated: " + data.azAccordionDeactivated + "\nazAccordionHeaderJQElement: ", data.azAccordionHeaderJQElement)
             });
 
-            azAccordion1 = new AZAccordion(
+            $.subscribe("functionlib/azAccordionReady", function (e, data)
+            {
+                if (data.Options.azAccordionId === "az-accordion-1")
+                {
+                    $(".cmdAZAccordion1").off().on("click", function (e)
+                    {
+                        data.azSelectAccordion(0);
+                    });
+                    $(".cmdAZAccordion2").off().on("click", function (e)
+                    {
+                        data.azSelectAccordion(1);
+                    });
+                    $(".cmdAZAccordion3").off().on("click", function (e)
+                    {
+                        data.azSelectAccordion(2);
+                    });
+                }
+                if (data.Options.azAccordionId === "az-accordion-2")
+                {
+                    $(".cmdAZAccordion4").off().on("click", function (e)
+                    {
+                        ChangeText(data);
+                    });
+                }
+            });
+
+            new AZAccordion(
                 {
                     azAccordionId: "az-accordion-1"
                 });
 
-            azAccordion2 = new AZAccordion(
+            new AZAccordion(
                 {
                     azAccordionId: "az-accordion-2",
                     azAccordionHeightStyle: "auto",
@@ -65,14 +83,13 @@
                 });
         });
 
-        function ChangeText()
+        function ChangeText(data)
         {
             var _HTML = "";
             _HTML = '<img class="az-image az-width-40 az-display-left az-margin-r-14 az-shadow-1" src="/web2net/img_avatar4.png" />';
             _HTML += '<p class="az-clearfix">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>';
-            azAccordion2.ChangeText(0, _HTML);
+            data.azChangeText(0, _HTML);
         }
-
 
     </script>
 </head>
@@ -186,7 +203,7 @@
                         <strong>Default settings</strong>
                         <br />
                         <br />
-                        var azAccordion = new AZAccordion(<br />
+                        new AZAccordion(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionId: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionHeightStyle: "content",<br />
@@ -213,12 +230,12 @@
                         <br />
                         Hvis du ønsker å bruke egne knapper eller linker til å åpne/lukke <strong>AZAccordion</strong>, bruker du funksjonen under.<br />
                         <br />
-                        azAccordion.SelectAccordion(0);<br />
+                        azSelectAccordion(0);<br />
                         <br />
                         <br />
                         Du har også muligheten til å skifte ut innholdet i <strong>AZAccordion</strong>, ved enten å klikke på en knapp eller link, eller en bestemt hendelse inntrer.<br />
                         <br />
-                        azAccordion.ChangeText(0, "Dette er en tekst");<br />
+                        azChangeText(0, "Dette er en tekst");<br />
                         <br />
                         Det første parameteret, (Index) tilsvarer nummert på hvilken accordion "header" du ønsker å gjøre noe med. Det siste parameteret er selve innholdet.<br />
                         <br />

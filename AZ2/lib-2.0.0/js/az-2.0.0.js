@@ -1196,13 +1196,14 @@ $(document).ready(function ()
                 on: "subscribe",
                 one: "subscribeonce",
                 off: "unsubscribe"
-            }, function (key, val)
-        {
-            jQuery[val] = function ()
+            },
+            function (key, val)
             {
-                _$Obj[key].apply(_$Obj, arguments);
-            };
-        });
+                jQuery[val] = function ()
+                {
+                    _$Obj[key].apply(_$Obj, arguments);
+                };
+            });
 
         var _azLastScrollTop = 0;
         $(window).scroll(function ()
@@ -2357,12 +2358,8 @@ function AZAccordion(Options)
             {
                 _Main.azSelectAccordion(0);
             }
+            $.publish("functionlib/azAccordionReady", _Main);
         }
-        return (
-            {
-                "SelectAccordion": _Main.azSelectAccordion,
-                "ChangeText": _Main.azChangeText
-            });
     }
     else
     {
@@ -2476,74 +2473,14 @@ function AZCircularBar(Options)
     }
 }
 
-
-//function createnewobject(SelectedObject)
-//{
-//    new Cust(SelectedObject);
-//}
-
-//function Cust(SelectedObject)
-//{
-//    SelectedObject.guid = Math.floor(Math.random() * 10000);
-//    window.objects.push(SelectedObject);
-//}
-
-//function deletelatestobject()
-//{
-//    if (window.objects.length > 0)
-//    {
-//        window.objects[0].destroy();
-//    }
-//}
-
-//Cust.prototype.destroy = function ()
-//{
-//    var index = -1;
-//    for (var i = 0; i < window.objects.length; i++)
-//    {
-//        if (window.objects[i].guid == this.guid)
-//        {
-//            index = i;
-//        }
-//    }
-//    console.log(index);
-//    if (index > -1)
-//    {
-//        window.objects.splice(index, 1);
-//    }
-//    console.log(window.objects);
-//};
-
-
-function CheckObjects(SelectedObject)
-{
-    for (var i = 0; i < window.objects.length; i++)
-    {
-        if (window.objects[i] === SelectedObject)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-
 // AZ Modal Dialog
 function AZModalDialog(Options)
 {
     if (this instanceof AZModalDialog === true)
     {
-        console.log(CheckObjects(this))
-
-        window.objects.push(this);
-
-        console.log(window.objects)
-
-
         var _Main = this;
         var _Defaults =
         {
-            azModalDialogReturnVariable: "",
             azModalDialogId: "",
             azModalDialogTitle: "",
             azModalDialogText: "",
@@ -2573,7 +2510,7 @@ function AZModalDialog(Options)
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
-        if (_Main.Options.azModalDialogReturnVariable !== "" && _Main.Options.azModalDialogId !== "" && $("#" + _Main.Options.azModalDialogId).length === 0)
+        if (_Main.Options.azModalDialogId !== "" && $("#" + _Main.Options.azModalDialogId).length === 0)
         {
             $.subscribeonce("functionlib/azModalDialogBeforeOpen", function ()
             {
@@ -2603,6 +2540,10 @@ function AZModalDialog(Options)
                     _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe-" + _Main.Options.azModalDialogId);
                     _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": (_Main.Options.azModalDialogHeight - 80) });
                     _Main.$Card.append(_Main.$Iframe);
+                    setTimeout(function ()
+                    {
+                        $.publish("functionlib/azModalDialogiFrame", _Main)
+                    }, 100);
                 }
 
                 // UI Dialog
@@ -2692,12 +2633,11 @@ function AZModalDialog(Options)
                         });
                     }
                 }
-                AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterOpen, "functionlib/azModalDialogAfterOpen");
+                AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterOpen, "functionlib/azModalDialogAfterOpen", _Main);
 
                 // AZ Modal Dialog Close 
                 _Main.azModalDialogClose = function (Options)
                 {
-                    window[_Main.Options.azModalDialogReturnVariable] = undefined;
                     var _Defaults =
                     {
                         azModalDialogAfterClose: function () { },
@@ -2746,7 +2686,7 @@ function AZModalDialog(Options)
                             }
                         }
                     });
-                    AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterClose, "functionlib/azModalDialogAfterClose");
+                    AZCheckAsyncAndPublish(_Main.Options.azModalDialogAfterClose, "functionlib/azModalDialogAfterClose", _Main);
                 }
 
                 // AZ Change Modal Dialog Titlebar
@@ -2781,25 +2721,7 @@ function AZModalDialog(Options)
                     }
                 }
             });
-            AZCheckAsyncAndPublish(_Main.Options.azModalDialogBeforeOpen, "functionlib/azModalDialogBeforeOpen");
-
-            if (_Main.Options.azModalDialogiFrameURL !== "" && _Main.$Iframe !== undefined)
-            {
-                return (
-                    {
-                        "ModalDialogClose": _Main.azModalDialogClose,
-                        "ChangeModalTitlebar": _Main.azChangeModalTitlebar,
-                        "IFrame": _Main.$Iframe[0].contentWindow
-                    });
-            }
-            else
-            {
-                return (
-                    {
-                        "ModalDialogClose": _Main.azModalDialogClose,
-                        "ChangeModalTitlebar": _Main.azChangeModalTitlebar
-                    });
-            }
+            AZCheckAsyncAndPublish(_Main.Options.azModalDialogBeforeOpen, "functionlib/azModalDialogBeforeOpen", _Main);
         }
     }
     else
@@ -2808,7 +2730,7 @@ function AZModalDialog(Options)
     }
 }
 
-function AZCheckAsyncAndPublish(FunctionToRun, Publish)
+function AZCheckAsyncAndPublish(FunctionToRun, Publish, ObjData)
 {
     if (FunctionToRun)
     {
@@ -2817,17 +2739,17 @@ function AZCheckAsyncAndPublish(FunctionToRun, Publish)
         {
             _Obj.always(function ()
             {
-                $.publish(Publish);
+                $.publish(Publish, ObjData);
             });
         }
         else
         {
-            $.publish(Publish);
+            $.publish(Publish, ObjData);
         }
     }
     else
     {
-        $.publish(Publish);
+        $.publish(Publish, ObjData);
     }
 }
 
@@ -3026,13 +2948,9 @@ function AZSnackbar(Options)
 
             _Main.$Wrapper.animate(_Main.AnimateOpenOptions, 500, function ()
             {
-                AZCheckAsyncAndPublish(_Main.Options.azSnackbarAfterOpen, "functionlib/azSnackbarAfterOpen");
+                AZCheckAsyncAndPublish(_Main.Options.azSnackbarAfterOpen, "functionlib/azSnackbarAfterOpen", _Main);
             });
         }
-        return (
-            {
-                "ChangeSnackbarText": _Main.azChangeSnackbarText
-            });
     }
     else
     {
@@ -3136,12 +3054,7 @@ function AZTabs(Options)
             }
             _Main.azSelectTabs(_Main.Options.azTabsIndex);
         }
-        return (
-            {
-                "SelectTab": _Main.azSelectTabs,
-                "ChangeText": _Main.azChangeText,
-                "ToggleVertical": _Main.azToggleVertical
-            });
+        $.publish("functionlib/azTabsReady", _Main);
     }
     else
     {
@@ -3276,7 +3189,7 @@ function AZWindow(Options)
                 {
                     _Main.$Window.show();
                 }
-                AZCheckAsyncAndPublish(_Main.Options.azWindowAfterOpen, "functionlib/azWindowAfterOpen");
+                AZCheckAsyncAndPublish(_Main.Options.azWindowAfterOpen, "functionlib/azWindowAfterOpen", _Main);
 
                 // AZ Window Close 
                 _Main.azWindowClose = function (Options)
@@ -3326,7 +3239,7 @@ function AZWindow(Options)
                             }
                         }
                     });
-                    AZCheckAsyncAndPublish(_Main.Options.azWindowAfterClose, "functionlib/azWindowAfterClose");
+                    AZCheckAsyncAndPublish(_Main.Options.azWindowAfterClose, "functionlib/azWindowAfterClose", _Main);
                 }
 
                 // AZ Change Window Titlebar
@@ -3360,14 +3273,8 @@ function AZWindow(Options)
                     }
                 }
             });
-            AZCheckAsyncAndPublish(_Main.Options.azWindowBeforeOpen, "functionlib/azWindowBeforeOpen");
+            AZCheckAsyncAndPublish(_Main.Options.azWindowBeforeOpen, "functionlib/azWindowBeforeOpen", _Main);
         }
-
-        return (
-            {
-                "WindowClose": _Main.azWindowClose,
-                "ChangeWindowTitlebar": _Main.azChangeWindowTitlebar
-            });
     }
     else
     {
@@ -3474,9 +3381,9 @@ function AZFullWindow(Options)
                     ModalDialogScrollTop = $(window).scrollTop();
                     _Main.$Body.addClass("az-no-parent-scroll");
                 });
-                AZCheckAsyncAndPublish(_Main.Options.azFullWindowAfterOpen, "functionlib/azFullWindowAfterOpen");
+                AZCheckAsyncAndPublish(_Main.Options.azFullWindowAfterOpen, "functionlib/azFullWindowAfterOpen", _Main);
             });
-            AZCheckAsyncAndPublish(_Main.Options.azFullWindowBeforeOpen, "functionlib/azFullWindowBeforeOpen");
+            AZCheckAsyncAndPublish(_Main.Options.azFullWindowBeforeOpen, "functionlib/azFullWindowBeforeOpen", _Main);
 
             _Main.$Close.on('click', function ()
             {
@@ -3497,7 +3404,7 @@ function AZFullWindow(Options)
                         $.publish("functionlib/azFullWindowClosed");
                     });
                 });
-                AZCheckAsyncAndPublish(_Main.Options.azFullWindowAfterClose, "functionlib/azFullWindowAfterClose");
+                AZCheckAsyncAndPublish(_Main.Options.azFullWindowAfterClose, "functionlib/azFullWindowAfterClose", _Main);
             });
         }
     }

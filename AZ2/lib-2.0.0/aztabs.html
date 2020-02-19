@@ -25,10 +25,6 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
-        var azTabs1;
-        var azTabs2;
-        var azTabs3;
-
         $(document).ready(function ()
         {
             w3CodeColor();
@@ -43,27 +39,42 @@
                 console.log("azTabsId: " + data.azTabsId + "\nazTabsJQElement: ", data.azTabsJQElement)
             });
 
-            $("#cmdAZTabs1").off().on("click", function (e) { azTabs1.SelectTab(0) });
-            $("#cmdAZTabs2").off().on("click", function (e) { azTabs1.SelectTab(1) });
-            $("#cmdAZTabs3").off().on("click", function (e) { azTabs1.SelectTab(2) });
-            $("#cmdAZTabsVertical").off().on("click", function (e)
+            $.subscribe("functionlib/azTabsReady", function (e, data)
             {
-                azTabs1.ToggleVertical()
+                if (data.Options.azTabsId === "az-tabs-1")
+                {
+                    $("#cmdAZTabs1").off().on("click", function (e)
+                    {
+                        data.azSelectTabs(0);
+                    });
+                    $("#cmdAZTabs2").off().on("click", function (e)
+                    {
+                        data.azSelectTabs(1);
+                    });
+                    $("#cmdAZTabs3").off().on("click", function (e)
+                    {
+                        data.azSelectTabs(2);
+                    });
+                    $("#cmdAZTabsVertical").off().on("click", function (e)
+                    {
+                        data.azToggleVertical();
+                    });
+                }
             });
 
-            azTabs1 = new AZTabs(
+            new AZTabs(
                 {
                     azTabsId: "az-tabs-1"
                 });
 
-            azTabs2 = new AZTabs(
+            new AZTabs(
                 {
                     azTabsId: "az-tabs-2",
                     azTabsHeightStyle: "auto",
                     azTabsOpenEvent: "mouseover"
                 });
 
-            azTabs3 = new AZTabs(
+            new AZTabs(
                 {
                     azTabsId: "az-tabs-3",
                     azTabsHeightStyle: "auto",
@@ -154,7 +165,7 @@
                         Hvis du ønsker å bruke egne knapper eller linker til å åpne/lukke din AZTabs, bruker du JavaScript funksjonen under.
                     </div>
                     <div class="az-code jsHigh notranslate">
-                        azTabs.SelectTab(0);<br />
+                        azSelectTabs(0);<br />
                         <br />
                     </div>
                     <div class="az-code htmlHigh notranslate">
@@ -221,7 +232,7 @@
 
             <div class="row az-margin-t-56">
                 <div class="az-col xs-12">
-                    <h1 class="az-code-header">AZ Tabs</h1>
+                    <h1 class="az-code-header" style="margin: 0;">AZ Tabs</h1>
                 </div>
             </div>
             <div class="az-row">
@@ -230,7 +241,7 @@
                         <strong>Default settings</strong>
                         <br />
                         <br />
-                        var azTabs = new AZTabs(<br />
+                        new AZTabs(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azTabsId: "az-tabs-1",<br />
                         &emsp;&ensp;&emsp;&ensp;azTabsHeightStyle: "content",<br />
@@ -304,7 +315,7 @@
 
             <div class="row az-margin-t-56">
                 <div class="az-col xs-12">
-                    <h1 class="az-code-header">AZ Tabs HTML og CSS</h1>
+                    <h1 class="az-code-header" style="margin: 0;">AZ Tabs HTML og CSS</h1>
                 </div>
             </div>
             <div class="az-row az-margin-b-56">

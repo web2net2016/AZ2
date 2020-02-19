@@ -1,4 +1,55 @@
-﻿// AZ-Functionlib v2.0.0 | (c) web2net AS
+﻿
+//function createnewobject(SelectedObject)
+//{
+//    new Cust(SelectedObject);
+//}
+
+//function Cust(SelectedObject)
+//{
+//    SelectedObject.guid = Math.floor(Math.random() * 10000);
+//    window.objects.push(SelectedObject);
+//}
+
+//function deletelatestobject()
+//{
+//    if (window.objects.length > 0)
+//    {
+//        window.objects[0].destroy();
+//    }
+//}
+
+//Cust.prototype.destroy = function ()
+//{
+//    var index = -1;
+//    for (var i = 0; i < window.objects.length; i++)
+//    {
+//        if (window.objects[i].guid == this.guid)
+//        {
+//            index = i;
+//        }
+//    }
+//    console.log(index);
+//    if (index > -1)
+//    {
+//        window.objects.splice(index, 1);
+//    }
+//    console.log(window.objects);
+//};
+
+//function CheckObjects(SelectedObject)
+//{
+//    for (var i = 0; i < window.objects.length; i++)
+//    {
+//        if (window.objects[i] === SelectedObject)
+//        {
+//            return true;
+//        }
+//    }
+//    return false;
+//}
+
+
+// AZ-Functionlib v2.0.0 | (c) web2net AS
 // Site info
 //if (typeof AppName === 'undefined' || AppName === null)
 //{
