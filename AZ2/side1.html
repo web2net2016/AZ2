@@ -28,13 +28,10 @@
         $(document).ready(function ()
         {
             w3CodeColor();
-            $.subscribe("functionlib/azModalDialogiFrame", function (e, data)
+
+            $("#cmdModalDialog1").off().on('click', function ()
             {
-                $("#cmdModalDialog1").off().on('click', function ()
-                {
-                    console.log(data)
-                    //data.$Iframe[0].contentWindow.AZSide2("Side 1");
-                });
+                window.top.ModalDialogiFrame2.$Iframe[0].contentWindow.AZSide2("Side 1");
             });
         });
 

@@ -25,15 +25,75 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
-        var azCircularBar14;
-        var azCircularBar5;
-        var azCircularBar6;
-        var azCircularBar7;
-        var azCircularBar8;
-
         $(document).ready(function ()
         {
             w3CodeColor();
+
+            $.subscribe("functionlib/azCircularBarReady", function (e, data)
+            {
+                console.log(data)
+
+                if (data.Options.azCircularBarId === "az-circularbar-5")
+                {
+                    $(".cmdAZCircularBar5").off().on("click", function (e)
+                    {
+                        data.ChangeCircularBar(
+                            {
+                                azCircularBarSize: 120,
+                                azCircularBarColor: "",
+                                azCircularBarValue: 89,
+                                azCircularBarValueColor: "",
+                                azCircularBarLabel: "89 %",
+                                azCircularBarCaption: "Cleaned"
+                            });
+                    });
+                }
+                if (data.Options.azCircularBarId === "az-circularbar-6")
+                {
+                    $(".cmdAZCircularBar6").off().on("click", function (e)
+                    {
+                        data.ChangeCircularBar(
+                            {
+                                azCircularBarSize: 220,
+                                azCircularBarColor: "#777777",
+                                azCircularBarValue: 54,
+                                azCircularBarValueColor: "#dd9d22",
+                                azCircularBarLabel: "54 %",
+                                azCircularBarCaption: "Cleaned",
+                            });
+                    });
+                }
+                if (data.Options.azCircularBarId === "az-circularbar-7")
+                {
+                    $(".cmdAZCircularBar7").off().on("click", function (e)
+                    {
+                        data.ChangeCircularBar(
+                            {
+                                azCircularBarSize: 120,
+                                azCircularBarColor: "",
+                                azCircularBarValue: 89,
+                                azCircularBarValueColor: "",
+                                azCircularBarLabel: "89 %",
+                                azCircularBarCaption: "Cleaned"
+                            });
+                    });
+                }
+                if (data.Options.azCircularBarId === "az-circularbar-8")
+                {
+                    $(".cmdAZCircularBar8").off().on("click", function (e)
+                    {
+                        data.ChangeCircularBar(
+                            {
+                                azCircularBarSize: 220,
+                                azCircularBarColor: "",
+                                azCircularBarValue: 23,
+                                azCircularBarValueColor: "",
+                                azCircularBarLabel: "23 %",
+                                azCircularBarCaption: "Cleaned"
+                            });
+                    });
+                }
+            });
 
             var _ListCircularBar = [];
             _ListCircularBar.push(
@@ -74,9 +134,9 @@
                     azCircularBarCaption: "Do Not Clean"
                 });
 
-            azCircularBar14 = new AZCircularBar(_ListCircularBar);
+            new AZCircularBar(_ListCircularBar);
 
-            azCircularBar5 = new AZCircularBar(
+            new AZCircularBar(
                 {
                     azCircularBarId: "az-circularbar-5",
                     azCircularBarSize: 220,
@@ -87,7 +147,7 @@
                     azCircularBarCaption: "Cleaned",
                 });
 
-            azCircularBar6 = new AZCircularBar(
+            new AZCircularBar(
                 {
                     azCircularBarId: "az-circularbar-6",
                     azCircularBarSize: 120,
@@ -98,7 +158,7 @@
                     azCircularBarCaption: "Do Not Clean"
                 });
 
-            azCircularBar7 = new AZCircularBar(
+            new AZCircularBar(
                 {
                     azCircularBarId: "az-circularbar-7",
                     azCircularBarSize: 220,
@@ -109,7 +169,7 @@
                     azCircularBarCaption: "Cleaned"
                 });
 
-            azCircularBar8 = new AZCircularBar(
+            new AZCircularBar(
                 {
                     azCircularBarId: "az-circularbar-8",
                     azCircularBarSize: 120,
@@ -119,58 +179,6 @@
                     azCircularBarLabel: "89 %",
                     azCircularBarCaption: "Cleaned"
                 });
-
-            $(".cmdAZCircularBar5").off().on("click", function (e)
-            {
-                azCircularBar5.ChangeCircularBar(
-                    {
-                        azCircularBarSize: 220,
-                        azCircularBarColor: "",
-                        azCircularBarValue: 76,
-                        azCircularBarValueColor: "",
-                        azCircularBarLabel: "76 %",
-                        azCircularBarCaption: "Do Not Clean"
-                    });
-            });
-
-            $(".cmdAZCircularBar6").off().on("click", function (e)
-            {
-                azCircularBar6.ChangeCircularBar(
-                    {
-                        azCircularBarSize: 120,
-                        azCircularBarColor: "#777777",
-                        azCircularBarValue: 54,
-                        azCircularBarValueColor: "#dd9d22",
-                        azCircularBarLabel: "54 %",
-                        azCircularBarCaption: "Cleaned"
-                    });
-            });
-
-            $(".cmdAZCircularBar7").off().on("click", function (e)
-            {
-                azCircularBar7.ChangeCircularBar(
-                    {
-                        azCircularBarSize: 220,
-                        azCircularBarColor: "",
-                        azCircularBarValue: 89,
-                        azCircularBarValueColor: "",
-                        azCircularBarLabel: "89 %",
-                        azCircularBarCaption: "Cleaned"
-                    });
-            });
-
-            $(".cmdAZCircularBar8").off().on("click", function (e)
-            {
-                azCircularBar8.ChangeCircularBar(
-                    {
-                        azCircularBarSize: 120,
-                        azCircularBarColor: "#777777",
-                        azCircularBarValue: 54,
-                        azCircularBarValueColor: "#dd9d22",
-                        azCircularBarLabel: "54 %",
-                        azCircularBarCaption: "Cleaned"
-                    });
-            });
         });
 
     </script>
@@ -180,62 +188,78 @@
     <form id="frmReg">
         <div class="az-container">
 
-            <div class="az-row az-margin-t-56 az-margin-b-56">
-                <div class="az-col xs-12 sm-6 md-3">
-                    <div id="az-circularbar-1"></div>
+            <div class="az-row" style="margin-top: 70px;">
+                <div class="az-col xs-12 sm-6">
+                    <div style="height: 270px;">
+                        <div id="az-circularbar-1"></div>
+                    </div>
                 </div>
-                <div class="az-col xs-12 sm-6 md-3">
-                    <div id="az-circularbar-2"></div>
+                <div class="az-col xs-12 sm-6">
+                    <div style="height: 270px;">
+                        <div id="az-circularbar-2"></div>
+                    </div>
                 </div>
-                <div class="az-col xs-12 sm-6 md-3">
-                    <div id="az-circularbar-3"></div>
+                <div class="az-col xs-12 sm-6">
+                    <div style="height: 270px;">
+                        <div id="az-circularbar-3"></div>
+                    </div>
                 </div>
-                <div class="az-col xs-12 sm-6 md-3">
-                    <div id="az-circularbar-4"></div>
+                <div class="az-col xs-12 sm-6">
+                    <div style="height: 270px;">
+                        <div id="az-circularbar-4"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="az-row az-margin-t-56 az-margin-b-56">
-                <div class="az-col xs-12 sm-6 md-3">
-                    <div id="az-circularbar-5"></div>
+            <div class="az-row" style="margin-top: 150px;">
+                <div class="az-col xs-12 sm-6">
+                    <div style="height: 270px;">
+                        <div id="az-circularbar-5"></div>
+                    </div>
                 </div>
-                <div class="az-col xs-12 sm-6 md-3">
-                    <div id="az-circularbar-6"></div>
+                <div class="az-col xs-12 sm-6">
+                    <div style="height: 270px;">
+                        <div id="az-circularbar-6"></div>
+                    </div>
                 </div>
-                <div class="az-col xs-12 sm-6 md-3">
-                    <div id="az-circularbar-7"></div>
+                <div class="az-col xs-12 sm-6">
+                    <div style="height: 270px;">
+                        <div id="az-circularbar-7"></div>
+                    </div>
                 </div>
-                <div class="az-col xs-12 sm-6 md-3">
-                    <div id="az-circularbar-8"></div>
+                <div class="az-col xs-12 sm-6">
+                    <div style="height: 270px;">
+                        <div id="az-circularbar-8"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="az-row az-margin-t-56">
+            <div class="az-row" style="margin-top: 100px;">
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 cmdAZCircularBar5">AZ Circular Bar 1</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 cmdAZCircularBar5">AZ Circular Bar 5</button>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 cmdAZCircularBar6">AZ Circular Bar 2</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 cmdAZCircularBar6">AZ Circular Bar 6</button>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 cmdAZCircularBar7">AZ Circular Bar 3</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 cmdAZCircularBar7">AZ Circular Bar 7</button>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 cmdAZCircularBar8">AZ Circular Bar 4</button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 cmdAZCircularBar8">AZ Circular Bar 8</button>
                     </div>
                 </div>
             </div>
 
             <div class="az-row az-margin-t-56">
                 <div class="az-col xs-12">
-                    <h1 class="az-code-header">AZ Circular Bar</h1>
+                    <h1 class="az-code-header" style="margin: 0;">AZ Circular Bar</h1>
                 </div>
             </div>
             <div class="az-row">
@@ -243,7 +267,7 @@
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />
-                        var azCircularBar = new AZCircularBar(<br />
+                        new AZCircularBar(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azCircularBarId: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azCircularBarSize: 120,<br />

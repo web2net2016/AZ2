@@ -221,8 +221,6 @@
     <Content Include="lib-2.0.0\fontawesome\webfonts\fa-solid-900.ttf" />
     <Content Include="lib-2.0.0\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="lib-2.0.0\fontawesome\webfonts\fa-solid-900.woff2" />
-    <Content Include="lib\lang-val\index-lang.json" />
-    <Content Include="lib\lang-val\index-val.json" />
     <Content Include="admin\index\lib\lang-val\index-lang.json" />
     <Content Include="admin\index\lib\lang-val\index-val.json" />
     <None Include="bundleconfig.json" />

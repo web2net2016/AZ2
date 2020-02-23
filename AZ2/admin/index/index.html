@@ -34,8 +34,8 @@
             RequestReasonId: 1,
             Date: "11/15/2019",
             Time: "11:10:00",
-            DateTime: "11/15/2019 11:10:00",
-            Decimal: 11.5,
+            DateTime: "2020-02-21T02:38:00.000Z",
+            Decimal: 111111.50,
             Numeric: 12345,
             Comment: "Comment"
         }
@@ -43,39 +43,13 @@
         $(document).ready(function ()
         {
             w3CodeColor();
-            SetContentInfo();
         });
 
-        function SetContentInfo()
+        function SetAZPage()
         {
             $.subscribe("functionlib/AZPage", function (e, data)
             {
-                ObjPageData.Values.AZPage = data;
-                ObjPageData.Values.AZSettings = AZSettings;
-                var _AZPopulateFormOptions =
-                {
-                    $Area: ObjPageData.Values.AZPage.$Form,
-                    ObjInputData: InputData,
-                    ObjValidation: ObjPageData.Values.AZPage.ObjValidation
-                }
-                AZPopulateForm(_AZPopulateFormOptions);
-                $.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
-                {
-                    var _AZInvalidCharacterAlertOptions =
-                    {
-                        $Area: ObjPageData.Values.AZPage.$Form,
-                        $Input: data.azInputJQElement,
-                        InputKey: data.azInputKey,
-                        ObjLanguage: ObjPageData.Values.AZPage.ObjLanguage
-                    }
-                    AZInvalidCharacterAlert(_AZInvalidCharacterAlertOptions);
-                });
-                $.subscribe("functionlib/azValidateInputValidChar", function (e, data)
-                {
-                    console.log(data)
-                });
-                formdirty = false;
-                AZHideCoverSpin();
+                SetAZPageContent(e, data);
             });
             new AZPage(
                 {
@@ -83,6 +57,23 @@
                     azPageLanguage: true,
                     azPageValidation: true
                 });
+        }
+
+        function SetAZPageContent(e, data)
+        {
+            ObjPageData.Values.AZPage = data;
+            ObjPageData.Values.AZSettings = AZSettings;
+
+            var _AZPopulateFormOptions =
+            {
+                $Area: ObjPageData.Values.AZPage.$Form,
+                ObjInputData: InputData,
+                ObjValidation: ObjPageData.Values.AZPage.ObjValidation
+            }
+            AZPopulateForm(_AZPopulateFormOptions);
+            $("#signinInfo").html("Vennligst fyll inn alle feltene merket med <strong class=\"az-color-red\">*</strong>")
+            formdirty = false;
+            AZHideCoverSpin();
         }
 
         function AZSubmit()
@@ -96,6 +87,10 @@
             var _ObjReturnForm = AZSerializeForm(_AZSerializeFormOptions);
             if (IsEmpty(_ObjReturnForm) === false)
             {
+
+                console.log(InputData)
+
+
                 console.log(_ObjReturnForm)
             }
         }
@@ -107,7 +102,14 @@
     <form class="disabled-enter" id="frmContact">
         <div class="az-container">
 
-            <div class="az-row az-padding-t-14">
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+                    <div class="az-form-group xs">
+                        <p class="az-alert az-alert-info" role="alert" id="signinInfo"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row az-margin-t-14">
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="CustomerName" id="labelCustomerName"></label>
@@ -200,6 +202,33 @@
                     <div class="az-form-group xs">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 submit" id="cmdSubmit"></button>
                     </div>
+                </div>
+            </div>
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12">
+                    <div class="az-form-group xs">
+                        <h5>Feltene valideres etter følgende regler:</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row az-margin-t-14">
+                <div class="az-col xs-3">
+                    <ul>
+                        <li>Empty</li>
+                        <li>InvalidChar</li>
+                        <li>MaxLength</li>
+                        <li>MinLength</li>
+                    </ul>
+                </div>
+                <div class="az-col xs-9">
+                    <ul>
+                        <li>Date</li>
+                        <li>DateTime</li>
+                        <li>Time</li>
+                        <li>Decimal</li>
+                        <li>Email</li>
+                        <li>Web</li>
+                    </ul>
                 </div>
             </div>
 

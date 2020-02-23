@@ -25,31 +25,45 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
-        var azSlideIn1;
-        var azSlideIn2;
+        var AZSlideIn1;
+        var AZSlideIn2;
 
         $(document).ready(function ()
         {
             w3CodeColor();
 
-            $("#cmdAZSlideIn1").off().on("click", function (e) { azSlideIn1.SlideInTab.trigger("click") });
-            $("#cmdAZSlideIn2").off().on("click", function (e) { azSlideIn2.SlideInTab.trigger("click") });
+            $.subscribe("functionlib/azSlideInReady", function (e, data)
+            {
+                if (data.Options.azSlideInId === "az-slidein-1")
+                {
+                    $("#cmdAZSlideIn1").off().on("click", function (e)
+                    {
+                        data.$SlideInTab.trigger("click");
+                    });
+                }
+                if (data.Options.azSlideInId === "az-slidein-2")
+                {
+                    $("#cmdAZSlideIn2").off().on("click", function (e)
+                    {
+                        data.$SlideInTab.trigger("click");
+                    });
+                }
+            });
 
             var _HTML = "";
             _HTML += '<div class="az-row az-margin-t-28">';
             _HTML += '<div class="az-col xs-12">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'var azWindow = new initAZWindow(<br />';
+            _HTML += 'new AZSlideIn(<br />';
             _HTML += '{<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Window 1",<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azSlideInId: "AZ SlideIn 1"<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '</div>';
             _HTML += '</div>';
 
-            azSlideIn1 = new AZSlideIn(
+            AZSlideIn1 = new AZSlideIn(
                 {
                     azSlideInId: "az-slidein-1",
                     azSlideInText: _HTML,
@@ -65,7 +79,7 @@
                     azSlideInArticleColor: "#000000"
                 });
 
-            azSlideIn2 = new AZSlideIn(
+            AZSlideIn2 = new AZSlideIn(
                 {
                     azSlideInId: "az-slidein-2",
                     azSlideInText: _HTML,
@@ -85,16 +99,16 @@
             {
                 if (data.azWindowScrollDir == "down" && data.azWindowScrollTop > 1000)
                 {
-                    if (azSlideIn2.SlideIn.hasClass("display-" + azSlideIn2.SlideOptions.azSlideInPosition) === false)
+                    if (AZSlideIn2.$SlideIn.hasClass("display-" + AZSlideIn2.Options.azSlideInPosition) === false)
                     {
-                        azSlideIn2.SlideInTab.trigger("click");
+                        AZSlideIn2.$SlideInTab.trigger("click");
                     }
                 }
                 if (data.azWindowScrollDir == "up" && data.azWindowScrollTop < 1000)
                 {
-                    if (azSlideIn2.SlideIn.hasClass("display-" + azSlideIn2.SlideOptions.azSlideInPosition) === true)
+                    if (AZSlideIn2.$SlideIn.hasClass("display-" + AZSlideIn2.Options.azSlideInPosition) === true)
                     {
-                        azSlideIn2.SlideInTab.trigger("click");
+                        AZSlideIn2.$SlideInTab.trigger("click");
                     }
                 }
             });
@@ -121,7 +135,7 @@
             </div>
             <div class="row az-margin-t-56">
                 <div class="az-col xs-12">
-                    <h1 class="az-code-header">AZ SlideIn</h1>
+                    <h1 class="az-code-header" style="margin: 0;">AZ SlideIn</h1>
                 </div>
             </div>
             <div class="az-row">
@@ -129,7 +143,7 @@
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />
-                        var azSlideIn = new AZSlideIn(<br />
+                        new AZSlideIn(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azSlideInId: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azSlideInText: "",<br />
@@ -149,17 +163,17 @@
                 </div>
                 <div class="az-col xs-12 sm-6">
                     <div class="az-code jsHigh notranslate">
+                        <strong>Tilleggsfunksjoner</strong>
                         <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <strong>Skift tekstinnhold</strong>
                         <br />
                         Hvis du ønsker å bruke egne knapper eller linker til å åpne/lukke <strong>AZSlideIn</strong>, bruker du funksjonen under.
                         <br />
                         <br />
-                        azSlideIn.azSlideIn(0);<br />
+                        azSlideIn(0);<br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                         <br />
                         <br />
                         <br />

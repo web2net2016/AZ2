@@ -52,6 +52,17 @@ $(document).ready(function ()
         }
         new AZStandardAlert(_AZStandardAlertOptions);
     });
+
+    $.subscribe("functionlib/azValidateInputValidChar", function (e, data)
+    {
+        var _AZStandardAlertOptions =
+        {
+            $Area: ObjPageData.Values.AZPage.$Form,
+            Title: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.invalidCharacterTitle,
+            Text: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.invalidCharacterText + " " + data.azInputKey
+        }
+        new AZStandardAlert(_AZStandardAlertOptions);
+    });
 });
 
 // AZ Page
@@ -235,7 +246,7 @@ function AZPage(Options)
                 }
                 moment.locale(_Main.DefaultLanguage);
                 var _LanguageCode = _Main.DefaultLanguage.split("-");
-                numeral.locale(_LanguageCode[1].toLowerCase());
+                numeral.locale(_LanguageCode[0].toLowerCase());
                 clientStorage("set", "language", _Main.DefaultLanguage)
 
                 if ((AZSettings.LanguageValidationFolder.match(new RegExp("/", "g")) || []).length > 1)
@@ -1105,10 +1116,6 @@ function AZSetInputTypeEvents()
                 $(this).attr("disabled", true);
             }
         }
-        //if ($(this).is("button"))
-        //{
-        //    $(this).off("click", AZValidateDirtyKeyup).on("click", AZValidateDirtyKeyup);
-        //}
     });
 
     // Mandatory Asterisk
@@ -1163,30 +1170,10 @@ function AZValidateInputValueFocusout(e)
 {
     var _Element = e.target || e.srcElement;
     var _CurrentValidType = e.data.ValidType[0];
-    var _CurrentInputValue = $(_Element).val();
-    var _DefaultLanguage = clientStorage("get", "language", "");
-    if (_DefaultLanguage === null)
-    {
-        _DefaultLanguage = AZSettings.DefaultLanguage;
-    }
 
     if (_CurrentValidType === "validate-decimal")
     {
-        $(_Element).val(numeral($(_Element).val()).format('0,0.00'));
-
-        if (_CurrentInputValue != "" && IsValidDecimal(_DefaultLanguage, _CurrentInputValue) === false)
-        {
-        }
-    }
-
-    function IsValidDecimal(DefaultLanguage, Float)
-    {
-        var _RegExp = /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/;
-        if (DefaultLanguage === "nb-NO")
-        {
-            var _RegExp = /^\s*(\+|-)?((\d+(\,\d+)?)|(\,\d+))\s*$/;
-        }
-        return _RegExp.test(Float);
+        $(_Element).val(numeral($(_Element).val()).format('0.00'));
     }
 }
 
@@ -1222,8 +1209,8 @@ function AZGetValidType(SelectedType)
             "validate-numeric": "1234567890",
             "validate-decimal": "1234567890.",
             "validate-date": "1234567890./",
-            "validate-time": "1234567890:",
-            "validate-datetime": "1234567890./:\u0020",
+            "validate-time": "1234567890amp:\u0020",
+            "validate-datetime": "1234567890amp./:\u0020",
             "validate-email": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
             "validate-web": "1234567890abcdefghijklmnopqrstuvwxyz-_.:/",
             "validate-userpass": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
@@ -1238,9 +1225,11 @@ function AZGetValidType(SelectedType)
 // MaxLength
 // MinLength
 // Date
+// DateTime
+// Time
+// Decimal
 // Email
 // Web
-// Float
 
 function AZSerializeForm(Options)
 {
@@ -1259,15 +1248,7 @@ function AZSerializeForm(Options)
                 _$Input = $('#' + HTMLElement);
                 _ObjCurrentValidation = Value;
 
-                if (_ObjCurrentValidation.datatype.toLowerCase() === "int")
-                {
-                    _ObjOutputData[_$Input.attr("id")] = Number(_$Input.val());
-                }
-                else if (_ObjCurrentValidation.datatype.toLowerCase() === "decimal")
-                {
-                    _ObjOutputData[_$Input.attr("id")] = parseFloat(_$Input.val());
-                }
-                else if (_ObjCurrentValidation.datatype.toLowerCase() === "date")
+                if (_ObjCurrentValidation.datatype.toLowerCase() === "date")
                 {
                     if (_$Input.val().replace(/^\s+|\s+$/g, '') !== "")
                     {
@@ -1278,9 +1259,26 @@ function AZSerializeForm(Options)
                         _ObjOutputData[_$Input.attr("id")] = null;
                     }
                 }
+                else if (_ObjCurrentValidation.datatype.toLowerCase() === "datetime")
+                {
+                    var LongDateFormat = moment()._locale._longDateFormat;
+                    _ObjOutputData[_$Input.attr("id")] = moment(_$Input.val(), LongDateFormat.L + " " + LongDateFormat.LT).toJSON();
+                }
+                else if (_ObjCurrentValidation.datatype.toLowerCase() === "time")
+                {
+                    _ObjOutputData[_$Input.attr("id")] = moment('01/01/1900 ' + _$Input.val()).format('h:mm:ss');
+                }
+                else if (_ObjCurrentValidation.datatype.toLowerCase() === "decimal")
+                {
+                    _ObjOutputData[_$Input.attr("id")] = parseFloat(_$Input.val().replace(",", ".").replace(/ /g, ""));
+                }
+                else if (_ObjCurrentValidation.datatype.toLowerCase() === "int")
+                {
+                    _ObjOutputData[_$Input.attr("id")] = Number(_$Input.val());
+                }
                 else
                 {
-                    _ObjOutputData[_$Input.attr("id")] = encodeURIComponent(_$Input.val());
+                    _ObjOutputData[_$Input.attr("id")] = _$Input.val();
                 }
 
                 _ObjReturnValidation = AZValidateInput(_$Input, _ObjCurrentValidation);
@@ -1403,15 +1401,23 @@ function AZValidateInput($Input, ObjCurrentValidation)
                     {
                         azInputId: $Input.attr("id"),
                         azInputValidType: _CurrentValidType,
-                        azInputKey: _ListChar.join(),
+                        azInputKey: _ListChar.join(" - "),
                         azInputJQElement: $Input
                     });
             }
             else
             {
-                if (ObjCurrentValidation.datatype.toLowerCase() == "date" && isNaN(new Date($Input.datepicker("getDate"))))
+                if (_CurrentValidType === "validate-date" && isNaN(new Date($Input.datepicker("getDate"))))
                 {
                     _ObjReturnValidation.Error = "Date";
+                }
+                if (_CurrentValidType === "validate-datetime")
+                {
+                    var LongDateFormat = moment()._locale._longDateFormat;
+                    if (AZCheckDateTimeFormat(moment(_CurrentInputValue, LongDateFormat.L + " " + LongDateFormat.LT)) === false)
+                    {
+                        _ObjReturnValidation.Error = "DateTime";
+                    }
                 }
                 if (_CurrentValidType === "validate-time" && AZCheckDateTimeFormat('01/01/1900 ' + _CurrentInputValue) === false)
                 {
@@ -1497,7 +1503,7 @@ function AZPopulateForm(Options)
             if (IsEmpty(_$Input) === false)
             {
                 _DataAttr = _$Input.attr("data-attr");
-                _ObjCurrentValidation = Options.ObjValidation[_$Input.attr("id")]
+                _ObjCurrentValidation = Options.ObjValidation[_$Input.attr("id")];
 
                 if (_ObjCurrentValidation.datatype === "date")
                 {
@@ -1521,7 +1527,18 @@ function AZPopulateForm(Options)
                 {
                     if (Value != "" && Value != null && Value != undefined)
                     {
-                        _$Input[_DataAttr](moment('01/01/1900 ' + Value).format('HH:mm'));
+                        _$Input[_DataAttr](moment('01/01/1900 ' + Value).format('LT'));
+                    }
+                    else
+                    {
+                        _$Input[_DataAttr](0);
+                    }
+                }
+                else if (_ObjCurrentValidation.datatype === "decimal")
+                {
+                    if (Value != "" && Value != null && Value != undefined)
+                    {
+                        _$Input[_DataAttr](numeral(Value).format('0.00'));
                     }
                     else
                     {
@@ -1551,7 +1568,16 @@ function AZPopulateForm(Options)
 
 function AZIsValidDecimal(Float)
 {
+    var _DefaultLanguage = clientStorage("get", "language", "");
+    if (_DefaultLanguage === null)
+    {
+        _DefaultLanguage = AZSettings.DefaultLanguage;
+    }
     var _RegExp = /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/;
+    if (_DefaultLanguage === "nb-NO")
+    {
+        var _RegExp = /^\s*(\+|-)?((\d+(\,\d+)?)|(\,\d+))\s*$/;
+    }
     return _RegExp.test(Float);
 }
 
@@ -1673,7 +1699,7 @@ function AZAjaxSuccess(Options)
 {
     var _Defaults =
     {
-        Request: "AZWindow",
+        Request: "",
         Title: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.informationTitle,
         Text: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.alertTransferError,
         WindowModal: true,
@@ -1695,39 +1721,6 @@ function AZAjaxSuccess(Options)
                 azWindowAfterClose: _Options.WindowAfterClose,
                 azWindowAfterCloseReload: _Options.WindowAfterCloseReload
             });
-    }
-    if (_Options.Request === "SignIn")
-    {
-        var _ObjCustomerInfo = _Options.Data;
-        delete _ObjCustomerInfo.Transfer;
-        clientStorage("set", "customerinfo", JSON.stringify(_ObjCustomerInfo));
-        ObjPageData.Elements.$Token.val(_ObjCustomerInfo.UserSignIn.Token);
-        $(ObjPageData.Values.AZPage.$Form).submit();
-    }
-    if (_Options.Request === "GetSubscriptionData")
-    {
-        ObjPageData.Values.ObjCustomerInfo.LocalData.ListSubscriptionReturn = _Options.Data.ListSubscriptionReturn;
-        clientStorage("set", "customerinfo", JSON.stringify(ObjPageData.Values.ObjCustomerInfo));
-        $.publish("GetSubscriptionDataSuccess");
-    }
-    if (_Options.Request === "GetInvoiceData")
-    {
-        ObjPageData.Values.ObjCustomerInfo.LocalData.ListInvoiceReturn = _Options.Data.ListInvoiceReturn;
-        clientStorage("set", "customerinfo", JSON.stringify(ObjPageData.Values.ObjCustomerInfo));
-        $.publish("GetInvoiceDataSuccess");
-    }
-    if (_Options.Request === "AZSubmitCustomerAdd")
-    {
-        ObjPageData.Values.ObjCustomerInfo.LocalData.OrgUnitId = _Options.Data.ObjOrgUnit.OrgUnitId;
-        clientStorage("set", "customerinfo", JSON.stringify(ObjPageData.Values.ObjCustomerInfo));
-        $(ObjPageData.Values.AZPage.$Form).submit();
-    }
-    if (_Options.Request === "AZSubmitCustomerAdd1")
-    {
-        ObjPageData.Values.ObjCustomerInfo.LocalData.CustomerId = _Options.Data.ObjCustomer.CustomerId;
-        ObjPageData.Values.ObjCustomerInfo.LocalData.LanguageId = _Options.Data.ObjCustomer.LanguageId;
-        clientStorage("set", "customerinfo", JSON.stringify(ObjPageData.Values.ObjCustomerInfo));
-        $(ObjPageData.Values.AZPage.$Form).submit();
     }
     AZCheckAsyncAndPublish(_Options.FunctionToRun, "");
 }

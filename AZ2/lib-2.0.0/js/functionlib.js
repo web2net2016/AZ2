@@ -1234,60 +1234,68 @@ function AZAjax(Options)
 // AZ Circular Bar
 function AZCircularBar(Options)
 {
-    var _Defaults =
+    if (this instanceof AZCircularBar === true)
     {
-        azCircularBarId: "",
-        azCircularBarSize: 120,
-        azCircularBarColor: "#CCCCCC",
-        azCircularBarValue: 0,
-        azCircularBarValueColor: "#307BBB",
-        azCircularBarLabel: "",
-        azCircularBarCaption: "",
-        azCircularBarCaptionColor: ""
-    };
-
-    if (Options && Options.length > 0)
-    {
-        azCircularBarArray = [];
-        $.each(Options, function (Index, ObjCurrentOption)
+        var _Defaults =
         {
-            azCircularBarArray.push(new AktivateAZCircularBar(ObjCurrentOption));
-        });
-        return azCircularBarArray
-    }
-    else if (IsEmpty(Options) === false)
-    {
-        return new AktivateAZCircularBar(Options);
-    }
+            azCircularBarId: "",
+            azCircularBarSize: 120,
+            azCircularBarColor: "#CCCCCC",
+            azCircularBarValue: 0,
+            azCircularBarValueColor: "#307BBB",
+            azCircularBarLabel: "",
+            azCircularBarCaption: "",
+            azCircularBarCaptionColor: ""
+        };
 
-    function AktivateAZCircularBar(ObjCurrentOption)
-    {
-        this.Options = $.extend({}, _Defaults, ObjCurrentOption || {});
-        if (this.Options.azCircularBarId != "")
+        var _Main;
+        if (Options && Options.length > 0)
         {
-            this.$CircularBar = $("#" + this.Options.azCircularBarId);
-            this.$CircularBar.$Slice = $('<div></div>').addClass("slice");
-            this.$CircularBar.$Bar = $('<div></div>').addClass("bar").css({ "border-color": this.Options.azCircularBarValueColor });
-            this.$CircularBar.$Fill = $('<div></div>').addClass("fill").css({ "border-color": this.Options.azCircularBarValueColor });
-            this.$CircularBar.$Label = $('<span></span>').addClass("label").html(this.Options.azCircularBarLabel);
-            if (this.Options.azCircularBarCaption != "")
+            $.each(Options, function (Index, ObjCurrentOption)
             {
-                this.$CircularBar.$Caption = $('<span></span>').addClass("caption").css({ "top": this.Options.azCircularBarSize, "color": this.Options.azCircularBarCaptionColor }).html(this.Options.azCircularBarCaption);
-            }
-            this.$CircularBar.$Slice.append(this.$CircularBar.$Bar).append(this.$CircularBar.$Fill);
-            this.$CircularBar.append(this.$CircularBar.$Label).append(this.$CircularBar.$Slice).append(this.$CircularBar.$Caption).addClass("c100 p" + this.Options.azCircularBarValue).css({ "background-color": this.Options.azCircularBarColor, "font-size": this.Options.azCircularBarSize });
+                _Main = new AktivateAZCircularBar(ObjCurrentOption);
+                $.publish("functionlib/azCircularBarReady", _Main)
+            }); 
+        }
+        else if (IsEmpty(Options) === false)
+        {
+            _Main = new AktivateAZCircularBar(Options);
+            $.publish("functionlib/azCircularBarReady", _Main)
+        }
 
-            this.ChangeCircularBar = function (Options)
+        function AktivateAZCircularBar(ObjCurrentOption)
+        {
+            this.Options = $.extend({}, _Defaults, ObjCurrentOption || {});
+            if (this.Options.azCircularBarId != "")
             {
-                this.$CircularBar.$Bar.css({ "border-color": Options.azCircularBarValueColor });
-                this.$CircularBar.$Fill.css({ "border-color": Options.azCircularBarValueColor });
-                this.$CircularBar.$Label.html(Options.azCircularBarLabel);
-                this.$CircularBar.$Caption.css({ "top": Options.azCircularBarSize, "color": Options.azCircularBarCaptionColor }).html(Options.azCircularBarCaption);
-                this.$CircularBar.removeClass().addClass("c100 p" + Options.azCircularBarValue).css({ "background-color": Options.azCircularBarColor, "font-size": Options.azCircularBarSize });
+                this.$CircularBar = $("#" + this.Options.azCircularBarId);
+                this.$CircularBar.$Slice = $('<div></div>').addClass("slice");
+                this.$CircularBar.$Bar = $('<div></div>').addClass("bar").css({ "border-color": this.Options.azCircularBarValueColor });
+                this.$CircularBar.$Fill = $('<div></div>').addClass("fill").css({ "border-color": this.Options.azCircularBarValueColor });
+                this.$CircularBar.$Label = $('<span></span>').addClass("label").html(this.Options.azCircularBarLabel);
+                if (this.Options.azCircularBarCaption != "")
+                {
+                    this.$CircularBar.$Caption = $('<span></span>').addClass("caption").css({ "top": this.Options.azCircularBarSize, "color": this.Options.azCircularBarCaptionColor }).html(this.Options.azCircularBarCaption);
+                }
+                this.$CircularBar.$Slice.append(this.$CircularBar.$Bar).append(this.$CircularBar.$Fill);
+                this.$CircularBar.append(this.$CircularBar.$Label).append(this.$CircularBar.$Slice).append(this.$CircularBar.$Caption).addClass("c100 p" + this.Options.azCircularBarValue).css({ "background-color": this.Options.azCircularBarColor, "font-size": this.Options.azCircularBarSize });
+
+                this.ChangeCircularBar = function (Options)
+                {
+                    this.$CircularBar.$Bar.css({ "border-color": Options.azCircularBarValueColor });
+                    this.$CircularBar.$Fill.css({ "border-color": Options.azCircularBarValueColor });
+                    this.$CircularBar.$Label.html(Options.azCircularBarLabel);
+                    this.$CircularBar.$Caption.css({ "top": Options.azCircularBarSize, "color": Options.azCircularBarCaptionColor }).html(Options.azCircularBarCaption);
+                    this.$CircularBar.removeClass().addClass("c100 p" + Options.azCircularBarValue).css({ "background-color": Options.azCircularBarColor, "font-size": Options.azCircularBarSize });
+                }
+                return this;
             }
-            return this;
         }
     }
+    else
+    {
+        return new AZCircularBar(Options);
+    }    
 }
 
 // AZ Modal Dialog
@@ -1357,10 +1365,6 @@ function AZModalDialog(Options)
                     _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe-" + _Main.Options.azModalDialogId);
                     _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": (_Main.Options.azModalDialogHeight - 80) });
                     _Main.$Card.append(_Main.$Iframe);
-                    setTimeout(function ()
-                    {
-                        $.publish("functionlib/azModalDialogiFrame", _Main)
-                    }, 100);
                 }
 
                 // UI Dialog
@@ -2329,9 +2333,9 @@ function AZSlideIn(Options)
                     _Main.$SlideInTab.children("div").css({ "width": 100, "height": 100, "left": - 70 }).append('<i class="' + _Main.Options.azSlideInTabIcon + ' fa-rotate-90"></i>');
                 }
             }
-            if (_Main.Options.azSlideInWidth > (window.innerWidth - 40))
+            if (_Main.Options.azSlideInWidth > (window.innerWidth - 60))
             {
-                _Main.Options.azSlideInWidth = (window.innerWidth - 40);
+                _Main.Options.azSlideInWidth = (window.innerWidth - 60);
             }
             if (_Main.Options.azSlideInPosition == "right")
             {
@@ -2362,7 +2366,7 @@ function AZSlideIn(Options)
             _Main.$SlideInCard.append(_Main.$Article);
             _Main.$SlideIn.append(_Main.$SlideInTab).append(_Main.$SlideInCard);
             _Main.$Body.append(_Main.$SlideIn);
-            $.publish("functionlib/azSlideInAfterInit");
+            $.publish("functionlib/azSlideInAfterInit", _Main);
 
             window.setTimeout(function ()
             {
@@ -2380,14 +2384,8 @@ function AZSlideIn(Options)
                     _Main.$SlideIn.toggleClass('az-slidein-active display-left');
                 }
             });
+            $.publish("functionlib/azSlideInReady", _Main)
         }
-        return (
-            {
-                "ChangeText": _Main.azChangeText,
-                "SlideInTab": _Main.$SlideInTab,
-                "SlideIn": _Main.$SlideIn,
-                "SlideOptions": _Main.Options
-            });
     }
     else
     {

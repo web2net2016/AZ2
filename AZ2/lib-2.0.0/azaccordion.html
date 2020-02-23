@@ -34,7 +34,7 @@
                 console.log("azAccordionId: " + data.azAccordionId + "\nazAccordionStatus: " + data.azAccordionStatus + "\nazAccordionActivated: " + data.azAccordionActivated + "\nazAccordionDeactivated: " + data.azAccordionDeactivated + "\nazAccordionHeaderJQElement: ", data.azAccordionHeaderJQElement)
             });
 
-            $.subscribe("functionlib/azAccordionReady", function (e, data)
+            $.subscribeonce("functionlib/azAccordionReady", function (e, data)
             {
                 if (data.Options.azAccordionId === "az-accordion-1")
                 {
@@ -228,16 +228,16 @@
                         <strong>Tilleggsfunksjoner</strong>
                         <br />
                         <br />
-                        Hvis du ønsker å bruke egne knapper eller linker til å åpne/lukke <strong>AZAccordion</strong>, bruker du funksjonen under.<br />
+                        Hvis du ønsker å bruke egne knapper eller linker til å åpne/lukke <strong>AZ Accordion</strong>, bruker du funksjonen under.<br />
                         <br />
                         azSelectAccordion(0);<br />
                         <br />
                         <br />
-                        Du har også muligheten til å skifte ut innholdet i <strong>AZAccordion</strong>, ved enten å klikke på en knapp eller link, eller en bestemt hendelse inntrer.<br />
+                        Du har også muligheten til å skifte ut innholdet i <strong>AZ Accordion</strong>, ved enten å klikke på en knapp eller link, eller en bestemt hendelse inntrer.<br />
                         <br />
                         azChangeText(0, "Dette er en tekst");<br />
                         <br />
-                        Det første parameteret, (Index) tilsvarer nummert på hvilken accordion "header" du ønsker å gjøre noe med. Det siste parameteret er selve innholdet.<br />
+                        Det første parameteret, (Index) tilsvarer nummert på hvilken <strong>AZ Accordion</strong> "header" du ønsker å gjøre noe med. Det siste parameteret er selve innholdet.<br />
                         <br />
                         <br />
                         <br />
@@ -362,7 +362,7 @@
                                 &emsp;&ensp;&emsp;&ensp;data.azAccordionHeaderJQElement<br />
                                 });<br />
                                 <br />
-                                Denne funksjonen trigges hver gang man klikker, (åper/lukker) din <strong>azAccordion</strong>. Ved å abonnere på funksjonen, vil du få en bedre flyt i din egen kode.
+                                Denne funksjonen trigges hver gang man klikker, (åper/lukker) <strong>AZ Accordion</strong>. Ved å abonnere på funksjonen, vil du få en bedre flyt i din egen kode.
                                 <br />
                             </div>
                         </div>

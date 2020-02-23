@@ -7188,6 +7188,7 @@ ul
     {
         -webkit-appearance: none;
         width: 100%;
+        border-radius: 50px !important;
     }
 
         .az-form-group .az-range:focus
@@ -7217,22 +7218,22 @@ ul
 
         .az-form-group .az-range.az-round::-webkit-slider-runnable-track
         {
-            border-radius: 50px;
+            border-radius: 50px !important;
         }
 
         .az-form-group .az-range.az-round.xs::-webkit-slider-runnable-track
         {
-            border-radius: 50px;
+            border-radius: 50px !important;
         }
 
         .az-form-group .az-range.az-round.sm::-webkit-slider-runnable-track
         {
-            border-radius: 50px;
+            border-radius: 50px !important;
         }
 
         .az-form-group .az-range.az-round.md::-webkit-slider-runnable-track
         {
-            border-radius: 50px;
+            border-radius: 50px !important;
         }
 
         .az-form-group .az-range::-moz-range-track
@@ -7257,22 +7258,22 @@ ul
 
         .az-form-group .az-range.az-round::-moz-range-track
         {
-            border-radius: 50px;
+            border-radius: 50px !important;
         }
 
         .az-form-group .az-range.az-round.xs::-moz-range-track
         {
-            border-radius: 50px;
+            border-radius: 50px !important;
         }
 
         .az-form-group .az-range.az-round.sm::-moz-range-track
         {
-            border-radius: 50px;
+            border-radius: 50px !important;
         }
 
         .az-form-group .az-range.az-round.md::-moz-range-track
         {
-            border-radius: 50px;
+            border-radius: 50px !important;
         }
 
         .az-form-group .az-range::-ms-track
@@ -7297,22 +7298,22 @@ ul
 
         .az-form-group .az-range.az-round::-ms-track
         {
-            border-radius: 50px;
+            border-radius: 50px !important;
         }
 
         .az-form-group .az-range.az-round.xs::-ms-track
         {
-            border-radius: 50px;
+            border-radius: 50px !important;
         }
 
         .az-form-group .az-range.az-round.sm::-ms-track
         {
-            border-radius: 50px;
+            border-radius: 50px !important;
         }
 
         .az-form-group .az-range.az-round.md::-ms-track
         {
-            border-radius: 50px;
+            border-radius: 50px !important;
         }
 
         .az-form-group .az-range::-webkit-slider-thumb
