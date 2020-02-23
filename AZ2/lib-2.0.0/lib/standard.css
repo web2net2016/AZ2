@@ -80,7 +80,7 @@ card.css
 
     .az-card > header
     {
-        background-color: #009688;
+        background-color: #0078D7;
         color: #FFFFFF;
     }
 
@@ -100,7 +100,7 @@ card.css
 
     .az-card > footer
     {
-        background-color: #009688;
+        background-color: #0078D7;
         color: #FFFFFF;
     }
 
@@ -125,7 +125,7 @@ card.css
 
             .az-card > .az-card-overlay > .az-card-overlay-card > article
             {
-                background-color: #009688;
+                background-color: #0078D7;
                 color: #FFFFFF;
             }
 
@@ -501,7 +501,7 @@ list.css
     .az-list-card > header
     {
         height: 18px;
-        background-color: #009688;
+        background-color: #0078D7;
         color: #FFFFFF;
     }
 
@@ -538,7 +538,7 @@ list.css
 
     .az-list-card > footer
     {
-        background-color: #009688;
+        background-color: #0078D7;
         color: #FFFFFF;
     }
 
@@ -746,7 +746,7 @@ portfolio.css
 
         .az-portfolio-content li > .az-portfolio-card > header
         {
-            background-color: #009688;
+            background-color: #0078D7;
         }
 
             .az-portfolio-content li > .az-portfolio-card > header > h1
@@ -773,7 +773,7 @@ portfolio.css
 
         .az-portfolio-content li > .az-portfolio-card > footer
         {
-            background-color: #009688;
+            background-color: #0078D7;
             color: #FFFFFF;
         }
 
@@ -840,7 +840,7 @@ sidebar.css
 
     .az-sidebar-menu > li > a:hover
     {
-        background-color: #009688;
+        background-color: #0078D7;
         color: #FFFFFF;
     }
 
@@ -925,7 +925,7 @@ tabs.css
             padding: 14px;
             font-size: 14px;
             color: #FFFFFF;
-            background-color: #009688;
+            background-color: #0078D7;
             border: 1px solid #DDDDDD;
         }
 
@@ -1035,7 +1035,7 @@ timeline.css
 
     .az-timeline > .az-timeline-container > .az-timeline-card > header
     {
-        background-color: #009688;
+        background-color: #0078D7;
     }
 
         .az-timeline > .az-timeline-container > .az-timeline-card > header > h1
@@ -1058,7 +1058,7 @@ timeline.css
 
     .az-timeline > .az-timeline-container > .az-timeline-card > footer
     {
-        background-color: #009688;
+        background-color: #0078D7;
         color: #FFFFFF;
     }
 

@@ -167,6 +167,8 @@
     <Content Include="web2net\billeas.jpg" />
     <Content Include="web2net\bootstrap3.txt" />
     <Content Include="web2net\bootstrap4.txt" />
+    <Content Include="web2net\color.css" />
+    <Content Include="web2net\color.html" />
     <Content Include="web2net\ebf.jpg" />
     <Content Include="web2net\havfruene.jpg" />
     <Content Include="web2net\img_avatar2.png" />

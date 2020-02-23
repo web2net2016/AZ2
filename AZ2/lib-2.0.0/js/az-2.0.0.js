@@ -2212,9 +2212,9 @@ function AZAccordion(Options)
             azAccordionHeightStyle: "content",
             azAccordionCollapsible: true,
             azAccordionOpenEvent: "click",
-            azAccordionHeaderBackgroundColor: "#009688",
+            azAccordionHeaderBackgroundColor: "#0078D7",
             azAccordionHeaderColor: "#FFFFFF",
-            azAccordionHeaderHoverBackgroundColor: "#607D8B",
+            azAccordionHeaderHoverBackgroundColor: "#0bb2d4",
             azAccordionHeaderHoverColor: "#FFFFFF",
             azAccordionArticleBackgroundColor: "#FFFFFF",
             azAccordionArticleColor: "#000000",
@@ -2423,9 +2423,9 @@ function AZCircularBar(Options)
         {
             azCircularBarId: "",
             azCircularBarSize: 120,
-            azCircularBarColor: "#CCCCCC",
+            azCircularBarColor: "#BBBBBB",
             azCircularBarValue: 0,
-            azCircularBarValueColor: "#307BBB",
+            azCircularBarValueColor: "#0078D7",
             azCircularBarLabel: "",
             azCircularBarCaption: "",
             azCircularBarCaptionColor: ""
@@ -2509,7 +2509,7 @@ function AZModalDialog(Options)
             azModalDialogPositionAt: "left top",
             azModalDialogBackgroundColor: "#FFFFFF",
             azModalDialogColor: "#000000",
-            azModalDialogTitlebarBackgroundColor: "#009688",
+            azModalDialogTitlebarBackgroundColor: "#0078D7",
             azModalDialogTitlebarColor: "#FFFFFF",
             azModalDialogBeforeOpen: function () { },
             azModalDialogAfterOpen: function () { },
@@ -2699,7 +2699,7 @@ function AZModalDialog(Options)
                     var _Defaults =
                     {
                         azModalDialogTitle: "",
-                        azModalDialogTitlebarBackgroundColor: "#009688",
+                        azModalDialogTitlebarBackgroundColor: "#0078D7",
                         azModalDialogTitlebarColor: "#FFFFFF",
                         azModalDialogAlertTimeout: 3000
                     };
@@ -2773,7 +2773,7 @@ function AZSnackbar(Options)
             azSnackbarMobileMinHeight: 0,
             azSnackbarClose: false,
             azSnackbarTimeout: 3000,
-            azSnackbarBackgroundColor: "#333333",
+            azSnackbarBackgroundColor: "#0078D7",
             azSnackbarColor: "#FFFFFF",
             azSnackbarCloseColor: "#FFFFFF",
             azSnackbarAfterOpen: function () { }
@@ -3085,7 +3085,7 @@ function AZWindow(Options)
             azWindowNoParentScroll: false,
             azWindowBackground: true,
             azWindowBorderColor: "#FFFFFF",
-            azWindowTitlebarBackgroundColor: "#009688",
+            azWindowTitlebarBackgroundColor: "#0078D7",
             azWindowTitlebarColor: "#FFFFFF",
             azWindowBackgroundColor: "#FFFFFF",
             azWindowColor: "#000000",
@@ -3252,7 +3252,7 @@ function AZWindow(Options)
                     var _Defaults =
                     {
                         azWindowTitle: "",
-                        azWindowTitlebarBackgroundColor: "#009688",
+                        azWindowTitlebarBackgroundColor: "#0078D7",
                         azWindowTitlebarColor: "#FFFFFF",
                         azWindowAlertTimeout: 3000
                     };
@@ -3470,7 +3470,7 @@ function AZSlideIn(Options)
             azSlideInPosition: "right",
             azSlideInTabText: "",
             azSlideInTabIcon: "fas fa-bars",
-            azSlideInTabBackgroundColor: "#009688",
+            azSlideInTabBackgroundColor: "#0078D7",
             azSlideInTabColor: "#FFFFFF",
             azSlideInArticleBackgroundColor: "#FFFFFF",
             azSlideInArticleColor: "#000000"
