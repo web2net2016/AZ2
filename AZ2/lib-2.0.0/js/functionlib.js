@@ -1255,7 +1255,7 @@ function AZCircularBar(Options)
             {
                 _Main = new AktivateAZCircularBar(ObjCurrentOption);
                 $.publish("functionlib/azCircularBarReady", _Main)
-            }); 
+            });
         }
         else if (IsEmpty(Options) === false)
         {
@@ -1295,7 +1295,7 @@ function AZCircularBar(Options)
     else
     {
         return new AZCircularBar(Options);
-    }    
+    }
 }
 
 // AZ Modal Dialog
@@ -1575,6 +1575,7 @@ function AZCheckAsyncAndPublish(FunctionToRun, Publish, ObjData)
 }
 
 // AZ Snackbar
+window.ListSnackbar = [];
 function AZSnackbar(Options)
 {
     if (this instanceof AZSnackbar === true)
@@ -1582,7 +1583,7 @@ function AZSnackbar(Options)
         var _Main = this;
         var _Defaults =
         {
-            azSnackbarId: "",
+            azSnackbarId: Guid(),
             azSnackbarText: "",
             azSnackbarPosition: "left-top",
             azSnackbarTopMargin: 20,
@@ -1597,181 +1598,136 @@ function AZSnackbar(Options)
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
-        if (_Main.Options.azSnackbarId != "" && $("#" + _Main.Options.azSnackbarId).length === 0)
+        _Main.$Snackbar = $('<div></div>').attr({ "id": _Main.Options.azSnackbarId }).addClass("az-snackbar").css({ "background-color": _Main.Options.azSnackbarBackgroundColor });
+        _Main.$Table = $('<table></table>').addClass("az-snackbar-table");
+        _Main.SnackbarTimer;
+
+        _Main.AnimateOpenOptions = {};
+        _Main.AnimateCloseOptions = {};
+        if (_Main.Options.azSnackbarPosition == "left-top")
         {
-            _Main.$Body = $("body");
-            _Main.$Wrapper = $('<div></div>').attr({ "id": _Main.Options.azSnackbarId }).addClass("az-snackbar").css({ "background-color": _Main.Options.azSnackbarBackgroundColor });
-            _Main.$Table = $('<table></table>').addClass("az-snackbar-table");
+            _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
+            _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
+        }
+        else if (_Main.Options.azSnackbarPosition == "left-bottom")
+        {
+            _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
+            _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
+        }
+        else if (_Main.Options.azSnackbarPosition == "center-top")
+        {
+            _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
+            _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
+        }
+        else if (_Main.Options.azSnackbarPosition == "center-bottom")
+        {
+            _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
+            _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
+        }
+        else if (_Main.Options.azSnackbarPosition == "right-top")
+        {
+            _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
+            _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
+        }
+        else if (_Main.Options.azSnackbarPosition == "right-bottom")
+        {
+            _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
+            _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
+        }
+        else if (_Main.Options.azSnackbarPosition == "full-width-top")
+        {
+            _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
+            _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
+        }
+        else if (_Main.Options.azSnackbarPosition == "full-width-bottom")
+        {
+            _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
+            _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
+        }
+        _Main.$Snackbar.addClass("az-snackbar-" + _Main.Options.azSnackbarPosition);
 
-            _Main.AnimateOpenOptions = {};
-            _Main.AnimateCloseOptions = {};
-            if (_Main.Options.azSnackbarPosition == "left-top")
+        if (window.innerWidth < 576)
+        {
+            _Main.$Snackbar.addClass("az-snackbar-mobile");
+            if (_Main.AnimateOpenOptions.hasOwnProperty("top") === true)
             {
-                _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
-                _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
+                _Main.AnimateOpenOptions.top = 20;
             }
-            else if (_Main.Options.azSnackbarPosition == "left-bottom")
+            if (_Main.AnimateOpenOptions.hasOwnProperty("bottom") === true)
             {
-                _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
-                _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
+                _Main.AnimateOpenOptions.bottom = 20;
             }
-            else if (_Main.Options.azSnackbarPosition == "center-top")
+            if (_Main.Options.azSnackbarMobileMinHeight > 0)
             {
-                _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
-                _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
+                if (_Main.Options.azSnackbarMobileMinHeight > (window.innerHeight - 70))
+                {
+                    _Main.Options.azSnackbarMobileMinHeight = (window.innerHeight - 70);
+                }
+                _Main.$Snackbar.css({ "min-height": _Main.Options.azSnackbarMobileMinHeight })
             }
-            else if (_Main.Options.azSnackbarPosition == "center-bottom")
-            {
-                _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
-                _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
-            }
-            else if (_Main.Options.azSnackbarPosition == "right-top")
-            {
-                _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
-                _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
-            }
-            else if (_Main.Options.azSnackbarPosition == "right-bottom")
-            {
-                _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
-                _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
-            }
-            else if (_Main.Options.azSnackbarPosition == "full-width-top")
-            {
-                _Main.AnimateOpenOptions = { "top": _Main.Options.azSnackbarTopMargin, "opacity": 1 };
-                _Main.AnimateCloseOptions = { "top": -20, "opacity": 0 };
-            }
-            else if (_Main.Options.azSnackbarPosition == "full-width-bottom")
-            {
-                _Main.AnimateOpenOptions = { "bottom": _Main.Options.azSnackbarBottomMargin, "opacity": 1 };
-                _Main.AnimateCloseOptions = { "bottom": -20, "opacity": 0 };
-            }
-            _Main.$Wrapper.addClass("az-snackbar-" + _Main.Options.azSnackbarPosition);
+        }
 
-            if (window.innerWidth < 576)
+        _Main.azCloseSnackbar = function ()
+        {
+            _Main.$Snackbar.animate(_Main.AnimateCloseOptions, 500, function ()
             {
-                _Main.$Wrapper.addClass("az-snackbar-mobile");
-                if (_Main.AnimateOpenOptions.hasOwnProperty("top") === true)
+                window.clearTimeout(_Main.SnackbarTimer);
+                $("#" + _Main.Options.azSnackbarId).remove();
+                if ($(".az-snackbar.az-snackbar-" + _Main.Options.azSnackbarPosition).length === 0)
                 {
-                    _Main.AnimateOpenOptions.top = 20;
-                }
-                if (_Main.AnimateOpenOptions.hasOwnProperty("bottom") === true)
-                {
-                    _Main.AnimateOpenOptions.bottom = 20;
-                }
-                if (_Main.Options.azSnackbarMobileMinHeight > 0)
-                {
-                    if (_Main.Options.azSnackbarMobileMinHeight > (window.innerHeight - 70))
+                    for (var i = 0; i < window.ListSnackbar.length; i++)
                     {
-                        _Main.Options.azSnackbarMobileMinHeight = (window.innerHeight - 70);
+                        if (window.ListSnackbar[i].attr("class").toString() == "az-snackbar-container az-snackbar-" + _Main.Options.azSnackbarPosition)
+                        {
+                            $(".az-snackbar-container.az-snackbar-" + _Main.Options.azSnackbarPosition).remove();
+                            window.ListSnackbar.splice(i, 1);
+                            break;
+                        }
                     }
-                    _Main.$Wrapper.css({ "min-height": _Main.Options.azSnackbarMobileMinHeight })
                 }
-            }
-
-            //_Main.azRecalcSnackbarPosition = function ()
-            //{
-            //    var _TotalHeight = 0;
-            //    var _Position = "";
-            //    $(".az-snackbar").not(_Main.$Wrapper).each(function ()
-            //    {
-            //        if (_Main.Options.azSnackbarPosition == "left-top" || _Main.Options.azSnackbarPosition == "full-width-top")
-            //        {
-            //            if ($(this).hasClass("az-snackbar-left-top") || $(this).hasClass("az-snackbar-full-width-top"))
-            //            {
-            //                _TotalHeight = _TotalHeight + $(this).height() + 16;
-            //            }
-            //            _Position = "top";
-            //        }
-            //        else if (_Main.Options.azSnackbarPosition == "right-top" || _Main.Options.azSnackbarPosition == "full-width-top")
-            //        {
-            //            if ($(this).hasClass("az-snackbar-right-top") || $(this).hasClass("az-snackbar-full-width-top"))
-            //            {
-            //                _TotalHeight = _TotalHeight + $(this).height() + 16;
-            //            }
-            //            _Position = "top";
-            //        }
-            //        else if (_Main.Options.azSnackbarPosition == "center-top" || _Main.Options.azSnackbarPosition == "full-width-top")
-            //        {
-            //            if ($(this).hasClass("az-snackbar-center-top") || $(this).hasClass("az-snackbar-full-width-top"))
-            //            {
-            //                _TotalHeight = _TotalHeight + $(this).height() + 16;
-            //            }
-            //            _Position = "top";
-            //        }
-            //        else if (_Main.Options.azSnackbarPosition == "left-bottom" || _Main.Options.azSnackbarPosition == "full-width-bottom")
-            //        {
-            //            if ($(this).hasClass("az-snackbar-left-bottom") || $(this).hasClass("az-snackbar-full-width-bottom"))
-            //            {
-            //                _TotalHeight = _TotalHeight + $(this).height() + _Main.Options.azSnackbarBottomMargin + 16;
-            //            }
-            //            _Position = "bottom";
-            //        }
-            //        else if (_Main.Options.azSnackbarPosition == "center-bottom" || _Main.Options.azSnackbarPosition == "full-width-bottom")
-            //        {
-            //            if ($(this).hasClass("az-snackbar-center-bottom") || $(this).hasClass("az-snackbar-full-width-bottom"))
-            //            {
-            //                _TotalHeight = _TotalHeight + $(this).height() + _Main.Options.azSnackbarBottomMargin + 16;
-            //            }
-            //            _Position = "bottom";
-            //        }
-            //        else if (_Main.Options.azSnackbarPosition == "right-bottom" || _Main.Options.azSnackbarPosition == "full-width-bottom")
-            //        {
-            //            if ($(this).hasClass("az-snackbar-right-bottom") || $(this).hasClass("az-snackbar-full-width-bottom"))
-            //            {
-            //                _TotalHeight = _TotalHeight + $(this).height() + _Main.Options.azSnackbarBottomMargin + 16;
-            //            }
-            //            _Position = "bottom";
-            //        }
-            //    });
-            //    if (_TotalHeight > 0 && _Position !== "")
-            //    {
-            //        _Main.AnimateOpenOptions[_Position] = _TotalHeight;
-            //    }
-            //}
-
-            _Main.azCloseSnackbar = function ()
-            {
-                _Main.$Wrapper.animate(_Main.AnimateCloseOptions, 500, function ()
-                {
-                    $("#" + _Main.Options.azSnackbarId).remove();
-                    //_Main.azRecalcSnackbarPosition();
-                });
-            }
-
-            _Main.azChangeSnackbarText = function (SnackbarText)
-            {
-                _Main.$TextCell.html(SnackbarText)
-            }
-
-            if (_Main.Options.azSnackbarClose === true)
-            {
-                _Main.$Close = $('<td></td>').html("X").addClass("az-snackbar-close").css({ "color": _Main.Options.azSnackbarCloseColor });
-                _Main.$Close.off("click").on("click", function ()
-                {
-                    _Main.azCloseSnackbar();
-                });
-            }
-            else
-            {
-                _Main.$Close = "";
-                window.setTimeout(function ()
-                {
-                    _Main.azCloseSnackbar();
-                }, _Main.Options.azSnackbarTimeout);
-            }
-
-            _Main.$TextCell = $('<td></td>').html(_Main.Options.azSnackbarText).addClass("az-snackbar-text").css({ "color": _Main.Options.azSnackbarColor });
-            _Main.$TableRow = $('<tr></tr>').append(_Main.$TextCell).append(_Main.$Close);
-            _Main.$Table.append(_Main.$TableRow);
-            _Main.$Wrapper.append(_Main.$Table);
-            _Main.$Body.append(_Main.$Wrapper);
-            //_Main.azRecalcSnackbarPosition();
-
-            _Main.$Wrapper.animate(_Main.AnimateOpenOptions, 500, function ()
-            {
-                AZCheckAsyncAndPublish(_Main.Options.azSnackbarAfterOpen, "functionlib/azSnackbarAfterOpen", _Main);
             });
         }
+
+        _Main.azChangeSnackbarText = function (SnackbarText)
+        {
+            _Main.$TextCell.html(SnackbarText)
+        }
+
+        if (_Main.Options.azSnackbarClose === true)
+        {
+            _Main.$Close = $('<td></td>').html("X").addClass("az-snackbar-close").css({ "color": _Main.Options.azSnackbarCloseColor });
+            _Main.$Close.off("click").on("click", function ()
+            {
+                _Main.azCloseSnackbar();
+            });
+        }
+
+        _Main.$TextCell = $('<td></td>').html(_Main.Options.azSnackbarText).addClass("az-snackbar-text").css({ "color": _Main.Options.azSnackbarColor });
+        _Main.$TableRow = $('<tr></tr>').append(_Main.$TextCell).append(_Main.$Close);
+        _Main.$Table.append(_Main.$TableRow);
+        _Main.$Snackbar.append(_Main.$Table);
+
+        if ($(".az-snackbar-container.az-snackbar-" + _Main.Options.azSnackbarPosition).length === 0)
+        {
+            $Container = $('<div></div>').addClass("az-snackbar-container").addClass("az-snackbar-" + _Main.Options.azSnackbarPosition);
+            window.ListSnackbar.push($Container);
+            $Container.append(_Main.$Snackbar);
+            $("body").append($Container);
+        }
+        else
+        {
+            $(".az-snackbar-container.az-snackbar-" + _Main.Options.azSnackbarPosition).append(_Main.$Snackbar);
+        }
+
+        if (_Main.Options.azSnackbarClose === false)
+        {
+            _Main.SnackbarTimer = window.setTimeout(_Main.azCloseSnackbar, _Main.Options.azSnackbarTimeout);
+        }
+
+        _Main.$Snackbar.animate(_Main.AnimateOpenOptions, 500, function ()
+        {
+            AZCheckAsyncAndPublish(_Main.Options.azSnackbarAfterOpen, "functionlib/azSnackbarAfterOpen", _Main);
+        });
     }
     else
     {

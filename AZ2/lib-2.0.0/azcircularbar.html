@@ -31,8 +31,6 @@
 
             $.subscribe("functionlib/azCircularBarReady", function (e, data)
             {
-                console.log(data)
-
                 if (data.Options.azCircularBarId === "az-circularbar-5")
                 {
                     $(".cmdAZCircularBar5").off().on("click", function (e)

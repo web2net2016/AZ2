@@ -10070,10 +10070,60 @@ template
     right: 0;
     bottom: 0;
 }
-.az-snackbar
+.az-snackbar-container
 {
     position: fixed;
     z-index: 5001;
+}
+
+    .az-snackbar-container.az-snackbar-left-top
+    {
+        left: 14px;
+        top: 20px;
+    }
+
+    .az-snackbar-container.az-snackbar-left-bottom
+    {
+        left: 14px;
+        bottom: 20px;
+    }
+
+    .az-snackbar-container.az-snackbar-center-top
+    {
+        left: 50%;
+        top: 20px;
+    }
+
+    .az-snackbar-container.az-snackbar-center-bottom
+    {
+        left: 50%;
+        bottom: 20px;
+    }
+
+    .az-snackbar-container.az-snackbar-right-top
+    {
+        right: 14px;
+        top: 20px;
+    }
+
+    .az-snackbar-container.az-snackbar-right-bottom
+    {
+        right: 14px;
+        bottom: 20px;
+    }
+
+    .az-snackbar-container.az-snackbar-full-width-top
+    {
+        top: 20px;
+    }
+
+    .az-snackbar-container.az-snackbar-full-width-bottom
+    {
+        bottom: 20px;
+    }
+
+.az-snackbar
+{
     opacity: 0;
     min-width: 250px;
     padding: 14px 0 14px 0;
@@ -10086,12 +10136,14 @@ template
     {
         left: 14px;
         top: -20px;
+        margin-bottom: 7px;
     }
 
     .az-snackbar.az-snackbar-left-bottom
     {
         left: 14px;
         bottom: -20px;
+        margin-top: 7px;
     }
 
     .az-snackbar.az-snackbar-center-top
@@ -10102,6 +10154,7 @@ template
         -moz-transform: translate(-50%,0%);
         -o-transform: translate(-50%,0%);
         transform: translate(-50%,0%);
+        margin-bottom: 7px;
     }
 
     .az-snackbar.az-snackbar-center-bottom
@@ -10112,18 +10165,21 @@ template
         -moz-transform: translate(-50%,0%);
         -o-transform: translate(-50%,0%);
         transform: translate(-50%,0%);
+        margin-top: 7px;
     }
 
     .az-snackbar.az-snackbar-right-top
     {
         right: 14px;
         top: -20px;
+        margin-bottom: 7px;
     }
 
     .az-snackbar.az-snackbar-right-bottom
     {
         right: 14px;
         bottom: -20px;
+        margin-top: 7px;
     }
 
     .az-snackbar.az-snackbar-full-width-top
@@ -10135,6 +10191,7 @@ template
         -moz-transform: none !important;
         -o-transform: none !important;
         transform: none !important;
+        margin-bottom: 7px;
     }
 
     .az-snackbar.az-snackbar-full-width-bottom
@@ -10146,6 +10203,7 @@ template
         -moz-transform: none !important;
         -o-transform: none !important;
         transform: none !important;
+        margin-top: 7px;
     }
 
 .az-snackbar.az-snackbar-mobile
