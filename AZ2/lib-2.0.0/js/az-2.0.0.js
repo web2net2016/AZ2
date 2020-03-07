@@ -2414,6 +2414,67 @@ function AZAjax(Options)
     }
 }
 
+// AZ Background Slider
+function AZBackgroundSlider(Options)
+{
+    if (this instanceof AZBackgroundSlider === true)
+    {
+        var _Main = this;
+        var _Defaults =
+        {
+            azBackgroundSliderId: "",
+            azBackgroundSliderWidth: 500,
+            azBackgroundSliderHeight: 300
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
+
+        if (_Main.Options.azBackgroundSliderId != "")
+        {
+            _Main.$BackgroundSlider = $("#" + _Main.Options.azBackgroundSliderId);
+            _Main.$BackgroundSliderWrapper = _Main.$BackgroundSlider.children(".az-background-slider-wrapper");
+            _Main.$BackgroundSliderContent = _Main.$BackgroundSliderWrapper.children(".az-background-slider-content");
+
+            if (_Main.$BackgroundSliderContent.length > 0)
+            {
+                _Main.$BackgroundSliderContent.css({ "float": "left", "width": _Main.Options.azBackgroundSliderWidth, "height": _Main.Options.azBackgroundSliderHeight });
+
+                _Main.TotalWidth = 0;
+                _Main.TotalHeight = 0;
+                _Main.LeftRightMargin = 0;
+                _Main.TopBottomMargin = 0;
+                _Main.$BackgroundSliderContent.each(function (Index, Content)
+                {
+                    if ($(Content).outerWidth(true) > _Main.TotalWidth)
+                    {
+                        _Main.TotalWidth = $(Content).outerWidth(true);
+                    }
+                    if ($(Content).outerHeight(true) > _Main.TotalHeight)
+                    {
+                        _Main.TotalHeight = $(Content).outerHeight(true);
+                    }
+                });
+                if (_Main.TotalWidth > _Main.$BackgroundSliderContent.innerWidth())
+                {
+                    _Main.LeftRightMargin = ((_Main.TotalWidth - _Main.$BackgroundSliderContent.innerWidth()) / 2)
+                }
+                if (_Main.TotalHeight > _Main.$BackgroundSliderContent.innerHeight())
+                {
+                    _Main.TopBottomMargin = ((_Main.TotalHeight - _Main.$BackgroundSliderContent.innerHeight()) / 2)
+                }
+                _Main.$BackgroundSliderWrapper.css({ "width": (_Main.$BackgroundSliderContent.length * _Main.TotalWidth) });
+                _Main.$BackgroundSlider.css({ "overflow-x": "scroll", "width": "100%", "height": (_Main.TotalHeight + 25) });
+                _Main.$BackgroundSliderContent.find("img").css({ "width": _Main.Options.azBackgroundSliderWidth, "height": _Main.Options.azBackgroundSliderHeight }).parent().css({ "margin-left": _Main.LeftRightMargin, "margin-right": _Main.LeftRightMargin, "margin-top": _Main.TopBottomMargin, "margin-bottom": _Main.TopBottomMargin });
+
+                $.publish("functionlib/azSlidingReady", _Main);
+            }
+        }
+    }
+    else
+    {
+        return new AZBackgroundSlider(Options);
+    }
+}
+
 // AZ Circular Bar
 function AZCircularBar(Options)
 {

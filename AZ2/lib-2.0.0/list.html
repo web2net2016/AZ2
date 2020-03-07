@@ -28,19 +28,118 @@
         $(document).ready(function ()
         {
             w3CodeColor();
+
+            new AZBackgroundSlider(
+                {
+                    azBackgroundSliderId: "az-background-slider-1"
+                });
+
+            new AZBackgroundSlider(
+                {
+                    azBackgroundSliderId: "az-background-slider-2"
+                });
         });
 
     </script>
+
+    <style>
+
+        @media (max-width: 576px)
+        {
+            ::-webkit-scrollbar
+            {
+                width: 0;
+            }
+        }
+    </style>
+
 </head>
+
 <body>
 
     <form id="frmReg">
         <div class="az-container">
 
             <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+
+                    <div id="az-background-slider-1">
+                        <div class="az-background-slider-wrapper">
+
+                            <div class="az-background-slider-content">
+                                <img src="https://www.w3schools.com/w3css/img_snowtops.jpg" />
+                            </div>
+
+                            <div class="az-list-card az-background-slider-content">
+                                <article>
+                                    <h1 class="az-text-large">Lorem 1</h1>
+                                    <p class="az-clearfix">Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum.</p>
+                                </article>
+                            </div>
+
+                            <div class="az-list-card az-background-slider-content">
+                                <article>
+                                    <h1 class="az-text-large">Lorem 2</h1>
+                                    <p class="az-clearfix">Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum.</p>
+                                </article>
+                            </div>
+
+                            <div class="az-list-card az-background-slider-content">
+                                <article>
+                                    <h1 class="az-text-large">Lorem 3</h1>
+                                    <p class="az-clearfix">Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum.</p>
+                                </article>
+                            </div>
+
+                            <div class="az-background-slider-content">
+                                <img src="https://www.w3schools.com/w3css/img_vernazza.jpg" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+
+                    <div id="az-background-slider-2">
+                        <div class="az-background-slider-wrapper">
+
+                            <div class="az-list-card az-background-slider-content">
+                                <article>
+                                    <h1 class="az-text-large">Lorem 2</h1>
+                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum. Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum. Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum. Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum. Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum.</p>
+                                </article>
+                            </div>
+
+                            <div class="az-background-slider-content">
+                                <img src="https://www.w3schools.com/w3images/steak.jpg" />
+                            </div>
+
+                            <div class="az-list-card az-background-slider-content">
+                                <article>
+                                    <h1 class="az-text-large">Lorem 3</h1>
+                                    <p class="az-clearfix">Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum.</p>
+                                </article>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <!--<div class="az-row az-margin-t-28">
                 <div class="az-col xs-12 sm-6">
 
-                    <!--List Card-->
                     <div class="az-list-card adjust">
                         <article>
                             <img class="az-image az-width-100" src="/web2net/innherred.png" />
@@ -52,7 +151,6 @@
                 </div>
                 <div class="az-col xs-12 sm-6 az-xs-margin-t-7 az-sm-margin-t-0">
 
-                    <!--List Card-->
                     <div class="az-list-card adjust">
                         <article>
                             <span class="az-badge az-left az-margin-t-7 az-margin-r-14 az-bg-black" style="padding: 7px 21px 7px 21px;"><i class="fas fa-info fa-3x"></i></span>
@@ -66,7 +164,6 @@
                 </div>
                 <div class="az-col xs-12 sm-6 az-xs-margin-t-7">
 
-                    <!--List Card-->
                     <div class="az-list-card adjust">
                         <article>
                             <img class="az-image az-width-100" src="https://www.w3schools.com/w3css/img_snowtops.jpg" />
@@ -85,7 +182,6 @@
                 </div>
                 <div class="az-col xs-12 sm-6 az-xs-margin-t-7">
 
-                    <!--List Card-->
                     <div class="az-list-card adjust">
                         <article>
                             <img class="az-image az-width-100" src="https://www.w3schools.com/w3css/img_vernazza.jpg" />
@@ -107,7 +203,6 @@
             <div class="az-row az-margin-t-7">
                 <div class="az-col xs-12 sm-6">
 
-                    <!--List Card-->
                     <div class="az-list-card az-border-bottom-1-silver">
                         <article>
                             <img class="az-image az-left az-margin-r-14 az-width-15" src="https://www.w3schools.com/w3images/sandwich.jpg" />
@@ -119,7 +214,6 @@
                 </div>
                 <div class="az-col xs-12 sm-6">
 
-                    <!--List Card-->
                     <div class="az-list-card az-border-bottom-1-silver">
                         <article>
                             <img class="az-image az-left az-margin-r-14 az-width-15" src="https://www.w3schools.com/w3images/steak.jpg" />
@@ -131,7 +225,6 @@
                 </div>
                 <div class="az-col xs-12 sm-6">
 
-                    <!--List Card-->
                     <div class="az-list-card az-border-bottom-1-silver">
                         <article>
                             <img class="az-image az-left az-margin-r-14 az-width-15" src="https://www.w3schools.com/w3images/cherries.jpg" />
@@ -143,7 +236,6 @@
                 </div>
                 <div class="az-col xs-12 sm-6">
 
-                    <!--List Card-->
                     <div class="az-list-card">
                         <article>
                             <img class="az-image az-left az-margin-r-14 az-width-15" src="https://www.w3schools.com/w3images/wine.jpg" />
@@ -158,7 +250,6 @@
             <div class="az-row az-margin-t-7 az-margin-b-56">
                 <div class="az-col xs-12 sm-6">
 
-                    <!--List Card-->
                     <div class="az-list-card">
                         <article>
                             <img class="az-image az-left az-margin-r-14 az-width-25 az-circle-50" src="https://www.w3schools.com/w3css/img_avatar4.png" />
@@ -179,7 +270,6 @@
                 </div>
                 <div class="az-col xs-12 sm-6 az-xs-margin-t-7 az-sm-margin-t-0">
 
-                    <!--List Card-->
                     <div class="az-list-card">
                         <article>
                             <img class="az-image az-left az-margin-r-14 az-width-25 az-circle-50" src="https://www.w3schools.com/w3css/img_avatar2.png" />
@@ -198,7 +288,10 @@
                     </div>
 
                 </div>
-            </div>
+            </div>-->
+
+
+
 
         </div>
     </form>
