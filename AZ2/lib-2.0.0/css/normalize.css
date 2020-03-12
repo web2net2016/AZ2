@@ -219,6 +219,7 @@ video
 
 img
 {
+    max-width: 100vw;
 	border-style: none;
 }
 

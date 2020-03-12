@@ -76,6 +76,11 @@
             AZHideCoverSpin();
         }
 
+        function AZCancel()
+        {
+            window.location.href = "/lib-2.0.0/azcdn200.html";
+        }
+
         function AZSubmit()
         {
             var _AZSerializeFormOptions =
@@ -87,11 +92,7 @@
             var _ObjReturnForm = AZSerializeForm(_AZSerializeFormOptions);
             if (IsEmpty(_ObjReturnForm) === false)
             {
-
-                console.log(InputData)
-
-
-                console.log(_ObjReturnForm)
+                $("#ObjFormResponse").text(JSON.stringify(_ObjReturnForm));
             }
         }
 
@@ -231,7 +232,15 @@
                     </ul>
                 </div>
             </div>
-
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12">
+                    <div class="az-card" style="margin: 0;">
+                        <article>
+                            <div id="ObjFormResponse">Click Submit to see the object that serializes from the form.</div>
+                        </article>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 

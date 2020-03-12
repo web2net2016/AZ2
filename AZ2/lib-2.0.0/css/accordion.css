@@ -1,35 +1,33 @@
-﻿.az-accordion-card
+﻿.az-accordion
 {
-    position: relative;
     display: block;
-    overflow: visible;
-    white-space: normal;
+    position: relative;
 }
 
-    .az-accordion-card > header
+    .az-accordion > .az-accordion-card
     {
-        cursor: pointer;
+        display: block;
+        position: relative;
+        overflow: visible;
+        white-space: normal;
     }
 
-        .az-accordion-card > header > *
+        .az-accordion > .az-accordion-card > header
         {
-            display: inline-block;
+            cursor: pointer;
         }
 
-        .az-accordion-card > header > i
+            .az-accordion > .az-accordion-card > header > *
+            {
+                display: inline-block;
+            }
+
+            .az-accordion > .az-accordion-card > header > i
+            {
+                float: right;
+            }
+
+        .az-accordion > .az-accordion-card > article
         {
-            float: right;
+            display: none;
         }
-
-    .az-accordion-card > article
-    {
-        display: none;
-    }
-
-@media (max-width: 576px)
-{
-    .az-accordion
-    {
-        margin: 0 7px 0 7px;
-    }
-}

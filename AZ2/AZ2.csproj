@@ -71,6 +71,8 @@
     <Content Include="authentication.js" />
     <Content Include="fingerprint.js" />
     <Content Include="http-errors.txt" />
+    <Content Include="lib-2.0.0\azbackgroundslider.html" />
+    <Content Include="lib-2.0.0\css\backgroundslider.css" />
     <Content Include="side1.html" />
     <Content Include="side2.html" />
     <Content Include="lib-2.0.0\aztabs.html" />

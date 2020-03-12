@@ -4,7 +4,7 @@ var AZSettings =
 {
     LanguageValidationFolder: "/admin",
     DefaultLanguageFile: "/lib/lang-val/default-lang.json",
-    DefaultLanguage: "nb-NO",
+    DefaultLanguage: "en-US",
     DebugMode: true,
     AppName: "AZ Team",
     AppVersion: "1.0.0",

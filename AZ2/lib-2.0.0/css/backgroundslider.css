@@ -1,0 +1,7 @@
+﻿@media (max-width: 576px)
+{
+    ::-webkit-scrollbar
+    {
+        width: 0;
+    }
+}

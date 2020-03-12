@@ -3,6 +3,7 @@
     "outputFileName": "lib-2.0.0/css/az-2.0.0.css",
     "inputFiles": [
       "lib-2.0.0/css/accordion.css",
+      "lib-2.0.0/css/backgroundslider.css",
       "lib-2.0.0/css/card.css",
       "lib-2.0.0/css/circularbar.css",
       "lib-2.0.0/css/color.css",

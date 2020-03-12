@@ -12,8 +12,8 @@
       { "labelDecimal": [ "id", "text", "Desimal:" ] },
       { "labelNumeric": [ "id", "text", "Heltall:" ] },
       { "labelComment": [ "id", "text", "Kommentar:" ] },
-      { "cmdSubmit": [ "id", "text", "Send" ] },
-      { "cmdSubmit": [ "id", "title", "Klikk for å sende" ] }
+      { "cmdSubmit": [ "id", "text", "Submit" ] },
+      { "cmdSubmit": [ "id", "title", "Klikk for å lagre" ] }
     ],
     "nb-NO": [
       { "labelCustomerName": [ "id", "text", "Kunde:" ] },
@@ -27,8 +27,8 @@
       { "labelDecimal": [ "id", "text", "Desimal:" ] },
       { "labelNumeric": [ "id", "text", "Heltall:" ] },
       { "labelComment": [ "id", "text", "Kommentar:" ] },
-      { "cmdSubmit": [ "id", "text", "Send" ] },
-      { "cmdSubmit": [ "id", "title", "Klikk for å sende" ] }
+      { "cmdSubmit": [ "id", "text", "Lagre" ] },
+      { "cmdSubmit": [ "id", "title", "Klikk for å lagre" ] }
     ]
   },
   "SingleElements": {
