@@ -1,5 +1,10 @@
 ﻿function clientStorage(ActionType, Name, Value)
 {
+    AZClientStorage(ActionType, Name, Value);
+}
+
+function AZClientStorage(ActionType, Name, Value)
+{
     var _ThisLocation = window.document.location.hostname;
     var _LocalStorageEnabled = checkLocalStorage();
     if (typeof Value === "object")

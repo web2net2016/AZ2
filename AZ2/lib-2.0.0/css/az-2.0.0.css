@@ -10094,14 +10094,22 @@ template
 
     .az-snackbar-container.az-snackbar-center-top
     {
-        left: 50%;
         top: 20px;
+        left: 50%;
+        -webkit-transform: translate(-50%,0%);
+        -moz-transform: translate(-50%,0%);
+        -o-transform: translate(-50%,0%);
+        transform: translate(-50%,0%);
     }
 
     .az-snackbar-container.az-snackbar-center-bottom
     {
         left: 50%;
         bottom: 20px;
+        -webkit-transform: translate(-50%,0%);
+        -moz-transform: translate(-50%,0%);
+        -o-transform: translate(-50%,0%);
+        transform: translate(-50%,0%);
     }
 
     .az-snackbar-container.az-snackbar-right-top
@@ -10119,10 +10127,14 @@ template
     .az-snackbar-container.az-snackbar-full-width-top
     {
         top: 20px;
+        left: 14px;
+        right: 14px;
     }
 
     .az-snackbar-container.az-snackbar-full-width-bottom
     {
+        left: 14px;
+        right: 14px;
         bottom: 20px;
     }
 
@@ -10138,107 +10150,63 @@ template
 
     .az-snackbar.az-snackbar-left-top
     {
-        left: 14px;
-        top: -20px;
         margin-bottom: 7px;
     }
 
     .az-snackbar.az-snackbar-left-bottom
     {
-        left: 14px;
-        bottom: -20px;
         margin-top: 7px;
     }
 
     .az-snackbar.az-snackbar-center-top
     {
-        left: 50%;
-        top: -20px;
-        -webkit-transform: translate(-50%,0%);
-        -moz-transform: translate(-50%,0%);
-        -o-transform: translate(-50%,0%);
-        transform: translate(-50%,0%);
         margin-bottom: 7px;
     }
 
     .az-snackbar.az-snackbar-center-bottom
     {
-        left: 50%;
-        bottom: -20px;
-        -webkit-transform: translate(-50%,0%);
-        -moz-transform: translate(-50%,0%);
-        -o-transform: translate(-50%,0%);
-        transform: translate(-50%,0%);
-        margin-top: 7px;
+        margin-bottom: 7px;
     }
 
     .az-snackbar.az-snackbar-right-top
     {
-        right: 14px;
-        top: -20px;
         margin-bottom: 7px;
     }
 
     .az-snackbar.az-snackbar-right-bottom
     {
-        right: 14px;
-        bottom: -20px;
         margin-top: 7px;
     }
 
     .az-snackbar.az-snackbar-full-width-top
     {
-        top: -20px;
-        left: 14px !important;
-        right: 14px !important;
-        -webkit-transform: none !important;
-        -moz-transform: none !important;
-        -o-transform: none !important;
-        transform: none !important;
         margin-bottom: 7px;
     }
 
     .az-snackbar.az-snackbar-full-width-bottom
     {
-        bottom: -20px;
-        left: 14px !important;
-        right: 14px !important;
-        -webkit-transform: none !important;
-        -moz-transform: none !important;
-        -o-transform: none !important;
-        transform: none !important;
         margin-top: 7px;
     }
 
-.az-snackbar.az-snackbar-mobile
-{
-    left: 14px !important;
-    right: 14px !important;
-    -webkit-transform: none !important;
-    -moz-transform: none !important;
-    -o-transform: none !important;
-    transform: none !important;
-}
-
-.az-snackbar > .az-snackbar-table
-{
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-    border: 0;
-}
-
-    .az-snackbar > .az-snackbar-table .az-snackbar-text
+    .az-snackbar > .az-snackbar-table
     {
-        padding: 0 14px 0 14px;
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 0;
     }
 
-    .az-snackbar > .az-snackbar-table .az-snackbar-close
-    {
-        width: 20px;
-        font-weight: bold;
-        cursor: pointer;
-    }
+        .az-snackbar > .az-snackbar-table .az-snackbar-text
+        {
+            padding: 0 14px 0 14px;
+        }
+
+        .az-snackbar > .az-snackbar-table .az-snackbar-close
+        {
+            width: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
 .az-table
 {

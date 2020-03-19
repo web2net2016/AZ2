@@ -630,7 +630,7 @@ $(document).ready(function ()
                 if ((_ObjAttributes.Value < _ObjAttributes.Min) || (_ObjAttributes.Value > _ObjAttributes.Max))
                 {
                     _$CurrentSpinner.remove();
-                    _$ParentElement.html('<div>Her er det en feil</div>');
+                    _$ParentElement.html('<div>#Error</div>');
                 }
                 else
                 {
@@ -1265,7 +1265,7 @@ function AZBackgroundSlider(Options)
 
                 if (_Main.Options.azBackgroundSliderWidth > window.innerWidth)
                 {
-                    _Main.ContentWidth = (window.innerWidth - 18);
+                    _Main.ContentWidth = (window.innerWidth - 24);
                 }
 
                 _Main.$BackgroundSliderContent.css({ "width": _Main.ContentWidth, "height": _Main.ContentHeight });
@@ -1289,21 +1289,22 @@ function AZBackgroundSlider(Options)
                     _Main.TopBottomMargin = ((_Main.ContentMaxHeight - _Main.$BackgroundSliderContent.innerHeight()) / 2)
                 }
 
-                _Main.$BackgroundSliderContent.find("img").css({ "width": _Main.ContentWidth, "height": _Main.ContentHeight }).parent().css({ "margin-left": _Main.LeftRightMargin, "margin-right": _Main.LeftRightMargin, "margin-top": _Main.TopBottomMargin, "margin-bottom": _Main.TopBottomMargin });
+                _Main.$BackgroundSliderContent.find("img").css({ "width": _Main.ContentWidth, "height": _Main.ContentHeight });
 
                 if (_Main.Options.azBackgroundSliderDir === "horizontal")
                 {
                     _Main.$BackgroundSliderWrapper.css({ "width": (_Main.$BackgroundSliderContent.length * _Main.ContentMaxWidth) });
-                    _Main.$BackgroundSlider.css({ "overflow-x": "scroll", "width": "100%", "height": (_Main.ContentMaxHeight + 20) });
-                    _Main.$BackgroundSliderContent.css({ "float": "left" });
+                    _Main.$BackgroundSlider.css({ "overflow-x": "scroll", "width": "100%", "height": (_Main.ContentMaxHeight + 12) });
+                    _Main.$BackgroundSliderContent.css({ "float": "left", "margin-left": _Main.LeftRightMargin, "margin-right": _Main.LeftRightMargin, "margin-top": 0, "margin-bottom": 0 });
                 }
                 else
                 {
                     _Main.$BackgroundSlider.css({ "overflow-y": "scroll", "width": "100%", "height": _Main.SliderHeight });
                     if (_Main.Options.azBackgroundSliderWidth < window.innerWidth)
                     {
-                        _Main.$BackgroundSlider.css({ "width": (_Main.ContentMaxWidth + 20) });
+                        _Main.$BackgroundSlider.css({ "width": (_Main.ContentMaxWidth + 12) });
                     }
+                    _Main.$BackgroundSliderContent.css({ "margin-left": 0, "margin-right": 0, "margin-top": _Main.TopBottomMargin, "margin-bottom": _Main.TopBottomMargin });
                 }
 
                 $.publish("functionlib/azBackgroundSliderReady", _Main);
@@ -1733,7 +1734,6 @@ function AZSnackbar(Options)
 
         if (window.innerWidth < 576)
         {
-            _Main.$Snackbar.addClass("az-snackbar-mobile");
             if (_Main.AnimateOpenOptions.hasOwnProperty("top") === true)
             {
                 _Main.AnimateOpenOptions.top = 20;
@@ -2276,42 +2276,6 @@ function AZFullWindow(Options)
     }
 }
 
-// AZ Portfolio
-var _$PortfolioMenu = {};
-var _$PortfolioContent = {};
-function setPortfolio()
-{
-    _$PortfolioMenu = $(".az-portfolio-menu");
-    _$PortfolioContent = $(".az-portfolio-content");
-    _$PortfolioMenu.off().on("click", "li", function (e)
-    {
-        var _$MenuFilter = $(this).attr('data-filter');
-        if (_$MenuFilter == "*")
-        {
-            _$PortfolioContent.children("li").removeClass("az-portfolio-content-hidden");
-        }
-        else
-        {
-            _$PortfolioContent.children("li").not(_$MenuFilter).addClass("az-portfolio-content-hidden");
-            _$PortfolioContent.children(_$MenuFilter).removeClass("az-portfolio-content-hidden");
-        }
-    });
-    if ($(".az-portfolio-content-hidden", _$PortfolioContent).length == 0)
-    {
-        _$PortfolioContent.height(0);
-        _$PortfolioContent.height(_$PortfolioContent.parent().height() + 28);
-    }
-}
-
-function setParallaxImages(ParallaxImages)
-{
-    $.each(ParallaxImages, function (i, ImagesContent)
-    {
-        var _CurrentImage = $('#img' + (i + 1));
-        _CurrentImage.css({ 'background-image': 'url(' + ImagesContent.url + ')', 'height': ImagesContent.height, 'opacity': ImagesContent.opacity });
-    });
-}
-
 // AZ SlideIn
 function AZSlideIn(Options)
 {
@@ -2601,27 +2565,27 @@ function AZRangeMulti(Options)
 }
 
 // AZ Sort JSON
-function AZSortJSONArray(arr, prop, order)
+function AZSortJSONArray(Arr, Prop, Order)
 {
-    if (arr == null || Array.isArray(arr) === false || prop == null || prop == "")
+    if (Arr == null || Array.isArray(Arr) === false || Prop == null || Prop == "")
     {
         return [];
     }
     else
     {
         _Order = "asc";
-        if (order != null && order != "" && order.length > 2)
+        if (Order != null && Order != "" && Order.length > 2)
         {
-            _Order = order.toLowerCase();
+            _Order = Order.toLowerCase();
         }
 
         if (_Order === "asc")
         {
-            return arr.sort(Compare(prop, 1));
+            return Arr.sort(Compare(Prop, 1));
         }
         else if (_Order == "desc")
         {
-            return arr.sort(Compare(prop, 0));
+            return Arr.sort(Compare(Prop, 0));
         }
 
         function Compare(Attr, Value)
@@ -2630,23 +2594,119 @@ function AZSortJSONArray(arr, prop, order)
             {
                 return function (a, b)
                 {
-                    var x = parseInt((a[Attr] === null) ? "" : "" + a[Attr]);
-                    var y = parseInt((b[Attr] === null) ? "" : "" + b[Attr]);
-                    return x < y ? -1 : (x > y ? 1 : 0);
+                    var x = (a[Attr] === null) ? "" : "" + a[Attr],
+                        y = (b[Attr] === null) ? "" : "" + b[Attr];
+                    return x < y ? -1 : (x > y ? 1 : 0)
                 }
             }
             else
             {
                 return function (a, b)
                 {
-                    var x = parseInt((a[Attr] === null) ? "" : "" + a[Attr]);
-                    var y = parseInt((b[Attr] === null) ? "" : "" + b[Attr]);
-                    return x < y ? 1 : (x > y ? -1 : 0);
+                    var x = (a[Attr] === null) ? "" : "" + a[Attr],
+                        y = (b[Attr] === null) ? "" : "" + b[Attr];
+                    return x < y ? 1 : (x > y ? -1 : 0)
                 }
             }
         }
     }
 }
+
+function IsEmpty(SelectedObj)
+{
+    if (SelectedObj instanceof Object)
+    {
+        if (SelectedObj == null)
+        {
+            return true;
+        }
+        for (var key in SelectedObj)
+        {
+            if (SelectedObj.hasOwnProperty(key))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+function AZGetURLParameters(SelectedURL)
+{
+    var _ParameterReturn = {};
+    if (SelectedURL === undefined || SelectedURL === "")
+    {
+        window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value)
+        {
+            _ParameterReturn[key.toLowerCase()] = value;
+        });
+    }
+    else
+    {
+        SelectedURL.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value)
+        {
+            _ParameterReturn[key.toLowerCase()] = value;
+        });
+    }
+    return _ParameterReturn;
+}
+
+function AZBytesConverter(Bytes, Decimal)
+{
+    if (Bytes == 0)
+    {
+        return '0 Bytes';
+    }
+    else
+    {
+        var _Kilo = 1000;
+        var _Decimal = Decimal === 0 ? 0 : Decimal || 2;
+        var _Sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        var _Index = Math.floor(Math.log(Bytes) / Math.log(_Kilo));
+        return parseFloat((Bytes / Math.pow(_Kilo, _Index)).toFixed(_Decimal)) + ' ' + _Sizes[_Index];
+    }
+}
+
+
+function AZGetObject(Arr, Key, Val)
+{
+    var _ObjReturn = {};
+    return SearchArray(Arr, Key, Val);
+
+    function SearchArray(Arr, Key, Val)
+    {
+        for (var Obj in Arr)
+        {
+            if (Array.isArray(Arr[Obj]) || typeof Arr[Obj] === 'object')
+            {
+                SearchArray(Arr[Obj], Key, Val);
+            }
+            else
+            {
+                if (Obj == Key && Arr[Obj] == Val)
+                {
+                    for (var _Obj in Arr)
+                    {
+                        if (Array.isArray(Arr[_Obj]) || typeof Arr[_Obj] === 'object')
+                        {
+                            console.log(Arr.Obj)
+                            delete _Obj;
+                        }
+                    }
+                    _ObjReturn = Arr;
+                    break;
+                }
+            }
+        }
+        return _ObjReturn;
+    }
+}
+
+
 
 ////////////////////////////////////////////////////////////
 
@@ -2680,29 +2740,6 @@ $.urlParam = function (name)
     else
     {
         return results[1] || 0;
-    }
-}
-
-function IsEmpty(SelectedObj)
-{
-    if (SelectedObj instanceof Object)
-    {
-        if (SelectedObj == null)
-        {
-            return true;
-        }
-        for (var key in SelectedObj)
-        {
-            if (SelectedObj.hasOwnProperty(key))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-    else
-    {
-        return true;
     }
 }
 
@@ -2894,4 +2931,40 @@ function CalcChildrenHeight($Element)
         }
     });
     return (bottomOffset - topOffset - $Element.offset().top);
+}
+
+// AZ Portfolio
+var _$PortfolioMenu = {};
+var _$PortfolioContent = {};
+function setPortfolio()
+{
+    _$PortfolioMenu = $(".az-portfolio-menu");
+    _$PortfolioContent = $(".az-portfolio-content");
+    _$PortfolioMenu.off().on("click", "li", function (e)
+    {
+        var _$MenuFilter = $(this).attr('data-filter');
+        if (_$MenuFilter == "*")
+        {
+            _$PortfolioContent.children("li").removeClass("az-portfolio-content-hidden");
+        }
+        else
+        {
+            _$PortfolioContent.children("li").not(_$MenuFilter).addClass("az-portfolio-content-hidden");
+            _$PortfolioContent.children(_$MenuFilter).removeClass("az-portfolio-content-hidden");
+        }
+    });
+    if ($(".az-portfolio-content-hidden", _$PortfolioContent).length == 0)
+    {
+        _$PortfolioContent.height(0);
+        _$PortfolioContent.height(_$PortfolioContent.parent().height() + 28);
+    }
+}
+
+function setParallaxImages(ParallaxImages)
+{
+    $.each(ParallaxImages, function (i, ImagesContent)
+    {
+        var _CurrentImage = $('#img' + (i + 1));
+        _CurrentImage.css({ 'background-image': 'url(' + ImagesContent.url + ')', 'height': ImagesContent.height, 'opacity': ImagesContent.opacity });
+    });
 }
