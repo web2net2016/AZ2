@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="admin\index\index.html" />
     <Content Include="authentication.js" />
+    <Content Include="favicon.ico" />
     <Content Include="fingerprint.js" />
     <Content Include="http-errors.txt" />
     <Content Include="lib-2.0.0\azbackgroundslider.html" />
@@ -95,7 +96,6 @@
       <DependentUpon>az-2.0.0.css</DependentUpon>
     </Content>
     <Content Include="lib-2.0.0\default.html" />
-    <Content Include="favicon.ico" />
     <Content Include="lib-2.0.0\azform2.html" />
     <Content Include="lib-2.0.0\azform.html" />
     <Content Include="lib-2.0.0\flex.html" />
@@ -165,6 +165,7 @@
     <Content Include="Web.config" />
     <Content Include="web2net\648991523.mp4" />
     <Content Include="web2net\analytics.png" />
+    <Content Include="web2net\az-logo-600x600.png" />
     <Content Include="web2net\bakoy.jpg" />
     <Content Include="web2net\billeas.jpg" />
     <Content Include="web2net\bootstrap3.txt" />

@@ -176,7 +176,7 @@ function AZPage(Options)
                     _Main.$Validation = new AZGetJSON({ azJsonUrl: _Main.JsonUrl + "-val.json" });
                     _Main.$Validation.done(function (data, textStatus, jqXHR)
                     {
-                        if (IsEmpty(data) === false && textStatus === "success")
+                        if (textStatus === "success")
                         {
                             _Main.ObjValidation = data;
                             var _AZSetValidationOptions =
@@ -239,15 +239,15 @@ function AZPage(Options)
             if (IsEmpty(AZSettings) === false)
             {
                 _Main.DefaultLanguageFile = AZSettings.DefaultLanguageFile;
-                _Main.DefaultLanguage = clientStorage("get", "language", "");
-                if (_Main.DefaultLanguage === null)
+                _Main.DefaultLanguage = AZClientStorage("get", "language");
+                if (_Main.DefaultLanguage === null || _Main.DefaultLanguage === undefined)
                 {
                     _Main.DefaultLanguage = AZSettings.DefaultLanguage;
                 }
                 moment.locale(_Main.DefaultLanguage);
                 var _LanguageCode = _Main.DefaultLanguage.split("-");
                 numeral.locale(_LanguageCode[0].toLowerCase());
-                clientStorage("set", "language", _Main.DefaultLanguage)
+                AZClientStorage("set", "language", _Main.DefaultLanguage)
 
                 if ((AZSettings.LanguageValidationFolder.match(new RegExp("/", "g")) || []).length > 1)
                 {
@@ -645,8 +645,8 @@ function AZSetValidation(Options)
 
 function AZSetInputTypeEvents()
 {
-    var _DefaultLanguage = clientStorage("get", "language", "");
-    if (_DefaultLanguage === null)
+    var _DefaultLanguage = AZClientStorage("get", "language", "");
+    if (_DefaultLanguage === null || _DefaultLanguage === undefined)
     {
         _DefaultLanguage = AZSettings.DefaultLanguage;
     }
@@ -1179,8 +1179,8 @@ function AZValidateInputValueFocusout(e)
 
 function AZGetValidType(SelectedType)
 {
-    var _DefaultLanguage = clientStorage("get", "language", "");
-    if (_DefaultLanguage === null)
+    var _DefaultLanguage = AZClientStorage("get", "language", "");
+    if (_DefaultLanguage === null || _DefaultLanguage === undefined)
     {
         _DefaultLanguage = AZSettings.DefaultLanguage;
     }
@@ -1568,8 +1568,8 @@ function AZPopulateForm(Options)
 
 function AZIsValidDecimal(Float)
 {
-    var _DefaultLanguage = clientStorage("get", "language", "");
-    if (_DefaultLanguage === null)
+    var _DefaultLanguage = AZClientStorage("get", "language", "");
+    if (_DefaultLanguage === null || _DefaultLanguage === undefined)
     {
         _DefaultLanguage = AZSettings.DefaultLanguage;
     }

@@ -56,8 +56,8 @@ $(document).ready(function ()
                 });
         });
 
-        var _DefaultLanguage = clientStorage("get", "language", "");
-        if (_DefaultLanguage === null)
+        var _DefaultLanguage = AZClientStorage("get", "language", "");
+        if (_DefaultLanguage === null || _DefaultLanguage === undefined)
         {
             _DefaultLanguage = "nb-NO";
         }
@@ -2671,7 +2671,6 @@ function AZBytesConverter(Bytes, Decimal)
     }
 }
 
-
 function AZGetObject(Arr, Key, Val)
 {
     var _ObjReturn = {};
@@ -2689,24 +2688,14 @@ function AZGetObject(Arr, Key, Val)
             {
                 if (Obj == Key && Arr[Obj] == Val)
                 {
-                    for (var _Obj in Arr)
-                    {
-                        if (Array.isArray(Arr[_Obj]) || typeof Arr[_Obj] === 'object')
-                        {
-                            console.log(Arr.Obj)
-                            delete _Obj;
-                        }
-                    }
                     _ObjReturn = Arr;
-                    break;
+                    return false;
                 }
             }
         }
         return _ObjReturn;
     }
 }
-
-
 
 ////////////////////////////////////////////////////////////
 

@@ -422,14 +422,14 @@
 // AZ Set Language Client Storage
 //function initAZSetLanguageClientStorage()
 //{
-//    var _CurrentLanguage = clientStorage("get", "language", "");
+//    var _CurrentLanguage = AZClientStorage("get", "language", "");
 //    if (_CurrentLanguage != null)
 //    {
 //        ThisLanguage = _CurrentLanguage;
 //    }
 //    else
 //    {
-//        clientStorage("set", "language", ThisLanguage);
+//        AZClientStorage("set", "language", ThisLanguage);
 //    }
 //    consoleLog("initAZSetLanguageClientStorage");
 //    $.publish("functionlib/initAZSetLanguageClientStorage");
@@ -438,7 +438,7 @@
 // AZ Get Customer Info
 //function initAZGetCustomerInfo()
 //{
-//    ObjCustomerInfo = JSON.parse(clientStorage("get", "customerinfo", ""));
+//    ObjCustomerInfo = JSON.parse(AZClientStorage("get", "customerinfo", ""));
 //    if (isEmpty(ObjCustomerInfo) === false && ObjCustomerInfo.hasOwnProperty("UserSignIn"))
 //    {
 //        ThisCustomerName = ObjCustomerInfo.UserSignIn.CustomerName;
@@ -2075,7 +2075,7 @@
 // AZ Get Customer Info
 //function AZGetCustomerInfo()
 //{
-//    var _ObjCustomerInfo = JSON.parse(clientStorage("get", "customerinfo", ""));
+//    var _ObjCustomerInfo = JSON.parse(AZClientStorage("get", "customerinfo", ""));
 //    if (IsEmpty(_ObjCustomerInfo) === false && _ObjCustomerInfo.hasOwnProperty("UserSignIn"))
 //    {
 //        if (_ObjCustomerInfo.UserSignIn.hasOwnProperty("LanguageCode") && _ObjCustomerInfo.UserSignIn.LanguageCode != "")
