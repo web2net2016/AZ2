@@ -74,6 +74,7 @@
     <Content Include="http-errors.txt" />
     <Content Include="lib-2.0.0\azbackgroundslider.html" />
     <Content Include="lib-2.0.0\css\backgroundslider.css" />
+    <Content Include="lib-2.0.0\js\watch - Copy.js" />
     <Content Include="side1.html" />
     <Content Include="side2.html" />
     <Content Include="lib-2.0.0\aztabs.html" />
@@ -146,7 +147,7 @@
     <Content Include="lib-2.0.0\js\moment.locales.js" />
     <Content Include="lib-2.0.0\js\numeral.js" />
     <Content Include="lib-2.0.0\js\numeral.locales.js" />
-    <Content Include="lib-2.0.0\js\watch.js" />
+    <Content Include="lib-2.0.0\js\crontab.js" />
     <Content Include="lib-2.0.0\lib\az-codecolor.js" />
     <Content Include="lib-2.0.0\lib\functionlib.js" />
     <Content Include="lib-2.0.0\lib\az-codecolor.css" />

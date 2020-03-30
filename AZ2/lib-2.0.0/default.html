@@ -23,10 +23,14 @@
     <script src="/lib-2.0.0/lib/functionlib.js"></script>
     <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
+    <script src="js/crontab.js"></script>
     <script>
+
+        var cronstrue;
 
         $(document).ready(function ()
         {
+            //cronstrue = window.cronstrue;
             w3CodeColor();
 
             $.subscribe("functionlib/azWindowScroll", function (e, data)
@@ -55,7 +59,14 @@
             $("#BytesConverter").off("click", BytesConverter).on("click", BytesConverter);
             $("#cmdAZAnim").off("click", AZAnim).on("click", AZAnim);
             $("#GetObject").off("click", GetObject).on("click", GetObject);
+            $("#crontab").off("keyup", CheckCrontab).on("keyup", CheckCrontab);
         });
+
+        function CheckCrontab(e)
+        {
+            //console.log(this.value)
+            //console.log(cronstrue.toString(this.value));
+        }
 
         function ClientStorageSet()
         {
@@ -652,6 +663,16 @@
                                 <button type="button" id="cmdAZAnim" class="az-button primary az-shadow-1 az-shadow-hover-2">Go Anim</button>
                             </div>
                         </div>
+                        <!--<div class="az-code-property-wrapper">
+                            <property>Crontab</property>
+                            <type><span>Type:</span> <brown>Function</brown></type>
+                            <default><span>Input:</span> <brown>object</brown></default>
+                            <values><span>Return:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
+                            <br />
+                            <div class="az-form-group">
+                                <input type="text" class="az-input" id="crontab" value="* * * * *" />
+                            </div>
+                        </div>-->
 
                     </div>
                 </div>
