@@ -133,7 +133,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -171,7 +171,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -208,7 +208,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -246,7 +246,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -284,7 +284,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -323,7 +323,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -362,7 +362,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -401,7 +401,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -440,7 +440,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -1383,6 +1383,596 @@ function AZCircularBar(Options)
         return new AZCircularBar(Options);
     }
 }
+
+// AZ Grid
+function AZGrid(Options)
+{
+    if (this instanceof AZGrid === true)
+    {
+        var _Main = this;
+        var _Defaults =
+        {
+            azGridId: "",
+            azGridData: {},
+            azGridSetting: [],
+            azGridLanguage: {},
+            azGridFooter: true,
+            azGridTableHeaderColor: "",
+            azGridTableHeaderBackgroundColor: "",
+            azGridTableDataColor: "",
+            azGridTableDataOddBackgroundColor: "",
+            azGridTableDataEvenBackgroundColor: "",
+            azGridTableDataMouseoverColor: "",
+            azGridTableDataOddMouseoverBackgroundColor: "",
+            azGridTableDataEvenMouseoverBackgroundColor: "",
+            azGridFooterColor: "",
+            azGridFooterBackgroundColor: ""
+        };
+        _Main.Options = $.extend({}, _Defaults, Options || {});
+
+        if (_Main.Options.azGridId !== "" && _Main.Options.azGridData.hasOwnProperty("Data") && _Main.Options.azGridData.Data.length > 0 && _Main.Options.azGridSetting.length > 0)
+        {
+            _Main.GridMeta = {};
+            _Main.$GridMainTableHeaderRow = "";
+            _Main.$GridMainTableDataRow = "";
+            _Main.$GridMainTableFooterRow = "";
+
+            // Main
+            _Main.$GridMainTable = $('<table></table>').addClass("az-grid-table");
+
+            // Header
+            _Main.$GridMainTableHeaderRow = $("<tr></tr>");
+            _Main.$GridTableHeader = $('<table></table>').addClass("az-grid-table az-grid-table-header");
+            _Main.$GridTableHeaderRow = $("<tr></tr>");
+            if (_Main.Options.azGridTableHeaderBackgroundColor !== "")
+            {
+                _Main.$GridTableHeader.css({ "background-color": _Main.Options.azGridTableHeaderBackgroundColor })
+            }
+            if (_Main.Options.azGridTableHeaderColor !== "")
+            {
+                _Main.$GridTableHeader.css({ "color": _Main.Options.azGridTableHeaderColor })
+            }
+
+            // Data
+            _Main.$GridMainTableDataRow = $("<tr></tr>");
+            _Main.$GridTableData = $('<table></table>').addClass("az-grid-table az-grid-table-data");
+            if (_Main.Options.azGridTableDataColor !== "")
+            {
+                _Main.$GridTableData.css({ "color": _Main.Options.azGridTableDataColor })
+            }
+            var _NumberOfProperties = 0;
+            for (var _NumberOf in _Main.Options.azGridData.Data[0])
+            {
+                _NumberOfProperties += 1;
+            }
+            _Main.GridDataLength = _NumberOfProperties;
+
+            // Meta
+            _Main.Options.azGridData.Meta.IsValid = true;
+            if (IsEmpty(_Main.Options.azGridData.Meta) === false)
+            {
+                var _MetaPropertiesList = ["PageCurrent", "PageSize", "RecordCount"];
+                $.each(_MetaPropertiesList, function (Index, Value)
+                {
+                    if (_Main.Options.azGridData.Meta.hasOwnProperty(Value) === false || _Main.Options.azGridData.Meta[Value] === undefined || _Main.Options.azGridData.Meta[Value] == 0 || _Main.Options.azGridData.Meta[Value] == "")
+                    {
+                        _Main.Options.azGridData.Meta.IsValid = false;
+                        return false;
+                    }
+                });
+                if (_Main.Options.azGridData.Meta.IsValid === true)
+                {
+                    _Main.Options.azGridData.Meta.PageCount = parseInt(Math.ceil(parseFloat(_Main.Options.azGridData.Meta.RecordCount) / parseFloat(_Main.Options.azGridData.Meta.PageSize)));
+                }
+            }
+
+            // Language
+            _Main.Options.azGridLanguage.IsValid = false;
+            if (IsEmpty(_Main.Options.azGridLanguage) === false && _Main.Options.azGridLanguage.hasOwnProperty("SingleElements") === true)
+            {
+                _Main.Options.azGridLanguage.IsValid = true;
+            }
+
+            // Settings
+            _Main.Options.azGridSetting.IsValid = false;
+            if (_Main.Options.azGridSetting.length === _Main.GridDataLength)
+            {
+                _Main.Options.azGridSetting.IsValid = true;
+                $.each(_Main.Options.azGridSetting, function (Index, GridSettingObj)
+                {
+                    _Main.$GridTableHeaderCell = $("<td></td>").html(SetHeaderValue(GridSettingObj.name));
+                    _Main.$GridTableHeaderRow.append(SetTableCellSize("Header", GridSettingObj, _Main.$GridTableHeaderCell, GridSettingObj.name));
+                });
+            }
+
+            _Main.azSetGridData = function ()
+            {
+                $("tr", _Main.$GridTableData).remove();
+                $.each(_Main.Options.azGridData.Data, function (Index, GridDataObj)
+                {
+                    _Main.$GridTableDataRow = $("<tr></tr>");
+                    $.each(GridDataObj, function (Key, Value)
+                    {
+                        var _GridSettingObj = getSelectedObj(_Main.Options.azGridSetting, "name", Key);
+                        if (IsEmpty(_GridSettingObj) === false)
+                        {
+                            _Main.$GridTableDataCell = $("<td></td>").html(SetDataValue(_GridSettingObj, Value));
+                            _Main.$GridTableDataRow.append(SetTableCellSize("Data", _GridSettingObj, _Main.$GridTableDataCell, ""));
+                        }
+                    });
+                    _Main.$GridTableData.append(_Main.$GridTableDataRow);
+                });
+            }
+            _Main.azSetGridData();
+
+            // Header
+            _Main.$GridTableHeader.append(_Main.$GridTableHeaderRow);
+            _Main.$GridMainTableHeaderRow.append(_Main.$GridTableHeader);
+            _Main.$GridTableHeaderRow.off().on("click", "td", function (e)
+            {
+                var _HeaderCellObj = e.target || e.srcElement;
+                if ($(_HeaderCellObj).hasClass("icon"))
+                {
+                    SetHeaderSort(_HeaderCellObj, _Main.$GridTableHeaderRow);
+                }
+            });
+
+            // Data
+            _Main.$GridMainTableHeaderRow.append(_Main.$GridTableHeader);
+            _Main.$GridMainTableDataRow.append(_Main.$GridTableData);
+
+            // Footer
+            _Main.$GridMainTableFooterRow = $("<tr></tr>");
+            if (_Main.Options.azGridFooter === true)
+            {
+                _Main.$GridTableFooter = $('<table></table>').addClass("az-grid-table az-grid-table-footer");
+                if (_Main.Options.azGridFooterBackgroundColor !== "")
+                {
+                    _Main.$GridTableFooter.css({ "background-color": _Main.Options.azGridFooterBackgroundColor });
+                }
+                if (_Main.Options.azGridFooterColor !== "")
+                {
+                    _Main.$GridTableFooter.css({ "color": _Main.Options.azGridFooterColor });
+                }
+            }
+            if (_Main.Options.azGridFooter === true)
+            {
+                _Main.$GridTableFooter.append($(GetFooterHTML()));
+                _Main.$GridMainTableFooterRow.append(_Main.$GridTableFooter);
+                _Main.$GridTableFooter.off("click").on("click", ".az-form-group", function (e)
+                {
+                    var _Element = e.target || e.srcElement;
+                    var _Self = this;
+
+                    if ($(_Element).hasClass("az-button") || $(_Element).hasClass("fas"))
+                    {
+                        //console.log(_Main.Options.azGridData.Meta.OrderByClause)
+                        //_Main.Options.azGridData.Meta.PageCount = ;
+                        //$(_Self).find("button").data("id")
+                    }
+                });
+                _Main.$GridTableFooter.off("change").on("change", ".SizeGridPage", function (e)
+                {
+                    // TODO
+
+
+                    _Main.GridMeta.PageCurrent = 1;
+                    _Main.GridMeta.PageSize = Number($(this).val());
+                    if (_Main.GridMeta.OrderByClause === undefined || _Main.GridMeta.OrderByClause === "")
+                    {
+                        _Main.GridMeta.OrderByClause = "";
+                    }
+                    if (_Main.GridMeta.SearchClause === undefined || _Main.GridMeta.SearchClause == "")
+                    {
+                        _Main.GridMeta.SearchClause = "";
+                    }
+                    $.publish("functionlib/azGridMeta", _Main.GridMeta);
+                });
+            }
+
+            function changeGridPage(SelectedPage)
+            {
+                if (SelectedPage == "cmdFirstGridPage")
+                {
+                    if (PageCurrent == 1)
+                    {
+                        return false;
+                    }
+                    ObjPageData.PageCurrent = 1;
+                }
+                else if (SelectedPage == "cmdPreviousGridPage")
+                {
+                    if (PageCurrent == 1)
+                    {
+                        return false;
+                    }
+                    ObjPageData.PageCurrent = (parseInt(PageCurrent) - 1);
+                }
+                else if (SelectedPage == "cmdNextGridPage")
+                {
+                    if (PageCurrent == PageCount)
+                    {
+                        return false;
+                    }
+                    ObjPageData.PageCurrent = (parseInt(PageCurrent) + 1);
+                }
+                else if (SelectedPage == "cmdLastGridPage")
+                {
+                    if (PageCurrent == PageCount)
+                    {
+                        return false;
+                    }
+                    ObjPageData.PageCurrent = PageCount;
+                }
+ 
+            }
+
+            // Main
+            _Main.$GridMainTable.append(_Main.$GridMainTableHeaderRow).append(_Main.$GridMainTableDataRow).append(_Main.$GridMainTableFooterRow);
+            SetDataColorAndHover();
+            $("#" + _Main.Options.azGridId).html(_Main.$GridMainTable);
+
+            function SetHeaderValue(Value)
+            {
+                var _ValueReturn = "";
+                if (_Main.Options.azGridLanguage.IsValid === true && Value != "")
+                {
+                    _ValueReturn = _Main.Options.azGridLanguage.SingleElements["GridHeader" + Value];
+                }
+                else
+                {
+                    _ValueReturn = Value;
+                }
+                return _ValueReturn;
+            }
+
+            function SetDataValue(GridSettingObj, Value)
+            {
+                if (GridSettingObj.hasOwnProperty("datatype") && Value != "")
+                {
+                    if (GridSettingObj.datatype.toLowerCase() == "date")
+                    {
+                        return AZSetDateFormat(Value).LocalDate;
+                    }
+                    else if (GridSettingObj.datatype.toLowerCase() == "datetime")
+                    {
+                        return AZSetDateTimeFormat(Value).LocalDateTime;
+                    }
+                    else if (GridSettingObj.datatype.toLowerCase() == "time")
+                    {
+                        return AZSetTimeFormat(moment('0001-01-01 ' + Value)).LocalTime;
+                    }
+                    else if (GridSettingObj.datatype.toLowerCase() == "decimal")
+                    {
+                        return numeral(Value).format('0.00');
+                    }
+                    else if (GridSettingObj.datatype.toLowerCase() == "bytes")
+                    {
+                        return AZBytesConverter(Value);
+                    }
+                    else if (GridSettingObj.datatype.toLowerCase() == "email")
+                    {
+                        return '<a href="mailto:' + Value + '">' + Value + '</a>';
+                    }
+                    else if (GridSettingObj.datatype.toLowerCase() == "web")
+                    {
+                        return '<a href="' + Value + '" target="_blank">' + Value + '</a>';
+                    }
+                    else
+                    {
+                        return Value;
+                    }
+                }
+                else
+                {
+                    return Value;
+                }
+            }
+
+            function SetTableCellSize(Type, GridSettingObj, $GridTableCell, Value)
+            {
+                var _$GridTableCellReturn = {};
+                if (_Main.Options.azGridSetting.IsValid === true)
+                {
+                    if (GridSettingObj.hasOwnProperty("width") === true)
+                    {
+                        _$GridTableCellReturn = $GridTableCell.css({ "width": GridSettingObj.width });
+                    }
+                    else
+                    {
+                        _$GridTableCellReturn = $GridTableCell;
+                    }
+                }
+                else
+                {
+                    _$GridTableCellReturn = $GridTableCell.css({ "width": (100 / _Main.GridDataLength) + "%" });
+                }
+                if (Type.toLowerCase() === "header" && GridSettingObj.hasOwnProperty("sort") === true && GridSettingObj.sort === true)
+                {
+                    _$GridTableCellReturn = _$GridTableCellReturn.data("orderby", Value).addClass("icon sort");
+                }
+                return _$GridTableCellReturn;
+            }
+
+            function SetDataColorAndHover()
+            {
+                if (_Main.Options.azGridTableDataOddBackgroundColor !== "")
+                {
+                    $("tr:odd", _Main.$GridTableData).css({ "background-color": _Main.Options.azGridTableDataOddBackgroundColor });
+                }
+                if (_Main.Options.azGridTableDataEvenBackgroundColor !== "")
+                {
+                    $("tr:even", _Main.$GridTableData).css({ "background-color": _Main.Options.azGridTableDataEvenBackgroundColor });
+                }
+                if (_Main.Options.azGridTableDataOddMouseoverBackgroundColor !== "" && _Main.Options.azGridTableDataMouseoverColor !== "")
+                {
+                    $("tr:odd", _Main.$GridTableData).mouseover(function ()
+                    {
+                        $(this).css({ "background-color": _Main.Options.azGridTableDataOddMouseoverBackgroundColor, "color": _Main.Options.azGridTableDataMouseoverColor });
+                    }).mouseout(function ()
+                    {
+                        $(this).css({ "background-color": _Main.Options.azGridTableDataOddBackgroundColor, "color": _Main.Options.azGridTableDataColor });
+                    });
+                }
+                if (_Main.Options.azGridTableDataEvenMouseoverBackgroundColor !== "" && _Main.Options.azGridTableDataMouseoverColor !== "")
+                {
+                    $("tr:even", _Main.$GridTableData).mouseover(function ()
+                    {
+                        $(this).css({ "background-color": _Main.Options.azGridTableDataEvenMouseoverBackgroundColor, "color": _Main.Options.azGridTableDataMouseoverColor });
+                    }).mouseout(function ()
+                    {
+                        $(this).css({ "background-color": _Main.Options.azGridTableDataEvenBackgroundColor, "color": _Main.Options.azGridTableDataColor });
+                    });
+                }
+            }
+
+            function SetHeaderSort(HeaderCellObj, $GridTableHeaderRow)
+            {
+                $("td.icon", $GridTableHeaderRow).not(HeaderCellObj).each(function ()
+                {
+                    $(this).removeClass("sort sort-up sort-down sort-asc sort-desc").addClass("sort");
+                });
+
+                var _Order = "";
+                var _OrderByClause = "";
+                var _OrderBy = $(HeaderCellObj).data("orderby");
+                if ($(HeaderCellObj).hasClass("sort-asc"))
+                {
+                    $(HeaderCellObj).removeClass("sort sort-up sort-down sort-asc").addClass("sort-down sort-desc");
+                    _Order = "DESC";
+                    _OrderByClause = _OrderBy + " " + _Order
+                }
+                else if ($(HeaderCellObj).hasClass("sort-desc"))
+                {
+                    $(HeaderCellObj).removeClass("sort sort-up sort-down sort-desc").addClass("sort-up sort-asc");
+                    _Order = "ASC";
+                    _OrderByClause = _OrderBy + " " + _Order
+                }
+                else
+                {
+                    $(HeaderCellObj).removeClass("sort sort-up sort-down sort-desc").addClass("sort-up sort-asc");
+                    _Order = "ASC";
+                    _OrderByClause = _OrderBy + " " + _Order
+                }
+
+                console.log(_OrderByClause)
+
+                if (_Main.Options.azGridData.Meta.PageCount === _Main.Options.azGridData.Meta.PageCurrent)
+                {
+                    _Main.Options.azGridData.Data = AZSortJSONArray(_Main.Options.azGridData.Data, _OrderBy, _Order)
+                    _Main.azSetGridData();
+                }
+                else
+                {
+                    _Main.GridMeta.PageCurrent = 1;
+                    _Main.GridMeta.PageSize = Number($(".SizeGridPage", _Main.$GridTableFooter).val());
+                    _Main.GridMeta.OrderByClause = _OrderByClause;
+                    _Main.GridMeta.SearchClause = "";
+                    $.publish("functionlib/azGridMeta", _Main.GridMeta);
+                }
+            }
+
+            function GetFooterHTML()
+            {
+                var _HTML = "";
+                _HTML = '<tr height="32px">';
+                _HTML += '<td align="center">';
+                if (_Main.Options.azGridData.Meta.IsValid === true)
+                {
+                    _HTML += '<table>';
+                    _HTML += '<tr>';
+                    _HTML += '<td class="az-form-group"><button type="button" data-id="cmdFirstGridPage" class="az-button az-button-block default az-shadow-1 az-shadow-hover-2"><i class="fas fa-angle-double-left"></i></button></td>';
+                    _HTML += '<td class="az-form-group"><button type="button" class="az-button az-button-block default az-shadow-1 az-shadow-hover-2 cmdPreviousGridPage"><i class="fas fa-angle-left"></i></button></td>';
+                    _HTML += '<td class="az-form-group"><button type="button" class="az-button az-button-block default az-shadow-1 az-shadow-hover-2 cmdNextGridPage"><i class="fas fa-angle-right"></i></button></td>';
+                    _HTML += '<td class="az-form-group"><button type="button" class="az-button az-button-block default az-shadow-1 az-shadow-hover-2 cmdLastGridPage"><i class="fas fa-angle-double-right"></i></button></td>';
+                    _HTML += '<td class="InfoGridPage">Page 1 of 1</td>';
+                    _HTML += '<td class="az-form-group">';
+                    _HTML += '<select class="az-select SizeGridPage">';
+                    _HTML += '<option value="10">10</option>';
+                    _HTML += '<option value="20">20</option>';
+                    _HTML += '<option value="30">30</option>';
+                    _HTML += '<option value="40">40</option>';
+                    _HTML += '<option value="50">50</option>';
+                    _HTML += '</select>';
+                    _HTML += '</td>';
+                    _HTML += '</tr>';
+                    _HTML += '</table>';
+                }
+                else
+                {
+                    _HTML += '&nbsp;';
+                }
+                _HTML += '</td>';
+                _HTML += '</tr>';
+                return _HTML;
+            }
+        }
+    }
+    else
+    {
+        return new AZGrid(Options);
+    }
+}
+
+
+
+//var _ReturnObj = {};
+//var _ObjSpanCheckBox = {};
+//var _ObjCheckBox = {};
+//$("tr > td", _Main.$GridTableData).each(function ()
+//{
+//    if ($(this).children().is("span") == true)
+//    {
+//        _ObjSpanCheckBox = $(this).children();
+//        _ObjCheckBox = _ObjSpanCheckBox.find(":input");
+//        if (_ObjCheckBox.is(":input") == true)
+//        {
+//            _ObjCheckBox.attr("id", _ObjSpanCheckBox.attr("data-id"));
+//            _ObjCheckBox.addClass("az-checkbox");
+//        }
+//    }
+//});
+
+//function setGridFunctions(SelectedArea)
+//{
+//    if (SelectedArea != "" && SelectedArea != undefined && SelectedArea != null)
+//    {
+//        SelectedArea = $(SelectedArea);
+//    }
+//    else
+//    {
+//        SelectedArea = "";
+//    }
+//    $(":input", SelectedArea).each(function ()
+//    {
+//        if ($(this).is("button"))
+//        {
+//            if ($(this).hasClass("firstgridpage") || $(this).hasClass("previousgridpage") || $(this).hasClass("nextgridpage") || $(this).hasClass("lastgridpage"))
+//            {
+//                $(this).off('click').on('click', function ()
+//                {
+//                    changeGridPage(this.id, SelectedArea);
+//                });
+//            }
+//        }
+//    });
+//    var thisElementClass;
+//    $(".header", SelectedArea).each(function ()
+//    {
+//        $(this).off('click').on('click', function ()
+//        {
+//            if ($(this).hasClass("headerSortAsc"))
+//            {
+//                thisElementClass = "headerSortDesc";
+//                ObjPageData.OrderByClause = $(this).attr("data-attr") + " DESC"
+//            }
+//            else if ($(this).hasClass("headerSortDesc"))
+//            {
+//                thisElementClass = "headerSortAsc";
+//                ObjPageData.OrderByClause = $(this).attr("data-attr") + " ASC"
+//            }
+//            else
+//            {
+//                thisElementClass = "headerSortAsc";
+//                ObjPageData.OrderByClause = $(this).attr("data-attr") + " ASC"
+//            }
+//            $(".header").each(function ()
+//            {
+//                $(this).removeClass("headerSortAsc");
+//                $(this).removeClass("headerSortDesc");
+//            });
+//            showBackground();
+//            $(this).addClass(thisElementClass);
+//            ObjPageData.PageCurrent = 1;
+//            ObjPageData.PageSize = $("#GridPageSize").val();
+//            getContentData();
+//        });
+//    });
+//    $("#GridPageSize", SelectedArea).off('change').on('change', function ()
+//    {
+//        showBackground();
+//        ObjPageData.PageCurrent = 1;
+//        ObjPageData.PageSize = this.value;
+//        getContentData();
+//    });
+//    $("#SearchText", SelectedArea).off('keyup').on('keyup', function ()
+//    {
+//        searchGridContent(this.value);
+//    });
+//}
+
+//PageCurrent = 1
+//PageSize = PageSize;
+//PageCount = Convert.ToInt32(Math.Ceiling((Convert.ToDouble(_RecordCount) / Convert.ToDouble(_ObjAdminUserGridSettings.PageSize))));
+//RecordCount = RecordCount;
+
+//OrderBy(_ObjAdminUserGridSettings.OrderByClause).Skip((PageCurrent - 1) * PageSize).Take(PageSize).ToList();
+
+//function changeGridPage(SelectedPage, SelectedArea)
+//{
+//    if (SelectedPage == "cmdFirstGridPage")
+//    {
+//        if (PageCurrent == 1)
+//        {
+//            return false;
+//        }
+//        ObjPageData.PageCurrent = 1;
+//    }
+//    else if (SelectedPage == "cmdPreviousGridPage")
+//    {
+//        if (PageCurrent == 1)
+//        {
+//            return false;
+//        }
+//        ObjPageData.PageCurrent = (parseInt(PageCurrent) - 1);
+//    }
+//    else if (SelectedPage == "cmdNextGridPage")
+//    {
+//        if (PageCurrent == PageCount)
+//        {
+//            return false;
+//        }
+//        ObjPageData.PageCurrent = (parseInt(PageCurrent) + 1);
+//    }
+//    else if (SelectedPage == "cmdLastGridPage")
+//    {
+//        if (PageCurrent == PageCount)
+//        {
+//            return false;
+//        }
+//        ObjPageData.PageCurrent = PageCount;
+//    }
+//    showBackground();
+//    ObjPageData.PageSize = $("#GridPageSize", SelectedArea).val();
+//    getContentData();
+//}
+
+//var SearchGridContentTimer = 0;
+//function searchGridContent(SearchText)
+//{
+//    if (SearchText.length > 1)
+//    {
+//        clearTimeout(SearchGridContentTimer);
+//        SearchGridContentTimer = window.setTimeout(function ()
+//        {
+//            ObjPageData.PageCurrent = 1;
+//            ObjPageData.PageSize = 10;
+//            ObjPageData.SearchClause = SearchText;
+//            getContentData();
+//        }, 200);
+//    }
+//    else if (SearchText.length == 0)
+//    {
+//        ObjPageData.PageCurrent = 1;
+//        ObjPageData.PageSize = 10;
+//        ObjPageData.SearchClause = "";
+//        getContentData();
+//    }
+//    if (typeof setSearchGrid == 'function')
+//    {
+//        setSearchGrid();
+//    }
+//}
 
 // AZ Modal Dialog
 function AZModalDialog(Options)

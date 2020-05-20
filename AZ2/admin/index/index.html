@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
 
-    <link rel="stylesheet" href="/lib-2.0.0/lib/standard.css" />
-    <script src="/lib-2.0.0/lib/functionlib.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-2.0.0.team.css" />
+    <script src="/lib-2.0.0/lib/az-2.0.0.additionally.js"></script>
     <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
@@ -32,9 +32,9 @@
             Email: "john@doe.com",
             Web: "www.johndoe.com",
             RequestReasonId: 1,
-            Date: "11/15/2019",
-            Time: "11:10:00",
-            DateTime: "2020-02-21T02:38:00.000Z",
+            Date: "2020-02-21",
+            Time: "17:00:00",
+            DateTime: "2020-02-21T02:38:00",
             Decimal: 111.50,
             Numeric: 12345,
             Comment: "Comment"
@@ -63,6 +63,7 @@
         {
             ObjPageData.Values.AZPage = data;
             ObjPageData.Values.AZSettings = AZSettings;
+            ObjPageData.Elements.$cmdSubmit = $("#cmdSubmit");            
 
             var _AZPopulateFormOptions =
             {
@@ -92,6 +93,7 @@
             var _ObjReturnForm = AZSerializeForm(_AZSerializeFormOptions);
             if (IsEmpty(_ObjReturnForm) === false)
             {
+                console.log(JSON.stringify(_ObjReturnForm))
                 $("#ObjFormResponse").text(JSON.stringify(_ObjReturnForm));
             }
         }

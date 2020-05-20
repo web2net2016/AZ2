@@ -1,13 +1,15 @@
-﻿// AZ-Functionlib Additional v2.0.0 | (c) web2net AS
+﻿// AZ-2.0.0.Additionally | (c) web2net AS
 
 var AZSettings =
 {
     LanguageValidationFolder: "/admin",
     DefaultLanguageFile: "/lib/lang-val/default-lang.json",
+    //DefaultLanguage: "nb-NO",
     DefaultLanguage: "en-US",
     DebugMode: true,
     AppName: "AZ Team",
     AppVersion: "1.0.0",
+    AppVersionCode: "1.0.0",
     ApiVersion: "_1"
 }
 
@@ -79,8 +81,7 @@ function AZPage(Options)
             azPageLanguage: false,
             azPageLanguageUrl: "",
             azPageValidation: false,
-            azPageValidationUrl: "",
-            azPageGridView: false
+            azPageValidationUrl: ""
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
@@ -109,6 +110,7 @@ function AZPage(Options)
                             {
                                 AppName: AZSettings.AppName,
                                 AppVersion: AZSettings.AppVersion,
+                                AppVersionCode: AZSettings.AppVersionCode,
                                 ApiVersion: AZSettings.ApiVersion,
                                 $Form: _Main.ObjPageAttributes.$ObjAZForm,
                                 Location: _Main.ObjPageAttributes.Location,
@@ -127,6 +129,7 @@ function AZPage(Options)
                         {
                             AppName: AZSettings.AppName,
                             AppVersion: AZSettings.AppVersion,
+                            AppVersionCode: AZSettings.AppVersionCode,
                             ApiVersion: AZSettings.ApiVersion,
                             $Form: _Main.ObjPageAttributes.$ObjAZForm,
                             Location: _Main.ObjPageAttributes.Location,
@@ -139,35 +142,13 @@ function AZPage(Options)
                 }
             }
 
-            _Main.GridView = function ()
-            {
-                if (_Main.Options.azPageGridView === true)
-                {
-                    $.subscribeonce("functionlib/AZGridView", function (e, data)
-                    {
-                        _Main.InputTypeEvents();
-                    });
-                    var _AZGridViewOptions =
-                    {
-                        $Area: _Main.ObjPageAttributes.$ObjAZForm,
-                        ObjLanguage: _Main.ObjLanguage,
-                        ObjValidation: _Main.ObjValidation
-                    }
-                    new AZGridView(_AZGridViewOptions);
-                }
-                else
-                {
-                    _Main.InputTypeEvents();
-                }
-            }
-
             _Main.Validation = function ()
             {
                 if (_Main.Options.azPageValidation === true)
                 {
                     $.subscribeonce("functionlib/AZSetValidation", function (e, data)
                     {
-                        _Main.GridView();
+                        _Main.InputTypeEvents();
                     });
                     if (_Main.Options.azPageValidationUrl !== "")
                     {
@@ -194,7 +175,7 @@ function AZPage(Options)
                 }
                 else
                 {
-                    _Main.GridView();
+                    _Main.InputTypeEvents();
                 }
             }
 
@@ -289,13 +270,14 @@ function AZCheckPageAttributes()
         {
             _Main.Location = window.document.location.hostname;
             _Main.PageName = window.document.location.href.split("/").slice(-1)[0];
+            _Main.PageName = _Main.PageName.split("?")[0];
             _Main.$ObjAZForm = (window.document.forms.length > 0) ? $(window.document.forms[0]) : "";
 
-            if (_Main.PageName != "")
+            if (_Main.PageName !== "")
             {
                 _Main.ObjPageAttributes.PageName = _Main.PageName;
                 _Main.PageFirstName = _Main.ObjPageAttributes.PageName.split(".")[0];
-                if (_Main.PageFirstName != "")
+                if (_Main.PageFirstName !== "")
                 {
                     _Main.ObjPageAttributes.PageFirstName = _Main.PageFirstName;
                     _Main.Attributes += 1;
@@ -307,7 +289,7 @@ function AZCheckPageAttributes()
                 _Main.ObjPageAttributes.PageFirstName = "index";
                 _Main.Attributes += 1;
             }
-            if (_Main.Location != "")
+            if (_Main.Location !== "")
             {
                 _Main.ObjPageAttributes.Location = _Main.Location;
                 _Main.Attributes += 1;
@@ -344,8 +326,7 @@ function AZGetJSON(Options)
             azJsonUrl: ""
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
-
-        if (_Main.Options.azJsonUrl != "")
+        if (_Main.Options.azJsonUrl !== "")
         {
             $.ajaxSetup({ cache: false });
             return $.getJSON(_Main.Options.azJsonUrl).promise();
@@ -602,11 +583,11 @@ function AZSetValidation(Options)
             {
                 $.each(ObjSubValidation, function (AttrType, AttrValue)
                 {
-                    if (AttrType.toLowerCase() == "label")
+                    if (AttrType.toLowerCase() === "label")
                     {
                         $("label[for='" + HtmlElement + "']", _Main.$Area).addClass(AttrValue);
                     }
-                    else if (AttrType.toLowerCase() == "data-attr" || AttrType.toLowerCase() == "minlength" || AttrType.toLowerCase() == "maxlength" || AttrType.toLowerCase() == "tabindex")
+                    else if (AttrType.toLowerCase() === "data-attr" || AttrType.toLowerCase() === "minlength" || AttrType.toLowerCase() === "maxlength" || AttrType.toLowerCase() === "tabindex")
                     {
                         if ($('#' + HtmlElement, _Main.$Area).length > 0)
                         {
@@ -617,7 +598,7 @@ function AZSetValidation(Options)
                             $('.' + HtmlElement, _Main.$Area).attr(AttrType, AttrValue);
                         }
                     }
-                    else if (AttrType.toLowerCase() == "class")
+                    else if (AttrType.toLowerCase() === "class")
                     {
                         if ($('#' + HtmlElement, _Main.$Area).length > 0)
                         {
@@ -726,7 +707,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -764,7 +745,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -801,7 +782,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -839,7 +820,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -877,7 +858,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -916,7 +897,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -955,7 +936,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -994,7 +975,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -1033,7 +1014,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -1140,8 +1121,7 @@ function AZValidateInputValueKeypress(e)
     var _Element = e.target || e.srcElement;
     var _ValidType = AZGetValidType(e.data.ValidType);
     var _KeyChar = e.keyCode || e.which;
-
-    if (_KeyChar == 8 || _KeyChar == 13)
+    if (_KeyChar === 8 || _KeyChar === 13)
     {
         return true;
     }
@@ -1170,7 +1150,6 @@ function AZValidateInputValueFocusout(e)
 {
     var _Element = e.target || e.srcElement;
     var _CurrentValidType = e.data.ValidType[0];
-
     if (_CurrentValidType === "validate-decimal")
     {
         $(_Element).val(numeral($(_Element).val()).format('0.00'));
@@ -1252,7 +1231,7 @@ function AZSerializeForm(Options)
                 {
                     if (_$Input.val().replace(/^\s+|\s+$/g, '') !== "")
                     {
-                        _ObjOutputData[_$Input.attr("id")] = moment(_$Input.datepicker("getDate")).format('MM/DD/YYYY');
+                        _ObjOutputData[_$Input.attr("id")] = moment(_$Input.datepicker("getDate")).format('YYYY-MM-DD');
                     }
                     else
                     {
@@ -1261,12 +1240,12 @@ function AZSerializeForm(Options)
                 }
                 else if (_ObjCurrentValidation.datatype.toLowerCase() === "datetime")
                 {
-                    var LongDateFormat = moment()._locale._longDateFormat;
-                    _ObjOutputData[_$Input.attr("id")] = moment(_$Input.val(), LongDateFormat.L + " " + LongDateFormat.LT).toJSON();
+                    var _LongDateFormat = moment()._locale._longDateFormat;
+                    _ObjOutputData[_$Input.attr("id")] = moment(_$Input.val(), _LongDateFormat.L + " " + _LongDateFormat.LT).toJSON();
                 }
                 else if (_ObjCurrentValidation.datatype.toLowerCase() === "time")
                 {
-                    _ObjOutputData[_$Input.attr("id")] = moment('01/01/1900 ' + _$Input.val()).format('h:mm:ss');
+                    _ObjOutputData[_$Input.attr("id")] = moment('0001-01-01 ' + _$Input.val()).format('h:mm:ss');
                 }
                 else if (_ObjCurrentValidation.datatype.toLowerCase() === "decimal")
                 {
@@ -1413,13 +1392,13 @@ function AZValidateInput($Input, ObjCurrentValidation)
                 }
                 if (_CurrentValidType === "validate-datetime")
                 {
-                    var LongDateFormat = moment()._locale._longDateFormat;
-                    if (AZCheckDateTimeFormat(moment(_CurrentInputValue, LongDateFormat.L + " " + LongDateFormat.LT)) === false)
+                    var _LongDateFormat = moment()._locale._longDateFormat;
+                    if (AZCheckDateTimeFormat(moment(_CurrentInputValue, _LongDateFormat.L + " " + _LongDateFormat.LT)) === false)
                     {
                         _ObjReturnValidation.Error = "DateTime";
                     }
                 }
-                if (_CurrentValidType === "validate-time" && AZCheckDateTimeFormat('01/01/1900 ' + _CurrentInputValue) === false)
+                if (_CurrentValidType === "validate-time" && AZCheckDateTimeFormat('0001-01-01 ' + _CurrentInputValue) === false)
                 {
                     _ObjReturnValidation.Error = "Time";
                 }
@@ -1509,14 +1488,14 @@ function AZPopulateForm(Options)
                 {
                     if (Value != "" && Value != null && Value != undefined)
                     {
-                        _$Input[_DataAttr](moment(Value).format('L'));
+                        _$Input[_DataAttr](AZSetDateFormat(Value).LocalDate);
                     }
                 }
                 else if (_ObjCurrentValidation.datatype === "datetime")
                 {
                     if (Value != "" && Value != null && Value != undefined)
                     {
-                        _$Input[_DataAttr](moment(Value).format('L') + " " + moment(Value).format('LT'));
+                        _$Input[_DataAttr](AZSetDateTimeFormat(Value).LocalDateTime);
                     }
                     else
                     {
@@ -1527,7 +1506,7 @@ function AZPopulateForm(Options)
                 {
                     if (Value != "" && Value != null && Value != undefined)
                     {
-                        _$Input[_DataAttr](moment('01/01/1900 ' + Value).format('LT'));
+                        _$Input[_DataAttr](AZSetTimeFormat('0001-01-01 ' + Value).LocalTime);
                     }
                     else
                     {
@@ -1564,6 +1543,39 @@ function AZPopulateForm(Options)
     {
         consoleLog({ consoleType: "error", consoleText: "AZPopulateForm - Options is empty or missing some properties" });
     }
+}
+
+function AZSetDateFormat(Date)
+{
+    var _DateReturn = {};
+    if (AZCheckDateTimeFormat(Date) === true)
+    {
+        _DateReturn.LocalDate = moment(Date).format('L');
+        _DateReturn.ENUSDate = moment(Date).format('YYYY-MM-DD');
+    }
+    return _DateReturn;
+}
+
+function AZSetDateTimeFormat(DateTime)
+{
+    var _DateTimeReturn = {};
+    if (AZCheckDateTimeFormat(DateTime) === true)
+    {
+        _DateTimeReturn.LocalDateTime = moment(DateTime).format('L') + " " + moment(DateTime).format('LT');
+        _DateTimeReturn.ENUSDateTime = moment(DateTime).format('YYYY-MM-DD') + " " + moment(DateTime).format('h:mm a');
+    }
+    return _DateTimeReturn;
+}
+
+function AZSetTimeFormat(Time)
+{
+    var _TimeReturn = {};
+    if (AZCheckDateTimeFormat(Time) === true)
+    {
+        _TimeReturn.LocalTime = moment(Time).format('LT');
+        _TimeReturn.ENUSTime = moment(Time).format('h:mm a');
+    }
+    return _TimeReturn;
 }
 
 function AZIsValidDecimal(Float)

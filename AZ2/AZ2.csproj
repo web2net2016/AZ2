@@ -68,14 +68,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\index\index.html" />
-    <Content Include="authentication.js" />
+    <Content Include="lib-2.0.0\azgrid.html" />
+    <Content Include="web2net\authentication.js" />
     <Content Include="favicon.ico" />
-    <Content Include="fingerprint.js" />
-    <Content Include="http-errors.txt" />
+    <Content Include="web2net\fingerprint.js" />
+    <Content Include="web2net\http-errors.txt" />
     <Content Include="lib-2.0.0\azbackgroundslider.html" />
     <Content Include="lib-2.0.0\css\backgroundslider.css" />
-    <Content Include="side1.html" />
-    <Content Include="side2.html" />
+    <Content Include="lib-2.0.0\side1.html" />
+    <Content Include="lib-2.0.0\side2.html" />
     <Content Include="lib-2.0.0\aztabs.html" />
     <Content Include="lib-2.0.0\azaccordion.html" />
     <Content Include="lib-2.0.0\azajax.html" />
@@ -99,7 +100,7 @@
     <Content Include="lib-2.0.0\azform2.html" />
     <Content Include="lib-2.0.0\azform.html" />
     <Content Include="lib-2.0.0\flex.html" />
-    <Content Include="lib-2.0.0\grid.html" />
+    <Content Include="lib-2.0.0\responsivegrid.html" />
     <Content Include="index.html" />
     <Content Include="lib-2.0.0\css\tabs.css" />
     <Content Include="lib-2.0.0\css\accordion.css" />
@@ -108,7 +109,7 @@
     <Content Include="lib-2.0.0\css\default.css" />
     <Content Include="lib-2.0.0\css\display.css" />
     <Content Include="lib-2.0.0\css\form.css" />
-    <Content Include="lib-2.0.0\css\grid.css" />
+    <Content Include="lib-2.0.0\css\responsivegrid.css" />
     <Content Include="lib-2.0.0\css\list.css" />
     <Content Include="lib-2.0.0\css\navbar.css" />
     <Content Include="lib-2.0.0\css\normalize.css" />
@@ -137,9 +138,9 @@
     <Content Include="lib-2.0.0\js\az-2.0.0.min.js">
       <DependentUpon>az-2.0.0.js</DependentUpon>
     </Content>
-    <Content Include="lib-2.0.0\js\clientstorage.js" />
+    <Content Include="lib-2.0.0\js\az-2.0.0.clientstorage.js" />
     <None Include="lib\lang-val\default-lang.json" />
-    <Content Include="lib-2.0.0\lib\functionlib - Copy.js" />
+    <Content Include="web2net\functionlib - Copy.js" />
     <Content Include="lib-2.0.0\js\functionlib.js" />
     <Content Include="lib-2.0.0\js\jquery.3.4.1.js" />
     <Content Include="lib-2.0.0\js\jquery.matchHeight.js" />
@@ -148,10 +149,10 @@
     <Content Include="lib-2.0.0\js\numeral.locales.js" />
     <Content Include="lib-2.0.0\js\crontab.js" />
     <Content Include="lib-2.0.0\lib\az-codecolor.js" />
-    <Content Include="lib-2.0.0\lib\functionlib.js" />
+    <Content Include="lib-2.0.0\lib\az-2.0.0.additionally.js" />
     <Content Include="lib-2.0.0\lib\az-codecolor.css" />
-    <Content Include="lib-2.0.0\lib\standard.css" />
-    <Content Include="lib-2.0.0\lib\templates.html" />
+    <Content Include="lib-2.0.0\lib\az-2.0.0.team.css" />
+    <Content Include="web2net\templates.html" />
     <Content Include="lib-2.0.0\list.html" />
     <Content Include="lib-2.0.0\mobile.html" />
     <Content Include="lib-2.0.0\navbar.html" />
