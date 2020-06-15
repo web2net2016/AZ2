@@ -25,6 +25,12 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
+        var AZWindow1 = {};
+        var AZWindow2 = {};
+        var AZWindow3 = {};
+        var AZFullWindow1 = {};
+        var AZFullWindow2 = {};        
+
         $(document).ready(function ()
         {
             w3CodeColor();
@@ -53,17 +59,22 @@
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "AZ Window 1",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowText: _HTML,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowHeight: 400<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowHeight: 500,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowButton:<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Button1: true,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton1: "Lukk"<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;}<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '</div>';
 
-            new AZWindow(
+            AZWindow1 = new AZWindow(
                 {
                     azWindowTitle: "AZ Window 1",
                     azWindowText: _HTML,
-                    azWindowHeight: 400,
+                    azWindowHeight: 500,
                     azWindowButton: {
                         Button1: true,
                         TextButton1: "Lukk"
@@ -82,41 +93,47 @@
             });
 
             var _HTML = "";
-            _HTML = '<div class="az-margin-t-28 az-margin-b-28">';
-            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML = '<div>';
+            _HTML += '<div class="az-code jsHigh notranslate" style="border: none;">';
             _HTML += 'new AZWindow(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "AZ Window 2",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowText: _HTML,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowWidth: 550,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowHeight: 550,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowHeight: 610,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowPositionTop: 50,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowModal: true,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowAnimation: false,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowNoParentScroll: true<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowNoParentScroll: true,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitlebar: false,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowBorderColor: "#607D8B",<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "#607D8B",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowBackgroundColor: "#607D8B",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowButton:<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Button1: true,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TypeButton1: "default",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton1: "Lukk"<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;}<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '</div>';
 
-            new AZWindow(
+            AZWindow2 = new AZWindow(
                 {
                     azWindowTitle: "AZ Window 2",
                     azWindowText: _HTML,
                     azWindowWidth: 550,
-                    azWindowHeight: 550,
+                    azWindowHeight: 610,
                     azWindowPositionTop: 50,
                     azWindowModal: true,
                     azWindowAnimation: false,
                     azWindowNoParentScroll: true,
-                    azWindowBorderColor: "#607D8B",
-                    azWindowTitlebarBackgroundColor: "#607D8B",
+                    azWindowTitlebar: false,
                     azWindowBackgroundColor: "#607D8B",
                     azWindowButton: {
                         Button1: true,
+                        TypeButton1: "default",
                         TextButton1: "Lukk"
                     }
                 });
@@ -154,7 +171,7 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            new AZWindow(
+            AZWindow3 = new AZWindow(
                 {
                     azWindowTitle: "AZ Window",
                     azWindowText: _HTML,
@@ -177,7 +194,7 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            new AZFullWindow(
+            AZFullWindow1 = new AZFullWindow(
                 {
                     azFullWindowText: _HTML
                 });
@@ -199,7 +216,7 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            new AZFullWindow(
+            AZFullWindow1 = new AZFullWindow(
                 {
                     azFullWindowText: _HTML,
                     azFullWindowPosition: "top",
@@ -258,6 +275,7 @@
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />
+                        <br />
                         new AZWindow(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowTitle: "",<br />
@@ -271,11 +289,10 @@
                         &emsp;&ensp;&emsp;&ensp;azWindowAnimation: true,<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowNoParentScroll: false,<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowBackground: true,<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowBorderColor: "#FFFFFF",<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "#0078D7",<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarColor: "#FFFFFF",<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowBackgroundColor: "#FFFFFF",<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowColor: "#000000",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowBackgroundColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarColor: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azWindowButton: {<br />
                         &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Button1: false,<br />
                         &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TypeButton1: "primary",<br />
@@ -286,10 +303,6 @@
                         &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;SizeButton2: "",<br />
                         &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton2: ""<br />
                         &emsp;&ensp;&emsp;&ensp;}<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowBeforeOpen: function () {},<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowAfterOpen: function () {},<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowAfterClose: function () {},<br />
-                        &emsp;&ensp;&emsp;&ensp;azWindowAfterCloseReload: false<br />
                         });<br />
                         <br />
                     </div>
@@ -298,20 +311,16 @@
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />
+                        <br />
                         new initAZFullWindow(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azFullWindowText: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azFullWindowPosition: "bottom",<br />
                         &emsp;&ensp;&emsp;&ensp;azFullWindowFadeIn: 400,<br />
                         &emsp;&ensp;&emsp;&ensp;azFullWindowFadeOut: 400,<br />
-                        &emsp;&ensp;&emsp;&ensp;azFullWindowBackgroundColor: "#FFFFFF",<br />
-                        &emsp;&ensp;&emsp;&ensp;azFullWindowColor: "#000000",<br />
-                        &emsp;&ensp;&emsp;&ensp;azFullWindowBeforeOpen: function () {},<br />
-                        &emsp;&ensp;&emsp;&ensp;azFullWindowAfterOpen: function () {},<br />
-                        &emsp;&ensp;&emsp;&ensp;azFullWindowAfterClose: function () {}<br />
+                        &emsp;&ensp;&emsp;&ensp;azFullWindowBackgroundColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azFullWindowColor: ""<br />
                         });<br />
-                        <br />
-                        <br />
                         <br />
                         <br />
                         <br />
@@ -335,6 +344,12 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
             <div class="az-row">
                 <div class="az-col xs-12">
                     <div class="az-code htmlHigh notranslate">
@@ -342,19 +357,14 @@
                             <property>azWindowTitle</property>
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>""</brown></default>
-                            <br />
-                            Tekst eller enkle HTML- tags.
-                            <br />
-                            <br />
-                            <strong>Tips:</strong> Du kan også bruke et ikon i forbindelse med tittel - &lt;i class="far fa-icon"&gt&lt;/i&gt
+                            <values><span>Values:</span> Text</values>
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>azWindowText</property>
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>""</brown></default>
-                            <br />
-                            Tekst eller HTML.
+                            <values><span>Values:</span> Text or HTML</values>
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -363,7 +373,7 @@
                             <default><span>Default:</span> <red>450</red></default>
                             <units><span>Unit:</span> <red>px</red></units>
                             <br />
-                            Ved skjermstørrelser under <red>576</red>, vil <strong>azWindowWidth</strong> tilpasses enhetens skjermstørrelse hvis <strong>azWindowWidth</strong> er satt større enn skjermens bredde.
+                            For screen sizes below <red>576</red>, <strong>azWindowWidth</strong> will be adjusted to fit the screen size of the device if <strong>azWindowWidth</strong> is set larger than the screen width.
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -372,7 +382,7 @@
                             <default><span>Default:</span> <red>150</red></default>
                             <units><span>Unit:</span> <red>px</red></units>
                             <br />
-                            Ved skjermstørrelser under <red>576</red>, vil <strong>azWindowHeight</strong> tilpasses enhetens skjermstørrelse hvis <strong>azWindowHeight</strong> er satt større enn skjermens høyde.
+                            For screen sizes below <red>576</red>, <strong>azWindowHeight</strong> will be adjusted to fit the screen size of the device if <strong>azWindowHeight</strong> is set larger than the screen height.
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -386,101 +396,139 @@
                             <property>azWindowModal</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>false</mediumblue></default>
+                            <values><span>Values:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
                             <br />
-                            Ved å endre verdien til <mediumblue>true</mediumblue>, vil ikke <strong>AZWindow</strong> automatisk lukke seg når brukeren klikker på utsiden av <strong>AZWindow</strong>.
+                            By changing the value to <mediumblue>true</mediumblue>, <strong>AZWindow</strong> will not automatically close when the user clicks on the outside of <strong>AZWindow</strong>.
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>azWindowTitlebar</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>true</mediumblue></default>
+                            <values><span>Values:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
                             <br />
-                            Ved å endre verdiene til <mediumblue>false</mediumblue>, har du har muligheten til å skjule hele tittellinjen.
+                            By changing the values to <mediumblue>false</mediumblue>, you have the option to hide the entire title bar.
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>azWindowTitlebarClose</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>true</mediumblue></default>
+                            <values><span>Values:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
                             <br />
-                            Ved å endre verdiene til <mediumblue>false</mediumblue>, har du har muligheten til å skjule selve lukkeknappen (X) i høyre del.
+                            By changing the values to <mediumblue>false</mediumblue>, you have the option to hide the close button (X) in the right part of the title bar.
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>azWindowAnimation</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>true</mediumblue></default>
+                            <values><span>Values:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>azWindowNoParentScroll</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>false</mediumblue></default>
+                            <values><span>Values:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
                             <br />
-                            Ved å endre verdiene til <mediumblue>true</mediumblue>, vil rullefeltet for hovedsiden fjernes og <strong>AZWindow</strong> vil beholde sin posisjon.
+                            By changing the values to <mediumblue>true</mediumblue>, the scroll bar for the main page will be removed and <strong>AZWindow</strong> will retain its position when scrolling.
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>azWindowBackground</property>
                             <type><span>Type:</span> <brown>Boolean</brown></type>
                             <default><span>Default:</span> <mediumblue>true</mediumblue></default>
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>azWindowBorderColor</property>
-                            <type><span>Type:</span> <brown>Color Hex</brown></type>
-                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
-                            <br />
-                            Se også CSS .az-accordion
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>azWindowTitlebarBackgroundColor</property>
-                            <type><span>Type:</span> <brown>Color Hex</brown></type>
-                            <default><span>Default:</span> <brown>"FF4136"</brown></default>
-                            <br />
-                            Se også CSS .az-accordion
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>azWindowTitlebarColor</property>
-                            <type><span>Type:</span> <brown>Color Hex</brown></type>
-                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
-                            <br />
-                            Se også CSS .az-accordion
+                            <values><span>Values:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>azWindowBackgroundColor</property>
                             <type><span>Type:</span> <brown>Color Hex</brown></type>
-                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
+                            <default><span>Default:</span> <brown>""</brown></default>
                             <br />
-                            Se også CSS .az-accordion
+                            See also CSS #az-window
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>azWindowColor</property>
                             <type><span>Type:</span> <brown>Color Hex</brown></type>
-                            <default><span>Default:</span> <brown>"000000"</brown></default>
+                            <default><span>Default:</span> <brown>""</brown></default>
                             <br />
-                            Se også CSS .az-accordion
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>azWindowBeforeOpen</property>
-                            <type><span>Type:</span> <brown>Function</brown></type>
-                            <default><span>Default:</span> <mediumblue>function () {}</mediumblue></default>
-                            <br />
-                            Hvis du ønsker å få utført en funksjon før <strong>AZWindow</strong> er åpent, dvs. i tiden mellom <strong>AZWindow</strong> trigges og det er helt åpent.
+                            See also CSS #az-window
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>azWindowAfterOpen</property>
+                            <property>azWindowTitlebarBackgroundColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <br />
+                            See also CSS #az-window > .az-window-titlebar
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azWindowTitlebarColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <br />
+                            See also CSS #az-window > .az-window-titlebar
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azWindowButton</property>
+                            <type><span>Type:</span> <brown>object</brown></type>
+                            <br />
+                            <values><span>Button1:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
+                            <values><span>TypeButton1:</span> <brown>"default"</brown> or <brown>"primary"</brown> or <brown>"success"</brown> or <brown>"info"</brown> or <brown>"warning"</brown> or <brown>"danger"</brown> or <brown>"link"</brown></values>
+                            <values><span>SizeButton1:</span> <brown>""</brown> or <brown>"xs"</brown> or <brown>"sm"</brown> or <brown>"md"</brown></values>
+                            <values><span>TextButton1:</span> Text</values>
+                            <br />
+                            <values><span>Button2:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
+                            <values><span>TypeButton2:</span> <brown>"default"</brown> or <brown>"primary"</brown> or <brown>"success"</brown> or <brown>"info"</brown> or <brown>"warning"</brown> or <brown>"danger"</brown> or <brown>"link"</brown></values>
+                            <values><span>SizeButton2:</span> <brown>""</brown> or <brown>"xs"</brown> or <brown>"sm"</brown> or <brown>"md"</brown></values>
+                            <values><span>TextButton2:</span> Text</values>
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>functionlib/azWindowBeforeOpen</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
-                            <default><span>Default:</span> <mediumblue>function () {}</mediumblue></default>
                             <br />
-                            Hvis du ønsker å få utført en funksjon rett etter <strong>AZWindow</strong> er åpent.
+                            <div class="jsHigh notranslate">
+                                $.subscribe("functionlib/azWindowBeforeOpen", function ()<br />
+                                {<br />
+                                });<br />
+                                <br />
+                                This function is triggered before <strong>AZWindow</strong> is fully initiated.
+                                <br />
+                            </div>
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>functionlib/azWindowAfterOpen</property>
+                            <type><span>Type:</span> <brown>Function</brown></type>
                             <br />
+                            <div class="jsHigh notranslate">
+                                $.subscribe("functionlib/azWindowAfterOpen", function (e, data)<br />
+                                {<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azChangeWindowTitlebar - ƒ (n)<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azWindowClose - ƒ ()<br />
+                                });<br />
+                                <br />
+                                This function is triggered when <strong>AZWindow</strong> is fully initiated.
+                                <br />
+                            </div>
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>functionlib/azWindowAfterClose</property>
+                            <type><span>Type:</span> <brown>Function</brown></type>
+                            <br />
+                            <div class="jsHigh notranslate">
+                                $.subscribe("functionlib/azWindowAfterClose", function ()<br />
+                                {<br />
+                                });<br />
+                                <br />
+                                This function is triggered after <strong>AZWindow</strong> is closed.
+                                <br />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -494,32 +542,83 @@
             <div class="az-row az-margin-b-56">
                 <div class="az-col xs-12">
                     <div class="az-code htmlHigh notranslate">
-                        AZ Window har noe grunnleggende CSS som det i utgangspunktet ikke skal være nødvendig å justere på. <a href="/lib-2.0.0/css/snackbar.css" target="_blank" class="az-border-bottom-1-blue">snackbar.css</a>
-                        <br />
-                        CSS som du selv kan endre, finenr du i filen <a href="/lib-2.0.0/lib/az-2.0.0.team.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
+                        You can find the CSS which you can change yourself in the file <a href="/lib-2.0.0/lib/az-2.0.0.team.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
                         <br />
                         <br />
                         /*---------------------<br />
-                        Snackbar<br />
-                        snackbar.css<br />
+                        AZ Window <br />
                         ---------------------*/<br />
-                        <br />
                     </div>
                     <div class="az-code cssHigh notranslate">
-                        .az-snackbar<br />
+                        #az-window<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                        &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                        &emsp;&ensp;&emsp;&ensp;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+                        &emsp;&ensp;&emsp;&ensp;background-color: #FFFFFF;<br />
+                        &emsp;&ensp;&emsp;&ensp;color: #000000;<br />
+                        &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);<br />
+                        &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);<br />
+                        &emsp;&ensp;&emsp;&ensp;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);<br />
                         }<br />
                         <br />
-                        .az-snackbar > .az-snackbar-table .az-snackbar-text<br />
+                        #az-window > .az-window-titlebar<br />
                         {<br />
+                        &emsp;&ensp;&emsp;&ensp;background-color: #0078D7;<br />
+                        &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
                         }<br />
                         <br />
-                        .az-snackbar > .az-snackbar-table .az-snackbar-close<br />
+                        #az-window > .az-window-titlebar > h1<br />
                         {<br />
+                        &emsp;&ensp;&emsp;&ensp;font-size: 14px;<br />
                         }<br />
+                        <br />
+                        #az-window > .az-window-titlebar > span<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;font-size: 14px;<br />
+                        &emsp;&ensp;&emsp;&ensp;font-weight: bold;<br />
+                        }<br />
+                        <br />
+                        #az-window > .az-window-titlebar > span:hover<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;color: #FF4136;<br />
+                        }<br />
+                        <br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row az-margin-t-56">
+                <div class="az-col xs-12">
+                    <h1 class="az-code-header" style="margin: 0;">AZ Full Window CSS</h1>
+                </div>
+            </div>
+            <div class="az-row az-margin-b-56">
+                <div class="az-col xs-12">
+                    <div class="az-code htmlHigh notranslate">
+                        You can find the CSS which you can change yourself in the file <a href="/lib-2.0.0/lib/az-2.0.0.team.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
+                        <br />
+                        <br />
+                        /*---------------------<br />
+                        AZ Full Window <br />
+                        ---------------------*/<br />
+                    </div>
+                    <div class="az-code cssHigh notranslate">
+                        #az-full-window<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;background-color: #FFFFFF;<br />
+                        &emsp;&ensp;&emsp;&ensp;color: #000000;<br />
+                        }<br />
+                        <br />
+                        #az-full-window-close<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;padding: 7px 14px;<br />
+                        &emsp;&ensp;&emsp;&ensp;font-size: 35px;<br />
+                        }<br />
+                        <br />
+                        #az-full-window-close:hover<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;background: #DDDDDD;<br />
+                        }<br />
+                        <br />
                         <br />
                     </div>
                 </div>

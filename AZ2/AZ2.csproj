@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="admin\index\index.html" />
     <Content Include="lib-2.0.0\azgrid.html" />
+    <Content Include="lib-2.0.0\azdragdrop.html" />
     <Content Include="web2net\authentication.js" />
     <Content Include="favicon.ico" />
     <Content Include="web2net\fingerprint.js" />

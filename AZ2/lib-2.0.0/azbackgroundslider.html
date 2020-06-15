@@ -25,18 +25,26 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
+        var AZBackgroundSlider1 = {};
+        var AZBackgroundSlider2 = {};
+
         $(document).ready(function ()
         {
             w3CodeColor();
 
-            new AZBackgroundSlider(
+            $.subscribe("functionlib/azBackgroundSliderReady", function (e, data)
+            {
+                console.log(data)
+            });
+
+            AZBackgroundSlider1 = new AZBackgroundSlider(
                 {
                     azBackgroundSliderId: "az-background-slider-1",
                     azBackgroundSliderWidth: 200,
                     azBackgroundSliderHeight: 150
                 });
 
-            new AZBackgroundSlider(
+            AZBackgroundSlider2 = new AZBackgroundSlider(
                 {
                     azBackgroundSliderId: "az-background-slider-2",
                     azBackgroundSliderDir: "vertical",
@@ -194,6 +202,19 @@
                             <default><span>Default:</span> <red>300</red></default>
                             <units><span>Unit:</span> <red>px</red></units>
                             <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>functionlib/azBackgroundSliderReady</property>
+                            <type><span>Type:</span> <brown>Function</brown></type>
+                            <br />
+                            <div class="jsHigh notranslate">
+                                $.subscribe("functionlib/azBackgroundSliderReady", function (e, data)<br />
+                                {<br />
+                                });<br />
+                                <br />
+                                This function is triggered when <strong>AZBackgroundSlider</strong> is fully initiated. By subscribing to the function, you will get a better flow in your own code.
+                                <br />
+                            </div>
                         </div>
                     </div>
                 </div>

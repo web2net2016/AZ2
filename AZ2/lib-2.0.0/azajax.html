@@ -78,6 +78,7 @@
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />
+                        <br />
                         var _azAjaxOptions =<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azAjaxUrl: "",<br />
@@ -89,15 +90,17 @@
                         &emsp;&ensp;&emsp;&ensp;azAjaxObjToSend: {},<br />
                         };<br />
                         <br />
-                        <strong>Det finnes flere måter å benytte AZ Ajax på:</strong><br />
+                        <strong>Features</strong><br />
+                        <br />
+                        There are several ways to use <strong>AZAjax</strong>.<br />
                         <br />
                         new AZAjax(_azAjaxOptions).always(function (data, textStatus, jqXHR)<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;// Her legges logikken for å håndtere "always", "done" og "fail", etc.<br />
+                        &emsp;&ensp;&emsp;&ensp;// Here you put the logic for handling "always", "done", "fail", etc.<br />
                         });<br />
                         <br />
                         <br />
-                        <strong>Man kan også ha funksjoner på utsiden som lytter på om AZ Ajax har mottatt data eller har feilet.</strong><br />
+                        You can also have functions that listen to whether <strong>AZAjax</strong> has received data or has failed.<br />
                         <br />
                         var azAjax1 = new AZAjax(_azAjaxOptions);<br />
                         <br />
@@ -105,13 +108,13 @@
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;if (jqXHR.status === 200)<br />
                         &emsp;&ensp;&emsp;&ensp;{<br />
-                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;// Her legges logikk for å håndtere "done".<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;// Here you put the logic for handling "done".<br />
                         &emsp;&ensp;&emsp;&ensp;}<br />
                         });<br />
                         <br />
                         azAjax1.always(function (data, textStatus, jqXHR)<br />
                         {<br />
-                        &emsp;&ensp;&emsp;&ensp;// Her legges logikk for å håndtere eventuelle feil.<br />
+                        &emsp;&ensp;&emsp;&ensp;// Here you put the logic for handling any errors.<br />
                         &emsp;&ensp;&emsp;&ensp;if (jqXHR.status === 404)<br />
                         &emsp;&ensp;&emsp;&ensp;{<br />
                         &emsp;&ensp;&emsp;&ensp;}<br />
@@ -135,7 +138,7 @@
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>"json"</brown></default>
                             <br />
-                            Datatypen du forventer tilbake fra serveren. Andre alternativer: <brown>"jsonp"</brown> - <brown>"xml"</brown> - <brown>"script"</brown> - <brown>"html"</brown>
+                            The type of data you expect back from the server. Other options: <brown>"jsonp"</brown> - <brown>"xml"</brown> - <brown>"script"</brown> - <brown>"html"</brown>
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -143,7 +146,7 @@
                             <type><span>Type:</span> <brown>String</brown></type>
                             <default><span>Default:</span> <brown>"POST"</brown></default>
                             <br />
-                            Andre alternativer: <brown>"GET"</brown> - <brown>"PUT"</brown> - <brown>"DELETE"</brown> - <brown>"POST"</brown>
+                            Other options: <brown>"GET"</brown> - <brown>"PUT"</brown> - <brown>"DELETE"</brown> - <brown>"POST"</brown>
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -151,7 +154,7 @@
                             <type><span>Type:</span> <brown>String</brown> eller <brown>Boolean</brown></type>
                             <default><span>Default:</span> <brown>"application/json; charset=utf-8"</brown></default>
                             <br />
-                            Datatypen du sender til serveren. Se også <mediumblue>azAjaxObjToSend</mediumblue>
+                            The data type you are sending to the server. See also <mediumblue>azAjaxObjToSend</mediumblue>
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -176,7 +179,7 @@
                             <type><span>Type:</span> <brown>Object</brown></type>
                             <default><span>Default:</span> <mediumblue>{}</mediumblue></default>
                             <br />
-                            Dataene du sender omgjøres automatisk til en streng - <mediumblue>JSON.stringify(azAjaxObjToSend)</mediumblue>
+                            The data you send is automatically converted into a string - <mediumblue>JSON.stringify(azAjaxObjToSend)</mediumblue>
                             <br />
                         </div>
                     </div>

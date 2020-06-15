@@ -25,6 +25,9 @@
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
     <script>
 
+        var AZAccordion1 = {};
+        var AZAccordion2 = {};
+
         $(document).ready(function ()
         {
             w3CodeColor();
@@ -36,7 +39,7 @@
 
             $.subscribe("functionlib/azAccordionReady", function (e, data)
             {
-                if (data.Options.azAccordionId === "az-accordion-1")
+                if (data.azAccordionId === "az-accordion-1")
                 {
                     $(".cmdAZAccordion1").off().on("click", function (e)
                     {
@@ -51,7 +54,7 @@
                         data.azSelectAccordion(2);
                     });
                 }
-                if (data.Options.azAccordionId === "az-accordion-2")
+                if (data.azAccordionId === "az-accordion-2")
                 {
                     $(".cmdAZAccordion4").off().on("click", function (e)
                     {
@@ -60,12 +63,12 @@
                 }
             });
 
-            new AZAccordion(
+            AZAccordion1 = new AZAccordion(
                 {
                     azAccordionId: "az-accordion-1"
                 });
 
-            new AZAccordion(
+            AZAccordion2 = new AZAccordion(
                 {
                     azAccordionId: "az-accordion-2",
                     azAccordionHeightStyle: "auto",
@@ -204,35 +207,36 @@
                         &emsp;&ensp;&emsp;&ensp;azAccordionHeightStyle: "content",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionCollapsible: true,<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionOpenEvent: "click",<br />
-                        &emsp;&ensp;&emsp;&ensp;azAccordionHeaderBackgroundColor: "#0078D7",<br />
-                        &emsp;&ensp;&emsp;&ensp;azAccordionHeaderColor: "#FFFFFF",<br />
-                        &emsp;&ensp;&emsp;&ensp;azAccordionHeaderHoverBackgroundColor: "#0bb2d4",<br />
-                        &emsp;&ensp;&emsp;&ensp;azAccordionHeaderHoverColor: "#FFFFFF",<br />
-                        &emsp;&ensp;&emsp;&ensp;azAccordionArticleBackgroundColor: "#FFFFFF",<br />
-                        &emsp;&ensp;&emsp;&ensp;azAccordionArticleColor: "#000000",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionSlideDown: 100,<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionSlideUp: 100,<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionIconClosed: "fas fa-plus",<br />
                         &emsp;&ensp;&emsp;&ensp;azAccordionIconOpen: "fas fa-minus",<br />
-                        &emsp;&ensp;&emsp;&ensp;azAccordionSlideDown: 100,<br />
-                        &emsp;&ensp;&emsp;&ensp;azAccordionSlideUp: 100<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionHeaderBackgroundColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionHeaderColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionHeaderHoverBackgroundColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionHeaderHoverColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionArticleBackgroundColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azAccordionArticleColor: ""<br />
                         });<br />
                         <br />
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6">
-                    <div class="az-code jsHigh notranslate">
-                        <strong>Additional Features</strong>
+                    <div class="az-code htmlHigh notranslate">
+                        <strong>Init AZAccordion</strong>
                         <br />
                         <br />
-                        If you want to use your own buttons or links to open/close the <strong>AZAccordion</strong>, use the function below.<br />
+                        There are two ways to initiate the <strong>AZAccordion</strong>. The way you choose is important for further use of the function.<br />
                         <br />
-                        azSelectAccordion(0);<br />
+                        <strong>1. new AZAccordion();</strong><br />
+                        The function is initiated but you do not assign the function to a variable. This means you can use the <strong>azAccordionReady</strong> function in relation to further interaction with the function.
                         <br />
                         <br />
-                        You also have the option to replace the contents of the <strong>AZAccordion</strong>, by using the function below.<br />
+                        <strong>2. var AZAccordion = new AZAccordion();</strong><br />
+                        The function is initiated and assigned to a variable. This means you can use the variable in relation to further interaction with the function.
                         <br />
-                        azChangeText(0, "This is a text");<br />
                         <br />
-                        The first parameter, (Index) corresponds to the number of which <strong>AZAccordion</strong> "header" you want to interact with. The last parameter is the content itself.<br />
+                        <br />
                         <br />
                         <br />
                         <br />
@@ -240,6 +244,72 @@
                     </div>
                 </div>
             </div>
+
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-code htmlHigh notranslate">
+                        <strong>Additional Features</strong><br />
+                        <br />
+                        If you want to use your own buttons or links to open/close the <strong>AZAccordion</strong>.<br />
+                        <br />
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 50%;">
+                                    <strong>1. functionlib/azAccordionReady</strong><br />
+                                    <br />
+                                    <div class="az-code jsHigh notranslate">
+                                        $.subscribe("functionlib/azAccordionReady", function (e, data)<br />
+                                        {<br />
+                                        &emsp;&ensp;&emsp;&ensp;data.azSelectAccordion(0);<br />
+                                        });<br />
+                                    </div>
+                                </td>
+                                <td style="width: 50%;">
+                                    <strong>2. var AZAccordion</strong><br />
+                                    <br />
+                                    <div class="az-code jsHigh notranslate">
+                                        <br />
+                                        &emsp;&ensp;&emsp;&ensp;AZAccordion.azSelectAccordion(0);<br />
+                                        <br />
+                                        <br />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <br />
+                        You also have the option to replace the content of the <strong>AZAccordion</strong>.<br />
+                        <br />
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 50%;">
+                                    <strong>1. functionlib/azAccordionReady</strong><br />
+                                    <br />
+                                    <div class="az-code jsHigh notranslate">
+                                        $.subscribe("functionlib/azAccordionReady", function (e, data)<br />
+                                        {<br />
+                                        &emsp;&ensp;&emsp;&ensp;data.azChangeText(0, "This is a text");<br />
+                                        });<br />
+                                    </div>
+                                </td>
+                                <td style="width: 50%;">
+                                    <strong>2. var AZAccordion</strong><br />
+                                    <br />
+                                    <div class="az-code jsHigh notranslate">
+                                        <br />
+                                        &emsp;&ensp;&emsp;&ensp;AZAccordion.azChangeText(0, "This is a text");<br />                                        <br />
+                                        <br />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        The first parameter, (Index) corresponds to the number of which <strong>AZAccordion</strong> "header" you want to interact with. The last parameter is the content itself.<br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+
             <div class="az-row">
                 <div class="az-col xs-12">
                     <div class="az-code htmlHigh notranslate">
@@ -271,51 +341,17 @@
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>azAccordionHeaderBackgroundColor</property>
-                            <type><span>Type:</span> <brown>Color Hex</brown></type>
-                            <default><span>Default:</span> <brown>"0078D7"</brown></default>
-                            <br />
-                            See also CSS .az-accordion
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>azAccordionHeaderColor</property>
-                            <type><span>Type:</span> <brown>Color Hex</brown></type>
-                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
-                            <br />
-                            See also CSS .az-accordion
+                            <property>azAccordionSlideDown</property>
+                            <type><span>Type:</span> <brown>Integer</brown></type>
+                            <default><span>Default:</span> <red>100</red></default>
+                            <units><span>Unit:</span> <red>milliseconds</red></units>
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>azAccordionHeaderHoverBackgroundColor</property>
-                            <type><span>Type:</span> <brown>Color Hex</brown></type>
-                            <default><span>Default:</span> <brown>"607D8B"</brown></default>
-                            <br />
-                            See also CSS .az-accordion
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>azAccordionHeaderHoverColor</property>
-                            <type><span>Type:</span> <brown>Color Hex</brown></type>
-                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
-                            <br />
-                            See also CSS .az-accordion
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>azAccordionArticleBackgroundColor</property>
-                            <type><span>Type:</span> <brown>Color Hex</brown></type>
-                            <default><span>Default:</span> <brown>"FFFFFF"</brown></default>
-                            <br />
-                            See also CSS .az-accordion
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <property>azAccordionArticleColor</property>
-                            <type><span>Type:</span> <brown>Color Hex</brown></type>
-                            <default><span>Default:</span> <brown>"000000"</brown></default>
-                            <br />
-                            See also CSS .az-accordion
+                            <property>azAccordionSlideUp</property>
+                            <type><span>Type:</span> <brown>Integer</brown></type>
+                            <default><span>Default:</span> <red>100</red></default>
+                            <units><span>Unit:</span> <red>milliseconds</red></units>
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
@@ -331,18 +367,68 @@
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>azAccordionSlideDown</property>
-                            <type><span>Type:</span> <brown>Integer</brown></type>
-                            <default><span>Default:</span> <red>100</red></default>
-                            <units><span>Unit:</span> <red>milliseconds</red></units>
+                            <property>azAccordionHeaderBackgroundColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <br />
+                            See also CSS .az-accordion
                             <br />
                         </div>
                         <div class="az-code-property-wrapper">
-                            <property>azAccordionSlideUp</property>
-                            <type><span>Type:</span> <brown>Integer</brown></type>
-                            <default><span>Default:</span> <red>100</red></default>
-                            <units><span>Unit:</span> <red>milliseconds</red></units>
+                            <property>azAccordionHeaderColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
                             <br />
+                            See also CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azAccordionHeaderHoverBackgroundColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <br />
+                            See also CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azAccordionHeaderHoverColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <br />
+                            See also CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azAccordionArticleBackgroundColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <br />
+                            See also CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azAccordionArticleColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <br />
+                            See also CSS .az-accordion
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>functionlib/azAccordionReady</property>
+                            <type><span>Type:</span> <brown>Function</brown></type>
+                            <br />
+                            <div class="jsHigh notranslate">
+                                $.subscribe("functionlib/azAccordionReady", function (e, data)<br />
+                                {<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azAccordionId<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azSelectAccordion - ƒ (n)<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azChangeText - ƒ (n, i)<br />
+                                });<br />
+                                <br />
+                                This function is triggered when <strong>AZAccordion</strong> is fully initiated.
+                                <br />
+                            </div>
                         </div>
                         <div class="az-code-property-wrapper">
                             <property>functionlib/azAccordionHeader</property>
@@ -351,14 +437,14 @@
                             <div class="jsHigh notranslate">
                                 $.subscribe("functionlib/azAccordionHeader", function (e, data)<br />
                                 {<br />
-                                &emsp;&ensp;&emsp;&ensp;data.azAccordionId<br />
-                                &emsp;&ensp;&emsp;&ensp;data.azAccordionStatus<br />
-                                &emsp;&ensp;&emsp;&ensp;data.azAccordionActivated<br />
-                                &emsp;&ensp;&emsp;&ensp;data.azAccordionDeactivated<br />
-                                &emsp;&ensp;&emsp;&ensp;data.azAccordionHeaderJQElement<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azAccordionId - your id<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azAccordionStatus - open/closed<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azAccordionActivated - index<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azAccordionDeactivated - index<br />
+                                &emsp;&ensp;&emsp;&ensp;data.azAccordionHeaderJQElement - i.fn.init<br />
                                 });<br />
                                 <br />
-                                This feature is triggered every time you click, (open/close) the <strong>AZAccordion</strong>. By subscribing to the feature, you will get a better flow in your own code.
+                                This function is triggered every time you open/close the <strong>AZAccordion</strong>.
                                 <br />
                             </div>
                         </div>
@@ -403,7 +489,7 @@
                         /*---------------------<br />
                         Accordion<br />
                         accordion.css<br />
-                        ---------------------*/<br />                        
+                        ---------------------*/<br />
                         <br />
                     </div>
                     <div class="az-code cssHigh notranslate">
@@ -423,6 +509,14 @@
                         .az-accordion > .az-accordion-card > header<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;padding: 7px;<br />
+                        &emsp;&ensp;&emsp;&ensp;background-color: #0078D7;<br />
+                        &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
+                        }<br />
+                        <br />
+                        .az-accordion > .az-accordion-card > header:hover<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;background-color: #0bb2d4;<br />
+                        &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
                         }<br />
                         <br />
                         .az-accordion > .az-accordion-card > header > *<br />
@@ -440,6 +534,8 @@
                         .az-accordion > .az-accordion-card > article<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;padding: 7px;<br />
+                        &emsp;&ensp;&emsp;&ensp;background-color: #FFFFFF;<br />
+                        &emsp;&ensp;&emsp;&ensp;color: #000000;<br />
                         }<br />
                         <br />
                         .az-accordion > .az-accordion-card > article > *<br />

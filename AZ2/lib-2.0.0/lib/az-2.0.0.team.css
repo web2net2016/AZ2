@@ -37,7 +37,15 @@ accordion.css
         .az-accordion > .az-accordion-card > header
         {
             padding: 7px;
+            background-color: #0078D7;
+            color: #FFFFFF;
         }
+
+            .az-accordion > .az-accordion-card > header:hover
+            {
+                background-color: #0bb2d4;
+                color: #FFFFFF;
+            }
 
             .az-accordion > .az-accordion-card > header > *
             {
@@ -54,6 +62,8 @@ accordion.css
         .az-accordion > .az-accordion-card > article
         {
             padding: 7px;
+            background-color: #FFFFFF;
+            color: #000000;
         }
 
             .az-accordion > .az-accordion-card > article > *
@@ -176,9 +186,6 @@ form.css
 - Input Animated
 - Alert
 - Modal Background
-- Modal Dialog
-- Window
-- Full Window
 - Dropdown
 - Badge
 - Cover Spin
@@ -188,6 +195,7 @@ form.css
 - Animations Keyframes
 -----------------------------------------------------------*/
 /* Form Group */
+
 
 /* Input Group Addon */
 .az-form-group .az-input-group-addon
@@ -385,46 +393,6 @@ form.css
     background-color: rgba(0,0,0,0.4);
 }
 
-/* Modal Dialog */
-
-
-/* Window */
-#az-window
-{
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-}
-
-    #az-window > .az-window-titlebar > h1
-    {
-        font-size: 14px;
-    }
-
-    #az-window > .az-window-titlebar > span
-    {
-        font-size: 14px;
-        font-weight: bold;
-    }
-
-        #az-window > .az-window-titlebar > span:hover
-        {
-            color: #FF4136;
-        }
-
-
-/* Full Window */
-#az-full-window-close
-{
-    padding: 7px 14px;
-    font-size: 35px;
-}
-
-    #az-full-window-close:hover
-    {
-        background: #DDDDDD;
-    }
-
 /* Dropdown */
 .az-dropdown-layout
 {
@@ -459,7 +427,6 @@ form.css
 /* Badge */
 
 
-
 /* Cover Spin Text */
 #az-cover-spin > div
 {
@@ -482,7 +449,6 @@ form.css
 {
     color: #FF0000;
 }
-
 
 /*--------------------------------------------------------
 Grid 
@@ -551,6 +517,21 @@ list.css
             font-size: 14px;
         }
 
+/*--------------------------------------------------------
+Modal Dialog 
+-----------------------------------------------------------*/
+.az-modal-dialog
+{
+    border: none !important;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.az-modal-dialog-titlebar
+{
+    background-color: #0078D7;
+    color: #FFFFFF;
+}
 
 /*--------------------------------------------------------
 Navbar 
@@ -1071,6 +1052,59 @@ timeline.css
             font-size: 14px;
         }
 
+/*--------------------------------------------------------
+Window  
+-----------------------------------------------------------*/
+#az-window
+{
+    background-color: #FFFFFF;
+    color: #000000;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+    #az-window > .az-window-titlebar
+    {
+        background-color: #0078D7;
+        color: #FFFFFF;
+    }
+
+    #az-window > .az-window-titlebar > h1
+    {
+        font-size: 14px;
+    }
+
+    #az-window > .az-window-titlebar > span
+    {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+        #az-window > .az-window-titlebar > span:hover
+        {
+            color: #FF4136;
+        }
+
+/*--------------------------------------------------------
+Full Window  
+-----------------------------------------------------------*/
+#az-full-window
+{
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+#az-full-window-close
+{
+    padding: 7px 14px;
+    font-size: 35px;
+}
+
+    #az-full-window-close:hover
+    {
+        background: #DDDDDD;
+    }
 
 /*--------------------------------------------------------
 Jquery UI 
@@ -1085,7 +1119,6 @@ jqueryui/jquery-ui.min.css
 {
     padding: 0 !important;
     padding: 7px !important;
-    background-color: #FFFFFF !important;
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -1128,5 +1161,5 @@ jqueryui/jquery-ui.min.css
 
 .ui-widget.ui-widget-content
 {
-    border: 1px solid #dddddd !important;
+    border: 1px solid #dddddd;
 }
