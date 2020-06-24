@@ -63,7 +63,7 @@
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowButton:<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Button1: true,<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton1: "Lukk"<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton1: "Close"<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;}<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
@@ -77,7 +77,7 @@
                     azWindowHeight: 500,
                     azWindowButton: {
                         Button1: true,
-                        TextButton1: "Lukk"
+                        TextButton1: "Close"
                     }
                 });
         }
@@ -112,7 +112,7 @@
             _HTML += '&emsp;&ensp;&emsp;&ensp;{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Button1: true,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TypeButton1: "default",<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton1: "Lukk"<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton1: "Close"<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;}<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
@@ -134,7 +134,7 @@
                     azWindowButton: {
                         Button1: true,
                         TypeButton1: "default",
-                        TextButton1: "Lukk"
+                        TextButton1: "Close"
                     }
                 });
         }
@@ -145,7 +145,7 @@
             {
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    data.azChangeWindowTitlebar({ azWindowTitle: "Ny tittel", azWindowTitlebarBackgroundColor: "#FF4136" });
+                    data.azChangeWindowTitlebar({ azWindowTitle: "New title", azWindowTitlebarBackgroundColor: "#FF4136" });
                 });
                 $("#cmdButton2").off().on('click', function ()
                 {
@@ -158,16 +158,16 @@
             _HTML += '<div class="az-code jsHigh notranslate">';
             _HTML += 'azChangeWindowTitlebar(<br />';
             _HTML += '{<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "Ny tittel",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "New title",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "#FF4136"<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Skift tittel</button>';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Change title</button>';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton2" style="width: 60%; margin-left: 4px;">Lukk</button>';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton2" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
 
@@ -312,7 +312,7 @@
                         <strong>Default settings</strong>
                         <br />
                         <br />
-                        new initAZFullWindow(<br />
+                        new AZFullWindow(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azFullWindowText: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azFullWindowPosition: "bottom",<br />
@@ -537,11 +537,14 @@
             <div class="az-row az-margin-b-56">
                 <div class="az-col xs-12">
                     <div class="az-code htmlHigh notranslate">
+                        AZWindow has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.0/css/window.css" target="_blank" class="az-border-bottom-1-blue">window.css</a>
+                        <br />
                         You can find the CSS which you can change yourself in the file <a href="/lib-2.0.0/lib/az-2.0.0.team.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
                         <br />
                         <br />
                         /*---------------------<br />
-                        AZ Window <br />
+                        AZ Window<br />
+                        window.css<br />
                         ---------------------*/<br />
                     </div>
                     <div class="az-code cssHigh notranslate">
@@ -589,11 +592,14 @@
             <div class="az-row az-margin-b-56">
                 <div class="az-col xs-12">
                     <div class="az-code htmlHigh notranslate">
+                        AZFullWindow has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.0/css/window.css" target="_blank" class="az-border-bottom-1-blue">window.css</a>
+                        <br />
                         You can find the CSS which you can change yourself in the file <a href="/lib-2.0.0/lib/az-2.0.0.team.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
                         <br />
                         <br />
                         /*---------------------<br />
-                        AZ Full Window <br />
+                        AZ Full Window<br />
+                        window.css<br />
                         ---------------------*/<br />
                     </div>
                     <div class="az-code cssHigh notranslate">

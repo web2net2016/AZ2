@@ -185,7 +185,6 @@ form.css
 - Buttons
 - Input Animated
 - Alert
-- Modal Background
 - Dropdown
 - Badge
 - Cover Spin
@@ -380,19 +379,6 @@ form.css
     color: #FFFFFF;
 }
 
-/* Modal Background */
-#az-background
-{
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-}
-
-.az-background
-{
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-}
-
 /* Dropdown */
 .az-dropdown-layout
 {
@@ -518,7 +504,8 @@ list.css
         }
 
 /*--------------------------------------------------------
-Modal Dialog 
+Modal Dialog
+modaldialog.css
 -----------------------------------------------------------*/
 .az-modal-dialog
 {
@@ -531,6 +518,12 @@ Modal Dialog
 {
     background-color: #0078D7;
     color: #FFFFFF;
+}
+
+#az-background
+{
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
 
 /*--------------------------------------------------------
@@ -841,6 +834,8 @@ slidein.css
 -----------------------------------------------------------*/
 .az-slidein > .az-slidein-tab
 {
+    background-color: #0078D7;
+    color: #FFFFFF;
     font-size: 14px;
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -853,6 +848,12 @@ slidein.css
     -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+
+    .az-slidein-card > article
+    {
+        background-color: #FFFFFF;
+        color: #000000;
+    }
 
     .az-slidein-card > article > *
     {
@@ -1053,7 +1054,8 @@ timeline.css
         }
 
 /*--------------------------------------------------------
-Window  
+Window
+window.css
 -----------------------------------------------------------*/
 #az-window
 {

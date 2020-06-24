@@ -2923,20 +2923,21 @@ function AZSlideIn(Options)
             azSlideInPosition: "right",
             azSlideInTabText: "",
             azSlideInTabIcon: "fas fa-bars",
-            azSlideInTabBackgroundColor: "#0078D7",
-            azSlideInTabColor: "#FFFFFF",
-            azSlideInArticleBackgroundColor: "#FFFFFF",
-            azSlideInArticleColor: "#000000"
+            azSlideInTabBackgroundColor: "",
+            azSlideInTabColor: "",
+            azSlideInArticleBackgroundColor: "",
+            azSlideInArticleColor: ""
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
         if (_Main.Options.azSlideInId != "" && $("#" + _Main.Options.azSlideInId).length == 0)
         {
+            _Main.azSlideInId = _Main.Options.azSlideInId;
             _Main.$Body = $("body");
             _Main.$SlideIn = $("<div></div>").attr("id", _Main.Options.azSlideInId).addClass("az-slidein");
-            _Main.$SlideInTab = $("<div><div></div></div>").addClass("az-slidein-tab").css({ "background-color": _Main.Options.azSlideInTabBackgroundColor, "color": _Main.Options.azSlideInTabColor });
+            _Main.$SlideInTab = $("<div><div></div></div>").addClass("az-slidein-tab");
             _Main.$SlideInCard = $("<div></div>").addClass("az-slidein-card");
-            _Main.$Article = $("<article></article>").html(_Main.Options.azSlideInText).css({ "background-color": _Main.Options.azSlideInArticleBackgroundColor, "color": _Main.Options.azSlideInArticleColor });
+            _Main.$Article = $("<article></article>").html(_Main.Options.azSlideInText);
             _Main.TextLength = _Main.Options.azSlideInTabText.length;
 
             _Main.SlideInArticleOptions = {};
@@ -2992,6 +2993,23 @@ function AZSlideIn(Options)
                 _Main.SlideInArticleOptions = { "min-height": _Main.TextLength };
             }
 
+            if (_Main.Options.azSlideInTabBackgroundColor !== "")
+            {
+                _Main.$SlideInTab.css({ "background-color": _Main.Options.azSlideInTabBackgroundColor });
+            }
+            if (_Main.Options.azSlideInTabColor !== "")
+            {
+                _Main.$SlideInTab.css({ "color": _Main.Options.azSlideInTabColor });
+            }
+            if (_Main.Options.azSlideInArticleBackgroundColor !== "")
+            {
+                _Main.$Article.css({ "background-color": _Main.Options.azSlideInArticleBackgroundColor });
+            }
+            if (_Main.Options.azSlideInArticleColor !== "")
+            {
+                _Main.$Article.css({ "color": _Main.Options.azSlideInArticleColor });
+            }
+
             _Main.azChangeText = function (SelectedText)
             {
                 _Main.$Article.html(SelectedText);
@@ -3002,7 +3020,6 @@ function AZSlideIn(Options)
             _Main.$SlideInCard.append(_Main.$Article);
             _Main.$SlideIn.append(_Main.$SlideInTab).append(_Main.$SlideInCard);
             _Main.$Body.append(_Main.$SlideIn);
-            $.publish("functionlib/azSlideInAfterInit", _Main);
 
             window.setTimeout(function ()
             {
@@ -3010,6 +3027,16 @@ function AZSlideIn(Options)
             }, 100);
 
             _Main.$SlideInTab.on('click', function ()
+            {
+                azExecSlideInTab();
+            });
+
+            _Main.azSelectSlideInTab = function ()
+            {
+                azExecSlideInTab();
+            }
+
+            function azExecSlideInTab()
             {
                 if (_Main.Options.azSlideInPosition == "right")
                 {
@@ -3019,7 +3046,7 @@ function AZSlideIn(Options)
                 {
                     _Main.$SlideIn.toggleClass('az-slidein-active display-left');
                 }
-            });
+            }
             $.publish("functionlib/azSlideInReady", _Main)
         }
     }

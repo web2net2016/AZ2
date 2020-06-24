@@ -18,39 +18,18 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
-
     <link rel="stylesheet" href="/lib-2.0.0/lib/az-2.0.0.team.css" />
     <script src="/lib-2.0.0/lib/az-2.0.0.additionally.js"></script>
-    <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
-    <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
-    <script>
-
-        $(document).ready(function ()
-        {
-            w3CodeColor();
-
-            $("#cmdModalDialog1").off().on('click', function ()
-            {
-                window.top.ModalDialogiFrame2.$Iframe[0].contentWindow.AZSide2("Side 1");
-            });
-        });
-
-        function AZSide1(Page)
-        {
-            $("h1").text(Page);
-        }
-
-    </script>
 </head>
 <body>
 
-    <form class="disabled-enter" id="frmContact">
+    <form class="disabled-enter" id="frmReg">
         <div class="az-container-fluid">
 
-            <h1>Side 1</h1>
-
-            <div class="az-form-group xs az-text-center">
-                <button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog1" style="width: 60%; margin-left: 4px;">Klikk</button>
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12">
+                    <h1 class="az-text-center">This is an internal web site, on the same domain.</h1>
+                </div>
             </div>
 
         </div>

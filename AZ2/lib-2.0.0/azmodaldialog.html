@@ -222,8 +222,7 @@
                     azModalDialogTitle: "AZ Modal Dialog iFrame 1",
                     azModalDialogWidth: 600,
                     azModalDialogHeight: 500,
-                    azModalDialogiFrameURL: "side1.html",
-                    azModalDialogBackground: false
+                    azModalDialogiFrameURL: "side1.html"
                 });
         }
 
@@ -233,10 +232,9 @@
                 {
                     azModalDialogId: "azModalDialogiFrame2",
                     azModalDialogTitle: "AZ Modal Dialog iFrame 2",
-                    azModalDialogWidth: 600,
-                    azModalDialogHeight: 500,
-                    azModalDialogiFrameURL: "side2.html",
-                    azModalDialogBackground: false
+                    azModalDialogWidth: 800,
+                    azModalDialogHeight: 600,
+                    azModalDialogiFrameURL: "https://web2net.no"
                 });
         }
 
@@ -918,17 +916,20 @@
 
             <div class="az-row az-margin-t-56">
                 <div class="az-col xs-12">
-                    <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog HTML and CSS</h1>
+                    <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog CSS</h1>
                 </div>
             </div>
             <div class="az-row az-margin-b-56">
                 <div class="az-col xs-12">
                     <div class="az-code htmlHigh notranslate">
+                        AZModalDialog has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.0/css/modaldialog.css" target="_blank" class="az-border-bottom-1-blue">modaldialog.css</a>
+                        <br />
                         You can find the CSS which you can change yourself in the file <a href="/lib-2.0.0/lib/az-2.0.0.team.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
                         <br />
                         <br />
                         /*---------------------<br />
-                        Modal Dialog <br />
+                        Modal Dialog<br />
+                        modaldialog.css<br />
                         ---------------------*/<br />
                     </div>
                     <div class="az-code cssHigh notranslate">
@@ -945,6 +946,13 @@
                         &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
                         }<br />
                         <br />
+                        #az-background<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;background-color: rgb(0,0,0);<br />
+                        &emsp;&ensp;&emsp;&ensp;background-color: rgba(0,0,0,0.4);<br />
+                        }<br />
+                        <br />
+
                     </div>
                 </div>
             </div>

@@ -13,6 +13,7 @@
       "lib-2.0.0/css/form.css",
       "lib-2.0.0/css/responsivegrid.css",
       "lib-2.0.0/css/list.css",
+      "lib-2.0.0/css/modaldialog.css",
       "lib-2.0.0/css/navbar.css",
       "lib-2.0.0/css/normalize.css",
       "lib-2.0.0/css/parallax.css",
@@ -25,6 +26,7 @@
       "lib-2.0.0/css/tabs.css",
       "lib-2.0.0/css/text.css",
       "lib-2.0.0/css/timeline.css",
+      "lib-2.0.0/css/window.css",
       "lib-2.0.0/fontawesome/fontawesome-all.css",
       "lib-2.0.0/jqueryui/jquery-ui.min.css"
     ]
