@@ -872,6 +872,8 @@ snackbar.css
 -----------------------------------------------------------*/
 .az-snackbar
 {
+    padding: 14px 0 14px 0;
+    background-color: #0078D7;
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -879,10 +881,13 @@ snackbar.css
 
     .az-snackbar > .az-snackbar-table .az-snackbar-text
     {
+        padding: 0 14px 0 14px;
+        color: #FFFFFF;
     }
 
     .az-snackbar > .az-snackbar-table .az-snackbar-close
     {
+        color: #FFFFFF;
     }
 
 

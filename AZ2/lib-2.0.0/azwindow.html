@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
 
-    <link rel="stylesheet" href="/lib-2.0.0/lib/az-2.0.0.team.css" />
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-2.0.0.additionally.css" />
     <script src="/lib-2.0.0/lib/az-2.0.0.additionally.js"></script>
     <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
@@ -230,22 +230,17 @@
 <body>
 
     <form id="frmReg">
-        <div class="az-container">
 
+        <div class="az-container">
             <div class="az-row az-margin-t-56">
-                <div class="az-col xs-12 sm-4">
+                <div class="az-col xs-12 sm-6">
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow1">AZ Window 1</button>
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-4">
+                <div class="az-col xs-12 sm-6">
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow2">AZ Window 2</button>
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-4">
-                    <div class="az-form-group">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow3">AZ Window 3</button>
                     </div>
                 </div>
             </div>
@@ -261,7 +256,9 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="az-container az-background-white">
             <div class="row az-margin-t-56">
                 <div class="az-col xs-12 sm-6">
                     <h1 class="az-code-header" style="margin: 0;">AZ Window</h1>
@@ -322,29 +319,68 @@
                         &emsp;&ensp;&emsp;&ensp;azFullWindowColor: ""<br />
                         });<br />
                         <br />
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-code htmlHigh notranslate">
+                        <strong>Init AZWindow</strong>
+                        <br />
+                        <br />
+                        There are two ways to initiate the <strong>AZWindow</strong>. The way you choose is important for further use of the function.<br />
+                        <br />
+                        <strong>1. new AZWindow();</strong><br />
+                        The function is initiated but you do not assign the function to a variable. This means that you can not directly interact with the function.
+                        <br />
+                        <br />
+                        <strong>2. var AZWindow = new AZWindow();</strong><br />
+                        The function is initiated and assigned to a variable. This means you can use the variable in relation to further interaction with the function.
+                        <br />
+                        <br />
+                        Whatever approach you choose, you can use the following three features (Events):
+                        <br />
+                        <br />
+                        <a href="#azWindowBeforeOpen">azWindowBeforeOpen</a>
+                        <br />
+                        <a href="#azWindowAfterOpen">azWindowAfterOpen</a>
+                        <br />
+                        <a href="#azWindowAfterClose">azWindowAfterClose</a>
                         <br />
                         <br />
                         <br />
+                        <h6>Other examples:</h6>
+                        <a href="#window-title">Window Title</a>
+                        <br />
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-6">
+                    <div class="az-code htmlHigh notranslate">
+                        <strong>Init AZFullWindow</strong>
                         <br />
                         <br />
+                        There are two ways to initiate the <strong>AZFullWindow</strong>. The way you choose is important for further use of the function.<br />
+                        <br />
+                        <strong>1. new AZFullWindow();</strong><br />
+                        The function is initiated but you do not assign the function to a variable. This means that you can not directly interact with the function.
                         <br />
                         <br />
+                        <strong>2. var AZFullWindow = new AZFullWindow();</strong><br />
+                        The function is initiated and assigned to a variable. This means you can use the variable in relation to further interaction with the function.
                         <br />
                         <br />
+                        Whatever approach you choose, you can use the following three features (Events):
                         <br />
                         <br />
+                        <a href="#azFullWindowBeforeOpen">azFullWindowBeforeOpen</a>
                         <br />
+                        <a href="#azFullWindowAfterOpen">azFullWindowAfterOpen</a>
                         <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                        <a href="#azFullWindowAfterClose">azFullWindowAfterClose</a>
                         <br />
                     </div>
                 </div>
             </div>
-
             <div class="az-row">
                 <div class="az-col xs-12">
                     <div class="az-code htmlHigh notranslate">
@@ -484,12 +520,12 @@
                             <values><span>TextButton2:</span> Text</values>
                             <br />
                         </div>
-                        <div class="az-code-property-wrapper">
+                        <div id="azWindowBeforeOpen" class="az-code-property-wrapper">
                             <property>functionlib/azWindowBeforeOpen</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
                             <br />
                             <div class="jsHigh notranslate">
-                                $.subscribe("functionlib/azWindowBeforeOpen", function ()<br />
+                                $.subscribeonce("functionlib/azWindowBeforeOpen", function ()<br />
                                 {<br />
                                 });<br />
                                 <br />
@@ -497,12 +533,12 @@
                                 <br />
                             </div>
                         </div>
-                        <div class="az-code-property-wrapper">
+                        <div id="azWindowAfterOpen" class="az-code-property-wrapper">
                             <property>functionlib/azWindowAfterOpen</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
                             <br />
                             <div class="jsHigh notranslate">
-                                $.subscribe("functionlib/azWindowAfterOpen", function (e, data)<br />
+                                $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)<br />
                                 {<br />
                                 &emsp;&ensp;&emsp;&ensp;data.azChangeWindowTitlebar - ƒ (n)<br />
                                 &emsp;&ensp;&emsp;&ensp;data.azWindowClose - ƒ ()<br />
@@ -512,12 +548,12 @@
                                 <br />
                             </div>
                         </div>
-                        <div class="az-code-property-wrapper">
+                        <div id="azWindowAfterClose" class="az-code-property-wrapper">
                             <property>functionlib/azWindowAfterClose</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
                             <br />
                             <div class="jsHigh notranslate">
-                                $.subscribe("functionlib/azWindowAfterClose", function ()<br />
+                                $.subscribeonce("functionlib/azWindowAfterClose", function ()<br />
                                 {<br />
                                 });<br />
                                 <br />
@@ -528,7 +564,91 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="az-container az-background-white">
+            <div id="window-title" class="az-row az-margin-t-56">
+                <div class="az-col xs-12">
+                    <h1 class="az-code-header" style="margin: 0;">AZ Window - Title</h1>
+                    <div class="az-code jsHigh notranslate">
+                        <strong>Default settings</strong>
+                        <br />
+                        <br />
+                        azChangeWindowTitlebar(<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitle: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowAlertTimeout: 3000<br />
+                        });<br />
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-code htmlHigh notranslate">
+                        <div class="az-code-property-wrapper">
+                            <property>azWindowTitle</property>
+                            <type><span>Type:</span> <brown>String</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <values><span>Values:</span> Text</values>
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azWindowTitlebarBackgroundColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <br />
+                            See also CSS .az-window-titlebar
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azWindowTitlebarColor</property>
+                            <type><span>Type:</span> <brown>Color Hex</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <br />
+                            See also CSS .az-window-titlebar
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azWindowAlertTimeout</property>
+                            <type><span>Type:</span> <brown>Integer</brown></type>
+                            <default><span>Default:</span> <red>3000</red></default>
+                            <units><span>Unit:</span> <red>milliseconds</red></units>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-code jsHigh notranslate">
+                        var ChangeWindowTitlebarOptions = <br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitle: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowTitlebarColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azWindowAlertTimeout: 3000<br />
+                        });<br />
+                        <br />
+                        azChangeWindowTitlebar(ChangeWindowTitlebarOptions);
+                        <br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="az-container">
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12 sm-4">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow3">AZ Window Title</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="az-container az-background-white">
             <div class="row az-margin-t-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header" style="margin: 0;">AZ Window CSS</h1>
@@ -539,7 +659,7 @@
                     <div class="az-code htmlHigh notranslate">
                         AZWindow has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.0/css/window.css" target="_blank" class="az-border-bottom-1-blue">window.css</a>
                         <br />
-                        You can find the CSS which you can change yourself in the file <a href="/lib-2.0.0/lib/az-2.0.0.team.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
+                        You can find the CSS which you can change yourself in the file <a href="/lib-2.0.0/lib/az-2.0.0.additionally.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
                         <br />
                         <br />
                         /*---------------------<br />
@@ -583,7 +703,9 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="az-container az-background-white">
             <div class="row az-margin-t-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header" style="margin: 0;">AZ Full Window CSS</h1>
@@ -594,7 +716,7 @@
                     <div class="az-code htmlHigh notranslate">
                         AZFullWindow has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.0/css/window.css" target="_blank" class="az-border-bottom-1-blue">window.css</a>
                         <br />
-                        You can find the CSS which you can change yourself in the file <a href="/lib-2.0.0/lib/az-2.0.0.team.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
+                        You can find the CSS which you can change yourself in the file <a href="/lib-2.0.0/lib/az-2.0.0.additionally.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
                         <br />
                         <br />
                         /*---------------------<br />
@@ -624,8 +746,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
+
     </form>
 
 </body>

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
 
-    <link rel="stylesheet" href="/lib-2.0.0/lib/az-2.0.0.team.css" />
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-2.0.0.additionally.css" />
     <script src="/lib-2.0.0/lib/az-2.0.0.additionally.js"></script>
     <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
@@ -309,7 +309,7 @@
             var _HTML = "";
             _HTML = '<div class="az-margin-t-28 az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialog.ModalDialogClose()<br />';
+            _HTML += 'azModalDialogClose()<br />';
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
@@ -345,7 +345,7 @@
             var _HTML = "";
             _HTML = '<div class="az-margin-t-28 az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialog.ModalDialogClose();<br />';
+            _HTML += 'azModalDialogClose();<br />';
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
@@ -381,7 +381,7 @@
             var _HTML = "";
             _HTML = '<div class="az-margin-t-28 az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialog.ModalDialogClose();<br />';
+            _HTML += 'azModalDialogClose();<br />';
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
@@ -417,7 +417,7 @@
             var _HTML = "";
             _HTML = '<div class="az-margin-t-28 az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialog.ChangeModalTitlebar(<br />';
+            _HTML += 'azChangeModalTitlebar(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "New Title",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "#FF4136"<br />';
@@ -447,8 +447,8 @@
 <body>
 
     <form id="frmReg">
-        <div class="az-container">
 
+        <div class="az-container">
             <div class="az-row az-margin-t-56">
                 <div class="az-col xs-12 sm-4">
                     <div class="az-form-group">
@@ -483,7 +483,9 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="az-container az-background-white">
             <div class="row az-margin-t-28">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog</h1>
@@ -531,31 +533,32 @@
                         There are two ways to initiate the <strong>AZModalDialog</strong>. The way you choose is important for further use of the function.<br />
                         <br />
                         <strong>1. new AZModalDialog();</strong><br />
-                        The function is initiated but you do not assign the function to a variable. This means you can use the <strong>azModalDialogBeforeOpen</strong>, <strong>azModalDialogAfterOpen</strong> and <strong>azModalDialogAfterClose</strong> functions in relation to further interaction with the function.
+                        The function is initiated but you do not assign the function to a variable. This means that you can not directly interact with the function.
                         <br />
                         <br />
                         <strong>2. var AZModalDialog = new AZModalDialog();</strong><br />
                         The function is initiated and assigned to a variable. This means you can use the variable in relation to further interaction with the function.
                         <br />
                         <br />
+                        Whatever approach you choose, you can use the following three features (Events):
                         <br />
                         <br />
-                        <h6>See examples:</h6>
+                        <a href="#azModalDialogBeforeOpen">azModalDialogBeforeOpen</a>
                         <br />
+                        <a href="#azModalDialogAfterOpen">azModalDialogAfterOpen</a>
+                        <br />
+                        <a href="#azModalDialogAfterClose">azModalDialogAfterClose</a>
+                        <br />
+                        <br />
+                        <br />
+                        <h6>Other examples:</h6>
                         <a href="#dialog-modal-close">Modal Dialog Close</a>
                         <br />
                         <a href="#dialog-modal-title">Modal Dialog Title</a>
                         <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
                     </div>
                 </div>
             </div>
-
             <div class="az-row">
                 <div class="az-col xs-12">
                     <div class="az-code htmlHigh notranslate">
@@ -699,12 +702,12 @@
                             See also CSS .az-modal-dialog-titlebar
                             <br />
                         </div>
-                        <div class="az-code-property-wrapper">
+                        <div id="azModalDialogBeforeOpen" class="az-code-property-wrapper">
                             <property>functionlib/azModalDialogBeforeOpen</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
                             <br />
                             <div class="jsHigh notranslate">
-                                $.subscribe("functionlib/azModalDialogBeforeOpen", function (e, data)<br />
+                                $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)<br />
                                 {<br />
                                 &emsp;&ensp;&emsp;&ensp;data.azModalDialogId<br />
                                 });<br />
@@ -713,12 +716,12 @@
                                 <br />
                             </div>
                         </div>
-                        <div class="az-code-property-wrapper">
+                        <div id="azModalDialogAfterOpen" class="az-code-property-wrapper">
                             <property>functionlib/azModalDialogAfterOpen</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
                             <br />
                             <div class="jsHigh notranslate">
-                                $.subscribe("functionlib/azModalDialogAfterOpen", function (e, data)<br />
+                                $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)<br />
                                 {<br />
                                 &emsp;&ensp;&emsp;&ensp;data.azModalDialogId<br />
                                 &emsp;&ensp;&emsp;&ensp;data.azChangeModalTitlebar - ƒ (n)<br />
@@ -729,12 +732,12 @@
                                 <br />
                             </div>
                         </div>
-                        <div class="az-code-property-wrapper">
+                        <div id="azModalDialogAfterClose" class="az-code-property-wrapper">
                             <property>functionlib/azModalDialogAfterClose</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
                             <br />
                             <div class="jsHigh notranslate">
-                                $.subscribe("functionlib/azModalDialogAfterClose", function (e, data)<br />
+                                $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)<br />
                                 {<br />
                                 &emsp;&ensp;&emsp;&ensp;data.azModalDialogId<br />
                                 });<br />
@@ -746,7 +749,9 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="az-container az-background-white">
             <div id="dialog-modal-close" class="az-row az-margin-t-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog - Close</h1>
@@ -772,7 +777,7 @@
                         <br />
                         <strong>2. var AZModalDialog = new AZModalDialog();</strong>
                         <br />
-                        azModalDialog.ModalDialogClose()
+                        AZModalDialog.azModalDialogClose()
                         <br />
                         <br />
                         <br />
@@ -797,7 +802,7 @@
                         <br />
                         <strong>2. var AZModalDialog = new AZModalDialog();</strong>
                         <br />
-                        azModalDialog.ModalDialogClose();
+                        AZModalDialog.azModalDialogClose();
                         <br />
                         location.reload();
                         <br />
@@ -824,7 +829,7 @@
                         <br />
                         <strong>2. var AZModalDialog = new AZModalDialog();</strong>
                         <br />
-                        azModalDialog.ModalDialogClose();
+                        AZModalDialog.azModalDialogClose();
                         <br />
                         window.location.href = "azcdn200.html";
                         <br />
@@ -833,7 +838,9 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="az-container">
             <div class="az-row az-margin-t-28">
                 <div class="az-col xs-12 sm-4">
                     <div class="az-form-group">
@@ -851,21 +858,23 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="az-container az-background-white">
             <div id="dialog-modal-title" class="az-row az-margin-t-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog - Title</h1>
                     <div class="az-code jsHigh notranslate">
                         <strong>Default settings</strong>
                         <br />
-                        azModalDialog.azChangeModalTitlebar(<br />
+                        <br />
+                        azChangeModalTitlebar(<br />
                         {<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarColor: "",<br />
                         &emsp;&ensp;&emsp;&ensp;azModalDialogAlertTimeout: 3000<br />
                         });<br />
-                        <br />
                     </div>
                 </div>
             </div>
@@ -905,7 +914,25 @@
                     </div>
                 </div>
             </div>
-
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-code jsHigh notranslate">
+                        var ChangeModalTitlebarOptions = <br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarColor: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azModalDialogAlertTimeout: 3000<br />
+                        });<br />
+                        <br />
+                        azChangeModalTitlebar(ChangeModalTitlebarOptions);
+                        <br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="az-container">
             <div class="az-row az-margin-t-28">
                 <div class="az-col xs-12 sm-4">
                     <div class="az-form-group">
@@ -913,7 +940,9 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="az-container az-background-white">
             <div class="az-row az-margin-t-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog CSS</h1>
@@ -924,7 +953,7 @@
                     <div class="az-code htmlHigh notranslate">
                         AZModalDialog has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.0/css/modaldialog.css" target="_blank" class="az-border-bottom-1-blue">modaldialog.css</a>
                         <br />
-                        You can find the CSS which you can change yourself in the file <a href="/lib-2.0.0/lib/az-2.0.0.team.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
+                        You can find the CSS which you can change yourself in the file <a href="/lib-2.0.0/lib/az-2.0.0.additionally.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
                         <br />
                         <br />
                         /*---------------------<br />
@@ -952,12 +981,11 @@
                         &emsp;&ensp;&emsp;&ensp;background-color: rgba(0,0,0,0.4);<br />
                         }<br />
                         <br />
-
                     </div>
                 </div>
             </div>
-
         </div>
+
     </form>
 
 </body>

@@ -49,986 +49,9 @@ jQuery(function (e) { e.datepicker.regional["en-US"] = { showWeek: !0, showOther
 !function (a) { function f(a, b) { if (!(a.originalEvent.touches.length > 1)) { a.preventDefault(); var c = a.originalEvent.changedTouches[0], d = document.createEvent("MouseEvents"); d.initMouseEvent(b, !0, !0, window, 1, c.screenX, c.screenY, c.clientX, c.clientY, !1, !1, !1, !1, 0, null), a.target.dispatchEvent(d) } } if (a.support.touch = "ontouchend" in document, a.support.touch) { var e, b = a.ui.mouse.prototype, c = b._mouseInit, d = b._mouseDestroy; b._touchStart = function (a) { var b = this; !e && b._mouseCapture(a.originalEvent.changedTouches[0]) && (e = !0, b._touchMoved = !1, f(a, "mouseover"), f(a, "mousemove"), f(a, "mousedown")) }, b._touchMove = function (a) { e && (this._touchMoved = !0, f(a, "mousemove")) }, b._touchEnd = function (a) { e && (f(a, "mouseup"), f(a, "mouseout"), this._touchMoved || f(a, "click"), e = !1) }, b._mouseInit = function () { var b = this; b.element.bind({ touchstart: a.proxy(b, "_touchStart"), touchmove: a.proxy(b, "_touchMove"), touchend: a.proxy(b, "_touchEnd") }), c.call(b) }, b._mouseDestroy = function () { var b = this; b.element.unbind({ touchstart: a.proxy(b, "_touchStart"), touchmove: a.proxy(b, "_touchMove"), touchend: a.proxy(b, "_touchEnd") }), d.call(b) } } }(jQuery);
 !function (a, b) { "function" == typeof define && define.amd ? define(b) : "object" == typeof module && module.exports ? module.exports = b() : a.numeral = b() }(this, function () { function a(a, b) { this._input = a, this._value = b } var b, c, d = "2.0.6", e = {}, f = {}, g = { currentLocale: "en", zeroFormat: null, nullFormat: null, defaultFormat: "0,0", scalePercentBy100: !0 }, h = { currentLocale: g.currentLocale, zeroFormat: g.zeroFormat, nullFormat: g.nullFormat, defaultFormat: g.defaultFormat, scalePercentBy100: g.scalePercentBy100 }; return b = function (d) { var f, g, i, j; if (b.isNumeral(d)) f = d.value(); else if (0 === d || "undefined" == typeof d) f = 0; else if (null === d || c.isNaN(d)) f = null; else if ("string" == typeof d) if (h.zeroFormat && d === h.zeroFormat) f = 0; else if (h.nullFormat && d === h.nullFormat || !d.replace(/[^0-9]+/g, "").length) f = null; else { for (g in e) if (j = "function" == typeof e[g].regexps.unformat ? e[g].regexps.unformat() : e[g].regexps.unformat, j && d.match(j)) { i = e[g].unformat; break } i = i || b._.stringToNumber, f = i(d) } else f = Number(d) || null; return new a(d, f) }, b.version = d, b.isNumeral = function (b) { return b instanceof a }, b._ = c = { numberToFormat: function (a, c, d) { var e, g, h, i, j, k, l, m = f[b.options.currentLocale], n = !1, o = !1, p = 0, q = "", r = 1e12, s = 1e9, t = 1e6, u = 1e3, v = "", w = !1; if (a = a || 0, g = Math.abs(a), b._.includes(c, "(") ? (n = !0, c = c.replace(/[\(|\)]/g, "")) : (b._.includes(c, "+") || b._.includes(c, "-")) && (j = b._.includes(c, "+") ? c.indexOf("+") : 0 > a ? c.indexOf("-") : -1, c = c.replace(/[\+|\-]/g, "")), b._.includes(c, "a") && (e = c.match(/a(k|m|b|t)?/), e = e ? e[1] : !1, b._.includes(c, " a") && (q = " "), c = c.replace(new RegExp(q + "a[kmbt]?"), ""), g >= r && !e || "t" === e ? (q += m.abbreviations.trillion, a /= r) : r > g && g >= s && !e || "b" === e ? (q += m.abbreviations.billion, a /= s) : s > g && g >= t && !e || "m" === e ? (q += m.abbreviations.million, a /= t) : (t > g && g >= u && !e || "k" === e) && (q += m.abbreviations.thousand, a /= u)), b._.includes(c, "[.]") && (o = !0, c = c.replace("[.]", ".")), h = a.toString().split(".")[0], i = c.split(".")[1], k = c.indexOf(","), p = (c.split(".")[0].split(",")[0].match(/0/g) || []).length, i ? (b._.includes(i, "[") ? (i = i.replace("]", ""), i = i.split("["), v = b._.toFixed(a, i[0].length + i[1].length, d, i[1].length)) : v = b._.toFixed(a, i.length, d), h = v.split(".")[0], v = b._.includes(v, ".") ? m.delimiters.decimal + v.split(".")[1] : "", o && 0 === Number(v.slice(1)) && (v = "")) : h = b._.toFixed(a, 0, d), q && !e && Number(h) >= 1e3 && q !== m.abbreviations.trillion) switch (h = String(Number(h) / 1e3), q) { case m.abbreviations.thousand: q = m.abbreviations.million; break; case m.abbreviations.million: q = m.abbreviations.billion; break; case m.abbreviations.billion: q = m.abbreviations.trillion }if (b._.includes(h, "-") && (h = h.slice(1), w = !0), h.length < p) for (var x = p - h.length; x > 0; x--)h = "0" + h; return k > -1 && (h = h.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1" + m.delimiters.thousands)), 0 === c.indexOf(".") && (h = ""), l = h + v + (q ? q : ""), n ? l = (n && w ? "(" : "") + l + (n && w ? ")" : "") : j >= 0 ? l = 0 === j ? (w ? "-" : "+") + l : l + (w ? "-" : "+") : w && (l = "-" + l), l }, stringToNumber: function (a) { var b, c, d, e = f[h.currentLocale], g = a, i = { thousand: 3, million: 6, billion: 9, trillion: 12 }; if (h.zeroFormat && a === h.zeroFormat) c = 0; else if (h.nullFormat && a === h.nullFormat || !a.replace(/[^0-9]+/g, "").length) c = null; else { c = 1, "." !== e.delimiters.decimal && (a = a.replace(/\./g, "").replace(e.delimiters.decimal, ".")); for (b in i) if (d = new RegExp("[^a-zA-Z]" + e.abbreviations[b] + "(?:\\)|(\\" + e.currency.symbol + ")?(?:\\))?)?$"), g.match(d)) { c *= Math.pow(10, i[b]); break } c *= (a.split("-").length + Math.min(a.split("(").length - 1, a.split(")").length - 1)) % 2 ? 1 : -1, a = a.replace(/[^0-9\.]+/g, ""), c *= Number(a) } return c }, isNaN: function (a) { return "number" == typeof a && isNaN(a) }, includes: function (a, b) { return -1 !== a.indexOf(b) }, insert: function (a, b, c) { return a.slice(0, c) + b + a.slice(c) }, reduce: function (a, b) { if (null === this) throw new TypeError("Array.prototype.reduce called on null or undefined"); if ("function" != typeof b) throw new TypeError(b + " is not a function"); var c, d = Object(a), e = d.length >>> 0, f = 0; if (3 === arguments.length) c = arguments[2]; else { for (; e > f && !(f in d);)f++; if (f >= e) throw new TypeError("Reduce of empty array with no initial value"); c = d[f++] } for (; e > f; f++)f in d && (c = b(c, d[f], f, d)); return c }, multiplier: function (a) { var b = a.toString().split("."); return b.length < 2 ? 1 : Math.pow(10, b[1].length) }, correctionFactor: function () { var a = Array.prototype.slice.call(arguments); return a.reduce(function (a, b) { var d = c.multiplier(b); return a > d ? a : d }, 1) }, toFixed: function (a, b, c, d) { var e, f, g, h, i = a.toString().split("."), j = b - (d || 0); return e = 2 === i.length ? Math.min(Math.max(i[1].length, j), b) : j, g = Math.pow(10, e), h = (c(a + "e+" + e) / g).toFixed(e), d > b - e && (f = new RegExp("\\.?0{1," + (d - (b - e)) + "}$"), h = h.replace(f, "")), h } }, b.options = h, b.formats = e, b.locales = f, b.locale = function (a) { return a && (h.currentLocale = a.toLowerCase()), h.currentLocale }, b.localeData = function (a) { if (!a) return f[h.currentLocale]; if (a = a.toLowerCase(), !f[a]) throw new Error("Unknown locale : " + a); return f[a] }, b.reset = function () { for (var a in g) h[a] = g[a] }, b.zeroFormat = function (a) { h.zeroFormat = "string" == typeof a ? a : null }, b.nullFormat = function (a) { h.nullFormat = "string" == typeof a ? a : null }, b.defaultFormat = function (a) { h.defaultFormat = "string" == typeof a ? a : "0.0" }, b.register = function (a, b, c) { if (b = b.toLowerCase(), this[a + "s"][b]) throw new TypeError(b + " " + a + " already registered."); return this[a + "s"][b] = c, c }, b.validate = function (a, c) { var d, e, f, g, h, i, j, k; if ("string" != typeof a && (a += "", console.warn && console.warn("Numeral.js: Value is not string. It has been co-erced to: ", a)), a = a.trim(), a.match(/^\d+$/)) return !0; if ("" === a) return !1; try { j = b.localeData(c) } catch (l) { j = b.localeData(b.locale()) } return f = j.currency.symbol, h = j.abbreviations, d = j.delimiters.decimal, e = "." === j.delimiters.thousands ? "\\." : j.delimiters.thousands, k = a.match(/^[^\d]+/), null !== k && (a = a.substr(1), k[0] !== f) ? !1 : (k = a.match(/[^\d]+$/), null !== k && (a = a.slice(0, -1), k[0] !== h.thousand && k[0] !== h.million && k[0] !== h.billion && k[0] !== h.trillion) ? !1 : (i = new RegExp(e + "{2}"), a.match(/[^\d.,]/g) ? !1 : (g = a.split(d), g.length > 2 ? !1 : g.length < 2 ? !!g[0].match(/^\d+.*\d$/) && !g[0].match(i) : 1 === g[0].length ? !!g[0].match(/^\d+$/) && !g[0].match(i) && !!g[1].match(/^\d+$/) : !!g[0].match(/^\d+.*\d$/) && !g[0].match(i) && !!g[1].match(/^\d+$/)))) }, b.fn = a.prototype = { clone: function () { return b(this) }, format: function (a, c) { var d, f, g, i = this._value, j = a || h.defaultFormat; if (c = c || Math.round, 0 === i && null !== h.zeroFormat) f = h.zeroFormat; else if (null === i && null !== h.nullFormat) f = h.nullFormat; else { for (d in e) if (j.match(e[d].regexps.format)) { g = e[d].format; break } g = g || b._.numberToFormat, f = g(i, j, c) } return f }, value: function () { return this._value }, input: function () { return this._input }, set: function (a) { return this._value = Number(a), this }, add: function (a) { function b(a, b, c, e) { return a + Math.round(d * b) } var d = c.correctionFactor.call(null, this._value, a); return this._value = c.reduce([this._value, a], b, 0) / d, this }, subtract: function (a) { function b(a, b, c, e) { return a - Math.round(d * b) } var d = c.correctionFactor.call(null, this._value, a); return this._value = c.reduce([a], b, Math.round(this._value * d)) / d, this }, multiply: function (a) { function b(a, b, d, e) { var f = c.correctionFactor(a, b); return Math.round(a * f) * Math.round(b * f) / Math.round(f * f) } return this._value = c.reduce([this._value, a], b, 1), this }, divide: function (a) { function b(a, b, d, e) { var f = c.correctionFactor(a, b); return Math.round(a * f) / Math.round(b * f) } return this._value = c.reduce([this._value, a], b), this }, difference: function (a) { return Math.abs(b(this._value).subtract(a).value()) } }, b.register("locale", "en", { delimiters: { thousands: ",", decimal: "." }, abbreviations: { thousand: "k", million: "m", billion: "b", trillion: "t" }, ordinal: function (a) { var b = a % 10; return 1 === ~~(a % 100 / 10) ? "th" : 1 === b ? "st" : 2 === b ? "nd" : 3 === b ? "rd" : "th" }, currency: { symbol: "$" } }), function () { b.register("format", "bps", { regexps: { format: /(BPS)/, unformat: /(BPS)/ }, format: function (a, c, d) { var e, f = b._.includes(c, " BPS") ? " " : ""; return a = 1e4 * a, c = c.replace(/\s?BPS/, ""), e = b._.numberToFormat(a, c, d), b._.includes(e, ")") ? (e = e.split(""), e.splice(-1, 0, f + "BPS"), e = e.join("")) : e = e + f + "BPS", e }, unformat: function (a) { return +(1e-4 * b._.stringToNumber(a)).toFixed(15) } }) }(), function () { var a = { base: 1e3, suffixes: ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"] }, c = { base: 1024, suffixes: ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"] }, d = a.suffixes.concat(c.suffixes.filter(function (b) { return a.suffixes.indexOf(b) < 0 })), e = d.join("|"); e = "(" + e.replace("B", "B(?!PS)") + ")", b.register("format", "bytes", { regexps: { format: /([0\s]i?b)/, unformat: new RegExp(e) }, format: function (d, e, f) { var g, h, i, j, k = b._.includes(e, "ib") ? c : a, l = b._.includes(e, " b") || b._.includes(e, " ib") ? " " : ""; for (e = e.replace(/\s?i?b/, ""), h = 0; h <= k.suffixes.length; h++)if (i = Math.pow(k.base, h), j = Math.pow(k.base, h + 1), null === d || 0 === d || d >= i && j > d) { l += k.suffixes[h], i > 0 && (d /= i); break } return g = b._.numberToFormat(d, e, f), g + l }, unformat: function (d) { var e, f, g = b._.stringToNumber(d); if (g) { for (e = a.suffixes.length - 1; e >= 0; e--) { if (b._.includes(d, a.suffixes[e])) { f = Math.pow(a.base, e); break } if (b._.includes(d, c.suffixes[e])) { f = Math.pow(c.base, e); break } } g *= f || 1 } return g } }) }(), function () { b.register("format", "currency", { regexps: { format: /(\$)/ }, format: function (a, c, d) { var e, f, g, h = b.locales[b.options.currentLocale], i = { before: c.match(/^([\+|\-|\(|\s|\$]*)/)[0], after: c.match(/([\+|\-|\)|\s|\$]*)$/)[0] }; for (c = c.replace(/\s?\$\s?/, ""), e = b._.numberToFormat(a, c, d), a >= 0 ? (i.before = i.before.replace(/[\-\(]/, ""), i.after = i.after.replace(/[\-\)]/, "")) : 0 > a && !b._.includes(i.before, "-") && !b._.includes(i.before, "(") && (i.before = "-" + i.before), g = 0; g < i.before.length; g++)switch (f = i.before[g]) { case "$": e = b._.insert(e, h.currency.symbol, g); break; case " ": e = b._.insert(e, " ", g + h.currency.symbol.length - 1) }for (g = i.after.length - 1; g >= 0; g--)switch (f = i.after[g]) { case "$": e = g === i.after.length - 1 ? e + h.currency.symbol : b._.insert(e, h.currency.symbol, -(i.after.length - (1 + g))); break; case " ": e = g === i.after.length - 1 ? e + " " : b._.insert(e, " ", -(i.after.length - (1 + g) + h.currency.symbol.length - 1)) }return e } }) }(), function () { b.register("format", "exponential", { regexps: { format: /(e\+|e-)/, unformat: /(e\+|e-)/ }, format: function (a, c, d) { var e, f = "number" != typeof a || b._.isNaN(a) ? "0e+0" : a.toExponential(), g = f.split("e"); return c = c.replace(/e[\+|\-]{1}0/, ""), e = b._.numberToFormat(Number(g[0]), c, d), e + "e" + g[1] }, unformat: function (a) { function c(a, c, d, e) { var f = b._.correctionFactor(a, c), g = a * f * (c * f) / (f * f); return g } var d = b._.includes(a, "e+") ? a.split("e+") : a.split("e-"), e = Number(d[0]), f = Number(d[1]); return f = b._.includes(a, "e-") ? f *= -1 : f, b._.reduce([e, Math.pow(10, f)], c, 1) } }) }(), function () { b.register("format", "ordinal", { regexps: { format: /(o)/ }, format: function (a, c, d) { var e, f = b.locales[b.options.currentLocale], g = b._.includes(c, " o") ? " " : ""; return c = c.replace(/\s?o/, ""), g += f.ordinal(a), e = b._.numberToFormat(a, c, d), e + g } }) }(), function () { b.register("format", "percentage", { regexps: { format: /(%)/, unformat: /(%)/ }, format: function (a, c, d) { var e, f = b._.includes(c, " %") ? " " : ""; return b.options.scalePercentBy100 && (a = 100 * a), c = c.replace(/\s?\%/, ""), e = b._.numberToFormat(a, c, d), b._.includes(e, ")") ? (e = e.split(""), e.splice(-1, 0, f + "%"), e = e.join("")) : e = e + f + "%", e }, unformat: function (a) { var c = b._.stringToNumber(a); return b.options.scalePercentBy100 ? .01 * c : c } }) }(), function () { b.register("format", "time", { regexps: { format: /(:)/, unformat: /(:)/ }, format: function (a, b, c) { var d = Math.floor(a / 60 / 60), e = Math.floor((a - 60 * d * 60) / 60), f = Math.round(a - 60 * d * 60 - 60 * e); return d + ":" + (10 > e ? "0" + e : e) + ":" + (10 > f ? "0" + f : f) }, unformat: function (a) { var b = a.split(":"), c = 0; return 3 === b.length ? (c += 60 * Number(b[0]) * 60, c += 60 * Number(b[1]), c += Number(b[2])) : 2 === b.length && (c += 60 * Number(b[0]), c += Number(b[1])), Number(c) } }) }(), b });
 !function (a, b) { "function" == typeof define && define.amd ? define(["numeral"], b) : b("object" == typeof module && module.exports ? require("./numeral") : a.numeral) }(this, function (a) { !function () { a.register("locale", "bg", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "хил", million: "млн", billion: "млрд", trillion: "трлн" }, ordinal: function (a) { return "" }, currency: { symbol: "лв" } }) }(), function () { a.register("locale", "chs", { delimiters: { thousands: ",", decimal: "." }, abbreviations: { thousand: "千", million: "百万", billion: "十亿", trillion: "兆" }, ordinal: function (a) { return "." }, currency: { symbol: "¥" } }) }(), function () { a.register("locale", "cs", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "tis.", million: "mil.", billion: "b", trillion: "t" }, ordinal: function () { return "." }, currency: { symbol: "Kč" } }) }(), function () { a.register("locale", "da-dk", { delimiters: { thousands: ".", decimal: "," }, abbreviations: { thousand: "k", million: "mio", billion: "mia", trillion: "b" }, ordinal: function (a) { return "." }, currency: { symbol: "DKK" } }) }(), function () { a.register("locale", "de-ch", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "k", million: "m", billion: "b", trillion: "t" }, ordinal: function (a) { return "." }, currency: { symbol: "CHF" } }) }(), function () { a.register("locale", "de", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "k", million: "m", billion: "b", trillion: "t" }, ordinal: function (a) { return "." }, currency: { symbol: "€" } }) }(), function () { a.register("locale", "en-au", { delimiters: { thousands: ",", decimal: "." }, abbreviations: { thousand: "k", million: "m", billion: "b", trillion: "t" }, ordinal: function (a) { var b = a % 10; return 1 === ~~(a % 100 / 10) ? "th" : 1 === b ? "st" : 2 === b ? "nd" : 3 === b ? "rd" : "th" }, currency: { symbol: "$" } }) }(), function () { a.register("locale", "en-gb", { delimiters: { thousands: ",", decimal: "." }, abbreviations: { thousand: "k", million: "m", billion: "b", trillion: "t" }, ordinal: function (a) { var b = a % 10; return 1 === ~~(a % 100 / 10) ? "th" : 1 === b ? "st" : 2 === b ? "nd" : 3 === b ? "rd" : "th" }, currency: { symbol: "£" } }) }(), function () { a.register("locale", "en-za", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "k", million: "m", billion: "b", trillion: "t" }, ordinal: function (a) { var b = a % 10; return 1 === ~~(a % 100 / 10) ? "th" : 1 === b ? "st" : 2 === b ? "nd" : 3 === b ? "rd" : "th" }, currency: { symbol: "R" } }) }(), function () { a.register("locale", "es-es", { delimiters: { thousands: ".", decimal: "," }, abbreviations: { thousand: "k", million: "mm", billion: "b", trillion: "t" }, ordinal: function (a) { var b = a % 10; return 1 === b || 3 === b ? "er" : 2 === b ? "do" : 7 === b || 0 === b ? "mo" : 8 === b ? "vo" : 9 === b ? "no" : "to" }, currency: { symbol: "€" } }) }(), function () { a.register("locale", "es", { delimiters: { thousands: ".", decimal: "," }, abbreviations: { thousand: "k", million: "mm", billion: "b", trillion: "t" }, ordinal: function (a) { var b = a % 10; return 1 === b || 3 === b ? "er" : 2 === b ? "do" : 7 === b || 0 === b ? "mo" : 8 === b ? "vo" : 9 === b ? "no" : "to" }, currency: { symbol: "$" } }) }(), function () { a.register("locale", "et", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: " tuh", million: " mln", billion: " mld", trillion: " trl" }, ordinal: function (a) { return "." }, currency: { symbol: "€" } }) }(), function () { a.register("locale", "fi", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "k", million: "M", billion: "G", trillion: "T" }, ordinal: function (a) { return "." }, currency: { symbol: "€" } }) }(), function () { a.register("locale", "fr-ca", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "k", million: "M", billion: "G", trillion: "T" }, ordinal: function (a) { return 1 === a ? "er" : "e" }, currency: { symbol: "$" } }) }(), function () { a.register("locale", "fr-ch", { delimiters: { thousands: "'", decimal: "." }, abbreviations: { thousand: "k", million: "m", billion: "b", trillion: "t" }, ordinal: function (a) { return 1 === a ? "er" : "e" }, currency: { symbol: "CHF" } }) }(), function () { a.register("locale", "fr", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "k", million: "m", billion: "b", trillion: "t" }, ordinal: function (a) { return 1 === a ? "er" : "e" }, currency: { symbol: "€" } }) }(), function () { a.register("locale", "hu", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "E", million: "M", billion: "Mrd", trillion: "T" }, ordinal: function (a) { return "." }, currency: { symbol: " Ft" } }) }(), function () { a.register("locale", "it", { delimiters: { thousands: ".", decimal: "," }, abbreviations: { thousand: "mila", million: "mil", billion: "b", trillion: "t" }, ordinal: function (a) { return "º" }, currency: { symbol: "€" } }) }(), function () { a.register("locale", "ja", { delimiters: { thousands: ",", decimal: "." }, abbreviations: { thousand: "千", million: "百万", billion: "十億", trillion: "兆" }, ordinal: function (a) { return "." }, currency: { symbol: "¥" } }) }(), function () { a.register("locale", "lv", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: " tūkst.", million: " milj.", billion: " mljrd.", trillion: " trilj." }, ordinal: function (a) { return "." }, currency: { symbol: "€" } }) }(), function () { a.register("locale", "nl-be", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "k", million: " mln", billion: " mld", trillion: " bln" }, ordinal: function (a) { var b = a % 100; return 0 !== a && 1 >= b || 8 === b || b >= 20 ? "ste" : "de" }, currency: { symbol: "€ " } }) }(), function () { a.register("locale", "nl-nl", { delimiters: { thousands: ".", decimal: "," }, abbreviations: { thousand: "k", million: "mln", billion: "mrd", trillion: "bln" }, ordinal: function (a) { var b = a % 100; return 0 !== a && 1 >= b || 8 === b || b >= 20 ? "ste" : "de" }, currency: { symbol: "€ " } }) }(), function () { a.register("locale", "nb", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "k", million: "m", billion: "b", trillion: "t" }, ordinal: function (a) { return "." }, currency: { symbol: "kr" } }) }(), function () { a.register("locale", "pl", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "tys.", million: "mln", billion: "mld", trillion: "bln" }, ordinal: function (a) { return "." }, currency: { symbol: "PLN" } }) }(), function () { a.register("locale", "pt-br", { delimiters: { thousands: ".", decimal: "," }, abbreviations: { thousand: "mil", million: "milhões", billion: "b", trillion: "t" }, ordinal: function (a) { return "º" }, currency: { symbol: "R$" } }) }(), function () { a.register("locale", "pt-pt", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "k", million: "m", billion: "b", trillion: "t" }, ordinal: function (a) { return "º" }, currency: { symbol: "€" } }) }(), function () { a.register("locale", "ru-ua", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "тыс.", million: "млн", billion: "b", trillion: "t" }, ordinal: function () { return "." }, currency: { symbol: "₴" } }) }(), function () { a.register("locale", "ru", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "тыс.", million: "млн.", billion: "млрд.", trillion: "трлн." }, ordinal: function () { return "." }, currency: { symbol: "руб." } }) }(), function () { a.register("locale", "sk", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "tis.", million: "mil.", billion: "b", trillion: "t" }, ordinal: function () { return "." }, currency: { symbol: "€" } }) }(), function () { a.register("locale", "sl", { delimiters: { thousands: ".", decimal: "," }, abbreviations: { thousand: "k", million: "mio", billion: "mrd", trillion: "trilijon" }, ordinal: function () { return "." }, currency: { symbol: "€" } }) }(), function () { a.register("locale", "th", { delimiters: { thousands: ",", decimal: "." }, abbreviations: { thousand: "พัน", million: "ล้าน", billion: "พันล้าน", trillion: "ล้านล้าน" }, ordinal: function (a) { return "." }, currency: { symbol: "฿" } }) }(), function () { var b = { 1: "'inci", 5: "'inci", 8: "'inci", 70: "'inci", 80: "'inci", 2: "'nci", 7: "'nci", 20: "'nci", 50: "'nci", 3: "'üncü", 4: "'üncü", 100: "'üncü", 6: "'ncı", 9: "'uncu", 10: "'uncu", 30: "'uncu", 60: "'ıncı", 90: "'ıncı" }; a.register("locale", "tr", { delimiters: { thousands: ".", decimal: "," }, abbreviations: { thousand: "bin", million: "milyon", billion: "milyar", trillion: "trilyon" }, ordinal: function (a) { if (0 === a) return "'ıncı"; var c = a % 10, d = a % 100 - c, e = a >= 100 ? 100 : null; return b[c] || b[d] || b[e] }, currency: { symbol: "₺" } }) }(), function () { a.register("locale", "uk-ua", { delimiters: { thousands: " ", decimal: "," }, abbreviations: { thousand: "тис.", million: "млн", billion: "млрд", trillion: "блн" }, ordinal: function () { return "" }, currency: { symbol: "₴" } }) }(), function () { a.register("locale", "vi", { delimiters: { thousands: ".", decimal: "," }, abbreviations: { thousand: " nghìn", million: " triệu", billion: " tỷ", trillion: " nghìn tỷ" }, ordinal: function () { return "." }, currency: { symbol: "₫" } }) }() });
-"use strict";
-(function (factory)
-{
-    if (typeof exports === 'object')
-    {
-        // Node. Does not work with strict CommonJS, but
-        // only CommonJS-like enviroments that support module.exports,
-        // like Node.
-        module.exports = factory();
-    } else if (typeof define === 'function' && define.amd)
-    {
-        // AMD. Register as an anonymous module.
-        define(factory);
-    } else
-    {
-        // Browser globals
-        window.WatchJS = factory();
-        window.watch = window.WatchJS.watch;
-        window.unwatch = window.WatchJS.unwatch;
-        window.callWatchers = window.WatchJS.callWatchers;
-    }
-}(function ()
-{
-
-    var WatchJS = {
-        noMore: false,        // use WatchJS.suspend(obj) instead
-        useDirtyCheck: false, // use only dirty checking to track changes.
-        preserveExistingSetters: false
-    },
-        lengthsubjects = [];
-
-    var dirtyChecklist = [];
-    var pendingChanges = []; // used coalesce changes from defineProperty and __defineSetter__
-
-    var supportDefineProperty = false;
-    try
-    {
-        supportDefineProperty = Object.defineProperty && Object.defineProperty({}, 'x', {});
-    } catch (ex) {  /* not supported */ }
-
-    var isFunction = function (functionToCheck)
-    {
-        var getType = {};
-        return functionToCheck && getType.toString.call(functionToCheck) == '[object Function]';
-    };
-
-    var isInt = function (x)
-    {
-        return x % 1 === 0;
-    };
-
-    var isArray = function (obj)
-    {
-        return Object.prototype.toString.call(obj) === '[object Array]';
-    };
-
-    var isObject = function (obj)
-    {
-        return {}.toString.apply(obj) === '[object Object]';
-    };
-
-    var getObjDiff = function (a, b)
-    {
-        var aplus = [],
-            bplus = [];
-
-        if (!(typeof a == "string") && !(typeof b == "string"))
-        {
-
-            if (isArray(a) && b)
-            {
-                for (var i = 0; i < a.length; i++)
-                {
-                    if (b[i] === undefined) aplus.push(i);
-                }
-            } else
-            {
-                for (var i in a)
-                {
-                    if (a.hasOwnProperty(i))
-                    {
-                        if (b && !b.hasOwnProperty(i))
-                        {
-                            aplus.push(i);
-                        }
-                    }
-                }
-            }
-
-            if (isArray(b) && a)
-            {
-                for (var j = 0; j < b.length; j++)
-                {
-                    if (a[j] === undefined) bplus.push(j);
-                }
-            } else
-            {
-                for (var j in b)
-                {
-                    if (b.hasOwnProperty(j))
-                    {
-                        if (a && !a.hasOwnProperty(j))
-                        {
-                            bplus.push(j);
-                        }
-                    }
-                }
-            }
-        }
-
-        return {
-            added: aplus,
-            removed: bplus
-        }
-    };
-
-    var clone = function (obj)
-    {
-
-        if (null == obj || "object" != typeof obj)
-        {
-            return obj;
-        }
-
-        var copy = obj.constructor();
-
-        for (var attr in obj)
-        {
-            copy[attr] = obj[attr];
-        }
-
-        return copy;
-
-    }
-
-    var getExistingSetter = function (obj, propName)
-    {
-        if (WatchJS.preserveExistingSetters)
-        {
-            var existing = Object.getOwnPropertyDescriptor(obj, propName);
-            return existing.set;
-        }
-
-        return undefined;
-    }
-
-    var defineGetAndSet = function (obj, propName, getter, setter)
-    {
-        try
-        {
-            var existingSetter = getExistingSetter(obj, propName);
-            Object.defineProperty(obj, propName, {
-                get: getter,
-                set: function (value)
-                {
-                    setter.call(this, value, true); // coalesce changes
-                    if (existingSetter)
-                    {
-                        existingSetter(value);
-                    }
-                },
-                enumerable: true,
-                configurable: true
-            });
-        }
-        catch (e1)
-        {
-            try
-            {
-                Object.prototype.__defineGetter__.call(obj, propName, getter);
-                Object.prototype.__defineSetter__.call(obj, propName, function (value)
-                {
-                    setter.call(this, value, true); // coalesce changes
-                });
-            }
-            catch (e2)
-            {
-                observeDirtyChanges(obj, propName, setter);
-                //throw new Error("watchJS error: browser not supported :/")
-            }
-        }
-
-    };
-
-    var defineProp = function (obj, propName, value)
-    {
-        try
-        {
-            Object.defineProperty(obj, propName, {
-                enumerable: false,
-                configurable: true,
-                writable: false,
-                value: value
-            });
-        } catch (error)
-        {
-            obj[propName] = value;
-        }
-    };
-
-    var observeDirtyChanges = function (obj, propName, setter)
-    {
-        dirtyChecklist[dirtyChecklist.length] = {
-            prop: propName,
-            object: obj,
-            orig: clone(obj[propName]),
-            callback: setter
-        }
-    }
-
-    var watch = function ()
-    {
-
-        if (isFunction(arguments[1]))
-        {
-            watchAll.apply(this, arguments);
-        } else if (isArray(arguments[1]))
-        {
-            watchMany.apply(this, arguments);
-        } else
-        {
-            watchOne.apply(this, arguments);
-        }
-
-    };
-
-
-    var watchAll = function (obj, watcher, level, addNRemove)
-    {
-
-        if ((typeof obj == "string") || (!(obj instanceof Object) && !isArray(obj)))
-        { //accepts only objects and array (not string)
-            return;
-        }
-
-        if (isArray(obj))
-        {
-            defineWatcher(obj, "__watchall__", watcher, level); // watch all changes on the array
-            if (level === undefined || level > 0)
-            {
-                for (var prop = 0; prop < obj.length; prop++)
-                { // watch objects in array
-                    watchAll(obj[prop], watcher, level, addNRemove);
-                }
-            }
-        }
-        else
-        {
-            var prop, props = [];
-            for (prop in obj)
-            { //for each attribute if obj is an object
-                if (prop == "$val" || (!supportDefineProperty && prop === 'watchers'))
-                {
-                    continue;
-                }
-
-                if (Object.prototype.hasOwnProperty.call(obj, prop))
-                {
-                    props.push(prop); //put in the props
-                }
-            }
-            watchMany(obj, props, watcher, level, addNRemove); //watch all items of the props
-        }
-
-
-        if (addNRemove)
-        {
-            pushToLengthSubjects(obj, "$$watchlengthsubjectroot", watcher, level);
-        }
-    };
-
-
-    var watchMany = function (obj, props, watcher, level, addNRemove)
-    {
-
-        if ((typeof obj == "string") || (!(obj instanceof Object) && !isArray(obj)))
-        { //accepts only objects and array (not string)
-            return;
-        }
-
-        for (var i = 0; i < props.length; i++)
-        { //watch each property
-            var prop = props[i];
-            watchOne(obj, prop, watcher, level, addNRemove);
-        }
-
-    };
-
-    var watchOne = function (obj, prop, watcher, level, addNRemove)
-    {
-        if ((typeof obj == "string") || (!(obj instanceof Object) && !isArray(obj)))
-        { //accepts only objects and array (not string)
-            return;
-        }
-
-        if (isFunction(obj[prop]))
-        { //dont watch if it is a function
-            return;
-        }
-        if (obj[prop] != null && (level === undefined || level > 0))
-        {
-            watchAll(obj[prop], watcher, level !== undefined ? level - 1 : level); //recursively watch all attributes of this
-        }
-
-        defineWatcher(obj, prop, watcher, level);
-
-        if (addNRemove && (level === undefined || level > 0))
-        {
-            pushToLengthSubjects(obj, prop, watcher, level);
-        }
-
-    };
-
-    var unwatch = function ()
-    {
-
-        if (isFunction(arguments[1]))
-        {
-            unwatchAll.apply(this, arguments);
-        } else if (isArray(arguments[1]))
-        {
-            unwatchMany.apply(this, arguments);
-        } else
-        {
-            unwatchOne.apply(this, arguments);
-        }
-
-    };
-
-    var unwatchAll = function (obj, watcher)
-    {
-
-        if (obj instanceof String || (!(obj instanceof Object) && !isArray(obj)))
-        { //accepts only objects and array (not string)
-            return;
-        }
-
-        if (isArray(obj))
-        {
-            var props = ['__watchall__'];
-            for (var prop = 0; prop < obj.length; prop++)
-            { //for each item if obj is an array
-                props.push(prop); //put in the props
-            }
-            unwatchMany(obj, props, watcher); //watch all itens of the props
-        } else
-        {
-            var unwatchPropsInObject = function (obj2)
-            {
-                var props = [];
-                for (var prop2 in obj2)
-                { //for each attribute if obj is an object
-                    if (obj2.hasOwnProperty(prop2))
-                    {
-                        if (obj2[prop2] instanceof Object)
-                        {
-                            unwatchPropsInObject(obj2[prop2]); //recurs into object props
-                        } else
-                        {
-                            props.push(prop2); //put in the props
-                        }
-                    }
-                }
-                unwatchMany(obj2, props, watcher); //unwatch all of the props
-            };
-            unwatchPropsInObject(obj);
-        }
-    };
-
-
-    var unwatchMany = function (obj, props, watcher)
-    {
-
-        for (var prop2 in props)
-        { //watch each attribute of "props" if is an object
-            if (props.hasOwnProperty(prop2))
-            {
-                unwatchOne(obj, props[prop2], watcher);
-            }
-        }
-    };
-
-    var timeouts = [],
-        timerID = null;
-    function clearTimerID()
-    {
-        timerID = null;
-        for (var i = 0; i < timeouts.length; i++)
-        {
-            timeouts[i]();
-        }
-        timeouts.length = 0;
-    }
-    var getTimerID = function ()
-    {
-        if (!timerID)
-        {
-            timerID = setTimeout(clearTimerID);
-        }
-        return timerID;
-    }
-    var registerTimeout = function (fn)
-    { // register function to be called on timeout
-        if (timerID == null) getTimerID();
-        timeouts[timeouts.length] = fn;
-    }
-
-    // Track changes made to an array, object or an object's property 
-    // and invoke callback with a single change object containing type, value, oldvalue and array splices
-    // Syntax: 
-    //      trackChange(obj, callback, recursive, addNRemove)
-    //      trackChange(obj, prop, callback, recursive, addNRemove)
-    var trackChange = function ()
-    {
-        var fn = (isFunction(arguments[2])) ? trackProperty : trackObject;
-        fn.apply(this, arguments);
-    }
-
-    // track changes made to an object and invoke callback with a single change object containing type, value and array splices
-    var trackObject = function (obj, callback, recursive, addNRemove)
-    {
-        var change = null, lastTimerID = -1;
-        var isArr = isArray(obj);
-        var level, fn = function (prop, action, newValue, oldValue)
-        {
-            var timerID = getTimerID();
-            if (lastTimerID !== timerID)
-            { // check if timer has changed since last update
-                lastTimerID = timerID;
-                change = {
-                    type: 'update'
-                }
-                change['value'] = obj;
-                change['splices'] = null;
-                registerTimeout(function ()
-                {
-                    callback.call(this, change);
-                    change = null;
-                });
-            }
-            // create splices for array changes
-            if (isArr && obj === this && change !== null)
-            {
-                if (action === 'pop' || action === 'shift')
-                {
-                    newValue = [];
-                    oldValue = [oldValue];
-                }
-                else if (action === 'push' || action === 'unshift')
-                {
-                    newValue = [newValue];
-                    oldValue = [];
-                }
-                else if (action !== 'splice')
-                {
-                    return; // return here - for reverse and sort operations we don't need to return splices. a simple update will do
-                }
-                if (!change.splices) change.splices = [];
-                change.splices[change.splices.length] = {
-                    index: prop,
-                    deleteCount: oldValue ? oldValue.length : 0,
-                    addedCount: newValue ? newValue.length : 0,
-                    added: newValue,
-                    deleted: oldValue
-                };
-            }
-
-        }
-        level = (recursive == true) ? undefined : 0;
-        watchAll(obj, fn, level, addNRemove);
-    }
-
-    // track changes made to the property of an object and invoke callback with a single change object containing type, value, oldvalue and splices
-    var trackProperty = function (obj, prop, callback, recursive, addNRemove)
-    {
-        if (obj && prop)
-        {
-            watchOne(obj, prop, function (prop, action, newvalue, oldvalue)
-            {
-                var change = {
-                    type: 'update'
-                }
-                change['value'] = newvalue;
-                change['oldvalue'] = oldvalue;
-                if (recursive && isObject(newvalue) || isArray(newvalue))
-                {
-                    trackObject(newvalue, callback, recursive, addNRemove);
-                }
-                callback.call(this, change);
-            }, 0)
-
-            if (recursive && isObject(obj[prop]) || isArray(obj[prop]))
-            {
-                trackObject(obj[prop], callback, recursive, addNRemove);
-            }
-        }
-    }
-
-
-    var defineWatcher = function (obj, prop, watcher, level)
-    {
-        var newWatcher = false;
-        var isArr = isArray(obj);
-
-        if (!obj.watchers)
-        {
-            defineProp(obj, "watchers", {});
-            if (isArr)
-            {
-                // watch array functions
-                watchFunctions(obj, function (index, action, newValue, oldValue)
-                {
-                    addPendingChange(obj, index, action, newValue, oldValue);
-                    if (level !== 0 && newValue && (isObject(newValue) || isArray(newValue)))
-                    {
-                        var i, n, ln, wAll, watchList = obj.watchers[prop];
-                        if ((wAll = obj.watchers['__watchall__']))
-                        {
-                            watchList = watchList ? watchList.concat(wAll) : wAll;
-                        }
-                        ln = watchList ? watchList.length : 0;
-                        for (i = 0; i < ln; i++)
-                        {
-                            if (action !== 'splice')
-                            {
-                                watchAll(newValue, watchList[i], (level === undefined) ? level : level - 1);
-                            }
-                            else
-                            {
-                                // watch spliced values
-                                for (n = 0; n < newValue.length; n++)
-                                {
-                                    watchAll(newValue[n], watchList[i], (level === undefined) ? level : level - 1);
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        if (!obj.watchers[prop])
-        {
-            obj.watchers[prop] = [];
-            if (!isArr) newWatcher = true;
-        }
-
-        for (var i = 0; i < obj.watchers[prop].length; i++)
-        {
-            if (obj.watchers[prop][i] === watcher)
-            {
-                return;
-            }
-        }
-
-        obj.watchers[prop].push(watcher); //add the new watcher to the watchers array
-
-        if (newWatcher)
-        {
-            var val = obj[prop];
-            var getter = function ()
-            {
-                return val;
-            };
-
-            var setter = function (newval, delayWatcher)
-            {
-                var oldval = val;
-                val = newval;
-                if (level !== 0
-                    && obj[prop] && (isObject(obj[prop]) || isArray(obj[prop]))
-                    && !obj[prop].watchers)
-                {
-                    // watch sub properties
-                    var i, ln = obj.watchers[prop].length;
-                    for (i = 0; i < ln; i++)
-                    {
-                        watchAll(obj[prop], obj.watchers[prop][i], (level === undefined) ? level : level - 1);
-                    }
-                }
-
-                //watchFunctions(obj, prop);
-
-                if (isSuspended(obj, prop))
-                {
-                    resume(obj, prop);
-                    return;
-                }
-
-                if (!WatchJS.noMore)
-                { // this does not work with Object.observe
-                    //if (JSON.stringify(oldval) !== JSON.stringify(newval)) {
-                    if (oldval !== newval)
-                    {
-                        if (!delayWatcher)
-                        {
-                            callWatchers(obj, prop, "set", newval, oldval);
-                        }
-                        else
-                        {
-                            addPendingChange(obj, prop, "set", newval, oldval);
-                        }
-                        WatchJS.noMore = false;
-                    }
-                }
-            };
-
-            if (WatchJS.useDirtyCheck)
-            {
-                observeDirtyChanges(obj, prop, setter);
-            }
-            else
-            {
-                defineGetAndSet(obj, prop, getter, setter);
-            }
-        }
-
-    };
-
-    var callWatchers = function (obj, prop, action, newval, oldval)
-    {
-        if (prop !== undefined)
-        {
-            var ln, wl, watchList = obj.watchers[prop];
-            if ((wl = obj.watchers['__watchall__']))
-            {
-                watchList = watchList ? watchList.concat(wl) : wl;
-            }
-            ln = watchList ? watchList.length : 0;
-            for (var wr = 0; wr < ln; wr++)
-            {
-                watchList[wr].call(obj, prop, action, newval, oldval);
-            }
-        } else
-        {
-            for (var prop in obj)
-            {//call all
-                if (obj.hasOwnProperty(prop))
-                {
-                    callWatchers(obj, prop, action, newval, oldval);
-                }
-            }
-        }
-    };
-
-    var methodNames = ['pop', 'push', 'reverse', 'shift', 'sort', 'slice', 'unshift', 'splice'];
-    var defineArrayMethodWatcher = function (obj, original, methodName, callback)
-    {
-        defineProp(obj, methodName, function ()
-        {
-            var index = 0;
-            var i, newValue, oldValue, response;
-            // get values before splicing array 
-            if (methodName === 'splice')
-            {
-                var start = arguments[0];
-                var end = start + arguments[1];
-                oldValue = obj.slice(start, end);
-                newValue = [];
-                for (i = 2; i < arguments.length; i++)
-                {
-                    newValue[i - 2] = arguments[i];
-                }
-                index = start;
-            }
-            else
-            {
-                newValue = arguments.length > 0 ? arguments[0] : undefined;
-            }
-
-            response = original.apply(obj, arguments);
-            if (methodName !== 'slice')
-            {
-                if (methodName === 'pop')
-                {
-                    oldValue = response;
-                    index = obj.length;
-                }
-                else if (methodName === 'push')
-                {
-                    index = obj.length - 1;
-                }
-                else if (methodName === 'shift')
-                {
-                    oldValue = response;
-                }
-                else if (methodName !== 'unshift' && newValue === undefined)
-                {
-                    newValue = response;
-                }
-                callback.call(obj, index, methodName, newValue, oldValue)
-            }
-            return response;
-        });
-    };
-
-    var watchFunctions = function (obj, callback)
-    {
-
-        if (!isFunction(callback) || !obj || (obj instanceof String) || (!isArray(obj)))
-        {
-            return;
-        }
-
-        for (var i = methodNames.length, methodName; i--;)
-        {
-            methodName = methodNames[i];
-            defineArrayMethodWatcher(obj, obj[methodName], methodName, callback);
-        }
-
-    };
-
-    var unwatchOne = function (obj, prop, watcher)
-    {
-        if (prop)
-        {
-            if (obj.watchers && obj.watchers[prop])
-            {
-                if (watcher === undefined)
-                {
-                    delete obj.watchers[prop]; // remove all property watchers
-                }
-                else
-                {
-                    for (var i = 0; i < obj.watchers[prop].length; i++)
-                    {
-                        var w = obj.watchers[prop][i];
-                        if (w == watcher)
-                        {
-                            obj.watchers[prop].splice(i, 1);
-                        }
-                    }
-                }
-            }
-        } else
-        {
-            delete obj.watchers;
-        }
-
-        removeFromLengthSubjects(obj, prop, watcher);
-        removeFromDirtyChecklist(obj, prop);
-    };
-
-    // suspend watchers until next update cycle
-    var suspend = function (obj, prop)
-    {
-        if (obj.watchers)
-        {
-            var name = '__wjs_suspend__' + (prop !== undefined ? prop : '');
-            obj.watchers[name] = true;
-        }
-    }
-
-    var isSuspended = function (obj, prop)
-    {
-        return obj.watchers
-            && (obj.watchers['__wjs_suspend__'] ||
-                obj.watchers['__wjs_suspend__' + prop]);
-    }
-
-    // resumes preivously suspended watchers
-    var resume = function (obj, prop)
-    {
-        registerTimeout(function ()
-        {
-            delete obj.watchers['__wjs_suspend__'];
-            delete obj.watchers['__wjs_suspend__' + prop];
-        })
-    }
-
-    var pendingTimerID = null;
-    var addPendingChange = function (obj, prop, mode, newval, oldval)
-    {
-        pendingChanges[pendingChanges.length] = {
-            obj: obj,
-            prop: prop,
-            mode: mode,
-            newval: newval,
-            oldval: oldval
-        };
-        if (pendingTimerID === null)
-        {
-            pendingTimerID = setTimeout(applyPendingChanges);
-        }
-    };
-
-
-    var applyPendingChanges = function ()
-    {
-        // apply pending changes
-        var change = null;
-        pendingTimerID = null;
-        for (var i = 0; i < pendingChanges.length; i++)
-        {
-            change = pendingChanges[i];
-            callWatchers(change.obj, change.prop, change.mode, change.newval, change.oldval);
-        }
-        if (change)
-        {
-            pendingChanges = [];
-            change = null;
-        }
-    }
-
-    var loop = function ()
-    {
-
-        // check for new or deleted props
-        for (var i = 0; i < lengthsubjects.length; i++)
-        {
-
-            var subj = lengthsubjects[i];
-
-            if (subj.prop === "$$watchlengthsubjectroot")
-            {
-
-                var difference = getObjDiff(subj.obj, subj.actual);
-
-                if (difference.added.length || difference.removed.length)
-                {
-                    if (difference.added.length)
-                    {
-                        watchMany(subj.obj, difference.added, subj.watcher, subj.level - 1, true);
-                    }
-
-                    subj.watcher.call(subj.obj, "root", "differentattr", difference, subj.actual);
-                }
-                subj.actual = clone(subj.obj);
-
-
-            } else
-            {
-
-                var difference = getObjDiff(subj.obj[subj.prop], subj.actual);
-
-                if (difference.added.length || difference.removed.length)
-                {
-                    if (difference.added.length)
-                    {
-                        for (var j = 0; j < subj.obj.watchers[subj.prop].length; j++)
-                        {
-                            watchMany(subj.obj[subj.prop], difference.added, subj.obj.watchers[subj.prop][j], subj.level - 1, true);
-                        }
-                    }
-
-                    callWatchers(subj.obj, subj.prop, "differentattr", difference, subj.actual);
-                }
-
-                subj.actual = clone(subj.obj[subj.prop]);
-
-            }
-
-        }
-
-        // start dirty check
-        var n, value;
-        if (dirtyChecklist.length > 0)
-        {
-            for (var i = 0; i < dirtyChecklist.length; i++)
-            {
-                n = dirtyChecklist[i];
-                value = n.object[n.prop];
-                if (!compareValues(n.orig, value))
-                {
-                    n.orig = clone(value);
-                    n.callback(value);
-                }
-            }
-        }
-
-    };
-
-    var compareValues = function (a, b)
-    {
-        var i, state = true;
-        if (a !== b)
-        {
-            if (isObject(a))
-            {
-                for (i in a)
-                {
-                    if (!supportDefineProperty && i === 'watchers') continue;
-                    if (a[i] !== b[i])
-                    {
-                        state = false;
-                        break;
-                    };
-                }
-            }
-            else
-            {
-                state = false;
-            }
-        }
-        return state;
-    }
-
-    var pushToLengthSubjects = function (obj, prop, watcher, level)
-    {
-
-        var actual;
-
-        if (prop === "$$watchlengthsubjectroot")
-        {
-            actual = clone(obj);
-        } else
-        {
-            actual = clone(obj[prop]);
-        }
-
-        lengthsubjects.push({
-            obj: obj,
-            prop: prop,
-            actual: actual,
-            watcher: watcher,
-            level: level
-        });
-    };
-
-    var removeFromLengthSubjects = function (obj, prop, watcher)
-    {
-        for (var i = 0; i < lengthsubjects.length; i++)
-        {
-            var subj = lengthsubjects[i];
-
-            if (subj.obj == obj)
-            {
-                if (!prop || subj.prop == prop)
-                {
-                    if (!watcher || subj.watcher == watcher)
-                    {
-                        // if we splice off one item at position i
-                        // we need to decrement i as the array is one item shorter
-                        // so when we increment i in the loop statement we
-                        // will land at the correct index.
-                        // if it's not decremented, you won't delete all length subjects
-                        lengthsubjects.splice(i--, 1);
-                    }
-                }
-            }
-        }
-
-    };
-
-    var removeFromDirtyChecklist = function (obj, prop)
-    {
-        var notInUse;
-        for (var i = 0; i < dirtyChecklist.length; i++)
-        {
-            var n = dirtyChecklist[i];
-            var watchers = n.object.watchers;
-            notInUse = (
-                n.object == obj
-                && (!prop || n.prop == prop)
-                && watchers
-                && (!prop || !watchers[prop] || watchers[prop].length == 0)
-            );
-            if (notInUse)
-            {
-                // we use the same syntax as in removeFromLengthSubjects
-                dirtyChecklist.splice(i--, 1);
-            }
-        }
-
-    };
-
-    setInterval(loop, 50);
-
-    WatchJS.watch = watch;
-    WatchJS.unwatch = unwatch;
-    WatchJS.callWatchers = callWatchers;
-    WatchJS.suspend = suspend; // suspend watchers    
-    WatchJS.onChange = trackChange;  // track changes made to object or  it's property and return a single change object
-
-    return WatchJS;
-
-}));
 function clientStorage(ActionType, Name, Value)
 {
-    AZClientStorage(ActionType, Name, Value);
+    return AZClientStorage(ActionType, Name, Value);
 }
 
 function AZClientStorage(ActionType, Name, Value)
@@ -2617,596 +1640,6 @@ function AZCircularBar(Options)
     }
 }
 
-// AZ Grid
-function AZGrid(Options)
-{
-    if (this instanceof AZGrid === true)
-    {
-        var _Main = this;
-        var _Defaults =
-        {
-            azGridId: "",
-            azGridData: {},
-            azGridSetting: [],
-            azGridLanguage: {},
-            azGridFooter: true,
-            azGridTableHeaderColor: "",
-            azGridTableHeaderBackgroundColor: "",
-            azGridTableDataColor: "",
-            azGridTableDataOddBackgroundColor: "",
-            azGridTableDataEvenBackgroundColor: "",
-            azGridTableDataMouseoverColor: "",
-            azGridTableDataOddMouseoverBackgroundColor: "",
-            azGridTableDataEvenMouseoverBackgroundColor: "",
-            azGridFooterColor: "",
-            azGridFooterBackgroundColor: ""
-        };
-        _Main.Options = $.extend({}, _Defaults, Options || {});
-
-        if (_Main.Options.azGridId !== "" && _Main.Options.azGridData.hasOwnProperty("Data") && _Main.Options.azGridData.Data.length > 0 && _Main.Options.azGridSetting.length > 0)
-        {
-            _Main.GridMeta = {};
-            _Main.$GridMainTableHeaderRow = "";
-            _Main.$GridMainTableDataRow = "";
-            _Main.$GridMainTableFooterRow = "";
-
-            // Main
-            _Main.$GridMainTable = $('<table></table>').addClass("az-grid-table");
-
-            // Header
-            _Main.$GridMainTableHeaderRow = $("<tr></tr>");
-            _Main.$GridTableHeader = $('<table></table>').addClass("az-grid-table az-grid-table-header");
-            _Main.$GridTableHeaderRow = $("<tr></tr>");
-            if (_Main.Options.azGridTableHeaderBackgroundColor !== "")
-            {
-                _Main.$GridTableHeader.css({ "background-color": _Main.Options.azGridTableHeaderBackgroundColor })
-            }
-            if (_Main.Options.azGridTableHeaderColor !== "")
-            {
-                _Main.$GridTableHeader.css({ "color": _Main.Options.azGridTableHeaderColor })
-            }
-
-            // Data
-            _Main.$GridMainTableDataRow = $("<tr></tr>");
-            _Main.$GridTableData = $('<table></table>').addClass("az-grid-table az-grid-table-data");
-            if (_Main.Options.azGridTableDataColor !== "")
-            {
-                _Main.$GridTableData.css({ "color": _Main.Options.azGridTableDataColor })
-            }
-            var _NumberOfProperties = 0;
-            for (var _NumberOf in _Main.Options.azGridData.Data[0])
-            {
-                _NumberOfProperties += 1;
-            }
-            _Main.GridDataLength = _NumberOfProperties;
-
-            // Meta
-            _Main.Options.azGridData.Meta.IsValid = true;
-            if (IsEmpty(_Main.Options.azGridData.Meta) === false)
-            {
-                var _MetaPropertiesList = ["PageCurrent", "PageSize", "RecordCount"];
-                $.each(_MetaPropertiesList, function (Index, Value)
-                {
-                    if (_Main.Options.azGridData.Meta.hasOwnProperty(Value) === false || _Main.Options.azGridData.Meta[Value] === undefined || _Main.Options.azGridData.Meta[Value] == 0 || _Main.Options.azGridData.Meta[Value] == "")
-                    {
-                        _Main.Options.azGridData.Meta.IsValid = false;
-                        return false;
-                    }
-                });
-                if (_Main.Options.azGridData.Meta.IsValid === true)
-                {
-                    _Main.Options.azGridData.Meta.PageCount = parseInt(Math.ceil(parseFloat(_Main.Options.azGridData.Meta.RecordCount) / parseFloat(_Main.Options.azGridData.Meta.PageSize)));
-                }
-            }
-
-            // Language
-            _Main.Options.azGridLanguage.IsValid = false;
-            if (IsEmpty(_Main.Options.azGridLanguage) === false && _Main.Options.azGridLanguage.hasOwnProperty("SingleElements") === true)
-            {
-                _Main.Options.azGridLanguage.IsValid = true;
-            }
-
-            // Settings
-            _Main.Options.azGridSetting.IsValid = false;
-            if (_Main.Options.azGridSetting.length === _Main.GridDataLength)
-            {
-                _Main.Options.azGridSetting.IsValid = true;
-                $.each(_Main.Options.azGridSetting, function (Index, GridSettingObj)
-                {
-                    _Main.$GridTableHeaderCell = $("<td></td>").html(SetHeaderValue(GridSettingObj.name));
-                    _Main.$GridTableHeaderRow.append(SetTableCellSize("Header", GridSettingObj, _Main.$GridTableHeaderCell, GridSettingObj.name));
-                });
-            }
-
-            _Main.azSetGridData = function ()
-            {
-                $("tr", _Main.$GridTableData).remove();
-                $.each(_Main.Options.azGridData.Data, function (Index, GridDataObj)
-                {
-                    _Main.$GridTableDataRow = $("<tr></tr>");
-                    $.each(GridDataObj, function (Key, Value)
-                    {
-                        var _GridSettingObj = getSelectedObj(_Main.Options.azGridSetting, "name", Key);
-                        if (IsEmpty(_GridSettingObj) === false)
-                        {
-                            _Main.$GridTableDataCell = $("<td></td>").html(SetDataValue(_GridSettingObj, Value));
-                            _Main.$GridTableDataRow.append(SetTableCellSize("Data", _GridSettingObj, _Main.$GridTableDataCell, ""));
-                        }
-                    });
-                    _Main.$GridTableData.append(_Main.$GridTableDataRow);
-                });
-            }
-            _Main.azSetGridData();
-
-            // Header
-            _Main.$GridTableHeader.append(_Main.$GridTableHeaderRow);
-            _Main.$GridMainTableHeaderRow.append(_Main.$GridTableHeader);
-            _Main.$GridTableHeaderRow.off().on("click", "td", function (e)
-            {
-                var _HeaderCellObj = e.target || e.srcElement;
-                if ($(_HeaderCellObj).hasClass("icon"))
-                {
-                    SetHeaderSort(_HeaderCellObj, _Main.$GridTableHeaderRow);
-                }
-            });
-
-            // Data
-            _Main.$GridMainTableHeaderRow.append(_Main.$GridTableHeader);
-            _Main.$GridMainTableDataRow.append(_Main.$GridTableData);
-
-            // Footer
-            _Main.$GridMainTableFooterRow = $("<tr></tr>");
-            if (_Main.Options.azGridFooter === true)
-            {
-                _Main.$GridTableFooter = $('<table></table>').addClass("az-grid-table az-grid-table-footer");
-                if (_Main.Options.azGridFooterBackgroundColor !== "")
-                {
-                    _Main.$GridTableFooter.css({ "background-color": _Main.Options.azGridFooterBackgroundColor });
-                }
-                if (_Main.Options.azGridFooterColor !== "")
-                {
-                    _Main.$GridTableFooter.css({ "color": _Main.Options.azGridFooterColor });
-                }
-            }
-            if (_Main.Options.azGridFooter === true)
-            {
-                _Main.$GridTableFooter.append($(GetFooterHTML()));
-                _Main.$GridMainTableFooterRow.append(_Main.$GridTableFooter);
-                _Main.$GridTableFooter.off("click").on("click", ".az-form-group", function (e)
-                {
-                    var _Element = e.target || e.srcElement;
-                    var _Self = this;
-
-                    if ($(_Element).hasClass("az-button") || $(_Element).hasClass("fas"))
-                    {
-                        //console.log(_Main.Options.azGridData.Meta.OrderByClause)
-                        //_Main.Options.azGridData.Meta.PageCount = ;
-                        //$(_Self).find("button").data("id")
-                    }
-                });
-                _Main.$GridTableFooter.off("change").on("change", ".SizeGridPage", function (e)
-                {
-                    // TODO
-
-
-                    _Main.GridMeta.PageCurrent = 1;
-                    _Main.GridMeta.PageSize = Number($(this).val());
-                    if (_Main.GridMeta.OrderByClause === undefined || _Main.GridMeta.OrderByClause === "")
-                    {
-                        _Main.GridMeta.OrderByClause = "";
-                    }
-                    if (_Main.GridMeta.SearchClause === undefined || _Main.GridMeta.SearchClause == "")
-                    {
-                        _Main.GridMeta.SearchClause = "";
-                    }
-                    $.publish("functionlib/azGridMeta", _Main.GridMeta);
-                });
-            }
-
-            function changeGridPage(SelectedPage)
-            {
-                if (SelectedPage == "cmdFirstGridPage")
-                {
-                    if (PageCurrent == 1)
-                    {
-                        return false;
-                    }
-                    ObjPageData.PageCurrent = 1;
-                }
-                else if (SelectedPage == "cmdPreviousGridPage")
-                {
-                    if (PageCurrent == 1)
-                    {
-                        return false;
-                    }
-                    ObjPageData.PageCurrent = (parseInt(PageCurrent) - 1);
-                }
-                else if (SelectedPage == "cmdNextGridPage")
-                {
-                    if (PageCurrent == PageCount)
-                    {
-                        return false;
-                    }
-                    ObjPageData.PageCurrent = (parseInt(PageCurrent) + 1);
-                }
-                else if (SelectedPage == "cmdLastGridPage")
-                {
-                    if (PageCurrent == PageCount)
-                    {
-                        return false;
-                    }
-                    ObjPageData.PageCurrent = PageCount;
-                }
-
-            }
-
-            // Main
-            _Main.$GridMainTable.append(_Main.$GridMainTableHeaderRow).append(_Main.$GridMainTableDataRow).append(_Main.$GridMainTableFooterRow);
-            SetDataColorAndHover();
-            $("#" + _Main.Options.azGridId).html(_Main.$GridMainTable);
-
-            function SetHeaderValue(Value)
-            {
-                var _ValueReturn = "";
-                if (_Main.Options.azGridLanguage.IsValid === true && Value != "")
-                {
-                    _ValueReturn = _Main.Options.azGridLanguage.SingleElements["GridHeader" + Value];
-                }
-                else
-                {
-                    _ValueReturn = Value;
-                }
-                return _ValueReturn;
-            }
-
-            function SetDataValue(GridSettingObj, Value)
-            {
-                if (GridSettingObj.hasOwnProperty("datatype") && Value != "")
-                {
-                    if (GridSettingObj.datatype.toLowerCase() == "date")
-                    {
-                        return AZSetDateFormat(Value).LocalDate;
-                    }
-                    else if (GridSettingObj.datatype.toLowerCase() == "datetime")
-                    {
-                        return AZSetDateTimeFormat(Value).LocalDateTime;
-                    }
-                    else if (GridSettingObj.datatype.toLowerCase() == "time")
-                    {
-                        return AZSetTimeFormat(moment('0001-01-01 ' + Value)).LocalTime;
-                    }
-                    else if (GridSettingObj.datatype.toLowerCase() == "decimal")
-                    {
-                        return numeral(Value).format('0.00');
-                    }
-                    else if (GridSettingObj.datatype.toLowerCase() == "bytes")
-                    {
-                        return AZBytesConverter(Value);
-                    }
-                    else if (GridSettingObj.datatype.toLowerCase() == "email")
-                    {
-                        return '<a href="mailto:' + Value + '">' + Value + '</a>';
-                    }
-                    else if (GridSettingObj.datatype.toLowerCase() == "web")
-                    {
-                        return '<a href="' + Value + '" target="_blank">' + Value + '</a>';
-                    }
-                    else
-                    {
-                        return Value;
-                    }
-                }
-                else
-                {
-                    return Value;
-                }
-            }
-
-            function SetTableCellSize(Type, GridSettingObj, $GridTableCell, Value)
-            {
-                var _$GridTableCellReturn = {};
-                if (_Main.Options.azGridSetting.IsValid === true)
-                {
-                    if (GridSettingObj.hasOwnProperty("width") === true)
-                    {
-                        _$GridTableCellReturn = $GridTableCell.css({ "width": GridSettingObj.width });
-                    }
-                    else
-                    {
-                        _$GridTableCellReturn = $GridTableCell;
-                    }
-                }
-                else
-                {
-                    _$GridTableCellReturn = $GridTableCell.css({ "width": (100 / _Main.GridDataLength) + "%" });
-                }
-                if (Type.toLowerCase() === "header" && GridSettingObj.hasOwnProperty("sort") === true && GridSettingObj.sort === true)
-                {
-                    _$GridTableCellReturn = _$GridTableCellReturn.data("orderby", Value).addClass("icon sort");
-                }
-                return _$GridTableCellReturn;
-            }
-
-            function SetDataColorAndHover()
-            {
-                if (_Main.Options.azGridTableDataOddBackgroundColor !== "")
-                {
-                    $("tr:odd", _Main.$GridTableData).css({ "background-color": _Main.Options.azGridTableDataOddBackgroundColor });
-                }
-                if (_Main.Options.azGridTableDataEvenBackgroundColor !== "")
-                {
-                    $("tr:even", _Main.$GridTableData).css({ "background-color": _Main.Options.azGridTableDataEvenBackgroundColor });
-                }
-                if (_Main.Options.azGridTableDataOddMouseoverBackgroundColor !== "" && _Main.Options.azGridTableDataMouseoverColor !== "")
-                {
-                    $("tr:odd", _Main.$GridTableData).mouseover(function ()
-                    {
-                        $(this).css({ "background-color": _Main.Options.azGridTableDataOddMouseoverBackgroundColor, "color": _Main.Options.azGridTableDataMouseoverColor });
-                    }).mouseout(function ()
-                    {
-                        $(this).css({ "background-color": _Main.Options.azGridTableDataOddBackgroundColor, "color": _Main.Options.azGridTableDataColor });
-                    });
-                }
-                if (_Main.Options.azGridTableDataEvenMouseoverBackgroundColor !== "" && _Main.Options.azGridTableDataMouseoverColor !== "")
-                {
-                    $("tr:even", _Main.$GridTableData).mouseover(function ()
-                    {
-                        $(this).css({ "background-color": _Main.Options.azGridTableDataEvenMouseoverBackgroundColor, "color": _Main.Options.azGridTableDataMouseoverColor });
-                    }).mouseout(function ()
-                    {
-                        $(this).css({ "background-color": _Main.Options.azGridTableDataEvenBackgroundColor, "color": _Main.Options.azGridTableDataColor });
-                    });
-                }
-            }
-
-            function SetHeaderSort(HeaderCellObj, $GridTableHeaderRow)
-            {
-                $("td.icon", $GridTableHeaderRow).not(HeaderCellObj).each(function ()
-                {
-                    $(this).removeClass("sort sort-up sort-down sort-asc sort-desc").addClass("sort");
-                });
-
-                var _Order = "";
-                var _OrderByClause = "";
-                var _OrderBy = $(HeaderCellObj).data("orderby");
-                if ($(HeaderCellObj).hasClass("sort-asc"))
-                {
-                    $(HeaderCellObj).removeClass("sort sort-up sort-down sort-asc").addClass("sort-down sort-desc");
-                    _Order = "DESC";
-                    _OrderByClause = _OrderBy + " " + _Order
-                }
-                else if ($(HeaderCellObj).hasClass("sort-desc"))
-                {
-                    $(HeaderCellObj).removeClass("sort sort-up sort-down sort-desc").addClass("sort-up sort-asc");
-                    _Order = "ASC";
-                    _OrderByClause = _OrderBy + " " + _Order
-                }
-                else
-                {
-                    $(HeaderCellObj).removeClass("sort sort-up sort-down sort-desc").addClass("sort-up sort-asc");
-                    _Order = "ASC";
-                    _OrderByClause = _OrderBy + " " + _Order
-                }
-
-                console.log(_OrderByClause)
-
-                if (_Main.Options.azGridData.Meta.PageCount === _Main.Options.azGridData.Meta.PageCurrent)
-                {
-                    _Main.Options.azGridData.Data = AZSortJSONArray(_Main.Options.azGridData.Data, _OrderBy, _Order)
-                    _Main.azSetGridData();
-                }
-                else
-                {
-                    _Main.GridMeta.PageCurrent = 1;
-                    _Main.GridMeta.PageSize = Number($(".SizeGridPage", _Main.$GridTableFooter).val());
-                    _Main.GridMeta.OrderByClause = _OrderByClause;
-                    _Main.GridMeta.SearchClause = "";
-                    $.publish("functionlib/azGridMeta", _Main.GridMeta);
-                }
-            }
-
-            function GetFooterHTML()
-            {
-                var _HTML = "";
-                _HTML = '<tr height="32px">';
-                _HTML += '<td align="center">';
-                if (_Main.Options.azGridData.Meta.IsValid === true)
-                {
-                    _HTML += '<table>';
-                    _HTML += '<tr>';
-                    _HTML += '<td class="az-form-group"><button type="button" data-id="cmdFirstGridPage" class="az-button az-button-block default az-shadow-1 az-shadow-hover-2"><i class="fas fa-angle-double-left"></i></button></td>';
-                    _HTML += '<td class="az-form-group"><button type="button" class="az-button az-button-block default az-shadow-1 az-shadow-hover-2 cmdPreviousGridPage"><i class="fas fa-angle-left"></i></button></td>';
-                    _HTML += '<td class="az-form-group"><button type="button" class="az-button az-button-block default az-shadow-1 az-shadow-hover-2 cmdNextGridPage"><i class="fas fa-angle-right"></i></button></td>';
-                    _HTML += '<td class="az-form-group"><button type="button" class="az-button az-button-block default az-shadow-1 az-shadow-hover-2 cmdLastGridPage"><i class="fas fa-angle-double-right"></i></button></td>';
-                    _HTML += '<td class="InfoGridPage">Page 1 of 1</td>';
-                    _HTML += '<td class="az-form-group">';
-                    _HTML += '<select class="az-select SizeGridPage">';
-                    _HTML += '<option value="10">10</option>';
-                    _HTML += '<option value="20">20</option>';
-                    _HTML += '<option value="30">30</option>';
-                    _HTML += '<option value="40">40</option>';
-                    _HTML += '<option value="50">50</option>';
-                    _HTML += '</select>';
-                    _HTML += '</td>';
-                    _HTML += '</tr>';
-                    _HTML += '</table>';
-                }
-                else
-                {
-                    _HTML += '&nbsp;';
-                }
-                _HTML += '</td>';
-                _HTML += '</tr>';
-                return _HTML;
-            }
-        }
-    }
-    else
-    {
-        return new AZGrid(Options);
-    }
-}
-
-
-
-//var _ReturnObj = {};
-//var _ObjSpanCheckBox = {};
-//var _ObjCheckBox = {};
-//$("tr > td", _Main.$GridTableData).each(function ()
-//{
-//    if ($(this).children().is("span") == true)
-//    {
-//        _ObjSpanCheckBox = $(this).children();
-//        _ObjCheckBox = _ObjSpanCheckBox.find(":input");
-//        if (_ObjCheckBox.is(":input") == true)
-//        {
-//            _ObjCheckBox.attr("id", _ObjSpanCheckBox.attr("data-id"));
-//            _ObjCheckBox.addClass("az-checkbox");
-//        }
-//    }
-//});
-
-//function setGridFunctions(SelectedArea)
-//{
-//    if (SelectedArea != "" && SelectedArea != undefined && SelectedArea != null)
-//    {
-//        SelectedArea = $(SelectedArea);
-//    }
-//    else
-//    {
-//        SelectedArea = "";
-//    }
-//    $(":input", SelectedArea).each(function ()
-//    {
-//        if ($(this).is("button"))
-//        {
-//            if ($(this).hasClass("firstgridpage") || $(this).hasClass("previousgridpage") || $(this).hasClass("nextgridpage") || $(this).hasClass("lastgridpage"))
-//            {
-//                $(this).off('click').on('click', function ()
-//                {
-//                    changeGridPage(this.id, SelectedArea);
-//                });
-//            }
-//        }
-//    });
-//    var thisElementClass;
-//    $(".header", SelectedArea).each(function ()
-//    {
-//        $(this).off('click').on('click', function ()
-//        {
-//            if ($(this).hasClass("headerSortAsc"))
-//            {
-//                thisElementClass = "headerSortDesc";
-//                ObjPageData.OrderByClause = $(this).attr("data-attr") + " DESC"
-//            }
-//            else if ($(this).hasClass("headerSortDesc"))
-//            {
-//                thisElementClass = "headerSortAsc";
-//                ObjPageData.OrderByClause = $(this).attr("data-attr") + " ASC"
-//            }
-//            else
-//            {
-//                thisElementClass = "headerSortAsc";
-//                ObjPageData.OrderByClause = $(this).attr("data-attr") + " ASC"
-//            }
-//            $(".header").each(function ()
-//            {
-//                $(this).removeClass("headerSortAsc");
-//                $(this).removeClass("headerSortDesc");
-//            });
-//            showBackground();
-//            $(this).addClass(thisElementClass);
-//            ObjPageData.PageCurrent = 1;
-//            ObjPageData.PageSize = $("#GridPageSize").val();
-//            getContentData();
-//        });
-//    });
-//    $("#GridPageSize", SelectedArea).off('change').on('change', function ()
-//    {
-//        showBackground();
-//        ObjPageData.PageCurrent = 1;
-//        ObjPageData.PageSize = this.value;
-//        getContentData();
-//    });
-//    $("#SearchText", SelectedArea).off('keyup').on('keyup', function ()
-//    {
-//        searchGridContent(this.value);
-//    });
-//}
-
-//PageCurrent = 1
-//PageSize = PageSize;
-//PageCount = Convert.ToInt32(Math.Ceiling((Convert.ToDouble(_RecordCount) / Convert.ToDouble(_ObjAdminUserGridSettings.PageSize))));
-//RecordCount = RecordCount;
-
-//OrderBy(_ObjAdminUserGridSettings.OrderByClause).Skip((PageCurrent - 1) * PageSize).Take(PageSize).ToList();
-
-//function changeGridPage(SelectedPage, SelectedArea)
-//{
-//    if (SelectedPage == "cmdFirstGridPage")
-//    {
-//        if (PageCurrent == 1)
-//        {
-//            return false;
-//        }
-//        ObjPageData.PageCurrent = 1;
-//    }
-//    else if (SelectedPage == "cmdPreviousGridPage")
-//    {
-//        if (PageCurrent == 1)
-//        {
-//            return false;
-//        }
-//        ObjPageData.PageCurrent = (parseInt(PageCurrent) - 1);
-//    }
-//    else if (SelectedPage == "cmdNextGridPage")
-//    {
-//        if (PageCurrent == PageCount)
-//        {
-//            return false;
-//        }
-//        ObjPageData.PageCurrent = (parseInt(PageCurrent) + 1);
-//    }
-//    else if (SelectedPage == "cmdLastGridPage")
-//    {
-//        if (PageCurrent == PageCount)
-//        {
-//            return false;
-//        }
-//        ObjPageData.PageCurrent = PageCount;
-//    }
-//    showBackground();
-//    ObjPageData.PageSize = $("#GridPageSize", SelectedArea).val();
-//    getContentData();
-//}
-
-//var SearchGridContentTimer = 0;
-//function searchGridContent(SearchText)
-//{
-//    if (SearchText.length > 1)
-//    {
-//        clearTimeout(SearchGridContentTimer);
-//        SearchGridContentTimer = window.setTimeout(function ()
-//        {
-//            ObjPageData.PageCurrent = 1;
-//            ObjPageData.PageSize = 10;
-//            ObjPageData.SearchClause = SearchText;
-//            getContentData();
-//        }, 200);
-//    }
-//    else if (SearchText.length == 0)
-//    {
-//        ObjPageData.PageCurrent = 1;
-//        ObjPageData.PageSize = 10;
-//        ObjPageData.SearchClause = "";
-//        getContentData();
-//    }
-//    if (typeof setSearchGrid == 'function')
-//    {
-//        setSearchGrid();
-//    }
-//}
-
 // AZ Modal Dialog
 function AZModalDialog(Options)
 {
@@ -3327,21 +1760,21 @@ function AZModalDialog(Options)
             }
             _Main.$CurrentDialog.dialog("open");
             _Main.$CurrentDialog.dialog(
-            {
-                focus: function (e, ui)
                 {
-                    var _Element = e.target || e.srcElement;
-                    $(".ui-dialog").not($(_Element).parent(".ui-dialog")).css({ "z-index": "5000" });
-                    $(_Element).parent(".ui-dialog").css({ "z-index": "5001" });
-                },
-                close: function (e, ui)
-                {
-                    if (e.originalEvent)
+                    focus: function (e, ui)
                     {
-                        _Main.azModalDialogClose(e);
+                        var _Element = e.target || e.srcElement;
+                        $(".ui-dialog").not($(_Element).parent(".ui-dialog")).css({ "z-index": "5000" });
+                        $(_Element).parent(".ui-dialog").css({ "z-index": "5001" });
+                    },
+                    close: function (e, ui)
+                    {
+                        if (e.originalEvent)
+                        {
+                            _Main.azModalDialogClose(e);
+                        }
                     }
-                }
-            });
+                });
 
             var _$ListUIDialog = $(".ui-dialog").not(_Main.$UIDialog);
             if (_$ListUIDialog.length === 0)
@@ -3499,16 +1932,20 @@ function AZSnackbar(Options)
             azSnackbarMobileMinHeight: 0,
             azSnackbarClose: false,
             azSnackbarTimeout: 3000,
-            azSnackbarBackgroundColor: "#0078D7",
-            azSnackbarColor: "#FFFFFF",
-            azSnackbarCloseColor: "#FFFFFF",
+            azSnackbarBackgroundColor: "",
+            azSnackbarColor: "",
+            azSnackbarCloseColor: "",
             azSnackbarAfterOpen: function () { }
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
-        _Main.$Snackbar = $('<div></div>').attr({ "id": _Main.Options.azSnackbarId }).addClass("az-snackbar").css({ "background-color": _Main.Options.azSnackbarBackgroundColor });
-        _Main.$Table = $('<table></table>').addClass("az-snackbar-table");
         _Main.SnackbarTimer;
+        _Main.$Snackbar = $('<div></div>').attr({ "id": _Main.Options.azSnackbarId }).addClass("az-snackbar");
+        _Main.$Table = $('<table></table>').addClass("az-snackbar-table");
+        if (_Main.Options.azSnackbarBackgroundColor !== "")
+        {
+            _Main.$Snackbar.css({ "background-color": _Main.Options.azSnackbarBackgroundColor + " !important" });
+        }
 
         _Main.AnimateOpenOptions = {};
         _Main.AnimateCloseOptions = {};
@@ -3595,21 +2032,29 @@ function AZSnackbar(Options)
             });
         }
 
-        _Main.azChangeSnackbarText = function (SnackbarText)
+        _Main.azChangeText = function (SnackbarText)
         {
             _Main.$TextCell.html(SnackbarText)
         }
 
         if (_Main.Options.azSnackbarClose === true)
         {
-            _Main.$Close = $('<td></td>').html("X").addClass("az-snackbar-close").css({ "color": _Main.Options.azSnackbarCloseColor });
+            _Main.$Close = $('<td></td>').html("X").addClass("az-snackbar-close");
+            if (_Main.Options.azSnackbarCloseColor !== "")
+            {
+                _Main.$Close.css({ "color": _Main.Options.azSnackbarCloseColor + " !important" });
+            }
             _Main.$Close.off("click").on("click", function ()
             {
                 _Main.azCloseSnackbar();
             });
         }
 
-        _Main.$TextCell = $('<td></td>').html(_Main.Options.azSnackbarText).addClass("az-snackbar-text").css({ "color": _Main.Options.azSnackbarColor });
+        _Main.$TextCell = $('<td></td>').html(_Main.Options.azSnackbarText).addClass("az-snackbar-text");
+        if (_Main.Options.azSnackbarColor !== "")
+        {
+            _Main.$TextCell.css({ "color": _Main.Options.azSnackbarColor + " !important" });
+        }
         _Main.$TableRow = $('<tr></tr>').append(_Main.$TextCell).append(_Main.$Close);
         _Main.$Table.append(_Main.$TableRow);
         _Main.$Snackbar.append(_Main.$Table);
@@ -3633,7 +2078,7 @@ function AZSnackbar(Options)
 
         _Main.$Snackbar.animate(_Main.AnimateOpenOptions, 500, function ()
         {
-            AZCheckAsyncAndPublish(_Main.Options.azSnackbarAfterOpen, "functionlib/azSnackbarAfterOpen", _Main);
+            $.publish("functionlib/azSnackbarAfterOpen", _Main);
         });
     }
     else
@@ -3954,7 +2399,6 @@ function AZWindow(Options)
                     }, _Main.Options.azWindowAlertTimeout);
                 }
             }
-
         }
     }
     else
@@ -4410,8 +2854,13 @@ function AZRangeMulti(Options)
     }
 }
 
-// AZ Sort JSON
+// AZ Sort Array
 function AZSortJSONArray(Arr, Prop, Order)
+{
+    return AZSortArray(Arr, Prop, Order);
+}
+
+function AZSortArray(Arr, Prop, Order)
 {
     if (Arr == null || Array.isArray(Arr) === false || Prop == null || Prop == "")
     {
@@ -4517,32 +2966,6 @@ function AZBytesConverter(Bytes, Decimal)
     }
 }
 
-function AZGetObject(Arr, Key, Val)
-{
-    var _ObjReturn = {};
-    return SearchArray(Arr, Key, Val);
-
-    function SearchArray(Arr, Key, Val)
-    {
-        for (var Obj in Arr)
-        {
-            if (Array.isArray(Arr[Obj]) || typeof Arr[Obj] === 'object')
-            {
-                SearchArray(Arr[Obj], Key, Val);
-            }
-            else
-            {
-                if (Obj == Key && Arr[Obj] == Val)
-                {
-                    _ObjReturn = Arr;
-                    return false;
-                }
-            }
-        }
-        return _ObjReturn;
-    }
-}
-
 ////////////////////////////////////////////////////////////
 
 function bytesToSize(bytes, decimalPoint)
@@ -4591,113 +3014,70 @@ function navigateTo(SelectedPage, SelectedTarget)
     }
 }
 
-function getSelectedObj(SelectedList1, SelectedKey1, SelectedVal1, SelectedList2, SelectedKey2, SelectedVal2)
+function getSelectedObj(Array, Key, Val)
 {
-    var _ObjReturn = {};
-    if (SelectedList1 !== undefined && SelectedList1 !== null)
-    {
-        $.each(SelectedList1, function (index1, Selected1Content)
-        {
-            if (SelectedList2 !== undefined && SelectedList2 !== "")
-            {
-                if (Selected1Content.hasOwnProperty(SelectedKey1) && Selected1Content[SelectedKey1] !== null && SelectedVal1 !== undefined && SelectedVal1 !== null)
-                {
-                    if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
-                    {
-                        if (Selected1Content.hasOwnProperty(SelectedList2) && Selected1Content[SelectedList2] !== null)
-                        {
-                            $.each(Selected1Content[SelectedList2], function (index2, Selected2Content)
-                            {
-                                if (Selected2Content !== undefined && Selected2Content !== null)
-                                {
-                                    $.each(Selected2Content, function (Key, Value)
-                                    {
-                                        if (SelectedKey2 !== undefined && SelectedKey2 !== null && Key !== undefined && Key !== null && SelectedVal2 !== undefined && SelectedVal2 !== null && Value !== undefined && Value !== null)
-                                        {
-                                            if (SelectedKey2.toString().toLowerCase() == Key.toString().toLowerCase() && SelectedVal2.toString().toLowerCase() == Value.toString().toLowerCase())
-                                            {
-                                                _ObjReturn = Selected2Content;
-                                                return false;
-                                            }
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    }
-                }
-            }
-            else
-            {
-                $.each(Selected1Content, function (Key, Value)
-                {
-                    if (SelectedKey1 !== undefined && SelectedKey1 !== null && Key !== undefined && Key !== null && SelectedVal1 !== undefined && SelectedVal1 !== null && Value !== undefined && Value !== null)
-                    {
-                        if (SelectedKey1.toString().toLowerCase() == Key.toString().toLowerCase() && SelectedVal1.toString().toLowerCase() == Value.toString().toLowerCase())
-                        {
-                            _ObjReturn = Selected1Content;
-                            return false;
-                        }
-                    }
-                });
-            }
-        });
-    }
-    return _ObjReturn;
+    return AZGetObj(Array, Key, Val);
 }
 
-function removeSelectedObj(SelectedList1, SelectedKey1, SelectedVal1, SelectedList2, SelectedKey2, SelectedVal2)
+function AZGetObj(Array, Key, Val)
 {
-    if (SelectedList1 !== undefined && SelectedList1 !== null)
+    var _ReturnObj = {};
+    if (Array !== undefined && Array !== null && Array.length > 0)
     {
-        $.each(SelectedList1, function (index1, Selected1Content)
+        $.each(Array, function (Index, Obj)
         {
-            if (SelectedList2 !== undefined && SelectedList2 !== null)
+            $.each(Obj, function (key, val)
             {
-                if (Selected1Content.hasOwnProperty(SelectedKey1) && Selected1Content[SelectedKey1] !== null && SelectedVal1 !== undefined && SelectedVal1 !== null)
+                if (Key !== undefined && Key !== null && key !== undefined && key !== null && Val !== undefined && Val !== null && val !== undefined && val !== null)
                 {
-                    if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
+                    if (Key.toString().toLowerCase() == key.toString().toLowerCase() && Val.toString().toLowerCase() == val.toString().toLowerCase())
                     {
-                        if (Selected1Content.hasOwnProperty(SelectedList2) && Selected1Content[SelectedList2] !== null)
-                        {
-                            $.each(Selected1Content[SelectedList2], function (index2, Selected2Content)
-                            {
-                                if (Selected2Content.hasOwnProperty(SelectedKey2) && Selected2Content[SelectedKey2] !== null && SelectedVal2 !== undefined && SelectedVal2 !== null)
-                                {
-                                    if (Selected2Content[SelectedKey2].toString().toLowerCase() == SelectedVal2.toString().toLowerCase())
-                                    {
-                                        Selected1Content[SelectedList2].splice(index2, 1);
-                                        return false;
-                                    }
-                                }
-                            });
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (Selected1Content.hasOwnProperty(SelectedKey1) && Selected1Content[SelectedKey1] !== null && SelectedVal1 !== undefined && SelectedVal1 !== null)
-                {
-                    if (Selected1Content[SelectedKey1].toString().toLowerCase() == SelectedVal1.toString().toLowerCase())
-                    {
-                        SelectedList1.splice(index1, 1);
+                        _ReturnObj = Obj;
                         return false;
                     }
                 }
+            });
+        });
+    }
+    return _ReturnObj;
+}
+
+function removeSelectedObj(Array, Key, Val)
+{
+    return AZRemoveObj(Array, Key, Val);
+}
+
+function AZRemoveObj(Array, Key, Val)
+{
+    if (Array !== undefined && Array !== null && Array.length > 0)
+    {
+        $.each(Array, function (Index, Selected1Content)
+        {
+            if (Selected1Content.hasOwnProperty(Key) && Selected1Content[Key] !== null && Val !== undefined && Val !== null)
+            {
+                if (Selected1Content[Key].toString().toLowerCase() == Val.toString().toLowerCase())
+                {
+                    Array.splice(Index, 1);
+                    return false;
+                }
             }
         });
     }
 }
 
-function existsSelectedObj(SelectedList, SelectedKey, SelectedVal)
+function existsSelectedObj(Array, Key, Val)
+{
+    return AZExistObj(Array, Key, Val);
+}
+
+function AZExistObj(Array, Key, Val)
 {
     var _Found = false;
-    for (var i = 0; i < SelectedList.length; i++)
+    for (var i = 0; i < Array.length; i++)
     {
-        if (SelectedList[i].hasOwnProperty(SelectedKey) && SelectedList[i][SelectedKey] !== null && SelectedVal !== undefined && SelectedVal !== null)
+        if (Array[i].hasOwnProperty(Key) && Array[i][Key] !== null && Val !== undefined && Val !== null)
         {
-            if (SelectedList[i][SelectedKey].toString().toLowerCase() == SelectedVal.toString().toLowerCase())
+            if (Array[i][Key].toString().toLowerCase() == Val.toString().toLowerCase())
             {
                 _Found = true;
                 break;

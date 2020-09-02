@@ -19,18 +19,14 @@
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
 
-    <link rel="stylesheet" href="/lib-2.0.0/lib/az-2.0.0.team.css" />
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-2.0.0.additionally.css" />
     <script src="/lib-2.0.0/lib/az-2.0.0.additionally.js"></script>
     <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
-    <script src="js/crontab.js"></script>
     <script>
-
-        var cronstrue;
 
         $(document).ready(function ()
         {
-            //cronstrue = window.cronstrue;
             w3CodeColor();
 
             $.subscribe("functionlib/azWindowScroll", function (e, data)
@@ -51,27 +47,22 @@
             $("#ClientStorageSet").off("click", ClientStorageSet).on("click", ClientStorageSet);
             $("#ClientStorageGet").off("click", ClientStorageGet).on("click", ClientStorageGet);
             $("#ClientStorageDelete").off("click", ClientStorageDelete).on("click", ClientStorageDelete);
-
             $("#ShowCoverSpin1").off("click", ShowCoverSpin1).on("click", ShowCoverSpin1);
             $("#ShowCoverSpin2").off("click", ShowCoverSpin2).on("click", ShowCoverSpin2);
-            $("#SortJsonArray").off("click", SortJsonArray).on("click", SortJsonArray);
+            $("#SortArray").off("click", SortArray).on("click", SortArray);
             $("#GetURLParameters").off("click", GetURLParameters).on("click", GetURLParameters);
             $("#BytesConverter").off("click", BytesConverter).on("click", BytesConverter);
-            $("#cmdAZAnim").off("click", AZAnim).on("click", AZAnim);
-            $("#GetObject").off("click", GetObject).on("click", GetObject);
-            $("#crontab").off("keyup", CheckCrontab).on("keyup", CheckCrontab);
+            $("#AZAnim").off("click", AZAnim).on("click", AZAnim);
+            $("#GetObj").off("click", GetObj).on("click", GetObj);
+            $("#RemoveObj").off("click", RemoveObj).on("click", RemoveObj);    
+            $("#ExistObj").off("click", ExistObj).on("click", ExistObj);                
         });
-
-        function CheckCrontab(e)
-        {
-            //console.log(this.value)
-            //console.log(cronstrue.toString(this.value));
-        }
 
         function ClientStorageSet()
         {
-            var _Customer = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
-            AZClientStorage("set", "Customer", _Customer);
+            var _Customers = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
+            AZClientStorage("set", "Customer", _Customers);
+            $("#ClientStorage").show();
         }
 
         function ClientStorageGet()
@@ -81,8 +72,6 @@
             {
                 $("#clienstoragestring").html("<br /><strong>String</strong><br /><brown>" + _Customers + "</brown>");
                 $("#clienstorageparsed").html("<br /><strong>Parsed (JavaScript Objects)</strong><br /><brown>" + $.parseJSON(_Customers) + "</brown>");
-                console.log(_Customers);
-                console.log($.parseJSON(_Customers));
             }
         }
 
@@ -91,6 +80,76 @@
             AZClientStorage("delete", "Customer");
             $("#clienstoragestring").text("");
             $("#clienstorageparsed").text("");
+            $("#ClientStorage").hide();
+        }
+
+        function GetObj()
+        {
+            var _Customers = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
+            var _Customer = AZGetObj(_Customers, "Name", "Olsen");
+            $("#azgetobjstring").html("<br /><strong>String</strong><br /><brown>" + JSON.stringify(_Customer) + "</brown>");
+            $("#azgetobjparsed").html("<br /><strong>Parsed (JavaScript Objects)</strong><br /><brown>" + _Customer + "</brown>");
+        }
+
+        function RemoveObj()
+        {
+            var _Customers = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
+            AZRemoveObj(_Customers, "Name", "Olsen");
+            $("#azremoveobjstring").html("<br /><strong>String</strong><br /><brown>" + JSON.stringify(_Customers) + "</brown>");
+            $("#azremoveobjparsed").html("<br /><strong>Parsed (JavaScript Objects)</strong><br /><brown>" + _Customers + "</brown>");
+        }
+
+        function ExistObj()
+        {
+            var _Customers = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
+            $("#azexistobj").html("<br /><mediumblue>" + AZExistObj(_Customers, "Name", "Olsen") + "</mediumblue>");
+        }
+
+        function SortArray()
+        {
+            var _Customers = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
+            var _CustomersAsc = AZSortJSONArray(_Customers, "Name", "asc");
+            $("#arrayasc").html("<br /><strong>Sorted ASC</strong><br /><brown>" + JSON.stringify(_CustomersAsc) + "</brown>");
+            var _CustomersDesc = AZSortJSONArray(_Customers, "Name", "desc");
+            $("#arraydesc").html("<br /><strong>Sorted DESC</strong><br /><brown>" + JSON.stringify(_CustomersDesc) + "</brown>");
+        }
+
+        function GetURLParameters()
+        {
+            var _URLParametersReturn = AZGetURLParameters("https://cdn.web2net.no/lib-2.0.0/default.html?id=1&guid=23j4j223k54k235k");
+            $("#parameters").html("<br /><brown>" + _URLParametersReturn.id + " - " + _URLParametersReturn.guid + "</brown>");
+            $("#urlparameters").html("<br /><brown>" + JSON.stringify(_URLParametersReturn) + "</brown>");
+        }
+
+        function BytesConverter()
+        {
+            $("#byte").html("<br /><brown>" + AZBytesConverter(123456) + " - " + AZBytesConverter(987654321) + "</brown>");
+        }
+
+        function AZAnim()
+        {
+            var _$AZAnim = $(this);
+            _$AZAnim.attr("disabled", true);
+            $("p.az-anim-message").append(" Started...");
+
+            $.when(effect()).done(function ()
+            {
+                $("p.az-anim-message").append(" Finished!");
+                window.setTimeout(function ()
+                {
+                    $("p.az-anim-message").text("Animation...");
+                    $("div.az-anim-rect").show();
+                    _$AZAnim.attr("disabled", false);
+                }, 3000)
+            });
+
+            function effect()
+            {
+                return $("div.az-anim-rect").each(function (Index)
+                {
+                    $(this).fadeOut(1000 * (Index + 1));
+                });
+            };
         }
 
         function ShowCoverSpin1()
@@ -104,241 +163,6 @@
             AZShowCoverSpin("Show Cover Spin");
             $("#az-cover-spin").off("click", AZHideCoverSpin).on("click", AZHideCoverSpin);
         }
-
-        function SortJsonArray()
-        {
-            var _Customer = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
-            var _CustomerAsc = AZSortJSONArray(_Customer, "Name", "asc");
-            $("#jsonarrayasc").html("<br /><strong>Sorted ASC</strong><br /><brown>" + JSON.stringify(_CustomerAsc) + "</brown>");
-
-            var _CustomerDesc = AZSortJSONArray(_Customer, "Name", "desc");
-            $("#jsonarraydesc").html("<br /><strong>Sorted DESC</strong><br /><brown>" + JSON.stringify(_CustomerDesc) + "</brown>");
-        }
-
-        function GetURLParameters()
-        {
-            var _URLParametersReturn = AZGetURLParameters("https://cdn.web2net.no/lib-2.0.0/default.html?id=1&guid=23j4j223k54k235k");
-            $("#parameters").html("<br /><brown>" + _URLParametersReturn.id + " - " + _URLParametersReturn.guid + "</brown>");
-            $("#urlparameters").html("<br /><brown>" + JSON.stringify(_URLParametersReturn) + "</brown>");
-            console.log(_URLParametersReturn);
-        }
-
-        function BytesConverter()
-        {
-            $("#byte").html("<br /><brown>" + AZBytesConverter(123456) + " - " + AZBytesConverter(987654321) + "</brown>");
-        }
-
-        function AZAnim()
-        {
-            var _$cmdAZAnim = $(this);
-            _$cmdAZAnim.attr("disabled", true);
-            $("p.az-anim-message").append(" Started...");
-
-            $.when(effect()).done(function ()
-            {
-                $("p.az-anim-message").append(" Finished!");
-                window.setTimeout(function ()
-                {
-                    $("p.az-anim-message").text("Animation...");
-                    $("div.az-anim-rect").show();
-                    _$cmdAZAnim.attr("disabled", false);
-                }, 3000)
-            });
-
-            function effect()
-            {
-                return $("div.az-anim-rect").each(function (Index)
-                {
-                    $(this).fadeOut(1000 * (Index + 1));
-                });
-            };
-        }
-
-        //function AZRemoveObject(Arr, Key, Val)
-        //{
-        //    $.each(Arr, function (Index, Content)
-        //    {
-        //        SearchArray(Arr, Index, Content, Key, Val);
-        //    });
-
-        //    function SearchArray(Arr, Index, Content, Key, Val)
-        //    {
-        //        $.each(Content, function (_key, _val)
-        //        {
-        //            if (Array.isArray(_val) || typeof _val === 'object')
-        //            {
-        //                SearchArray(Arr, Index, _val, Key, Val);
-        //            }
-        //            if (_key == Key && _val == Val)
-        //            {
-        //                //console.log("arr - ", Arr)
-        //                //console.log("key - ", _key)
-        //                //console.log("val - ", _val)
-        //                Arr.splice(Index, 1);
-        //                //return false;
-        //            }
-        //        });
-        //    }
-        //}
-        //for (var _Obj in Arr)
-        //{
-        //    if (Array.isArray(Arr[_Obj]) || typeof Arr[_Obj] === 'object')
-        //    {
-        //        //console.log("Arr[Obj] - ", Arr[Obj])
-        //        delete _Obj;
-        //    }
-        //}
-
-        function GetObject()
-        {
-            //console.log(JSON.stringify(array))
-            //AZRemoveObject(array, "id", "10");
-            //console.log(JSON.stringify(array))
-
-            var _Object = AZGetObject(array, "id", "12");
-            $("#getobject").html("<br /><brown>" + JSON.stringify(_Object) + "</brown>");
-            console.log(_Object)
-
-        }
-
-        var array =
-            [
-                {
-                    id: 10,
-                    name: "a",
-                    children1:
-                        [
-                            {
-                                id: 11,
-                                name: "b"
-                            },
-                            {
-                                id: 12,
-                                name: "c"
-                            }
-                        ]
-                },
-                {
-                    id: 20,
-                    name: "d",
-                    children2:
-                        [
-                            {
-                                id: 21,
-                                name: "e"
-                            },
-                            {
-                                id: 22,
-                                name: "f"
-                            }
-                        ]
-                }
-            ]
-
-        //var array =
-        //    [
-        //        {
-        //            id: 10,
-        //            name: "a",
-        //            children1:
-        //            {
-        //                id: 11,
-        //                name: "b",
-        //                children2:
-        //                {
-        //                    id: 12,
-        //                    name: "c"
-        //                }
-        //            }
-        //        },
-        //        {
-        //            id: 13,
-        //            name: "d",
-        //            children1:
-        //            {
-        //                id: 14,
-        //                name: "e",
-        //                children2:
-        //                {
-        //                    id: 15,
-        //                    name: "f"
-        //                }
-        //            }
-        //        }
-        //    ]
-
-
-        //var array =
-        //    [
-        //        {
-        //            id: 1,
-        //            name: "a",
-        //            children1:
-        //                [
-        //                    {
-        //                        id: 2,
-        //                        name: "b",
-        //                        children2:
-        //                            [
-        //                                {
-        //                                    id: 3,
-        //                                    name: "c"
-        //                                }, {
-        //                                    id: 4,
-        //                                    name: "d"
-        //                                }]
-        //                    }, {
-        //                        id: 5,
-        //                        name: "e"
-        //                    }, {
-        //                        id: 6,
-        //                        name: "f",
-        //                        children3:
-        //                            [
-        //                                {
-        //                                    id: 7,
-        //                                    name: "g"
-        //                                }, {
-        //                                    id: 8,
-        //                                    name: "h"
-        //                                }]
-        //                    }]
-        //        }, {
-        //            id: 9,
-        //            name: "i",
-        //            children4:
-        //                [
-        //                    {
-        //                        id: 10,
-        //                        name: "j",
-        //                        children5:
-        //                            [
-        //                                {
-        //                                    id: 11,
-        //                                    name: "k"
-        //                                }, {
-        //                                    id: 12,
-        //                                    name: "l"
-        //                                }]
-        //                    }, {
-        //                        id: 13,
-        //                        name: "m"
-        //                    }, {
-        //                        id: 14,
-        //                        name: "n",
-        //                        children6:
-        //                            [
-        //                                {
-        //                                    id: 15,
-        //                                    name: "o"
-        //                                }, {
-        //                                    id: 16,
-        //                                    name: "p"
-        //                                }]
-        //                    }]
-        //        }
-        //    ];
-
 
     </script>
     <style>
@@ -356,8 +180,8 @@
 <body>
 
     <form id="frmReg">
-        <div class="az-container">
 
+        <div class="az-container az-background-white">
             <div class="az-row az-margin-t-56">
                 <div class="az-col xs-12">
                     <h1 class="az-code-header" style="margin: 0;">AZ Standard Functions</h1>
@@ -397,6 +221,7 @@
                             </div>
                             <br />
                         </div>
+
                         <div class="az-code-property-wrapper">
                             <property>AZ Window Scroll</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
@@ -417,6 +242,7 @@
                             <br />
                             <span>azWindowScrollDir: </span><span id="azWindowScrollDir"></span>
                         </div>
+
                         <div class="az-code-property-wrapper">
                             <property>AZ Window Resize</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
@@ -446,12 +272,12 @@
                             <br />
                             <span>azWindowOrientation: </span><span id="azWindowOrientation"></span>
                         </div>
+
                         <div class="az-code-property-wrapper">
                             <property>AZ Client Storage</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
-                            <default><span>Input:</span> <brown>Varying data types</brown></default>
                             <default><span>Parameters:</span> <brown>ActionType - Name - Value</brown></default>
-                            <default><span>Return:</span> <brown>Data -  Objects, Arrays, String, Integer...</brown></default>
+                            <default><span>Return:</span> <brown>Objects, Arrays, String, Integer...</brown></default>
                             <br />
                             <div class="jsHigh notranslate">
                                 AZClientStorage(ActionType, Name, Value);<br />
@@ -519,52 +345,96 @@
                                 <button id="ClientStorageDelete" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Delete data</button>
                             </div>
                             <br />
-                            Before testing the function, open the console in your browser and find the tab - <strong>Application</strong> and <strong>Local Storage</strong>.
+                            <p id="ClientStorage" style="display: none;">Open the console in your browser and find the tab - <strong>Application</strong> and <strong>Local Storage</strong>.</p>
                             <br />
                         </div>
+
                         <div class="az-code-property-wrapper">
-                            <property>AZ Show/Hide CoverSpin</property>
+                            <property>AZ Get Obj</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
-                            <default><span>Input:</span> <brown>string</brown></default>
+                            <default><span>Parameters:</span> <brown>Array - Key - Val</brown></default>
+                            <values><span>Return:</span> <mediumblue>object</mediumblue></values>
                             <br />
-                            AZShowCoverSpin();<br />
+                            AZGetObj(Array, "Name", "Olsen");
+                            <br />
+                            <br />
+                            <div class="jsHigh notranslate">
+                                [{"Name": "Hansen"}, {"Name": "Olsen"}, {"Name": "Andersen"}]
+                            </div>
+                            <div id="azgetobjstring" class="jsHigh notranslate"></div>
+                            <div id="azgetobjparsed" class="jsHigh notranslate"></div>
                             <br />
                             <div class="az-form-group">
-                                <button id="ShowCoverSpin1" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Show Cover Spin 1</button>
+                                <button id="GetObj" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Get Object</button>
                             </div>
-                            <br />
-                            AZShowCoverSpin("Show Cover Spin");<br />
-                            <br />
-                            <div class="az-form-group">
-                                <button id="ShowCoverSpin2" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Show Cover Spin 2</button>
-                            </div>
-                            <br />
-                            AZHideCoverSpin();<br />
                             <br />
                         </div>
+
                         <div class="az-code-property-wrapper">
-                            <property>AZ Sort JSON Array</property>
+                            <property>AZ Remove Obj</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
+                            <default><span>Parameters:</span> <brown>Array - Key - Val</brown></default>
                             <br />
-                            AZSortJSONArray(Array, Property, Order);
+                            AZRemoveObj(Array, "Name", "Olsen");
+                            <br />
+                            <br />
+                            <div class="jsHigh notranslate">
+                                [{"Name": "Hansen"}, {"Name": "Olsen"}, {"Name": "Andersen"}]
+                            </div>
+                            <div id="azremoveobjstring" class="jsHigh notranslate"></div>
+                            <div id="azremoveobjparsed" class="jsHigh notranslate"></div>
+                            <br />
+                            <div class="az-form-group">
+                                <button id="RemoveObj" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Remove Object</button>
+                            </div>
+                            <br />
+                        </div>
+
+                        <div class="az-code-property-wrapper">
+                            <property>AZ Exist Obj</property>
+                            <type><span>Type:</span> <brown>Function</brown></type>
+                            <default><span>Parameters:</span> <brown>Array - Key - Val</brown></default>
+                            <values><span>Return:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
+                            <br />
+                            AZExistObj(Array, "Name", "Olsen");
+                            <br />
+                            <br />
+                            <div class="jsHigh notranslate">
+                                [{"Name": "Hansen"}, {"Name": "Olsen"}, {"Name": "Andersen"}]
+                            </div>
+                            <div id="azexistobj" class="jsHigh notranslate"></div>
+                            <br />
+                            <div class="az-form-group">
+                                <button id="ExistObj" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Exist Object</button>
+                            </div>
+                            <br />
+                        </div>
+
+                        <div class="az-code-property-wrapper">
+                            <property>AZ Sort Array</property>
+                            <type><span>Type:</span> <brown>Function</brown></type>
+                            <default><span>Parameters:</span> <brown>Array - Key - Sort</brown></default>
+                            <br />
+                            AZSortArray(Array, "Name", "asc");
                             <br />
                             <br />
                             <strong>Unsorted</strong>
                             <div class="jsHigh notranslate">
                                 [{"Name": "Hansen"}, {"Name": "Olsen"}, {"Name": "Andersen"}]
                             </div>
-                            <div id="jsonarrayasc" class="jsHigh notranslate"></div>
-                            <div id="jsonarraydesc" class="jsHigh notranslate"></div>
+                            <div id="arrayasc" class="jsHigh notranslate"></div>
+                            <div id="arraydesc" class="jsHigh notranslate"></div>
                             <br />
                             <div class="az-form-group">
-                                <button id="SortJsonArray" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Sort Json Array</button>
+                                <button id="SortArray" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Sort Array</button>
                             </div>
                             <br />
                         </div>
+
                         <div class="az-code-property-wrapper">
                             <property>IsEmpty</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
-                            <default><span>Input:</span> <brown>object</brown></default>
+                            <default><span>Input:</span> <mediumblue>object</mediumblue></default>
                             <values><span>Return:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
                             <br />
                             IsEmpty(Object);
@@ -573,6 +443,7 @@
                             The function returns <mediumblue>false</mediumblue> if you are testing an Object and the Object is not empty and has at least one property.
                             <br />
                         </div>
+
                         <div class="az-code-property-wrapper">
                             <property>AZ Get URL Parameters</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
@@ -594,6 +465,7 @@
                             Before testing the function, open the console in your browser and find the tab - <strong>Console</strong>
                             <br />
                         </div>
+
                         <div class="az-code-property-wrapper">
                             <property>AZ Bytes Converter</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
@@ -612,29 +484,11 @@
                             </div>
                             <br />
                         </div>
+
                         <div class="az-code-property-wrapper">
-                            <property>AZ Get Object (from Array)</property>
-                            <type><span>Type:</span> <brown>Function</brown></type>
-                            <default><span>Input:</span> <brown>Array - String - String</brown></default>
-                            <default><span>Parameters:</span> <brown>Array - Key - Val</brown></default>
+                            <property>AZ Promise</property>
                             <br />
-                            AZGetObject(Array, Key, Val);
-                            <br />
-                            <br />
-                            The function retrieves a specific Object from nested Objects or Arrays, no matter how many levels the Object or Array is nested.
-                            <br />
-                            <div id="getobject" class="jsHigh notranslate"></div>
-                            <br />
-                            <div class="az-form-group">
-                                <button id="GetObject" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Get Object</button>
-                            </div>
-                            <br />
-                            Before testing the function, open the console in your browser and find the tab - <strong>Console</strong>
-                            <br />
-                        </div>
-                        <div class="az-code-property-wrapper">
-                            <br />
-                            Under ser du også et eksempel på å bruke Promise ved hjelp av funksjonen $.when
+                            Below you will also see an example of using Promise using the feature <strong>$.when</strong>
                             <br />
                             <br />
                             <div style="display: inline-block; height: 70px;">
@@ -660,142 +514,168 @@
                                 <br />
                             </div>
                             <div class="az-form-group">
-                                <button type="button" id="cmdAZAnim" class="az-button primary az-shadow-1 az-shadow-hover-2">Go Anim</button>
+                                <button type="button" id="AZAnim" class="az-button primary az-shadow-1 az-shadow-hover-2">Go Anim</button>
                             </div>
                         </div>
-                        <!--<div class="az-code-property-wrapper">
-                            <property>Crontab</property>
+
+
+                        <div class="az-code-property-wrapper">
+                            <property>AZ Show/Hide CoverSpin</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
-                            <default><span>Input:</span> <brown>object</brown></default>
-                            <values><span>Return:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
+                            <default><span>Input:</span> <brown>string</brown></default>
+                            <br />
+                            AZShowCoverSpin();<br />
                             <br />
                             <div class="az-form-group">
-                                <input type="text" class="az-input" id="crontab" value="* * * * *" />
+                                <button id="ShowCoverSpin1" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Show Cover Spin 1</button>
                             </div>
-                        </div>-->
+                            <br />
+                            AZShowCoverSpin("Show Cover Spin");<br />
+                            <br />
+                            <div class="az-form-group">
+                                <button id="ShowCoverSpin2" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Show Cover Spin 2</button>
+                            </div>
+                            <br />
+                            AZHideCoverSpin();<br />
+                            <br />
+                        </div>
 
                     </div>
                 </div>
             </div>
-
-            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
-                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><h1 class="az-shadow-1">.az-shadow-1</h1></div>
-                <div class="az-col xs-12 az-margin-b-21"><h1 class="az-shadow-2">.az-shadow-2</h1></div>
-                <div class="az-col xs-12 az-margin-b-21"><h1 class="az-shadow-3">.az-shadow-3</h1></div>
-                <div class="az-col xs-12 az-margin-b-21"><h1 class="az-shadow-4">.az-shadow-4</h1></div>
-                <div class="az-col xs-12 az-margin-b-28"><h1 class="az-shadow-5">.az-shadow-5</h1></div>
-            </div>
-
-            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
-                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><h1>h1 font-size: 36px</h1></div>
-                <div class="az-col xs-12 az-margin-b-21"><h2>h2 font-size: 32px</h2></div>
-                <div class="az-col xs-12 az-margin-b-21"><h3>h3 font-size: 28px</h3></div>
-                <div class="az-col xs-12 az-margin-b-21"><h4>h4 font-size: 24px</h4></div>
-                <div class="az-col xs-12 az-margin-b-21"><h5>h5 font-size: 20px</h5></div>
-                <div class="az-col xs-12 az-margin-b-21"><h6>h6 font-size: 11px</h6></div>
-            </div>
-
-            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
-                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-tiny">.az-text-tiny font-size: 12px</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-small">.az-text-small font-size: 16px</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-medium">.az-text-medium font-size: 20px</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-large">.az-text-large font-size: 24px</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xlarge">.az-text-xlarge font-size: 28px</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xxlarge">.az-text-xxlarge font-size: 32px</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xxxlarge">.az-text-xxxlarge font-size: 36px</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xxxxlarge">.az-text-xxxxlarge font-size: 40px</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xxxxxlarge">.az-text-xxxxxlarge font-size: 44px</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-jumbo">.az-text-jumbo font-size: 64px</p></div>
-            </div>
-
-            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
-                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-left az-text-medium">.az-text-left</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-right az-text-medium">.az-text-right</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-center az-text-medium">.az-text-center</p></div>
-                <div class="az-col xs-12 az-margin-b-21">
-                    <p class="az-text-medium">az-text-justify</p>
-                    <br />
-                    <p class="az-text-justify az-text-medium">Alle våre pakkeløsninger bygger på et abonnementssystem hvor du abonnerer på bruken av et dynamisk publiseringsverktøy, (WordPress) eller en statisk løsning, men eier selv helt og holdent retten til bruken av domenet, e-post og selvsagt det publiserte innholdet. Hos oss møter du ingen skjulte kostnader. Våre pakkeløsninger inneholder alt du trenger for å fremstå profesjonelt på Internett.</p>
-                </div>
-            </div>
-
-            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
-                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-capitalize az-text-medium">.az-text-capitalize</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-uppercase az-text-medium">.az-text-uppercase</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-lowercase az-text-medium">.az-text-lowercase</p></div>
-            </div>
-
-            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
-                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-opacity-75 az-text-medium">.az-text-opacity-75</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-opacity-50 az-text-medium">.az-text-opacity-50</p></div>
-                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-opacity-25 az-text-medium">.az-text-opacity-25</p></div>
-            </div>
-
-            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
-                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21">
-                    <rating>
-                        <i class="fas fa-star az-orange"></i>
-                        <i class="fas fa-star az-orange"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span>Rating 3</span>
-                    </rating>
-                </div>
-            </div>
-
-            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
-                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x"></i></div>
-                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-45"></i></div>
-                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-90"></i></div>
-                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-135"></i></div>
-                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-180"></i></div>
-                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-225"></i></div>
-                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-270"></i></div>
-                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-315"></i></div>
-            </div>
-
-            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
-                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-medium">.az-image - Automatisk "resize".</p></div>
-                <div class="az-col xs-12 az-margin-b-21">
-                    <img class="az-image" src="/web2net/wordpress.jpg" />
-                </div>
-            </div>
-
-            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
-                <div class="az-col xs-6 az-margin-t-21"><p class="az-text-medium">.az-circle-10</p></div>
-                <div class="az-col xs-6 az-margin-t-21 az-margin-b-21">
-                    <img class="az-image az-circle-10 az-width-40" src="/web2net/wordpress.jpg" />
-                </div>
-                <div class="az-col xs-6"><p class="az-text-medium">.az-circle-20</p></div>
-                <div class="az-col xs-6 az-margin-b-21">
-                    <img class="az-image az-circle-20 az-width-40" src="/web2net/wordpress.jpg" />
-                </div>
-                <div class="az-col xs-6"><p class="az-text-medium">.az-circle-30</p></div>
-                <div class="az-col xs-6 az-margin-b-21">
-                    <img class="az-image az-circle-30 az-width-40" src="/web2net/wordpress.jpg" />
-                </div>
-                <div class="az-col xs-6"><p class="az-text-medium">.az-circle-40</p></div>
-                <div class="az-col xs-6 az-margin-b-21">
-                    <img class="az-image az-circle-40 az-width-40" src="/web2net/wordpress.jpg" />
-                </div>
-                <div class="az-col xs-6"><p class="az-text-medium">.az-circle-50</p></div>
-                <div class="az-col xs-6 az-margin-b-21">
-                    <img class="az-image az-circle-50 az-width-40" src="/web2net/wordpress.jpg" />
-                </div>
-            </div>
-
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-
         </div>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <!--<div class="az-container">
+        <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+            <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><h1 class="az-shadow-1">.az-shadow-1</h1></div>
+            <div class="az-col xs-12 az-margin-b-21"><h1 class="az-shadow-2">.az-shadow-2</h1></div>
+            <div class="az-col xs-12 az-margin-b-21"><h1 class="az-shadow-3">.az-shadow-3</h1></div>
+            <div class="az-col xs-12 az-margin-b-21"><h1 class="az-shadow-4">.az-shadow-4</h1></div>
+            <div class="az-col xs-12 az-margin-b-28"><h1 class="az-shadow-5">.az-shadow-5</h1></div>
+        </div>
+
+        <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+            <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><h1>h1 font-size: 36px</h1></div>
+            <div class="az-col xs-12 az-margin-b-21"><h2>h2 font-size: 32px</h2></div>
+            <div class="az-col xs-12 az-margin-b-21"><h3>h3 font-size: 28px</h3></div>
+            <div class="az-col xs-12 az-margin-b-21"><h4>h4 font-size: 24px</h4></div>
+            <div class="az-col xs-12 az-margin-b-21"><h5>h5 font-size: 20px</h5></div>
+            <div class="az-col xs-12 az-margin-b-21"><h6>h6 font-size: 11px</h6></div>
+        </div>
+
+        <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+            <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-tiny">.az-text-tiny font-size: 12px</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-small">.az-text-small font-size: 16px</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-medium">.az-text-medium font-size: 20px</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-large">.az-text-large font-size: 24px</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xlarge">.az-text-xlarge font-size: 28px</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xxlarge">.az-text-xxlarge font-size: 32px</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xxxlarge">.az-text-xxxlarge font-size: 36px</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xxxxlarge">.az-text-xxxxlarge font-size: 40px</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xxxxxlarge">.az-text-xxxxxlarge font-size: 44px</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-jumbo">.az-text-jumbo font-size: 64px</p></div>
+        </div>
+
+        <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+            <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-left az-text-medium">.az-text-left</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-right az-text-medium">.az-text-right</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-center az-text-medium">.az-text-center</p></div>
+            <div class="az-col xs-12 az-margin-b-21">
+                <p class="az-text-medium">az-text-justify</p>
+                <br />
+                <p class="az-text-justify az-text-medium">Alle våre pakkeløsninger bygger på et abonnementssystem hvor du abonnerer på bruken av et dynamisk publiseringsverktøy, (WordPress) eller en statisk løsning, men eier selv helt og holdent retten til bruken av domenet, e-post og selvsagt det publiserte innholdet. Hos oss møter du ingen skjulte kostnader. Våre pakkeløsninger inneholder alt du trenger for å fremstå profesjonelt på Internett.</p>
+            </div>
+        </div>
+
+        <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+            <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-capitalize az-text-medium">.az-text-capitalize</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-uppercase az-text-medium">.az-text-uppercase</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-lowercase az-text-medium">.az-text-lowercase</p></div>
+        </div>
+
+        <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+            <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-opacity-75 az-text-medium">.az-text-opacity-75</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-opacity-50 az-text-medium">.az-text-opacity-50</p></div>
+            <div class="az-col xs-12 az-margin-b-21"><p class="az-text-opacity-25 az-text-medium">.az-text-opacity-25</p></div>
+        </div>
+
+        <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+            <div class="az-col xs-12 az-margin-t-21 az-margin-b-21">
+                <rating>
+                    <i class="fas fa-star az-orange"></i>
+                    <i class="fas fa-star az-orange"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>Rating 3</span>
+                </rating>
+            </div>
+        </div>
+
+        <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+            <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x"></i></div>
+            <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-45"></i></div>
+            <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-90"></i></div>
+            <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-135"></i></div>
+            <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-180"></i></div>
+            <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-225"></i></div>
+            <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-270"></i></div>
+            <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-315"></i></div>
+        </div>
+
+        <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+            <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-medium">.az-image - Automatisk "resize".</p></div>
+            <div class="az-col xs-12 az-margin-b-21">
+                <img class="az-image" src="/web2net/wordpress.jpg" />
+            </div>
+        </div>
+
+        <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+            <div class="az-col xs-6 az-margin-t-21"><p class="az-text-medium">.az-circle-10</p></div>
+            <div class="az-col xs-6 az-margin-t-21 az-margin-b-21">
+                <img class="az-image az-circle-10 az-width-40" src="/web2net/wordpress.jpg" />
+            </div>
+            <div class="az-col xs-6"><p class="az-text-medium">.az-circle-20</p></div>
+            <div class="az-col xs-6 az-margin-b-21">
+                <img class="az-image az-circle-20 az-width-40" src="/web2net/wordpress.jpg" />
+            </div>
+            <div class="az-col xs-6"><p class="az-text-medium">.az-circle-30</p></div>
+            <div class="az-col xs-6 az-margin-b-21">
+                <img class="az-image az-circle-30 az-width-40" src="/web2net/wordpress.jpg" />
+            </div>
+            <div class="az-col xs-6"><p class="az-text-medium">.az-circle-40</p></div>
+            <div class="az-col xs-6 az-margin-b-21">
+                <img class="az-image az-circle-40 az-width-40" src="/web2net/wordpress.jpg" />
+            </div>
+            <div class="az-col xs-6"><p class="az-text-medium">.az-circle-50</p></div>
+            <div class="az-col xs-6 az-margin-b-21">
+                <img class="az-image az-circle-50 az-width-40" src="/web2net/wordpress.jpg" />
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+    </div>-->
+
     </form>
 
 </body>

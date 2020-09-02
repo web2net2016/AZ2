@@ -4,8 +4,7 @@ var AZSettings =
 {
     LanguageValidationFolder: "/admin",
     DefaultLanguageFile: "/lib/lang-val/default-lang.json",
-    //DefaultLanguage: "nb-NO",
-    DefaultLanguage: "en-US",
+    DefaultLanguage: "nb-NO",
     DebugMode: true,
     AppName: "AZ Team",
     AppVersion: "1.0.0",
@@ -77,6 +76,7 @@ function AZPage(Options)
         var _Defaults =
         {
             azPageArea: {},
+            azPageElement: [],
             azPageInputTypeEvents: false,
             azPageLanguage: false,
             azPageLanguageUrl: "",
@@ -95,24 +95,54 @@ function AZPage(Options)
         _Main.ObjPageAttributes = new AZCheckPageAttributes();
         if (IsEmpty(_Main.ObjPageAttributes) === false)
         {
+            _Main.ObjPageAttributes.$AZFormObj = (window.document.forms.length > 0) ? $(window.document.forms[0]) : {};
             if (IsEmpty(_Main.Options.azPageArea) === false)
             {
-                _Main.ObjPageAttributes.$ObjAZForm = _Main.Options.azPageArea;
+                _Main.ObjPageAttributes.$AZFormObj = _Main.Options.azPageArea;
             }
-
-            _Main.InputTypeEvents = function ()
+            if (IsEmpty(_Main.ObjPageAttributes.$AZFormObj) === false)
             {
-                if (_Main.Options.azPageInputTypeEvents === true)
+                if (_Main.Options.azPageElement.length > 0)
                 {
-                    $.subscribeonce("functionlib/AZSetInputTypeEvents", function (e, data)
+                    $.each(_Main.Options.azPageElement, function (Index, PageElement)
+                    {
+                        if ($("#" + PageElement).length > 0)
+                        {
+                            ObjPageData.Elements["$" + PageElement] = $("#" + PageElement);
+                        }
+                        if ($("." + PageElement).length > 0)
+                        {
+                            ObjPageData.Elements["$" + PageElement] = $("." + PageElement);
+                        }
+                    });
+                }
+
+                _Main.InputTypeEvents = function ()
+                {
+                    if (_Main.Options.azPageInputTypeEvents === true)
+                    {
+                        $.subscribeonce("functionlib/AZSetInputTypeEvents", function (e, data)
+                        {
+                            $.publish("functionlib/AZPage",
+                                {
+                                    AZSettings: AZSettings,
+                                    $Form: _Main.ObjPageAttributes.$AZFormObj,
+                                    Location: _Main.ObjPageAttributes.Location,
+                                    PageName: _Main.ObjPageAttributes.PageName,
+                                    PageFirstName: _Main.ObjPageAttributes.PageFirstName,
+                                    Language: _Main.DefaultLanguage,
+                                    ObjLanguage: _Main.ObjLanguage,
+                                    ObjValidation: _Main.ObjValidation
+                                });
+                        });
+                        AZSetInputTypeEvents();
+                    }
+                    else
                     {
                         $.publish("functionlib/AZPage",
                             {
-                                AppName: AZSettings.AppName,
-                                AppVersion: AZSettings.AppVersion,
-                                AppVersionCode: AZSettings.AppVersionCode,
-                                ApiVersion: AZSettings.ApiVersion,
-                                $Form: _Main.ObjPageAttributes.$ObjAZForm,
+                                AZSettings: AZSettings,
+                                $Form: _Main.ObjPageAttributes.$AZFormObj,
                                 Location: _Main.ObjPageAttributes.Location,
                                 PageName: _Main.ObjPageAttributes.PageName,
                                 PageFirstName: _Main.ObjPageAttributes.PageFirstName,
@@ -120,130 +150,116 @@ function AZPage(Options)
                                 ObjLanguage: _Main.ObjLanguage,
                                 ObjValidation: _Main.ObjValidation
                             });
-                    });
-                    AZSetInputTypeEvents();
+                    }
                 }
-                else
-                {
-                    $.publish("functionlib/AZPage",
-                        {
-                            AppName: AZSettings.AppName,
-                            AppVersion: AZSettings.AppVersion,
-                            AppVersionCode: AZSettings.AppVersionCode,
-                            ApiVersion: AZSettings.ApiVersion,
-                            $Form: _Main.ObjPageAttributes.$ObjAZForm,
-                            Location: _Main.ObjPageAttributes.Location,
-                            PageName: _Main.ObjPageAttributes.PageName,
-                            PageFirstName: _Main.ObjPageAttributes.PageFirstName,
-                            Language: _Main.DefaultLanguage,
-                            ObjLanguage: _Main.ObjLanguage,
-                            ObjValidation: _Main.ObjValidation
-                        });
-                }
-            }
 
-            _Main.Validation = function ()
-            {
-                if (_Main.Options.azPageValidation === true)
+                _Main.Validation = function ()
                 {
-                    $.subscribeonce("functionlib/AZSetValidation", function (e, data)
+                    if (_Main.Options.azPageValidation === true)
+                    {
+                        $.subscribeonce("functionlib/AZSetValidation", function (e, data)
+                        {
+                            _Main.InputTypeEvents();
+                        });
+                        if (_Main.Options.azPageValidationUrl !== "")
+                        {
+                            _Main.JsonUrl = _Main.Options.azPageValidationUrl;
+                        }
+                        _Main.$Validation = new AZGetJSON({ azJsonUrl: _Main.JsonUrl + "-val.json" });
+                        _Main.$Validation.done(function (data, textStatus, jqXHR)
+                        {
+                            if (textStatus === "success")
+                            {
+                                _Main.ObjValidation = data;
+                                var _AZSetValidationOptions =
+                                {
+                                    $Area: _Main.ObjPageAttributes.$AZFormObj,
+                                    ObjValidation: data
+                                }
+                                new AZSetValidation(_AZSetValidationOptions);
+                            }
+                            else
+                            {
+                                consoleLog({ consoleType: "error", consoleText: "AZPage - AZSetValidation is empty or missing some properties" });
+                            }
+                        });
+                    }
+                    else
                     {
                         _Main.InputTypeEvents();
-                    });
-                    if (_Main.Options.azPageValidationUrl !== "")
-                    {
-                        _Main.JsonUrl = _Main.Options.azPageValidationUrl;
                     }
-                    _Main.$Validation = new AZGetJSON({ azJsonUrl: _Main.JsonUrl + "-val.json" });
-                    _Main.$Validation.done(function (data, textStatus, jqXHR)
-                    {
-                        if (textStatus === "success")
-                        {
-                            _Main.ObjValidation = data;
-                            var _AZSetValidationOptions =
-                            {
-                                $Area: _Main.ObjPageAttributes.$ObjAZForm,
-                                ObjValidation: data
-                            }
-                            new AZSetValidation(_AZSetValidationOptions);
-                        }
-                        else
-                        {
-                            consoleLog({ consoleType: "error", consoleText: "AZPage - AZSetValidation is empty or missing some properties" });
-                        }
-                    });
                 }
-                else
-                {
-                    _Main.InputTypeEvents();
-                }
-            }
 
-            _Main.Language = function ()
-            {
-                if (_Main.Options.azPageLanguage === true)
+                _Main.Language = function ()
                 {
-                    $.subscribeonce("functionlib/AZSetLanguage", function (e, data)
+                    if (_Main.Options.azPageLanguage === true)
                     {
-                        _Main.ObjLanguage = data;
+                        $.subscribeonce("functionlib/AZSetLanguage", function (e, data)
+                        {
+                            _Main.ObjLanguage = data;
+                            _Main.Validation();
+                        });
+                        if (_Main.Options.azPageLanguageUrl !== "")
+                        {
+                            _Main.JsonUrl = _Main.Options.azPageLanguageUrl;
+                        }
+                        _Main.$Language = new AZGetJSON({ azJsonUrl: _Main.JsonUrl + "-lang.json" });
+                        _Main.$Language.always(function (data, textStatus, jqXHR)
+                        {
+                            if (IsEmpty(data) === false && textStatus === "success")
+                            {
+                                var _AZSetLanguageOptions =
+                                {
+                                    ObjPageLanguage: data,
+                                    DefaultLanguageFile: _Main.DefaultLanguageFile,
+                                    DefaultLanguage: _Main.DefaultLanguage
+                                }
+                                new AZSetLanguage(_AZSetLanguageOptions);
+                            }
+                            else
+                            {
+                                consoleLog({ consoleType: "error", consoleText: "AZPage - AZSetLanguage is empty or missing some properties" });
+                            }
+                        });
+                    }
+                    else
+                    {
                         _Main.Validation();
-                    });
-                    if (_Main.Options.azPageLanguageUrl !== "")
-                    {
-                        _Main.JsonUrl = _Main.Options.azPageLanguageUrl;
                     }
-                    _Main.$Language = new AZGetJSON({ azJsonUrl: _Main.JsonUrl + "-lang.json" });
-                    _Main.$Language.always(function (data, textStatus, jqXHR)
+                }
+
+                if (IsEmpty(AZSettings) === false)
+                {
+                    _Main.DefaultLanguageFile = AZSettings.DefaultLanguageFile;
+                    _Main.DefaultLanguage = AZClientStorage("get", "language");
+                    if (_Main.DefaultLanguage === null || _Main.DefaultLanguage === undefined)
                     {
-                        if (IsEmpty(data) === false && textStatus === "success")
-                        {
-                            var _AZSetLanguageOptions =
-                            {
-                                ObjPageLanguage: data,
-                                DefaultLanguageFile: _Main.DefaultLanguageFile,
-                                DefaultLanguage: _Main.DefaultLanguage
-                            }
-                            new AZSetLanguage(_AZSetLanguageOptions);
-                        }
-                        else
-                        {
-                            consoleLog({ consoleType: "error", consoleText: "AZPage - AZSetLanguage is empty or missing some properties" });
-                        }
-                    });
+                        _Main.DefaultLanguage = AZSettings.DefaultLanguage;
+                    }
+                    moment.locale(_Main.DefaultLanguage);
+                    var _LanguageCode = _Main.DefaultLanguage.split("-");
+                    numeral.locale(_LanguageCode[0].toLowerCase());
+                    AZClientStorage("set", "language", _Main.DefaultLanguage)
+
+                    if ((AZSettings.LanguageValidationFolder.match(new RegExp("/", "g")) || []).length > 1)
+                    {
+                        _Main.JsonUrl = AZSettings.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName;
+                    }
+                    else
+                    {
+                        _Main.JsonUrl = AZSettings.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName + "/lib/lang-val/" + _Main.ObjPageAttributes.PageFirstName;
+                    }
+                    _Main.Language();
                 }
                 else
                 {
-                    _Main.Validation();
+                    consoleLog({ consoleType: "error", consoleText: "AZPage - AZSettings is empty or missing some properties" });
                 }
-            }
-
-            if (IsEmpty(AZSettings) === false)
-            {
-                _Main.DefaultLanguageFile = AZSettings.DefaultLanguageFile;
-                _Main.DefaultLanguage = AZClientStorage("get", "language");
-                if (_Main.DefaultLanguage === null || _Main.DefaultLanguage === undefined)
-                {
-                    _Main.DefaultLanguage = AZSettings.DefaultLanguage;
-                }
-                moment.locale(_Main.DefaultLanguage);
-                var _LanguageCode = _Main.DefaultLanguage.split("-");
-                numeral.locale(_LanguageCode[0].toLowerCase());
-                AZClientStorage("set", "language", _Main.DefaultLanguage)
-
-                if ((AZSettings.LanguageValidationFolder.match(new RegExp("/", "g")) || []).length > 1)
-                {
-                    _Main.JsonUrl = AZSettings.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName;
-                }
-                else
-                {
-                    _Main.JsonUrl = AZSettings.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName + "/lib/lang-val/" + _Main.ObjPageAttributes.PageFirstName;
-                }
-                _Main.Language();
             }
             else
             {
-                consoleLog({ consoleType: "error", consoleText: "AZPage - AZSettings is empty or missing some properties" });
-            }
+                consoleLog({ consoleType: "error", consoleText: "AZPage - AZForm is missing" });
+            }            
         }
         else
         {
@@ -271,7 +287,6 @@ function AZCheckPageAttributes()
             _Main.Location = window.document.location.hostname;
             _Main.PageName = window.document.location.href.split("/").slice(-1)[0];
             _Main.PageName = _Main.PageName.split("?")[0];
-            _Main.$ObjAZForm = (window.document.forms.length > 0) ? $(window.document.forms[0]) : "";
 
             if (_Main.PageName !== "")
             {
@@ -294,12 +309,7 @@ function AZCheckPageAttributes()
                 _Main.ObjPageAttributes.Location = _Main.Location;
                 _Main.Attributes += 1;
             }
-            if (IsEmpty(_Main.$ObjAZForm) === false)
-            {
-                _Main.ObjPageAttributes.$ObjAZForm = _Main.$ObjAZForm;
-                _Main.Attributes += 1;
-            }
-            if (_Main.Attributes !== 3)
+            if (_Main.Attributes !== 2)
             {
                 _Main.ObjPageAttributes = {};
             }

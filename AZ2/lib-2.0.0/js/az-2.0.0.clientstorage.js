@@ -1,6 +1,6 @@
 ﻿function clientStorage(ActionType, Name, Value)
 {
-    AZClientStorage(ActionType, Name, Value);
+    return AZClientStorage(ActionType, Name, Value);
 }
 
 function AZClientStorage(ActionType, Name, Value)

@@ -149,11 +149,11 @@
     <Content Include="lib-2.0.0\js\moment.locales.js" />
     <Content Include="lib-2.0.0\js\numeral.js" />
     <Content Include="lib-2.0.0\js\numeral.locales.js" />
-    <Content Include="lib-2.0.0\js\crontab.js" />
+    <Content Include="lib\crontab.js" />
     <Content Include="lib-2.0.0\lib\az-codecolor.js" />
     <Content Include="lib-2.0.0\lib\az-2.0.0.additionally.js" />
     <Content Include="lib-2.0.0\lib\az-codecolor.css" />
-    <Content Include="lib-2.0.0\lib\az-2.0.0.team.css" />
+    <Content Include="lib-2.0.0\lib\az-2.0.0.additionally.css" />
     <Content Include="web2net\templates.html" />
     <Content Include="lib-2.0.0\list.html" />
     <Content Include="lib-2.0.0\mobile.html" />

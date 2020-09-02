@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/lib-2.0.0/css/az-2.0.0.min.css" />
     <script src="/lib-2.0.0/js/az-2.0.0.min.js"></script>
 
-    <link rel="stylesheet" href="/lib-2.0.0/lib/az-2.0.0.team.css" />
+    <link rel="stylesheet" href="/lib-2.0.0/lib/az-2.0.0.additionally.css" />
     <script src="/lib-2.0.0/lib/az-2.0.0.additionally.js"></script>
     <link rel="stylesheet" href="/lib-2.0.0/lib/az-codecolor.css" />
     <script src="/lib-2.0.0/lib/az-codecolor.js"></script>
@@ -53,6 +53,7 @@
             });
             new AZPage(
                 {
+                    azPageElement: ["ObjFormResponse", "submit"],
                     azPageInputTypeEvents: true,
                     azPageLanguage: true,
                     azPageValidation: true
@@ -62,8 +63,6 @@
         function SetAZPageContent(e, data)
         {
             ObjPageData.Values.AZPage = data;
-            ObjPageData.Values.AZSettings = AZSettings;
-            ObjPageData.Elements.$cmdSubmit = $("#cmdSubmit");            
 
             var _AZPopulateFormOptions =
             {
@@ -198,12 +197,12 @@
             <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6">
                     <div class="az-form-group xs">
-                        <button type="button" class="az-button az-button-block info az-shadow-1 az-shadow-hover-2 cancel" id="cmdClose"></button>
+                        <!--<button type="button" class="az-button az-button-block info az-shadow-1 az-shadow-hover-2 cancel"></button>-->
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-6">
                     <div class="az-form-group xs">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 submit" id="cmdSubmit"></button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 submit"></button>
                     </div>
                 </div>
             </div>
