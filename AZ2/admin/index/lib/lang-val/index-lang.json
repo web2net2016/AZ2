@@ -12,7 +12,7 @@
       { "labelDecimal": [ "id", "text", "Desimal:" ] },
       { "labelNumeric": [ "id", "text", "Heltall:" ] },
       { "labelComment": [ "id", "text", "Kommentar:" ] },
-      { "submit": [ "class", "text", "Submit" ] },
+      { "submit": [ "class", "htmlembedded-right", "Submit" ] },
       { "submit": [ "class", "title", "Klikk for å lagre" ] }
     ],
     "nb-NO": [
@@ -27,7 +27,7 @@
       { "labelDecimal": [ "id", "text", "Desimal:" ] },
       { "labelNumeric": [ "id", "text", "Heltall:" ] },
       { "labelComment": [ "id", "text", "Kommentar:" ] },
-      { "submit": [ "class", "text", "Lagre" ] },
+      { "submit": [ "class", "htmlembedded-right", "Lagre" ] },
       { "submit": [ "class", "title", "Klikk for å lagre" ] }
     ]
   },

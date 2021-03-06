@@ -76,6 +76,11 @@
             AZHideCoverSpin();
         }
 
+        function AZValidateDirty(e, data)
+        {
+            console.log(data)
+        }
+
         function AZCancel()
         {
             window.location.href = "/lib-2.0.0/azcdn200.html";
@@ -202,7 +207,7 @@
                 </div>
                 <div class="az-col xs-12 sm-6">
                     <div class="az-form-group xs">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 submit"></button>
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 submit"><i class="fas fa-exclamation az-padding-l-7"></i></button>
                     </div>
                 </div>
             </div>

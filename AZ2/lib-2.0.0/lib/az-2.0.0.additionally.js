@@ -125,14 +125,18 @@ function AZPage(Options)
                         {
                             $.publish("functionlib/AZPage",
                                 {
-                                    AZSettings: AZSettings,
                                     $Form: _Main.ObjPageAttributes.$AZFormObj,
+                                    ApiVersion: AZSettings.ApiVersion,
+                                    AppName: AZSettings.AppName,
+                                    AppVersion: AZSettings.AppVersion,
+                                    AppVersionCode: AZSettings.AppVersionCode,
                                     Location: _Main.ObjPageAttributes.Location,
                                     PageName: _Main.ObjPageAttributes.PageName,
                                     PageFirstName: _Main.ObjPageAttributes.PageFirstName,
                                     Language: _Main.DefaultLanguage,
                                     ObjLanguage: _Main.ObjLanguage,
-                                    ObjValidation: _Main.ObjValidation
+                                    ObjValidation: _Main.ObjValidation,
+                                    AZSettings: AZSettings
                                 });
                         });
                         AZSetInputTypeEvents();
@@ -141,14 +145,18 @@ function AZPage(Options)
                     {
                         $.publish("functionlib/AZPage",
                             {
-                                AZSettings: AZSettings,
                                 $Form: _Main.ObjPageAttributes.$AZFormObj,
+                                ApiVersion: AZSettings.ApiVersion,
+                                AppName: AZSettings.AppName,
+                                AppVersion: AZSettings.AppVersion,
+                                AppVersionCode: AZSettings.AppVersionCode,
                                 Location: _Main.ObjPageAttributes.Location,
                                 PageName: _Main.ObjPageAttributes.PageName,
                                 PageFirstName: _Main.ObjPageAttributes.PageFirstName,
                                 Language: _Main.DefaultLanguage,
                                 ObjLanguage: _Main.ObjLanguage,
-                                ObjValidation: _Main.ObjValidation
+                                ObjValidation: _Main.ObjValidation,
+                                AZSettings: AZSettings
                             });
                     }
                 }
@@ -479,7 +487,30 @@ function AZSetFormLanguage(ObjElements)
                     var _FirstChildElement = $('#' + Key + '>:first');
                     $('#' + Key).html('');
                     $('#' + Key).html(Value[1]);
-                    $('#' + Key).prepend(_FirstChildElement);
+                    if (_FirstChildElement.length > 0)
+                    {
+                        $('#' + Key).prepend(_FirstChildElement);
+                    }
+                }
+                else if (Value[0] == "htmlembedded-left")
+                {
+                    var _FirstChildElement = $('#' + Key + '>:first');
+                    $('#' + Key).html('');
+                    $('#' + Key).html(Value[1]);
+                    if (_FirstChildElement.length > 0)
+                    {
+                        $('#' + Key).prepend(_FirstChildElement);
+                    }
+                }
+                else if (Value[0] == "htmlembedded-right")
+                {
+                    var _FirstChildElement = $('#' + Key + '>:first');
+                    $('#' + Key).html('');
+                    $('#' + Key).html(Value[1]);
+                    if (_FirstChildElement.length > 0)
+                    {
+                        $('#' + Key).prepend(_FirstChildElement);
+                    }
                 }
             }
             else if (Value.length == 3)
@@ -521,7 +552,30 @@ function AZSetFormLanguage(ObjElements)
                         var _FirstChildElement = $('#' + Key + '>:first');
                         $('#' + Key).html('');
                         $('#' + Key).html(Value[2]);
-                        $('#' + Key).prepend(_FirstChildElement);
+                        if (_FirstChildElement.length > 0)
+                        {
+                            $('#' + Key).prepend(_FirstChildElement);
+                        }
+                    }
+                    else if (Value[1] == "htmlembedded-left")
+                    {
+                        var _FirstChildElement = $('#' + Key + '>:first');
+                        $('#' + Key).html('');
+                        $('#' + Key).html(Value[2]);
+                        if (_FirstChildElement.length > 0)
+                        {
+                            $('#' + Key).prepend(_FirstChildElement);
+                        }
+                    }
+                    else if (Value[1] == "htmlembedded-right")
+                    {
+                        var _FirstChildElement = $('#' + Key + '>:first');
+                        $('#' + Key).html('');
+                        $('#' + Key).html(Value[2]);
+                        if (_FirstChildElement.length > 0)
+                        {
+                            $('#' + Key).prepend(_FirstChildElement);
+                        }
                     }
                 }
                 else if (Value[0] == "class")
@@ -558,10 +612,33 @@ function AZSetFormLanguage(ObjElements)
                     }
                     else if (Value[1] == "htmlembedded")
                     {
+                       var _FirstChildElement = $('.' + Key + '>:first');
+                        $('.' + Key).html('');
+                        $('.' + Key).html(Value[1]);
+                        if (_FirstChildElement.length > 0)
+                        {
+                            $('.' + Key).prepend(_FirstChildElement);
+                        }
+                    }
+                    else if (Value[1] == "htmlembedded-left")
+                    {
                         var _FirstChildElement = $('.' + Key + '>:first');
                         $('.' + Key).html('');
                         $('.' + Key).html(Value[1]);
-                        $('.' + Key).prepend(_FirstChildElement);
+                        if (_FirstChildElement.length > 0)
+                        {
+                            $('.' + Key).prepend(_FirstChildElement);
+                        }
+                    }
+                    else if (Value[1] == "htmlembedded-right")
+                    {
+                        var _FirstChildElement = $('.' + Key + '>:first');
+                        $('.' + Key).html('');
+                        $('.' + Key).html(Value[1]);
+                        if (_FirstChildElement.length > 0)
+                        {
+                            $('.' + Key).append(_FirstChildElement);
+                        }
                     }
                 }
             }
@@ -1123,15 +1200,21 @@ function AZValidateDirtyKeyup(e)
 {
     if (typeof AZValidateDirty == "function")
     {
-        AZValidateDirty(e);
+        var _Element = e.target || e.srcElement;
+        var _Data =
+        {
+            azInputId: $(_Element).attr("id") === undefined ? "" : $(_Element).attr("id"),
+            azInputJQElement: $(_Element)
+        }
+        AZValidateDirty(e, _Data);
     }
 }
 
 function AZValidateInputValueKeypress(e)
 {
     var _Element = e.target || e.srcElement;
-    var _ValidType = AZGetValidType(e.data.ValidType);
     var _KeyChar = e.keyCode || e.which;
+    var _ValidType = AZGetValidType(e.data.ValidType);
     if (_KeyChar === 8 || _KeyChar === 13)
     {
         return true;
@@ -1139,11 +1222,28 @@ function AZValidateInputValueKeypress(e)
     else
     {
         var _Char = String.fromCharCode(_KeyChar);
-        if (_ValidType.indexOf(_Char.toLowerCase()) >= 0)
+        if (_ValidType.substring(0, 3) === "NOT")
+        {
+            _ValidType = _ValidType.substring(3);
+            if (_ValidType.indexOf(_Char.toLowerCase()) < 0)
+            {
+                return true;
+            }
+            else
+            {
+                TriggerAlert();
+            }
+        }
+        else if (_ValidType.indexOf(_Char.toLowerCase()) >= 0)
         {
             return true;
         }
         else
+        {
+            TriggerAlert();
+        }
+
+        function TriggerAlert()
         {
             e.preventDefault ? e.preventDefault() : e.returnValue = false;
             $.publish("functionlib/azValidateInputValueKeypress",
@@ -1169,43 +1269,19 @@ function AZValidateInputValueFocusout(e)
 
 function AZGetValidType(SelectedType)
 {
-    var _DefaultLanguage = AZClientStorage("get", "language", "");
-    if (_DefaultLanguage === null || _DefaultLanguage === undefined)
-    {
-        _DefaultLanguage = AZSettings.DefaultLanguage;
-    }
     var _ValidTypes = {};
-    if (_DefaultLanguage === "nb-NO")
+    _ValidTypes =
     {
-        _ValidTypes =
-        {
-            "validate-alpha": "1234567890abcdefghijklmnopqrstuvwxyzæøå!@#%&()?*+-_,;.:/\u0020\u0027\u000a",
-            "validate-numeric": "1234567890",
-            "validate-decimal": "1234567890,",
-            "validate-date": "1234567890./",
-            "validate-time": "1234567890:",
-            "validate-datetime": "1234567890./:\u0020",
-            "validate-email": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
-            "validate-web": "1234567890abcdefghijklmnopqrstuvwxyz-_.:/",
-            "validate-userpass": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
-            "validate-connectionid": "abcdefghijklmnopqrstuvwxyz"
-        }
-    }
-    else
-    {
-        _ValidTypes =
-        {
-            "validate-alpha": "1234567890abcdefghijklmnopqrstuvwxyzæøå!@#%&()?*+-_,;.:/\u0020\u0027\u000a",
-            "validate-numeric": "1234567890",
-            "validate-decimal": "1234567890.",
-            "validate-date": "1234567890./",
-            "validate-time": "1234567890amp:\u0020",
-            "validate-datetime": "1234567890amp./:\u0020",
-            "validate-email": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
-            "validate-web": "1234567890abcdefghijklmnopqrstuvwxyz-_.:/",
-            "validate-userpass": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
-            "validate-connectionid": "abcdefghijklmnopqrstuvwxyz"
-        }
+        "validate-alpha": "NOT|§\"",
+        "validate-numeric": "1234567890",
+        "validate-decimal": "1234567890,.",
+        "validate-date": "1234567890./",
+        "validate-time": "1234567890:",
+        "validate-datetime": "1234567890./:\u0020",
+        "validate-email": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
+        "validate-web": "1234567890abcdefghijklmnopqrstuvwxyz-_.:/",
+        "validate-userpass": "1234567890abcdefghijklmnopqrstuvwxyz-_.@",
+        "validate-connectionid": "abcdefghijklmnopqrstuvwxyz"
     }
     return _ValidTypes[SelectedType];
 }
@@ -1364,7 +1440,7 @@ function AZValidateInput($Input, ObjCurrentValidation)
     var _CurrentInputType = GetCurrentInputType($Input);
     var _CurrentValidType = ObjCurrentValidation.class.match(/[\w-]*validate-[\w-]*/g)[0].toLowerCase();
     var _CurrentInputValue = "";
-    var _CurrentValidChar = "";
+    var _ValidType = "";
     var _ListChar = [];
 
     if (_CurrentInputType == "input")
@@ -1376,10 +1452,18 @@ function AZValidateInput($Input, ObjCurrentValidation)
         }
         else if ((ObjCurrentValidation.label.toLowerCase() === "mandatory" || ObjCurrentValidation.label.toLowerCase() === "optional") && _CurrentInputValue !== "")
         {
-            _CurrentValidChar = AZGetValidType(_CurrentValidType);
             for (var i = 0; i < _CurrentInputValue.length; i++)
             {
-                if (_CurrentValidChar.indexOf(_CurrentInputValue.charAt(i).toLowerCase()) == -1)
+                _ValidType = AZGetValidType(_CurrentValidType);
+                if (_ValidType.substring(0, 3) === "NOT")
+                {
+                    _ValidType = _ValidType.substring(3);
+                    if (_ValidType.indexOf(_CurrentInputValue.charAt(i).toLowerCase()) > 0)
+                    {
+                        _ListChar.push(_CurrentInputValue.charAt(i));
+                    }
+                }
+                else if (_ValidType.indexOf(_CurrentInputValue.charAt(i).toLowerCase()) < 0)
                 {
                     _ListChar.push(_CurrentInputValue.charAt(i));
                 }
@@ -1715,81 +1799,6 @@ function AZStandardAlert(Options)
     else
     {
         return new AZStandardAlert(Options);
-    }
-}
-
-function changeInOut(_ElementIn, _ElementOut)
-{
-    if ($("#" + _ElementIn + "").is(":hidden"))
-    {
-        $("#" + _ElementIn + "").slideDown("slow");
-        $("#" + _ElementOut + "").slideUp("slow");
-    }
-    else
-    {
-        $("#" + _ElementIn + "").slideUp("slow");
-        $("#" + _ElementOut + "").slideDown("slow");
-    }
-}
-
-function formatTime(SelectedTime)
-{
-    if (SelectedTime != "" && SelectedTime != null && SelectedTime != undefined)
-    {
-        return SelectedTime;
-    }
-    else
-    {
-        return "";
-    }
-}
-
-function CalcChildrenHeight($Element)
-{
-    var topOffset = 0;
-    var bottomOffset = 0;
-    var outer = true;
-    $Element.children().each(function (i, e)
-    {
-        var $e = $(e);
-        var eTopOffset = $e.offset().top;
-        var eBottomOffset = eTopOffset + (outer ? $e.outerHeight() : $e.height());
-
-        if (eTopOffset < topOffset)
-        {
-            topOffset = eTopOffset;
-        }
-        if (eBottomOffset > bottomOffset)
-        {
-            bottomOffset = eBottomOffset;
-        }
-    });
-    return (bottomOffset - topOffset - $Element.offset().top);
-}
-
-$.urlParam = function (name)
-{
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-    if (results == null)
-    {
-        return null;
-    }
-    else
-    {
-        return results[1] || 0;
-    }
-}
-
-function navigateTo(SelectedPage, SelectedTarget)
-{
-    SelectedTarget = SelectedTarget === true ? true : false;
-    if (SelectedTarget == 0)
-    {
-        window.location.href = SelectedPage;
-    }
-    else
-    {
-        window.open(SelectedPage, SelectedTarget);
     }
 }
 

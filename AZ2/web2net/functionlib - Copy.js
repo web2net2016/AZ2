@@ -1,4 +1,67 @@
 ﻿
+//function changeInOut(_ElementIn, _ElementOut)
+//{
+//    if ($("#" + _ElementIn + "").is(":hidden"))
+//    {
+//        $("#" + _ElementIn + "").slideDown("slow");
+//        $("#" + _ElementOut + "").slideUp("slow");
+//    }
+//    else
+//    {
+//        $("#" + _ElementIn + "").slideUp("slow");
+//        $("#" + _ElementOut + "").slideDown("slow");
+//    }
+//}
+
+//function CalcChildrenHeight($Element)
+//{
+//    var topOffset = 0;
+//    var bottomOffset = 0;
+//    var outer = true;
+//    $Element.children().each(function (i, e)
+//    {
+//        var $e = $(e);
+//        var eTopOffset = $e.offset().top;
+//        var eBottomOffset = eTopOffset + (outer ? $e.outerHeight() : $e.height());
+
+//        if (eTopOffset < topOffset)
+//        {
+//            topOffset = eTopOffset;
+//        }
+//        if (eBottomOffset > bottomOffset)
+//        {
+//            bottomOffset = eBottomOffset;
+//        }
+//    });
+//    return (bottomOffset - topOffset - $Element.offset().top);
+//}
+
+//$.urlParam = function (name)
+//{
+//    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+//    if (results == null)
+//    {
+//        return null;
+//    }
+//    else
+//    {
+//        return results[1] || 0;
+//    }
+//}
+
+//function navigateTo(SelectedPage, SelectedTarget)
+//{
+//    SelectedTarget = SelectedTarget === true ? true : false;
+//    if (SelectedTarget == 0)
+//    {
+//        window.location.href = SelectedPage;
+//    }
+//    else
+//    {
+//        window.open(SelectedPage, SelectedTarget);
+//    }
+//}
+
 //function createnewobject(SelectedObject)
 //{
 //    new Cust(SelectedObject);

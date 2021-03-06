@@ -116,98 +116,98 @@ function AZClientStorage(ActionType, Name, Value)
             clientStorageError("Local Storage / Cookies not supported.");
         }
     }
-}
 
-function checkLocalStorage()
-{
-    try
+    function checkLocalStorage()
     {
-        var _SupportsLocalStorage = !!window.localStorage && typeof localStorage.getItem === 'function' && typeof localStorage.setItem === 'function' && typeof localStorage.removeItem === 'function';
-        if (_SupportsLocalStorage)
+        try
         {
-            return true;
+            var _SupportsLocalStorage = !!window.localStorage && typeof localStorage.getItem === 'function' && typeof localStorage.setItem === 'function' && typeof localStorage.removeItem === 'function';
+            if (_SupportsLocalStorage)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        else
+        catch (e)
         {
             return false;
         }
     }
-    catch (e)
+
+    function setLocalStorage(LSName, LSValue)
     {
-        return false;
+        localStorage.setItem(LSName, LSValue);
     }
-}
 
-function setLocalStorage(LSName, LSValue)
-{
-    localStorage.setItem(LSName, LSValue);
-}
-
-function getLocalStorage(LSName)
-{
-    return localStorage.getItem(LSName);
-}
-
-function removeLocalStorage(LSName)
-{
-    localStorage.removeItem(LSName);
-}
-
-function checkCookie()
-{
-    try
+    function getLocalStorage(LSName)
     {
-        if (navigator.cookieEnabled)
+        return localStorage.getItem(LSName);
+    }
+
+    function removeLocalStorage(LSName)
+    {
+        localStorage.removeItem(LSName);
+    }
+
+    function checkCookie()
+    {
+        try
         {
-            return true;
+            if (navigator.cookieEnabled)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        else
+        catch (e)
         {
             return false;
         }
     }
-    catch (e)
+
+    function setCookie(CName, CValue)
     {
-        return false;
+        var _Date = new Date();
+        _Date.setTime(_Date.getTime() + (365 * 24 * 60 * 60 * 1000));
+        var _Expires = "expires=" + _Date.toUTCString();
+        document.cookie = CName + "=" + CValue + "; " + _Expires;
     }
-}
 
-function setCookie(CName, CValue)
-{
-    var _Date = new Date();
-    _Date.setTime(_Date.getTime() + (365 * 24 * 60 * 60 * 1000));
-    var _Expires = "expires=" + _Date.toUTCString();
-    document.cookie = CName + "=" + CValue + "; " + _Expires;
-}
-
-function getCookie(CName)
-{
-    var _Name = CName + "=";
-    var _DecodedCookie = decodeURIComponent(document.cookie);
-    var _CA = _DecodedCookie.split(';');
-    for (var i = 0; i < _CA.length; i++)
+    function getCookie(CName)
     {
-        var _C = _CA[i];
-        while (_C.charAt(0) == ' ')
+        var _Name = CName + "=";
+        var _DecodedCookie = decodeURIComponent(document.cookie);
+        var _CA = _DecodedCookie.split(';');
+        for (var i = 0; i < _CA.length; i++)
         {
-            _C = _C.substring(1);
+            var _C = _CA[i];
+            while (_C.charAt(0) == ' ')
+            {
+                _C = _C.substring(1);
+            }
+            if (_C.indexOf(_Name) == 0)
+            {
+                return _C.substring(_Name.length, _C.length);
+            }
         }
-        if (_C.indexOf(_Name) == 0)
-        {
-            return _C.substring(_Name.length, _C.length);
-        }
+        return "";
     }
-    return "";
-}
 
-function removeCookie(CName)
-{
-    document.cookie = CName + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
+    function removeCookie(CName)
+    {
+        document.cookie = CName + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
 
-function clientStorageError(consoleText)
-{
-    console.error("Client Storage Error\n" + consoleText);
+    function clientStorageError(consoleText)
+    {
+        console.error("Client Storage Error\n" + consoleText);
+    }
 }
 // AZ-Functionlib v2.0.0 | (c) web2net AS
 
@@ -990,8 +990,7 @@ function AZEnableButton(Element)
 function AZShowCoverSpin(CoverSpinText)
 {
     var _CoverSpinText = CoverSpinText === undefined ? "" : CoverSpinText;
-    var _$CoverSpin = $("#az-cover-spin");
-    if (_$CoverSpin.length == 0)
+    if ($("#az-cover-spin").length == 0)
     {
         $("body").append('<div id="az-cover-spin"><div>' + _CoverSpinText + '</div></div>');
     }
@@ -2854,7 +2853,6 @@ function AZRangeMulti(Options)
     }
 }
 
-
 // AZ Portfolio
 var _$PortfolioMenu = {};
 var _$PortfolioContent = {};
@@ -2890,8 +2888,6 @@ function setParallaxImages(ParallaxImages)
         _CurrentImage.css({ 'background-image': 'url(' + ImagesContent.url + ')', 'height': ImagesContent.height, 'opacity': ImagesContent.opacity });
     });
 }
-
-////////////////////////////////////////
 
 // AZ Sort Array
 function AZSortJSONArray(Arr, Prop, Order)
@@ -3100,7 +3096,8 @@ function AZGuid()
 {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c)
     {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        var r = Math.random() * 16 | 0;
+        var v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
 }

@@ -779,8 +779,7 @@ function AZEnableButton(Element)
 function AZShowCoverSpin(CoverSpinText)
 {
     var _CoverSpinText = CoverSpinText === undefined ? "" : CoverSpinText;
-    var _$CoverSpin = $("#az-cover-spin");
-    if (_$CoverSpin.length == 0)
+    if ($("#az-cover-spin").length == 0)
     {
         $("body").append('<div id="az-cover-spin"><div>' + _CoverSpinText + '</div></div>');
     }
@@ -2643,7 +2642,6 @@ function AZRangeMulti(Options)
     }
 }
 
-
 // AZ Portfolio
 var _$PortfolioMenu = {};
 var _$PortfolioContent = {};
@@ -2679,8 +2677,6 @@ function setParallaxImages(ParallaxImages)
         _CurrentImage.css({ 'background-image': 'url(' + ImagesContent.url + ')', 'height': ImagesContent.height, 'opacity': ImagesContent.opacity });
     });
 }
-
-////////////////////////////////////////
 
 // AZ Sort Array
 function AZSortJSONArray(Arr, Prop, Order)
@@ -2889,7 +2885,8 @@ function AZGuid()
 {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c)
     {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        var r = Math.random() * 16 | 0;
+        var v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
 }
