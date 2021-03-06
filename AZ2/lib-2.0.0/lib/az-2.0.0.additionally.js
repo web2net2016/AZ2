@@ -259,7 +259,7 @@ function AZPage(Options)
             else
             {
                 consoleLog({ consoleType: "error", consoleText: "AZPage - AZForm is missing" });
-            }            
+            }
         }
         else
         {
@@ -314,7 +314,8 @@ function AZCheckPageAttributes()
                 _Main.ObjPageAttributes = {};
             }
             return _Main.ObjPageAttributes;
-        } catch (e)
+        }
+        catch (e)
         {
             return null;
         }
@@ -717,7 +718,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -755,7 +756,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -792,7 +793,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -830,7 +831,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -868,7 +869,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -907,7 +908,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -946,7 +947,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -985,7 +986,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -1024,7 +1025,7 @@ function AZSetInputTypeEvents()
                                 {
                                     azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                     azDateLocalDate: curDate,
-                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                    azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                     azDateJQElement: $(this)
                                 });
                         }
@@ -1122,7 +1123,7 @@ function AZValidateDirtyKeyup(e)
 {
     if (typeof AZValidateDirty == "function")
     {
-        AZValidateDirty();
+        AZValidateDirty(e);
     }
 }
 
@@ -1403,12 +1404,12 @@ function AZValidateInput($Input, ObjCurrentValidation)
                 if (_CurrentValidType === "validate-datetime")
                 {
                     var _LongDateFormat = moment()._locale._longDateFormat;
-                    if (AZCheckDateTimeFormat(moment(_CurrentInputValue, _LongDateFormat.L + " " + _LongDateFormat.LT)) === false)
+                    if (AZIsValidDateTime(moment(_CurrentInputValue, _LongDateFormat.L + " " + _LongDateFormat.LT)) === false)
                     {
                         _ObjReturnValidation.Error = "DateTime";
                     }
                 }
-                if (_CurrentValidType === "validate-time" && AZCheckDateTimeFormat('0001-01-01 ' + _CurrentInputValue) === false)
+                if (_CurrentValidType === "validate-time" && AZIsValidDateTime('0001-01-01 ' + _CurrentInputValue) === false)
                 {
                     _ObjReturnValidation.Error = "Time";
                 }
@@ -1553,39 +1554,39 @@ function AZPopulateForm(Options)
     {
         consoleLog({ consoleType: "error", consoleText: "AZPopulateForm - Options is empty or missing some properties" });
     }
-}
 
-function AZSetDateFormat(Date)
-{
-    var _DateReturn = {};
-    if (AZCheckDateTimeFormat(Date) === true)
+    function AZSetDateFormat(Date)
     {
-        _DateReturn.LocalDate = moment(Date).format('L');
-        _DateReturn.ENUSDate = moment(Date).format('YYYY-MM-DD');
+        var _DateReturn = {};
+        if (AZIsValidDateTime(Date) === true)
+        {
+            _DateReturn.LocalDate = moment(Date).format('L');
+            _DateReturn.ENUSDate = moment(Date).format('YYYY-MM-DD');
+        }
+        return _DateReturn;
     }
-    return _DateReturn;
-}
 
-function AZSetDateTimeFormat(DateTime)
-{
-    var _DateTimeReturn = {};
-    if (AZCheckDateTimeFormat(DateTime) === true)
+    function AZSetDateTimeFormat(DateTime)
     {
-        _DateTimeReturn.LocalDateTime = moment(DateTime).format('L') + " " + moment(DateTime).format('LT');
-        _DateTimeReturn.ENUSDateTime = moment(DateTime).format('YYYY-MM-DD') + " " + moment(DateTime).format('h:mm a');
+        var _DateTimeReturn = {};
+        if (AZIsValidDateTime(DateTime) === true)
+        {
+            _DateTimeReturn.LocalDateTime = moment(DateTime).format('L') + " " + moment(DateTime).format('LT');
+            _DateTimeReturn.ENUSDateTime = moment(DateTime).format('YYYY-MM-DD') + " " + moment(DateTime).format('h:mm a');
+        }
+        return _DateTimeReturn;
     }
-    return _DateTimeReturn;
-}
 
-function AZSetTimeFormat(Time)
-{
-    var _TimeReturn = {};
-    if (AZCheckDateTimeFormat(Time) === true)
+    function AZSetTimeFormat(Time)
     {
-        _TimeReturn.LocalTime = moment(Time).format('LT');
-        _TimeReturn.ENUSTime = moment(Time).format('h:mm a');
+        var _TimeReturn = {};
+        if (AZIsValidDateTime(Time) === true)
+        {
+            _TimeReturn.LocalTime = moment(Time).format('LT');
+            _TimeReturn.ENUSTime = moment(Time).format('h:mm a');
+        }
+        return _TimeReturn;
     }
-    return _TimeReturn;
 }
 
 function AZIsValidDecimal(Float)
@@ -1615,7 +1616,7 @@ function AZIsValidURL(URL)
     return _RegExp.test(URL);
 }
 
-function AZCheckDateTimeFormat(DateTime)
+function AZIsValidDateTime(DateTime)
 {
     if (moment(DateTime).isValid() === true)
     {
@@ -1717,70 +1718,78 @@ function AZStandardAlert(Options)
     }
 }
 
-function AZAjaxSuccess(Options)
+function changeInOut(_ElementIn, _ElementOut)
 {
-    var _Defaults =
+    if ($("#" + _ElementIn + "").is(":hidden"))
     {
-        Request: "",
-        Title: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.informationTitle,
-        Text: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.alertTransferError,
-        WindowModal: true,
-        WindowBeforeOpen: function () { },
-        WindowAfterClose: function () { },
-        WindowAfterCloseReload: false,
-        FunctionToRun: function () { }
-    };
-    _Options = $.extend({}, _Defaults, Options || {});
-
-    if (_Options.Request === "AZWindow")
-    {
-        new AZWindow(
-            {
-                azWindowTitle: _Options.Title,
-                azWindowText: _Options.Text,
-                azWindowModal: _Options.WindowModal,
-                azWindowBeforeOpen: _Options.WindowBeforeOpen,
-                azWindowAfterClose: _Options.WindowAfterClose,
-                azWindowAfterCloseReload: _Options.WindowAfterCloseReload
-            });
+        $("#" + _ElementIn + "").slideDown("slow");
+        $("#" + _ElementOut + "").slideUp("slow");
     }
-    AZCheckAsyncAndPublish(_Options.FunctionToRun, "");
+    else
+    {
+        $("#" + _ElementIn + "").slideUp("slow");
+        $("#" + _ElementOut + "").slideDown("slow");
+    }
 }
 
-function AZAjaxError(Options)
+function formatTime(SelectedTime)
 {
-    var _Defaults =
+    if (SelectedTime != "" && SelectedTime != null && SelectedTime != undefined)
     {
-        Request: "AZWindow",
-        Title: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.informationTitle,
-        Text: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.alertTransferError,
-        WindowModal: true,
-        WindowBeforeOpen: function () { },
-        WindowAfterClose: function () { },
-        WindowAfterCloseReload: false
-    };
-    _Options = $.extend({}, _Defaults, Options || {});
-
-    if (_Options.Request === "AZWindow")
-    {
-        new AZWindow(
-            {
-                azWindowTitle: _Options.Title,
-                azWindowText: _Options.Text,
-                azWindowModal: _Options.WindowModal,
-                azWindowBeforeOpen: _Options.WindowBeforeOpen,
-                azWindowAfterClose: _Options.WindowAfterClose,
-                azWindowAfterCloseReload: _Options.WindowAfterCloseReload
-            });
+        return SelectedTime;
     }
-    if (_Options.Request === "RoleAlert")
+    else
     {
-        AZHideCoverSpin();
-        $('[role="alert"]').text(Options.Text).removeClass('az-alert-info').addClass('az-alert-danger').show();
-        window.setTimeout(function ()
+        return "";
+    }
+}
+
+function CalcChildrenHeight($Element)
+{
+    var topOffset = 0;
+    var bottomOffset = 0;
+    var outer = true;
+    $Element.children().each(function (i, e)
+    {
+        var $e = $(e);
+        var eTopOffset = $e.offset().top;
+        var eBottomOffset = eTopOffset + (outer ? $e.outerHeight() : $e.height());
+
+        if (eTopOffset < topOffset)
         {
-            $('[role="alert"]').text(ObjPageData.Values.AZPage.ObjLanguage.SingleElements.DefaultMessage).removeClass('az-alert-danger').addClass('az-alert-info').show();
-        }, 3000);
+            topOffset = eTopOffset;
+        }
+        if (eBottomOffset > bottomOffset)
+        {
+            bottomOffset = eBottomOffset;
+        }
+    });
+    return (bottomOffset - topOffset - $Element.offset().top);
+}
+
+$.urlParam = function (name)
+{
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results == null)
+    {
+        return null;
+    }
+    else
+    {
+        return results[1] || 0;
+    }
+}
+
+function navigateTo(SelectedPage, SelectedTarget)
+{
+    SelectedTarget = SelectedTarget === true ? true : false;
+    if (SelectedTarget == 0)
+    {
+        window.location.href = SelectedPage;
+    }
+    else
+    {
+        window.open(SelectedPage, SelectedTarget);
     }
 }
 

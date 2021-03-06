@@ -133,7 +133,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -171,7 +171,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -208,7 +208,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -246,7 +246,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -284,7 +284,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -323,7 +323,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -362,7 +362,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -401,7 +401,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -440,7 +440,7 @@ $(document).ready(function ()
                                     {
                                         azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
                                         azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('YYYY-MM-DD'),
+                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
                                         azDateJQElement: $(this)
                                     });
                             }
@@ -2643,6 +2643,45 @@ function AZRangeMulti(Options)
     }
 }
 
+
+// AZ Portfolio
+var _$PortfolioMenu = {};
+var _$PortfolioContent = {};
+function setPortfolio()
+{
+    _$PortfolioMenu = $(".az-portfolio-menu");
+    _$PortfolioContent = $(".az-portfolio-content");
+    _$PortfolioMenu.off().on("click", "li", function (e)
+    {
+        var _$MenuFilter = $(this).attr('data-filter');
+        if (_$MenuFilter == "*")
+        {
+            _$PortfolioContent.children("li").removeClass("az-portfolio-content-hidden");
+        }
+        else
+        {
+            _$PortfolioContent.children("li").not(_$MenuFilter).addClass("az-portfolio-content-hidden");
+            _$PortfolioContent.children(_$MenuFilter).removeClass("az-portfolio-content-hidden");
+        }
+    });
+    if ($(".az-portfolio-content-hidden", _$PortfolioContent).length == 0)
+    {
+        _$PortfolioContent.height(0);
+        _$PortfolioContent.height(_$PortfolioContent.parent().height() + 28);
+    }
+}
+
+function setParallaxImages(ParallaxImages)
+{
+    $.each(ParallaxImages, function (i, ImagesContent)
+    {
+        var _CurrentImage = $('#img' + (i + 1));
+        _CurrentImage.css({ 'background-image': 'url(' + ImagesContent.url + ')', 'height': ImagesContent.height, 'opacity': ImagesContent.opacity });
+    });
+}
+
+////////////////////////////////////////
+
 // AZ Sort Array
 function AZSortJSONArray(Arr, Prop, Order)
 {
@@ -2696,17 +2735,22 @@ function AZSortArray(Arr, Prop, Order)
     }
 }
 
-function IsEmpty(SelectedObj)
+function isEmpty(Obj)
 {
-    if (SelectedObj instanceof Object)
+    return IsEmpty(Obj);
+}
+
+function IsEmpty(Obj)
+{
+    if (Obj instanceof Object)
     {
-        if (SelectedObj == null)
+        if (Obj == null)
         {
             return true;
         }
-        for (var key in SelectedObj)
+        for (var key in Obj)
         {
-            if (SelectedObj.hasOwnProperty(key))
+            if (Obj.hasOwnProperty(key))
             {
                 return false;
             }
@@ -2719,88 +2763,48 @@ function IsEmpty(SelectedObj)
     }
 }
 
-function AZGetURLParameters(SelectedURL)
+function getURLParameters(URL)
 {
-    var _ParameterReturn = {};
-    if (SelectedURL === undefined || SelectedURL === "")
+    return AZGetURLParameters(URL);
+}
+
+function AZGetURLParameters(URL)
+{
+    var _Return = {};
+    if (URL === undefined || URL === "")
     {
         window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value)
         {
-            _ParameterReturn[key.toLowerCase()] = value;
+            _Return[key.toLowerCase()] = value;
         });
     }
     else
     {
-        SelectedURL.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value)
+        URL.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value)
         {
-            _ParameterReturn[key.toLowerCase()] = value;
+            _Return[key.toLowerCase()] = value;
         });
     }
-    return _ParameterReturn;
+    return _Return;
+}
+
+function bytesToSize(Bytes, Decimal)
+{
+    return AZBytesConverter(Bytes, Decimal);
 }
 
 function AZBytesConverter(Bytes, Decimal)
 {
-    if (Bytes == 0)
-    {
-        return '0 Bytes';
-    }
-    else
+    var _Return = "0 Bytes";
+    if (RegExp('^\\d+$').test(Bytes) === true)
     {
         var _Kilo = 1000;
         var _Decimal = Decimal === 0 ? 0 : Decimal || 2;
         var _Sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
         var _Index = Math.floor(Math.log(Bytes) / Math.log(_Kilo));
-        return parseFloat((Bytes / Math.pow(_Kilo, _Index)).toFixed(_Decimal)) + ' ' + _Sizes[_Index];
+        _Return = parseFloat((Bytes / Math.pow(_Kilo, _Index)).toFixed(_Decimal)) + ' ' + _Sizes[_Index];
     }
-}
-
-////////////////////////////////////////////////////////////
-
-function bytesToSize(bytes, decimalPoint)
-{
-    if (bytes == 0) return '0 Bytes';
-    var k = 1000;
-    var dm = decimalPoint || 2;
-    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    var i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-}
-
-function getURLParameters(PageURL)
-{
-    var vars = {};
-    var parts = PageURL.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value)
-    {
-        vars[key.toLowerCase()] = value;
-    });
-    return vars;
-}
-
-$.urlParam = function (name)
-{
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-    if (results == null)
-    {
-        return null;
-    }
-    else
-    {
-        return results[1] || 0;
-    }
-}
-
-function navigateTo(SelectedPage, SelectedTarget)
-{
-    SelectedTarget = SelectedTarget === true ? true : false;
-    if (SelectedTarget == 0)
-    {
-        window.location.href = SelectedPage;
-    }
-    else
-    {
-        window.open(SelectedPage, SelectedTarget);
-    }
+    return _Return;
 }
 
 function getSelectedObj(Array, Key, Val)
@@ -2876,113 +2880,31 @@ function AZExistObj(Array, Key, Val)
     return _Found;
 }
 
-function changeInOut(_ElementIn, _ElementOut)
+function Guid()
 {
-    if ($("#" + _ElementIn + "").is(":hidden"))
-    {
-        $("#" + _ElementIn + "").slideDown("slow");
-        $("#" + _ElementOut + "").slideUp("slow");
-    }
-    else
-    {
-        $("#" + _ElementIn + "").slideUp("slow");
-        $("#" + _ElementOut + "").slideDown("slow");
-    }
-}
-
-function formatDateTime(SelectedDateTime, FormatType)
-{
-    if (moment(SelectedDateTime).isValid() == true)
-    {
-        return moment(SelectedDateTime).format(FormatType);
-    }
-    else
-    {
-        return "";
-    }
-}
-
-function formatTime(SelectedTime)
-{
-    if (SelectedTime != "" && SelectedTime != null && SelectedTime != undefined)
-    {
-        return SelectedTime;
-    }
-    else
-    {
-        return "";
-    }
-}
-
-function CalcChildrenHeight($Element)
-{
-    var topOffset = 0;
-    var bottomOffset = 0;
-    var outer = true;
-    $Element.children().each(function (i, e)
-    {
-        var $e = $(e);
-        var eTopOffset = $e.offset().top;
-        var eBottomOffset = eTopOffset + (outer ? $e.outerHeight() : $e.height());
-
-        if (eTopOffset < topOffset)
-        {
-            topOffset = eTopOffset;
-        }
-        if (eBottomOffset > bottomOffset)
-        {
-            bottomOffset = eBottomOffset;
-        }
-    });
-    return (bottomOffset - topOffset - $Element.offset().top);
-}
-
-// AZ Portfolio
-var _$PortfolioMenu = {};
-var _$PortfolioContent = {};
-function setPortfolio()
-{
-    _$PortfolioMenu = $(".az-portfolio-menu");
-    _$PortfolioContent = $(".az-portfolio-content");
-    _$PortfolioMenu.off().on("click", "li", function (e)
-    {
-        var _$MenuFilter = $(this).attr('data-filter');
-        if (_$MenuFilter == "*")
-        {
-            _$PortfolioContent.children("li").removeClass("az-portfolio-content-hidden");
-        }
-        else
-        {
-            _$PortfolioContent.children("li").not(_$MenuFilter).addClass("az-portfolio-content-hidden");
-            _$PortfolioContent.children(_$MenuFilter).removeClass("az-portfolio-content-hidden");
-        }
-    });
-    if ($(".az-portfolio-content-hidden", _$PortfolioContent).length == 0)
-    {
-        _$PortfolioContent.height(0);
-        _$PortfolioContent.height(_$PortfolioContent.parent().height() + 28);
-    }
-}
-
-function setParallaxImages(ParallaxImages)
-{
-    $.each(ParallaxImages, function (i, ImagesContent)
-    {
-        var _CurrentImage = $('#img' + (i + 1));
-        _CurrentImage.css({ 'background-image': 'url(' + ImagesContent.url + ')', 'height': ImagesContent.height, 'opacity': ImagesContent.opacity });
-    });
+    return AZGuid();
 }
 
 function AZGuid()
-{
-    Guid();
-}
-
-function Guid()
 {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c)
     {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
+}
+
+function formatDateTime(DateTime, Format)
+{
+    return AZFormatDateTime(DateTime, Format);
+}
+
+function AZFormatDateTime(DateTime, Format)
+{
+    var _ReturnObj = {};
+    if (moment(DateTime).isValid() == true && Format != "" && Format != undefined)
+    {
+        _ReturnObj = moment(DateTime).format(Format);
+    }
+    return _ReturnObj;
 }
