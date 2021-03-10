@@ -47,7 +47,7 @@
 
         function SetAZPage()
         {
-            $.subscribe("functionlib/AZPage", function (e, data)
+            $.subscribeonce("functionlib/AZPage", function (e, data)
             {
                 SetAZPageContent(e, data);
             });
@@ -64,6 +64,13 @@
         {
             ObjPageData.Values.AZPage = data;
 
+            //var _AZSetLanguageOptions =
+            //{
+            //    $Area: $("#labelContact").parent(),
+            //    ObjLanguage: ObjPageData.Values.AZPage.ObjLanguage
+            //}
+            //AZSetLanguage(_AZSetLanguageOptions);
+
             var _AZPopulateFormOptions =
             {
                 $Area: ObjPageData.Values.AZPage.$Form,
@@ -71,6 +78,7 @@
                 ObjValidation: ObjPageData.Values.AZPage.ObjValidation
             }
             AZPopulateForm(_AZPopulateFormOptions);
+
             $("#signinInfo").html("Vennligst fyll inn alle feltene merket med <strong class=\"az-color-red\">*</strong>")
             formdirty = false;
             AZHideCoverSpin();
@@ -90,7 +98,7 @@
         {
             var _AZSerializeFormOptions =
             {
-                $Area: ObjPageData.Values.AZPage.$Form,
+                $Area: $("#labelCustomerName").parent(),
                 ObjLanguage: ObjPageData.Values.AZPage.ObjLanguage,
                 ObjValidation: ObjPageData.Values.AZPage.ObjValidation
             }

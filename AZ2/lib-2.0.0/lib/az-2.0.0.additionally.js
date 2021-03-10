@@ -16,25 +16,6 @@ var ObjPageData = {};
 ObjPageData.Elements = {};
 ObjPageData.Values = {};
 
-(function ($)
-{
-    $.fn.decimal = function ()
-    {
-        var _Return = this.map(function ()
-        {
-            var _Value = $(this).val();
-            if (_Value != "" && _Value.indexOf(",") > 0)
-            {
-                return parseFloat(_Value.replace(",", ".").replace(/ /g, ""));
-            }
-        });
-        if (_Return.length > 0)
-        {
-            return _Return[0];
-        }
-    };
-})(jQuery);
-
 $(document).ready(function ()
 {
     if (typeof SetAZPage == "function")
@@ -102,21 +83,7 @@ function AZPage(Options)
             }
             if (IsEmpty(_Main.ObjPageAttributes.$AZFormObj) === false)
             {
-                if (_Main.Options.azPageElement.length > 0)
-                {
-                    $.each(_Main.Options.azPageElement, function (Index, PageElement)
-                    {
-                        if ($("#" + PageElement).length > 0)
-                        {
-                            ObjPageData.Elements["$" + PageElement] = $("#" + PageElement);
-                        }
-                        if ($("." + PageElement).length > 0)
-                        {
-                            ObjPageData.Elements["$" + PageElement] = $("." + PageElement);
-                        }
-                    });
-                }
-
+                AZSetPageElement(_Main.Options.azPageElement)
                 _Main.InputTypeEvents = function ()
                 {
                     if (_Main.Options.azPageInputTypeEvents === true)
@@ -334,6 +301,24 @@ function AZCheckPageAttributes()
     }
 }
 
+function AZSetPageElement(PageElementArray)
+{
+    if (PageElementArray.length > 0)
+    {
+        $.each(PageElementArray, function (Index, PageElement)
+        {
+            if ($("#" + PageElement).length > 0)
+            {
+                ObjPageData.Elements["$" + PageElement] = $("#" + PageElement);
+            }
+            if ($("." + PageElement).length > 0)
+            {
+                ObjPageData.Elements["$" + PageElement] = $("." + PageElement);
+            }
+        });
+    }
+}
+
 // AZ Get JSON
 function AZGetJSON(Options)
 {
@@ -368,68 +353,89 @@ function AZSetLanguage(Options)
     {
         var _Main = this;
 
-        if (IsEmpty(Options) === false && Options.hasOwnProperty("ObjPageLanguage") && Options.hasOwnProperty("DefaultLanguageFile") && Options.hasOwnProperty("DefaultLanguage"))
+        if (IsEmpty(Options) === false)
         {
-            _Main.ObjPageLanguage = Options.ObjPageLanguage;
-            _Main.DefaultLanguageFile = Options.DefaultLanguageFile;
-            _Main.DefaultLanguage = Options.DefaultLanguage;
-
-            _Main.SetFullLanguage = function (ObjDefaultLanguage)
+            if (Options.hasOwnProperty("ObjPageLanguage") && Options.hasOwnProperty("DefaultLanguageFile") && Options.hasOwnProperty("DefaultLanguage"))
             {
-                _Main.ObjLanguage =
-                {
-                    ObjActiveLanguages: ObjDefaultLanguage.ActiveLanguages,
-                    ObjNonLanguageElements: ObjDefaultLanguage.ObjNonLanguageElements,
-                    SingleNonLanguageElements: ObjDefaultLanguage.SingleNonLanguageElements,
-                    ObjDefaultElements: ObjDefaultLanguage.ObjDefaultElements[_Main.DefaultLanguage],
-                    SingleDefaultElements: ObjDefaultLanguage.SingleDefaultElements[_Main.DefaultLanguage],
-                    ObjElements: _Main.ObjPageLanguage.ObjElements[_Main.DefaultLanguage],
-                    SingleElements: _Main.ObjPageLanguage.SingleElements[_Main.DefaultLanguage]
-                }
-                $.publish("AZSetLanguage");
-            }
+                _Main.ObjPageLanguage = Options.ObjPageLanguage;
+                _Main.DefaultLanguageFile = Options.DefaultLanguageFile;
+                _Main.DefaultLanguage = Options.DefaultLanguage;
 
-            _Main.SetSingleLanguage = function ()
-            {
-                _Main.ObjLanguage =
+                _Main.SetFullLanguage = function (ObjDefaultLanguage)
                 {
-                    ObjElements: _Main.ObjPageLanguage.ObjElements[_Main.DefaultLanguage],
-                    SingleElements: _Main.ObjPageLanguage.SingleElements[_Main.DefaultLanguage]
-                }
-                $.publish("AZSetLanguage");
-                consoleLog({ consoleType: "error", consoleText: "AZSetLanguage - Missing default language file" });
-            }
-
-            $.subscribeonce("AZSetLanguage", function (e, data)
-            {
-                if (_Main.ObjLanguage.SingleElements.hasOwnProperty("labelPageTitle"))
-                {
-                    document.title = _Main.ObjLanguage.SingleElements.labelPageTitle;
-                }
-                AZSetFormLanguage(_Main.ObjLanguage.ObjNonLanguageElements);
-                AZSetFormLanguage(_Main.ObjLanguage.ObjDefaultElements);
-                AZSetFormLanguage(_Main.ObjLanguage.ObjElements);
-                $.publish("functionlib/AZSetLanguage", _Main.ObjLanguage);
-            });
-
-            if (_Main.DefaultLanguageFile != "")
-            {
-                _Main.$DefaultLanguage = new AZGetJSON({ azJsonUrl: _Main.DefaultLanguageFile });
-                _Main.$DefaultLanguage.always(function (data, textStatus, jqXHR)
-                {
-                    if (IsEmpty(data) === false && textStatus === "success")
+                    _Main.ObjLanguage =
                     {
-                        _Main.SetFullLanguage(data);
+                        ObjActiveLanguages: ObjDefaultLanguage.ActiveLanguages,
+                        ObjNonLanguageElements: ObjDefaultLanguage.ObjNonLanguageElements,
+                        SingleNonLanguageElements: ObjDefaultLanguage.SingleNonLanguageElements,
+                        ObjDefaultElements: ObjDefaultLanguage.ObjDefaultElements[_Main.DefaultLanguage],
+                        SingleDefaultElements: ObjDefaultLanguage.SingleDefaultElements[_Main.DefaultLanguage],
+                        ObjElements: _Main.ObjPageLanguage.ObjElements[_Main.DefaultLanguage],
+                        SingleElements: _Main.ObjPageLanguage.SingleElements[_Main.DefaultLanguage]
                     }
-                    else
+                    $.publish("AZSetLanguage");
+                }
+
+                _Main.SetSingleLanguage = function ()
+                {
+                    _Main.ObjLanguage =
                     {
-                        _Main.SetSingleLanguage();
+                        ObjElements: _Main.ObjPageLanguage.ObjElements[_Main.DefaultLanguage],
+                        SingleElements: _Main.ObjPageLanguage.SingleElements[_Main.DefaultLanguage]
                     }
+                    $.publish("AZSetLanguage");
+                    consoleLog({ consoleType: "error", consoleText: "AZSetLanguage - Missing default language file" });
+                }
+
+                $.subscribeonce("AZSetLanguage", function (e, data)
+                {
+                    if (_Main.ObjLanguage.SingleElements.hasOwnProperty("labelPageTitle"))
+                    {
+                        document.title = _Main.ObjLanguage.SingleElements.labelPageTitle;
+                    }
+                    AZSetFormLanguage(_Main.ObjLanguage.ObjNonLanguageElements);
+                    AZSetFormLanguage(_Main.ObjLanguage.ObjDefaultElements);
+                    AZSetFormLanguage(_Main.ObjLanguage.ObjElements);
+                    $.publish("functionlib/AZSetLanguage", _Main.ObjLanguage);
                 });
+
+                if (_Main.DefaultLanguageFile != "")
+                {
+                    _Main.$DefaultLanguage = new AZGetJSON({ azJsonUrl: _Main.DefaultLanguageFile });
+                    _Main.$DefaultLanguage.always(function (data, textStatus, jqXHR)
+                    {
+                        if (IsEmpty(data) === false && textStatus === "success")
+                        {
+                            _Main.SetFullLanguage(data);
+                        }
+                        else
+                        {
+                            _Main.SetSingleLanguage();
+                        }
+                    });
+                }
+                else
+                {
+                    _Main.SetSingleLanguage();
+                }
+            }
+            else if (Options.hasOwnProperty("ObjLanguage"))
+            {
+                _Main.$Area = "";
+                if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
+                {
+                    _Main.$Area = Options.$Area;
+                }
+                _Main.ObjFormLanguageOptions =
+                {
+                    $Area: _Main.$Area,
+                    ObjElements: Options.ObjLanguage.ObjElements
+                }
+                AZSetFormLanguage(_Main.ObjFormLanguageOptions);
             }
             else
             {
-                _Main.SetSingleLanguage();
+                consoleLog({ consoleType: "error", consoleText: "AZSetLanguage - Options is empty or missing some properties" });
             }
         }
         else
@@ -444,206 +450,221 @@ function AZSetLanguage(Options)
 }
 
 // AZ Set Form Language
-function AZSetFormLanguage(ObjElements)
+function AZSetFormLanguage(Options)
 {
-    $.each(ObjElements, function (Key, Value)
+    if (IsEmpty(Options) === false)
     {
-        $.each(Value, function (Key, Value)
+        var _$Area = "";
+        if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
         {
-            if (Value.length == 2)
+            _$Area = Options.$Area;
+        }
+
+        var _ObjElements = Options;
+        if (Options.hasOwnProperty("ObjElements") && IsEmpty(Options.ObjElements) === false)
+        {
+            _ObjElements = Options.ObjElements;
+        }
+
+        $.each(_ObjElements, function (Key, Value)
+        {
+            $.each(Value, function (Key, Value)
             {
-                if (Value[0] == "html")
+                if (Value.length == 2)
                 {
-                    $('#' + Key).html('');
-                    $('#' + Key).html(Value[1]);
-                }
-                else if (Value[0] == "text")
-                {
-                    $('#' + Key).text('');
-                    $('#' + Key).text(Value[1]);
-                }
-                else if (Value[0] == "val")
-                {
-                    $('#' + Key).val('');
-                    $('#' + Key).val(Value[1]);
-                }
-                else if (Value[0] == "cmdlbl")
-                {
-                    $('#' + Key).button({ label: "" });
-                    $('#' + Key).button({ label: "" + Value[1] + "" });
-                }
-                else if (Value[0] == "title")
-                {
-                    $('#' + Key).prop("title", "");
-                    $('#' + Key).prop("title", Value[1]);
-                }
-                else if (Value[0] == "placeholder")
-                {
-                    $('#' + Key).prop("placeholder", "");
-                    $('#' + Key).prop("placeholder", Value[1]);
-                }
-                else if (Value[0] == "htmlembedded")
-                {
-                    var _FirstChildElement = $('#' + Key + '>:first');
-                    $('#' + Key).html('');
-                    $('#' + Key).html(Value[1]);
-                    if (_FirstChildElement.length > 0)
+                    if (Value[0] == "html")
                     {
-                        $('#' + Key).prepend(_FirstChildElement);
+                        $('#' + Key, _$Area).html('');
+                        $('#' + Key, _$Area).html(Value[1]);
                     }
-                }
-                else if (Value[0] == "htmlembedded-left")
-                {
-                    var _FirstChildElement = $('#' + Key + '>:first');
-                    $('#' + Key).html('');
-                    $('#' + Key).html(Value[1]);
-                    if (_FirstChildElement.length > 0)
+                    else if (Value[0] == "text")
                     {
-                        $('#' + Key).prepend(_FirstChildElement);
+                        $('#' + Key, _$Area).text('');
+                        $('#' + Key, _$Area).text(Value[1]);
                     }
-                }
-                else if (Value[0] == "htmlembedded-right")
-                {
-                    var _FirstChildElement = $('#' + Key + '>:first');
-                    $('#' + Key).html('');
-                    $('#' + Key).html(Value[1]);
-                    if (_FirstChildElement.length > 0)
+                    else if (Value[0] == "val")
                     {
-                        $('#' + Key).prepend(_FirstChildElement);
+                        $('#' + Key, _$Area).val('');
+                        $('#' + Key, _$Area).val(Value[1]);
                     }
-                }
-            }
-            else if (Value.length == 3)
-            {
-                if (Value[0] == "id")
-                {
-                    if (Value[1] == "html")
+                    else if (Value[0] == "cmdlbl")
                     {
-                        $('#' + Key).html('');
-                        $('#' + Key).html(Value[2]);
+                        $('#' + Key, _$Area).button({ label: "" });
+                        $('#' + Key, _$Area).button({ label: "" + Value[1] + "" });
                     }
-                    else if (Value[1] == "text")
+                    else if (Value[0] == "title")
                     {
-                        $('#' + Key).text('');
-                        $('#' + Key).text(Value[2]);
+                        $('#' + Key, _$Area).prop("title", "");
+                        $('#' + Key, _$Area).prop("title", Value[1]);
                     }
-                    else if (Value[1] == "val")
+                    else if (Value[0] == "placeholder")
                     {
-                        $('#' + Key).val('');
-                        $('#' + Key).val(Value[2]);
+                        $('#' + Key, _$Area).prop("placeholder", "");
+                        $('#' + Key, _$Area).prop("placeholder", Value[1]);
                     }
-                    else if (Value[1] == "cmdlbl")
+                    else if (Value[0] == "htmlembedded")
                     {
-                        $('#' + Key).button({ label: "" });
-                        $('#' + Key).button({ label: "" + Value[2] + "" });
-                    }
-                    else if (Value[1] == "title")
-                    {
-                        $('#' + Key).prop("title", "");
-                        $('#' + Key).prop("title", Value[2]);
-                    }
-                    else if (Value[1] == "placeholder")
-                    {
-                        $('#' + Key).prop("placeholder", "");
-                        $('#' + Key).prop("placeholder", Value[2]);
-                    }
-                    else if (Value[1] == "htmlembedded")
-                    {
-                        var _FirstChildElement = $('#' + Key + '>:first');
-                        $('#' + Key).html('');
-                        $('#' + Key).html(Value[2]);
+                        var _FirstChildElement = $('#' + Key + '>:first', _$Area);
+                        $('#' + Key, _$Area).html('');
+                        $('#' + Key, _$Area).html(Value[1]);
                         if (_FirstChildElement.length > 0)
                         {
-                            $('#' + Key).prepend(_FirstChildElement);
+                            $('#' + Key, _$Area).prepend(_FirstChildElement);
                         }
                     }
-                    else if (Value[1] == "htmlembedded-left")
+                    else if (Value[0] == "htmlembedded-left")
                     {
-                        var _FirstChildElement = $('#' + Key + '>:first');
-                        $('#' + Key).html('');
-                        $('#' + Key).html(Value[2]);
+                        var _FirstChildElement = $('#' + Key + '>:first', _$Area);
+                        $('#' + Key, _$Area).html('');
+                        $('#' + Key, _$Area).html(Value[1]);
                         if (_FirstChildElement.length > 0)
                         {
-                            $('#' + Key).prepend(_FirstChildElement);
+                            $('#' + Key, _$Area).prepend(_FirstChildElement);
                         }
                     }
-                    else if (Value[1] == "htmlembedded-right")
+                    else if (Value[0] == "htmlembedded-right")
                     {
-                        var _FirstChildElement = $('#' + Key + '>:first');
-                        $('#' + Key).html('');
-                        $('#' + Key).html(Value[2]);
+                        var _FirstChildElement = $('#' + Key + '>:first', _$Area);
+                        $('#' + Key, _$Area).html('');
+                        $('#' + Key, _$Area).html(Value[1]);
                         if (_FirstChildElement.length > 0)
                         {
-                            $('#' + Key).prepend(_FirstChildElement);
+                            $('#' + Key, _$Area).append(_FirstChildElement);
                         }
                     }
                 }
-                else if (Value[0] == "class")
+                else if (Value.length == 3)
                 {
-                    if (Value[1] == "html")
+                    if (Value[0] == "id")
                     {
-                        $('.' + Key).html('');
-                        $('.' + Key).html(Value[2]);
-                    }
-                    else if (Value[1] == "text")
-                    {
-                        $('.' + Key).text('');
-                        $('.' + Key).text(Value[2]);
-                    }
-                    else if (Value[1] == "val")
-                    {
-                        $('.' + Key).val('');
-                        $('.' + Key).val(Value[2]);
-                    }
-                    else if (Value[1] == "cmdlbl")
-                    {
-                        $('.' + Key).button({ label: "" });
-                        $('.' + Key).button({ label: "" + Value[2] + "" });
-                    }
-                    else if (Value[1] == "title")
-                    {
-                        $('.' + Key).prop("title", "");
-                        $('.' + Key).prop("title", Value[2]);
-                    }
-                    else if (Value[1] == "placeholder")
-                    {
-                        $('.' + Key).prop("placeholder", "");
-                        $('.' + Key).prop("placeholder", Value[2]);
-                    }
-                    else if (Value[1] == "htmlembedded")
-                    {
-                       var _FirstChildElement = $('.' + Key + '>:first');
-                        $('.' + Key).html('');
-                        $('.' + Key).html(Value[1]);
-                        if (_FirstChildElement.length > 0)
+                        if (Value[1] == "html")
                         {
-                            $('.' + Key).prepend(_FirstChildElement);
+                            $('#' + Key, _$Area).html('');
+                            $('#' + Key, _$Area).html(Value[2]);
+                        }
+                        else if (Value[1] == "text")
+                        {
+                            $('#' + Key, _$Area).text('');
+                            $('#' + Key, _$Area).text(Value[2]);
+                        }
+                        else if (Value[1] == "val")
+                        {
+                            $('#' + Key, _$Area).val('');
+                            $('#' + Key, _$Area).val(Value[2]);
+                        }
+                        else if (Value[1] == "cmdlbl")
+                        {
+                            $('#' + Key, _$Area).button({ label: "" });
+                            $('#' + Key, _$Area).button({ label: "" + Value[2] + "" });
+                        }
+                        else if (Value[1] == "title")
+                        {
+                            $('#' + Key, _$Area).prop("title", "");
+                            $('#' + Key, _$Area).prop("title", Value[2]);
+                        }
+                        else if (Value[1] == "placeholder")
+                        {
+                            $('#' + Key, _$Area).prop("placeholder", "");
+                            $('#' + Key, _$Area).prop("placeholder", Value[2]);
+                        }
+                        else if (Value[1] == "htmlembedded")
+                        {
+                            var _FirstChildElement = $('#' + Key + '>:first', _$Area);
+                            $('#' + Key, _$Area).html('');
+                            $('#' + Key, _$Area).html(Value[2]);
+                            if (_FirstChildElement.length > 0)
+                            {
+                                $('#' + Key, _$Area).prepend(_FirstChildElement);
+                            }
+                        }
+                        else if (Value[1] == "htmlembedded-left")
+                        {
+                            var _FirstChildElement = $('#' + Key + '>:first', _$Area);
+                            $('#' + Key, _$Area).html('');
+                            $('#' + Key, _$Area).html(Value[2]);
+                            if (_FirstChildElement.length > 0)
+                            {
+                                $('#' + Key, _$Area).prepend(_FirstChildElement);
+                            }
+                        }
+                        else if (Value[1] == "htmlembedded-right")
+                        {
+                            var _FirstChildElement = $('#' + Key + '>:first', _$Area);
+                            $('#' + Key, _$Area).html('');
+                            $('#' + Key, _$Area).html(Value[2]);
+                            if (_FirstChildElement.length > 0)
+                            {
+                                $('#' + Key, _$Area).append(_FirstChildElement);
+                            }
                         }
                     }
-                    else if (Value[1] == "htmlembedded-left")
+                    else if (Value[0] == "class")
                     {
-                        var _FirstChildElement = $('.' + Key + '>:first');
-                        $('.' + Key).html('');
-                        $('.' + Key).html(Value[1]);
-                        if (_FirstChildElement.length > 0)
+                        if (Value[1] == "html")
                         {
-                            $('.' + Key).prepend(_FirstChildElement);
+                            $('.' + Key, _$Area).html('');
+                            $('.' + Key, _$Area).html(Value[2]);
                         }
-                    }
-                    else if (Value[1] == "htmlembedded-right")
-                    {
-                        var _FirstChildElement = $('.' + Key + '>:first');
-                        $('.' + Key).html('');
-                        $('.' + Key).html(Value[1]);
-                        if (_FirstChildElement.length > 0)
+                        else if (Value[1] == "text")
                         {
-                            $('.' + Key).append(_FirstChildElement);
+                            $('.' + Key, _$Area).text('');
+                            $('.' + Key, _$Area).text(Value[2]);
+                        }
+                        else if (Value[1] == "val")
+                        {
+                            $('.' + Key, _$Area).val('');
+                            $('.' + Key, _$Area).val(Value[2]);
+                        }
+                        else if (Value[1] == "cmdlbl")
+                        {
+                            $('.' + Key, _$Area).button({ label: "" });
+                            $('.' + Key, _$Area).button({ label: "" + Value[2] + "" });
+                        }
+                        else if (Value[1] == "title")
+                        {
+                            $('.' + Key, _$Area).prop("title", "");
+                            $('.' + Key, _$Area).prop("title", Value[2]);
+                        }
+                        else if (Value[1] == "placeholder")
+                        {
+                            $('.' + Key, _$Area).prop("placeholder", "");
+                            $('.' + Key, _$Area).prop("placeholder", Value[2]);
+                        }
+                        else if (Value[1] == "htmlembedded")
+                        {
+                            var _FirstChildElement = $('.' + Key + '>:first', _$Area);
+                            $('.' + Key, _$Area).html('');
+                            $('.' + Key, _$Area).html(Value[2]);
+                            if (_FirstChildElement.length > 0)
+                            {
+                                $('.' + Key, _$Area).prepend(_FirstChildElement);
+                            }
+                        }
+                        else if (Value[1] == "htmlembedded-left")
+                        {
+                            var _FirstChildElement = $('.' + Key + '>:first', _$Area);
+                            $('.' + Key, _$Area).html('');
+                            $('.' + Key, _$Area).html(Value[2]);
+                            if (_FirstChildElement.length > 0)
+                            {
+                                $('.' + Key, _$Area).prepend(_FirstChildElement);
+                            }
+                        }
+                        else if (Value[1] == "htmlembedded-right")
+                        {
+                            var _FirstChildElement = $('.' + Key + '>:first', _$Area);
+                            $('.' + Key, _$Area).html('');
+                            $('.' + Key, _$Area).html(Value[2]);
+                            if (_FirstChildElement.length > 0)
+                            {
+                                $('.' + Key, _$Area).append(_FirstChildElement);
+                            }
                         }
                     }
                 }
-            }
+            });
         });
-    });
+    }
     $.publish("functionlib/AZSetFormLanguage");
 }
 
@@ -653,16 +674,12 @@ function AZSetValidation(Options)
     if (this instanceof AZSetValidation === true)
     {
         var _Main = this;
-
         if (IsEmpty(Options) === false && Options.hasOwnProperty("ObjValidation"))
         {
+            _Main.$Area = "";
             if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
             {
                 _Main.$Area = Options.$Area;
-            }
-            else
-            {
-                _Main.$Area = "";
             }
 
             _Main.ObjValidation = Options.ObjValidation;
@@ -1301,6 +1318,12 @@ function AZSerializeForm(Options)
 {
     if (IsEmpty(Options) === false && Options.hasOwnProperty("ObjLanguage") && Options.hasOwnProperty("ObjValidation"))
     {
+        var _$Area = "";
+        if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
+        {
+            _$Area = Options.$Area;
+        }
+
         var _InputError = false;
         var _$Input = {};
         var _ObjCurrentValidation = {};
@@ -1309,113 +1332,117 @@ function AZSerializeForm(Options)
 
         $.each(Options.ObjValidation, function (HTMLElement, Value)
         {
-            if ($('#' + HTMLElement).length > 0 && Value.class.indexOf("validate") > -1)
+            if ($('#' + HTMLElement, _$Area).length > 0 && Value.class.indexOf("validate") > -1)
             {
-                _$Input = $('#' + HTMLElement);
-                _ObjCurrentValidation = Value;
+                _$Input = $('#' + HTMLElement, _$Area);
 
-                if (_ObjCurrentValidation.datatype.toLowerCase() === "date")
+                if (IsEmpty(_$Input) === false)
                 {
-                    if (_$Input.val().replace(/^\s+|\s+$/g, '') !== "")
-                    {
-                        _ObjOutputData[_$Input.attr("id")] = moment(_$Input.datepicker("getDate")).format('YYYY-MM-DD');
-                    }
-                    else
-                    {
-                        _ObjOutputData[_$Input.attr("id")] = null;
-                    }
-                }
-                else if (_ObjCurrentValidation.datatype.toLowerCase() === "datetime")
-                {
-                    var _LongDateFormat = moment()._locale._longDateFormat;
-                    _ObjOutputData[_$Input.attr("id")] = moment(_$Input.val(), _LongDateFormat.L + " " + _LongDateFormat.LT).toJSON();
-                }
-                else if (_ObjCurrentValidation.datatype.toLowerCase() === "time")
-                {
-                    _ObjOutputData[_$Input.attr("id")] = moment('0001-01-01 ' + _$Input.val()).format('h:mm:ss');
-                }
-                else if (_ObjCurrentValidation.datatype.toLowerCase() === "decimal")
-                {
-                    _ObjOutputData[_$Input.attr("id")] = parseFloat(_$Input.val().replace(",", ".").replace(/ /g, ""));
-                }
-                else if (_ObjCurrentValidation.datatype.toLowerCase() === "int")
-                {
-                    _ObjOutputData[_$Input.attr("id")] = Number(_$Input.val());
-                }
-                else
-                {
-                    _ObjOutputData[_$Input.attr("id")] = _$Input.val();
-                }
+                    _ObjCurrentValidation = Value;
 
-                _ObjReturnValidation = AZValidateInput(_$Input, _ObjCurrentValidation);
-                if (IsEmpty(_ObjReturnValidation) === false)
-                {
-                    _ObjReturnValidation.Input = _$Input.attr("id");
-                    consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + _ObjReturnValidation.Input + " - " + _ObjReturnValidation.Error });
-                    if ($(".az-alert-active").length === 0)
+                    if (_ObjCurrentValidation.datatype.toLowerCase() === "date")
                     {
-                        var _$RoleAlert = $("[role='alert']");
-                        var _$UIDialog = window.top.$(".ui-dialog");
-                        var _$Window = $("#az-window");
-
-                        if (_$RoleAlert.length > 0)
+                        if (_$Input.val().replace(/^\s+|\s+$/g, '') !== "")
                         {
-                            var _CurrentText = _$RoleAlert.text();
-                            _$RoleAlert.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]).removeClass("az-alert-info").addClass("az-alert-danger").show();
-                            _$Input.focus();
-                            $("body").addClass("az-alert-active");
-                            window.setTimeout(function ()
-                            {
-                                _$RoleAlert.text(_CurrentText).removeClass("az-alert-danger").addClass("az-alert-info").show();
-                                $("body").removeClass("az-alert-active");
-                            }, 3000);
-                        }
-                        else if (_$UIDialog.length > 0)
-                        {
-                            var _$NewUIDialogTitlebar = $('<div></div>').addClass("ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle").css({ "background-color": "#FF4136 ", "color": "#FFFFFF" });
-                            _$NewUIDialogTitlebar.append('<span class="ui-dialog-title">' + Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error] + '</span>');
-                            _$UIDialog.children(".ui-dialog-titlebar").hide();
-                            _$UIDialog.prepend(_$NewUIDialogTitlebar);
-                            _$Input.focus();
-                            $("body").addClass("az-alert-active");
-                            window.setTimeout(function ()
-                            {
-                                _$NewUIDialogTitlebar.remove();
-                                _$UIDialog.children(".ui-dialog-titlebar").show();
-                                $("body").removeClass("az-alert-active");
-                            }, 3000);
-                        }
-                        else if (_$Window.length > 0)
-                        {
-                            var _$NewTitlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error] + "</h1>").css({ "background-color": "#FF4136", "color": "#FFFFFF" });
-                            _$Window.children(".az-window-titlebar").hide();
-                            _$Window.prepend(_$NewTitlebar);
-                            _$Input.focus();
-                            $("body").addClass("az-alert-active");
-                            window.setTimeout(function ()
-                            {
-                                _$NewTitlebar.remove();
-                                _$Window.children(".az-window-titlebar").show();
-                                $("body").removeClass("az-alert-active");
-                            }, 3000);
+                            _ObjOutputData[_$Input.attr("id")] = moment(_$Input.datepicker("getDate")).format('YYYY-MM-DD');
                         }
                         else
                         {
-                            $("body").addClass("az-alert-active");
-                            $.subscribeonce("functionlib/azWindowAfterClose", function (e)
-                            {
-                                _$Input.focus();
-                                $("body").removeClass("az-alert-active");
-                            });
-                            new AZWindow(
-                                {
-                                    azWindowTitle: Options.ObjLanguage.SingleDefaultElements.informationTitle,
-                                    azWindowText: Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]
-                                });
+                            _ObjOutputData[_$Input.attr("id")] = null;
                         }
                     }
-                    _InputError = true;
-                    return false;
+                    else if (_ObjCurrentValidation.datatype.toLowerCase() === "datetime")
+                    {
+                        var _LongDateFormat = moment()._locale._longDateFormat;
+                        _ObjOutputData[_$Input.attr("id")] = moment(_$Input.val(), _LongDateFormat.L + " " + _LongDateFormat.LT).toJSON();
+                    }
+                    else if (_ObjCurrentValidation.datatype.toLowerCase() === "time")
+                    {
+                        _ObjOutputData[_$Input.attr("id")] = moment('0001-01-01 ' + _$Input.val()).format('h:mm:ss');
+                    }
+                    else if (_ObjCurrentValidation.datatype.toLowerCase() === "decimal")
+                    {
+                        _ObjOutputData[_$Input.attr("id")] = parseFloat(_$Input.val().replace(",", ".").replace(/ /g, ""));
+                    }
+                    else if (_ObjCurrentValidation.datatype.toLowerCase() === "int")
+                    {
+                        _ObjOutputData[_$Input.attr("id")] = Number(_$Input.val());
+                    }
+                    else
+                    {
+                        _ObjOutputData[_$Input.attr("id")] = _$Input.val();
+                    }
+
+                    _ObjReturnValidation = AZValidateInput(_$Input, _ObjCurrentValidation);
+                    if (IsEmpty(_ObjReturnValidation) === false)
+                    {
+                        _ObjReturnValidation.Input = _$Input.attr("id");
+                        consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + _ObjReturnValidation.Input + " - " + _ObjReturnValidation.Error });
+                        if ($(".az-alert-active").length === 0)
+                        {
+                            var _$RoleAlert = $("[role='alert']");
+                            var _$UIDialog = window.top.$(".ui-dialog");
+                            var _$Window = $("#az-window");
+
+                            if (_$RoleAlert.length > 0)
+                            {
+                                var _CurrentText = _$RoleAlert.text();
+                                _$RoleAlert.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]).removeClass("az-alert-info").addClass("az-alert-danger").show();
+                                _$Input.focus();
+                                $("body").addClass("az-alert-active");
+                                window.setTimeout(function ()
+                                {
+                                    _$RoleAlert.text(_CurrentText).removeClass("az-alert-danger").addClass("az-alert-info").show();
+                                    $("body").removeClass("az-alert-active");
+                                }, 3000);
+                            }
+                            else if (_$UIDialog.length > 0)
+                            {
+                                var _$NewUIDialogTitlebar = $('<div></div>').addClass("ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle").css({ "background-color": "#FF4136 ", "color": "#FFFFFF" });
+                                _$NewUIDialogTitlebar.append('<span class="ui-dialog-title">' + Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error] + '</span>');
+                                _$UIDialog.children(".ui-dialog-titlebar").hide();
+                                _$UIDialog.prepend(_$NewUIDialogTitlebar);
+                                _$Input.focus();
+                                $("body").addClass("az-alert-active");
+                                window.setTimeout(function ()
+                                {
+                                    _$NewUIDialogTitlebar.remove();
+                                    _$UIDialog.children(".ui-dialog-titlebar").show();
+                                    $("body").removeClass("az-alert-active");
+                                }, 3000);
+                            }
+                            else if (_$Window.length > 0)
+                            {
+                                var _$NewTitlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error] + "</h1>").css({ "background-color": "#FF4136", "color": "#FFFFFF" });
+                                _$Window.children(".az-window-titlebar").hide();
+                                _$Window.prepend(_$NewTitlebar);
+                                _$Input.focus();
+                                $("body").addClass("az-alert-active");
+                                window.setTimeout(function ()
+                                {
+                                    _$NewTitlebar.remove();
+                                    _$Window.children(".az-window-titlebar").show();
+                                    $("body").removeClass("az-alert-active");
+                                }, 3000);
+                            }
+                            else
+                            {
+                                $("body").addClass("az-alert-active");
+                                $.subscribeonce("functionlib/azWindowAfterClose", function (e)
+                                {
+                                    _$Input.focus();
+                                    $("body").removeClass("az-alert-active");
+                                });
+                                new AZWindow(
+                                    {
+                                        azWindowTitle: Options.ObjLanguage.SingleDefaultElements.informationTitle,
+                                        azWindowText: Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]
+                                    });
+                            }
+                        }
+                        _InputError = true;
+                        return false;
+                    }
                 }
             }
         });
@@ -1546,13 +1573,10 @@ function AZPopulateForm(Options)
 {
     if (IsEmpty(Options) === false && Options.hasOwnProperty("ObjInputData") && Options.hasOwnProperty("ObjValidation"))
     {
+        var _$Area = "";
         if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
         {
             _$Area = Options.$Area;
-        }
-        else
-        {
-            _$Area = "";
         }
 
         var _$Input = {};
@@ -1717,16 +1741,12 @@ function AZStandardAlert(Options)
     if (this instanceof AZStandardAlert === true)
     {
         var _Main = this;
-
         if (IsEmpty(Options) === false)
         {
+            _Main.$Area = "";
             if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
             {
                 _Main.$Area = Options.$Area;
-            }
-            else
-            {
-                _Main.$Area = "";
             }
 
             _Main.Title = Options.Title;
@@ -1802,6 +1822,86 @@ function AZStandardAlert(Options)
     }
 }
 
+function AZRunFunction(FunctionBody, FunctionArgs)
+{
+    var RunFunctionName = FunctionBody;
+    var RunFunctionArgs = FunctionArgs;
+    if (IsEmpty(FunctionBody) === false && FunctionBody.hasOwnProperty("FunctionName"))
+    {
+        RunFunctionName = FunctionBody.FunctionName;
+        RunFunctionArgs = FunctionBody.FunctionArgs;
+    }
+    else if (typeof FunctionBody == "object")
+    {
+        consoleLog({ consoleType: "warn", consoleText: "RunFunction argument failed, received wrong object" })
+        return false;
+    }
+
+    if (RunFunctionArgs == null || RunFunctionArgs == undefined || !Array.isArray(RunFunctionArgs))
+    {
+        RunFunctionArgs = [];
+    }
+    if (RunFunctionName && typeof RunFunctionName == "string" && RunFunctionName == "")
+    {
+        consoleLog({ consoleType: "warn", consoleText: "RunFunction argument failed, received empty string" })
+    }
+    else if (RunFunctionName && typeof RunFunctionName == "string")
+    {
+        var _ObjectList = RunFunctionName.split('.');
+        if (_ObjectList[0] == "window")
+        {
+            if (_ObjectList.length > 1)
+            {
+                RecursiveFindAndRunFunction(window, _ObjectList.slice(1));
+            }
+            else
+            {
+                consoleLog({ consoleType: "warn", consoleText: "RunFunction failed, received " + RunFunctionName });
+            }
+        }
+        else
+        {
+            RecursiveFindAndRunFunction(window, _ObjectList);
+        }
+    }
+    else
+    {
+        consoleLog({ consoleType: "warn", consoleText: "RunFunction argument failed, received " + typeof RunFunctionName + ", expected string" })
+    }
+
+    function RecursiveFindAndRunFunction(currentObject, currentQueue)
+    {
+        var _CurrentProperty = currentQueue.shift();
+        var _NewObject = null;
+        if (currentObject.hasOwnProperty(_CurrentProperty))
+        {
+            _NewObject = currentObject[_CurrentProperty];
+        }
+        if (_NewObject != null)
+        {
+            if (currentQueue.length > 0)
+            {
+                RecursiveFindAndRunFunction(_NewObject, currentQueue);
+            }
+            else
+            {
+                if (typeof _NewObject == "function")
+                {
+                    _NewObject.apply(currentObject, RunFunctionArgs);
+                }
+                else
+                {
+                    consoleLog({ consoleType: "warn", consoleText: "RunFunction failed, not a function - " + RunFunctionName });
+                }
+            }
+        }
+        else
+        {
+            consoleLog({ consoleType: "warn", consoleText: "RunFunction failed, missing property property " + _CurrentProperty + " - " + RunFunctionName });
+        }
+    }
+}
+
 function consoleLog(Options)
 {
     var _Defaults =
@@ -1829,3 +1929,22 @@ function consoleLog(Options)
         console[_Options.consoleType](_Options.consoleText);
     }
 }
+
+(function ($)
+{
+    $.fn.decimal = function ()
+    {
+        var _Return = this.map(function ()
+        {
+            var _Value = $(this).val();
+            if (_Value != "" && _Value.indexOf(",") > 0)
+            {
+                return parseFloat(_Value.replace(",", ".").replace(/ /g, ""));
+            }
+        });
+        if (_Return.length > 0)
+        {
+            return _Return[0];
+        }
+    };
+})(jQuery);
