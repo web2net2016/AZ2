@@ -419,7 +419,7 @@ function AZSetLanguage(Options)
                     _Main.SetSingleLanguage();
                 }
             }
-            else if (Options.hasOwnProperty("ObjLanguage"))
+            else if (Options.hasOwnProperty("ObjLanguage") && IsEmpty(Options.ObjLanguage) === false)
             {
                 _Main.$Area = "";
                 if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
@@ -428,8 +428,15 @@ function AZSetLanguage(Options)
                 }
                 _Main.ObjFormLanguageOptions =
                 {
-                    $Area: _Main.$Area,
-                    ObjElements: Options.ObjLanguage.ObjElements
+                    $Area: _Main.$Area
+                }
+                if (Options.ObjLanguage.hasOwnProperty("ObjElements") && IsEmpty(Options.ObjLanguage.ObjElements) === false)
+                {
+                    _Main.ObjFormLanguageOptions.ObjElements = Options.ObjLanguage.ObjElements;
+                }
+                else
+                {
+                    _Main.ObjFormLanguageOptions.ObjElements = [Options.ObjLanguage];
                 }
                 AZSetFormLanguage(_Main.ObjFormLanguageOptions);
             }
