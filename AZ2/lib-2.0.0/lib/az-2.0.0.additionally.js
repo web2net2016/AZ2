@@ -303,7 +303,11 @@ function AZCheckPageAttributes()
 
 function AZSetPageElement(PageElementArray)
 {
-    if (PageElementArray.length > 0)
+    if (PageElementArray == undefined || PageElementArray.length == 0)
+    {
+        consoleLog({ consoleType: "error", consoleText: "AZSetPageElement - Missing array" });
+    }
+    else
     {
         $.each(PageElementArray, function (Index, PageElement)
         {

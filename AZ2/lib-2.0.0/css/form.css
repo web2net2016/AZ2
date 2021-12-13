@@ -486,6 +486,7 @@
             -webkit-transform: translateX(16px);
             -moz-transform: translateX(16px);
             -ms-transform: translateX(16px);
+            -o-transform: translateX(16px);
             transform: translateX(16px);
         }
 
@@ -494,6 +495,7 @@
             -webkit-transform: translateX(13px);
             -moz-transform: translateX(13px);
             -ms-transform: translateX(13px);
+            -o-transform: translateX(13px);
             transform: translateX(13px);
         }
 
@@ -502,6 +504,7 @@
             -webkit-transform: translateX(19px);
             -moz-transform: translateX(19px);
             -ms-transform: translateX(19px);
+            -o-transform: translateX(19px);
             transform: translateX(19px);
         }
 
@@ -510,6 +513,7 @@
             -webkit-transform: translateX(22px);
             -moz-transform: translateX(22px);
             -ms-transform: translateX(22px);
+            -o-transform: translateX(22px);
             transform: translateX(22px);
         }
 
@@ -573,46 +577,6 @@
         }
 
         .az-form-group .az-range.az-round.md::-webkit-slider-runnable-track
-        {
-            border-radius: 50px !important;
-        }
-
-        .az-form-group .az-range::-moz-range-track
-        {
-            height: 20px;
-        }
-
-        .az-form-group .az-range.xs::-moz-range-track
-        {
-            height: 15px;
-        }
-
-        .az-form-group .az-range.sm::-moz-range-track
-        {
-            height: 25px;
-        }
-
-        .az-form-group .az-range.md::-moz-range-track
-        {
-            height: 30px;
-        }
-
-        .az-form-group .az-range.az-round::-moz-range-track
-        {
-            border-radius: 50px !important;
-        }
-
-        .az-form-group .az-range.az-round.xs::-moz-range-track
-        {
-            border-radius: 50px !important;
-        }
-
-        .az-form-group .az-range.az-round.sm::-moz-range-track
-        {
-            border-radius: 50px !important;
-        }
-
-        .az-form-group .az-range.az-round.md::-moz-range-track
         {
             border-radius: 50px !important;
         }
@@ -704,56 +668,6 @@
         }
 
         .az-form-group .az-range.az-round.md::-webkit-slider-thumb
-        {
-            width: 40px;
-            height: 40px;
-        }
-
-        .az-form-group .az-range::-moz-range-thumb
-        {
-            width: 20px;
-            height: 30px;
-            cursor: pointer;
-        }
-
-        .az-form-group .az-range.xs::-moz-range-thumb
-        {
-            width: 15px;
-            height: 25px;
-        }
-
-        .az-form-group .az-range.sm::-moz-range-thumb
-        {
-            width: 25px;
-            height: 35px;
-        }
-
-        .az-form-group .az-range.md::-moz-range-thumb
-        {
-            width: 30px;
-            height: 40px;
-        }
-
-        .az-form-group .az-range.az-round::-moz-range-thumb
-        {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-        }
-
-        .az-form-group .az-range.az-round.xs::-moz-range-thumb
-        {
-            width: 25px;
-            height: 25px;
-        }
-
-        .az-form-group .az-range.az-round.sm::-moz-range-thumb
-        {
-            width: 35px;
-            height: 35px;
-        }
-
-        .az-form-group .az-range.az-round.md::-moz-range-thumb
         {
             width: 40px;
             height: 40px;
@@ -1358,6 +1272,7 @@
         left: 50%;
         -webkit-transform: translate(-50%,-50%);
         -moz-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
         -o-transform: translate(-50%,-50%);
         transform: translate(-50%,-50%);
     }
@@ -1461,6 +1376,19 @@
     }
 }
 
+@-ms-keyframes cover-spin
+{
+    from
+    {
+        -ms-transform: rotate(0deg);
+    }
+
+    to
+    {
+        -ms-transform: rotate(360deg);
+    }
+}
+
 @-o-keyframes cover-spin
 {
     from
@@ -1502,6 +1430,19 @@
 }
 
 @-moz-keyframes input-focus
+{
+    0%
+    {
+        width: 0;
+    }
+
+    100%
+    {
+        width: 100%;
+    }
+}
+
+@-ms-keyframes input-focus
 {
     0%
     {

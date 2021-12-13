@@ -3,14 +3,32 @@
 Transitions:
 -webkit-transition
 -moz-transition
+-ms-transition
 -o-transition
 transition
 
 Transforms:
 -webkit-transform
 -moz-transform
+-ms-transform
 -o-transform
 transform
+
+Box Sizing:
+-webkit-box-sizing
+-moz-box-sizing
+box-sizing
+
+Border Radius:
+-webkit-border-radius
+-moz-border-radius
+border-radius
+
+Animation:
+-webkit-animation
+-moz-animation
+-o-animation
+animation
 
 Grid:
 xs - (0 - 576)
@@ -21,20 +39,26 @@ xl - (1200 - )
 */
 
 /* Size ALL ----------*/
-html
+*
 {
-    height: 100%;
-    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0px solid transparent;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-body
+html
 {
     height: 100%;
-    padding: 0;
-    outline: 0;
+}
+
+body
+{
+    width: 100%;
+    min-height: 100vh;
 }
 
 a:link

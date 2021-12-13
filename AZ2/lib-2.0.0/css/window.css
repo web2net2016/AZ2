@@ -26,7 +26,7 @@
 
     #az-window > .az-window-titlebar
     {
-        height: 20px;
+        height: 30px;
         margin-bottom: 7px;
         padding: 7px;
         -webkit-border-radius: 4px;
@@ -74,5 +74,6 @@
     -webkit-transform: translateX(0%, -50%);
     -moz-transform: translateX(0%, -50%);
     -ms-transform: translateX(0%, -50%);
+    -o-transform: translateX(0%, -50%);
     transform: translate(0%, -50%);
 }

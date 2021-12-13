@@ -112,19 +112,19 @@ $(document).ready(function ()
                             {
                                 if ($(this).hasClass("xs") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
                                 }
                                 else if ($(this).hasClass("sm") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
                                 }
                                 else if ($(this).hasClass("md") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
                                 }
                                 else
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
                                 }
                             },
                             onSelect: function (curDate, instance)
@@ -148,19 +148,19 @@ $(document).ready(function ()
                             {
                                 if ($(this).hasClass("xs") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
                                 }
                                 else if ($(this).hasClass("sm") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
                                 }
                                 else if ($(this).hasClass("md") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
                                 }
                                 else
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
                                 }
                             },
                             maxDate: 0,
@@ -186,19 +186,19 @@ $(document).ready(function ()
                             {
                                 if ($(this).hasClass("xs") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
                                 }
                                 else if ($(this).hasClass("sm") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
                                 }
                                 else if ($(this).hasClass("md") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
                                 }
                                 else
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
                                 }
                             },
                             minDate: 0,
@@ -223,19 +223,19 @@ $(document).ready(function ()
                             {
                                 if ($(this).hasClass("xs") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
                                 }
                                 else if ($(this).hasClass("sm") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
                                 }
                                 else if ($(this).hasClass("md") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
                                 }
                                 else
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
                                 }
                             },
                             numberOfMonths: 2,
@@ -261,19 +261,19 @@ $(document).ready(function ()
                             {
                                 if ($(this).hasClass("xs") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
                                 }
                                 else if ($(this).hasClass("sm") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
                                 }
                                 else if ($(this).hasClass("md") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
                                 }
                                 else
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
                                 }
                             },
                             numberOfMonths: 2,
@@ -299,19 +299,19 @@ $(document).ready(function ()
                             {
                                 if ($(this).hasClass("xs") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
                                 }
                                 else if ($(this).hasClass("sm") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
                                 }
                                 else if ($(this).hasClass("md") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
                                 }
                                 else
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
                                 }
                             },
                             maxDate: 0,
@@ -338,19 +338,19 @@ $(document).ready(function ()
                             {
                                 if ($(this).hasClass("xs") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
                                 }
                                 else if ($(this).hasClass("sm") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
                                 }
                                 else if ($(this).hasClass("md") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
                                 }
                                 else
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
                                 }
                             },
                             maxDate: 0,
@@ -377,19 +377,19 @@ $(document).ready(function ()
                             {
                                 if ($(this).hasClass("xs") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
                                 }
                                 else if ($(this).hasClass("sm") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
                                 }
                                 else if ($(this).hasClass("md") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
                                 }
                                 else
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
                                 }
                             },
                             minDate: 0,
@@ -416,19 +416,19 @@ $(document).ready(function ()
                             {
                                 if ($(this).hasClass("xs") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
                                 }
                                 else if ($(this).hasClass("sm") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
                                 }
                                 else if ($(this).hasClass("md") == true)
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" })
+                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
                                 }
                                 else
                                 {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" })
+                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
                                 }
                             },
                             minDate: 0,
@@ -1091,7 +1091,7 @@ function AZAccordion(Options)
                         $(this).css({ "color": "#FFFFFF" });
                     }
                 }
-            })
+            });
             if (_Main.Options.azAccordionArticleBackgroundColor !== "")
             {
                 _Main.$Article.css({ "background-color": _Main.Options.azAccordionArticleBackgroundColor });
@@ -1114,12 +1114,12 @@ function AZAccordion(Options)
                 {
                     _Main.$Article.height(_Main.MaxArticleHeight);
                 }
-            }
+            };
 
             _Main.azSelectAccordion = function (SelectedIndex)
             {
                 azExecAccordion(_Main.$AccordionCard.eq(SelectedIndex).children("header"));
-            }
+            };
 
             _Main.azChangeText = function (SelectedIndex, SelectedText)
             {
@@ -1131,7 +1131,7 @@ function AZAccordion(Options)
                         _Main.$AccordionCard.eq(SelectedIndex).children("article").html(SelectedText);
                     }).fadeIn();
                 }, 500);
-            }
+            };
 
             _Main.$Accordion.off().on(_Main.Options.azAccordionOpenEvent, ".az-accordion-card > header", function (e)
             {
@@ -1326,11 +1326,11 @@ function AZBackgroundSlider(Options)
                 });
                 if (_Main.ContentMaxWidth > _Main.$BackgroundSliderContent.innerWidth())
                 {
-                    _Main.LeftRightMargin = ((_Main.ContentMaxWidth - _Main.$BackgroundSliderContent.innerWidth()) / 2)
+                    _Main.LeftRightMargin = ((_Main.ContentMaxWidth - _Main.$BackgroundSliderContent.innerWidth()) / 2);
                 }
                 if (_Main.ContentMaxHeight > _Main.$BackgroundSliderContent.innerHeight())
                 {
-                    _Main.TopBottomMargin = ((_Main.ContentMaxHeight - _Main.$BackgroundSliderContent.innerHeight()) / 2)
+                    _Main.TopBottomMargin = ((_Main.ContentMaxHeight - _Main.$BackgroundSliderContent.innerHeight()) / 2);
                 }
 
                 _Main.$BackgroundSliderContent.find("img").css({ "width": _Main.ContentWidth, "height": _Main.ContentHeight });
@@ -1384,13 +1384,13 @@ function AZCircularBar(Options)
             $.each(Options, function (Index, ObjCurrentOption)
             {
                 _Main = new AktivateAZCircularBar(ObjCurrentOption);
-                $.publish("functionlib/azCircularBarReady", _Main)
+                $.publish("functionlib/azCircularBarReady", _Main);
             });
         }
         else if (IsEmpty(Options) === false)
         {
             _Main = new AktivateAZCircularBar(Options);
-            $.publish("functionlib/azCircularBarReady", _Main)
+            $.publish("functionlib/azCircularBarReady", _Main);
         }
 
         function AktivateAZCircularBar(ObjCurrentOption)
@@ -1417,7 +1417,7 @@ function AZCircularBar(Options)
                     this.$CircularBar.$Label.html(Options.azCircularBarLabel);
                     this.$CircularBar.$Caption.css({ "top": Options.azCircularBarSize, "color": Options.azCircularBarCaptionColor }).html(Options.azCircularBarCaption);
                     this.$CircularBar.removeClass().addClass("c100 p" + Options.azCircularBarValue).css({ "background-color": Options.azCircularBarColor, "font-size": Options.azCircularBarSize });
-                }
+                };
                 return this;
             }
         }
@@ -1631,7 +1631,7 @@ function AZModalDialog(Options)
                     }
                 }
                 $.publish("functionlib/azModalDialogAfterClose", { azModalDialogId: _Main.azModalDialogId });
-            }
+            };
 
             // AZModalDialog Change Titlebar
             _Main.azChangeModalTitlebar = function (Options)
@@ -1671,7 +1671,7 @@ function AZModalDialog(Options)
                         }
                     }, _Main.Options.azModalDialogAlertTimeout);
                 }
-            }
+            };
         }
     }
     else
@@ -1795,7 +1795,7 @@ function AZSnackbar(Options)
                 {
                     _Main.Options.azSnackbarMobileMinHeight = (window.innerHeight - 70);
                 }
-                _Main.$Snackbar.css({ "min-height": _Main.Options.azSnackbarMobileMinHeight })
+                _Main.$Snackbar.css({ "min-height": _Main.Options.azSnackbarMobileMinHeight });
             }
         }
 
@@ -1818,12 +1818,12 @@ function AZSnackbar(Options)
                     }
                 }
             });
-        }
+        };
 
         _Main.azChangeText = function (SnackbarText)
         {
-            _Main.$TextCell.html(SnackbarText)
-        }
+            _Main.$TextCell.html(SnackbarText);
+        };
 
         if (_Main.Options.azSnackbarClose === true)
         {
@@ -1909,22 +1909,22 @@ function AZTabs(Options)
                 {
                     _Main.$Article.height(_Main.MaxArticleHeight);
                 }
-            }
+            };
 
             _Main.azSelectTabs = function (SelectedIndex)
             {
                 azExecTabs(_Main.$Tabs.children("ul").children("li").eq(SelectedIndex));
-            }
+            };
 
             _Main.azChangeText = function (SelectedIndex, SelectedText)
             {
                 _Main.$TabsCard.children("article").eq(SelectedIndex).html(SelectedText);
-            }
+            };
 
             _Main.azToggleVertical = function ()
             {
                 _Main.$Tabs.toggleClass("az-tabs-vertical");
-            }
+            };
 
             _Main.$Tabs.off().on(_Main.Options.azTabsOpenEvent, " > ul > li", function (e)
             {
@@ -2147,7 +2147,7 @@ function AZWindow(Options)
                     _Main.$Window.remove();
                 }
                 $.publish("functionlib/azWindowAfterClose");
-            }
+            };
 
             // AZWindow Change Titlebar
             _Main.azChangeWindowTitlebar = function (Options)
@@ -2186,7 +2186,7 @@ function AZWindow(Options)
                         }
                     }, _Main.Options.azWindowAlertTimeout);
                 }
-            }
+            };
         }
     }
     else
@@ -2367,7 +2367,7 @@ function AZSlideIn(Options)
             {
                 _Main.TextLength = (_Main.TextLength * 8);
                 _Main.SlideInTabOptions = { "height": _Main.TextLength };
-                _Main.$SlideInTab.children("div").text(_Main.Options.azSlideInTabText)
+                _Main.$SlideInTab.children("div").text(_Main.Options.azSlideInTabText);
                 if (_Main.Options.azSlideInPosition == "right")
                 {
                     _Main.$SlideInTab.children("div").css({ "width": _Main.TextLength, "height": _Main.TextLength, "right": - 11 });
@@ -2433,7 +2433,7 @@ function AZSlideIn(Options)
             _Main.azChangeText = function (SelectedText)
             {
                 _Main.$Article.html(SelectedText);
-            }
+            };
 
             _Main.$SlideInTab.css(_Main.SlideInTabOptions);
             _Main.$Article.css(_Main.SlideInArticleOptions);
@@ -2454,7 +2454,7 @@ function AZSlideIn(Options)
             _Main.azSelectSlideInTab = function ()
             {
                 azExecSlideInTab();
-            }
+            };
 
             function azExecSlideInTab()
             {
@@ -2467,7 +2467,7 @@ function AZSlideIn(Options)
                     _Main.$SlideIn.toggleClass('az-slidein-active display-left');
                 }
             }
-            $.publish("functionlib/azSlideInReady", _Main)
+            $.publish("functionlib/azSlideInReady", _Main);
         }
     }
     else
@@ -2514,7 +2514,7 @@ function AZSlideshow(Options)
                         _Main.SlideShow = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
                     });
                     _Main.SlideShow = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
-                })
+                });
             }
 
             $.subscribe("functionlib/azWindowResize", function (e, data)
@@ -2547,7 +2547,7 @@ function AZSlideshow(Options)
                 window.clearTimeout(_Main.SlideShow);
                 _Main.SlideIndex += n;
                 showDivs();
-            }
+            };
 
             showDivs = function ()
             {
@@ -2561,7 +2561,7 @@ function AZSlideshow(Options)
                 };
                 $("slide", _Main.$Slides).fadeOut(100);
                 $("slide", _Main.$Slides).eq(_Main.SlideIndex).fadeIn(100);
-            }
+            };
         }
     }
     else
@@ -2715,8 +2715,8 @@ function AZSortArray(Arr, Prop, Order)
                 {
                     var x = (a[Attr] === null) ? "" : "" + a[Attr],
                         y = (b[Attr] === null) ? "" : "" + b[Attr];
-                    return x < y ? -1 : (x > y ? 1 : 0)
-                }
+                    return x < y ? -1 : (x > y ? 1 : 0);
+                };
             }
             else
             {
@@ -2724,8 +2724,8 @@ function AZSortArray(Arr, Prop, Order)
                 {
                     var x = (a[Attr] === null) ? "" : "" + a[Attr],
                         y = (b[Attr] === null) ? "" : "" + b[Attr];
-                    return x < y ? 1 : (x > y ? -1 : 0)
-                }
+                    return x < y ? 1 : (x > y ? -1 : 0);
+                };
             }
         }
     }
@@ -2733,12 +2733,17 @@ function AZSortArray(Arr, Prop, Order)
 
 function isEmpty(Obj)
 {
-    return IsEmpty(Obj);
+    return AZIsEmpty(Obj);
 }
 
 function IsEmpty(Obj)
 {
-    if (Obj instanceof Object)
+    return AZIsEmpty(Obj);
+}
+
+function AZIsEmpty(Obj)
+{
+    if (Obj.constructor === Object)
     {
         if (Obj == null)
         {
@@ -2749,6 +2754,20 @@ function IsEmpty(Obj)
             if (Obj.hasOwnProperty(key))
             {
                 return false;
+            }
+        }
+        return true;
+    }
+    else if (Obj.constructor === Array)
+    {
+        if (Obj.length > 0)
+        {
+            for (var key in Obj)
+            {
+                if (Obj.hasOwnProperty(key))
+                {
+                    return false;
+                }
             }
         }
         return true;
@@ -2767,14 +2786,14 @@ function getURLParameters(URL)
 function AZGetURLParameters(URL)
 {
     var _Return = {};
-    if (URL === undefined || URL === "")
+    if (URL !== undefined && URL !== null && URL == "")
     {
         window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value)
         {
             _Return[key.toLowerCase()] = value;
         });
     }
-    else
+    else if (URL !== undefined && URL !== null && URL != "")
     {
         URL.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value)
         {
@@ -2808,25 +2827,42 @@ function getSelectedObj(Array, Key, Val)
     return AZGetObj(Array, Key, Val);
 }
 
-function AZGetObj(Array, Key, Val)
+function AZGetObj(List, x, y)
 {
-    var _ReturnObj = {};
-    if (Array !== undefined && Array !== null && Array.length > 0)
+    var _ReturnObj = {};    
+    for (var Obj in List)
     {
-        $.each(Array, function (Index, Obj)
+        if (List[Obj].constructor === Array)
         {
-            $.each(Obj, function (key, val)
+            for (var Obj2 in List[Obj])
             {
-                if (Key !== undefined && Key !== null && key !== undefined && key !== null && Val !== undefined && Val !== null && val !== undefined && val !== null)
+                _ReturnObj = AZGetObj(List[Obj][Obj2], x, y);
+                if (AZIsEmpty(_ReturnObj) === false)
                 {
-                    if (Key.toString().toLowerCase() == key.toString().toLowerCase() && Val.toString().toLowerCase() == val.toString().toLowerCase())
-                    {
-                        _ReturnObj = Obj;
-                        return false;
-                    }
+                    break;
                 }
-            });
-        });
+            }
+        }
+        else
+        {
+            for (var key in List[Obj])
+            {
+                if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === List[Obj][key].toString().toLowerCase())
+                {
+                    _ReturnObj = List[Obj];
+                    break;
+                }
+                if (List[Obj][key] instanceof Array)
+                {
+                    _ReturnObj = AZGetObj(List[Obj][key], x, y);
+                }
+            }
+
+            if (AZIsEmpty(_ReturnObj) === false)
+            {
+                break;
+            }
+        }
     }
     return _ReturnObj;
 }
@@ -2836,22 +2872,48 @@ function removeSelectedObj(Array, Key, Val)
     return AZRemoveObj(Array, Key, Val);
 }
 
-function AZRemoveObj(Array, Key, Val)
+function AZRemoveObj(List, x, y)
 {
-    if (Array !== undefined && Array !== null && Array.length > 0)
+    var _ReturnObj = {};
+    for (var Obj in List)
     {
-        $.each(Array, function (Index, Selected1Content)
+        if (List[Obj].constructor === Array)
         {
-            if (Selected1Content.hasOwnProperty(Key) && Selected1Content[Key] !== null && Val !== undefined && Val !== null)
+            for (var Obj2 in List[Obj])
             {
-                if (Selected1Content[Key].toString().toLowerCase() == Val.toString().toLowerCase())
+                _ReturnObj = AZRemoveObj(List[Obj][Obj2], x, y);
+                if (AZIsEmpty(_ReturnObj) === false)
                 {
-                    Array.splice(Index, 1);
-                    return false;
+                    break;
                 }
             }
-        });
+        }
+        else
+        {
+            for (var key in List[Obj])
+            {
+                if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === List[Obj][key].toString().toLowerCase())
+                {
+                    _ReturnObj = List[Obj];
+                    break;
+                }
+                if (List[Obj][key] instanceof Array)
+                {
+                    _ReturnObj = AZRemoveObj(List[Obj][key], x, y);
+                }
+            }
+
+            if (AZIsEmpty(_ReturnObj) === false)
+            {
+                break;
+            }
+        }
     }
+
+    return _ReturnObj;
+
+    //console.log(findIndex(_ReturnObj, List))
+
 }
 
 function existsSelectedObj(Array, Key, Val)
@@ -2859,14 +2921,39 @@ function existsSelectedObj(Array, Key, Val)
     return AZExistObj(Array, Key, Val);
 }
 
-function AZExistObj(Array, Key, Val)
+function AZExistObj(List, x, y)
 {
     var _Found = false;
-    for (var i = 0; i < Array.length; i++)
+    var _ReturnObj = {};
+    for (var Obj in List)
     {
-        if (Array[i].hasOwnProperty(Key) && Array[i][Key] !== null && Val !== undefined && Val !== null)
+        if (List[Obj].constructor === Array)
         {
-            if (Array[i][Key].toString().toLowerCase() == Val.toString().toLowerCase())
+            for (var Obj2 in List[Obj])
+            {
+                _ReturnObj = AZGetObj(List[Obj][Obj2], x, y);
+                if (AZIsEmpty(_ReturnObj) === false)
+                {
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for (var key in List[Obj])
+            {
+                if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === List[Obj][key].toString().toLowerCase())
+                {
+                    _ReturnObj = List[Obj];
+                    break;
+                }
+                if (List[Obj][key] instanceof Array)
+                {
+                    _ReturnObj = AZGetObj(List[Obj][key], x, y);
+                }
+            }
+
+            if (AZIsEmpty(_ReturnObj) === false)
             {
                 _Found = true;
                 break;

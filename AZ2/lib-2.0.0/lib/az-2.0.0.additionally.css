@@ -1,9 +1,8 @@
 ﻿/* Size ALL --------*/
-html, body
+html
 {
     font-family: Verdana, sans-serif;
     font-size: 13px;
-    line-height: 1.42857143;
     color: #000000;
     background-color: #DEDEDE;
 }
