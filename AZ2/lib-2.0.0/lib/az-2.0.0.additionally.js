@@ -74,14 +74,14 @@ function AZPage(Options)
         _Main.DefaultLanguage = "";
 
         _Main.ObjPageAttributes = new AZCheckPageAttributes();
-        if (IsEmpty(_Main.ObjPageAttributes) === false)
+        if (AZIsEmpty(_Main.ObjPageAttributes) === false)
         {
             _Main.ObjPageAttributes.$AZFormObj = (window.document.forms.length > 0) ? $(window.document.forms[0]) : {};
-            if (IsEmpty(_Main.Options.azPageArea) === false)
+            if (AZIsEmpty(_Main.Options.azPageArea) === false)
             {
                 _Main.ObjPageAttributes.$AZFormObj = _Main.Options.azPageArea;
             }
-            if (IsEmpty(_Main.ObjPageAttributes.$AZFormObj) === false)
+            if (AZIsEmpty(_Main.ObjPageAttributes.$AZFormObj) === false)
             {
                 AZSetPageElement(_Main.Options.azPageElement)
                 _Main.InputTypeEvents = function ()
@@ -174,14 +174,14 @@ function AZPage(Options)
                             _Main.ObjLanguage = data;
                             _Main.Validation();
                         });
-                        if (_Main.Options.azPageLanguageUrl !== "")
+                        if (_Main.Options.azPageLanguageUrl != "")
                         {
                             _Main.JsonUrl = _Main.Options.azPageLanguageUrl;
                         }
                         _Main.$Language = new AZGetJSON({ azJsonUrl: _Main.JsonUrl + "-lang.json" });
                         _Main.$Language.always(function (data, textStatus, jqXHR)
                         {
-                            if (IsEmpty(data) === false && textStatus === "success")
+                            if (AZIsEmpty(data) === false && textStatus === "success")
                             {
                                 var _AZSetLanguageOptions =
                                 {
@@ -203,7 +203,7 @@ function AZPage(Options)
                     }
                 }
 
-                if (IsEmpty(AZSettings) === false)
+                if (AZIsEmpty(AZSettings) === false)
                 {
                     _Main.DefaultLanguageFile = AZSettings.DefaultLanguageFile;
                     _Main.DefaultLanguage = AZClientStorage("get", "language");
@@ -301,25 +301,25 @@ function AZCheckPageAttributes()
     }
 }
 
-function AZSetPageElement(PageElementArray)
+function AZSetPageElement(List)
 {
-    if (PageElementArray == undefined || PageElementArray.length == 0)
+    if (List !== null && List !== undefined && List.length > 0)
     {
-        consoleLog({ consoleType: "error", consoleText: "AZSetPageElement - Missing array" });
+        $.each(List, function (Index, Obj)
+        {
+            if ($("#" + Obj).length > 0)
+            {
+                ObjPageData.Elements["$" + Obj] = $("#" + Obj);
+            }
+            if ($("." + Obj).length > 0)
+            {
+                ObjPageData.Elements["$" + Obj] = $("." + Obj);
+            }
+        });
     }
     else
     {
-        $.each(PageElementArray, function (Index, PageElement)
-        {
-            if ($("#" + PageElement).length > 0)
-            {
-                ObjPageData.Elements["$" + PageElement] = $("#" + PageElement);
-            }
-            if ($("." + PageElement).length > 0)
-            {
-                ObjPageData.Elements["$" + PageElement] = $("." + PageElement);
-            }
-        });
+        consoleLog({ consoleType: "error", consoleText: "AZSetPageElement - Missing array" });
     }
 }
 
@@ -357,7 +357,7 @@ function AZSetLanguage(Options)
     {
         var _Main = this;
 
-        if (IsEmpty(Options) === false)
+        if (AZIsEmpty(Options) === false)
         {
             if (Options.hasOwnProperty("ObjPageLanguage") && Options.hasOwnProperty("DefaultLanguageFile") && Options.hasOwnProperty("DefaultLanguage"))
             {
@@ -408,7 +408,7 @@ function AZSetLanguage(Options)
                     _Main.$DefaultLanguage = new AZGetJSON({ azJsonUrl: _Main.DefaultLanguageFile });
                     _Main.$DefaultLanguage.always(function (data, textStatus, jqXHR)
                     {
-                        if (IsEmpty(data) === false && textStatus === "success")
+                        if (AZIsEmpty(data) === false && textStatus == "success")
                         {
                             _Main.SetFullLanguage(data);
                         }
@@ -423,10 +423,10 @@ function AZSetLanguage(Options)
                     _Main.SetSingleLanguage();
                 }
             }
-            else if (Options.hasOwnProperty("ObjLanguage") && IsEmpty(Options.ObjLanguage) === false)
+            else if (Options.hasOwnProperty("ObjLanguage") && AZIsEmpty(Options.ObjLanguage) === false)
             {
                 _Main.$Area = "";
-                if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
+                if (Options.hasOwnProperty("$Area") && AZIsEmpty(Options.$Area) === false)
                 {
                     _Main.$Area = Options.$Area;
                 }
@@ -434,7 +434,7 @@ function AZSetLanguage(Options)
                 {
                     $Area: _Main.$Area
                 }
-                if (Options.ObjLanguage.hasOwnProperty("ObjElements") && IsEmpty(Options.ObjLanguage.ObjElements) === false)
+                if (Options.ObjLanguage.hasOwnProperty("ObjElements") && AZIsEmpty(Options.ObjLanguage.ObjElements) === false)
                 {
                     _Main.ObjFormLanguageOptions.ObjElements = Options.ObjLanguage.ObjElements;
                 }
@@ -463,16 +463,16 @@ function AZSetLanguage(Options)
 // AZ Set Form Language
 function AZSetFormLanguage(Options)
 {
-    if (IsEmpty(Options) === false)
+    if (AZIsEmpty(Options) === false)
     {
         var _$Area = "";
-        if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
+        if (Options.hasOwnProperty("$Area") && AZIsEmpty(Options.$Area) === false)
         {
             _$Area = Options.$Area;
         }
 
         var _ObjElements = Options;
-        if (Options.hasOwnProperty("ObjElements") && IsEmpty(Options.ObjElements) === false)
+        if (Options.hasOwnProperty("ObjElements") && AZIsEmpty(Options.ObjElements) === false)
         {
             _ObjElements = Options.ObjElements;
         }
@@ -685,10 +685,10 @@ function AZSetValidation(Options)
     if (this instanceof AZSetValidation === true)
     {
         var _Main = this;
-        if (IsEmpty(Options) === false && Options.hasOwnProperty("ObjValidation"))
+        if (AZIsEmpty(Options) === false && Options.hasOwnProperty("ObjValidation"))
         {
             _Main.$Area = "";
-            if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
+            if (Options.hasOwnProperty("$Area") && AZIsEmpty(Options.$Area) === false)
             {
                 _Main.$Area = Options.$Area;
             }
@@ -1327,10 +1327,10 @@ function AZGetValidType(SelectedType)
 
 function AZSerializeForm(Options)
 {
-    if (IsEmpty(Options) === false && Options.hasOwnProperty("ObjLanguage") && Options.hasOwnProperty("ObjValidation"))
+    if (AZIsEmpty(Options) === false && Options.hasOwnProperty("ObjLanguage") && Options.hasOwnProperty("ObjValidation"))
     {
         var _$Area = "";
-        if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
+        if (Options.hasOwnProperty("$Area") && AZIsEmpty(Options.$Area) === false)
         {
             _$Area = Options.$Area;
         }
@@ -1347,7 +1347,7 @@ function AZSerializeForm(Options)
             {
                 _$Input = $('#' + HTMLElement, _$Area);
 
-                if (IsEmpty(_$Input) === false)
+                if (AZIsEmpty(_$Input) === false)
                 {
                     _ObjCurrentValidation = Value;
 
@@ -1385,7 +1385,7 @@ function AZSerializeForm(Options)
                     }
 
                     _ObjReturnValidation = AZValidateInput(_$Input, _ObjCurrentValidation);
-                    if (IsEmpty(_ObjReturnValidation) === false)
+                    if (AZIsEmpty(_ObjReturnValidation) === false)
                     {
                         _ObjReturnValidation.Input = _$Input.attr("id");
                         consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + _ObjReturnValidation.Input + " - " + _ObjReturnValidation.Error });
@@ -1463,7 +1463,7 @@ function AZSerializeForm(Options)
         }
         else
         {
-            return null;
+            return {};
         }
     }
     else
@@ -1582,10 +1582,10 @@ function AZValidateInput($Input, ObjCurrentValidation)
 
 function AZPopulateForm(Options)
 {
-    if (IsEmpty(Options) === false && Options.hasOwnProperty("ObjInputData") && Options.hasOwnProperty("ObjValidation"))
+    if (AZIsEmpty(Options) === false && Options.hasOwnProperty("ObjInputData") && Options.hasOwnProperty("ObjValidation"))
     {
         var _$Area = "";
-        if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
+        if (Options.hasOwnProperty("$Area") && AZIsEmpty(Options.$Area) === false)
         {
             _$Area = Options.$Area;
         }
@@ -1609,7 +1609,7 @@ function AZPopulateForm(Options)
                 _$Input = $('.' + HTMLElement, _$Area);
             }
 
-            if (IsEmpty(_$Input) === false)
+            if (AZIsEmpty(_$Input) === false)
             {
                 _DataAttr = _$Input.attr("data-attr");
                 _ObjCurrentValidation = Options.ObjValidation[_$Input.attr("id")];
@@ -1752,10 +1752,10 @@ function AZStandardAlert(Options)
     if (this instanceof AZStandardAlert === true)
     {
         var _Main = this;
-        if (IsEmpty(Options) === false)
+        if (AZIsEmpty(Options) === false)
         {
             _Main.$Area = "";
-            if (Options.hasOwnProperty("$Area") && IsEmpty(Options.$Area) === false)
+            if (Options.hasOwnProperty("$Area") && AZIsEmpty(Options.$Area) === false)
             {
                 _Main.$Area = Options.$Area;
             }
@@ -1837,7 +1837,7 @@ function AZRunFunction(FunctionBody, FunctionArgs)
 {
     var RunFunctionName = FunctionBody;
     var RunFunctionArgs = FunctionArgs;
-    if (IsEmpty(FunctionBody) === false && FunctionBody.hasOwnProperty("FunctionName"))
+    if (AZIsEmpty(FunctionBody) === false && FunctionBody.hasOwnProperty("FunctionName"))
     {
         RunFunctionName = FunctionBody.FunctionName;
         RunFunctionArgs = FunctionBody.FunctionArgs;

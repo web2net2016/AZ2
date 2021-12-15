@@ -29,15 +29,21 @@
         {
             w3CodeColor();
 
-            //+ $(this).attr("class") + ' '
-            //$("#container2 .az-col").css({ "outline": "1px solid #28a745", "text-align": "center", "padding-top": "30px" });
-            $(".az-grid-item").not(".az-padding-0").each(function (i)
+            $(".az-grid-item").each(function (i)
             {
-                $(this).html('<p style="margin: 10px">' + (Number(i) + 1) + '</p>');
+                $(this).html($(this).attr("class") + '<p style="color: red; margin: 10px">' + (Number(i) + 1) + '</p>');
             });
         });
 
     </script>
+    <style type="text/css">
+        .az-grid-item
+        {
+            outline: 1px solid #28a745;
+            text-align: center;
+            padding-top: 15px;
+        }
+    </style>
 </head>
 
 <body>
@@ -60,14 +66,14 @@
                 <div class="az-grid-item"></div>
             </div>
 
-            <br />
+            <!--<br />
             <br />
             <br />
             <br />
 
-            <div class="az-grid-row" style="grid-template-columns: 1fr 100px;">
+            <div class="az-grid-row" style="grid-template-columns: 1fr 300px;">
                 <div class="az-grid-item"></div>
-                <div class="az-grid-item az-padding-0">
+                <div class="az-grid-item az-padding-0" style="grid-column: 2; grid-row: 1 / 2; display: grid;">
                     <div class="az-form-group">
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Primary</button>
                     </div>
@@ -75,6 +81,17 @@
                         <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Primary</button>
                     </div>
                 </div>
+            </div>-->
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div class="az-grid-row xs-1 sm-4">
+                <div class="az-grid-item sm-span-2"></div>
+                <div class="az-grid-item sm-start-2"></div>
+                <div class="az-grid-item"></div>
             </div>
 
             <br />
@@ -82,10 +99,8 @@
             <br />
             <br />
 
-            <div class="az-grid-row xs-1 sm-2">
-                <div class="az-grid-item sm-span-2"></div>
-                <div class="az-grid-item sm-start-2"></div>
-                <div class="az-grid-item"></div>
+            <div class="az-grid-row xs-1 sm-4">
+                <div class="az-grid-item sm-span-2 md-span-3"></div>
             </div>
 
             <br />

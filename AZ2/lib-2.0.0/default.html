@@ -157,9 +157,9 @@
 
         $(document).ready(function ()
         {
-            //console.log(AZGetObj(Array1, "id", "955"));
-            //console.log(AZExistObj(Array1, "id", "955"));
-            //console.log(AZGuid());
+            //console.log(AZGetObj(Array2, "Name", "Olsen"));
+            //console.log(AZExistObj(Array2, "Name", "Olsen"));
+            //AZRemoveObj(Array2, "Name", "Olsen")
 
             w3CodeColor();
 
@@ -181,12 +181,13 @@
             $("#ClientStorageSet").off("click", ClientStorageSet).on("click", ClientStorageSet);
             $("#ClientStorageGet").off("click", ClientStorageGet).on("click", ClientStorageGet);
             $("#ClientStorageDelete").off("click", ClientStorageDelete).on("click", ClientStorageDelete);
-            $("#SortArray").off("click", SortArray).on("click", SortArray);
-            $("#GetURLParameters").off("click", GetURLParameters).on("click", GetURLParameters);
-            $("#BytesConverter").off("click", BytesConverter).on("click", BytesConverter);
             $("#GetObj").off("click", GetObj).on("click", GetObj);
             $("#RemoveObj").off("click", RemoveObj).on("click", RemoveObj);
             $("#ExistObj").off("click", ExistObj).on("click", ExistObj);
+            $("#SortArray").off("click", SortArray).on("click", SortArray);
+            $("#GetURLParameters").off("click", GetURLParameters).on("click", GetURLParameters);
+            $("#BytesConverter").off("click", BytesConverter).on("click", BytesConverter);
+            $("#Guid").off("click", Guid).on("click", Guid);
             $("#SetPageElement").off("click", SetPageElement).on("click", SetPageElement);
             $("#ShowCoverSpin1").off("click", ShowCoverSpin1).on("click", ShowCoverSpin1);
             $("#ShowCoverSpin2").off("click", ShowCoverSpin2).on("click", ShowCoverSpin2);
@@ -266,6 +267,11 @@
         {
             $("#byte").html("<br /><brown>" + AZBytesConverter(123456) + " - " + AZBytesConverter(987654321) + "</brown>");
         }
+
+        function Guid()
+        {
+            $("#guid").html("<br /><brown>" + AZGuid() + "</brown>");
+        }        
 
         function SetPageElement()
         {
@@ -633,6 +639,22 @@
                         </div>
 
                         <div class="az-code-property-wrapper">
+                            <property>AZ Guid</property>
+                            <type><span>Type:</span> <brown>Function</brown></type>
+                            <values><span>Return:</span> <brown>String</brown></values>
+                            <br />
+                            AZGuid();
+                            <br />
+                            <br />
+                            <div id="guid" class="jsHigh notranslate"></div>
+                            <br />
+                            <div class="az-form-group">
+                                <button id="Guid" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Guid</button>
+                            </div>
+                            <br />
+                        </div>
+
+                        <div class="az-code-property-wrapper">
                             <property>Set AZ Page</property>
                             <type><span>Type:</span> <brown>Function</brown></type>
                             <values><span>Return:</span> <mediumblue>object</mediumblue></values>
@@ -826,6 +848,7 @@
                             <div class="az-form-group">
                                 <button type="button" id="AZAnim" class="az-button primary az-shadow-1 az-shadow-hover-2">Go Anim</button>
                             </div>
+                            <br />
                         </div>
 
                         <div class="az-code-property-wrapper">

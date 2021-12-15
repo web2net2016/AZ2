@@ -2774,6 +2774,21 @@ function AZIsEmpty(Obj)
     }
     else
     {
+        if (Obj instanceof Object)
+        {
+            if (Obj == null)
+            {
+                return true;
+            }
+            for (var key in Obj)
+            {
+                if (Obj.hasOwnProperty(key))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         return true;
     }
 }
@@ -2786,14 +2801,14 @@ function getURLParameters(URL)
 function AZGetURLParameters(URL)
 {
     var _Return = {};
-    if (URL !== undefined && URL !== null && URL == "")
+    if (URL !== null && URL !== undefined && URL == "")
     {
         window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value)
         {
             _Return[key.toLowerCase()] = value;
         });
     }
-    else if (URL !== undefined && URL !== null && URL != "")
+    else if (URL !== null && URL !== undefined && URL != "")
     {
         URL.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value)
         {
@@ -2822,51 +2837,54 @@ function AZBytesConverter(Bytes, Decimal)
     return _Return;
 }
 
-function getSelectedObj(Array, Key, Val)
+function getSelectedObj(List, x, y)
 {
-    return AZGetObj(Array, Key, Val);
+    return AZGetObj(List, x, y);
 }
 
 function AZGetObj(List, x, y)
 {
     var _ReturnObj = {};
-    if (List.constructor === Array)
+    if (x !== null && x !== undefined && x != "" && y !== null && y !== undefined && y != "")
     {
-        for (var key in List)
+        if (List.constructor === Array)
         {
-            _ReturnObj = AZGetObj(List[key], x, y);
-            if (AZIsEmpty(_ReturnObj) === false)
+            for (var key in List)
             {
-                break;
-            }
-        }
-    }
-    else
-    {
-        var Obj = List;
-        for (var key in Obj)
-        {
-            if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === Obj[key].toString().toLowerCase())
-            {
-                _ReturnObj = Obj;
-                break;
-            }
-            if (Obj[key].constructor === Array || Obj[key].constructor === Object)
-            {
-                _ReturnObj = AZGetObj(Obj[key], x, y);
+                _ReturnObj = AZGetObj(List[key], x, y);
                 if (AZIsEmpty(_ReturnObj) === false)
                 {
                     break;
                 }
             }
         }
-    }
+        else
+        {
+            var Obj = List;
+            for (var key in Obj)
+            {
+                if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === Obj[key].toString().toLowerCase())
+                {
+                    _ReturnObj = Obj;
+                    break;
+                }
+                if (Obj[key].constructor === Array || Obj[key].constructor === Object)
+                {
+                    _ReturnObj = AZGetObj(Obj[key], x, y);
+                    if (AZIsEmpty(_ReturnObj) === false)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+    }    
     return _ReturnObj;
 }
 
-function existsSelectedObj(Array, Key, Val)
+function existsSelectedObj(List, x, y)
 {
-    return AZExistObj(Array, Key, Val);
+    return AZExistObj(List, x, y);
 }
 
 function AZExistObj(List, x, y)
@@ -2874,27 +2892,59 @@ function AZExistObj(List, x, y)
     return AZIsEmpty(AZGetObj(List, x, y)) === false;
 }
 
-function removeSelectedObj(Array, Key, Val)
+function removeSelectedObj(List, x, y)
 {
-    return AZRemoveObj(Array, Key, Val);
+    return AZRemoveObj(List, x, y);
 }
 
-function AZRemoveObj(Array, Key, Val)
+function AZRemoveObj(List, x, y)
 {
-    if (Array !== undefined && Array !== null && Array.length > 0)
+    if (List !== null && List !== undefined && List.length > 0 && x !== null && x !== undefined && x != "" && y !== null && y !== undefined && y != "")
     {
-        $.each(Array, function (Index, Selected1Content)
+        $.each(List, function (Index, Obj)
         {
-            if (Selected1Content.hasOwnProperty(Key) && Selected1Content[Key] !== null && Val !== undefined && Val !== null)
+            if (Obj[x].toString().toLowerCase() == y.toString().toLowerCase())
             {
-                if (Selected1Content[Key].toString().toLowerCase() == Val.toString().toLowerCase())
+                List.splice(Index, 1);
+                return false;
+            }
+        });
+    }
+}
+
+function AZFilterArray(SelectedList, SelectedKey, SelectedVal)
+{
+    var _Return = [];
+    if (SelectedList.length > 0 && SelectedKey != "" && SelectedKey != undefined && SelectedVal != "" && SelectedVal != undefined)
+    {
+        _Return = $.grep(SelectedList, function (Obj)
+        {
+            if (Obj.hasOwnProperty(SelectedKey) === true)
+            {
+                return (Obj[SelectedKey] == SelectedVal.toString().toLowerCase());
+            }
+        });
+    }
+    return _Return;
+}
+
+function AZFilterArrayUnique(SelectedList, SelectedKey, SelectedVal)
+{
+    var _ReturnList = [];
+    if (SelectedList.length > 0 && SelectedKey != "" && SelectedKey != undefined && SelectedVal != "" && SelectedVal != undefined)
+    {
+        $.each(SelectedList, function (Key, Value)
+        {
+            if (Value.hasOwnProperty(SelectedKey) === true)
+            {
+                if (existsSelectedObj(_ReturnList, SelectedKey, SelectedVal) === false)
                 {
-                    Array.splice(Index, 1);
-                    return false;
+                    _ReturnList.push(Value);
                 }
             }
         });
     }
+    return _ReturnList;
 }
 
 function Guid()
@@ -2920,7 +2970,7 @@ function formatDateTime(DateTime, Format)
 function AZFormatDateTime(DateTime, Format)
 {
     var _ReturnObj = {};
-    if (moment(DateTime).isValid() == true && Format != "" && Format != undefined)
+    if (moment(DateTime).isValid() == true && Format !== null && Format !== undefined && Format != "")
     {
         _ReturnObj = moment(DateTime).format(Format);
     }

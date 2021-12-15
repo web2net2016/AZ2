@@ -64,11 +64,16 @@
         {
             ObjPageData.Values.AZPage = data;
 
+            $.subscribe("functionlib/azSetDate", function (e, data)
+            {
+                console.log("azDateId: " + data.azDateId + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
+            });
+
             //ObjPageData.Values.AZPage.ObjLanguage
             //var _AZSetLanguageOptions =
             //{
             //    $Area: $("#labelCustomerName").parent(),
-            //    ObjLanguage: { "labelCustomerName": ["id", "text", "df hdfh dfh dhd h:"] }
+            //    ObjLanguage: { "labelCustomerName": ["id", "text", "Et firmanavn:"] }
             //}
             //AZSetLanguage(_AZSetLanguageOptions);
 
@@ -104,8 +109,9 @@
                 ObjValidation: ObjPageData.Values.AZPage.ObjValidation
             }
             var _ObjReturnForm = AZSerializeForm(_AZSerializeFormOptions);
-            if (IsEmpty(_ObjReturnForm) === false)
+            if (AZIsEmpty(_ObjReturnForm) === false)
             {
+                console.log(_ObjReturnForm)
                 console.log(JSON.stringify(_ObjReturnForm))
                 $("#ObjFormResponse").text(JSON.stringify(_ObjReturnForm));
             }
