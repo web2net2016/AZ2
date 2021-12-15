@@ -210,7 +210,7 @@ function AZClientStorage(ActionType, Name, Value)
         console.error("Client Storage Error\n" + consoleText);
     }
 }
-// AZ-Functionlib v2.0.0 | (c) web2net AS
+// AZ-Functionlib v2.0.1 | (c) web2net AS
 
 var ModalDialogScrollTop = 0;
 

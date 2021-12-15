@@ -1,4 +1,4 @@
-﻿// AZ-2.0.0.Additionally | (c) web2net AS
+﻿// AZ-2.0.1.Additionally | (c) web2net AS
 
 var AZSettings =
 {
