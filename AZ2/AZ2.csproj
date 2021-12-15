@@ -70,9 +70,11 @@
     <Content Include="admin\index\index.html" />
     <Content Include="lib-2.0.0\azgrid.html" />
     <Content Include="lib-2.0.0\azdragdrop.html" />
+    <Content Include="lib-2.0.0\css\cssgrid.css" />
     <Content Include="lib-2.0.0\css\window.css" />
     <Content Include="lib-2.0.0\css\modaldialog.css" />
     <Content Include="lib-2.0.0\js\sort.js" />
+    <Content Include="lib-2.0.0\azcssgrid.html" />
     <Content Include="web2net\authentication.js" />
     <Content Include="favicon.ico" />
     <Content Include="web2net\fingerprint.js" />

@@ -3041,91 +3041,39 @@ function getSelectedObj(Array, Key, Val)
 
 function AZGetObj(List, x, y)
 {
-    var _ReturnObj = {};    
-    for (var Obj in List)
-    {
-        if (List[Obj].constructor === Array)
-        {
-            for (var Obj2 in List[Obj])
-            {
-                _ReturnObj = AZGetObj(List[Obj][Obj2], x, y);
-                if (AZIsEmpty(_ReturnObj) === false)
-                {
-                    break;
-                }
-            }
-        }
-        else
-        {
-            for (var key in List[Obj])
-            {
-                if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === List[Obj][key].toString().toLowerCase())
-                {
-                    _ReturnObj = List[Obj];
-                    break;
-                }
-                if (List[Obj][key] instanceof Array)
-                {
-                    _ReturnObj = AZGetObj(List[Obj][key], x, y);
-                }
-            }
-
-            if (AZIsEmpty(_ReturnObj) === false)
-            {
-                break;
-            }
-        }
-    }
-    return _ReturnObj;
-}
-
-function removeSelectedObj(Array, Key, Val)
-{
-    return AZRemoveObj(Array, Key, Val);
-}
-
-function AZRemoveObj(List, x, y)
-{
     var _ReturnObj = {};
-    for (var Obj in List)
+    if (List.constructor === Array)
     {
-        if (List[Obj].constructor === Array)
+        for (var key in List)
         {
-            for (var Obj2 in List[Obj])
-            {
-                _ReturnObj = AZRemoveObj(List[Obj][Obj2], x, y);
-                if (AZIsEmpty(_ReturnObj) === false)
-                {
-                    break;
-                }
-            }
-        }
-        else
-        {
-            for (var key in List[Obj])
-            {
-                if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === List[Obj][key].toString().toLowerCase())
-                {
-                    _ReturnObj = List[Obj];
-                    break;
-                }
-                if (List[Obj][key] instanceof Array)
-                {
-                    _ReturnObj = AZRemoveObj(List[Obj][key], x, y);
-                }
-            }
-
+            _ReturnObj = AZGetObj(List[key], x, y);
             if (AZIsEmpty(_ReturnObj) === false)
             {
                 break;
             }
         }
     }
-
+    else
+    {
+        var Obj = List;
+        for (var key in Obj)
+        {
+            if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === Obj[key].toString().toLowerCase())
+            {
+                _ReturnObj = Obj;
+                break;
+            }
+            if (Obj[key].constructor === Array || Obj[key].constructor === Object)
+            {
+                _ReturnObj = AZGetObj(Obj[key], x, y);
+                if (AZIsEmpty(_ReturnObj) === false)
+                {
+                    break;
+                }
+            }
+        }
+    }
     return _ReturnObj;
-
-    //console.log(findIndex(_ReturnObj, List))
-
 }
 
 function existsSelectedObj(Array, Key, Val)
@@ -3135,44 +3083,30 @@ function existsSelectedObj(Array, Key, Val)
 
 function AZExistObj(List, x, y)
 {
-    var _Found = false;
-    var _ReturnObj = {};
-    for (var Obj in List)
-    {
-        if (List[Obj].constructor === Array)
-        {
-            for (var Obj2 in List[Obj])
-            {
-                _ReturnObj = AZGetObj(List[Obj][Obj2], x, y);
-                if (AZIsEmpty(_ReturnObj) === false)
-                {
-                    break;
-                }
-            }
-        }
-        else
-        {
-            for (var key in List[Obj])
-            {
-                if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === List[Obj][key].toString().toLowerCase())
-                {
-                    _ReturnObj = List[Obj];
-                    break;
-                }
-                if (List[Obj][key] instanceof Array)
-                {
-                    _ReturnObj = AZGetObj(List[Obj][key], x, y);
-                }
-            }
+    return AZIsEmpty(AZGetObj(List, x, y)) === false;
+}
 
-            if (AZIsEmpty(_ReturnObj) === false)
+function removeSelectedObj(Array, Key, Val)
+{
+    return AZRemoveObj(Array, Key, Val);
+}
+
+function AZRemoveObj(Array, Key, Val)
+{
+    if (Array !== undefined && Array !== null && Array.length > 0)
+    {
+        $.each(Array, function (Index, Selected1Content)
+        {
+            if (Selected1Content.hasOwnProperty(Key) && Selected1Content[Key] !== null && Val !== undefined && Val !== null)
             {
-                _Found = true;
-                break;
+                if (Selected1Content[Key].toString().toLowerCase() == Val.toString().toLowerCase())
+                {
+                    Array.splice(Index, 1);
+                    return false;
+                }
             }
-        }
+        });
     }
-    return _Found;
 }
 
 function Guid()
@@ -3182,10 +3116,10 @@ function Guid()
 
 function AZGuid()
 {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c)
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (e)
     {
         var r = Math.random() * 16 | 0;
-        var v = c == 'x' ? r : (r & 0x3 | 0x8);
+        var v = e == 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
 }
