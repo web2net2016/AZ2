@@ -1,0 +1,124 @@
+﻿
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>AZ Slideshow</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib-2.0.1/css/az-2.0.1.min.css" />
+    <script src="/lib-2.0.1/js/az-2.0.1.min.js"></script>
+
+    <link rel="stylesheet" href="/lib-2.0.1/lib/az-2.0.1.additionally.css" />
+    <script src="/lib-2.0.1/lib/az-2.0.1.additionally.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.1/lib/az-codecolor.css" />
+    <script src="/lib-2.0.1/lib/az-codecolor.js"></script>
+    <script>
+
+        $(document).ready(function ()
+        {
+            $('#section-container-1-col-1, #section-container-1-col-2, #section-container-1-col-3').matchHeight();
+
+            new AZSlideshow(
+                {
+                    azSlideshowId: "az-slideshow-1",
+                    azSlideshowArrows: true,
+                    azSlideshowTimer: 3000,
+                    azSlideshowFadeIn: 1000,
+                    azSlideshowFadeOut: 1000
+                });
+        });
+
+    </script>
+    <style>
+        #section-2
+        {
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="frmReg">
+        <div id="section-1" class="az-section">
+            <div class="az-container-fluid">
+
+                <div class="az-row">
+                    <div class="az-col xs-12">
+
+                        <div id="az-slideshow-1" class="az-slideshow">
+                            <div class="az-slides">
+                                <slide>
+                                    <img src="/web2net/slideshow1.jpg">
+                                    <div class="az-display-absolute-topleft az-text-jumbo az-color-white az-margin-14">Dette er en tekst</div>
+                                </slide>
+                                <slide>
+                                    <img src="/web2net/slideshow2.jpg">
+                                    <div class="az-display-absolute-middle az-text-jumbo az-color-danger az-margin-14">Dette er en tekst</div>
+                                </slide>
+                                <slide>
+                                    <img src="/web2net/slideshow3.jpg">
+                                    <div class="az-display-absolute-bottomright az-text-jumbo az-color-blue az-margin-14">Dette er en tekst</div>
+                                </slide>
+                                <slide>
+                                    <img src="/web2net/slideshow2.jpg">
+                                    <div class="az-display-absolute-middle az-text-jumbo az-color-danger az-margin-14">Dette er en tekst</div>
+                                </slide>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="section-2" class="az-section">
+            <div class="az-container-fluid">
+
+                <div class="az-row">
+                    <div class="az-col xs-12 lg-4">
+
+                        <div id="section-container-1-col-1" class="az-margin-14 az-color-white">
+                            <h1 class="az-xs-text-xlarge az-sm-text-xxlarge az-text-uppercase az-text-center az-padding-7">Webmaster tools</h1>
+                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="/web2net/webmastertools.png" /></p>
+                            <p class="az-display-center az-padding-t-14 az-padding-b-14 az-xs-width-90 az-sm-width-80">Webmaster Tools - Google Search Console, er et verktøy Google har laget for å gi deg en generell oversikt over helsestatusen til dine hjemmesider. Dette er et kraftig verktøy som oppdateres jevnlig med ny funksjonalitet for å gi deg en bedre oversikt.</p>
+                        </div>
+
+                    </div>
+                    <div class="az-col xs-12 lg-4">
+
+                        <div id="section-container-1-col-2" class="az-margin-14 az-color-white">
+                            <h1 class="az-xs-text-xlarge az-sm-text-xxlarge az-text-uppercase az-text-center az-padding-7">Webmaster tools</h1>
+                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="/web2net/webmastertools.png" /></p>
+                            <p class="az-display-center az-padding-t-14 az-padding-b-14 az-xs-width-90 az-sm-width-80">Webmaster Tools - Google Search Console, er et verktøy Google har laget for å gi deg en generell oversikt over helsestatusen til dine hjemmesider. Dette er et kraftig verktøy som oppdateres jevnlig med ny funksjonalitet for å gi deg en bedre oversikt.</p>
+                        </div>
+
+                    </div>
+                    <div class="az-col xs-12 lg-4">
+
+                        <div id="section-container-1-col-3" class="az-margin-14 az-color-white">
+                            <h1 class="az-xs-text-xlarge az-sm-text-xxlarge az-text-uppercase az-text-center az-padding-7">Sosiale medier</h1>
+                            <p class="az-text-center"><img alt="" class="az-xs-width-40 az-sm-width-30 az-lg-width-40" src="/web2net/sosial-media-1.png" /></p>
+                            <p class="az-display-center az-padding-t-14 az-padding-b-14 az-xs-width-90 az-sm-width-80">Sosiale medier er et verktøy for å nå ut til dine eksisterende og nye kunder. Med enkle grep kan vi gjøre dine hjemmesider langt mer tilpasset den sosiale verden enn de kanskje er i dag.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+
+</body>
+</html>

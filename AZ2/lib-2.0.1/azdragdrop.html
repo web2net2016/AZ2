@@ -1,0 +1,139 @@
+﻿
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>AZ Drag & Drop</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib-2.0.1/css/az-2.0.1.min.css" />
+    <script src="/lib-2.0.1/js/az-2.0.1.min.js"></script>
+
+    <link rel="stylesheet" href="/lib-2.0.1/lib/az-2.0.1.additionally.css" />
+    <script src="/lib-2.0.1/lib/az-2.0.1.additionally.js"></script>
+    <link rel="stylesheet" href="/lib-2.0.1/lib/az-codecolor.css" />
+    <script src="/lib-2.0.1/lib/az-codecolor.js"></script>
+    <script>
+
+        $(document).ready(function ()
+        {
+            w3CodeColor();
+
+            $('#draggable > li').draggable(
+                {
+                    revert: "invalid"
+                }).on('click', function ()
+                {
+                    console.log($(this).removeAttr('style'))
+
+                });
+
+            $("#droppable-wrapper").droppable(
+                {
+                    accept: "#draggable > li"
+                });
+
+            //$("#droppable").droppable({
+            //    accept: "#draggable",
+            //    classes: {
+            //        "ui-droppable-active": "ui-state-active",
+            //        "ui-droppable-hover": "ui-state-hover"
+            //    },
+            //    drop: function (event, ui)
+            //    {
+            //        $(this)
+            //            .addClass("ui-state-highlight")
+            //            .find("p")
+            //            .html("Dropped!");
+            //    }
+            //});
+
+
+            //$("#draggable").draggable();
+
+            //$("#sortable1").sortable(
+            //    {
+            //        connectWith: "#draggable-wrapper"
+            //    });
+        });
+
+    </script>
+    <style>
+
+        #droppable-wrapper
+        {
+            width: 700px;
+            height: 500px;
+            background-color: #FFFFFF;
+        }
+
+        /*#draggable
+        {
+            width: 100px;
+            height: 100px;
+            background-color: #ff6a00;
+        }*/
+
+        #draggable
+        {
+            border: 1px solid #eee;
+            width: 142px;
+            min-height: 20px;
+            list-style-type: none;
+            margin: 0;
+            padding: 5px 0 0 0;
+            float: left;
+            margin-right: 10px;
+        }
+
+            #draggable li
+            {
+                margin: 0 5px 5px 5px;
+                padding: 5px;
+                font-size: 1.2em;
+                width: 120px;
+            }
+    </style>
+</head>
+<body>
+
+    <form id="frmReg">
+        <div class="az-container">
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+
+                    <div id="droppable-wrapper"></div>
+
+                </div>
+            </div>
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+
+                    <ul id="draggable">
+                        <li class="ui-state-default">Item 1</li>
+                        <li class="ui-state-default">Item 2</li>
+                        <li class="ui-state-default">Item 3</li>
+                        <li class="ui-state-default">Item 4</li>
+                        <li class="ui-state-default">Item 5</li>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</body>
+</html>
