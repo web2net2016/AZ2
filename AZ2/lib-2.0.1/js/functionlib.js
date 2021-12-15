@@ -2743,38 +2743,9 @@ function IsEmpty(Obj)
 
 function AZIsEmpty(Obj)
 {
-    if (Obj.constructor === Object)
+    if (Obj !== null && Obj !== undefined)
     {
-        if (Obj == null)
-        {
-            return true;
-        }
-        for (var key in Obj)
-        {
-            if (Obj.hasOwnProperty(key))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-    else if (Obj.constructor === Array)
-    {
-        if (Obj.length > 0)
-        {
-            for (var key in Obj)
-            {
-                if (Obj.hasOwnProperty(key))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    else
-    {
-        if (Obj instanceof Object)
+        if (Obj.constructor === Object)
         {
             if (Obj == null)
             {
@@ -2789,8 +2760,44 @@ function AZIsEmpty(Obj)
             }
             return true;
         }
-        return true;
+        else if (Obj.constructor === Array)
+        {
+            if (Obj.length > 0)
+            {
+                for (var key in Obj)
+                {
+                    if (Obj.hasOwnProperty(key))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        else
+        {
+            if (Obj instanceof Object)
+            {
+                if (Obj == null)
+                {
+                    return true;
+                }
+                for (var key in Obj)
+                {
+                    if (Obj.hasOwnProperty(key))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return true;
+        }
     }
+    else
+    {
+        return true;
+    }    
 }
 
 function getURLParameters(URL)
@@ -2841,11 +2848,10 @@ function getSelectedObj(List, x, y)
 {
     return AZGetObj(List, x, y);
 }
-
 function AZGetObj(List, x, y)
 {
     var _ReturnObj = {};
-    if (x !== null && x !== undefined && x != "" && y !== null && y !== undefined && y != "")
+    if (List !== null && List !== undefined && x !== null && x !== undefined && x != "" && y !== null && y !== undefined && y != "")
     {
         if (List.constructor === Array)
         {
@@ -2863,22 +2869,25 @@ function AZGetObj(List, x, y)
             var Obj = List;
             for (var key in Obj)
             {
-                if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === Obj[key].toString().toLowerCase())
+                if (Obj[key] !== null && Obj[key] !== undefined)
                 {
-                    _ReturnObj = Obj;
-                    break;
-                }
-                if (Obj[key].constructor === Array || Obj[key].constructor === Object)
-                {
-                    _ReturnObj = AZGetObj(Obj[key], x, y);
-                    if (AZIsEmpty(_ReturnObj) === false)
+                    if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === Obj[key].toString().toLowerCase())
                     {
+                        _ReturnObj = Obj;
                         break;
+                    }
+                    if (Obj[key].constructor === Array || Obj[key].constructor === Object)
+                    {
+                        _ReturnObj = AZGetObj(Obj[key], x, y);
+                        if (AZIsEmpty(_ReturnObj) === false)
+                        {
+                            break;
+                        }
                     }
                 }
             }
         }
-    }    
+    }
     return _ReturnObj;
 }
 
