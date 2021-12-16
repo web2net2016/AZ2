@@ -1046,7 +1046,7 @@ function AZAccordion(Options)
             _Main.azAccordionId = _Main.Options.azAccordionId;
             _Main.$Accordion = $("#" + _Main.azAccordionId);
             _Main.$AccordionCard = _Main.$Accordion.children(".az-accordion-card");
-            _Main.$Header = _Main.$AccordionCard.children("header").append('<i class="' + _Main.Options.azAccordionIconClosed + '"></i>');
+            _Main.$Header = _Main.$AccordionCard.children("header").append('<span class="az-accordion-icon"><i class="' + _Main.Options.azAccordionIconClosed + '"></i><span>');
             _Main.$Article = _Main.$AccordionCard.children("article");
 
             if (_Main.Options.azAccordionHeaderBackgroundColor !== "")
@@ -1148,7 +1148,7 @@ function AZAccordion(Options)
                     {
                         $SelectedAccordionHeader.removeClass("az-accordion-header-active");
                         $SelectedAccordionHeader.siblings("article").slideUp(_Main.Options.azAccordionSlideUp).removeClass("az-accordion-article-active");
-                        $("i", $SelectedAccordionHeader).removeClass(_Main.Options.azAccordionIconOpen).addClass(_Main.Options.azAccordionIconClosed);
+                        $("span.az-accordion-icon > i", $SelectedAccordionHeader).removeClass(_Main.Options.azAccordionIconOpen).addClass(_Main.Options.azAccordionIconClosed);
 
                         if (_Main.AccordionActivated == $SelectedAccordionHeader.parent().index())
                         {
@@ -1185,11 +1185,11 @@ function AZAccordion(Options)
                 {
                     _Main.$Header.removeClass("az-accordion-header-active");
                     _Main.$Article.slideUp(_Main.Options.azAccordionSlideUp).removeClass("az-accordion-article-active");
-                    $("i", _Main.$Header).removeClass(_Main.Options.azAccordionIconOpen).addClass(_Main.Options.azAccordionIconClosed);
+                    $("span.az-accordion-icon > i", _Main.$Header).removeClass(_Main.Options.azAccordionIconOpen).addClass(_Main.Options.azAccordionIconClosed);
 
                     $SelectedAccordionHeader.addClass("az-accordion-header-active");
                     $SelectedAccordionHeader.siblings("article").slideDown(_Main.Options.azAccordionSlideDown).addClass("az-accordion-article-active");
-                    $("i", $SelectedAccordionHeader).removeClass(_Main.Options.azAccordionIconClosed).addClass(_Main.Options.azAccordionIconOpen);
+                    $("span.az-accordion-icon > i", $SelectedAccordionHeader).removeClass(_Main.Options.azAccordionIconClosed).addClass(_Main.Options.azAccordionIconOpen);
 
                     if (_Main.AccordionDeactivated == $SelectedAccordionHeader.parent().index())
                     {
@@ -1440,8 +1440,9 @@ function AZModalDialog(Options)
             azModalDialogTitle: "",
             azModalDialogText: "",
             azModalDialogiFrameURL: "",
-            azModalDialogWidth: 450,
-            azModalDialogHeight: 300,
+            azModalDialogWidth: 300,
+            azModalDialogHeight: 150,
+            azModalDialogContentHeight: false,
             azModalDialogNoParentScroll: false,
             azModalDialogBackground: true,
             azModalDialogModal: true,
@@ -1471,7 +1472,7 @@ function AZModalDialog(Options)
             _Main.$Background = {};
             _Main.$Iframe;
 
-            _Main.$Dialog = $("<div></div>").attr("id", _Main.azModalDialogId);
+            _Main.$Dialog = $("<div></div>").attr("id", _Main.azModalDialogId).addClass("az-modal-dialog-content");
             _Main.$Card = $("<div></div>").addClass("az-modal-card");
             _Main.$Article = $("<article></article>").html(_Main.Options.azModalDialogText);
             _Main.$Card.append(_Main.$Article);
@@ -1489,8 +1490,13 @@ function AZModalDialog(Options)
             // AZModalDialog iFrame
             if (_Main.Options.azModalDialogiFrameURL != "")
             {
+                var _IFrameHeight = (_Main.Options.azModalDialogHeight - 53);
+                if (_Main.Options.azModalDialogTitlebar === false)
+                {
+                    _IFrameHeight = _IFrameHeight + 29;
+                }
                 _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe-" + _Main.azModalDialogId);
-                _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": (_Main.Options.azModalDialogHeight - 80) });
+                _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": _IFrameHeight });
                 _Main.$Card.append(_Main.$Iframe);
             }
 
@@ -1500,12 +1506,16 @@ function AZModalDialog(Options)
                 {
                     autoOpen: false,
                     modal: false,
-                    width: (_Main.Options.azModalDialogWidth - 16),
-                    height: _Main.Options.azModalDialogHeight,
+                    width: _Main.Options.azModalDialogWidth,
                     resizable: _Main.Options.azModalDialogResizable,
                     draggable: _Main.Options.azModalDialogDraggable,
                     closeOnEscape: _Main.Options.azModalDialogCloseOnEscape
                 });
+            if (_Main.Options.azModalDialogContentHeight === false)
+            {
+                _Main.$CurrentDialog.dialog({ height: _Main.Options.azModalDialogHeight });
+            }
+
             if (_Main.Options.azModalDialogPosition && IsEmpty(_Main.Options.azModalDialogPositionOf) === false && window.innerWidth > 576)
             {
                 _Main.$CurrentDialog.dialog(
@@ -1598,6 +1608,10 @@ function AZModalDialog(Options)
                 }
             }
             $.publish("functionlib/azModalDialogAfterOpen", _Main);
+            if (_Main.$CurrentDialog.height() > (window.innerHeight - 20))
+            {
+                _Main.$CurrentDialog.dialog({ height: (window.innerHeight - 20) });
+            }
 
             // AZModalDialog Close
             _Main.azModalDialogClose = function ()
@@ -1988,8 +2002,9 @@ function AZWindow(Options)
         {
             azWindowTitle: "",
             azWindowText: "",
-            azWindowWidth: 450,
+            azWindowWidth: 300,
             azWindowHeight: 150,
+            azWindowContentHeight: false,
             azWindowPositionTop: 0,
             azWindowModal: false,
             azWindowTitlebar: true,
@@ -2038,17 +2053,13 @@ function AZWindow(Options)
             }
 
             // AZWindow Size
-            _Main.Options.azWindowWidth = (_Main.Options.azWindowWidth - 14);
-            if (_Main.Options.azWindowWidth > (window.innerWidth - 40))
+            if (_Main.Options.azWindowWidth > (window.innerWidth - 20))
             {
-                _Main.Options.azWindowWidth = (window.innerWidth - 40);
+                _Main.Options.azWindowWidth = (window.innerWidth - 20);
             }
-            if (_Main.Options.azWindowHeight > 150)
+            if (_Main.Options.azWindowHeight > (window.innerHeight - 20))
             {
-                if (_Main.Options.azWindowHeight > (window.innerHeight - 40))
-                {
-                    _Main.Options.azWindowHeight = (window.innerHeight - 40);
-                }
+                _Main.Options.azWindowHeight = (window.innerHeight - 20);
             }
 
             // AZWindow No Parent Scroll
@@ -2080,11 +2091,7 @@ function AZWindow(Options)
             if (_Main.Options.azWindowTitlebar === false)
             {
                 _Main.$Titlebar.hide();
-                _Main.$Dialog.height(_Main.Options.azWindowHeight - 28);
-            }
-            else
-            {
-                _Main.$Dialog.height(_Main.Options.azWindowHeight - 69);
+                _Main.$Dialog.css({ "margin-top": "7px" });
             }
             if (_Main.Options.azWindowTitlebarClose === false)
             {
@@ -2098,16 +2105,6 @@ function AZWindow(Options)
                 });
             }
 
-            _Main.$Window.width(_Main.Options.azWindowWidth);
-            _Main.$Window.height(_Main.Options.azWindowHeight - 14);
-            if (_Main.Options.azWindowPositionTop === 0 || ((_Main.Options.azWindowPositionTop + _Main.$Window.height()) > ($(window).scrollTop() + $(window).height())))
-            {
-                _Main.$Window.css({ "top": ($(window).scrollTop() + $(window).height() / 2) - (_Main.$Window.height() / 2) });
-            }
-            else
-            {
-                _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
-            }
             _Main.$Body.append(_Main.$Window);
             _Main.$Window.hide();
             if (_Main.Options.azWindowAnimation === true)
@@ -2119,6 +2116,34 @@ function AZWindow(Options)
                 _Main.$Window.show();
             }
             $.publish("functionlib/azWindowAfterOpen", _Main);
+
+            _Main.$Window.width(_Main.Options.azWindowWidth);
+            if (_Main.Options.azWindowContentHeight === false)
+            {
+                _Main.$Window.height(_Main.Options.azWindowHeight);
+                _Main.$Dialog.height((_Main.Options.azWindowHeight - 51));
+                if (_Main.Options.azWindowTitlebar === false)
+                {
+                    _Main.$Dialog.height((_Main.Options.azWindowHeight - 16));
+                }
+            }
+            if (_Main.$Window.height() > (window.innerHeight - 20))
+            {
+                _Main.$Window.height((window.innerHeight - 20));
+                _Main.$Dialog.height(((window.innerHeight - 20) - 51));
+                if (_Main.Options.azWindowTitlebar === false)
+                {
+                    _Main.$Dialog.height(((window.innerHeight - 20) - 16));
+                }
+            }
+            if (_Main.Options.azWindowPositionTop === 0 || ((_Main.Options.azWindowPositionTop + _Main.$Window.height()) > ($(window).height())))
+            {
+                _Main.$Window.css({ "top": ($(window).height() / 2) - (_Main.$Window.height() / 2) });
+            }
+            else
+            {
+                _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
+            }
 
             // AZWindow Close
             _Main.azWindowClose = function ()
@@ -2797,7 +2822,7 @@ function AZIsEmpty(Obj)
     else
     {
         return true;
-    }    
+    }
 }
 
 function getURLParameters(URL)
@@ -2846,42 +2871,49 @@ function AZBytesConverter(Bytes, Decimal)
 
 function getSelectedObj(List, x, y)
 {
-    return AZGetObj(List, x, y);
+    return AZGetObj(List, x, y, z);
 }
-function AZGetObj(List, x, y)
+
+function AZGetObj(List, x, y, MaxLevel, DepthLevel)
 {
     var _ReturnObj = {};
-    if (List !== null && List !== undefined && x !== null && x !== undefined && x != "" && y !== null && y !== undefined && y != "")
+    var _MaxLevel = MaxLevel !== undefined ? MaxLevel : 9999;
+    var _DepthLevel = DepthLevel !== undefined ? DepthLevel : 1;
+
+    if (AZIsEmpty(List) === false && x !== null && x !== undefined && x != "" && y !== null && y !== undefined && y != "")
     {
-        if (List.constructor === Array)
+        if (_DepthLevel <= _MaxLevel)
         {
-            for (var key in List)
+            if (List.constructor === Array)
             {
-                _ReturnObj = AZGetObj(List[key], x, y);
-                if (AZIsEmpty(_ReturnObj) === false)
+                for (var key in List)
                 {
-                    break;
-                }
-            }
-        }
-        else
-        {
-            var Obj = List;
-            for (var key in Obj)
-            {
-                if (Obj[key] !== null && Obj[key] !== undefined)
-                {
-                    if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === Obj[key].toString().toLowerCase())
+                    _ReturnObj = AZGetObj(List[key], x, y, _MaxLevel, _DepthLevel);
+                    if (AZIsEmpty(_ReturnObj) === false)
                     {
-                        _ReturnObj = Obj;
                         break;
                     }
-                    if (Obj[key].constructor === Array || Obj[key].constructor === Object)
+                }
+            }
+            else
+            {
+                var Obj = List;
+                for (var key in Obj)
+                {
+                    if (Obj[key] !== null && Obj[key] !== undefined)
                     {
-                        _ReturnObj = AZGetObj(Obj[key], x, y);
-                        if (AZIsEmpty(_ReturnObj) === false)
+                        if (x.toString().toLowerCase() === key.toString().toLowerCase() && y.toString().toLowerCase() === Obj[key].toString().toLowerCase())
                         {
+                            _ReturnObj = Obj;
                             break;
+                        }
+                        if (Obj[key].constructor === Array || Obj[key].constructor === Object)
+                        {
+                            _ReturnObj = AZGetObj(Obj[key], x, y, _MaxLevel, _DepthLevel+1);
+                            if (AZIsEmpty(_ReturnObj) === false)
+                            {
+                                break;
+                            }
                         }
                     }
                 }

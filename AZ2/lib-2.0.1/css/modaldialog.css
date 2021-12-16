@@ -6,13 +6,18 @@
     border-radius: 4px;
 }
 
-    .az-modal-dialog > .az-modal-card
+.az-modal-dialog-titlebar
+{
+    margin-bottom: 7px;
+}
+
+.az-modal-dialog .az-modal-card
+{
+}
+
+    .az-modal-dialog .az-modal-card > article
     {
     }
-
-        .az-modal-dialog > .az-modal-card > article
-        {
-        }
 
 /* Modal Background */
 #az-background

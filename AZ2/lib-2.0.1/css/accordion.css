@@ -22,7 +22,7 @@
                 display: inline-block;
             }
 
-            .az-accordion > .az-accordion-card > header > i
+            .az-accordion > .az-accordion-card > header > span.az-accordion-icon
             {
                 float: right;
             }

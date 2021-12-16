@@ -22,7 +22,7 @@
                 display: inline-block;
             }
 
-            .az-accordion > .az-accordion-card > header > i
+            .az-accordion > .az-accordion-card > header > span.az-accordion-icon
             {
                 float: right;
             }
@@ -8449,8 +8449,8 @@ ul
 /* Cover Spin */
 #az-cover-spin
 {
-    z-index: 5000;
     position: fixed;
+    z-index: 5000;
     width: 100%;
     left: 0;
     right: 0;
@@ -8474,15 +8474,15 @@ ul
     #az-cover-spin::after
     {
         content: '';
-        display: block;
         position: absolute;
+        display: block;
         z-index: 1;
         left: 50%;
-        margin-left: -25px;
         top: 50%;
-        margin-top: -25px;
         width: 50px;
         height: 50px;
+        margin-left: -25px;
+        margin-top: -25px;
         border-style: solid;
         border-color: black;
         border-top-color: transparent;
@@ -8730,13 +8730,18 @@ ul
     border-radius: 4px;
 }
 
-    .az-modal-dialog > .az-modal-card
+.az-modal-dialog-titlebar
+{
+    margin-bottom: 7px;
+}
+
+.az-modal-dialog .az-modal-card
+{
+}
+
+    .az-modal-dialog .az-modal-card > article
     {
     }
-
-        .az-modal-dialog > .az-modal-card > article
-        {
-        }
 
 /* Modal Background */
 #az-background
@@ -8749,6 +8754,7 @@ ul
     height: 100%;
     overflow: auto;
 }
+
 .az-navbar-sticky
 {
     position: fixed;
@@ -12497,15 +12503,12 @@ address
 /* Window */
 #az-window
 {
-    position: absolute;
+    position: fixed;
     z-index: 5000;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    padding: 7px;
-    width: 450px;
-    height: auto;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -12513,17 +12516,15 @@ address
 
     #az-window > .az-window-dialog
     {
-        overflow: auto;
-        padding: 7px;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
+        overflow-y: auto;
+        margin-left: 7px;
+        margin-right: 7px;
     }
 
     #az-window > .az-window-titlebar
     {
         height: 30px;
-        margin-bottom: 7px;
+        margin: 7px;
         padding: 7px;
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;

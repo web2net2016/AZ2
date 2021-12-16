@@ -51,7 +51,7 @@ accordion.css
                 font-size: 14px;
             }
 
-            .az-accordion > .az-accordion-card > header > i
+            .az-accordion > .az-accordion-card > header > span.az-accordion-icon > i
             {
                 font-size: 12px;
                 margin-right: 2px;
@@ -248,22 +248,12 @@ form.css
         background-color: #CCCCCC;
     }
 
-    .az-form-group .az-range::-moz-range-track
-    {
-        background-color: #CCCCCC;
-    }
-
     .az-form-group .az-range::-ms-track
     {
         background-color: #CCCCCC;
     }
 
     .az-form-group .az-range::-webkit-slider-thumb
-    {
-        background-color: #0078D7;
-    }
-
-    .az-form-group .az-range::-moz-range-thumb
     {
         background-color: #0078D7;
     }
@@ -1123,7 +1113,7 @@ jqueryui/jquery-ui.min.css
 
 .ui-dialog
 {
-    padding: 0 !important;
+    position: fixed;
     padding: 7px !important;
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -1132,14 +1122,13 @@ jqueryui/jquery-ui.min.css
 
 .ui-widget-header
 {
-    margin-bottom: 7px !important;
     border: 0 !important;
     font-weight: normal !important
 }
 
 .ui-dialog-titlebar
 {
-    padding: 0px !important;
+    padding: 0 !important;
 }
 
 .ui-dialog-title
@@ -1162,7 +1151,7 @@ jqueryui/jquery-ui.min.css
 
 .ui-dialog-content
 {
-    padding: 7px !important;
+    padding: 0 !important;
 }
 
 .ui-widget.ui-widget-content
