@@ -108,7 +108,7 @@
     <Content Include="lib-2.0.1\azform2.html" />
     <Content Include="lib-2.0.1\azform.html" />
     <Content Include="lib-2.0.1\flex.html" />
-    <Content Include="lib-2.0.1\responsivegrid.html" />
+    <Content Include="lib-2.0.1\floatgrid.html" />
     <Content Include="index.html" />
     <Content Include="lib-2.0.1\css\tabs.css" />
     <Content Include="lib-2.0.1\css\accordion.css" />
@@ -117,8 +117,8 @@
     <Content Include="lib-2.0.1\css\default.css" />
     <Content Include="lib-2.0.1\css\display.css" />
     <Content Include="lib-2.0.1\css\form.css" />
-    <Content Include="lib-2.0.1\css\responsivegrid.css" />
-    <Content Include="lib-2.0.1\css\list.css" />
+    <Content Include="lib-2.0.1\css\floatgrid.css" />
+    <Content Include="lib-2.0.1\css\cardlayout.css" />
     <Content Include="lib-2.0.1\css\navbar.css" />
     <Content Include="lib-2.0.1\css\normalize.css" />
     <Content Include="lib-2.0.1\css\parallax.css" />
@@ -158,7 +158,7 @@
     <Content Include="lib-2.0.1\lib\az-codecolor.css" />
     <Content Include="lib-2.0.1\lib\az-2.0.1.additionally.css" />
     <Content Include="web2net\templates.html" />
-    <Content Include="lib-2.0.1\list.html" />
+    <Content Include="lib-2.0.1\azcardlayout.html" />
     <Content Include="lib-2.0.1\mobile.html" />
     <Content Include="lib-2.0.1\navbar.html" />
     <Content Include="lib-2.0.1\parallax.html" />

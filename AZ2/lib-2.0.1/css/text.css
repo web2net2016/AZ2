@@ -52,7 +52,8 @@ email,
 name,
 address
 {
-    margin: 7px 7px 7px 0;
+    display: block;
+    margin-bottom: 7px;
 }
 
     phone > i,

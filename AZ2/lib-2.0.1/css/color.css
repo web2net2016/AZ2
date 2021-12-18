@@ -1,32 +1,32 @@
 ﻿/* Font Color */
 .az-color-default
 {
-    color: #FFFFFF !important;
+	color: var(--default-color) !important;
 }
 
 .az-color-primary
 {
-    color: #0078D7 !important;
+	color: var(--primary-color) !important;
 }
 
 .az-color-success
 {
-    color: #28a745 !important;
+	color: var(--success-color) !important;
 }
 
 .az-color-info
 {
-    color: #0bb2d4 !important;
+	color: var(--info-color) !important;
 }
 
 .az-color-warning
 {
-    color: #FF851B !important;
+	color: var(--warning-color) !important;
 }
 
 .az-color-danger
 {
-    color: #FF4136 !important;
+	color: var(--danger-color) !important;
 }
 
 .az-color-fire-engine
@@ -147,38 +147,38 @@
 /* Backgrounds */
 .az-background-default
 {
-    background-color: #FFFFFF !important;
-    color: #000000 !important;
+	background-color: var(--default-background-color) !important;
+	color: var(--default-color) !important;
 }
 
 .az-background-primary
 {
-    background-color: #0078D7 !important;
-    color: #FFFFFF !important;
+	background-color: var(--primary-background-color) !important;
+	color: var(--default-color) !important;
 }
 
 .az-background-success
 {
-    background-color: #28a745 !important;
-    color: #FFFFFF !important;
+	background-color: var(--success-background-color) !important;
+	color: var(--success-color) !important;
 }
 
 .az-background-info
 {
-    background-color: #0bb2d4 !important;
-    color: #FFFFFF !important;
+	background-color: var(--info-background-color) !important;
+	color: var(--info-color) !important;
 }
 
 .az-background-warning
 {
-    background-color: #FF851B !important;
-    color: #FFFFFF !important;
+	background-color: var(--warning-background-color) !important;
+	color: var(--warning-color) !important;
 }
 
 .az-background-danger
 {
-    background-color: #FF4136 !important;
-    color: #FFFFFF !important;
+	background-color: var(--danger-background-color) !important;
+	color: var(--danger-color) !important;
 }
 
 .az-background-fire-engine

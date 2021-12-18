@@ -36,7 +36,7 @@ accordion.css
         .az-accordion > .az-accordion-card > header
         {
             padding: 7px;
-            background-color: #0078D7;
+            background-color: var(--primary-background-color);
             color: #FFFFFF;
         }
 
@@ -93,7 +93,7 @@ card.css
 
     .az-card > header
     {
-        background-color: #0078D7;
+        background-color: var(--primary-background-color);
         color: #FFFFFF;
     }
 
@@ -113,7 +113,7 @@ card.css
 
     .az-card > footer
     {
-        background-color: #0078D7;
+        background-color: var(--primary-background-color);
         color: #FFFFFF;
     }
 
@@ -125,32 +125,76 @@ card.css
     /* Card Overlay */
     .az-card > .az-card-overlay
     {
-        background-color: rgb(0,0,0);
-        background-color: rgba(0,0,0,0.4);
+        background-color: #333333;
     }
 
-        .az-card > .az-card-overlay > .az-card-overlay-card
+        .az-card > .az-card-overlay > .az-card-overlay-card > article
         {
-            -webkit-box-shadow: none;
-            -moz-box-shadow: none;
-            box-shadow: none;
+            color: #FFFFFF;
         }
 
-            .az-card > .az-card-overlay > .az-card-overlay-card > article
-            {
-                background-color: #0078D7;
-                color: #FFFFFF;
-            }
 
-                .az-card > .az-card-overlay > .az-card-overlay-card > article > h1
-                {
-                    font-size: 14px;
-                }
 
-                .az-card > .az-card-overlay > .az-card-overlay-card > article > name
-                {
-                    font-weight: bold;
-                }
+/*--------------------------------------------------------
+Card Layout 
+cardlayout.css    
+-----------------------------------------------------------*/
+.az-card-layout
+{
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+    .az-card-layout > header
+    {
+        height: 18px;
+        background-color: var(--primary-background-color);
+        color: #FFFFFF;
+    }
+
+        .az-card-layout > header > h1
+        {
+            color: #FFFFFF;
+            font-size: 14px;
+        }
+
+        .az-card-layout > header > button
+        {
+            font-size: 14px;
+        }
+
+        .az-card-layout > header i
+        {
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+
+    .az-card-layout > article
+    {
+    }
+
+        .az-card-layout > article > h1
+        {
+            font-size: 14px;
+        }
+
+        .az-card-layout > article > name
+        {
+            font-weight: bold;
+        }
+
+    .az-card-layout > footer
+    {
+        background-color: var(--primary-background-color);
+        color: #FFFFFF;
+    }
+
+        .az-card-layout > footer > h1
+        {
+            font-size: 14px;
+        }
 
 
 /*--------------------------------------------------------
@@ -193,8 +237,6 @@ form.css
 - Animations Keyframes
 -----------------------------------------------------------*/
 /* Form Group */
-
-
 /* Input Group Addon */
 .az-form-group .az-input-group-addon
 {
@@ -234,7 +276,7 @@ form.css
 
 .az-form-group .az-switch input:checked + .az-slider
 {
-    background-color: #0078D7;
+    background-color: var(--primary-background-color);
 }
 
 /* Range (Slider) */
@@ -255,12 +297,12 @@ form.css
 
     .az-form-group .az-range::-webkit-slider-thumb
     {
-        background-color: #0078D7;
+        background-color: var(--primary-background-color);
     }
 
     .az-form-group .az-range::-ms-thumb
     {
-        background-color: #0078D7;
+        background-color: var(--primary-background-color);
     }
 
 /* Multi Range (Slider) */
@@ -269,38 +311,38 @@ form.css
 /* Buttons */
 .az-form-group .az-button.default
 {
-    background-color: #FFFFFF;
-    color: #000000;
+    background-color: var(--default-background-color);
+    color: var(--default-color);
 }
 
 .az-form-group .az-button.primary
 {
-    background-color: #0078D7;
-    color: #FFFFFF;
+    background-color: var(--primary-background-color);
+    color: var(--primary-color);
 }
 
 .az-form-group .az-button.success
 {
-    background-color: #28a745;
-    color: #FFFFFF;
+    background-color: var(--success-background-color);
+    color: var(--success-color);
 }
 
 .az-form-group .az-button.info
 {
-    background-color: #0bb2d4;
-    color: #FFFFFF;
+    background-color: var(--info-background-color);
+    color: var(--info-color);
 }
 
 .az-form-group .az-button.warning
 {
-    background-color: #FF851B;
-    color: #FFFFFF;
+    background-color: var(--warning-background-color);
+    color: var(--warning-color);
 }
 
 .az-form-group .az-button.danger
 {
-    background-color: #FF4136;
-    color: #FFFFFF;
+    background-color: var(--danger-background-color);
+    color: var(--danger-color);
 }
 
 .az-form-group .az-button.link
@@ -334,14 +376,14 @@ form.css
 /* Alert */
 .az-form-group .az-alert-default
 {
-    background-color: #FFFFFF;
-    color: #000000;
+    background-color: var(--default-background-color);
+    color: var(--default-color);
 }
 
 .az-form-group .az-alert-primary
 {
-    background-color: #0078D7;
-    color: #FFFFFF;
+    background-color: var(--primary-background-color);
+    color: var(--primary-color);
 }
 
 .az-form-group .az-alert-success
@@ -431,66 +473,7 @@ grid.css
 -----------------------------------------------------------*/
 
 
-/*--------------------------------------------------------
-List 
-list.css    
------------------------------------------------------------*/
-.az-list-card
-{
-    background-color: #FFFFFF;
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-}
 
-    .az-list-card > header
-    {
-        height: 18px;
-        background-color: #0078D7;
-        color: #FFFFFF;
-    }
-
-        .az-list-card > header > h1
-        {
-            color: #FFFFFF;
-            font-size: 14px;
-        }
-
-        .az-list-card > header > button
-        {
-            font-size: 14px;
-        }
-
-        .az-list-card > header i
-        {
-            font-size: 14px;
-            color: #FFFFFF;
-        }
-
-    .az-list-card > article
-    {
-    }
-
-        .az-list-card > article > h1
-        {
-            font-size: 14px;
-        }
-
-        .az-list-card > article > name
-        {
-            font-weight: bold;
-        }
-
-    .az-list-card > footer
-    {
-        background-color: #0078D7;
-        color: #FFFFFF;
-    }
-
-        .az-list-card > footer > h1
-        {
-            font-size: 14px;
-        }
 
 /*--------------------------------------------------------
 Modal Dialog
@@ -505,7 +488,7 @@ modaldialog.css
 
 .az-modal-dialog-titlebar
 {
-    background-color: #0078D7;
+    background-color: var(--primary-background-color);
     color: #FFFFFF;
 }
 
@@ -713,7 +696,7 @@ portfolio.css
 
         .az-portfolio-content li > .az-portfolio-card > header
         {
-            background-color: #0078D7;
+            background-color: var(--primary-background-color);
         }
 
             .az-portfolio-content li > .az-portfolio-card > header > h1
@@ -740,7 +723,7 @@ portfolio.css
 
         .az-portfolio-content li > .az-portfolio-card > footer
         {
-            background-color: #0078D7;
+            background-color: var(--primary-background-color);
             color: #FFFFFF;
         }
 
@@ -807,7 +790,7 @@ sidebar.css
 
     .az-sidebar-menu > li > a:hover
     {
-        background-color: #0078D7;
+        background-color: var(--primary-background-color);
         color: #FFFFFF;
     }
 
@@ -823,7 +806,7 @@ slidein.css
 -----------------------------------------------------------*/
 .az-slidein > .az-slidein-tab
 {
-    background-color: #0078D7;
+    background-color: var(--primary-background-color);
     color: #FFFFFF;
     font-size: 14px;
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -844,10 +827,10 @@ slidein.css
         color: #000000;
     }
 
-    .az-slidein-card > article > *
-    {
-        font-size: 14px;
-    }
+        .az-slidein-card > article > *
+        {
+            font-size: 14px;
+        }
 
 /*--------------------------------------------------------
 Slideshow 
@@ -862,7 +845,7 @@ snackbar.css
 .az-snackbar
 {
     padding: 14px 0 14px 0;
-    background-color: #0078D7;
+    background-color: var(--primary-background-color);
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -905,7 +888,7 @@ tabs.css
             padding: 14px;
             font-size: 14px;
             color: #FFFFFF;
-            background-color: #0078D7;
+            background-color: var(--primary-background-color);
             border: 1px solid #DDDDDD;
         }
 
@@ -1015,7 +998,7 @@ timeline.css
 
     .az-timeline > .az-timeline-container > .az-timeline-card > header
     {
-        background-color: #0078D7;
+        background-color: var(--primary-background-color);
     }
 
         .az-timeline > .az-timeline-container > .az-timeline-card > header > h1
@@ -1038,7 +1021,7 @@ timeline.css
 
     .az-timeline > .az-timeline-container > .az-timeline-card > footer
     {
-        background-color: #0078D7;
+        background-color: var(--primary-background-color);
         color: #FFFFFF;
     }
 
@@ -1062,25 +1045,25 @@ window.css
 
     #az-window > .az-window-titlebar
     {
-        background-color: #0078D7;
+        background-color: var(--primary-background-color);
         color: #FFFFFF;
     }
 
-    #az-window > .az-window-titlebar > h1
-    {
-        font-size: 14px;
-    }
-
-    #az-window > .az-window-titlebar > span
-    {
-        font-size: 14px;
-        font-weight: bold;
-    }
-
-        #az-window > .az-window-titlebar > span:hover
+        #az-window > .az-window-titlebar > h1
         {
-            color: #FF4136;
+            font-size: 14px;
         }
+
+        #az-window > .az-window-titlebar > span
+        {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+            #az-window > .az-window-titlebar > span:hover
+            {
+                color: #FF4136;
+            }
 
 /*--------------------------------------------------------
 Full Window  

@@ -1,0 +1,109 @@
+﻿
+.az-card-layout-wrapper
+{
+    transition: all .5s ease-in-out;
+    column-gap: 10px;
+    column-fill: initial;
+}
+
+    .az-card-layout-wrapper .az-card-layout
+    {
+        margin-bottom: 10px;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .az-card-layout-wrapper.bordered
+    {
+        column-rule: 1px solid #808080;
+        column-gap: 50px;
+    }
+
+        .az-card-layout-wrapper.bordered .az-card-layout
+        {
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #808080;
+        }
+
+    .az-card-layout-wrapper.gutterless
+    {
+        column-gap: 0;
+    }
+
+        .az-card-layout-wrapper.gutterless .az-card-layout
+        {
+            margin-bottom: 0;
+        }
+
+@media (min-width: 576px)
+{
+    .az-card-layout-wrapper
+    {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 768px)
+{
+    .az-card-layout-wrapper
+    {
+        column-count: 3;
+    }
+}
+
+@media (min-width: 992px)
+{
+    .az-card-layout-wrapper
+    {
+        column-count: 4;
+    }
+}
+
+@media (min-width: 1200px)
+{
+    .az-card-layout-wrapper
+    {
+        column-count: 5;
+    }
+}
+
+.az-card-layout
+{
+    display: block;
+    position: relative;
+    margin: 7px;
+}
+
+    .az-card-layout > header
+    {
+        padding: 7px;
+    }
+
+        .az-card-layout > header > h1
+        {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            margin: 0 14px 0 7px;
+        }
+
+        .az-card-layout > header > button
+        {
+            padding: 3px 7px;
+        }
+
+        .az-card-layout > header i
+        {
+            margin-top: 2px;
+        }
+
+    .az-card-layout > article
+    {
+        padding: 7px;
+    }
+
+    .az-card-layout > footer
+    {
+        padding: 7px;
+    }
