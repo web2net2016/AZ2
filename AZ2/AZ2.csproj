@@ -70,10 +70,12 @@
     <Content Include="admin\index\index.html" />
     <Content Include="lib-2.0.1\azgrid.html" />
     <Content Include="lib-2.0.1\azdragdrop.html" />
+    <Content Include="lib-2.0.1\azfullwindow.html" />
     <Content Include="lib-2.0.1\css\az-2.0.1.min.css">
       <DependentUpon>az-2.0.1.css</DependentUpon>
     </Content>
     <Content Include="lib-2.0.1\css\cssgrid.css" />
+    <Content Include="lib-2.0.1\css\fullwindow.css" />
     <Content Include="lib-2.0.1\css\window.css" />
     <Content Include="lib-2.0.1\css\modaldialog.css" />
     <Content Include="lib-2.0.1\js\az-2.0.1.min.js">

@@ -12657,6 +12657,35 @@ address
     transform: translate(0%, -50%);
 }
 
+/* Full Window */
+#az-full-window
+{
+    position: fixed;
+    z-index: 4999;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+    #az-full-window.az-window-full
+    {
+        height: 100%;
+    }
+
+#az-full-window-close
+{
+    cursor: pointer;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    -webkit-transform: translateX(0%, -50%);
+    -moz-transform: translateX(0%, -50%);
+    -ms-transform: translateX(0%, -50%);
+    -o-transform: translateX(0%, -50%);
+    transform: translate(0%, -50%);
+}
+
 /*!
  * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)

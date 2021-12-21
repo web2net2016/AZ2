@@ -780,7 +780,7 @@ $(document).ready(function ()
         $(".az-label-animated").off("click", AZLabelAnimatedClick).on("click", AZLabelAnimatedClick);
 
         // Adjust Cards Height
-        $('.az-accordion-card.adjust, .az-card.adjust, .az-list-card.adjust, .az-timeline-card.adjust').matchHeight();
+        $('.az-accordion-card.adjust, .az-card.adjust, .az-card.adjust, .az-timeline-card.adjust').matchHeight();
 
         // Navbar Top Menu
         var _$NavbarTopMenu = $(".az-navbar-top-content").find(".az-navbar-menu");
@@ -1787,18 +1787,18 @@ function AZModalDialog(Options)
                 });
 
             var _$ListUIDialog = $(".ui-dialog").not(_Main.$UIDialog);
+
+            // AZModalDialog No Parent Scroll
+            if (_$ListUIDialog.length === 0 || _Main.$Body.hasClass("az-no-parent-scroll") === false)
+            {
+                if (_Main.Options.azModalDialogNoParentScroll === true)
+                {
+                    ModalDialogScrollTop = $(window).scrollTop();
+                    _Main.$Body.addClass("az-no-parent-scroll");
+                }
+            }
             if (_$ListUIDialog.length === 0)
             {
-                // AZModalDialog No Parent Scroll
-                if (_Main.$Body.hasClass("az-no-parent-scroll") === false)
-                {
-                    if (_Main.Options.azModalDialogNoParentScroll === true)
-                    {
-                        ModalDialogScrollTop = $(window).scrollTop();
-                        _Main.$Body.addClass("az-no-parent-scroll");
-                    }
-                }
-
                 // AZModalDialog Background
                 _Main.$Background = $("<div></div>").attr("id", "az-background");
                 if (_Main.Options.azModalDialogBackground === true)
@@ -1845,15 +1845,18 @@ function AZModalDialog(Options)
                 if (_$ListUIDialog.length === 0)
                 {
                     $("#az-background").remove();
-                    if (ModalDialogScrollTop > 0)
+                    if ($("#az-full-window").length === 0)
                     {
-                        $(window).scrollTop(ModalDialogScrollTop);
-                    }
+                        if (ModalDialogScrollTop > 0)
+                        {
+                            $(window).scrollTop(ModalDialogScrollTop);
+                        }
 
-                    $("body").removeClass("az-no-parent-scroll");
-                    if ($("body").hasClass("") === true)
-                    {
-                        $("body").removeAttr("class");
+                        $("body").removeClass("az-no-parent-scroll");
+                        if ($("body").hasClass("") === true)
+                        {
+                            $("body").removeAttr("class");
+                        }
                     }
                 }
                 $.publish("functionlib/azModalDialogAfterClose", { azModalDialogId: _Main.azModalDialogId });
@@ -2275,10 +2278,13 @@ function AZWindow(Options)
             }
 
             // AZWindow No Parent Scroll
-            if (_Main.Options.azWindowNoParentScroll === true)
+            if (_Main.$Body.hasClass("az-no-parent-scroll") === false)
             {
-                ModalDialogScrollTop = $(window).scrollTop();
-                _Main.$Body.addClass("az-no-parent-scroll");
+                if (_Main.Options.azWindowNoParentScroll === true)
+                {
+                    ModalDialogScrollTop = $(window).scrollTop();
+                    _Main.$Body.addClass("az-no-parent-scroll");
+                }
             }
 
             // AZWindow Background
@@ -2361,17 +2367,19 @@ function AZWindow(Options)
             _Main.azWindowClose = function ()
             {
                 _Main.$Background.remove();
-                if (ModalDialogScrollTop > 0)
+                if ($("#az-full-window").length === 0)
                 {
-                    $(window).scrollTop(ModalDialogScrollTop);
-                }
+                    if (ModalDialogScrollTop > 0)
+                    {
+                        $(window).scrollTop(ModalDialogScrollTop);
+                    }
 
-                _Main.$Body.removeClass("az-no-parent-scroll");
-                if (_Main.$Body.hasClass("") === true)
-                {
-                    _Main.$Body.removeAttr("class");
+                    _Main.$Body.removeClass("az-no-parent-scroll");
+                    if (_Main.$Body.hasClass("") === true)
+                    {
+                        _Main.$Body.removeAttr("class");
+                    }
                 }
-
                 if (_Main.Options.azWindowAnimation === true)
                 {
                     _Main.$Window.fadeOut(function ()
@@ -2539,7 +2547,13 @@ function AZFullWindow(Options)
             });
             $.publish("functionlib/azFullWindowAfterOpen", _Main);
 
-            _Main.$Close.on('click', function ()
+            _Main.$Close.on('click', function (e)
+            {
+                _Main.azFullWindowClose(e);
+            });
+
+            // AZFullWindow Close
+            _Main.azFullWindowClose = function (e)
             {
                 _Main.$Body.removeClass("az-no-parent-scroll");
                 if (_Main.$Body.hasClass("") === true)
@@ -2555,7 +2569,7 @@ function AZFullWindow(Options)
                     $(this).remove();
                 });
                 $.publish("functionlib/azFullWindowAfterClose");
-            });
+            };
         }
     }
     else
@@ -3121,7 +3135,7 @@ function AZGetObj(List, x, y, MaxLevel, DepthLevel)
                         }
                         if (Obj[key].constructor === Array || Obj[key].constructor === Object)
                         {
-                            _ReturnObj = AZGetObj(Obj[key], x, y, _MaxLevel, _DepthLevel+1);
+                            _ReturnObj = AZGetObj(Obj[key], x, y, _MaxLevel, _DepthLevel + 1);
                             if (AZIsEmpty(_ReturnObj) === false)
                             {
                                 break;

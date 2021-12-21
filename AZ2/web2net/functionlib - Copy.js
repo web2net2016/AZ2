@@ -1001,7 +1001,7 @@
 //    $(".az-label-animated").off("click", azLabelAnimatedClick).on("click", azLabelAnimatedClick);
 
 //     Adjust Cards Height
-//    $('.az-accordion-card.adjust, .az-card.adjust, .az-list-card.adjust, .az-timeline-card.adjust').matchHeight();
+//    $('.az-accordion-card.adjust, .az-card.adjust, .az-card.adjust, .az-timeline-card.adjust').matchHeight();
 
 //     Navbar Menu
 //    var _$NavbarMenu = $(".az-navbar-menu");
