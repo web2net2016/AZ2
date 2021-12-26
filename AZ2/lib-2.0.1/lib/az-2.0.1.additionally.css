@@ -134,7 +134,6 @@ card.css
         }
 
 
-
 /*--------------------------------------------------------
 Card Layout 
 cardlayout.css    
@@ -514,8 +513,8 @@ navbar.css
 
     .az-navbar > .az-navbar-top-content > .az-navbar-button
     {
-        margin: 8px 7px 8px 0;
-        padding: 11px 15px;
+        margin: 7px;
+        padding: 10px 14px;
         border: 1px solid #FFFFFF;
         background-color: transparent;
         color: #FFFFFF;
@@ -525,7 +524,7 @@ navbar.css
     {
         height: 46px;
         float: left;
-        margin: 3px 3px 0 3px;
+        margin: 2px 7px 2px 7px;
     }
 
     .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper
@@ -538,7 +537,8 @@ navbar.css
 
             .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li > a
             {
-                padding: 16px;
+                line-height: 50px;
+                padding: 0 7px 0 7px;
                 font-size: 16px;
                 color: #FFFFFF;
             }
@@ -553,13 +553,14 @@ navbar.css
 
             .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a
             {
+                line-height: 50px;
+                padding: 0 7px 0 7px;
+                font-size: 30px;
                 color: #FFFFFF;
             }
 
                 .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a > i
                 {
-                    padding: 12px;
-                    font-size: 30px;
                 }
 
         .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-button:hover,
@@ -590,11 +591,11 @@ navbar.css
         {
             padding: 7px;
             color: #FFFFFF;
+            font-size: 18px;
         }
 
             .az-navbar > .az-navbar-bottom-content > .az-navbar-menu > li > a > i
             {
-                font-size: 18px;
             }
 
             .az-navbar > .az-navbar-bottom-content > .az-navbar-menu > li > a > p
@@ -607,9 +608,6 @@ navbar.css
     /* Navbar Top*/
     .az-navbar.az-navbar-top
     {
-        top: 0 !important;
-        left: 0 !important;
-        height: auto !important;
     }
 
     .az-navbar > .az-navbar-top-content
@@ -622,7 +620,6 @@ navbar.css
 
             .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li > a
             {
-                padding: 8px;
             }
 
                 .az-navbar > .az-navbar-top-content.mobile > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li > a > i
@@ -641,15 +638,6 @@ navbar.css
                 {
                     padding: 4px;
                 }
-}
-
-@media (max-width: 767px)
-{
-    /* Navbar Top*/
-    .az-navbar.az-navbar-top
-    {
-        top: 0 !important;
-    }
 }
 
 /*--------------------------------------------------------
@@ -1092,7 +1080,7 @@ jqueryui/jquery-ui.min.css
 -----------------------------------------------------------*/
 .ui-front
 {
-    z-index: 5000;
+    z-index: 5000 !important;
 }
 
 .ui-dialog

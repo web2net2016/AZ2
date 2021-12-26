@@ -84,7 +84,6 @@
         {
             overflow: hidden;
             white-space: nowrap;
-            text-overflow: ellipsis;
             margin: 0 14px 0 7px;
         }
 

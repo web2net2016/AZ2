@@ -14,6 +14,7 @@
       "lib-2.0.1/css/display.css",
       "lib-2.0.1/css/flex.css",
       "lib-2.0.1/css/form.css",
+      "lib-2.0.1/css/fullwindow.css",
       "lib-2.0.1/css/modaldialog.css",
       "lib-2.0.1/css/navbar.css",
       "lib-2.0.1/css/parallax.css",
@@ -28,7 +29,6 @@
       "lib-2.0.1/css/text.css",
       "lib-2.0.1/css/timeline.css",
       "lib-2.0.1/css/window.css",
-      "lib-2.0.1/css/fullwindow.css",
       "lib-2.0.1/fontawesome/fontawesome-all.css",
       "lib-2.0.1/jqueryui/jquery-ui.min.css"
     ]

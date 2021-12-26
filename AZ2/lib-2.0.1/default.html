@@ -189,6 +189,9 @@
             $("#BytesConverter").off("click", BytesConverter).on("click", BytesConverter);
             $("#Guid").off("click", Guid).on("click", Guid);
             $("#SetPageElement").off("click", SetPageElement).on("click", SetPageElement);
+            $("#StandardAlert").off("click", StandardAlert).on("click", StandardAlert);
+
+            
             $("#ShowCoverSpin1").off("click", ShowCoverSpin1).on("click", ShowCoverSpin1);
             $("#ShowCoverSpin2").off("click", ShowCoverSpin2).on("click", ShowCoverSpin2);
             $("#AZAnim").off("click", AZAnim).on("click", AZAnim);
@@ -271,7 +274,17 @@
         function Guid()
         {
             $("#guid").html("<br /><brown>" + AZGuid() + "</brown>");
-        }        
+        }
+
+        function StandardAlert()
+        {
+            var _AZStandardAlertOptions =
+            {
+                Title: "Internet connection",
+                Text: "You are not connected to Internet or your Internet connection is too slow."
+            };
+            new AZStandardAlert(_AZStandardAlertOptions);
+        }
 
         function SetPageElement()
         {
@@ -653,6 +666,30 @@
                             </div>
                             <br />
                         </div>
+
+                        <div class="az-code-property-wrapper">
+                            <property>AZ Standard Alert</property>
+                            <type><span>Type:</span> <brown>Function</brown></type>
+                            <br />
+                            <div class="jsHigh notranslate">
+                                var _AZStandardAlertOptions =<br />
+                                {<br />
+                                &emsp;&ensp;&emsp;&ensp;$Area: "Optional",<br />
+                                &emsp;&ensp;&emsp;&ensp;Title: "",<br />
+                                &emsp;&ensp;&emsp;&ensp;Text: ""<br />
+                                }<br />
+                                new AZStandardAlert(_AZStandardAlertOptions);<br />
+                                <br />
+                            </div>
+                            <br />
+                            <div class="az-form-group">
+                                <button id="StandardAlert" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Standard Alert</button>
+                            </div>
+                            <br />
+                        </div>
+
+
+
 
                         <div class="az-code-property-wrapper">
                             <property>Set AZ Page</property>
