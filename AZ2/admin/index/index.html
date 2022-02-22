@@ -63,11 +63,21 @@
         function SetAZPageContent(e, data)
         {
             ObjPageData.Values.AZPage = data;
-
             $.subscribe("functionlib/azSetDate", function (e, data)
             {
-                console.log("azDateId: " + data.azDateId + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
+                console.log("azDateId: " + data.azDateId + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateISODate: " + data.azDateISODate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
+                consoleLog({ consoleType: "warn", consoleText: "azDateENUSDate is deprecated, use azDateISODate." });
             });
+            $.subscribe("functionlib/azSetTime", function (e, data)
+            {
+                console.log("azTimeId: " + data.azTimeId + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeJQElement: ", data.azTimeJQElement);
+            });
+            $.subscribe("functionlib/azValidateDirty", function (e, data)
+            {
+                console.log(data)
+                //console.log("azInputId: " + data.azInputId + "\nazInputJQElement: " + data.azInputJQElement);
+            });
+
 
             //ObjPageData.Values.AZPage.ObjLanguage
             //var _AZSetLanguageOptions =
@@ -88,11 +98,6 @@
             $("#signinInfo").html("Vennligst fyll inn alle feltene merket med <strong class=\"az-color-red\">*</strong>")
             formdirty = false;
             AZHideCoverSpin();
-        }
-
-        function AZValidateDirty(e, data)
-        {
-            console.log(data)
         }
 
         function AZCancel()
@@ -179,18 +184,21 @@
                     <div class="az-form-group xs">
                         <label class="az-label" for="Date" id="labelDate"></label>
                         <input type="text" class="az-input" id="Date" />
+                        <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Time" id="labelTime"></label>
                         <input type="text" class="az-input" id="Time" />
+                        <span class="az-input-icons"><i class="far fa-clock"></i></span>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="DateTime" id="labelDateTime"></label>
                         <input type="text" class="az-input" id="DateTime" />
+                        <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                     </div>
                 </div>
             </div>

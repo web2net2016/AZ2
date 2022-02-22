@@ -50,7 +50,7 @@
     "label": "mandatory",
     "data-attr": "val",
     "maxlength": "8",
-    "class": "validate validate-time",
+    "class": "validate validate-time time",
     "datatype": "time",
     "tabindex": 7
   },

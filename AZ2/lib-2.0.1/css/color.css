@@ -154,7 +154,7 @@
 .az-background-primary
 {
 	background-color: var(--primary-background-color) !important;
-	color: var(--default-color) !important;
+	color: var(--primary-color) !important;
 }
 
 .az-background-success

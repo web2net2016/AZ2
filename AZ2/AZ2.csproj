@@ -71,6 +71,7 @@
     <Content Include="lib-2.0.1\azgrid.html" />
     <Content Include="lib-2.0.1\azdragdrop.html" />
     <Content Include="lib-2.0.1\azfullwindow.html" />
+    <Content Include="lib-2.0.1\css\az-2.0.1.css" />
     <Content Include="lib-2.0.1\css\az-2.0.1.min.css">
       <DependentUpon>az-2.0.1.css</DependentUpon>
     </Content>
@@ -78,15 +79,15 @@
     <Content Include="lib-2.0.1\css\fullwindow.css" />
     <Content Include="lib-2.0.1\css\window.css" />
     <Content Include="lib-2.0.1\css\modaldialog.css" />
+    <Content Include="lib-2.0.1\jquerytimepicker\jquery.ui.timepicker.css" />
+    <Content Include="lib-2.0.1\jquerytimepicker\jquery.ui.timepicker.js" />
+    <Content Include="lib-2.0.1\js\az-2.0.1.js" />
     <Content Include="lib-2.0.1\js\az-2.0.1.min.js">
       <DependentUpon>az-2.0.1.js</DependentUpon>
     </Content>
     <Content Include="lib-2.0.1\js\sort.js" />
     <Content Include="lib-2.0.1\azcssgrid.html" />
-    <Content Include="web2net\authentication.js" />
     <Content Include="favicon.ico" />
-    <Content Include="web2net\fingerprint.js" />
-    <Content Include="web2net\http-errors.txt" />
     <Content Include="lib-2.0.1\azbackgroundslider.html" />
     <Content Include="lib-2.0.1\css\backgroundslider.css" />
     <Content Include="lib-2.0.1\side1.html" />
@@ -105,7 +106,6 @@
     <Content Include="lib-2.0.1\css\flex.css" />
     <Content Include="lib-2.0.1\css\slidein.css" />
     <Content Include="lib-2.0.1\css\snackbar.css" />
-    <Content Include="lib-2.0.1\css\az-2.0.1.css" />
     <Content Include="lib-2.0.1\default.html" />
     <Content Include="lib-2.0.1\azform2.html" />
     <Content Include="lib-2.0.1\azform.html" />
@@ -131,9 +131,6 @@
     <Content Include="lib-2.0.1\css\text.css" />
     <Content Include="lib-2.0.1\css\timeline.css" />
     <Content Include="lib-2.0.1\fontawesome\fontawesome-all.css" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-brands-400.svg" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-regular-400.svg" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-solid-900.svg" />
     <Content Include="lib-2.0.1\jqueryui\images\ui-icons_444444_256x240.png" />
     <Content Include="lib-2.0.1\jqueryui\images\ui-icons_555555_256x240.png" />
     <Content Include="lib-2.0.1\jqueryui\images\ui-icons_777620_256x240.png" />
@@ -144,10 +141,16 @@
     <Content Include="lib-2.0.1\jqueryui\jquery-ui.min.css" />
     <Content Include="lib-2.0.1\jqueryui\jquery-ui.min.js" />
     <Content Include="lib-2.0.1\jqueryui\jquery_ui_langs.min.js" />
-    <Content Include="lib-2.0.1\js\az-2.0.1.js" />
     <Content Include="lib-2.0.1\js\clientstorage.js" />
+    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-v4compatibility.ttf" />
+    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-v4compatibility.woff2" />
     <None Include="lib\lang-val\default-lang.json" />
-    <Content Include="web2net\functionlib - Copy.js" />
     <Content Include="lib-2.0.1\js\functionlib.js" />
     <Content Include="lib-2.0.1\js\jquery.js" />
     <Content Include="lib-2.0.1\js\jquery.matchHeight.js" />
@@ -159,7 +162,6 @@
     <Content Include="lib-2.0.1\lib\az-2.0.1.additionally.js" />
     <Content Include="lib-2.0.1\lib\az-codecolor.css" />
     <Content Include="lib-2.0.1\lib\az-2.0.1.additionally.css" />
-    <Content Include="web2net\templates.html" />
     <Content Include="lib-2.0.1\azcardlayout.html" />
     <Content Include="lib-2.0.1\mobile.html" />
     <Content Include="lib-2.0.1\navbar.html" />
@@ -171,69 +173,11 @@
     <Content Include="lib-2.0.1\template.html" />
     <Content Include="lib-2.0.1\timeline.html" />
     <Content Include="Web.config" />
-    <Content Include="web2net\648991523.mp4" />
-    <Content Include="web2net\analytics.png" />
-    <Content Include="web2net\az-logo-600x600.png" />
-    <Content Include="web2net\bakoy.jpg" />
-    <Content Include="web2net\billeas.jpg" />
-    <Content Include="web2net\bootstrap3.txt" />
-    <Content Include="web2net\bootstrap4.txt" />
-    <Content Include="web2net\color.css" />
-    <Content Include="web2net\color.html" />
-    <Content Include="web2net\ebf.jpg" />
-    <Content Include="web2net\havfruene.jpg" />
-    <Content Include="web2net\img_avatar2.png" />
-    <Content Include="web2net\img_avatar3.png" />
-    <Content Include="web2net\img_avatar4.png" />
-    <Content Include="web2net\img_parallax.jpg" />
-    <Content Include="web2net\img_parallax2.jpg" />
-    <Content Include="web2net\img_parallax3.jpg" />
-    <Content Include="web2net\index - Copy.html" />
-    <Content Include="web2net\innherred.png" />
-    <Content Include="web2net\kart.png" />
-    <Content Include="web2net\meiningen.jpg" />
-    <Content Include="web2net\ms-azure.png" />
-    <Content Include="web2net\ms-office-365.png" />
-    <Content Include="web2net\nordicbluecrude.jpg" />
-    <Content Include="web2net\office365.png" />
-    <Content Include="web2net\promidt.jpg" />
-    <Content Include="web2net\rana.jpg" />
-    <Content Include="web2net\red.png" />
-    <Content Include="web2net\ringom.jpg" />
-    <Content Include="web2net\side-seksjoner.jpg" />
-    <Content Include="web2net\sisselribe.jpg" />
-    <Content Include="web2net\slideshow1.jpg" />
-    <Content Include="web2net\slideshow2.jpg" />
-    <Content Include="web2net\slideshow3.jpg" />
-    <Content Include="web2net\sosial-media-1.png" />
-    <Content Include="web2net\sparbuteaterlag.jpg" />
-    <Content Include="web2net\static.png" />
-    <Content Include="web2net\totaltakst.jpg" />
-    <Content Include="web2net\w3.txt" />
-    <Content Include="web2net\w3pro.txt" />
-    <Content Include="web2net\web2net_logo_black.png" />
-    <Content Include="web2net\web2net_logo_white.png" />
-    <Content Include="web2net\webmastertools.png" />
-    <Content Include="web2net\wordpress.jpg" />
-    <Content Include="web2net\wordpress.png" />
-    <Content Include="web2net\ysk1.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-brands-400.eot" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-brands-400.ttf" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-brands-400.woff" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-brands-400.woff2" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-regular-400.eot" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-regular-400.ttf" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-regular-400.woff" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-regular-400.woff2" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-solid-900.eot" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-solid-900.ttf" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-solid-900.woff" />
-    <Content Include="lib-2.0.1\fontawesome\webfonts\fa-solid-900.woff2" />
     <Content Include="admin\index\lib\lang-val\index-lang.json" />
     <Content Include="admin\index\lib\lang-val\index-val.json" />
     <None Include="bundleconfig.json" />
@@ -244,6 +188,9 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="web2net\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -275,7 +222,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\BuildBundlerMinifier.3.2.449\build\BuildBundlerMinifier.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildBundlerMinifier.3.2.449\build\BuildBundlerMinifier.targets'))" />
   </Target>
+  <Import Project="..\packages\BuildBundlerMinifier.3.2.449\build\BuildBundlerMinifier.targets" Condition="Exists('..\packages\BuildBundlerMinifier.3.2.449\build\BuildBundlerMinifier.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

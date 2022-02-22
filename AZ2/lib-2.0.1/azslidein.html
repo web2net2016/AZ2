@@ -162,8 +162,8 @@
 <body>
 
     <form id="frmReg">
-
         <div id="section-1" class="az-section az-padding-t-56 az-padding-b-56">
+
             <div class="az-container">
                 <div class="az-row">
                     <div class="az-col xs-12 sm-3">
@@ -216,25 +216,25 @@
                             <br />
                         </div>
                     </div>
-                    <div class="az-row">
-                        <div class="az-col xs-12">
-                            <div class="az-code jsHigh notranslate">
-                                <strong>Init AZSlideIn</strong>
-                                <br />
-                                <br />
-                                There are two ways to initiate the <strong>AZSlideIn</strong>. The way you choose is important for further use of the function.<br />
-                                <br />
-                                <strong>1. new AZSlideIn();</strong><br />
-                                The function is initiated but you do not assign the function to a variable. This means you can use the <strong>azSlideInReady</strong> functions in relation to further interaction with the function.
-                                <br />
-                                <br />
-                                <strong>2. var AZSlideIn = new AZSlideIn();</strong><br />
-                                The function is initiated and assigned to a variable. This means you can use the variable in relation to further interaction with the function.
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                            </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code jsHigh notranslate">
+                            <strong>Init AZSlideIn</strong>
+                            <br />
+                            <br />
+                            There are two ways to initiate the <strong>AZSlideIn</strong>. The way you choose is important for further use of the function.<br />
+                            <br />
+                            <strong>1. new AZSlideIn();</strong><br />
+                            The function is initiated but you do not assign the function to a variable. This means you can use the <strong>azSlideInReady</strong> functions in relation to further interaction with the function.
+                            <br />
+                            <br />
+                            <strong>2. var AZSlideIn = new AZSlideIn();</strong><br />
+                            The function is initiated and assigned to a variable. This means you can use the variable in relation to further interaction with the function.
+                            <br />
+                            <br />
+                            <br />
+                            <br />
                         </div>
                     </div>
                 </div>
@@ -251,7 +251,7 @@
                                     <td>
                                         <strong>1. functionlib/azSlideInReady</strong><br />
                                         <br />
-                                        <div class="az-code jsHigh notranslate">
+                                        <div class="jsHigh notranslate">
                                             $.subscribe("functionlib/azSlideInReady", function (e, data)<br />
                                             {<br />
                                             &emsp;&ensp;&emsp;&ensp;data.azSelectSlideInTab();<br />
@@ -266,9 +266,9 @@
                                     <td>
                                         <strong>2. var AZSlideIn</strong><br />
                                         <br />
-                                        <div class="az-code jsHigh notranslate">
+                                        <div class="jsHigh notranslate">
                                             <br />
-                                            &emsp;&ensp;&emsp;&ensp;AZSlideIn.azSelectSlideInTab();<br />
+                                            AZSlideIn.azSelectSlideInTab();<br />
                                             <br />
                                             <br />
                                         </div>
@@ -284,7 +284,7 @@
                                     <td>
                                         <strong>1. functionlib/azSlideInReady</strong><br />
                                         <br />
-                                        <div class="az-code jsHigh notranslate">
+                                        <div class="jsHigh notranslate">
                                             $.subscribe("functionlib/azSlideInReady", function (e, data)<br />
                                             {<br />
                                             &emsp;&ensp;&emsp;&ensp;data.azChangeText("This is a text");<br />
@@ -299,9 +299,9 @@
                                     <td>
                                         <strong>2. var AZSlideIn</strong><br />
                                         <br />
-                                        <div class="az-code jsHigh notranslate">
+                                        <div class="jsHigh notranslate">
                                             <br />
-                                            &emsp;&ensp;&emsp;&ensp;AZSlideIn.azChangeText("This is a text");<br />
+                                            AZSlideIn.azChangeText("This is a text");<br />
                                             <br />
                                         </div>
                                     </td>
@@ -444,7 +444,7 @@
                             <br />
                             <strong>1. functionlib/azSlideInReady</strong><br />
                             <br />
-                            <div class="az-code jsHigh notranslate">
+                            <div class="jsHigh notranslate">
                                 $.subscribe("functionlib/azSlideInReady", function (e, data)<br />
                                 {<br />
                                 &emsp;&ensp;&emsp;&ensp;data.$SlideIn.hasClass("az-slidein-active")<br />
@@ -453,7 +453,7 @@
                             <br />
                             <strong>2. var AZSlideIn</strong><br />
                             <br />
-                            <div class="az-code jsHigh notranslate">
+                            <div class="jsHigh notranslate">
                                 <br />
                                 AZSlideIn.$SlideIn.hasClass("az-slidein-active")<br />
                                 <br />

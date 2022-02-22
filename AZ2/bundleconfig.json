@@ -30,7 +30,8 @@
       "lib-2.0.1/css/timeline.css",
       "lib-2.0.1/css/window.css",
       "lib-2.0.1/fontawesome/fontawesome-all.css",
-      "lib-2.0.1/jqueryui/jquery-ui.min.css"
+      "lib-2.0.1/jqueryui/jquery-ui.min.css",
+      "lib-2.0.1/jquerytimepicker/jquery.ui.timepicker.css"
     ]
   },
   {
@@ -42,6 +43,7 @@
       "lib-2.0.1/jqueryui/jquery-ui.min.js",
       "lib-2.0.1/jqueryui/jquery_ui_langs.min.js",
       "lib-2.0.1/jqueryui/jquery.ui.touch-punch.min.js",
+      "lib-2.0.1/jquerytimepicker/jquery.ui.timepicker.js",
       "lib-2.0.1/js/numeral.js",
       "lib-2.0.1/js/numeral.locales.js",
       "lib-2.0.1/js/sort.js",

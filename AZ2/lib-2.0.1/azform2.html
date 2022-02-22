@@ -31,7 +31,12 @@
 
             $.subscribe("functionlib/azSetDate", function (e, data)
             {
-                console.log("azDateId: " + data.azDateId + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement)
+                console.log("azDateId: " + data.azDateId + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateISODate: " + data.azDateISODate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
+                consoleLog({ consoleType: "warn", consoleText: "azDateENUSDate is deprecated, use azDateISODate." });
+            });
+            $.subscribe("functionlib/azSetTime", function (e, data)
+            {
+                console.log("azTimeId: " + data.azTimeId + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeJQElement: ", data.azTimeJQElement);
             });
         });
 
@@ -578,7 +583,7 @@
 
             <div class="az-row az-margin-t-28">
                 <div class="az-col xs-12">
-                    <h6 class="az-code-header" style="margin: 0;">Datovelgere</h6>
+                    <h6 class="az-code-header" style="margin: 0;">Datovelger</h6>
                 </div>
             </div>
             <div class="az-card" style="margin: 0;">
@@ -610,6 +615,46 @@
                                 <label class="az-label">Datovelger - Til dato</label>
                                 <input type="text" class="az-input todate" id="todate" />
                                 <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+                    <h6 class="az-code-header" style="margin: 0;">Tidsvelger</h6>
+                </div>
+            </div>
+            <div class="az-card" style="margin: 0;">
+                <article>
+                    <div class="az-row az-margin-t-14 az-margin-b-14">
+                        <div class="az-col xs-12 sm-6 md-3">
+                            <div class="az-form-group xs">
+                                <label class="az-label xs">Tid</label>
+                                <input type="text" class="az-input xs time" />
+                                <span class="az-input-icons"><i class="far fa-clock"></i></span>
+                            </div>
+                        </div>
+                        <div class="az-col xs-12 sm-6 md-3">
+                            <div class="az-form-group">
+                                <label class="az-label">Tid</label>
+                                <input type="text" class="az-input time" />
+                                <span class="az-input-icons"><i class="far fa-clock"></i></span>
+                            </div>
+                        </div>
+                        <div class="az-col xs-12 sm-6 md-3">
+                            <div class="az-form-group sm">
+                                <label class="az-label sm">Tid</label>
+                                <input type="text" class="az-input sm time" />
+                                <span class="az-input-icons"><i class="far fa-clock"></i></span>
+                            </div>
+                        </div>
+                        <div class="az-col xs-12 sm-6 md-3">
+                            <div class="az-form-group md">
+                                <label class="az-label md">Tid</label>
+                                <input type="text" class="az-input md time" />
+                                <span class="az-input-icons"><i class="far fa-clock"></i></span>
                             </div>
                         </div>
                     </div>

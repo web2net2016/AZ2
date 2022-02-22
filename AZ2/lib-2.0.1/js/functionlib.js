@@ -61,12 +61,11 @@ $(document).ready(function ()
         {
             _DefaultLanguage = "nb-NO";
         }
-        var _DatePicker = false;
+
         $(":input").each(function ()
         {
             if ($(this).is("[type='text'], [type='password'], [type='datetime'], [type='datetime-local'], [type='date'], [type='month'], [type='time'], [type='week'], [type='number'], [type='email'], [type='url'], [type='search'], [type='tel'], [type='color']"))
             {
-                _DatePicker = false;
                 $(this).attr("autocomplete", "off");
                 if ($(this).hasClass("az-input-animated"))
                 {
@@ -103,353 +102,8 @@ $(document).ready(function ()
                         $(this).select();
                     });
                 }
-                if ($(this).hasClass("date"))
-                {
-                    _DatePicker = true;
-                    $(this).datepicker
-                        ({
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
-                                }
-                            },
-                            onSelect: function (curDate, instance)
-                            {
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("pastdate"))
-                {
-                    _DatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
-                                }
-                            },
-                            maxDate: 0,
-                            yearRange: "-60:+0",
-                            onSelect: function (curDate, instance)
-                            {
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("nopastdate"))
-                {
-                    _DatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
-                                }
-                            },
-                            minDate: 0,
-                            onSelect: function (curDate, instance)
-                            {
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("fromdate"))
-                {
-                    _DatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
-                                }
-                            },
-                            numberOfMonths: 2,
-                            onSelect: function (curDate, instance)
-                            {
-                                $(".todate").datepicker("option", "minDate", curDate);
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("todate"))
-                {
-                    _DatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
-                                }
-                            },
-                            numberOfMonths: 2,
-                            onSelect: function (curDate, instance)
-                            {
-                                $(".fromdate").datepicker("option", "maxDate", curDate);
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("frompastdate"))
-                {
-                    _DatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
-                                }
-                            },
-                            maxDate: 0,
-                            numberOfMonths: 2,
-                            onSelect: function (curDate, instance)
-                            {
-                                $(".topastdate").datepicker("option", "minDate", curDate);
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("topastdate"))
-                {
-                    _DatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
-                                }
-                            },
-                            maxDate: 0,
-                            numberOfMonths: 2,
-                            onSelect: function (curDate, instance)
-                            {
-                                $(".frompastdate").datepicker("option", "maxDate", curDate);
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("fromnopastdate"))
-                {
-                    _DatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
-                                }
-                            },
-                            minDate: 0,
-                            numberOfMonths: 2,
-                            onSelect: function (curDate, instance)
-                            {
-                                $(".tonopastdate").datepicker("option", "minDate", curDate);
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if ($(this).hasClass("tonopastdate"))
-                {
-                    _DatePicker = true;
-                    $(this).datepicker(
-                        {
-                            beforeShow: function ()
-                            {
-                                if ($(this).hasClass("xs") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.85em" });
-                                }
-                                else if ($(this).hasClass("sm") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.10em" });
-                                }
-                                else if ($(this).hasClass("md") == true)
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "1.20em" });
-                                }
-                                else
-                                {
-                                    $(".ui-datepicker").css({ "font-size": "0.95em" });
-                                }
-                            },
-                            minDate: 0,
-                            numberOfMonths: 2,
-                            onSelect: function (curDate, instance)
-                            {
-                                $(".fromnopastdate").datepicker("option", "maxDate", curDate);
-                                $.publish("functionlib/azSetDate",
-                                    {
-                                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
-                                        azDateLocalDate: curDate,
-                                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
-                                        azDateJQElement: $(this)
-                                    });
-                            }
-                        });
-                }
-                if (_DatePicker == true)
-                {
-                    $.datepicker.setDefaults($.datepicker.regional[_DefaultLanguage]);
-                }
+                AZDatepicker($(this), _DefaultLanguage);
+                AZTimepicker($(this), _DefaultLanguage);
             }
             if ($(this).is("[type='range']") && $(this).hasClass("az-range"))
             {
@@ -650,6 +304,419 @@ $(document).ready(function ()
         });
     })(jQuery);
 });
+
+function AZDatepicker($Obj, DefaultLanguage)
+{   
+    var _DatePicker = false;
+    if ($Obj.hasClass("date"))
+    {
+        _DatePicker = true;
+        $Obj.datepicker
+            ({
+                beforeShow: function ()
+                {
+                    if ($Obj.hasClass("xs") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.85em" });
+                    }
+                    else if ($Obj.hasClass("sm") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.10em" });
+                    }
+                    else if ($Obj.hasClass("md") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.20em" });
+                    }
+                    else
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.95em" });
+                    }
+                },
+                onSelect: function (curDate, instance)
+                {
+                    $.publish("functionlib/azSetDate",
+                        {
+                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateLocalDate: curDate,
+                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateJQElement: $Obj
+                        });
+                }
+            });
+    }
+    if ($Obj.hasClass("pastdate"))
+    {
+        _DatePicker = true;
+        $Obj.datepicker(
+            {
+                beforeShow: function ()
+                {
+                    if ($Obj.hasClass("xs") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.85em" });
+                    }
+                    else if ($Obj.hasClass("sm") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.10em" });
+                    }
+                    else if ($Obj.hasClass("md") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.20em" });
+                    }
+                    else
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.95em" });
+                    }
+                },
+                maxDate: 0,
+                yearRange: "-60:+0",
+                onSelect: function (curDate, instance)
+                {
+                    $.publish("functionlib/azSetDate",
+                        {
+                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateLocalDate: curDate,
+                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateJQElement: $Obj
+                        });
+                }
+            });
+    }
+    if ($Obj.hasClass("nopastdate"))
+    {
+        _DatePicker = true;
+        $Obj.datepicker(
+            {
+                beforeShow: function ()
+                {
+                    if ($Obj.hasClass("xs") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.85em" });
+                    }
+                    else if ($Obj.hasClass("sm") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.10em" });
+                    }
+                    else if ($Obj.hasClass("md") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.20em" });
+                    }
+                    else
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.95em" });
+                    }
+                },
+                minDate: 0,
+                onSelect: function (curDate, instance)
+                {
+                    $.publish("functionlib/azSetDate",
+                        {
+                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateLocalDate: curDate,
+                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateJQElement: $Obj
+                        });
+                }
+            });
+    }
+    if ($Obj.hasClass("fromdate"))
+    {
+        _DatePicker = true;
+        $Obj.datepicker(
+            {
+                beforeShow: function ()
+                {
+                    if ($Obj.hasClass("xs") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.85em" });
+                    }
+                    else if ($Obj.hasClass("sm") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.10em" });
+                    }
+                    else if ($Obj.hasClass("md") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.20em" });
+                    }
+                    else
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.95em" });
+                    }
+                },
+                numberOfMonths: 2,
+                onSelect: function (curDate, instance)
+                {
+                    $(".todate").datepicker("option", "minDate", curDate);
+                    $.publish("functionlib/azSetDate",
+                        {
+                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateLocalDate: curDate,
+                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateJQElement: $Obj
+                        });
+                }
+            });
+    }
+    if ($Obj.hasClass("todate"))
+    {
+        _DatePicker = true;
+        $Obj.datepicker(
+            {
+                beforeShow: function ()
+                {
+                    if ($Obj.hasClass("xs") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.85em" });
+                    }
+                    else if ($Obj.hasClass("sm") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.10em" });
+                    }
+                    else if ($Obj.hasClass("md") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.20em" });
+                    }
+                    else
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.95em" });
+                    }
+                },
+                numberOfMonths: 2,
+                onSelect: function (curDate, instance)
+                {
+                    $(".fromdate").datepicker("option", "maxDate", curDate);
+                    $.publish("functionlib/azSetDate",
+                        {
+                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateLocalDate: curDate,
+                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateJQElement: $Obj
+                        });
+                }
+            });
+    }
+    if ($Obj.hasClass("frompastdate"))
+    {
+        _DatePicker = true;
+        $Obj.datepicker(
+            {
+                beforeShow: function ()
+                {
+                    if ($Obj.hasClass("xs") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.85em" });
+                    }
+                    else if ($Obj.hasClass("sm") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.10em" });
+                    }
+                    else if ($Obj.hasClass("md") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.20em" });
+                    }
+                    else
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.95em" });
+                    }
+                },
+                maxDate: 0,
+                numberOfMonths: 2,
+                onSelect: function (curDate, instance)
+                {
+                    $(".topastdate").datepicker("option", "minDate", curDate);
+                    $.publish("functionlib/azSetDate",
+                        {
+                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateLocalDate: curDate,
+                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateJQElement: $Obj
+                        });
+                }
+            });
+    }
+    if ($Obj.hasClass("topastdate"))
+    {
+        _DatePicker = true;
+        $Obj.datepicker(
+            {
+                beforeShow: function ()
+                {
+                    if ($Obj.hasClass("xs") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.85em" });
+                    }
+                    else if ($Obj.hasClass("sm") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.10em" });
+                    }
+                    else if ($Obj.hasClass("md") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.20em" });
+                    }
+                    else
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.95em" });
+                    }
+                },
+                maxDate: 0,
+                numberOfMonths: 2,
+                onSelect: function (curDate, instance)
+                {
+                    $(".frompastdate").datepicker("option", "maxDate", curDate);
+                    $.publish("functionlib/azSetDate",
+                        {
+                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateLocalDate: curDate,
+                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateJQElement: $Obj
+                        });
+                }
+            });
+    }
+    if ($Obj.hasClass("fromnopastdate"))
+    {
+        _DatePicker = true;
+        $Obj.datepicker(
+            {
+                beforeShow: function ()
+                {
+                    if ($Obj.hasClass("xs") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.85em" });
+                    }
+                    else if ($Obj.hasClass("sm") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.10em" });
+                    }
+                    else if ($Obj.hasClass("md") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.20em" });
+                    }
+                    else
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.95em" });
+                    }
+                },
+                minDate: 0,
+                numberOfMonths: 2,
+                onSelect: function (curDate, instance)
+                {
+                    $(".tonopastdate").datepicker("option", "minDate", curDate);
+                    $.publish("functionlib/azSetDate",
+                        {
+                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateLocalDate: curDate,
+                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateJQElement: $Obj
+                        });
+                }
+            });
+    }
+    if ($Obj.hasClass("tonopastdate"))
+    {
+        _DatePicker = true;
+        $Obj.datepicker(
+            {
+                beforeShow: function ()
+                {
+                    if ($Obj.hasClass("xs") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.85em" });
+                    }
+                    else if ($Obj.hasClass("sm") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.10em" });
+                    }
+                    else if ($Obj.hasClass("md") == true)
+                    {
+                        $(".ui-datepicker").css({ "font-size": "1.20em" });
+                    }
+                    else
+                    {
+                        $(".ui-datepicker").css({ "font-size": "0.95em" });
+                    }
+                },
+                minDate: 0,
+                numberOfMonths: 2,
+                onSelect: function (curDate, instance)
+                {
+                    $(".fromnopastdate").datepicker("option", "maxDate", curDate);
+                    $.publish("functionlib/azSetDate",
+                        {
+                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateLocalDate: curDate,
+                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
+                            azDateJQElement: $Obj
+                        });
+                }
+            });
+    }
+    if (_DatePicker == true)
+    {
+        $Obj.attr("readOnly", true);
+        $.datepicker.setDefaults($.datepicker.regional[DefaultLanguage]);
+    }
+}
+
+function AZTimepicker($Obj, DefaultLanguage)
+{
+    var _Timepicker = false;
+    if ($Obj.hasClass("time"))
+    {
+        _Timepicker = true;
+        $Obj.timepicker(
+            {
+                showLeadingZero: true,
+                defaultTime: '',
+                showCloseButton: true,
+                showNowButton: true,
+                showDeselectButton: true,
+                beforeShow: function ()
+                {
+                    if ($Obj.hasClass("xs") == true)
+                    {
+                        $(".ui-timepicker").css({ "font-size": "0.85em" });
+                    }
+                    else if ($Obj.hasClass("sm") == true)
+                    {
+                        $(".ui-timepicker").css({ "font-size": "1.10em" });
+                    }
+                    else if ($Obj.hasClass("md") == true)
+                    {
+                        $(".ui-timepicker").css({ "font-size": "1.20em" });
+                    }
+                    else
+                    {
+                        $(".ui-timepicker").css({ "font-size": "0.90em" });
+                    }
+                },
+                onSelect: function (curTime, instance)
+                {
+                    $.publish("functionlib/azSetTime",
+                        {
+                            azTimeId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azTimeLocalTime: curTime,
+                            azTimeISOTime: moment(moment().format("YYYY-MM-DD") + ' ' + curTime).format('HH:mm'),
+                            azTimeJQElement: $Obj
+                        });
+                }
+            });
+    }    
+    if (_Timepicker == true)
+    {
+        $Obj.attr("readOnly", true);
+        $.timepicker.setDefaults($.timepicker.regional[DefaultLanguage]);
+    }
+}
 
 function AZInputAnimatedFocusout(e)
 {
@@ -2855,7 +2922,7 @@ function getURLParameters(URL)
 function AZGetURLParameters(URL)
 {
     var _Return = {};
-    if (URL !== null && URL !== undefined && URL == "")
+    if (URL === null || URL === undefined || URL == "")
     {
         window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value)
         {
@@ -3000,7 +3067,7 @@ function AZFilterArrayUnique(SelectedList, SelectedKey, SelectedVal)
         {
             if (Value.hasOwnProperty(SelectedKey) === true)
             {
-                if (existsSelectedObj(_ReturnList, SelectedKey, SelectedVal) === false)
+                if (AZExistObj(_ReturnList, SelectedKey, SelectedVal) === false)
                 {
                     _ReturnList.push(Value);
                 }

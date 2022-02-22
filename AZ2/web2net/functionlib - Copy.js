@@ -1,4 +1,976 @@
 ﻿
+        < !--< div class="az-container" >
+            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><h1 class="az-shadow-1">.az-shadow-1</h1></div>
+                <div class="az-col xs-12 az-margin-b-21"><h1 class="az-shadow-2">.az-shadow-2</h1></div>
+                <div class="az-col xs-12 az-margin-b-21"><h1 class="az-shadow-3">.az-shadow-3</h1></div>
+                <div class="az-col xs-12 az-margin-b-21"><h1 class="az-shadow-4">.az-shadow-4</h1></div>
+                <div class="az-col xs-12 az-margin-b-28"><h1 class="az-shadow-5">.az-shadow-5</h1></div>
+            </div>
+
+            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><h1>h1 font-size: 36px</h1></div>
+                <div class="az-col xs-12 az-margin-b-21"><h2>h2 font-size: 32px</h2></div>
+                <div class="az-col xs-12 az-margin-b-21"><h3>h3 font-size: 28px</h3></div>
+                <div class="az-col xs-12 az-margin-b-21"><h4>h4 font-size: 24px</h4></div>
+                <div class="az-col xs-12 az-margin-b-21"><h5>h5 font-size: 20px</h5></div>
+                <div class="az-col xs-12 az-margin-b-21"><h6>h6 font-size: 11px</h6></div>
+            </div>
+
+            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-tiny">.az-text-tiny font-size: 12px</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-small">.az-text-small font-size: 16px</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-medium">.az-text-medium font-size: 20px</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-large">.az-text-large font-size: 24px</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xlarge">.az-text-xlarge font-size: 28px</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xxlarge">.az-text-xxlarge font-size: 32px</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xxxlarge">.az-text-xxxlarge font-size: 36px</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xxxxlarge">.az-text-xxxxlarge font-size: 40px</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-xxxxxlarge">.az-text-xxxxxlarge font-size: 44px</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-jumbo">.az-text-jumbo font-size: 64px</p></div>
+            </div>
+
+            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-left az-text-medium">.az-text-left</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-right az-text-medium">.az-text-right</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-center az-text-medium">.az-text-center</p></div>
+                <div class="az-col xs-12 az-margin-b-21">
+                    <p class="az-text-medium">az-text-justify</p>
+                    <br />
+                    <p class="az-text-justify az-text-medium">Alle våre pakkeløsninger bygger på et abonnementssystem hvor du abonnerer på bruken av et dynamisk publiseringsverktøy, (WordPress) eller en statisk løsning, men eier selv helt og holdent retten til bruken av domenet, e-post og selvsagt det publiserte innholdet. Hos oss møter du ingen skjulte kostnader. Våre pakkeløsninger inneholder alt du trenger for å fremstå profesjonelt på Internett.</p>
+                </div>
+            </div>
+
+            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-capitalize az-text-medium">.az-text-capitalize</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-uppercase az-text-medium">.az-text-uppercase</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-lowercase az-text-medium">.az-text-lowercase</p></div>
+            </div>
+
+            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-opacity-75 az-text-medium">.az-text-opacity-75</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-opacity-50 az-text-medium">.az-text-opacity-50</p></div>
+                <div class="az-col xs-12 az-margin-b-21"><p class="az-text-opacity-25 az-text-medium">.az-text-opacity-25</p></div>
+            </div>
+
+            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21">
+                    <rating>
+                        <i class="fas fa-star az-orange"></i>
+                        <i class="fas fa-star az-orange"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>Rating 3</span>
+                    </rating>
+                </div>
+            </div>
+
+            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x"></i></div>
+                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-45"></i></div>
+                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-90"></i></div>
+                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-135"></i></div>
+                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-180"></i></div>
+                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-225"></i></div>
+                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-270"></i></div>
+                <div class="az-col xs-1 az-margin-t-21 az-margin-b-21"><i class="fas fa-user fa-3x az-cw-rotate-315"></i></div>
+            </div>
+
+            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+                <div class="az-col xs-12 az-margin-t-21 az-margin-b-21"><p class="az-text-medium">.az-image - Automatisk "resize".</p></div>
+                <div class="az-col xs-12 az-margin-b-21">
+                    <img class="az-image" src="/web2net/wordpress.jpg" />
+                </div>
+            </div>
+
+            <div class="az-row az-margin-t-56 az-code htmlHigh notranslate">
+                <div class="az-col xs-6 az-margin-t-21"><p class="az-text-medium">.az-circle-10</p></div>
+                <div class="az-col xs-6 az-margin-t-21 az-margin-b-21">
+                    <img class="az-image az-circle-10 az-width-40" src="/web2net/wordpress.jpg" />
+                </div>
+                <div class="az-col xs-6"><p class="az-text-medium">.az-circle-20</p></div>
+                <div class="az-col xs-6 az-margin-b-21">
+                    <img class="az-image az-circle-20 az-width-40" src="/web2net/wordpress.jpg" />
+                </div>
+                <div class="az-col xs-6"><p class="az-text-medium">.az-circle-30</p></div>
+                <div class="az-col xs-6 az-margin-b-21">
+                    <img class="az-image az-circle-30 az-width-40" src="/web2net/wordpress.jpg" />
+                </div>
+                <div class="az-col xs-6"><p class="az-text-medium">.az-circle-40</p></div>
+                <div class="az-col xs-6 az-margin-b-21">
+                    <img class="az-image az-circle-40 az-width-40" src="/web2net/wordpress.jpg" />
+                </div>
+                <div class="az-col xs-6"><p class="az-text-medium">.az-circle-50</p></div>
+                <div class="az-col xs-6 az-margin-b-21">
+                    <img class="az-image az-circle-50 az-width-40" src="/web2net/wordpress.jpg" />
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+        </div > -->
+
+var Array1 = [
+    {
+        id: 1,
+        name: "bla",
+        children: [
+            {
+                id: 23,
+                name: "bla",
+                children: [
+                    {
+                        id: 88,
+                        name: "bla"
+                    }, {
+                        id: 99,
+                        name: "bla"
+                    }]
+            },
+            {
+                id: 43,
+                name: "bla"
+            },
+            {
+                id: 45,
+                name: "bla",
+                children: [
+                    {
+                        id: 43,
+                        name: "bla"
+                    }, {
+                        id: 46,
+                        name: "bla"
+                    }]
+            }
+        ]
+    },
+    {
+        id: 12,
+        name: "bla",
+        children: [
+            {
+                id: 232,
+                name: "bla",
+                children: [
+                    {
+                        id: 848,
+                        name: "bla"
+                    }, {
+                        id: 959,
+                        name: "bla"
+                    }]
+            },
+            {
+                id: 433,
+                name: "bla"
+            },
+            {
+                id: 391,
+                name: "bla",
+                children: [
+                    {
+                        id: 443,
+                        name: "bla"
+                    },
+                    {
+                        id: 456,
+                        name: "bla",
+                        children: [
+                            {
+                                id: 97,
+                                name: "bla"
+                            },
+                            {
+                                id: 56,
+                                name: "bla"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 15,
+        name: "bla",
+        children: [
+            {
+                id: 263,
+                name: "bla",
+                children: [
+                    {
+                        id: 868,
+                        name: "bla"
+                    }, {
+                        id: 979,
+                        name: "bla"
+                    }]
+            },
+            {
+                id: 483,
+                name: "bla",
+                children:
+                {
+                    id: 955,
+                    name: "bla"
+                }
+            },
+            {
+                id: 445,
+                name: "bla",
+                children: [
+                    {
+                        id: 423,
+                        name: "bla"
+                    }, {
+                        id: 436,
+                        name: "bla"
+                    }]
+            }
+        ]
+    }
+];
+
+var Array2 = {
+    "id": "2",
+    "Name": "Hansen"
+};
+
+var Array3 = [{ "MediaFileList": [{ "FileMediaFileList": [{ "MediaFileId": 9, "Type": "Video", "Category": "", "FileId": 1, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "KRV_Intro", "Name": "78752319cad927752efdb6eb09a9ff189e1a7167", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590626719.sd.mp4?s=78752319cad927752efdb6eb09a9ff189e1a7167&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 9, "MediaId": 1, "MediaFileGuid": "20f5ab58-383b-47ac-b007-ef0d298a302e", "Type": "Video", "Category": "", "Title": "Intro KRV-analyse, et produkt ", "Description": "", "Duration": null, "Sort": 1, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 10, "Type": "Video", "Category": "", "FileId": 2, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "KRV_V1", "Name": "9f7318d4749bac73b82bcc2ba30181bd5b33154b", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590626740.sd.mp4?s=9f7318d4749bac73b82bcc2ba30181bd5b33154b&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 10, "MediaId": 1, "MediaFileGuid": "ccb47ddb-a54e-4aef-81b9-85f3624598cd", "Type": "Video", "Category": "", "Title": "Case KRV, et produkt", "Description": "", "Duration": null, "Sort": 2, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 11, "Type": "Video", "Category": "", "FileId": 3, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "KRV_V2", "Name": "fb72bb00e20f1b5ce0c7407589e7551dabf9bba7", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590626764.sd.mp4?s=fb72bb00e20f1b5ce0c7407589e7551dabf9bba7&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 11, "MediaId": 1, "MediaFileGuid": "4c3cd022-c28d-40e7-bfcc-020ca14e8c30", "Type": "Video", "Category": "", "Title": "Resultatbudsjett", "Description": "", "Duration": null, "Sort": 3, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 12, "Type": "Video", "Category": "", "FileId": 4, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "KRV_V3", "Name": "bcb73d9843118cc0ad77909aa6825bc2e17813bd", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590626785.sd.mp4?s=bcb73d9843118cc0ad77909aa6825bc2e17813bd&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 12, "MediaId": 1, "MediaFileGuid": "9f75b9f5-3da2-4d91-b1f0-2e2e1eb82c67", "Type": "Video", "Category": "", "Title": "Dekningsbidrag", "Description": "", "Duration": null, "Sort": 4, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 13, "Type": "Video", "Category": "", "FileId": 5, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "KRV_V4", "Name": "dfbaac8365f2a11a332fad98b8f1fdbca6c40e8b", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590626809.sd.mp4?s=dfbaac8365f2a11a332fad98b8f1fdbca6c40e8b&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 13, "MediaId": 1, "MediaFileGuid": "ae3de8c4-aba6-4de5-a667-9d7968f571fd", "Type": "Video", "Category": "", "Title": "Følsomhetsanalyse med «ønsket resultat»", "Description": "", "Duration": null, "Sort": 5, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 14, "Type": "Video", "Category": "", "FileId": 6, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "KRV_V5", "Name": "82aa5caf7f1e2ddb13c351d5be9d3d0d4cf1c658", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590626821.sd.mp4?s=82aa5caf7f1e2ddb13c351d5be9d3d0d4cf1c658&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 14, "MediaId": 1, "MediaFileGuid": "e469bd92-eb76-46c2-8738-d64ca46e328b", "Type": "Video", "Category": "", "Title": "Følsomhetsanalyse med «kritiske verdier»", "Description": "", "Duration": null, "Sort": 6, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 15, "Type": "Video", "Category": "", "FileId": 7, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "KRV_V6", "Name": "c5bc53f951d74f3542342b724671e7c2917b7e94", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590626894.sd.mp4?s=c5bc53f951d74f3542342b724671e7c2917b7e94&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 15, "MediaId": 1, "MediaFileGuid": "4d8a7611-5f8f-4064-b70c-dd9d55ae15c2", "Type": "Video", "Category": "", "Title": "Kostnads- og inntektstabell (for diagram)", "Description": "", "Duration": null, "Sort": 7, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 16, "Type": "Video", "Category": "", "FileId": 8, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "KRV_V7", "Name": "9d8586860a121371b7f984f08b68d1db6716ee06", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590626921.sd.mp4?s=9d8586860a121371b7f984f08b68d1db6716ee06&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 16, "MediaId": 1, "MediaFileGuid": "655dfa4e-90ce-453d-a6ad-8265016729d4", "Type": "Video", "Category": "", "Title": "Nullpunktdiagram", "Description": "", "Duration": null, "Sort": 8, "FlagCode": 0, "StatusCode": 1 }], "MediaId": 1, "MediaGuid": "73e6d31d-72d8-4e38-8ecd-dce11266661c", "SiteId": 1, "RegDate": "2021-01-01T00:00:00", "Type": "Video", "Category": "", "Title": "KRV-analyse", "Description": "", "Sort": 1, "FlagCode": 0, "StatusCode": 1 }, { "MediaFileList": [{ "FileMediaFileList": [{ "MediaFileId": 17, "Type": "Video", "Category": "", "FileId": 9, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Kostn_video_01", "Name": "f7f74272-2ddd-42ad-97ab-525c383db766", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/543522375.sd.mp4?s=f6feab18c4dff456758428584b5e22d922e916c0&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 17, "MediaId": 6, "MediaFileGuid": "46fea83f-ef5e-4d8b-8aec-4c863fe9da4f", "Type": "Video", "Category": "", "Title": "Totale kostnader", "Description": "", "Duration": null, "Sort": 1, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 18, "Type": "Video", "Category": "", "FileId": 10, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Kostn_video_02", "Name": "3a88321e-7839-4819-a6e1-9ca2513c269f", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/543522471.sd.mp4?s=21bea00f3d6b4496a1cfd7ab6b0dc0045d15371b&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [{ "MediaChapterId": 3, "MediaFileId": 18, "MediaChapterGuid": "a98837b7-c019-4195-8b0d-6ec83a2d688c", "Title": "Diagramstiler", "Description": "", "StartTime": 139.2, "StopTime": null, "Duration": null, "Sort": 1, "FlagCode": 0, "StatusCode": 1 }], "MediaFileId": 18, "MediaId": 6, "MediaFileGuid": "b52ce7a7-1f2b-4597-8ee2-2e15592d4e4a", "Type": "Video", "Category": "", "Title": "Totaldiagram", "Description": "", "Duration": null, "Sort": 2, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 19, "Type": "Video", "Category": "", "FileId": 11, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Kostn_video_03", "Name": "eb4001fa-9e17-4ef8-8e59-3923cfd11bca", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/543522538.sd.mp4?s=230f3fb838dfc827994ddedf900dfcc20597becf&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 19, "MediaId": 6, "MediaFileGuid": "67b5dd96-f6cf-4dd0-8608-96449ff22f62", "Type": "Video", "Category": "", "Title": "Formatering av totaldiagram", "Description": "", "Duration": null, "Sort": 3, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 20, "Type": "Video", "Category": "", "FileId": 12, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Kostn_video_04", "Name": "173b54f3-6e8b-45f0-83e1-ed1246cdd7b5", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/543522619.sd.mp4?s=1f57ab69dbdb341bee02927f7c7d1d97bad11657&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 20, "MediaId": 6, "MediaFileGuid": "a33e509f-372c-47c2-9b97-e4b0af87b9a3", "Type": "Video", "Category": "", "Title": "Kostnadsoptimum ", "Description": "", "Duration": null, "Sort": 4, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 21, "Type": "Video", "Category": "", "FileId": 13, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Kostn_video_05", "Name": "06604e30-b475-49e8-9c35-a3532265962b", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/543522749.sd.mp4?s=58e951bb338402dc1d601eec189d1fb8a9a34493&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [{ "MediaChapterId": 4, "MediaFileId": 21, "MediaChapterGuid": "b442dbef-f96f-4eb5-9db6-2808bfd90989", "Title": "Enhetskostnader", "Description": "", "StartTime": 148.8, "StopTime": null, "Duration": null, "Sort": 1, "FlagCode": 0, "StatusCode": 1 }], "MediaFileId": 21, "MediaId": 6, "MediaFileGuid": "761e9877-9f58-4b1f-9588-c015399097ee", "Type": "Video", "Category": "", "Title": "Differansekostnad", "Description": "", "Duration": null, "Sort": 5, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 22, "Type": "Video", "Category": "", "FileId": 14, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Kostn_video_06", "Name": "290c7c8a-a321-4cc1-bf82-146c36a38406", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/543522791.sd.mp4?s=f224ebf59dddff2a884046b453a9ad3fb745e3d0&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [{ "MediaChapterId": 5, "MediaFileId": 22, "MediaChapterGuid": "a5b2375f-197f-4cc4-b130-037e97c329a9", "Title": "Formatering av enhetsdiagram", "Description": "", "StartTime": 186, "StopTime": null, "Duration": null, "Sort": 1, "FlagCode": 0, "StatusCode": 1 }], "MediaFileId": 22, "MediaId": 6, "MediaFileGuid": "5e4cc6be-7680-47c4-bd20-25e65fbc272d", "Type": "Video", "Category": "", "Title": "Enhetsdiagram", "Description": "", "Duration": null, "Sort": 6, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 23, "Type": "Video", "Category": "", "FileId": 15, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Kostn_video_07", "Name": "95c6c836-d0a1-4788-a23e-f5d6cbde4526", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/543522834.sd.mp4?s=67100476ca3d3fbcee47e5fa0f56ac9491886175&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 23, "MediaId": 6, "MediaFileGuid": "b724b9b6-5d3d-459b-8957-75a9ff09a674", "Type": "Video", "Category": "", "Title": "Kostnadsoptimum", "Description": "", "Duration": null, "Sort": 7, "FlagCode": 0, "StatusCode": 1 }], "MediaId": 6, "MediaGuid": "67c09daf-0eff-4b7e-ae1b-58a0df558094", "SiteId": 1, "RegDate": "2021-01-01T00:00:00", "Type": "Video", "Category": "", "Title": "Kostnad og etterspørsel - Kostnadsteori", "Description": "", "Sort": 1, "FlagCode": 0, "StatusCode": 1 }, { "MediaFileList": [{ "FileMediaFileList": [{ "MediaFileId": 31, "Type": "Video", "Category": "", "FileId": 16, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Ettersp_V1", "Name": "4be36b9b-3cba-4c87-b5f0-af959b5dacab", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590616558.sd.mp4?s=6e9804122dc2f922f99384e9a7e3343df1464cdb&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 31, "MediaId": 7, "MediaFileGuid": "df252f0e-6c79-4f16-9a83-874dee75ece2", "Type": "Video", "Category": "", "Title": "Total inntekt – monopol - tabell", "Description": "", "Duration": null, "Sort": 1, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 32, "Type": "Video", "Category": "", "FileId": 17, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Ettersp_V2", "Name": "b40c7b46-e2ad-4ad7-bf87-69db7eef0592", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590616611.sd.mp4?s=1f656ccfbe3fbe7dc542e35a1de195b6538fca62&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 32, "MediaId": 7, "MediaFileGuid": "5907d23b-b3ca-45e6-86ee-3dee0f8c7fc7", "Type": "Video", "Category": "", "Title": "Totaldiagram for inntekt (monopol)", "Description": "", "Duration": null, "Sort": 2, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 33, "Type": "Video", "Category": "", "FileId": 18, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Ettersp_V3", "Name": "a0ae9590-fbfe-4bce-8c72-ee2e966deade", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590616649.sd.mp4?s=e1c669fb8c251c2077059d35df2cb54789f97026&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 33, "MediaId": 7, "MediaFileGuid": "66fc47e2-109c-4240-a912-4490048beb76", "Type": "Video", "Category": "", "Title": "Differanseinntekt og differanseenhetsinntekt", "Description": "", "Duration": null, "Sort": 3, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 34, "Type": "Video", "Category": "", "FileId": 19, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Ettersp_V4", "Name": "52259a98-33e4-47d4-ac9b-d1fad13976d4", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590616667.sd.mp4?s=58b2c3f02ecde5823d82b3d149b85dc78a5afd07&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 34, "MediaId": 7, "MediaFileGuid": "c81e694f-80db-4a3e-bdd2-675a52ba3fbe", "Type": "Video", "Category": "", "Title": "Enhetsdiagram for inntekt", "Description": "", "Duration": null, "Sort": 4, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 35, "Type": "Video", "Category": "", "FileId": 20, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Ettersp_V5", "Name": "846b2b01-7b3e-4017-b271-8d1b95255c57", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590616692.sd.mp4?s=a7138b52aaf20e2647307b6dcf7b5ba18bf0ad98&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 35, "MediaId": 7, "MediaFileGuid": "45228bea-e615-462a-91dd-5cf496ea28bf", "Type": "Video", "Category": "", "Title": "Priselastisitet - tabell", "Description": "", "Duration": null, "Sort": 5, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 36, "Type": "Video", "Category": "", "FileId": 21, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Ettersp_V6", "Name": "79172e4f-4885-4099-9768-42c9d6daeebb", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590616710.sd.mp4?s=156aea9ff25f085f7ca49469dc377ca37c902f88&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 36, "MediaId": 7, "MediaFileGuid": "2b40b40b-6d9c-4da3-bbb5-b69214c8a343", "Type": "Video", "Category": "", "Title": "Priselastisitet - diagram", "Description": "", "Duration": null, "Sort": 6, "FlagCode": 0, "StatusCode": 1 }, { "FileMediaFileList": [{ "MediaFileId": 37, "Type": "Video", "Category": "", "FileId": 22, "FolderId": 4, "ClientGuid": "7c9e1928-9182-40de-123b-e07fc1f19ae7", "RegDate": "2021-01-01T00:00:00", "RegTime": "00:00:00", "Title": "Ettersp_V7", "Name": "a297acba-7a03-4cc3-a41d-45765ec1cd07", "Extension": "mp4", "Size": 0, "Width": null, "Height": null, "URL": "https://player.vimeo.com/external/590616768.sd.mp4?s=9301ce7b79751903ede3f82d6eac26e6dda156b3&profile_id=165", "StatusCode": 1 }], "MediaChapterList": [], "MediaFileId": 37, "MediaId": 7, "MediaFileGuid": "51e88f7e-5b7b-4534-b865-7b04e203479e", "Type": "Video", "Category": "", "Title": "Inntekt – fullkommen konkurranse", "Description": "", "Duration": null, "Sort": 7, "FlagCode": 0, "StatusCode": 1 }], "MediaId": 7, "MediaGuid": "accd8849-c2f5-4fb2-b37c-4a84cbc687e5", "SiteId": 1, "RegDate": "2021-01-01T00:00:00", "Type": "Video", "Category": "", "Title": "Kostnad og etterspørsel - Etterspørselsteori", "Description": "", "Sort": 1, "FlagCode": 0, "StatusCode": 1 }]
+
+//AZIndexedDB("set", "Customer", Array2);
+
+//console.log(AZGetObj(Array1, "id", 955));
+//console.log(AZGetObj(Array2, "Name", "Hansen", 0));
+//console.log(AZGetObj(Array3, "StatusCode", 1, 3));
+//console.log(AZExistObj(Array3, "MediaId", 1));
+//AZRemoveObj(Array2, "Name", "Olsen")
+
+
+if ($(this).hasClass("date"))
+{
+    _DatePicker = true;
+    $(this).datepicker
+        ({
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            onSelect: function (curDate, instance)
+            {
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("pastdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            maxDate: 0,
+            yearRange: "-60:+0",
+            onSelect: function (curDate, instance)
+            {
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("nopastdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            minDate: 0,
+            onSelect: function (curDate, instance)
+            {
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("fromdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            numberOfMonths: 2,
+            onSelect: function (curDate, instance)
+            {
+                $(".todate").datepicker("option", "minDate", curDate);
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("todate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            numberOfMonths: 2,
+            onSelect: function (curDate, instance)
+            {
+                $(".fromdate").datepicker("option", "maxDate", curDate);
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("frompastdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            maxDate: 0,
+            numberOfMonths: 2,
+            onSelect: function (curDate, instance)
+            {
+                $(".topastdate").datepicker("option", "minDate", curDate);
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("topastdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            maxDate: 0,
+            numberOfMonths: 2,
+            onSelect: function (curDate, instance)
+            {
+                $(".frompastdate").datepicker("option", "maxDate", curDate);
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("fromnopastdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            minDate: 0,
+            numberOfMonths: 2,
+            onSelect: function (curDate, instance)
+            {
+                $(".tonopastdate").datepicker("option", "minDate", curDate);
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("tonopastdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            minDate: 0,
+            numberOfMonths: 2,
+            onSelect: function (curDate, instance)
+            {
+                $(".fromnopastdate").datepicker("option", "maxDate", curDate);
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if (_DatePicker == true)
+{
+    $.datepicker.setDefaults($.datepicker.regional[_DefaultLanguage]);
+}
+
+
+
+
+
+
+
+if ($(this).hasClass("date"))
+{
+    _DatePicker = true;
+    $(this).datepicker
+        ({
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            onSelect: function (curDate, instance)
+            {
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("pastdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            maxDate: 0,
+            yearRange: "-60:+0",
+            onSelect: function (curDate, instance)
+            {
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("nopastdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            minDate: 0,
+            onSelect: function (curDate, instance)
+            {
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("fromdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            numberOfMonths: 2,
+            onSelect: function (curDate, instance)
+            {
+                $(".todate").datepicker("option", "minDate", curDate);
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("todate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            numberOfMonths: 2,
+            onSelect: function (curDate, instance)
+            {
+                $(".fromdate").datepicker("option", "maxDate", curDate);
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("frompastdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            maxDate: 0,
+            numberOfMonths: 2,
+            onSelect: function (curDate, instance)
+            {
+                $(".topastdate").datepicker("option", "minDate", curDate);
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("topastdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            maxDate: 0,
+            numberOfMonths: 2,
+            onSelect: function (curDate, instance)
+            {
+                $(".frompastdate").datepicker("option", "maxDate", curDate);
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("fromnopastdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            minDate: 0,
+            numberOfMonths: 2,
+            onSelect: function (curDate, instance)
+            {
+                $(".tonopastdate").datepicker("option", "minDate", curDate);
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if ($(this).hasClass("tonopastdate"))
+{
+    _DatePicker = true;
+    $(this).datepicker(
+        {
+            beforeShow: function ()
+            {
+                if ($(this).hasClass("xs") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.85em" });
+                }
+                else if ($(this).hasClass("sm") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.10em" });
+                }
+                else if ($(this).hasClass("md") == true)
+                {
+                    $(".ui-datepicker").css({ "font-size": "1.20em" });
+                }
+                else
+                {
+                    $(".ui-datepicker").css({ "font-size": "0.95em" });
+                }
+            },
+            minDate: 0,
+            numberOfMonths: 2,
+            onSelect: function (curDate, instance)
+            {
+                $(".fromnopastdate").datepicker("option", "maxDate", curDate);
+                $.publish("functionlib/azSetDate",
+                    {
+                        azDateId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                        azDateLocalDate: curDate,
+                        azDateENUSDate: moment($(this).datepicker("getDate")).format('MM/DD/YYYY'),
+                        azDateJQElement: $(this)
+                    });
+            }
+        });
+}
+if (_DatePicker == true)
+{
+    $.datepicker.setDefaults($.datepicker.regional[_DefaultLanguage]);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 //function changeInOut(_ElementIn, _ElementOut)
 //{
 //    if ($("#" + _ElementIn + "").is(":hidden"))

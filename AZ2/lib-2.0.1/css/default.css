@@ -41,9 +41,6 @@ xl - (1200 - )
 /* Size ALL ----------*/
 :root
 {
-    --fontSize40-50: calc(40px + (50 - 40) * ((100vw - 576px) / (1200 - 576)));
-    --fontSize30-36: calc(36px + (36 - 30) * ((100vw - 576px) / (1200 - 576)));
-    --fontSize20-26: calc(20px + (26 - 20) * ((100vw - 576px) / (1200 - 576)));
     --default-background-color: #FFFFFF;
     --default-color: #000000;
     --primary-background-color: #0078D7;

@@ -1,4 +1,10 @@
-﻿.az-code-header
+﻿.notranslate
+{
+    overflow: hidden;
+    word-break: break-all;
+}
+
+.az-code-header
 {
     width: auto;
     background-color: #4CAF50;

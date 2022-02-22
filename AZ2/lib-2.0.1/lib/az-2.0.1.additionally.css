@@ -1080,7 +1080,7 @@ jqueryui/jquery-ui.min.css
 -----------------------------------------------------------*/
 .ui-front
 {
-    z-index: 5000 !important;
+    z-index: 5000;
 }
 
 .ui-dialog
