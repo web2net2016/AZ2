@@ -387,26 +387,26 @@ form.css
 
 .az-form-group .az-alert-success
 {
-    background-color: #28a745;
-    color: #FFFFFF;
+    background-color: var(--success-background-color);
+    color: var(--success-color);
 }
 
 .az-form-group .az-alert-info
 {
-    background-color: #0bb2d4;
-    color: #FFFFFF;
+    background-color: var(--info-background-color);
+    color: var(--info-color);
 }
 
 .az-form-group .az-alert-warning
 {
-    background-color: #FF851B;
-    color: #FFFFFF;
+    background-color: var(--warning-background-color);
+    color: var(--warning-color);
 }
 
 .az-form-group .az-alert-danger
 {
-    background-color: #FF4136;
-    color: #FFFFFF;
+    background-color: var(--danger-background-color);
+    color: var(--danger-color);
 }
 
 /* Dropdown */

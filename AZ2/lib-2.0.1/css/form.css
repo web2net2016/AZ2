@@ -858,31 +858,6 @@
             font-size: 1.2em;
         }
 
-        /*.az-form-group .az-button.az-button-round
-        {
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            border-radius: 50%;
-        }
-
-            .az-form-group .az-button.az-button-round.xs
-            {
-                padding: 5px;
-                font-size: 11.05px;
-            }
-
-            .az-form-group .az-button.az-button-round.sm
-            {
-                padding: 8px;
-                font-size: 14.5px;
-            }
-
-            .az-form-group .az-button.az-button-round.md
-            {
-                padding: 10px;
-                font-size: 15.6px;
-            }*/
-
         .az-form-group .az-button.az-round
         {
             border-radius: 4px;
