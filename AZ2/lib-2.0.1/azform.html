@@ -31,17 +31,18 @@
 
             $.subscribe("functionlib/azSetDate", function (e, data)
             {
-                console.log("azDateId: " + data.azDateId + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement)
+                console.log("FUNCTIONLIB/AZSETDATE\nazDateId: " + data.azDateId + "\nazDateName: " + data.azDateName + "\nazDateClass: " + data.azDateClass + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateISODate: " + data.azDateISODate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
+                consoleLog({ consoleType: "warn", consoleText: "azDateENUSDate is deprecated, use azDateISODate." });
             });
 
             $.subscribe("functionlib/azCheckboxClick", function (e, data)
             {
-                console.log("azCheckboxId: " + data.azCheckboxId + "\nazCheckboxValue: " + data.azCheckboxValue + "\nazCheckboxChecked: " + data.azCheckboxChecked + "\nazCheckboxJQElement: ", data.azCheckboxJQElement)
+                console.log("FUNCTIONLIB/AZCHECKBOXCLICK\nazCheckboxId: " + data.azCheckboxId + "\nazCheckboxName: " + data.azCheckboxName + "\nazCheckboxClass: " + data.azCheckboxClass + "\nazCheckboxValue: " + data.azCheckboxValue + "\nazCheckboxChecked: " + data.azCheckboxChecked + "\nazCheckboxJQElement: ", data.azCheckboxJQElement);
             });
 
             $.subscribe("functionlib/azRadioClick", function (e, data)
             {
-                console.log("azRadioId: " + data.azRadioId + "\nazRadioName: " + data.azRadioName + "\nazRadioValue: " + data.azRadioValue + "\nazRadioChecked: " + data.azRadioChecked + "\nazRadioJQElement: ", data.azRadioJQElement)
+                console.log("FUNCTIONLIB/AZRADIOCLICK\nazRadioId: " + data.azRadioId + "\nazRadioName: " + data.azRadioName + "\nazRadioClass: " + data.azRadioClass + "\nazRadioValue: " + data.azRadioValue + "\nazRadioChecked: " + data.azRadioChecked + "\nazRadioJQElement: ", data.azRadioJQElement);
             });
 
             $.subscribe("functionlib/azSwitchClick", function (e, data)

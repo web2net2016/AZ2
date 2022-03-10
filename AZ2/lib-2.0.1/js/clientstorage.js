@@ -19,7 +19,7 @@ function AZClientStorage(ActionType, Name, Value)
         }
         else if (ActionType == "get")
         {
-            return getLocalStorage(_ThisLocation + "-" + Name);
+            return parseData(getLocalStorage(_ThisLocation + "-" + Name));
         }
         else if (ActionType == "remove")
         {
@@ -45,7 +45,7 @@ function AZClientStorage(ActionType, Name, Value)
             }
             else if (ActionType == "get")
             {
-                return getCookie(_ThisLocation + "-" + Name);
+                return parseData(getCookie(_ThisLocation + "-" + Name));
             }
             else if (ActionType == "remove")
             {
@@ -156,5 +156,27 @@ function AZClientStorage(ActionType, Name, Value)
     function clientStorageError(consoleText)
     {
         console.error("Client Storage Error\n" + consoleText);
+    }
+
+    function parseData(Data)
+    {
+        var _ReturnObj = {};
+        if (Data != null && Data != "")
+        {
+            var _Found = false;
+            if (Data.indexOf("{") == 0 || Data.indexOf("[") == 0)
+            {
+                _Found = true;
+            }
+            if (_Found == true)
+            {
+                _ReturnObj = $.parseJSON(Data);
+            }
+            else
+            {
+                _ReturnObj = Data;
+            }
+        }
+        return _ReturnObj;
     }
 }

@@ -72,10 +72,11 @@
         function ClientStorageGet()
         {
             var _Customers = AZClientStorage("get", "Customer");
-            if (_Customers !== null)
+            if (AZIsEmpty(_Customers) === false)
             {
-                $("#clienstoragestring").html("<br /><strong>String</strong><br /><brown>" + _Customers + "</brown>");
-                $("#clienstorageparsed").html("<br /><strong>Parsed (JavaScript Objects)</strong><br /><brown>" + $.parseJSON(_Customers) + "</brown>");
+                $("#clienstoragestring").html("<br /><strong>String</strong><br /><brown>" + JSON.stringify(_Customers) + "</brown>");
+                $("#clienstorageparsed").html("<br /><strong>Parsed (JavaScript Objects)</strong> Se also <strong>Console</strong><br /><brown>" + _Customers + "</brown>");
+                console.log(_Customers);
             }
         }
 
@@ -90,9 +91,10 @@
         function GetObj()
         {
             var _Customers = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
-            var _Customer = AZGetObj(_Customers, "Name", "Olsen");
+            var _Customer = AZGetObj(_Customers, "Name", "Olsen", 1);
             $("#azgetobjstring").html("<br /><strong>String</strong><br /><brown>" + JSON.stringify(_Customer) + "</brown>");
-            $("#azgetobjparsed").html("<br /><strong>Parsed (JavaScript Objects)</strong><br /><brown>" + _Customer + "</brown>");
+            $("#azgetobjparsed").html("<br /><strong>Parsed (JavaScript Objects)</strong> Se also <strong>Console</strong><br /><brown>" + _Customer + "</brown>");
+            console.log(_Customers);
         }
 
         function RemoveObj()
@@ -100,7 +102,8 @@
             var _Customers = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
             AZRemoveObj(_Customers, "Name", "Olsen");
             $("#azremoveobjstring").html("<br /><strong>String</strong><br /><brown>" + JSON.stringify(_Customers) + "</brown>");
-            $("#azremoveobjparsed").html("<br /><strong>Parsed (JavaScript Objects)</strong><br /><brown>" + _Customers + "</brown>");
+            $("#azremoveobjparsed").html("<br /><strong>Parsed (JavaScript Objects)</strong> Se also <strong>Console</strong><br /><brown>" + _Customers + "</brown>");
+            console.log(_Customers);
         }
 
         function ExistObj()
@@ -362,11 +365,11 @@
                                 <br />
                                 <strong>Get data</strong>
                                 <div class="jsHigh notranslate">
-                                    var _Customers = $.parseJSON(AZClientStorage("get", "Customers"));
+                                    var _Customers = AZClientStorage("get", "Customers");
                                 </div>
                                 <br />
                                 <div class="az-code">
-                                    If you have stored an Object or an Array, you will need to parse this from a string to a JavaScript Object. For example, you can use JSON Parse.
+                                    Objects and Arrays will be automatically parsed to JavaScript Objects or Arrays.
                                 </div>
                                 <br />
                                 <strong>Delete data</strong>
@@ -549,7 +552,7 @@
                                     &emsp;&ensp;&emsp;&ensp;$Area: "Optional",<br />
                                     &emsp;&ensp;&emsp;&ensp;Title: "",<br />
                                     &emsp;&ensp;&emsp;&ensp;Text: ""<br />
-                                    }<br />
+                                    };<br />
                                     new AZStandardAlert(_AZStandardAlertOptions);<br />
                                     <br />
                                 </div>

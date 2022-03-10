@@ -38,7 +38,7 @@
             Decimal: 111.50,
             Numeric: 12345,
             Comment: "Comment"
-        }
+        };
 
         $(document).ready(function ()
         {
@@ -63,21 +63,36 @@
         function SetAZPageContent(e, data)
         {
             ObjPageData.Values.AZPage = data;
+
+            $.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
+            {
+                console.log("FUNCTIONLIB - azValidateInputValueKeypress\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputValue: " + data.azInputValue + "\nazInputInvalidChar: " + data.azInputInvalidChar + "\nazInputValidType: " + data.azInputValidType + "\nazInputJQElement: ", data.azInputJQElement);
+            });
+            $.subscribe("functionlib/azValidateInputValidChar", function (e, data)
+            {
+                console.log("FUNCTIONLIB - azValidateInputValidChar\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputValue: " + data.azInputValue + "\nazInputInvalidChar: " + data.azInputInvalidChar + "\nazInputValidType: " + data.azInputValidType + "\nazInputJQElement: ", data.azInputJQElement);
+            });
+            $.subscribe("functionlib/azValidateDirty", function (e, data)
+            {
+                console.log("FUNCTIONLIB - azValidateDirty\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputValue: " + data.azInputValue + "\nazInputKey: " + data.azInputKey + "\nazInputJQElement: ", data.azInputJQElement);
+            });
             $.subscribe("functionlib/azSetDate", function (e, data)
             {
-                console.log("azDateId: " + data.azDateId + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateISODate: " + data.azDateISODate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
+                console.log("FUNCTIONLIB - azSetDate\nazDateId: " + data.azDateId + "\nazDateName: " + data.azDateName + "\nazDateClass: " + data.azDateClass + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateISODate: " + data.azDateISODate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
                 consoleLog({ consoleType: "warn", consoleText: "azDateENUSDate is deprecated, use azDateISODate." });
             });
             $.subscribe("functionlib/azSetTime", function (e, data)
             {
-                console.log("azTimeId: " + data.azTimeId + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeJQElement: ", data.azTimeJQElement);
+                console.log("FUNCTIONLIB - azSetTime\azTimeId: " + data.azTimeId + "\nazTimeName: " + data.azTimeName + "\nazTimeClass: " + data.azTimeClass + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeJQElement: ", data.azTimeJQElement);
             });
-            $.subscribe("functionlib/azValidateDirty", function (e, data)
+            $.subscribe("functionlib/azCheckboxClick", function (e, data)
             {
-                console.log(data)
-                //console.log("azInputId: " + data.azInputId + "\nazInputJQElement: " + data.azInputJQElement);
+                console.log("FUNCTIONLIB - azCheckboxClick\nazCheckboxId: " + data.azCheckboxId + "\nazCheckboxName: " + data.azCheckboxName + "\nazCheckboxClass: " + data.azCheckboxClass + "\nazCheckboxValue: " + data.azCheckboxValue + "\nazCheckboxChecked: " + data.azCheckboxChecked + "\nazCheckboxJQElement: ", data.azCheckboxJQElement);
             });
-
+            $.subscribe("functionlib/azRadioClick", function (e, data)
+            {
+                console.log("FUNCTIONLIB - azRadioClick\nazRadioId: " + data.azRadioId + "\nazRadioName: " + data.azRadioName + "\nazRadioClass: " + data.azRadioClass + "\nazRadioValue: " + data.azRadioValue + "\nazRadioChecked: " + data.azRadioChecked + "\nazRadioJQElement: ", data.azRadioJQElement);
+            });
 
             //ObjPageData.Values.AZPage.ObjLanguage
             //var _AZSetLanguageOptions =
@@ -92,10 +107,10 @@
                 $Area: ObjPageData.Values.AZPage.$Form,
                 ObjInputData: InputData,
                 ObjValidation: ObjPageData.Values.AZPage.ObjValidation
-            }
+            };
             AZPopulateForm(_AZPopulateFormOptions);
 
-            $("#signinInfo").html("Vennligst fyll inn alle feltene merket med <strong class=\"az-color-red\">*</strong>")
+            $("#signinInfo").html("Vennligst fyll inn alle feltene merket med <strong class=\"az-color-red\">*</strong>");
             formdirty = false;
             AZHideCoverSpin();
         }
@@ -112,12 +127,12 @@
                 $Area: ObjPageData.Values.AZPage.$Form,
                 ObjLanguage: ObjPageData.Values.AZPage.ObjLanguage,
                 ObjValidation: ObjPageData.Values.AZPage.ObjValidation
-            }
+            };
             var _ObjReturnForm = AZSerializeForm(_AZSerializeFormOptions);
             if (AZIsEmpty(_ObjReturnForm) === false)
             {
-                console.log(_ObjReturnForm)
-                console.log(JSON.stringify(_ObjReturnForm))
+                console.log(_ObjReturnForm);
+                console.log(JSON.stringify(_ObjReturnForm));
                 $("#ObjFormResponse").text(JSON.stringify(_ObjReturnForm));
             }
         }
@@ -222,6 +237,27 @@
                     </div>
                 </div>
             </div>
+            <div class="az-row">
+                <div class="az-col xs-12 sm-3">
+                    <div class="az-form-group">
+                        <input class="az-checkbox" type="checkbox" value="1" id="Checkbox" checked="checked">
+                        <label class="az-label">Størrelse Normal</label>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-3">
+                    <div class="az-form-group">
+                        <input class="az-radio" type="radio" name="id" value="1" id="1" checked="checked">
+                        <label class="az-label">Størrelse Normal</label>
+                    </div>
+                </div>
+                <div class="az-col xs-12 sm-3">
+                    <div class="az-form-group">
+                        <input class="az-radio" type="radio" name="id" value="2" id="2">
+                        <label class="az-label">Størrelse Normal</label>
+                    </div>
+                </div>
+            </div>
+
             <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6">
                     <div class="az-form-group xs">

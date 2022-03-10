@@ -306,7 +306,7 @@ $(document).ready(function ()
 });
 
 function AZDatepicker($Obj, DefaultLanguage)
-{   
+{
     var _DatePicker = false;
     if ($Obj.hasClass("date"))
     {
@@ -336,7 +336,9 @@ function AZDatepicker($Obj, DefaultLanguage)
                 {
                     $.publish("functionlib/azSetDate",
                         {
-                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
                             azDateLocalDate: curDate,
                             azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
                             azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
@@ -375,7 +377,9 @@ function AZDatepicker($Obj, DefaultLanguage)
                 {
                     $.publish("functionlib/azSetDate",
                         {
-                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
                             azDateLocalDate: curDate,
                             azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
                             azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
@@ -413,7 +417,9 @@ function AZDatepicker($Obj, DefaultLanguage)
                 {
                     $.publish("functionlib/azSetDate",
                         {
-                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
                             azDateLocalDate: curDate,
                             azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
                             azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
@@ -452,7 +458,9 @@ function AZDatepicker($Obj, DefaultLanguage)
                     $(".todate").datepicker("option", "minDate", curDate);
                     $.publish("functionlib/azSetDate",
                         {
-                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
                             azDateLocalDate: curDate,
                             azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
                             azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
@@ -491,7 +499,9 @@ function AZDatepicker($Obj, DefaultLanguage)
                     $(".fromdate").datepicker("option", "maxDate", curDate);
                     $.publish("functionlib/azSetDate",
                         {
-                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
                             azDateLocalDate: curDate,
                             azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
                             azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
@@ -531,7 +541,9 @@ function AZDatepicker($Obj, DefaultLanguage)
                     $(".topastdate").datepicker("option", "minDate", curDate);
                     $.publish("functionlib/azSetDate",
                         {
-                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
                             azDateLocalDate: curDate,
                             azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
                             azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
@@ -571,7 +583,9 @@ function AZDatepicker($Obj, DefaultLanguage)
                     $(".frompastdate").datepicker("option", "maxDate", curDate);
                     $.publish("functionlib/azSetDate",
                         {
-                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
                             azDateLocalDate: curDate,
                             azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
                             azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
@@ -611,7 +625,9 @@ function AZDatepicker($Obj, DefaultLanguage)
                     $(".tonopastdate").datepicker("option", "minDate", curDate);
                     $.publish("functionlib/azSetDate",
                         {
-                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
                             azDateLocalDate: curDate,
                             azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
                             azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
@@ -651,7 +667,9 @@ function AZDatepicker($Obj, DefaultLanguage)
                     $(".fromnopastdate").datepicker("option", "maxDate", curDate);
                     $.publish("functionlib/azSetDate",
                         {
-                            azDateId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
                             azDateLocalDate: curDate,
                             azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
                             azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
@@ -703,14 +721,16 @@ function AZTimepicker($Obj, DefaultLanguage)
                 {
                     $.publish("functionlib/azSetTime",
                         {
-                            azTimeId: $Obj.attr("id") === undefined ? "" : $Obj.attr("id"),
+                            azTimeId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+                            azTimeName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+                            azTimeClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
                             azTimeLocalTime: curTime,
                             azTimeISOTime: moment(moment().format("YYYY-MM-DD") + ' ' + curTime).format('HH:mm'),
                             azTimeJQElement: $Obj
                         });
                 }
             });
-    }    
+    }
     if (_Timepicker == true)
     {
         $Obj.attr("readOnly", true);
@@ -762,12 +782,13 @@ function AZNotEnter(e)
 function AZCheckboxClick(e)
 {
     var _Element = e.target || e.srcElement;
-    var _$SelectedCheckbox = $(this);
     $.publish("functionlib/azCheckboxClick",
         {
-            azCheckboxId: _$SelectedCheckbox.attr("id") === undefined ? "" : _$SelectedCheckbox.attr("id"),
-            azCheckboxValue: _$SelectedCheckbox.attr("value") === undefined ? "" : _$SelectedCheckbox.attr("value"),
-            azCheckboxChecked: _$SelectedCheckbox.is(":checked"),
+            azCheckboxId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+            azCheckboxName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+            azCheckboxClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+            azCheckboxValue: $(_Element).attr("value") === undefined ? "" : $(_Element).attr("value"),
+            azCheckboxChecked: $(_Element).is(":checked"),
             azCheckboxJQElement: $(_Element)
         });
 }
@@ -775,13 +796,13 @@ function AZCheckboxClick(e)
 function AZRadioClick(e)
 {
     var _Element = e.target || e.srcElement;
-    var _$SelectedRadio = $(this);
     $.publish("functionlib/azRadioClick",
         {
-            azRadioId: _$SelectedRadio.attr("id") === undefined ? "" : _$SelectedRadio.attr("id"),
-            azRadioName: _$SelectedRadio.attr("name") === undefined ? "" : _$SelectedRadio.attr("name"),
-            azRadioValue: _$SelectedRadio.attr("value") === undefined ? "" : _$SelectedRadio.attr("value"),
-            azRadioChecked: _$SelectedRadio.is(":checked"),
+            azRadioId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+            azRadioName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+            azRadioClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+            azRadioValue: $(_Element).attr("value") === undefined ? "" : $(_Element).attr("value"),
+            azRadioChecked: $(_Element).is(":checked"),
             azRadioJQElement: $(_Element)
         });
 }
@@ -789,12 +810,13 @@ function AZRadioClick(e)
 function AZSwitchClick(e)
 {
     var _Element = e.target || e.srcElement;
-    var _$SelectedSwitch = $(this);
     $.publish("functionlib/azSwitchClick",
         {
-            azSwitchId: _$SelectedSwitch.attr("id") === undefined ? "" : _$SelectedSwitch.attr("id"),
-            azSwitchValue: _$SelectedSwitch.attr("value") === undefined ? "" : _$SelectedSwitch.attr("value"),
-            azSwitchChecked: _$SelectedSwitch.is(":checked"),
+            azSwitchId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+            azSwitchName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+            azSwitchClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+            azSwitchValue: $(_Element).attr("value") === undefined ? "" : $(_Element).attr("value"),
+            azSwitchChecked: $(_Element).is(":checked"),
             azSwitchJQElement: $(_Element)
         });
 }
@@ -802,13 +824,14 @@ function AZSwitchClick(e)
 function AZRange(e)
 {
     var _Element = e.target || e.srcElement;
-    var _$SelectedRange = $(this);
     if (e.type === "input")
     {
         $.publish("functionlib/azRangeSlide",
             {
-                azRangeId: _$SelectedRange.attr("id") === undefined ? "" : _$SelectedRange.attr("id"),
-                azRangeValue: _$SelectedRange.val(),
+                azRangeId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+                azRangeName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+                azRangeClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+                azRangeValue: $(_Element).val(),
                 azRangeJQElement: $(_Element)
             });
     }
@@ -816,8 +839,10 @@ function AZRange(e)
     {
         $.publish("functionlib/azRangeStop",
             {
-                azRangeId: _$SelectedRange.attr("id") === undefined ? "" : _$SelectedRange.attr("id"),
-                azRangeValue: _$SelectedRange.val(),
+                azRangeId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+                azRangeName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+                azRangeClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+                azRangeValue: $(_Element).val(),
                 azRangeJQElement: $(_Element)
             });
     }
@@ -973,7 +998,9 @@ function AZSetSpinnerEvents(Element, ObjAttributes)
                 Element.children().eq(1).val(_CurrentSpinnerValue);
                 $.publish("functionlib/azInputSpinner",
                     {
-                        azInputSpinnerId: Element.attr("id") === undefined ? "" : Element.attr("id"),
+                        azInputSpinnerId: Element.attr("id") != undefined ? Element.attr("id") : Element.attr("data-id") != undefined ? Element.attr("data-id") : "",
+                        azInputSpinnerName: Element.attr("name") === undefined ? "" : Element.attr("name"),
+                        azInputSpinnerClass: Element.attr("class") === undefined ? "" : Element.attr("class"),
                         azInputSpinnerValue: _CurrentSpinnerValue,
                         azInputSpinnerJQElement: Element
                     });
@@ -997,7 +1024,9 @@ function AZSetSpinnerEvents(Element, ObjAttributes)
                 Element.children().eq(1).val(_CurrentSpinnerValue);
                 $.publish("functionlib/azInputSpinner",
                     {
-                        azInputSpinnerId: Element.attr("id") === undefined ? "" : Element.attr("id"),
+                        azInputSpinnerId: Element.attr("id") != undefined ? Element.attr("id") : Element.attr("data-id") != undefined ? Element.attr("data-id") : "",
+                        azInputSpinnerName: Element.attr("name") === undefined ? "" : Element.attr("name"),
+                        azInputSpinnerClass: Element.attr("class") === undefined ? "" : Element.attr("class"),
                         azInputSpinnerValue: _CurrentSpinnerValue,
                         azInputSpinnerJQElement: Element
                     });
@@ -1019,7 +1048,9 @@ function AZSetSpinnerEvents(Element, ObjAttributes)
             Element.children().eq(1).val(_CurrentSpinnerValue);
             $.publish("functionlib/azInputSpinner",
                 {
-                    azInputSpinnerId: Element.attr("id") === undefined ? "" : Element.attr("id"),
+                    azInputSpinnerId: Element.attr("id") != undefined ? Element.attr("id") : Element.attr("data-id") != undefined ? Element.attr("data-id") : "",
+                    azInputSpinnerName: Element.attr("name") === undefined ? "" : Element.attr("name"),
+                    azInputSpinnerClass: Element.attr("class") === undefined ? "" : Element.attr("class"),
                     azInputSpinnerValue: _CurrentSpinnerValue,
                     azInputSpinnerJQElement: Element
                 });
@@ -1037,7 +1068,9 @@ function AZSetSpinnerEvents(Element, ObjAttributes)
             Element.children().eq(1).val(_CurrentSpinnerValue);
             $.publish("functionlib/azInputSpinner",
                 {
-                    azInputSpinnerId: Element.attr("id") === undefined ? "" : Element.attr("id"),
+                    azInputSpinnerId: Element.attr("id") != undefined ? Element.attr("id") : Element.attr("data-id") != undefined ? Element.attr("data-id") : "",
+                    azInputSpinnerName: Element.attr("name") === undefined ? "" : Element.attr("name"),
+                    azInputSpinnerClass: Element.attr("class") === undefined ? "" : Element.attr("class"),
                     azInputSpinnerValue: _CurrentSpinnerValue,
                     azInputSpinnerJQElement: Element
                 });
@@ -2312,13 +2345,18 @@ function AZWindowButton(Options)
             Button1: false,
             TypeButton1: "primary",
             SizeButton1: "",
+            RoundedButton1: false,
             TextButton1: "",
             Button2: false,
             TypeButton2: "info",
             SizeButton2: "",
+            RoundedButton2: false,
             TextButton2: ""
         };
         var Option = $.extend({}, _Defaults, Options || {});
+
+        var _RoundedButton1 = Option.RoundedButton1 === true ? "az-round" : "";
+        var _RoundedButton2 = Option.RoundedButton2 === true ? "az-round" : "";
 
         var _HTML = "";
         if (Option.Button1 === true && Option.Button2 === true)
@@ -2326,12 +2364,12 @@ function AZWindowButton(Options)
             _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
             _HTML += '<div class="az-col xs-6 az-text-right">';
             _HTML += '<div class="az-form-group ' + Option.SizeButton2 + '">';
-            _HTML += '<button type="button" class="az-button ' + Option.TypeButton2 + ' ' + Option.SizeButton2 + ' az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton2" style="width: 60%; margin-right: 4px;">' + Option.TextButton2 + '</button>';
+            _HTML += '<button type="button" class="az-button ' + _RoundedButton2 + ' ' + Option.TypeButton2 + ' ' + Option.SizeButton2 + ' az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton2" style="min-width: 70px; margin-right: 4px;">' + Option.TextButton2 + '</button>';
             _HTML += '</div>';
             _HTML += '</div>';
             _HTML += '<div class="az-col xs-6 az-text-left">';
             _HTML += '<div class="az-form-group ' + Option.SizeButton1 + '">';
-            _HTML += '<button type="button" class="az-button ' + Option.TypeButton1 + ' ' + Option.SizeButton1 + ' az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton1" style="width: 60%; margin-left: 4px;">' + Option.TextButton1 + '</button>';
+            _HTML += '<button type="button" class="az-button ' + _RoundedButton1 + ' ' + Option.TypeButton1 + ' ' + Option.SizeButton1 + ' az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton1" style="min-width: 70px; margin-left: 4px;">' + Option.TextButton1 + '</button>';
             _HTML += '</div>';
             _HTML += '</div>';
             _HTML += '</div>';
@@ -2341,7 +2379,17 @@ function AZWindowButton(Options)
             _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
             _HTML += '<div class="az-col xs-12 az-text-center">';
             _HTML += '<div class="az-form-group ' + Option.SizeButton1 + '">';
-            _HTML += '<button type="button" class="az-button ' + Option.TypeButton1 + ' ' + Option.SizeButton1 + ' az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton1" style="width: 60%; margin-left: 4px;">' + Option.TextButton1 + '</button>';
+            _HTML += '<button type="button" class="az-button ' + _RoundedButton1 + ' ' + Option.TypeButton1 + ' ' + Option.SizeButton1 + ' az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton1" style="min-width: 70px;">' + Option.TextButton1 + '</button>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+        }
+        else if (Option.Button1 === false && Option.Button2 === true)
+        {
+            _HTML = '<div class="az-row az-margin-t-28 az-margin-b-14">';
+            _HTML += '<div class="az-col xs-12 az-text-center">';
+            _HTML += '<div class="az-form-group ' + Option.SizeButton2 + '">';
+            _HTML += '<button type="button" class="az-button ' + _RoundedButton2 + ' ' + Option.TypeButton2 + ' ' + Option.SizeButton2 + ' az-shadow-1 az-shadow-hover-2" id="cmdAZWindowButton2" style="min-width: 70px;">' + Option.TextButton2 + '</button>';
             _HTML += '</div>';
             _HTML += '</div>';
             _HTML += '</div>';
@@ -3086,9 +3134,9 @@ function AZGuid()
 {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (e)
     {
-        var r = Math.random() * 16 | 0;
-        var v = e == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
+        var _R = Math.random() * 16 | 0;
+        var _V = e == 'x' ? _R : (_R & 0x3 | 0x8);
+        return _V.toString(16);
     });
 }
 
@@ -3105,4 +3153,24 @@ function AZFormatDateTime(DateTime, Format)
         _ReturnObj = moment(DateTime).format(Format);
     }
     return _ReturnObj;
+}
+
+function AZSetCheckbox($SelectedCheckbox)
+{
+    var _LastChecked = null;
+    $SelectedCheckbox.click(function (e)
+    {
+        if (!_LastChecked)
+        {
+            _LastChecked = this;
+            return;
+        }
+        if (e.shiftKey)
+        {
+            var _Start = $SelectedCheckbox.index(this);
+            var _End = $SelectedCheckbox.index(_LastChecked);
+            $SelectedCheckbox.slice(Math.min(_Start, _End), Math.max(_Start, _End) + 1).prop('checked', _LastChecked.checked);
+        }
+        _LastChecked = this;
+    });
 }

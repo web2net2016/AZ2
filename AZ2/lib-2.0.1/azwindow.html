@@ -60,6 +60,7 @@
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowButton:<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Button1: true,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;RoundedButton1: true,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton1: "Close"<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;}<br />';
             _HTML += '});<br />';
@@ -75,7 +76,8 @@
                     azWindowContentHeight: true,
                     azWindowButton: {
                         Button1: true,
-                        TextButton1: "Close"
+                        TextButton1: "Close",
+                        RoundedButton1: true
                     }
                 });
         }
@@ -157,7 +159,7 @@
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "New title",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "#FF4136"<br />';
-            _HTML += '});<br />';
+            _HTML += '};<br />';
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
@@ -232,10 +234,12 @@
                             &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Button1: false,<br />
                             &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TypeButton1: "primary",<br />
                             &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;SizeButton1: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;RoundedButton1: false,<br />
                             &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton1: "",<br />
                             &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Button2: false,<br />
                             &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TypeButton2: "info",<br />
                             &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;SizeButton2: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;RoundedButton2: false,<br />
                             &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton2: ""<br />
                             &emsp;&ensp;&emsp;&ensp;}<br />
                             });<br />
@@ -408,11 +412,13 @@
                                 <values><span>Button1:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
                                 <values><span>TypeButton1:</span> <brown>"default"</brown> or <brown>"primary"</brown> or <brown>"success"</brown> or <brown>"info"</brown> or <brown>"warning"</brown> or <brown>"danger"</brown> or <brown>"link"</brown></values>
                                 <values><span>SizeButton1:</span> <brown>""</brown> or <brown>"xs"</brown> or <brown>"sm"</brown> or <brown>"md"</brown></values>
+                                <values><span>RoundedButton1:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
                                 <values><span>TextButton1:</span> Text</values>
                                 <br />
                                 <values><span>Button2:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
                                 <values><span>TypeButton2:</span> <brown>"default"</brown> or <brown>"primary"</brown> or <brown>"success"</brown> or <brown>"info"</brown> or <brown>"warning"</brown> or <brown>"danger"</brown> or <brown>"link"</brown></values>
                                 <values><span>SizeButton2:</span> <brown>""</brown> or <brown>"xs"</brown> or <brown>"sm"</brown> or <brown>"md"</brown></values>
+                                <values><span>RoundedButton2:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
                                 <values><span>TextButton2:</span> Text</values>
                                 <br />
                             </div>
@@ -525,7 +531,7 @@
                             &emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azWindowTitlebarColor: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azWindowAlertTimeout: 3000<br />
-                            });<br />
+                            };<br />
                             <br />
                             azChangeWindowTitlebar(ChangeWindowTitlebarOptions);
                             <br />

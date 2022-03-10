@@ -29,7 +29,8 @@ $(document).ready(function ()
         {
             $Area: ObjPageData.Values.AZPage.$Form,
             Title: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.invalidCharacterTitle,
-            Text: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.invalidCharacterText + " " + data.azInputKey
+            Text: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.invalidCharacterText + " " + data.azInputInvalidChar,
+            InputJQElement: data.azInputJQElement
         };
         new AZStandardAlert(_AZStandardAlertOptions);
     });
@@ -40,7 +41,8 @@ $(document).ready(function ()
         {
             $Area: ObjPageData.Values.AZPage.$Form,
             Title: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.invalidCharacterTitle,
-            Text: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.invalidCharacterText + " " + data.azInputKey
+            Text: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.invalidCharacterText + " " + data.azInputInvalidChar,
+            InputJQElement: data.azInputJQElement
         };
         new AZStandardAlert(_AZStandardAlertOptions);
     });
@@ -752,14 +754,13 @@ function AZSetInputTypeEvents()
         {
             _ValidType = "";
             $(this).attr("autocomplete", "off");
-            $(this).off("keyup", AZValidateDirtyKeyup).on("keyup", AZValidateDirtyKeyup);
+            $(this).off("keypress", AZValidateDirtyKeyup).on("keypress", AZValidateDirtyKeyup);
             _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
             if (_ValidType !== null)
             {
                 $(this).off("keypress", AZValidateInputValueKeypress).on("keypress", { ValidType: _ValidType }, AZValidateInputValueKeypress);
                 $(this).off("focusout", AZValidateInputValueFocusout).on("focusout", { ValidType: _ValidType }, AZValidateInputValueFocusout);
             }
-
             if ($(this).hasClass("az-input-animated"))
             {
                 $(this).off("focusout", AZInputAnimatedFocusout).on("focusout", AZInputAnimatedFocusout);
@@ -807,13 +808,12 @@ function AZSetInputTypeEvents()
         {
             _ValidType = "";
             $(this).attr("autocomplete", "false");
-            $(this).off("keyup", AZValidateDirtyKeyup).on("keyup", AZValidateDirtyKeyup);
+            $(this).off("keypress", AZValidateDirtyKeyup).on("keypress", AZValidateDirtyKeyup);
             _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
             if (_ValidType !== null)
             {
                 $(this).off("keypress", AZValidateInputValueKeypress).on("keypress", { ValidType: _ValidType }, AZValidateInputValueKeypress);
             }
-
             if ($(this).hasClass("forceuppercase"))
             {
                 $(this).off("keypress focusout", AZForceUppercaseKeypressFocusout).on("keypress focusout", AZForceUppercaseKeypressFocusout);
@@ -979,18 +979,25 @@ function AZSetInputTypeEvents()
 function AZValidateDirtyKeyup(e)
 {
     var _Element = e.target || e.srcElement;
-    var _$SelectedElement = $(this);
-    var _Data = {};
-    if (!_$SelectedElement.attr("readonly"))
+    var _KeyChar = e.keyCode || e.which;
+    if (!$(_Element).attr("readonly"))
     {
-        _Data =
+        var _Data =
         {
-            azInputId: $(_Element).attr("id") === undefined ? "" : $(_Element).attr("id"),
+            azInputId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+            azInputName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+            azInputClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+            azInputValue: $(_Element).val(),
+            azInputKey: String.fromCharCode(_KeyChar),
             azInputJQElement: $(_Element)
         };
         $.publish("functionlib/azValidateDirty",
             {
                 azInputId: _Data.azInputId,
+                azInputName: _Data.azInputName,
+                azInputClass: _Data.azInputClass,
+                azInputValue: _Data.azInputValue,
+                azInputKey: _Data.azInputKey,
                 azInputJQElement: _Data.azInputJQElement,
             });
         if (typeof AZValidateDirty == "function")
@@ -1038,9 +1045,12 @@ function AZValidateInputValueKeypress(e)
             e.preventDefault ? e.preventDefault() : e.returnValue = false;
             $.publish("functionlib/azValidateInputValueKeypress",
                 {
-                    azInputId: $(this).attr("id") === undefined ? "" : $(this).attr("id"),
+                    azInputId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+                    azInputName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+                    azInputClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+                    azInputValue: $(_Element).val(),
+                    azInputInvalidChar: _Char,
                     azInputValidType: e.data.ValidType.toString(),
-                    azInputKey: _Char,
                     azInputJQElement: $(_Element)
                 });
         }
@@ -1171,16 +1181,17 @@ function AZSerializeForm(Options)
                             }
                             else if (_$UIDialog.length > 0)
                             {
-                                var _$NewUIDialogTitlebar = $('<div></div>').addClass("ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle").css({ "background-color": "#FF4136 ", "color": "#FFFFFF" });
-                                _$NewUIDialogTitlebar.append('<span class="ui-dialog-title">' + Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error] + '</span>');
-                                _$UIDialog.children(".ui-dialog-titlebar").hide();
-                                _$UIDialog.prepend(_$NewUIDialogTitlebar);
+                                var _$UIDialogTitlebar = $(".ui-dialog-titlebar", _$UIDialog);
+                                var _$UIDialogTitle = _$UIDialogTitlebar.children("span.ui-dialog-title");
+                                var _CurrentText = _$UIDialogTitle.text();
+                                _$UIDialogTitlebar.addClass("az-alert-danger");
+                                _$UIDialogTitle.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]);
                                 _$Input.focus();
                                 $("body").addClass("az-alert-active");
                                 window.setTimeout(function ()
                                 {
-                                    _$NewUIDialogTitlebar.remove();
-                                    _$UIDialog.children(".ui-dialog-titlebar").show();
+                                    _$UIDialogTitlebar.removeClass("az-alert-danger");
+                                    _$UIDialogTitle.text(_CurrentText);
                                     $("body").removeClass("az-alert-active");
                                 }, 3000);
                             }
@@ -1274,8 +1285,11 @@ function AZValidateInput($Input, ObjCurrentValidation)
                 $.publish("functionlib/azValidateInputValidChar",
                     {
                         azInputId: $Input.attr("id"),
+                        azInputName: $Input.attr("name") === undefined ? "" : $Input.attr("name"),
+                        azInputClass: $Input.attr("class") === undefined ? "" : $Input.attr("class"),
+                        azInputValue: $Input.val(),
+                        azInputInvalidChar: _ListChar.join(" - "),
                         azInputValidType: _CurrentValidType,
-                        azInputKey: _ListChar.join(" - "),
                         azInputJQElement: $Input
                     });
             }
@@ -1517,11 +1531,15 @@ function AZStandardAlert(Options)
         if (AZIsEmpty(Options) === false)
         {
             _Main.$Area = "";
+            _Main.InputJQElement = "";
             if (Options.hasOwnProperty("$Area") && AZIsEmpty(Options.$Area) === false)
             {
                 _Main.$Area = Options.$Area;
             }
-
+            if (Options.hasOwnProperty("InputJQElement") && AZIsEmpty(Options.InputJQElement) === false)
+            {
+                _Main.InputJQElement = Options.InputJQElement;
+            }
             _Main.Title = Options.Title;
             _Main.Text = Options.Text;
 
@@ -1535,6 +1553,10 @@ function AZStandardAlert(Options)
                 {
                     var _CurrentText = _$RoleAlert.text();
                     _$RoleAlert.text(_Main.Text).removeClass("az-alert-info").addClass("az-alert-danger").show();
+                    if (_Main.InputJQElement != "")
+                    {
+                        _Main.InputJQElement.focus();
+                    }
                     $("body").addClass("az-alert-active");
                     window.setTimeout(function ()
                     {
@@ -1544,15 +1566,20 @@ function AZStandardAlert(Options)
                 }
                 else if (_$UIDialog.length > 0)
                 {
-                    var _$NewUIDialogTitlebar = $('<div></div>').addClass("ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ui-draggable-handle").css({ "background-color": "#FF4136 ", "color": "#FFFFFF" });
-                    _$NewUIDialogTitlebar.append('<span class="ui-dialog-title">' + _Main.Text + '</span>');
-                    _$UIDialog.children(".ui-dialog-titlebar").hide();
-                    _$UIDialog.prepend(_$NewUIDialogTitlebar);
+                    var _$UIDialogTitlebar = $(".ui-dialog-titlebar", _$UIDialog);
+                    var _$UIDialogTitle = _$UIDialogTitlebar.children("span.ui-dialog-title");
+                    var _CurrentText = _$UIDialogTitle.text();
+                    _$UIDialogTitlebar.addClass("az-alert-danger");
+                    _$UIDialogTitle.text(_Main.Text);
+                    if (_Main.InputJQElement != "")
+                    {
+                        _Main.InputJQElement.focus();
+                    }
                     $("body").addClass("az-alert-active");
                     window.setTimeout(function ()
                     {
-                        _$NewUIDialogTitlebar.remove();
-                        _$UIDialog.children(".ui-dialog-titlebar").show();
+                        _$UIDialogTitlebar.removeClass("az-alert-danger");
+                        _$UIDialogTitle.text(_CurrentText);
                         $("body").removeClass("az-alert-active");
                     }, 3000);
                 }
@@ -1561,6 +1588,10 @@ function AZStandardAlert(Options)
                     var _$NewTitlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + _Main.Text + "</h1>").css({ "background-color": "#FF4136", "color": "#FFFFFF" });
                     _$Window.children(".az-window-titlebar").hide();
                     _$Window.prepend(_$NewTitlebar);
+                    if (_Main.InputJQElement != "")
+                    {
+                        _Main.InputJQElement.focus();
+                    }
                     $("body").addClass("az-alert-active");
                     window.setTimeout(function ()
                     {
@@ -1574,6 +1605,10 @@ function AZStandardAlert(Options)
                     $("body").addClass("az-alert-active");
                     $.subscribeonce("functionlib/azWindowAfterClose", function (e)
                     {
+                        if (_Main.InputJQElement != "")
+                        {
+                            _Main.InputJQElement.focus();
+                        }
                         $("body").removeClass("az-alert-active");
                     });
                     new AZWindow(
