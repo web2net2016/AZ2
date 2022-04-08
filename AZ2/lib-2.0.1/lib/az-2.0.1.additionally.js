@@ -1449,39 +1449,51 @@ function AZPopulateForm(Options)
     {
         consoleLog({ consoleType: "error", consoleText: "AZPopulateForm - Options is empty or missing some properties" });
     }
+}
 
-    function AZSetDateFormat(Date)
+function AZSetDateFormat(Date)
+{
+    var _DateReturn =
     {
-        var _DateReturn = {};
-        if (AZIsValidDateTime(Date) === true)
-        {
-            _DateReturn.LocalDate = moment(Date).format('L');
-            _DateReturn.ENUSDate = moment(Date).format('YYYY-MM-DD');
-        }
-        return _DateReturn;
+        LocalDate: "",
+        ENUSDate: ""
+    };
+    if (AZIsValidDateTime(Date) === true)
+    {
+        _DateReturn.LocalDate = moment(Date).format('L');
+        _DateReturn.ENUSDate = moment(Date).format('YYYY-MM-DD');
     }
+    return _DateReturn;
+}
 
-    function AZSetDateTimeFormat(DateTime)
+function AZSetDateTimeFormat(DateTime)
+{
+    var _DateTimeReturn =
     {
-        var _DateTimeReturn = {};
-        if (AZIsValidDateTime(DateTime) === true)
-        {
-            _DateTimeReturn.LocalDateTime = moment(DateTime).format('L') + " " + moment(DateTime).format('LT');
-            _DateTimeReturn.ENUSDateTime = moment(DateTime).format('YYYY-MM-DD') + " " + moment(DateTime).format('h:mm a');
-        }
-        return _DateTimeReturn;
+        LocalDateTime: "",
+        ENUSDateTime: ""
+    };
+    if (AZIsValidDateTime(DateTime) === true)
+    {
+        _DateTimeReturn.LocalDateTime = moment(DateTime).format('L') + " " + moment(DateTime).format('LT');
+        _DateTimeReturn.ENUSDateTime = moment(DateTime).format('YYYY-MM-DD') + " " + moment(DateTime).format('h:mm a');
     }
+    return _DateTimeReturn;
+}
 
-    function AZSetTimeFormat(Time)
+function AZSetTimeFormat(Time)
+{
+    var _TimeReturn =
     {
-        var _TimeReturn = {};
-        if (AZIsValidDateTime(Time) === true)
-        {
-            _TimeReturn.LocalTime = moment(Time).format('LT');
-            _TimeReturn.ENUSTime = moment(Time).format('h:mm a');
-        }
-        return _TimeReturn;
+        LocalTime: "",
+        ENUSTime: ""
+    };
+    if (AZIsValidDateTime(Time) === true)
+    {
+        _TimeReturn.LocalTime = moment(Time).format('LT');
+        _TimeReturn.ENUSTime = moment(Time).format('h:mm a');
     }
+    return _TimeReturn;
 }
 
 function AZIsValidDecimal(Float)
@@ -1513,14 +1525,12 @@ function AZIsValidURL(URL)
 
 function AZIsValidDateTime(DateTime)
 {
-    if (moment(DateTime).isValid() === true)
+    var _Return = false;
+    if (DateTime != null && DateTime != undefined && DateTime != "" && moment(DateTime).isValid() === true)
     {
-        return true;
+        _Return = true;
     }
-    else
-    {
-        return false;
-    }
+    return _Return;
 }
 
 function AZStandardAlert(Options)

@@ -13,14 +13,14 @@
     <meta name="format-detection" content="email=no" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <title>AZ Framework</title>
+    <title>AZ Form 3</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2.0.1/css/az-2.0.1.min.css" />
     <script src="/lib-2.0.1/js/az-2.0.1.min.js"></script>
-
     <link rel="stylesheet" href="/lib-2.0.1/lib/az-2.0.1.additionally.css" />
     <script src="/lib-2.0.1/lib/az-2.0.1.additionally.js"></script>
+
     <link rel="stylesheet" href="/lib-2.0.1/lib/az-codecolor.css" />
     <script src="/lib-2.0.1/lib/az-codecolor.js"></script>
     <script>
@@ -68,27 +68,33 @@
             {
                 console.log("FUNCTIONLIB - azValidateInputValueKeypress\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputValue: " + data.azInputValue + "\nazInputInvalidChar: " + data.azInputInvalidChar + "\nazInputValidType: " + data.azInputValidType + "\nazInputJQElement: ", data.azInputJQElement);
             });
+
             $.subscribe("functionlib/azValidateInputValidChar", function (e, data)
             {
                 console.log("FUNCTIONLIB - azValidateInputValidChar\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputValue: " + data.azInputValue + "\nazInputInvalidChar: " + data.azInputInvalidChar + "\nazInputValidType: " + data.azInputValidType + "\nazInputJQElement: ", data.azInputJQElement);
             });
+
             $.subscribe("functionlib/azValidateDirty", function (e, data)
             {
                 console.log("FUNCTIONLIB - azValidateDirty\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputValue: " + data.azInputValue + "\nazInputKey: " + data.azInputKey + "\nazInputJQElement: ", data.azInputJQElement);
             });
+
             $.subscribe("functionlib/azSetDate", function (e, data)
             {
                 console.log("FUNCTIONLIB - azSetDate\nazDateId: " + data.azDateId + "\nazDateName: " + data.azDateName + "\nazDateClass: " + data.azDateClass + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateISODate: " + data.azDateISODate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
                 consoleLog({ consoleType: "warn", consoleText: "azDateENUSDate is deprecated, use azDateISODate." });
             });
+
             $.subscribe("functionlib/azSetTime", function (e, data)
             {
-                console.log("FUNCTIONLIB - azSetTime\azTimeId: " + data.azTimeId + "\nazTimeName: " + data.azTimeName + "\nazTimeClass: " + data.azTimeClass + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeJQElement: ", data.azTimeJQElement);
+                console.log("FUNCTIONLIB - azSetTime\nazTimeId: " + data.azTimeId + "\nazTimeName: " + data.azTimeName + "\nazTimeClass: " + data.azTimeClass + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeJQElement: ", data.azTimeJQElement);
             });
+
             $.subscribe("functionlib/azCheckboxClick", function (e, data)
             {
                 console.log("FUNCTIONLIB - azCheckboxClick\nazCheckboxId: " + data.azCheckboxId + "\nazCheckboxName: " + data.azCheckboxName + "\nazCheckboxClass: " + data.azCheckboxClass + "\nazCheckboxValue: " + data.azCheckboxValue + "\nazCheckboxChecked: " + data.azCheckboxChecked + "\nazCheckboxJQElement: ", data.azCheckboxJQElement);
             });
+
             $.subscribe("functionlib/azRadioClick", function (e, data)
             {
                 console.log("FUNCTIONLIB - azRadioClick\nazRadioId: " + data.azRadioId + "\nazRadioName: " + data.azRadioName + "\nazRadioClass: " + data.azRadioClass + "\nazRadioValue: " + data.azRadioValue + "\nazRadioChecked: " + data.azRadioChecked + "\nazRadioJQElement: ", data.azRadioJQElement);
@@ -237,7 +243,7 @@
                     </div>
                 </div>
             </div>
-            <div class="az-row">
+            <!--<div class="az-row">
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group">
                         <input class="az-checkbox" type="checkbox" value="1" id="Checkbox" checked="checked">
@@ -256,7 +262,7 @@
                         <label class="az-label">Størrelse Normal</label>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
             <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6">
@@ -279,7 +285,7 @@
             </div>
             <div class="az-row az-margin-t-14">
                 <div class="az-col xs-3">
-                    <ul>
+                    <ul class="az-ul-none">
                         <li>Empty</li>
                         <li>InvalidChar</li>
                         <li>MaxLength</li>
@@ -287,7 +293,7 @@
                     </ul>
                 </div>
                 <div class="az-col xs-9">
-                    <ul>
+                    <ul class="az-ul-none">
                         <li>Date</li>
                         <li>DateTime</li>
                         <li>Time</li>

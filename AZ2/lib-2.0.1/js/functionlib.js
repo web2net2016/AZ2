@@ -2840,7 +2840,6 @@ function setParallaxImages(ParallaxImages)
     });
 }
 
-// AZ Sort Array
 function AZSortJSONArray(Arr, Prop, Order)
 {
     return AZSortArray(Arr, Prop, Order);
@@ -2995,13 +2994,16 @@ function bytesToSize(Bytes, Decimal)
 function AZBytesConverter(Bytes, Decimal)
 {
     var _Return = "0 Bytes";
-    if (RegExp('^\\d+$').test(Bytes) === true)
+    if (Bytes !== null && Bytes !== undefined && Bytes != "")
     {
-        var _Kilo = 1000;
-        var _Decimal = Decimal === 0 ? 0 : Decimal || 2;
-        var _Sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        var _Index = Math.floor(Math.log(Bytes) / Math.log(_Kilo));
-        _Return = parseFloat((Bytes / Math.pow(_Kilo, _Index)).toFixed(_Decimal)) + ' ' + _Sizes[_Index];
+        if (RegExp('^\\d+$').test(Bytes) === true)
+        {
+            var _Kilo = 1000;
+            var _Decimal = Decimal === 0 ? 0 : Decimal || 2;
+            var _Sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+            var _Index = Math.floor(Math.log(Bytes) / Math.log(_Kilo));
+            _Return = parseFloat((Bytes / Math.pow(_Kilo, _Index)).toFixed(_Decimal)) + ' ' + _Sizes[_Index];
+        }
     }
     return _Return;
 }
@@ -3173,4 +3175,15 @@ function AZSetCheckbox($SelectedCheckbox)
         }
         _LastChecked = this;
     });
+}
+
+function AZResolutionConverter(Width, Height, Decimal)
+{
+    var _Return = "0 MP";
+    if (Width != "" && Height != "")
+    {
+        var _Decimal = Decimal === 0 ? 0 : Decimal || 2;
+        _Return = ((Width * Height) / 1000000).toFixed(_Decimal) + ' MP';
+    }
+    return _Return;
 }

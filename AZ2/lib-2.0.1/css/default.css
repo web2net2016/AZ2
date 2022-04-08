@@ -3,7 +3,6 @@
 Transitions:
 -webkit-transition
 -moz-transition
--ms-transition
 -o-transition
 transition
 
@@ -29,6 +28,11 @@ Animation:
 -moz-animation
 -o-animation
 animation
+
+Shadow:
+-webkit-box-shadow
+-moz-box-shadow
+box-shadow
 
 Grid:
 xs - (0 - 576)

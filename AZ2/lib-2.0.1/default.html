@@ -236,8 +236,8 @@
                                 &emsp;&ensp;&emsp;&ensp;$.subscribeonce()<br />
                                 &emsp;&ensp;&emsp;&ensp;$.unsubscribe()<br />
                                 <br />
-                                Based on <strong>jQuery Promise</strong>, we have created several functions you can subscribe on that will help you get a better flow in your code.
-                                The principles are based on <strong>Events & Delegates</strong>, which is a good form of programming practice and should replace all forms of use of <strong>Callback</strong>.
+                                <p style="word-break: break-word;">Based on <strong>jQuery Promise</strong>, we have created several functions you can subscribe on that will help you get a better flow in your code.
+                                The principles are based on <strong>Events & Delegates</strong>, which is a good form of programming practice and should replace all forms of use of <strong>Callback</strong>.</p>
                                 <br />
                                 <br />
                                 <div class="jsHigh notranslate">
@@ -297,7 +297,7 @@
                                     <br />
                                 </div>
                                 <br />
-                                This function is triggered when the page loads and every time the page resizes.
+                                <p style="word-break: break-word;">This function is triggered when the page loads and every time the page resizes.</p>
                                 <br />
                                 <br />
                                 <span>azWindowWidth: </span><span id="azWindowWidth"></span>
@@ -323,8 +323,8 @@
                                     AZClientStorage(ActionType, Name, Value);<br />
                                 </div>
                                 <br />
-                                This function is used to store and retrieve data, (Items) from the browser. <strong>AZClientStorage</strong> will automatically test if your browser supports storage. First <strong>Local Storage</strong> is tested, and if your browser supports this, your data will be stored in <strong>Local Storage</strong>.
-                                However, if your browser does not support <strong>Local Storage</strong>, it will try to store data in <strong>Cookies</strong>.
+                                <p style="word-break: break-word;">This function is used to store and retrieve data, (Items) from the browser. <strong>AZClientStorage</strong> will automatically test if your browser supports storage. First <strong>Local Storage</strong> is tested, and if your browser supports this, your data will be stored in <strong>Local Storage</strong>.
+                                However, if your browser does not support <strong>Local Storage</strong>, it will try to store data in <strong>Cookies</strong>.</p>
                                 <br />
                                 <br />
                                 <table width="100%">
@@ -359,7 +359,7 @@
                                     <br />
                                 </div>
                                 <br />
-                                <div class="az-code">
+                                <div class="az-code" style="word-break: break-word;">
                                     In addition to Item Name, the function adds the site's domain name - www.yourdomain.no-itemname. You can store virtually any type of data. Objects and Arrays will be automatically stringified.
                                 </div>
                                 <br />
@@ -392,10 +392,13 @@
                             <div class="az-code-property-wrapper">
                                 <property>AZ Get Obj</property>
                                 <type><span>Type:</span> <brown>Function</brown></type>
-                                <default><span>Parameters:</span> <brown>Array - Key - Val</brown></default>
+                                <default><span>Parameters:</span> <brown>Array - Key - Val - Int</brown></default>
                                 <values><span>Return:</span> <mediumblue>object</mediumblue></values>
                                 <br />
-                                AZGetObj(Array, "Name", "Olsen");
+                                AZGetObj(Array, "Name", "Olsen", Level);
+                                <br />
+                                <br />
+                                <p style="word-break: break-word;"><strong>Level</strong> The function is recursive, ie it does a multi level search in the array. If you specify the level, e.g. 1, it will only search for the object in level 1.</p>
                                 <br />
                                 <br />
                                 <div class="jsHigh notranslate">
@@ -439,6 +442,9 @@
                                 AZExistObj(Array, "Name", "Olsen");
                                 <br />
                                 <br />
+                                <p style="word-break: break-word;">The function is recursive, ie it does a multi level search in the array.</p>
+                                <br />
+                                <br />
                                 <div class="jsHigh notranslate">
                                     [{"Name": "Hansen"}, {"Name": "Olsen"}, {"Name": "Andersen"}]
                                 </div>
@@ -457,6 +463,9 @@
                                 <values><span>Return:</span> <mediumblue>array</mediumblue></values>
                                 <br />
                                 AZSortArray(Array, "Name", "asc");
+                                <br />
+                                <br />
+                                <p style="word-break: break-word;">For more advanced sorting, we can recommend looking at the module <strong><a href="https://github.com/Teun/thenBy.js" target="_blank">thenBy.js</a></strong> which is part of the AZ system.</p>
                                 <br />
                                 <br />
                                 <strong>Unsorted</strong>
@@ -481,7 +490,8 @@
                                 AZIsEmpty(object/array);
                                 <br />
                                 <br />
-                                The function returns <mediumblue>false</mediumblue> if you are testing an Object/Array and the Object/Array is not empty and the Object has at least one property.<br />
+                                <p style="word-break: break-word;">The function returns <mediumblue>false</mediumblue> if you are testing an Object/Array and the Object/Array is not empty and the Object has at least one property.</p>
+                                <br />
                                 <br />
                             </div>
 
@@ -499,11 +509,11 @@
                                 <div id="parameters" class="jsHigh notranslate"></div>
                                 <div id="urlparameters" class="jsHigh notranslate"></div>
                                 <br />
+                                <p id="AZURLParameters" style="display: none;">Open the console in your browser and find the tab - <strong>Console</strong>.</p>
+                                <br />
                                 <div class="az-form-group">
                                     <button id="GetURLParameters" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Get URL Parameters</button>
                                 </div>
-                                <br />
-                                <p id="AZURLParameters" style="display: none;">Open the console in your browser and find the tab - <strong>Console</strong>.</p>
                                 <br />
                             </div>
 
@@ -514,10 +524,11 @@
                                 <default><span>Default:</span> <brown>2 decimal</brown></default>
                                 <values><span>Return:</span> <brown>String</brown></values>
                                 <br />
-                                AZBytesConverter(Bytes, Decimal);
+                                AZBytesConverter(123456, 2);
+                                <br />
+                                AZBytesConverter(987654321, 2);
                                 <br />
                                 <br />
-                                123456 - 987654321
                                 <div id="byte" class="jsHigh notranslate"></div>
                                 <br />
                                 <div class="az-form-group">
@@ -562,9 +573,6 @@
                                 </div>
                                 <br />
                             </div>
-
-
-
 
                             <div class="az-code-property-wrapper">
                                 <property>Set AZ Page</property>
@@ -710,15 +718,15 @@
                                 ObjPageData.Elements.$AZSetPageElement;<br />
                                 <br />
                                 <br />
-                                The function looks for elements with <strong>ID</strong> or <strong>CLASS</strong> that match the elements in the list you submit in the function.
-                                When an element is found, the element is created as a <strong>jQuery</strong> object and added to the variable <strong>ObjPageData.Elements</strong>.
+                                <p style="word-break: break-word;">The function looks for elements with <strong>ID</strong> or <strong>CLASS</strong> that match the elements in the list you submit in the function.
+                                When an element is found, the element is created as a <strong>jQuery</strong> object and added to the variable <strong>ObjPageData.Elements</strong>.</p>
                                 <br />
+                                <br />
+                                <p id="AZSetPageElement" style="display: none;">Open the console in your browser and find the tab - <strong>Console</strong>.</p>
                                 <br />
                                 <div class="az-form-group">
                                     <button id="SetPageElement" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Set Object</button>
                                 </div>
-                                <br />
-                                <p id="AZSetPageElement" style="display: none;">Open the console in your browser and find the tab - <strong>Console</strong>.</p>
                                 <br />
                             </div>
 
