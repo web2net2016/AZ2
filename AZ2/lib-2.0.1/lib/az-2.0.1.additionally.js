@@ -206,7 +206,7 @@ function AZPage(Options)
                 {
                     _Main.DefaultLanguageFile = AZSettings.DefaultLanguageFile;
                     _Main.DefaultLanguage = AZClientStorage("get", "language");
-                    if (_Main.DefaultLanguage === null || _Main.DefaultLanguage === undefined)
+                    if (AZIsEmpty(_Main.DefaultLanguage) === true)
                     {
                         _Main.DefaultLanguage = AZSettings.DefaultLanguage;
                     }
