@@ -2129,36 +2129,39 @@ $(document).ready(function ()
         var _NavbarTopHeight = _$NavbarTopMenu.parents(".az-navbar-top").height();
         _$NavbarTopMenu.off().on("click", "li > a", function (e)
         {
-            var _Anchor = $(this).attr('href');
-            if (_Anchor.indexOf("#") === 0)
+            if (e !== undefined)
             {
-                e.preventDefault();
-                if (_$NavbarTopMenu.parents(".az-navbar-top").hasClass("az-navbar-sticky") === false)
+                var _Anchor = $(this).attr('href');
+                if (_Anchor.indexOf("#") === 0)
                 {
-                    _NavbarTopHeight = 0;
+                    e.preventDefault();
+                    if (_$NavbarTopMenu.parents(".az-navbar-top").hasClass("az-navbar-sticky") === false)
+                    {
+                        _NavbarTopHeight = 0;
+                    }
+                    if (_$NavbarTopMenu.hasClass("az-animated") === true)
+                    {
+                        $('html, body').stop().animate(
+                            {
+                                scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
+                            },
+                            {
+                                easing: 'easeInOutExpo',
+                                duration: 1500
+                            });
+                    }
+                    else
+                    {
+                        $('html, body').stop().animate(
+                            {
+                                scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
+                            },
+                            {
+                                duration: 0
+                            });
+                    }
+                    $(".az-navbar-top-content").removeClass("mobile");
                 }
-                if (_$NavbarTopMenu.hasClass("az-animated") === true)
-                {
-                    $('html, body').stop().animate(
-                        {
-                            scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
-                        },
-                        {
-                            easing: 'easeInOutExpo',
-                            duration: 1500
-                        });
-                }
-                else
-                {
-                    $('html, body').stop().animate(
-                        {
-                            scrollTop: $(_Anchor).offset().top - _NavbarTopHeight
-                        },
-                        {
-                            duration: 0
-                        });
-                }
-                $(".az-navbar-top-content").removeClass("mobile");
             }
         });
 
@@ -2640,111 +2643,139 @@ function AZTimepicker($Obj, DefaultLanguage)
 
 function AZInputAnimatedFocusout(e)
 {
-    var _Element = e.target || e.srcElement;
-    if ($(_Element).val() != "")
+    if (e !== undefined)
     {
-        $('label[for="' + _Element.id + '"]').css({ "top": "-15px" });
-    }
-    else
-    {
-        $('label[for="' + _Element.id + '"]').removeAttr('style');
+        var _Element = e.target || e.srcElement;
+        if ($(_Element).val() != "")
+        {
+            $('label[for="' + _Element.id + '"]').css({ "top": "-15px" });
+        }
+        else
+        {
+            $('label[for="' + _Element.id + '"]').removeAttr('style');
+        }
     }
 }
 
 function AZForceUppercaseKeypressFocusout(e)
 {
-    var _Element = e.target || e.srcElement;
-    $(_Element).val($(_Element).val().toUpperCase());
+    if (e !== undefined)
+    {
+        var _Element = e.target || e.srcElement;
+        $(_Element).val($(_Element).val().toUpperCase());
+    }
 }
 
 function AZForceLowercaseKeypressFocusout(e)
 {
-    var _Element = e.target || e.srcElement;
-    $(_Element).val($(_Element).val().toLowerCase());
+    if (e !== undefined)
+    {
+        var _Element = e.target || e.srcElement;
+        $(_Element).val($(_Element).val().toLowerCase());
+    }
 }
 
 function AZDoNotPaste(e)
 {
-    if (e.ctrlKey == true && (e.which == 118 || e.which == 86))
+    if (e !== undefined)
     {
-        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+        if (e.ctrlKey == true && (e.which == 118 || e.which == 86))
+        {
+            e.preventDefault ? e.preventDefault() : e.returnValue = false;
+        }
     }
 }
 
 function AZNotEnter(e)
 {
-    if ((e.keyCode || e.which) == 13)
+    if (e !== undefined)
     {
-        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+        if ((e.keyCode || e.which) == 13)
+        {
+            e.preventDefault ? e.preventDefault() : e.returnValue = false;
+        }
     }
 }
 
 function AZCheckboxClick(e)
 {
-    var _Element = e.target || e.srcElement;
-    $.publish("functionlib/azCheckboxClick",
-        {
-            azCheckboxId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
-            azCheckboxName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
-            azCheckboxClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
-            azCheckboxValue: $(_Element).attr("value") === undefined ? "" : $(_Element).attr("value"),
-            azCheckboxChecked: $(_Element).is(":checked"),
-            azCheckboxJQElement: $(_Element)
-        });
+    if (e !== undefined)
+    {
+        var _Element = e.target || e.srcElement;
+        var _$SelectedCheckbox = $(this);
+        $.publish("functionlib/azCheckboxClick",
+            {
+                azCheckboxId: _$SelectedCheckbox.attr("id") != undefined ? _$SelectedCheckbox.attr("id") : _$SelectedCheckbox.attr("data-id") != undefined ? _$SelectedCheckbox.attr("data-id") : "",
+                azCheckboxName: _$SelectedCheckbox.attr("name") === undefined ? "" : _$SelectedCheckbox.attr("name"),
+                azCheckboxClass: _$SelectedCheckbox.attr("class") === undefined ? "" : _$SelectedCheckbox.attr("class"),
+                azCheckboxValue: _$SelectedCheckbox.attr("value") === undefined ? "" : _$SelectedCheckbox.attr("value"),
+                azCheckboxChecked: _$SelectedCheckbox.is(":checked"),
+                azCheckboxJQElement: $(_Element)
+            });
+    }
 }
 
 function AZRadioClick(e)
 {
-    var _Element = e.target || e.srcElement;
-    $.publish("functionlib/azRadioClick",
-        {
-            azRadioId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
-            azRadioName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
-            azRadioClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
-            azRadioValue: $(_Element).attr("value") === undefined ? "" : $(_Element).attr("value"),
-            azRadioChecked: $(_Element).is(":checked"),
-            azRadioJQElement: $(_Element)
-        });
+    if (e !== undefined)
+    {
+        var _Element = e.target || e.srcElement;
+        $.publish("functionlib/azRadioClick",
+            {
+                azRadioId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+                azRadioName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+                azRadioClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+                azRadioValue: $(_Element).attr("value") === undefined ? "" : $(_Element).attr("value"),
+                azRadioChecked: $(_Element).is(":checked"),
+                azRadioJQElement: $(_Element)
+            });
+    }
 }
 
 function AZSwitchClick(e)
 {
-    var _Element = e.target || e.srcElement;
-    $.publish("functionlib/azSwitchClick",
-        {
-            azSwitchId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
-            azSwitchName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
-            azSwitchClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
-            azSwitchValue: $(_Element).attr("value") === undefined ? "" : $(_Element).attr("value"),
-            azSwitchChecked: $(_Element).is(":checked"),
-            azSwitchJQElement: $(_Element)
-        });
+    if (e !== undefined)
+    {
+        var _Element = e.target || e.srcElement;
+        $.publish("functionlib/azSwitchClick",
+            {
+                azSwitchId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+                azSwitchName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+                azSwitchClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+                azSwitchValue: $(_Element).attr("value") === undefined ? "" : $(_Element).attr("value"),
+                azSwitchChecked: $(_Element).is(":checked"),
+                azSwitchJQElement: $(_Element)
+            });
+    }
 }
 
 function AZRange(e)
 {
-    var _Element = e.target || e.srcElement;
-    if (e.type === "input")
+    if (e !== undefined)
     {
-        $.publish("functionlib/azRangeSlide",
-            {
-                azRangeId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
-                azRangeName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
-                azRangeClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
-                azRangeValue: $(_Element).val(),
-                azRangeJQElement: $(_Element)
-            });
-    }
-    else if (e.type === "change")
-    {
-        $.publish("functionlib/azRangeStop",
-            {
-                azRangeId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
-                azRangeName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
-                azRangeClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
-                azRangeValue: $(_Element).val(),
-                azRangeJQElement: $(_Element)
-            });
+        var _Element = e.target || e.srcElement;
+        if (e.type === "input")
+        {
+            $.publish("functionlib/azRangeSlide",
+                {
+                    azRangeId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+                    azRangeName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+                    azRangeClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+                    azRangeValue: $(_Element).val(),
+                    azRangeJQElement: $(_Element)
+                });
+        }
+        else if (e.type === "change")
+        {
+            $.publish("functionlib/azRangeStop",
+                {
+                    azRangeId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+                    azRangeName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+                    azRangeClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+                    azRangeValue: $(_Element).val(),
+                    azRangeJQElement: $(_Element)
+                });
+        }
     }
 }
 
@@ -2786,7 +2817,7 @@ function AZHideCoverSpin()
     }
 }
 
-function AZToggleNavbarMobile(e)
+function AZToggleNavbarMobile()
 {
     var _$NavbarTopContent = $(".az-navbar-top-content");
     if (_$NavbarTopContent.hasClass("mobile"))
@@ -2810,75 +2841,87 @@ function AZCloseNavbarMobile()
 
 function AZDropdown(e)
 {
-    var _Element = e.target || e.srcElement;
-    var _$ULDropdown = $(_Element).closest(".az-dropdown-click").find("ul.az-dropdown-content");
-    $(".az-dropdown-display").not(_$ULDropdown).each(function ()
+    if (e !== undefined)
     {
-        $(this).removeClass("az-dropdown-display");
-    });
-    if (_$ULDropdown.hasClass("az-dropdown-display"))
-    {
-        _$ULDropdown.removeClass("az-dropdown-display");
-    }
-    else
-    {
-        _$ULDropdown.addClass("az-dropdown-display");
-        window.setTimeout(function ()
+        var _Element = e.target || e.srcElement;
+        var _$ULDropdown = $(_Element).closest(".az-dropdown-click").find("ul.az-dropdown-content");
+        $(".az-dropdown-display").not(_$ULDropdown).each(function ()
         {
-            $(document).one("click", { ULDropdown: _$ULDropdown }, AZRemoveDropdown);
-        }, 100);
+            $(this).removeClass("az-dropdown-display");
+        });
+        if (_$ULDropdown.hasClass("az-dropdown-display"))
+        {
+            _$ULDropdown.removeClass("az-dropdown-display");
+        }
+        else
+        {
+            _$ULDropdown.addClass("az-dropdown-display");
+            window.setTimeout(function ()
+            {
+                $(document).one("click", { ULDropdown: _$ULDropdown }, AZRemoveDropdown);
+            }, 100);
+        }
     }
 }
 
 function AZRemoveDropdown(e)
 {
-    var _Element = e.target || e.srcElement;
-    var _$ULDropdown = e.data.ULDropdown;
-    if ($(_Element) != _$ULDropdown)
+    if (e !== undefined)
     {
-        if (_$ULDropdown.hasClass("az-dropdown-display"))
+        var _Element = e.target || e.srcElement;
+        var _$ULDropdown = e.data.ULDropdown;
+        if ($(_Element) != _$ULDropdown)
         {
-            _$ULDropdown.removeClass("az-dropdown-display");
+            if (_$ULDropdown.hasClass("az-dropdown-display"))
+            {
+                _$ULDropdown.removeClass("az-dropdown-display");
+            }
         }
     }
 }
 
 function AZHideShowPassword(e)
 {
-    var _Element = e.target || e.srcElement;
-    var _SelectedElementId = "";
-    if ($(_Element).hasClass("passwordeye"))
+    if (e !== undefined)
     {
-        _SelectedElementId = $(_Element).attr("data-connectedid");
-    }
-    else
-    {
-        if ($(_Element).parent().hasClass("passwordeye"))
+        var _Element = e.target || e.srcElement;
+        var _SelectedElementId = "";
+        if ($(_Element).hasClass("passwordeye"))
         {
-            _SelectedElementId = $(_Element).parent().attr("data-connectedid");
-        }
-    }
-    if (_SelectedElementId != "")
-    {
-        var _$PasswordField = $("#" + _SelectedElementId)[0];
-        if (_$PasswordField.type == "password")
-        {
-            if (_$PasswordField.value != "")
-            {
-                _$PasswordField.type = "text";
-            }
+            _SelectedElementId = $(_Element).attr("data-connectedid");
         }
         else
         {
-            _$PasswordField.type = "password";
+            if ($(_Element).parent().hasClass("passwordeye"))
+            {
+                _SelectedElementId = $(_Element).parent().attr("data-connectedid");
+            }
+        }
+        if (_SelectedElementId != "")
+        {
+            var _$PasswordField = $("#" + _SelectedElementId)[0];
+            if (_$PasswordField.type == "password")
+            {
+                if (_$PasswordField.value != "")
+                {
+                    _$PasswordField.type = "text";
+                }
+            }
+            else
+            {
+                _$PasswordField.type = "password";
+            }
         }
     }
 }
 
 function AZLabelAnimatedClick(e)
 {
-    var _Element = e.target || e.srcElement;
-    $(_Element).siblings(":input").focus();
+    if (e !== undefined)
+    {
+        var _Element = e.target || e.srcElement;
+        $(_Element).siblings(":input").focus();
+    }
 }
 
 function AZSetSpinnerEvents(Element, ObjAttributes)
@@ -3476,10 +3519,7 @@ function AZModalDialog(Options)
             $.publish("functionlib/azModalDialogBeforeOpen", { azModalDialogId: _Main.azModalDialogId });
 
             ModalDialogScrollTop = 0;
-            _Main.$Body = $("body");
-            _Main.$Background = {};
             _Main.$Iframe;
-
             _Main.$Dialog = $("<div></div>").attr("id", _Main.azModalDialogId).addClass("az-modal-dialog-content");
             _Main.$Card = $("<div></div>").addClass("az-modal-card");
             _Main.$Article = $("<article></article>").html(_Main.Options.azModalDialogText);
@@ -3519,6 +3559,7 @@ function AZModalDialog(Options)
                     draggable: _Main.Options.azModalDialogDraggable,
                     closeOnEscape: _Main.Options.azModalDialogCloseOnEscape
                 });
+
             if (_Main.Options.azModalDialogContentHeight === false)
             {
                 _Main.$CurrentDialog.dialog({ height: _Main.Options.azModalDialogHeight });
@@ -3582,38 +3623,33 @@ function AZModalDialog(Options)
                     }
                 });
 
-            var _$ListUIDialog = $(".ui-dialog").not(_Main.$UIDialog);
-
             // AZModalDialog No Parent Scroll
-            if (_$ListUIDialog.length === 0 || _Main.$Body.hasClass("az-no-parent-scroll") === false)
+            if ($("body").hasClass("az-no-parent-scroll") === false && _Main.Options.azModalDialogNoParentScroll === true)
             {
-                if (_Main.Options.azModalDialogNoParentScroll === true)
-                {
-                    ModalDialogScrollTop = $(window).scrollTop();
-                    _Main.$Body.addClass("az-no-parent-scroll");
-                }
+                ModalDialogScrollTop = $(window).scrollTop();
+                $("body").addClass("az-no-parent-scroll");
             }
-            if (_$ListUIDialog.length === 0)
-            {
-                // AZModalDialog Background
-                _Main.$Background = $("<div></div>").attr("id", "az-background");
-                if (_Main.Options.azModalDialogBackground === true)
-                {
-                    _Main.$Body.append(_Main.$Background);
-                }
 
-                // AZModalDialog Modal
-                if (_Main.Options.azModalDialogModal === false)
+            // AZModalDialog Background
+            if (_Main.Options.azModalDialogBackground === true && $("#az-background").length === 0)
+            {
+                $("body").append('<div id="az-background"></div>');
+            }
+
+            // AZModalDialog Modal
+            if (_Main.Options.azModalDialogModal === false && ("#az-background").length > 0 && $._data($("#az-background")[0], 'events') == null)
+            {
+                $("#az-background").on("click", function (e)
                 {
-                    _Main.$Background.off("click").on("click", function (e)
+                    if (e !== undefined)
                     {
                         var _Element = e.target || e.srcElement;
                         if ($(_Element).attr("id") == "az-background")
                         {
                             _Main.azModalDialogClose(e);
                         }
-                    });
-                }
+                    }
+                });
             }
             $.publish("functionlib/azModalDialogAfterOpen", _Main);
             if (_Main.$CurrentDialog.height() > (window.innerHeight - 20))
@@ -3621,8 +3657,20 @@ function AZModalDialog(Options)
                 _Main.$CurrentDialog.dialog({ height: (window.innerHeight - 20) });
             }
 
+            //AZModalDialog Resize
+            _Main.azModalDialogResize = function (Options)
+            {
+                var _Defaults =
+                {
+                    azModalDialogWidth: _Main.Options.azModalDialogWidth,
+                    azModalDialogHeight: _Main.Options.azModalDialogHeight
+                };
+                _Main.Options = $.extend({}, _Defaults, Options || {});
+                _Main.$CurrentDialog.dialog({ width: _Main.Options.azModalDialogWidth, height: _Main.Options.azModalDialogHeight });
+            };
+
             // AZModalDialog Close
-            _Main.azModalDialogClose = function ()
+            _Main.azModalDialogClose = function (e)
             {
                 // AZModalDialog iFrame
                 if (_Main.Options.azModalDialogiFrameURL !== "" && _Main.$Iframe !== undefined)
@@ -3631,28 +3679,23 @@ function AZModalDialog(Options)
                 }
 
                 // AZModalDialog UI Dialog
-                _Main.$Dialog.dialog("close");
-                if (_Main.$Dialog.length > 0)
-                {
-                    _Main.$Dialog.remove();
-                }
+                _Main.$UIDialog.remove();
 
-                var _$ListUIDialog = $(".ui-dialog");
-                if (_$ListUIDialog.length === 0)
+                if ($(".az-modal-dialog").length === 0 && $('#az-window').length === 0)
                 {
                     $("#az-background").remove();
-                    if ($("#az-full-window").length === 0)
+                }
+                if ($(".az-modal-dialog").length === 0 && $('#az-window').length === 0 && $("#az-full-window").length === 0)
+                {
+                    if (ModalDialogScrollTop > 0)
                     {
-                        if (ModalDialogScrollTop > 0)
-                        {
-                            $(window).scrollTop(ModalDialogScrollTop);
-                        }
+                        $(window).scrollTop(ModalDialogScrollTop);
+                    }
 
-                        $("body").removeClass("az-no-parent-scroll");
-                        if ($("body").hasClass("") === true)
-                        {
-                            $("body").removeAttr("class");
-                        }
+                    $("body").removeClass("az-no-parent-scroll");
+                    if ($("body").hasClass("") === true)
+                    {
+                        $("body").removeAttr("class");
                     }
                 }
                 $.publish("functionlib/azModalDialogAfterClose", { azModalDialogId: _Main.azModalDialogId });
@@ -3684,15 +3727,15 @@ function AZModalDialog(Options)
                     {
                         _Main.$NewUIDialogTitlebar.css({ "color": _Main.Options.azModalDialogTitlebarColor + " !important" });
                     }
-                    _Main.$Body.addClass("az-dialog-titlebar");
+                    $("body").addClass("az-dialog-titlebar");
                     window.setTimeout(function ()
                     {
                         _Main.$NewUIDialogTitlebar.remove();
                         _Main.$UIDialogTitlebar.show();
-                        _Main.$Body.removeClass("az-dialog-titlebar");
-                        if (_Main.$Body.hasClass("") === true)
+                        $("body").removeClass("az-dialog-titlebar");
+                        if ($("body").hasClass("") === true)
                         {
-                            _Main.$Body.removeAttr("class");
+                            $("body").removeAttr("class");
                         }
                     }, _Main.Options.azModalDialogAlertTimeout);
                 }
@@ -3953,13 +3996,16 @@ function AZTabs(Options)
 
             _Main.$Tabs.off().on(_Main.Options.azTabsOpenEvent, " > ul > li", function (e)
             {
-                azExecTabs($(this));
-                var _Element = e.target || e.srcElement;
-                $.publish("functionlib/azTabs",
-                    {
-                        azTabsId: _Main.Options.azTabsId,
-                        azTabsJQElement: $(_Element)
-                    });
+                if (e !== undefined)
+                {
+                    azExecTabs($(this));
+                    var _Element = e.target || e.srcElement;
+                    $.publish("functionlib/azTabs",
+                        {
+                            azTabsId: _Main.Options.azTabsId,
+                            azTabsJQElement: $(_Element)
+                        });
+                }
             });
 
             if (window.innerWidth < 576)
@@ -4036,9 +4082,6 @@ function AZWindow(Options)
             $.publish("functionlib/azWindowBeforeOpen");
 
             ModalDialogScrollTop = 0;
-            _Main.$Body = $("body");
-            _Main.$Background = {};
-
             _Main.$Window = $("<div></div>").attr("id", "az-window");
             _Main.$Titlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + _Main.Options.azWindowTitle + "</h1><span>X</span>");
             _Main.$Dialog = $("<div></div>").addClass("az-window-dialog");
@@ -4074,31 +4117,30 @@ function AZWindow(Options)
             }
 
             // AZWindow No Parent Scroll
-            if (_Main.$Body.hasClass("az-no-parent-scroll") === false)
+            if ($("body").hasClass("az-no-parent-scroll") === false && _Main.Options.azWindowNoParentScroll === true)
             {
-                if (_Main.Options.azWindowNoParentScroll === true)
-                {
-                    ModalDialogScrollTop = $(window).scrollTop();
-                    _Main.$Body.addClass("az-no-parent-scroll");
-                }
+                ModalDialogScrollTop = $(window).scrollTop();
+                $("body").addClass("az-no-parent-scroll");
             }
 
             // AZWindow Background
-            _Main.$Background = $("<div></div>").attr("id", "az-background");
-            if (_Main.Options.azWindowBackground === true)
+            if (_Main.Options.azWindowBackground === true && $("#az-background").length === 0)
             {
-                _Main.$Body.append(_Main.$Background);
+                $("body").append('<div id="az-background"></div>');
             }
 
             // AZWindow Modal
-            if (_Main.Options.azWindowModal === false)
+            if (_Main.Options.azWindowModal === false && ("#az-background").length > 0 && $._data($("#az-background")[0], 'events') == null)
             {
-                _Main.$Background.off().on("click", function (e)
+                $("#az-background").on("click", function (e)
                 {
-                    var _Element = e.target || e.srcElement;
-                    if ($(_Element).attr("id") == "az-background")
+                    if (e !== undefined)
                     {
-                        _Main.azWindowClose(e);
+                        var _Element = e.target || e.srcElement;
+                        if ($(_Element).attr("id") == "az-background")
+                        {
+                            _Main.azWindowClose(e);
+                        }
                     }
                 });
             }
@@ -4119,7 +4161,7 @@ function AZWindow(Options)
                 });
             }
 
-            _Main.$Body.append(_Main.$Window);
+            $("body").append(_Main.$Window);
             _Main.$Window.hide();
             if (_Main.Options.azWindowAnimation === true)
             {
@@ -4162,18 +4204,21 @@ function AZWindow(Options)
             // AZWindow Close
             _Main.azWindowClose = function ()
             {
-                _Main.$Background.remove();
-                if ($("#az-full-window").length === 0)
+                if ($(".az-modal-dialog").length === 0)
+                {
+                    $("#az-background").remove();
+                }
+                if ($(".az-modal-dialog").length === 0 && $("#az-full-window").length === 0)
                 {
                     if (ModalDialogScrollTop > 0)
                     {
                         $(window).scrollTop(ModalDialogScrollTop);
                     }
 
-                    _Main.$Body.removeClass("az-no-parent-scroll");
-                    if (_Main.$Body.hasClass("") === true)
+                    $("body").removeClass("az-no-parent-scroll");
+                    if ($("body").hasClass("") === true)
                     {
-                        _Main.$Body.removeAttr("class");
+                        $("body").removeAttr("class");
                     }
                 }
                 if (_Main.Options.azWindowAnimation === true)
@@ -4215,15 +4260,15 @@ function AZWindow(Options)
                     {
                         _Main.$NewTitlebar.css({ "color": _Main.Options.azWindowTitlebarColor + " !important" });
                     }
-                    _Main.$Body.addClass("az-window-titlebar-active");
+                    $("body").addClass("az-window-titlebar-active");
                     window.setTimeout(function ()
                     {
                         _Main.$NewTitlebar.remove();
                         _Main.$Titlebar.show();
-                        _Main.$Body.removeClass("az-window-titlebar-active");
-                        if (_Main.$Body.hasClass("") === true)
+                        $("body").removeClass("az-window-titlebar-active");
+                        if ($("body").hasClass("") === true)
                         {
-                            _Main.$Body.removeAttr("class");
+                            $("body").removeAttr("class");
                         }
                     }, _Main.Options.azWindowAlertTimeout);
                 }
@@ -4319,7 +4364,6 @@ function AZFullWindow(Options)
             $.publish("functionlib/azFullWindowBeforeOpen");
 
             ModalDialogScrollTop = 0;
-            _Main.$Body = $("body");
             _Main.$Window = $("<div></div>").attr("id", "az-full-window");
             _Main.$Close = $("<div>&times;</div>").attr("id", "az-full-window-close");
 
@@ -4349,12 +4393,12 @@ function AZFullWindow(Options)
 
             _Main.$Window.html(_Main.Options.azFullWindowText);
             _Main.$Window.append(_Main.$Close);
-            _Main.$Body.append(_Main.$Window);
+            $("body").append(_Main.$Window);
 
             _Main.$Window.animate(_Main.AnimateOpenOptions, _Main.Options.azFullWindowFadeIn, function ()
             {
                 ModalDialogScrollTop = $(window).scrollTop();
-                _Main.$Body.addClass("az-no-parent-scroll");
+                $("body").addClass("az-no-parent-scroll");
             });
             $.publish("functionlib/azFullWindowAfterOpen", _Main);
 
@@ -4366,10 +4410,10 @@ function AZFullWindow(Options)
             // AZFullWindow Close
             _Main.azFullWindowClose = function (e)
             {
-                _Main.$Body.removeClass("az-no-parent-scroll");
-                if (_Main.$Body.hasClass("") === true)
+                $("body").removeClass("az-no-parent-scroll");
+                if ($("body").hasClass("") === true)
                 {
-                    _Main.$Body.removeAttr("class");
+                    $("body").removeAttr("class");
                 }
                 if (ModalDialogScrollTop > 0)
                 {
@@ -4415,7 +4459,6 @@ function AZSlideIn(Options)
         if (_Main.Options.azSlideInId != "" && $("#" + _Main.Options.azSlideInId).length == 0)
         {
             _Main.azSlideInId = _Main.Options.azSlideInId;
-            _Main.$Body = $("body");
             _Main.$SlideIn = $("<div></div>").attr("id", _Main.Options.azSlideInId).addClass("az-slidein");
             _Main.$SlideInTab = $("<div><div></div></div>").addClass("az-slidein-tab");
             _Main.$SlideInCard = $("<div></div>").addClass("az-slidein-card");
@@ -4501,7 +4544,7 @@ function AZSlideIn(Options)
             _Main.$Article.css(_Main.SlideInArticleOptions);
             _Main.$SlideInCard.append(_Main.$Article);
             _Main.$SlideIn.append(_Main.$SlideInTab).append(_Main.$SlideInCard);
-            _Main.$Body.append(_Main.$SlideIn);
+            $("body").append(_Main.$SlideIn);
 
             window.setTimeout(function ()
             {
@@ -5036,9 +5079,12 @@ function AZGuid()
 {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (e)
     {
-        var _R = Math.random() * 16 | 0;
-        var _V = e == 'x' ? _R : (_R & 0x3 | 0x8);
-        return _V.toString(16);
+        if (e !== undefined)
+        {
+            var _R = Math.random() * 16 | 0;
+            var _V = e == 'x' ? _R : (_R & 0x3 | 0x8);
+            return _V.toString(16);
+        }
     });
 }
 
@@ -5059,28 +5105,31 @@ function AZFormatDateTime(DateTime, Format)
 
 function AZSetCheckbox($SelectedCheckbox)
 {
-    var _LastChecked = null;
-    $SelectedCheckbox.click(function (e)
+    if (AZIsEmpty($SelectedCheckbox) === false)
     {
-        if (!_LastChecked)
+        var _LastChecked = null;
+        $SelectedCheckbox.click(function (e)
         {
+            if (!_LastChecked)
+            {
+                _LastChecked = this;
+                return;
+            }
+            if (e.shiftKey)
+            {
+                var _Start = $SelectedCheckbox.index(this);
+                var _End = $SelectedCheckbox.index(_LastChecked);
+                $SelectedCheckbox.slice(Math.min(_Start, _End), Math.max(_Start, _End) + 1).prop('checked', _LastChecked.checked);
+            }
             _LastChecked = this;
-            return;
-        }
-        if (e.shiftKey)
-        {
-            var _Start = $SelectedCheckbox.index(this);
-            var _End = $SelectedCheckbox.index(_LastChecked);
-            $SelectedCheckbox.slice(Math.min(_Start, _End), Math.max(_Start, _End) + 1).prop('checked', _LastChecked.checked);
-        }
-        _LastChecked = this;
-    });
+        });
+    }
 }
 
 function AZResolutionConverter(Width, Height, Decimal)
 {
     var _Return = "0 MP";
-    if (Width != "" && Height != "")
+    if (Width !== null && Width !== undefined && Width != "" && Height !== null && Height !== undefined && Height != "")
     {
         var _Decimal = Decimal === 0 ? 0 : Decimal || 2;
         _Return = ((Width * Height) / 1000000).toFixed(_Decimal) + ' MP';
