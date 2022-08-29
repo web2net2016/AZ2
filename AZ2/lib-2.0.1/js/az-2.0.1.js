@@ -3666,6 +3666,15 @@ function AZModalDialog(Options)
                     azModalDialogHeight: _Main.Options.azModalDialogHeight
                 };
                 _Main.Options = $.extend({}, _Defaults, Options || {});
+
+                if (_Main.Options.azModalDialogWidth > (window.innerWidth - 20))
+                {
+                    _Main.Options.azModalDialogWidth = (window.innerWidth - 20);
+                }
+                if (_Main.Options.azModalDialogHeight > (window.innerHeight - 20))
+                {
+                    _Main.Options.azModalDialogHeight = (window.innerHeight - 20);
+                }
                 _Main.$CurrentDialog.dialog({ width: _Main.Options.azModalDialogWidth, height: _Main.Options.azModalDialogHeight });
             };
 
@@ -4200,6 +4209,29 @@ function AZWindow(Options)
             {
                 _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
             }
+
+            //AZWindow Resize
+            _Main.azWindowResize = function (Options)
+            {
+                var _Defaults =
+                {
+                    azWindowWidth: _Main.Options.azWindowWidth,
+                    azWindowHeight: _Main.Options.azWindowHeight
+                };
+                _Main.Options = $.extend({}, _Defaults, Options || {});
+
+                if (_Main.Options.azWindowWidth > (window.innerWidth - 20))
+                {
+                    _Main.Options.azWindowWidth = (window.innerWidth - 20);
+                }
+                if (_Main.Options.azWindowHeight > (window.innerHeight - 20))
+                {
+                    _Main.Options.azWindowHeight = (window.innerHeight - 20);
+                }
+                _Main.$Window.width(_Main.Options.azWindowWidth);
+                _Main.$Window.height(_Main.Options.azWindowHeight);
+                _Main.$Window.css({ "top": ($(window).height() / 2) - (_Main.$Window.height() / 2) });
+            };
 
             // AZWindow Close
             _Main.azWindowClose = function ()
@@ -5010,9 +5042,9 @@ function existsSelectedObj(List, x, y)
     return AZExistObj(List, x, y);
 }
 
-function AZExistObj(List, x, y)
+function AZExistObj(List, x, y, z)
 {
-    return AZIsEmpty(AZGetObj(List, x, y)) === false;
+    return AZIsEmpty(AZGetObj(List, x, y, z)) === false;
 }
 
 function removeSelectedObj(List, x, y)

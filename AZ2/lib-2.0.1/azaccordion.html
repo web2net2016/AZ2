@@ -32,10 +32,11 @@
         {
             w3CodeColor();
 
-            $.subscribe("functionlib/azAccordionHeader", function (e, data)
-            {
-                console.log("azAccordionId: " + data.azAccordionId + "\nazAccordionStatus: " + data.azAccordionStatus + "\nazAccordionActivated: " + data.azAccordionActivated + "\nazAccordionDeactivated: " + data.azAccordionDeactivated + "\nazAccordionHeaderJQElement: ", data.azAccordionHeaderJQElement);
-            });
+            //$.subscribe("functionlib/azAccordionHeader", function (e, data)
+            //{
+            //    console.log(data)
+            //    console.log("azAccordionId: " + data.azAccordionId + "\nazAccordionStatus: " + data.azAccordionStatus + "\nazAccordionActivated: " + data.azAccordionActivated + "\nazAccordionDeactivated: " + data.azAccordionDeactivated + "\nazAccordionCardJQElement: ", data.azAccordionCardJQElement, + "\nazAccordionHeaderJQElement: ", data.azAccordionHeaderJQElement);
+            //});
 
             $.subscribe("functionlib/azAccordionReady", function (e, data)
             {
@@ -68,16 +69,16 @@
                     azAccordionId: "az-accordion-1"
                 });
 
-            AZAccordion2 = new AZAccordion(
-                {
-                    azAccordionId: "az-accordion-2",
-                    azAccordionHeightStyle: "auto",
-                    azAccordionCollapsible: false,
-                    azAccordionIconClosed: "fas fa-arrow-circle-down",
-                    azAccordionIconOpen: "fas fa-arrow-circle-up",
-                    azAccordionSlideDown: 400,
-                    azAccordionSlideUp: 400
-                });
+            //AZAccordion2 = new AZAccordion(
+            //    {
+            //        azAccordionId: "az-accordion-2",
+            //        azAccordionHeightStyle: "auto",
+            //        azAccordionCollapsible: false,
+            //        azAccordionIconClosed: "fas fa-arrow-circle-down",
+            //        azAccordionIconOpen: "fas fa-arrow-circle-up",
+            //        azAccordionSlideDown: 400,
+            //        azAccordionSlideUp: 400
+            //    });
         });
 
         function ChangeText(data)

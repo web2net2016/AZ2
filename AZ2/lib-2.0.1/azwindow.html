@@ -28,6 +28,7 @@
         var AZWindow1 = {};
         var AZWindow2 = {};
         var AZWindow3 = {};
+        var AZWindow4 = {};
 
         $(document).ready(function ()
         {
@@ -36,12 +37,14 @@
             $("#cmdAZWindow1").off("click", setAZWindow1).on("click", setAZWindow1);
             $("#cmdAZWindow2").off("click", setAZWindow2).on("click", setAZWindow2);
             $("#cmdAZWindow3").off("click", setAZWindow3).on("click", setAZWindow3);
+            $("#cmdAZWindow4").off("click", setAZWindow4).on("click", setAZWindow4);
         });
 
         function setAZWindow1()
         {
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
             {
+                console.log(data)
                 $("#cmdAZWindowButton1").off().on('click', function ()
                 {
                     data.azWindowClose();
@@ -86,6 +89,7 @@
         {
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
             {
+                console.log(data)
                 $("#cmdAZWindowButton1").off().on('click', function ()
                 {
                     data.azWindowClose();
@@ -142,6 +146,7 @@
         {
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
             {
+                console.log(data)
                 $("#cmdButton1").off().on('click', function ()
                 {
                     data.azChangeWindowTitlebar({ azWindowTitle: "New title", azWindowTitlebarBackgroundColor: "#FF4136" });
@@ -173,6 +178,48 @@
             AZWindow3 = new AZWindow(
                 {
                     azWindowTitle: "AZ Window Title",
+                    azWindowText: _HTML,
+                    azWindowWidth: 500,
+                    azWindowHeight: 300
+                });
+        }
+
+        function setAZWindow4()
+        {
+            $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
+            {
+                console.log(data)
+                $("#cmdButton1").off().on('click', function ()
+                {
+                    data.azWindowResize({ azWindowWidth: 600, azWindowHeight: 600 });
+                });
+                $("#cmdButton2").off().on('click', function ()
+                {
+                    data.azWindowClose();
+                });
+            });
+
+            var _HTML = "";
+            _HTML = '<div class="az-margin-b-28">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'azWindowResize(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowWidth: 600,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowHeight: 600<br />';
+            _HTML += '};<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Resize</button>';
+            _HTML += '</div>';
+            _HTML += '<div class="az-form-group xs az-text-center">';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton2" style="width: 60%; margin-left: 4px;">Close</button>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+
+            AZWindow4 = new AZWindow(
+                {
+                    azWindowTitle: "AZ Window Resize",
                     azWindowText: _HTML,
                     azWindowWidth: 500,
                     azWindowHeight: 300
@@ -277,6 +324,9 @@
                             <h6>Other examples:</h6>
                             <a href="#window-title">Window Title</a>
                             <br />
+                            <a href="#window-resize">Window Resize</a>
+                            <br />
+                            <br />
                         </div>
                     </div>
 
@@ -304,7 +354,7 @@
                                 <default><span>Default:</span> <red>300</red></default>
                                 <units><span>Unit:</span> <red>px</red></units>
                                 <br />
-                                For screen sizes below <red>576</red>, <strong>azWindowWidth</strong> will be adjusted to fit the screen size of the device if <strong>azWindowWidth</strong> is set larger than the screen width.
+                                <strong>AZ Window</strong> width will be adjusted to fit the screen size of the device if <strong>azWindowWidth</strong> is set larger than the screen width.
                                 <br />
                             </div>
                             <div class="az-code-property-wrapper">
@@ -313,7 +363,7 @@
                                 <default><span>Default:</span> <red>150</red></default>
                                 <units><span>Unit:</span> <red>px</red></units>
                                 <br />
-                                For screen sizes below <red>576</red>, <strong>azWindowHeight</strong> will be adjusted to fit the screen size of the device if <strong>azWindowHeight</strong> is set larger than the screen height.
+                                <strong>AZ Window</strong> height will be adjusted to fit the screen size of the device if <strong>azWindowHeight</strong> is set larger than the screen height.
                                 <br />
                             </div>
                             <div class="az-code-property-wrapper">
@@ -452,10 +502,11 @@
                                     $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)<br />
                                     {<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azChangeWindowTitlebar - ƒ (n)<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azWindowResize - ƒ (n)<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azWindowClose - ƒ ()<br />
                                     });<br />
                                     <br />
-                                    This function is triggered when <strong>AZWindow</strong> is fully initiated.
+                                    This function is triggered after <strong>AZWindow</strong> is fully initiated.
                                     <br />
                                 </div>
                             </div>
@@ -554,6 +605,68 @@
                     <div class="az-col xs-12 sm-4">
                         <div class="az-form-group">
                             <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow3">AZ Window Title</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="az-container az-background-white az-margin-t-56">
+                <div id="window-resize" class="az-row">
+                    <div class="az-col xs-12">
+                        <h1 class="az-code-header" style="margin: 0;">AZ Window - Resize</h1>
+                        <div class="az-code jsHigh notranslate">
+                            <strong>Default settings</strong>
+                            <br />
+                            <br />
+                            azWindowResize(<br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;azWindowWidth: 300,<br />
+                            &emsp;&ensp;&emsp;&ensp;azWindowHeight: 150<br />
+                            };<br />
+                        </div>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code htmlHigh notranslate">
+                            <div class="az-code-property-wrapper">
+                                <property>azWindowWidth</property>
+                                <type><span>Type:</span> <brown>Integer</brown></type>
+                                <default><span>Default:</span> <red>300</red></default>
+                                <units><span>Unit:</span> <red>px</red></units>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azWindowHeight</property>
+                                <type><span>Type:</span> <brown>Integer</brown></type>
+                                <default><span>Default:</span> <red>150</red></default>
+                                <units><span>Unit:</span> <red>px</red></units>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code jsHigh notranslate">
+                            var WindowResizeOptions = <br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;azWindowWidth: 600,<br />
+                            &emsp;&ensp;&emsp;&ensp;azWindowHeight: 600<br />
+                            };<br />
+                            <br />
+                            azWindowResize(WindowResizeOptions);
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-container az-margin-t-28">
+                <div class="az-row">
+                    <div class="az-col xs-12 sm-4">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow4">AZ Window Resize</button>
                         </div>
                     </div>
                 </div>

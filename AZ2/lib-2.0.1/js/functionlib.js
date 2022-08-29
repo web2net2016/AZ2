@@ -1189,9 +1189,24 @@ function AZAccordion(Options)
             _Main.azAccordionId = _Main.Options.azAccordionId;
             _Main.$Accordion = $("#" + _Main.azAccordionId);
             _Main.$AccordionCard = _Main.$Accordion.children(".az-accordion-card");
-            _Main.$Header = _Main.$AccordionCard.children("header").append('<span class="az-accordion-icon"><i class="' + _Main.Options.azAccordionIconClosed + '"></i><span>');
+            _Main.$Header = _Main.$AccordionCard.children("header");
             _Main.$Article = _Main.$AccordionCard.children("article");
+            _Main.$Footer = _Main.$AccordionCard.children("footer");
 
+
+            //console.log(_Main.$Accordion)
+            //console.log(_Main.$Header)
+            //console.log(_Main.$Article)
+            //console.log(_Main.$Footer)
+
+
+            $.each(_Main.$Header, function (Index, Header)
+            {
+                if ($(".az-accordion-icon", $(Header)).length == 0)
+                {
+                    $(Header).append('<span class="az-accordion-icon"><i class="' + _Main.Options.azAccordionIconClosed + '"></i><span>');
+                }
+            });
             if (_Main.Options.azAccordionHeaderBackgroundColor !== "")
             {
                 _Main.$Header.css({ "background-color": _Main.Options.azAccordionHeaderBackgroundColor });
@@ -1245,7 +1260,7 @@ function AZAccordion(Options)
             }
 
             _Main.MaxArticleHeight = 0;
-            _Main.ArticleHeight = function ()
+            _Main.azArticleHeight = function ()
             {
                 _Main.MaxArticleHeight = 0;
                 _Main.$Article.css({ height: "inherit" });
@@ -1289,8 +1304,10 @@ function AZAccordion(Options)
                 {
                     if (_Main.Options.azAccordionCollapsible === true)
                     {
+                        $SelectedAccordionHeader.parent().removeClass("az-accordion-card-active");
                         $SelectedAccordionHeader.removeClass("az-accordion-header-active");
                         $SelectedAccordionHeader.siblings("article").slideUp(_Main.Options.azAccordionSlideUp).removeClass("az-accordion-article-active");
+                        $SelectedAccordionHeader.siblings("footer").removeClass("az-accordion-footer-active");
                         $("span.az-accordion-icon > i", $SelectedAccordionHeader).removeClass(_Main.Options.azAccordionIconOpen).addClass(_Main.Options.azAccordionIconClosed);
 
                         if (_Main.AccordionActivated == $SelectedAccordionHeader.parent().index())
@@ -1303,7 +1320,11 @@ function AZAccordion(Options)
                                 azAccordionStatus: "closed",
                                 azAccordionActivated: _Main.AccordionActivated,
                                 azAccordionDeactivated: _Main.AccordionDeactivated,
-                                azAccordionHeaderJQElement: $($SelectedAccordionHeader)
+                                //azAccordionCardJQElement: $($SelectedAccordionHeader.parent()),
+                                //azAccordionHeaderJQElement: $($SelectedAccordionHeader),
+                                //azAccordionArticleJQElement: $($SelectedAccordionHeader.siblings("article")),
+                                //azAccordionFooterJQElement: $($SelectedAccordionHeader.siblings("footer")),
+                                azMain: _Main
                             });
                         _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
                     }
@@ -1319,19 +1340,27 @@ function AZAccordion(Options)
                                 azAccordionStatus: "open",
                                 azAccordionActivated: $SelectedAccordionHeader.parent().index(),
                                 azAccordionDeactivated: _Main.AccordionDeactivated,
-                                azAccordionHeaderJQElement: $($SelectedAccordionHeader)
+                                //azAccordionCardJQElement: $($SelectedAccordionHeader.parent()),
+                                //azAccordionHeaderJQElement: $($SelectedAccordionHeader),
+                                //azAccordionArticleJQElement: $($SelectedAccordionHeader.siblings("article")),
+                                //azAccordionFooterJQElement: $($SelectedAccordionHeader.siblings("footer")),
+                                azMain: _Main
                             });
                         _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
                     }
                 }
                 else
                 {
+                    _Main.$AccordionCard.removeClass("az-accordion-card-active");
                     _Main.$Header.removeClass("az-accordion-header-active");
                     _Main.$Article.slideUp(_Main.Options.azAccordionSlideUp).removeClass("az-accordion-article-active");
+                    _Main.$Footer.removeClass("az-accordion-footer-active");
                     $("span.az-accordion-icon > i", _Main.$Header).removeClass(_Main.Options.azAccordionIconOpen).addClass(_Main.Options.azAccordionIconClosed);
 
+                    $SelectedAccordionHeader.parent().addClass("az-accordion-card-active");
                     $SelectedAccordionHeader.addClass("az-accordion-header-active");
                     $SelectedAccordionHeader.siblings("article").slideDown(_Main.Options.azAccordionSlideDown).addClass("az-accordion-article-active");
+                    $SelectedAccordionHeader.siblings("footer").addClass("az-accordion-footer-active");
                     $("span.az-accordion-icon > i", $SelectedAccordionHeader).removeClass(_Main.Options.azAccordionIconClosed).addClass(_Main.Options.azAccordionIconOpen);
 
                     if (_Main.AccordionDeactivated == $SelectedAccordionHeader.parent().index())
@@ -1344,7 +1373,11 @@ function AZAccordion(Options)
                             azAccordionStatus: "open",
                             azAccordionActivated: $SelectedAccordionHeader.parent().index(),
                             azAccordionDeactivated: _Main.AccordionDeactivated,
-                            azAccordionHeaderJQElement: $($SelectedAccordionHeader)
+                            //azAccordionCardJQElement: $($SelectedAccordionHeader.parent()),
+                            //azAccordionHeaderJQElement: $($SelectedAccordionHeader),
+                            //azAccordionArticleJQElement: $($SelectedAccordionHeader.siblings("article")),
+                            //azAccordionFooterJQElement: $($SelectedAccordionHeader.siblings("footer")),
+                            azMain: _Main
                         });
                     _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
                 }
@@ -1352,10 +1385,10 @@ function AZAccordion(Options)
 
             if (_Main.Options.azAccordionHeightStyle == "auto")
             {
-                _Main.ArticleHeight();
+                _Main.azArticleHeight();
                 $(window).resize(function ()
                 {
-                    _Main.ArticleHeight();
+                    _Main.azArticleHeight();
                 });
             }
             if (_Main.Options.azAccordionCollapsible == false)
@@ -1766,6 +1799,15 @@ function AZModalDialog(Options)
                     azModalDialogHeight: _Main.Options.azModalDialogHeight
                 };
                 _Main.Options = $.extend({}, _Defaults, Options || {});
+
+                if (_Main.Options.azModalDialogWidth > (window.innerWidth - 20))
+                {
+                    _Main.Options.azModalDialogWidth = (window.innerWidth - 20);
+                }
+                if (_Main.Options.azModalDialogHeight > (window.innerHeight - 20))
+                {
+                    _Main.Options.azModalDialogHeight = (window.innerHeight - 20);
+                }
                 _Main.$CurrentDialog.dialog({ width: _Main.Options.azModalDialogWidth, height: _Main.Options.azModalDialogHeight });
             };
 
@@ -2300,6 +2342,29 @@ function AZWindow(Options)
             {
                 _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
             }
+
+            //AZWindow Resize
+            _Main.azWindowResize = function (Options)
+            {
+                var _Defaults =
+                {
+                    azWindowWidth: _Main.Options.azWindowWidth,
+                    azWindowHeight: _Main.Options.azWindowHeight
+                };
+                _Main.Options = $.extend({}, _Defaults, Options || {});
+
+                if (_Main.Options.azWindowWidth > (window.innerWidth - 20))
+                {
+                    _Main.Options.azWindowWidth = (window.innerWidth - 20);
+                }
+                if (_Main.Options.azWindowHeight > (window.innerHeight - 20))
+                {
+                    _Main.Options.azWindowHeight = (window.innerHeight - 20);
+                }
+                _Main.$Window.width(_Main.Options.azWindowWidth);
+                _Main.$Window.height(_Main.Options.azWindowHeight);
+                _Main.$Window.css({ "top": ($(window).height() / 2) - (_Main.$Window.height() / 2) });
+            };
 
             // AZWindow Close
             _Main.azWindowClose = function ()
@@ -3110,9 +3175,9 @@ function existsSelectedObj(List, x, y)
     return AZExistObj(List, x, y);
 }
 
-function AZExistObj(List, x, y)
+function AZExistObj(List, x, y, z)
 {
-    return AZIsEmpty(AZGetObj(List, x, y)) === false;
+    return AZIsEmpty(AZGetObj(List, x, y, z)) === false;
 }
 
 function removeSelectedObj(List, x, y)

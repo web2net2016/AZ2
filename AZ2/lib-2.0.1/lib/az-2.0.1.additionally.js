@@ -206,7 +206,7 @@ function AZPage(Options)
                 {
                     _Main.DefaultLanguageFile = AZSettings.DefaultLanguageFile;
                     _Main.DefaultLanguage = AZClientStorage("get", "language");
-                    if (AZIsEmpty(_Main.DefaultLanguage) === true)
+                    if (typeof _Main.DefaultLanguage != 'string')
                     {
                         _Main.DefaultLanguage = AZSettings.DefaultLanguage;
                     }
@@ -214,7 +214,6 @@ function AZPage(Options)
                     var _LanguageCode = _Main.DefaultLanguage.split("-");
                     numeral.locale(_LanguageCode[0].toLowerCase());
                     AZClientStorage("set", "language", _Main.DefaultLanguage);
-
                     if ((AZSettings.LanguageValidationFolder.match(new RegExp("/", "g")) || []).length > 1)
                     {
                         _Main.JsonUrl = AZSettings.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName;
@@ -754,7 +753,7 @@ function AZSetInputTypeEvents()
         {
             _ValidType = "";
             $(this).attr("autocomplete", "off");
-            $(this).off("keypress", AZValidateDirtyKeyup).on("keypress", AZValidateDirtyKeyup);
+            $(this).off("keypress keydown", AZValidateDirtyKeyup).on("keypress keydown", AZValidateDirtyKeyup);
             _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
             if (_ValidType !== null)
             {
@@ -808,7 +807,7 @@ function AZSetInputTypeEvents()
         {
             _ValidType = "";
             $(this).attr("autocomplete", "false");
-            $(this).off("keypress", AZValidateDirtyKeyup).on("keypress", AZValidateDirtyKeyup);
+            $(this).off("keypress keydown", AZValidateDirtyKeyup).on("keypress keydown", AZValidateDirtyKeyup);
             _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
             if (_ValidType !== null)
             {
@@ -979,30 +978,50 @@ function AZSetInputTypeEvents()
 function AZValidateDirtyKeyup(e)
 {
     var _Element = e.target || e.srcElement;
-    var _KeyChar = e.keyCode || e.which;
     if (!$(_Element).attr("readonly"))
     {
-        var _Data =
+        var _InputValue = "";
+        var _InputKey = "";
+        var _KeyChar = e.keyCode || e.which;
+        if (e.type == "keydown")
         {
-            azInputId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
-            azInputName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
-            azInputClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
-            azInputValue: $(_Element).val(),
-            azInputKey: String.fromCharCode(_KeyChar),
-            azInputJQElement: $(_Element)
-        };
-        $.publish("functionlib/azValidateDirty",
+            if (_KeyChar === 8)
             {
-                azInputId: _Data.azInputId,
-                azInputName: _Data.azInputName,
-                azInputClass: _Data.azInputClass,
-                azInputValue: _Data.azInputValue,
-                azInputKey: _Data.azInputKey,
-                azInputJQElement: _Data.azInputJQElement,
-            });
-        if (typeof AZValidateDirty == "function")
+                _InputValue = $(_Element).val();
+                SetData();
+            }
+        }
+        if (e.type == "keypress")
         {
-            AZValidateDirty(e, _Data);
+            _InputValue = $(_Element).val() + String.fromCharCode(_KeyChar);
+            _InputKey = String.fromCharCode(_KeyChar);
+            SetData();
+        }
+
+        function SetData()
+        {
+            var _Data =
+            {
+                azInputId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+                azInputName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+                azInputClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+                azInputValue: _InputValue,
+                azInputKey: _InputKey,
+                azInputJQElement: $(_Element)
+            };
+            $.publish("functionlib/azValidateDirty",
+                {
+                    azInputId: _Data.azInputId,
+                    azInputName: _Data.azInputName,
+                    azInputClass: _Data.azInputClass,
+                    azInputValue: _Data.azInputValue,
+                    azInputKey: _Data.azInputKey,
+                    azInputJQElement: _Data.azInputJQElement,
+                });
+            if (typeof AZValidateDirty == "function")
+            {
+                AZValidateDirty(e, _Data);
+            }
         }
     }
 }
@@ -1456,12 +1475,14 @@ function AZSetDateFormat(Date)
     var _DateReturn =
     {
         LocalDate: "",
+        ISODate: "",
         ENUSDate: ""
     };
     if (AZIsValidDateTime(Date) === true)
     {
         _DateReturn.LocalDate = moment(Date).format('L');
-        _DateReturn.ENUSDate = moment(Date).format('YYYY-MM-DD');
+        _DateReturn.ISODate = moment(Date).format('MM/DD/YYYY');
+        _DateReturn.ENUSDate = moment(Date).format('MM/DD/YYYY');
     }
     return _DateReturn;
 }
@@ -1471,12 +1492,14 @@ function AZSetDateTimeFormat(DateTime)
     var _DateTimeReturn =
     {
         LocalDateTime: "",
+        ISODateTime: "",
         ENUSDateTime: ""
     };
     if (AZIsValidDateTime(DateTime) === true)
     {
         _DateTimeReturn.LocalDateTime = moment(DateTime).format('L') + " " + moment(DateTime).format('LT');
-        _DateTimeReturn.ENUSDateTime = moment(DateTime).format('YYYY-MM-DD') + " " + moment(DateTime).format('h:mm a');
+        _DateTimeReturn.ISODateTime = moment(DateTime).format('MM/DD/YYYY') + " " + moment(DateTime).format('h:mm a');
+        _DateTimeReturn.ENUSDateTime = moment(DateTime).format('MM/DD/YYYY') + " " + moment(DateTime).format('h:mm a');
     }
     return _DateTimeReturn;
 }
@@ -1486,11 +1509,13 @@ function AZSetTimeFormat(Time)
     var _TimeReturn =
     {
         LocalTime: "",
+        ISOTime: "",
         ENUSTime: ""
     };
     if (AZIsValidDateTime(Time) === true)
     {
         _TimeReturn.LocalTime = moment(Time).format('LT');
+        _DateReturn.ISOTime = moment(Time).format('h:mm a');
         _TimeReturn.ENUSTime = moment(Time).format('h:mm a');
     }
     return _TimeReturn;
