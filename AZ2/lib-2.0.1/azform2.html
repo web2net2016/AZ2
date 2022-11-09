@@ -37,7 +37,7 @@
 
             $.subscribe("functionlib/azSetTime", function (e, data)
             {
-                console.log("FUNCTIONLIB - azSetTime\nazTimeId: " + data.azTimeId + "\nazTimeName: " + data.azTimeName + "\nazTimeClass: " + data.azTimeClass + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeJQElement: ", data.azTimeJQElement);
+                console.log("FUNCTIONLIB - azSetTime\nazTimeId: " + data.azTimeId + "\nazTimeName: " + data.azTimeName + "\nazTimeClass: " + data.azTimeClass + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeENUSTime: " + data.azTimeENUSTime + "\nazTimeJQElement: ", data.azTimeJQElement);
             });
         });
 
@@ -47,21 +47,6 @@
 
     <form id="frmReg">
         <div class="az-container">
-
-            <div class="az-row az-margin-t-14 az-margin-b-14">
-                <div class="az-col xs-12 sm-6 md-3">
-                    <p class="az-text-center" style="font-size: .85em;">Størrelse XS</p>
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-                    <p class="az-text-center">Størrelse Normal</p>
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-                    <p class="az-text-center" style="font-size: 1.1em;">Størrelse SM</p>
-                </div>
-                <div class="az-col xs-12 sm-6 md-3">
-                    <p class="az-text-center" style="font-size: 1.2em;">Størrelse MD</p>
-                </div>
-            </div>
 
             <div class="az-row">
                 <div class="az-col xs-12">
@@ -591,29 +576,69 @@
                 <article>
                     <div class="az-row az-margin-t-28 az-margin-b-14">
                         <div class="az-col xs-12 sm-6 md-3">
+                            <div class="az-form-group xs">
+                                <label class="az-label xs">Størrelse XS</label>
+                                <input type="text" class="az-input xs date" id="date1" />
+                                <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                        <div class="az-col xs-12 sm-6 md-3">
                             <div class="az-form-group">
-                                <label class="az-label">Datovelger - Tidligere datoer</label>
+                                <label class="az-label">Størrelse Normal</label>
+                                <input type="text" class="az-input date" id="date2" />
+                                <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                        <div class="az-col xs-12 sm-6 md-3">
+                            <div class="az-form-group sm">
+                                <label class="az-label sm">Størrelse SM</label>
+                                <input type="text" class="az-input sm date" id="date3" />
+                                <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                        <div class="az-col xs-12 sm-6 md-3">
+                            <div class="az-form-group md">
+                                <label class="az-label md">Størrelse MD</label>
+                                <input type="text" class="az-input md date" id="date4" />
+                                <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+                    <h6 class="az-code-header" style="margin: 0;">Datovelger</h6>
+                </div>
+            </div>
+            <div class="az-card" style="margin: 0;">
+                <article>
+                    <div class="az-row az-margin-t-28 az-margin-b-14">
+                        <div class="az-col xs-12 sm-6 md-3">
+                            <div class="az-form-group">
+                                <label class="az-label">Tidligere datoer</label>
                                 <input type="text" class="az-input pastdate" id="pastdate" />
                                 <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                             </div>
                         </div>
                         <div class="az-col xs-12 sm-6 md-3">
                             <div class="az-form-group">
-                                <label class="az-label">Datovelger - Ikke tidligere datoer</label>
+                                <label class="az-label">Ikke tidligere datoer</label>
                                 <input type="text" class="az-input nopastdate" id="nopastdate" />
                                 <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                             </div>
                         </div>
                         <div class="az-col xs-12 sm-6 md-3">
                             <div class="az-form-group">
-                                <label class="az-label">Datovelger - Fra dato</label>
+                                <label class="az-label">Fra dato</label>
                                 <input type="text" class="az-input fromdate" id="fromdate" />
                                 <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                             </div>
                         </div>
                         <div class="az-col xs-12 sm-6 md-3">
                             <div class="az-form-group">
-                                <label class="az-label">Datovelger - Til dato</label>
+                                <label class="az-label">Til dato</label>
                                 <input type="text" class="az-input todate" id="todate" />
                                 <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                             </div>
@@ -632,28 +657,28 @@
                     <div class="az-row az-margin-t-14 az-margin-b-14">
                         <div class="az-col xs-12 sm-6 md-3">
                             <div class="az-form-group xs">
-                                <label class="az-label xs">Tid</label>
+                                <label class="az-label xs">Størrelse XS</label>
                                 <input type="text" class="az-input xs time" id="time1" />
                                 <span class="az-input-icons"><i class="far fa-clock"></i></span>
                             </div>
                         </div>
                         <div class="az-col xs-12 sm-6 md-3">
                             <div class="az-form-group">
-                                <label class="az-label">Tid</label>
+                                <label class="az-label">Størrelse Normal</label>
                                 <input type="text" class="az-input time" id="time2" />
                                 <span class="az-input-icons"><i class="far fa-clock"></i></span>
                             </div>
                         </div>
                         <div class="az-col xs-12 sm-6 md-3">
                             <div class="az-form-group sm">
-                                <label class="az-label sm">Tid</label>
+                                <label class="az-label sm">Størrelse SM</label>
                                 <input type="text" class="az-input sm time" id="time3" />
                                 <span class="az-input-icons"><i class="far fa-clock"></i></span>
                             </div>
                         </div>
                         <div class="az-col xs-12 sm-6 md-3">
                             <div class="az-form-group md">
-                                <label class="az-label md">Tid</label>
+                                <label class="az-label md">Størrelse MD</label>
                                 <input type="text" class="az-input md time" id="time4" />
                                 <span class="az-input-icons"><i class="far fa-clock"></i></span>
                             </div>

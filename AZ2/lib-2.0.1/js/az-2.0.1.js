@@ -1704,6 +1704,7 @@ jQuery(function (e) { e.datepicker.regional["en-US"] = { showWeek: !0, showOther
     window['TP_jQuery_' + tpuuid] = $;
 
     $.timepicker.regional['nb-NO'] = {
+        showPeriod: false,
         hourText: 'Timer',
         minuteText: 'Minutter',
         amPmText: ['', ''],
@@ -1957,7 +1958,7 @@ $(document).ready(function ()
         });
 
         var _DefaultLanguage = AZClientStorage("get", "language", "");
-        if (_DefaultLanguage === null || _DefaultLanguage === undefined)
+        if (typeof _DefaultLanguage != 'string')
         {
             _DefaultLanguage = "nb-NO";
         }
@@ -2208,6 +2209,16 @@ $(document).ready(function ()
     })(jQuery);
 });
 
+// date
+// pastdate
+// nopastdate
+// fromdate
+// todate
+// frompastdate
+// topastdate
+// fromnopastdate
+// tonopastdate
+
 function AZDatepicker($Obj, DefaultLanguage)
 {
     var _DatePicker = false;
@@ -2218,35 +2229,11 @@ function AZDatepicker($Obj, DefaultLanguage)
             ({
                 beforeShow: function ()
                 {
-                    if ($Obj.hasClass("xs") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.85em" });
-                    }
-                    else if ($Obj.hasClass("sm") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.10em" });
-                    }
-                    else if ($Obj.hasClass("md") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.20em" });
-                    }
-                    else
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.95em" });
-                    }
+                    SetDatePickerSize();
                 },
                 onSelect: function (curDate, instance)
                 {
-                    $.publish("functionlib/azSetDate",
-                        {
-                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
-                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
-                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
-                            azDateLocalDate: curDate,
-                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateJQElement: $Obj
-                        });
+                    PublishSetDate(curDate);
                 }
             });
     }
@@ -2257,37 +2244,13 @@ function AZDatepicker($Obj, DefaultLanguage)
             {
                 beforeShow: function ()
                 {
-                    if ($Obj.hasClass("xs") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.85em" });
-                    }
-                    else if ($Obj.hasClass("sm") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.10em" });
-                    }
-                    else if ($Obj.hasClass("md") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.20em" });
-                    }
-                    else
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.95em" });
-                    }
+                    SetDatePickerSize();
                 },
                 maxDate: 0,
                 yearRange: "-60:+0",
                 onSelect: function (curDate, instance)
                 {
-                    $.publish("functionlib/azSetDate",
-                        {
-                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
-                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
-                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
-                            azDateLocalDate: curDate,
-                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateJQElement: $Obj
-                        });
+                    PublishSetDate(curDate);
                 }
             });
     }
@@ -2298,36 +2261,12 @@ function AZDatepicker($Obj, DefaultLanguage)
             {
                 beforeShow: function ()
                 {
-                    if ($Obj.hasClass("xs") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.85em" });
-                    }
-                    else if ($Obj.hasClass("sm") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.10em" });
-                    }
-                    else if ($Obj.hasClass("md") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.20em" });
-                    }
-                    else
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.95em" });
-                    }
+                    SetDatePickerSize();
                 },
                 minDate: 0,
                 onSelect: function (curDate, instance)
                 {
-                    $.publish("functionlib/azSetDate",
-                        {
-                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
-                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
-                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
-                            azDateLocalDate: curDate,
-                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateJQElement: $Obj
-                        });
+                    PublishSetDate(curDate);
                 }
             });
     }
@@ -2338,37 +2277,13 @@ function AZDatepicker($Obj, DefaultLanguage)
             {
                 beforeShow: function ()
                 {
-                    if ($Obj.hasClass("xs") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.85em" });
-                    }
-                    else if ($Obj.hasClass("sm") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.10em" });
-                    }
-                    else if ($Obj.hasClass("md") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.20em" });
-                    }
-                    else
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.95em" });
-                    }
+                    SetDatePickerSize();
                 },
                 numberOfMonths: 2,
                 onSelect: function (curDate, instance)
                 {
                     $(".todate").datepicker("option", "minDate", curDate);
-                    $.publish("functionlib/azSetDate",
-                        {
-                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
-                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
-                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
-                            azDateLocalDate: curDate,
-                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateJQElement: $Obj
-                        });
+                    PublishSetDate(curDate);
                 }
             });
     }
@@ -2379,37 +2294,13 @@ function AZDatepicker($Obj, DefaultLanguage)
             {
                 beforeShow: function ()
                 {
-                    if ($Obj.hasClass("xs") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.85em" });
-                    }
-                    else if ($Obj.hasClass("sm") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.10em" });
-                    }
-                    else if ($Obj.hasClass("md") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.20em" });
-                    }
-                    else
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.95em" });
-                    }
+                    SetDatePickerSize();
                 },
                 numberOfMonths: 2,
                 onSelect: function (curDate, instance)
                 {
                     $(".fromdate").datepicker("option", "maxDate", curDate);
-                    $.publish("functionlib/azSetDate",
-                        {
-                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
-                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
-                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
-                            azDateLocalDate: curDate,
-                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateJQElement: $Obj
-                        });
+                    PublishSetDate(curDate);
                 }
             });
     }
@@ -2420,38 +2311,14 @@ function AZDatepicker($Obj, DefaultLanguage)
             {
                 beforeShow: function ()
                 {
-                    if ($Obj.hasClass("xs") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.85em" });
-                    }
-                    else if ($Obj.hasClass("sm") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.10em" });
-                    }
-                    else if ($Obj.hasClass("md") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.20em" });
-                    }
-                    else
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.95em" });
-                    }
+                    SetDatePickerSize();
                 },
                 maxDate: 0,
                 numberOfMonths: 2,
                 onSelect: function (curDate, instance)
                 {
                     $(".topastdate").datepicker("option", "minDate", curDate);
-                    $.publish("functionlib/azSetDate",
-                        {
-                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
-                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
-                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
-                            azDateLocalDate: curDate,
-                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateJQElement: $Obj
-                        });
+                    PublishSetDate(curDate);
                 }
             });
     }
@@ -2462,38 +2329,14 @@ function AZDatepicker($Obj, DefaultLanguage)
             {
                 beforeShow: function ()
                 {
-                    if ($Obj.hasClass("xs") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.85em" });
-                    }
-                    else if ($Obj.hasClass("sm") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.10em" });
-                    }
-                    else if ($Obj.hasClass("md") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.20em" });
-                    }
-                    else
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.95em" });
-                    }
+                    SetDatePickerSize();
                 },
                 maxDate: 0,
                 numberOfMonths: 2,
                 onSelect: function (curDate, instance)
                 {
                     $(".frompastdate").datepicker("option", "maxDate", curDate);
-                    $.publish("functionlib/azSetDate",
-                        {
-                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
-                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
-                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
-                            azDateLocalDate: curDate,
-                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateJQElement: $Obj
-                        });
+                    PublishSetDate(curDate);
                 }
             });
     }
@@ -2504,38 +2347,14 @@ function AZDatepicker($Obj, DefaultLanguage)
             {
                 beforeShow: function ()
                 {
-                    if ($Obj.hasClass("xs") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.85em" });
-                    }
-                    else if ($Obj.hasClass("sm") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.10em" });
-                    }
-                    else if ($Obj.hasClass("md") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.20em" });
-                    }
-                    else
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.95em" });
-                    }
+                    SetDatePickerSize();
                 },
                 minDate: 0,
                 numberOfMonths: 2,
                 onSelect: function (curDate, instance)
                 {
                     $(".tonopastdate").datepicker("option", "minDate", curDate);
-                    $.publish("functionlib/azSetDate",
-                        {
-                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
-                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
-                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
-                            azDateLocalDate: curDate,
-                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateJQElement: $Obj
-                        });
+                    PublishSetDate(curDate);
                 }
             });
     }
@@ -2546,38 +2365,14 @@ function AZDatepicker($Obj, DefaultLanguage)
             {
                 beforeShow: function ()
                 {
-                    if ($Obj.hasClass("xs") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.85em" });
-                    }
-                    else if ($Obj.hasClass("sm") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.10em" });
-                    }
-                    else if ($Obj.hasClass("md") == true)
-                    {
-                        $(".ui-datepicker").css({ "font-size": "1.20em" });
-                    }
-                    else
-                    {
-                        $(".ui-datepicker").css({ "font-size": "0.95em" });
-                    }
+                    SetDatePickerSize();
                 },
                 minDate: 0,
                 numberOfMonths: 2,
                 onSelect: function (curDate, instance)
                 {
                     $(".fromnopastdate").datepicker("option", "maxDate", curDate);
-                    $.publish("functionlib/azSetDate",
-                        {
-                            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
-                            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
-                            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
-                            azDateLocalDate: curDate,
-                            azDateISODate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateENUSDate: moment($Obj.datepicker("getDate")).format('MM/DD/YYYY'),
-                            azDateJQElement: $Obj
-                        });
+                    PublishSetDate(curDate);
                 }
             });
     }
@@ -2585,6 +2380,41 @@ function AZDatepicker($Obj, DefaultLanguage)
     {
         $Obj.attr("readOnly", true);
         $.datepicker.setDefaults($.datepicker.regional[DefaultLanguage]);
+    }
+
+    function SetDatePickerSize()
+    {
+        if ($Obj.hasClass("xs") == true)
+        {
+            $(".ui-datepicker").css({ "font-size": "0.85em" });
+        }
+        else if ($Obj.hasClass("sm") == true)
+        {
+            $(".ui-datepicker").css({ "font-size": "1.10em" });
+        }
+        else if ($Obj.hasClass("md") == true)
+        {
+            $(".ui-datepicker").css({ "font-size": "1.20em" });
+        }
+        else
+        {
+            $(".ui-datepicker").css({ "font-size": "0.95em" });
+        }
+    }
+
+    function PublishSetDate(curDate)
+    {
+        var _Date = AZSetDateFormat($Obj.datepicker("getDate"));
+        $.publish("functionlib/azSetDate",
+            {
+                azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+                azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+                azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
+                azDateLocalDate: curDate,
+                azDateISODate: _Date.ISODate,
+                azDateENUSDate: _Date.ENUSDate,
+                azDateJQElement: $Obj
+            });
     }
 }
 
@@ -2622,13 +2452,15 @@ function AZTimepicker($Obj, DefaultLanguage)
                 },
                 onSelect: function (curTime, instance)
                 {
+                    var _Time = AZSetTimeFormat('0001-01-01 ' + curTime);
                     $.publish("functionlib/azSetTime",
                         {
                             azTimeId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
                             azTimeName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
                             azTimeClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
                             azTimeLocalTime: curTime,
-                            azTimeISOTime: moment(moment().format("YYYY-MM-DD") + ' ' + curTime).format('HH:mm'),
+                            azTimeISOTime: curTime != "" ? _Time.ISOTime : "",
+                            azTimeENUSTime: curTime != "" ? _Time.ENUSTime : "",
                             azTimeJQElement: $Obj
                         });
                 }
@@ -2643,10 +2475,10 @@ function AZTimepicker($Obj, DefaultLanguage)
 
 function AZInputAnimatedFocusout(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         var _Element = e.target || e.srcElement;
-        if ($(_Element).val() != "")
+        if (AZIsNullOrEmpty($(_Element).val()) === false)
         {
             $('label[for="' + _Element.id + '"]').css({ "top": "-15px" });
         }
@@ -2659,7 +2491,7 @@ function AZInputAnimatedFocusout(e)
 
 function AZForceUppercaseKeypressFocusout(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         var _Element = e.target || e.srcElement;
         $(_Element).val($(_Element).val().toUpperCase());
@@ -2668,7 +2500,7 @@ function AZForceUppercaseKeypressFocusout(e)
 
 function AZForceLowercaseKeypressFocusout(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         var _Element = e.target || e.srcElement;
         $(_Element).val($(_Element).val().toLowerCase());
@@ -2677,7 +2509,7 @@ function AZForceLowercaseKeypressFocusout(e)
 
 function AZDoNotPaste(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         if (e.ctrlKey == true && (e.which == 118 || e.which == 86))
         {
@@ -2688,7 +2520,7 @@ function AZDoNotPaste(e)
 
 function AZNotEnter(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         if ((e.keyCode || e.which) == 13)
         {
@@ -2699,7 +2531,7 @@ function AZNotEnter(e)
 
 function AZCheckboxClick(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         var _Element = e.target || e.srcElement;
         var _$SelectedCheckbox = $(this);
@@ -2717,7 +2549,7 @@ function AZCheckboxClick(e)
 
 function AZRadioClick(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         var _Element = e.target || e.srcElement;
         $.publish("functionlib/azRadioClick",
@@ -2734,7 +2566,7 @@ function AZRadioClick(e)
 
 function AZSwitchClick(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         var _Element = e.target || e.srcElement;
         $.publish("functionlib/azSwitchClick",
@@ -2751,7 +2583,7 @@ function AZSwitchClick(e)
 
 function AZRange(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         var _Element = e.target || e.srcElement;
         if (e.type === "input")
@@ -2841,7 +2673,7 @@ function AZCloseNavbarMobile()
 
 function AZDropdown(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         var _Element = e.target || e.srcElement;
         var _$ULDropdown = $(_Element).closest(".az-dropdown-click").find("ul.az-dropdown-content");
@@ -2866,7 +2698,7 @@ function AZDropdown(e)
 
 function AZRemoveDropdown(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         var _Element = e.target || e.srcElement;
         var _$ULDropdown = e.data.ULDropdown;
@@ -2882,7 +2714,7 @@ function AZRemoveDropdown(e)
 
 function AZHideShowPassword(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         var _Element = e.target || e.srcElement;
         var _SelectedElementId = "";
@@ -2897,7 +2729,7 @@ function AZHideShowPassword(e)
                 _SelectedElementId = $(_Element).parent().attr("data-connectedid");
             }
         }
-        if (_SelectedElementId != "")
+        if (AZIsNullOrEmpty(_SelectedElementId) === false)
         {
             var _$PasswordField = $("#" + _SelectedElementId)[0];
             if (_$PasswordField.type == "password")
@@ -2917,7 +2749,7 @@ function AZHideShowPassword(e)
 
 function AZLabelAnimatedClick(e)
 {
-    if (e !== undefined)
+    if (AZIsNullOrEmpty(e) === false)
     {
         var _Element = e.target || e.srcElement;
         $(_Element).siblings(":input").focus();
@@ -3089,9 +2921,17 @@ function AZAccordion(Options)
             _Main.azAccordionId = _Main.Options.azAccordionId;
             _Main.$Accordion = $("#" + _Main.azAccordionId);
             _Main.$AccordionCard = _Main.$Accordion.children(".az-accordion-card");
-            _Main.$Header = _Main.$AccordionCard.children("header").append('<span class="az-accordion-icon"><i class="' + _Main.Options.azAccordionIconClosed + '"></i><span>');
+            _Main.$Header = _Main.$AccordionCard.children("header");
             _Main.$Article = _Main.$AccordionCard.children("article");
+            _Main.$Footer = _Main.$AccordionCard.children("footer");
 
+            $.each(_Main.$Header, function (Index, Header)
+            {
+                if ($(".az-accordion-icon", $(Header)).length == 0)
+                {
+                    $(Header).append('<span class="az-accordion-icon"><i class="' + _Main.Options.azAccordionIconClosed + '"></i><span>');
+                }
+            });
             if (_Main.Options.azAccordionHeaderBackgroundColor !== "")
             {
                 _Main.$Header.css({ "background-color": _Main.Options.azAccordionHeaderBackgroundColor });
@@ -3145,7 +2985,7 @@ function AZAccordion(Options)
             }
 
             _Main.MaxArticleHeight = 0;
-            _Main.ArticleHeight = function ()
+            _Main.azArticleHeight = function ()
             {
                 _Main.MaxArticleHeight = 0;
                 _Main.$Article.css({ height: "inherit" });
@@ -3161,7 +3001,7 @@ function AZAccordion(Options)
 
             _Main.azSelectAccordion = function (SelectedIndex)
             {
-                azExecAccordion(_Main.$AccordionCard.eq(SelectedIndex).children("header"));
+                azExecAccordion(new Event("click"), _Main.$AccordionCard.eq(SelectedIndex).children("header"));
             };
 
             _Main.azChangeText = function (SelectedIndex, SelectedText)
@@ -3172,25 +3012,30 @@ function AZAccordion(Options)
                     _Main.$AccordionCard.eq(SelectedIndex).children("article").fadeOut(function ()
                     {
                         _Main.$AccordionCard.eq(SelectedIndex).children("article").html(SelectedText);
-                    }).fadeIn();
+                    }).fadeIn(function ()
+                    {
+                        _Main.azArticleHeight();
+                    });
                 }, 500);
             };
 
             _Main.$Accordion.off().on(_Main.Options.azAccordionOpenEvent, ".az-accordion-card > header", function (e)
             {
-                azExecAccordion($(this));
+                azExecAccordion(e, $(this));
             });
 
             _Main.AccordionActivated = "";
             _Main.AccordionDeactivated = "";
-            function azExecAccordion($SelectedAccordionHeader)
+            function azExecAccordion(e, $SelectedAccordionHeader)
             {
                 if ($SelectedAccordionHeader.hasClass("az-accordion-header-active") === true)
                 {
                     if (_Main.Options.azAccordionCollapsible === true)
                     {
+                        $SelectedAccordionHeader.parent().removeClass("az-accordion-card-active");
                         $SelectedAccordionHeader.removeClass("az-accordion-header-active");
                         $SelectedAccordionHeader.siblings("article").slideUp(_Main.Options.azAccordionSlideUp).removeClass("az-accordion-article-active");
+                        $SelectedAccordionHeader.siblings("footer").removeClass("az-accordion-footer-active");
                         $("span.az-accordion-icon > i", $SelectedAccordionHeader).removeClass(_Main.Options.azAccordionIconOpen).addClass(_Main.Options.azAccordionIconClosed);
 
                         if (_Main.AccordionActivated == $SelectedAccordionHeader.parent().index())
@@ -3199,11 +3044,16 @@ function AZAccordion(Options)
                         }
                         $.publish("functionlib/azAccordionHeader",
                             {
+                                azEvent: e,
                                 azAccordionId: _Main.azAccordionId,
                                 azAccordionStatus: "closed",
                                 azAccordionActivated: _Main.AccordionActivated,
                                 azAccordionDeactivated: _Main.AccordionDeactivated,
-                                azAccordionHeaderJQElement: $($SelectedAccordionHeader)
+                                azAccordionCardJQElement: $($SelectedAccordionHeader.parent()),
+                                azAccordionHeaderJQElement: $SelectedAccordionHeader,
+                                azAccordionArticleJQElement: $($SelectedAccordionHeader.siblings("article")),
+                                azAccordionFooterJQElement: $($SelectedAccordionHeader.siblings("footer")),
+                                azMain: _Main
                             });
                         _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
                     }
@@ -3215,23 +3065,32 @@ function AZAccordion(Options)
                         }
                         $.publish("functionlib/azAccordionHeader",
                             {
+                                azEvent: e,
                                 azAccordionId: _Main.azAccordionId,
                                 azAccordionStatus: "open",
                                 azAccordionActivated: $SelectedAccordionHeader.parent().index(),
                                 azAccordionDeactivated: _Main.AccordionDeactivated,
-                                azAccordionHeaderJQElement: $($SelectedAccordionHeader)
+                                azAccordionCardJQElement: $($SelectedAccordionHeader.parent()),
+                                azAccordionHeaderJQElement: $SelectedAccordionHeader,
+                                azAccordionArticleJQElement: $($SelectedAccordionHeader.siblings("article")),
+                                azAccordionFooterJQElement: $($SelectedAccordionHeader.siblings("footer")),
+                                azMain: _Main
                             });
                         _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
                     }
                 }
                 else
                 {
+                    _Main.$AccordionCard.removeClass("az-accordion-card-active");
                     _Main.$Header.removeClass("az-accordion-header-active");
                     _Main.$Article.slideUp(_Main.Options.azAccordionSlideUp).removeClass("az-accordion-article-active");
+                    _Main.$Footer.removeClass("az-accordion-footer-active");
                     $("span.az-accordion-icon > i", _Main.$Header).removeClass(_Main.Options.azAccordionIconOpen).addClass(_Main.Options.azAccordionIconClosed);
 
+                    $SelectedAccordionHeader.parent().addClass("az-accordion-card-active");
                     $SelectedAccordionHeader.addClass("az-accordion-header-active");
                     $SelectedAccordionHeader.siblings("article").slideDown(_Main.Options.azAccordionSlideDown).addClass("az-accordion-article-active");
+                    $SelectedAccordionHeader.siblings("footer").addClass("az-accordion-footer-active");
                     $("span.az-accordion-icon > i", $SelectedAccordionHeader).removeClass(_Main.Options.azAccordionIconClosed).addClass(_Main.Options.azAccordionIconOpen);
 
                     if (_Main.AccordionDeactivated == $SelectedAccordionHeader.parent().index())
@@ -3240,11 +3099,16 @@ function AZAccordion(Options)
                     }
                     $.publish("functionlib/azAccordionHeader",
                         {
+                            azEvent: e,
                             azAccordionId: _Main.azAccordionId,
                             azAccordionStatus: "open",
                             azAccordionActivated: $SelectedAccordionHeader.parent().index(),
                             azAccordionDeactivated: _Main.AccordionDeactivated,
-                            azAccordionHeaderJQElement: $($SelectedAccordionHeader)
+                            azAccordionCardJQElement: $($SelectedAccordionHeader.parent()),
+                            azAccordionHeaderJQElement: $SelectedAccordionHeader,
+                            azAccordionArticleJQElement: $($SelectedAccordionHeader.siblings("article")),
+                            azAccordionFooterJQElement: $($SelectedAccordionHeader.siblings("footer")),
+                            azMain: _Main
                         });
                     _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
                 }
@@ -3252,10 +3116,10 @@ function AZAccordion(Options)
 
             if (_Main.Options.azAccordionHeightStyle == "auto")
             {
-                _Main.ArticleHeight();
+                _Main.azArticleHeight();
                 $(window).resize(function ()
                 {
-                    _Main.ArticleHeight();
+                    _Main.azArticleHeight();
                 });
             }
             if (_Main.Options.azAccordionCollapsible == false)
@@ -4093,10 +3957,8 @@ function AZWindow(Options)
             ModalDialogScrollTop = 0;
             _Main.$Window = $("<div></div>").attr("id", "az-window");
             _Main.$Titlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + _Main.Options.azWindowTitle + "</h1><span>X</span>");
-            _Main.$Dialog = $("<div></div>").addClass("az-window-dialog");
             _Main.$Article = $("<article></article>").html(_Main.Options.azWindowText).append(AZWindowButton(_Main.Options.azWindowButton));
-            _Main.$Dialog.append(_Main.$Article);
-            _Main.$Window.append(_Main.$Titlebar).append(_Main.$Dialog);
+            _Main.$Window.append(_Main.$Titlebar).append(_Main.$Article);
 
             if (_Main.Options.azWindowBackgroundColor !== "")
             {
@@ -4124,6 +3986,12 @@ function AZWindow(Options)
             {
                 _Main.Options.azWindowHeight = (window.innerHeight - 20);
             }
+            //if (_Main.Options.azWindowContentHeight === false)
+            //{
+
+
+            //    _Main.$Window.height(_Main.Options.azWindowHeight - _Main.Options.azWindowPositionTop);
+            //}
 
             // AZWindow No Parent Scroll
             if ($("body").hasClass("az-no-parent-scroll") === false && _Main.Options.azWindowNoParentScroll === true)
@@ -4153,10 +4021,11 @@ function AZWindow(Options)
                     }
                 });
             }
+
+            // AZWindow Titlebar
             if (_Main.Options.azWindowTitlebar === false)
             {
                 _Main.$Titlebar.hide();
-                _Main.$Dialog.css({ "margin-top": "7px" });
             }
             if (_Main.Options.azWindowTitlebarClose === false)
             {
@@ -4185,53 +4054,16 @@ function AZWindow(Options)
             _Main.$Window.width(_Main.Options.azWindowWidth);
             if (_Main.Options.azWindowContentHeight === false)
             {
-                _Main.$Window.height(_Main.Options.azWindowHeight);
-                _Main.$Dialog.height((_Main.Options.azWindowHeight - 51));
-                if (_Main.Options.azWindowTitlebar === false)
-                {
-                    _Main.$Dialog.height((_Main.Options.azWindowHeight - 16));
-                }
+                _Main.$Window.height(_Main.Options.azWindowHeight - _Main.Options.azWindowPositionTop);
             }
-            if (_Main.$Window.height() > (window.innerHeight - 20))
+            if (_Main.Options.azWindowPositionTop === 0 || ((_Main.Options.azWindowPositionTop + _Main.$Window.height()) > (window.innerHeight)))
             {
-                _Main.$Window.height((window.innerHeight - 20));
-                _Main.$Dialog.height(((window.innerHeight - 20) - 51));
-                if (_Main.Options.azWindowTitlebar === false)
-                {
-                    _Main.$Dialog.height(((window.innerHeight - 20) - 16));
-                }
-            }
-            if (_Main.Options.azWindowPositionTop === 0 || ((_Main.Options.azWindowPositionTop + _Main.$Window.height()) > ($(window).height())))
-            {
-                _Main.$Window.css({ "top": ($(window).height() / 2) - (_Main.$Window.height() / 2) });
+                _Main.$Window.css({ "top": (window.innerHeight / 2) - (_Main.$Window.height() / 2) });
             }
             else
             {
                 _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
             }
-
-            //AZWindow Resize
-            _Main.azWindowResize = function (Options)
-            {
-                var _Defaults =
-                {
-                    azWindowWidth: _Main.Options.azWindowWidth,
-                    azWindowHeight: _Main.Options.azWindowHeight
-                };
-                _Main.Options = $.extend({}, _Defaults, Options || {});
-
-                if (_Main.Options.azWindowWidth > (window.innerWidth - 20))
-                {
-                    _Main.Options.azWindowWidth = (window.innerWidth - 20);
-                }
-                if (_Main.Options.azWindowHeight > (window.innerHeight - 20))
-                {
-                    _Main.Options.azWindowHeight = (window.innerHeight - 20);
-                }
-                _Main.$Window.width(_Main.Options.azWindowWidth);
-                _Main.$Window.height(_Main.Options.azWindowHeight);
-                _Main.$Window.css({ "top": ($(window).height() / 2) - (_Main.$Window.height() / 2) });
-            };
 
             // AZWindow Close
             _Main.azWindowClose = function ()
@@ -4303,6 +4135,40 @@ function AZWindow(Options)
                             $("body").removeAttr("class");
                         }
                     }, _Main.Options.azWindowAlertTimeout);
+                }
+            };
+
+            //AZWindow Resize
+            _Main.azWindowResize = function (Options)
+            {
+                var _Defaults =
+                {
+                    azWindowWidth: _Main.Options.azWindowWidth,
+                    azWindowHeight: _Main.Options.azWindowHeight
+                };
+                _Main.WindowResizeOptions = $.extend({}, _Defaults, Options || {});
+
+                if (_Main.WindowResizeOptions.azWindowWidth > (window.innerWidth - 20))
+                {
+                    _Main.WindowResizeOptions.azWindowWidth = (window.innerWidth - 20);
+                }
+                if (_Main.WindowResizeOptions.azWindowHeight > (window.innerHeight - 20))
+                {
+                    _Main.WindowResizeOptions.azWindowHeight = (window.innerHeight - 20);
+                }
+                if (_Main.Options.azWindowContentHeight === false)
+                {
+                    _Main.$Window.height(_Main.WindowResizeOptions.azWindowHeight);
+                }
+
+                _Main.$Window.width(_Main.WindowResizeOptions.azWindowWidth);
+                if (_Main.Options.azWindowPositionTop === 0 || ((_Main.Options.azWindowPositionTop + _Main.$Window.height()) > (window.innerHeight)))
+                {
+                    _Main.$Window.css({ "top": (window.innerHeight / 2) - (_Main.$Window.height() / 2) });
+                }
+                else
+                {
+                    _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
                 }
             };
         }
@@ -4864,6 +4730,18 @@ function AZSortArray(Arr, Prop, Order)
                 };
             }
         }
+    }
+}
+
+function AZIsNullOrEmpty(Value)
+{
+    if (Value != "" && Value != null && Value != undefined)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
     }
 }
 

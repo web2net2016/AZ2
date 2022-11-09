@@ -1059,6 +1059,12 @@ window.css
                 color: #FF4136;
             }
 
+    #az-window > article
+    {
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+
 /*--------------------------------------------------------
 Full Window
 fullwindow.css

@@ -32,11 +32,15 @@
         {
             w3CodeColor();
 
-            //$.subscribe("functionlib/azAccordionHeader", function (e, data)
-            //{
-            //    console.log(data)
-            //    console.log("azAccordionId: " + data.azAccordionId + "\nazAccordionStatus: " + data.azAccordionStatus + "\nazAccordionActivated: " + data.azAccordionActivated + "\nazAccordionDeactivated: " + data.azAccordionDeactivated + "\nazAccordionCardJQElement: ", data.azAccordionCardJQElement, + "\nazAccordionHeaderJQElement: ", data.azAccordionHeaderJQElement);
-            //});
+            $.subscribe("functionlib/azAccordionHeader", function (e, data)
+            {
+                console.log("azEvent: ", data.azEvent);
+                console.log("azAccordionId: " + data.azAccordionId + "\nazAccordionStatus: " + data.azAccordionStatus + "\nazAccordionActivated: " + data.azAccordionActivated + "\nazAccordionDeactivated: " + data.azAccordionDeactivated + "\nazAccordionCardJQElement: ", data.azAccordionCardJQElement);
+                console.log("azAccordionHeaderJQElement: ", data.azAccordionHeaderJQElement);
+                console.log("azAccordionArticleJQElement: ", data.azAccordionArticleJQElement);
+                console.log("azAccordionFooterJQElement: ", data.azAccordionFooterJQElement);
+                console.log("azMain: ", data.azMain);
+            });
 
             $.subscribe("functionlib/azAccordionReady", function (e, data)
             {
@@ -69,16 +73,16 @@
                     azAccordionId: "az-accordion-1"
                 });
 
-            //AZAccordion2 = new AZAccordion(
-            //    {
-            //        azAccordionId: "az-accordion-2",
-            //        azAccordionHeightStyle: "auto",
-            //        azAccordionCollapsible: false,
-            //        azAccordionIconClosed: "fas fa-arrow-circle-down",
-            //        azAccordionIconOpen: "fas fa-arrow-circle-up",
-            //        azAccordionSlideDown: 400,
-            //        azAccordionSlideUp: 400
-            //    });
+            AZAccordion2 = new AZAccordion(
+                {
+                    azAccordionId: "az-accordion-2",
+                    azAccordionHeightStyle: "auto",
+                    azAccordionCollapsible: false,
+                    azAccordionIconClosed: "fas fa-arrow-circle-down",
+                    azAccordionIconOpen: "fas fa-arrow-circle-up",
+                    azAccordionSlideDown: 400,
+                    azAccordionSlideUp: 400
+                });
         });
 
         function ChangeText(data)
@@ -448,9 +452,15 @@
                                 <div class="jsHigh notranslate">
                                     $.subscribe("functionlib/azAccordionReady", function (e, data)<br />
                                     {<br />
-                                    &emsp;&ensp;&emsp;&ensp;data.azAccordionId<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Accordion - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$AccordionCard: i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Header - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Article - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Footer - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azAccordionId - your id<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azSelectAccordion - ƒ (n)<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azChangeText - ƒ (n, i)<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azArticleHeight - ƒ ()<br />
                                     });<br />
                                     <br />
                                     This function is triggered when <strong>AZAccordion</strong> is fully initiated.
@@ -464,11 +474,23 @@
                                 <div class="jsHigh notranslate">
                                     $.subscribe("functionlib/azAccordionHeader", function (e, data)<br />
                                     {<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azEvent<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azAccordionId - your id<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azAccordionStatus - open/closed<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azAccordionActivated - index<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azAccordionDeactivated - index<br />
-                                    &emsp;&ensp;&emsp;&ensp;data.azAccordionHeaderJQElement - i.fn.init<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azAccordionCardJQElement - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azAccordionHeaderJQElement - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azAccordionArticleJQElement - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azAccordionFooterJQElement - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azMain.$Accordion - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azMain.$AccordionCard -  i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azMain.$Header -  i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azMain.$Article -  i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azMain.$Footer -  i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azMain.azSelectAccordion - ƒ (n)<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azMain.azChangeText - ƒ (n, i)<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azMain.azArticleHeight - ƒ ()<br />
                                     });<br />
                                     <br />
                                     This function is triggered every time you open/close the <strong>AZAccordion</strong>.

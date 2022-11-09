@@ -1655,6 +1655,7 @@
     window['TP_jQuery_' + tpuuid] = $;
 
     $.timepicker.regional['nb-NO'] = {
+        showPeriod: false,
         hourText: 'Timer',
         minuteText: 'Minutter',
         amPmText: ['', ''],

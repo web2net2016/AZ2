@@ -33,8 +33,8 @@
             Web: "www.johndoe.com",
             RequestReasonId: 1,
             Date: "2020-02-21",
-            Time: "17:00:00",
-            DateTime: "2020-02-21T02:38:00",
+            Time: "17:00",
+            DateTime: "2020-02-21T02:38",
             Decimal: 111.50,
             Numeric: 12345,
             Comment: "Comment"
@@ -87,7 +87,7 @@
 
             $.subscribe("functionlib/azSetTime", function (e, data)
             {
-                console.log("FUNCTIONLIB - azSetTime\nazTimeId: " + data.azTimeId + "\nazTimeName: " + data.azTimeName + "\nazTimeClass: " + data.azTimeClass + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeJQElement: ", data.azTimeJQElement);
+                console.log("FUNCTIONLIB - azSetTime\nazTimeId: " + data.azTimeId + "\nazTimeName: " + data.azTimeName + "\nazTimeClass: " + data.azTimeClass + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeENUSTime: " + data.azTimeENUSTime + "\nazTimeJQElement: ", data.azTimeJQElement);
             });
 
             $.subscribe("functionlib/azCheckboxClick", function (e, data)
@@ -139,6 +139,7 @@
             {
                 console.log(_ObjReturnForm);
                 console.log(JSON.stringify(_ObjReturnForm));
+                $(".az-card").find("article").show();
                 $("#ObjFormResponse").text(JSON.stringify(_ObjReturnForm));
             }
         }
@@ -243,26 +244,6 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="az-row">
-                <div class="az-col xs-12 sm-3">
-                    <div class="az-form-group">
-                        <input class="az-checkbox" type="checkbox" value="1" id="Checkbox" checked="checked">
-                        <label class="az-label">Størrelse Normal</label>
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-3">
-                    <div class="az-form-group">
-                        <input class="az-radio" type="radio" name="id" value="1" id="1" checked="checked">
-                        <label class="az-label">Størrelse Normal</label>
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-3">
-                    <div class="az-form-group">
-                        <input class="az-radio" type="radio" name="id" value="2" id="2">
-                        <label class="az-label">Størrelse Normal</label>
-                    </div>
-                </div>
-            </div>-->
 
             <div class="az-row az-margin-t-14 az-margin-b-14">
                 <div class="az-col xs-12 sm-6">
@@ -287,13 +268,13 @@
                 <div class="az-col xs-3">
                     <ul class="az-ul-none">
                         <li>Empty</li>
-                        <li>InvalidChar</li>
                         <li>MaxLength</li>
                         <li>MinLength</li>
                     </ul>
                 </div>
                 <div class="az-col xs-9">
                     <ul class="az-ul-none">
+                        <li>InvalidChar - NOT: |§\</li>
                         <li>Date</li>
                         <li>DateTime</li>
                         <li>Time</li>
@@ -306,8 +287,11 @@
             <div class="az-row az-margin-t-56">
                 <div class="az-col xs-12">
                     <div class="az-card" style="margin: 0;">
-                        <article>
-                            <div id="ObjFormResponse">Click Submit to see the object that serializes from the form.</div>
+                        <header>
+                            <h1>Click <strong>Submit</strong> to see the object that is serializes from the form.</h1>
+                        </header>
+                        <article style="display: none;">
+                            <div id="ObjFormResponse" class="az-code jsHigh notranslate"></div>
                         </article>
                     </div>
                 </div>
@@ -317,3 +301,25 @@
 
 </body>
 </html>
+
+
+<!--<div class="az-row">
+    <div class="az-col xs-12 sm-3">
+        <div class="az-form-group">
+            <input class="az-checkbox" type="checkbox" value="1" id="Checkbox" checked="checked">
+            <label class="az-label">Størrelse Normal</label>
+        </div>
+    </div>
+    <div class="az-col xs-12 sm-3">
+        <div class="az-form-group">
+            <input class="az-radio" type="radio" name="id" value="1" id="1" checked="checked">
+            <label class="az-label">Størrelse Normal</label>
+        </div>
+    </div>
+    <div class="az-col xs-12 sm-3">
+        <div class="az-form-group">
+            <input class="az-radio" type="radio" name="id" value="2" id="2">
+            <label class="az-label">Størrelse Normal</label>
+        </div>
+    </div>
+</div>-->

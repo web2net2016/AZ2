@@ -191,7 +191,7 @@
                 console.log(data)
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    data.azWindowResize({ azWindowWidth: 600, azWindowHeight: 600 });
+                    data.azWindowResize({ azWindowWidth: 600, azWindowHeight: 6000 });
                 });
                 $("#cmdButton2").off().on('click', function ()
                 {
@@ -222,7 +222,8 @@
                     azWindowTitle: "AZ Window Resize",
                     azWindowText: _HTML,
                     azWindowWidth: 500,
-                    azWindowHeight: 300
+                    azWindowHeight: 350,
+                    azWindowPositionTop: 50
                 });
         }
 
