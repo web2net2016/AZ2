@@ -56,7 +56,9 @@
                     azPageElement: ["ObjFormResponse", "submit"],
                     azPageInputTypeEvents: true,
                     azPageLanguage: true,
-                    azPageValidation: true
+                    azPageLanguageUrl: "/lib-2.0.1/admin/index/lib/lang-val/index",
+                    azPageValidation: true,
+                    azPageValidationUrl: "/lib-2.0.1/admin/index/lib/lang-val/index"
                 });
         }
 
@@ -206,21 +208,20 @@
                     <div class="az-form-group xs">
                         <label class="az-label" for="Date" id="labelDate"></label>
                         <input type="text" class="az-input" id="Date" />
-                        <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
+                        <label for="Date" class="az-input-icons"><i class="fas fa-calendar-alt"></i></label>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Time" id="labelTime"></label>
                         <input type="text" class="az-input" id="Time" />
-                        <span class="az-input-icons"><i class="far fa-clock"></i></span>
+                        <label for="Time" class="az-input-icons"><i class="far fa-clock"></i></label>
                     </div>
                 </div>
                 <div class="az-col xs-12 sm-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="DateTime" id="labelDateTime"></label>
                         <input type="text" class="az-input" id="DateTime" />
-                        <span class="az-input-icons"><i class="fas fa-calendar-alt"></i></span>
                     </div>
                 </div>
             </div>
@@ -274,7 +275,7 @@
                 </div>
                 <div class="az-col xs-9">
                     <ul class="az-ul-none">
-                        <li>InvalidChar - NOT: |§\</li>
+                        <li>InvalidChar - NOT: | §</li>
                         <li>Date</li>
                         <li>DateTime</li>
                         <li>Time</li>

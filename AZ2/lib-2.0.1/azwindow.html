@@ -42,13 +42,22 @@
 
         function setAZWindow1()
         {
+            $.subscribeonce("functionlib/azWindowBeforeOpen", function ()
+            {
+                console.log("azWindowBeforeOpen")
+            });
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
             {
+                console.log("azWindowAfterOpen")
                 console.log(data)
                 $("#cmdAZWindowButton1").off().on('click', function ()
                 {
                     data.azWindowClose();
                 });
+            });
+            $.subscribeonce("functionlib/azWindowAfterClose", function ()
+            {
+                console.log("azWindowAfterClose")
             });
 
             var _HTML = "";
@@ -87,13 +96,22 @@
 
         function setAZWindow2()
         {
+            $.subscribeonce("functionlib/azWindowBeforeOpen", function ()
+            {
+                console.log("azWindowBeforeOpen")
+            });
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
             {
+                console.log("azWindowAfterOpen")
                 console.log(data)
                 $("#cmdAZWindowButton1").off().on('click', function ()
                 {
                     data.azWindowClose();
                 });
+            });
+            $.subscribeonce("functionlib/azWindowAfterClose", function ()
+            {
+                console.log("azWindowAfterClose")
             });
 
             var _HTML = "";
@@ -144,8 +162,13 @@
 
         function setAZWindow3()
         {
+            $.subscribeonce("functionlib/azWindowBeforeOpen", function ()
+            {
+                console.log("azWindowBeforeOpen")
+            });
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
             {
+                console.log("azWindowAfterOpen")
                 console.log(data)
                 $("#cmdButton1").off().on('click', function ()
                 {
@@ -155,6 +178,10 @@
                 {
                     data.azWindowClose();
                 });
+            });
+            $.subscribeonce("functionlib/azWindowAfterClose", function ()
+            {
+                console.log("azWindowAfterClose")
             });
 
             var _HTML = "";
@@ -180,23 +207,32 @@
                     azWindowTitle: "AZ Window Title",
                     azWindowText: _HTML,
                     azWindowWidth: 500,
-                    azWindowHeight: 300
+                    azWindowContentHeight: true
                 });
         }
 
         function setAZWindow4()
         {
+            $.subscribeonce("functionlib/azWindowBeforeOpen", function ()
+            {
+                console.log("azWindowBeforeOpen")
+            });
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
             {
+                console.log("azWindowAfterOpen")
                 console.log(data)
                 $("#cmdButton1").off().on('click', function ()
                 {
-                    data.azWindowResize({ azWindowWidth: 600, azWindowHeight: 6000 });
+                    data.azWindowResize({ azWindowWidth: 800, azWindowHeight: 600 });
                 });
                 $("#cmdButton2").off().on('click', function ()
                 {
                     data.azWindowClose();
                 });
+            });
+            $.subscribeonce("functionlib/azWindowAfterClose", function ()
+            {
+                console.log("azWindowAfterClose")
             });
 
             var _HTML = "";
@@ -204,7 +240,7 @@
             _HTML += '<div class="az-code jsHigh notranslate">';
             _HTML += 'azWindowResize(<br />';
             _HTML += '{<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowWidth: 600,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowWidth: 800,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowHeight: 600<br />';
             _HTML += '};<br />';
             _HTML += '<br />';
@@ -222,7 +258,7 @@
                     azWindowTitle: "AZ Window Resize",
                     azWindowText: _HTML,
                     azWindowWidth: 500,
-                    azWindowHeight: 350,
+                    azWindowContentHeight: true,
                     azWindowPositionTop: 50
                 });
         }

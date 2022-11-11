@@ -18,6 +18,12 @@ h6
     font-weight: 400;
 }
 
+#az-background
+{
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
 /*--------------------------------------------------------
 Accordion 
 accordion.css    
@@ -308,6 +314,21 @@ form.css
 
 
 /* Buttons */
+.az-form-group .az-button.outlined-primary
+{
+    border: 1px solid var(--primary-background-color);
+    background-color: transparent;
+    color: var(--default-color);
+}
+
+
+
+.az-form-group .az-button.default
+{
+    background-color: var(--default-background-color);
+    color: var(--default-color);
+}
+
 .az-form-group .az-button.default
 {
     background-color: var(--default-background-color);
@@ -376,43 +397,43 @@ form.css
 .az-form-group .az-alert-default,
 .az-alert-default
 {
-    background-color: var(--default-background-color);
-    color: var(--default-color);
+    background-color: var(--default-background-color) !important;
+    color: var(--default-color) !important;
 }
 
 .az-form-group .az-alert-primary,
 .az-alert-primary
 {
-    background-color: var(--primary-background-color);
-    color: var(--primary-color);
+    background-color: var(--primary-background-color) !important;
+    color: var(--primary-color) !important;
 }
 
 .az-form-group .az-alert-success,
 .az-alert-success
 {
-    background-color: var(--success-background-color);
-    color: var(--success-color);
+    background-color: var(--success-background-color) !important;
+    color: var(--success-color) !important;
 }
 
 .az-form-group .az-alert-info,
 .az-alert-info
 {
-    background-color: var(--info-background-color);
-    color: var(--info-color);
+    background-color: var(--info-background-color) !important;
+    color: var(--info-color) !important;
 }
 
 .az-form-group .az-alert-warning,
 .az-alert-warning
 {
-    background-color: var(--warning-background-color);
-    color: var(--warning-color);
+    background-color: var(--warning-background-color) !important;
+    color: var(--warning-color) !important;
 }
 
 .az-form-group .az-alert-danger,
 .az-alert-danger
 {
-    background-color: var(--danger-background-color);
-    color: var(--danger-color);
+    background-color: var(--danger-background-color) !important;
+    color: var(--danger-color) !important;
 }
 
 /* Dropdown */
@@ -495,12 +516,6 @@ modaldialog.css
 {
     background-color: var(--primary-background-color);
     color: #FFFFFF;
-}
-
-#az-background
-{
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
 }
 
 /*--------------------------------------------------------
@@ -1059,12 +1074,6 @@ window.css
                 color: #FF4136;
             }
 
-    #az-window > article
-    {
-        background-color: #FFFFFF;
-        color: #000000;
-    }
-
 /*--------------------------------------------------------
 Full Window
 fullwindow.css
@@ -1098,7 +1107,7 @@ jqueryui/jquery-ui.min.css
 .ui-dialog
 {
     position: fixed;
-    padding: 7px !important;
+    padding: 0 !important;
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -1118,7 +1127,6 @@ jqueryui/jquery-ui.min.css
 .ui-dialog-title
 {
     padding: 7px !important;
-    margin: 0 !important;
 }
 
 .ui-dialog-titlebar-close

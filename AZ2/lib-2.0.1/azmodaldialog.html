@@ -61,11 +61,17 @@
 
         function setModalDialog1()
         {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)
+            {
+                console.log("azModalDialogBeforeOpen")
+                console.log(data)
+            });
             $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
+                console.log("azModalDialogAfterOpen")
+                console.log(data)
                 if (data.azModalDialogId === "ModalDialog1")
                 {
-                    console.log(data)
                     $("#cmdModalDialog11").off().on('click', function ()
                     {
                         setModalDialog2();
@@ -79,6 +85,11 @@
                         data.azModalDialogClose();
                     });
                 }
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
+            {
+                console.log("azModalDialogAfterClose")
+                console.log(data)
             });
 
             var _HTML = "";
@@ -117,16 +128,27 @@
 
         function setModalDialog2()
         {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)
+            {
+                console.log("azModalDialogBeforeOpen")
+                console.log(data)
+            });
             $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
+                console.log("azModalDialogAfterOpen")
+                console.log(data)
                 if (data.azModalDialogId === "ModalDialog2")
                 {
-                    console.log(data)
                     $("#cmdModalDialog21").off().on('click', function ()
                     {
                         data.azModalDialogClose();
                     });
                 }
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
+            {
+                console.log("azModalDialogAfterClose")
+                console.log(data)
             });
 
             var _HTML = "";
@@ -1155,48 +1177,3 @@
 
 </body>
 </html>
-
-
-
-<!--<strong>iFrame</strong>
-<br />
-dialogiFrameURL: ""&emsp;&ensp;(default)<br />
-<br />
-Hvis du ønsker å vise en egen HTML side i 'AZModalDialog', legger du inn en URL her.
-<br />
-<br />
-<strong>Størrelse</strong>
-<br />
-dialogWidth: 450&emsp;&ensp;(default)<br />
-dialogHeight: 300&emsp;&ensp;(default)<br />
-<br />
-Ved skjermstørrelser under '576px', vil 'dialogWidth' og 'dialogHeight' tilpasses enhetens skjermstørrelse hvis 'dialogWidth' eller 'dialogHeight' er større enn skjermens bredde eller høyde.
-<br />
-<br />
-<strong>Endre størrelsen</strong>
-<br />
-dialogResizable: false&emsp;&ensp;(default)<br />
-<br />
-Ved å endre verdiene til true, har brukeren muligheten til å endre størrelsen på 'AZModalDialog' utover det du har satt som standard.
-<br />
-<br />
-<strong>Flyttbart vindu</strong>
-<br />
-dialogDraggable: true&emsp;&ensp;(default)<br />
-<br />
-Ved å endre verdiene til false, kan ikke brukeren flytte på 'AZModalDialog'.
-<br />
-<br />
-<strong>Rullefelt - hovedsiden</strong>
-<br />
-dialogNoParentScroll: false&emsp;&ensp;(default)<br />
-<br />
-Ved å endre verdiene til true, vil rullefeltet for hovedsiden, (vinduet) fjernes og 'AZModalDialog' vil beholde sin posisjon.
-<br />
-<br />
-<strong>Posisjonering</strong>
-
-Ved å endre verdien til true for 'dialogPosition', har du muligheten til å bestemme hvor på skjermen 'AZModalDialog' skal vises.
-Se under for mer informasjon.
-<br />
-<br />-->

@@ -45,6 +45,8 @@ xl - (1200 - )
 /* Size ALL ----------*/
 :root
 {
+
+
     --default-background-color: #FFFFFF;
     --default-color: #000000;
     --primary-background-color: #0078D7;
@@ -177,6 +179,17 @@ ul
     {
         padding-bottom: 4px;
     }
+
+#az-background
+{
+    position: fixed;
+    z-index: 4999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
 
 /* Image */
 .az-image
@@ -7854,12 +7867,18 @@ template
             font-size: 1.2em;
         }
 
-    .az-form-group .az-input ~ .az-input-icons i
+
+    .az-form-group .az-input-icons
     {
-        position: relative;
-        float: right;
-        margin: -22px 9px 0 0;
+        cursor: pointer;
     }
+
+        .az-form-group .az-input ~ .az-input-icons i
+        {
+            position: relative;
+            float: right;
+            margin: -22px 9px 0 0;
+        }
 
     .az-form-group .az-input.xs ~ .az-input-icons i
     {
@@ -8756,7 +8775,7 @@ template
     .az-form-group .az-alert-icons:first-child i
     {
         float: left;
-        margin: 9px 0 0 9px;
+        margin: 7px 0 0 9px;
     }
 
     .az-form-group.xs .az-alert-icons:first-child i
@@ -8820,10 +8839,10 @@ template
             display: block;
         }
 
-    .az-dropdown-hover:hover .az-dropdown-content
-    {
-        display: block;
-    }
+.az-dropdown-hover:hover .az-dropdown-content
+{
+    display: block;
+}
 
 .az-dropdown-content
 {
@@ -9198,7 +9217,6 @@ template
     transform: translate(0%, -50%);
 }
 
-/* Modal Dialog */
 .az-modal-dialog
 {
     -webkit-border-radius: 4px;
@@ -9208,29 +9226,16 @@ template
 
 .az-modal-dialog-titlebar
 {
-    margin-bottom: 7px;
+    height: 30px !important;
+    margin: 7px !important;
 }
 
-.az-modal-dialog .az-modal-card
+.az-modal-dialog-content
 {
+    overflow-y: auto;
+    margin-left: 7px;
+    margin-right: 7px;
 }
-
-    .az-modal-dialog .az-modal-card > article
-    {
-    }
-
-/* Modal Background */
-#az-background
-{
-    position: fixed;
-    z-index: 4999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-}
-
 .az-navbar-sticky
 {
     position: fixed;
@@ -12598,15 +12603,17 @@ address
 {
     position: fixed;
     z-index: 5000;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    overflow-y: auto;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
+
+    #az-window > .az-window-dialog
+    {
+        overflow-y: auto;
+        margin-left: 7px;
+        margin-right: 7px;
+    }
 
     #az-window > .az-window-titlebar
     {

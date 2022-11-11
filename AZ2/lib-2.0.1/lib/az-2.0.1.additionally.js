@@ -3,7 +3,7 @@
 var AZSettings =
 {
     LanguageValidationFolder: "/admin",
-    DefaultLanguageFile: "/lib/lang-val/default-lang.json",
+    DefaultLanguageFile: "/lib-2.0.1/admin/index/lib/lang-val/default-lang.json",
     DefaultLanguage: "nb-NO",
     DebugMode: true,
     AppName: "AZ Team",
@@ -926,7 +926,7 @@ function AZSetInputTypeEvents()
     $(".az-label-animated").off("click", AZLabelAnimatedClick).on("click", AZLabelAnimatedClick);
 
     // Mandatory Asterisk
-    $(".mandatory").not(".az-no-asterisk").each(function ()
+    $(".mandatory").not(".az-no-asterisk, .az-input-icons").each(function ()
     {
         $(".az-mandatory-asterisk", this).remove();
         $(this).append(' <span class="az-mandatory-asterisk">*</span>');
@@ -991,10 +991,15 @@ function AZValidateDirtyKeyup(e)
                 SetData();
             }
         }
-        if (e.type == "keypress")
+        else if (e.type == "keypress")
         {
             _InputValue = $(_Element).val() + String.fromCharCode(_KeyChar);
             _InputKey = String.fromCharCode(_KeyChar);
+            SetData();
+        }
+        else
+        {
+            _InputValue = $(_Element).val();
             SetData();
         }
 
@@ -1115,7 +1120,6 @@ function AZGetValidType(SelectedType)
 // Time
 // Email
 // Web
-
 function AZSerializeForm(Options)
 {
     if (AZIsEmpty(Options) === false && Options.hasOwnProperty("ObjLanguage") && Options.hasOwnProperty("ObjValidation"))
@@ -1183,7 +1187,7 @@ function AZSerializeForm(Options)
                         if ($(".az-alert-active").length === 0)
                         {
                             var _$RoleAlert = $("[role='alert']");
-                            var _$UIDialog = window.top.$(".ui-dialog");
+                            var _$ModalDialogWindow = window.top.$(".az-modal-dialog");
                             var _$Window = $("#az-window");
 
                             if (_$RoleAlert.length > 0)
@@ -1198,33 +1202,35 @@ function AZSerializeForm(Options)
                                     $("body").removeClass("az-alert-active");
                                 }, 3000);
                             }
-                            else if (_$UIDialog.length > 0)
+                            else if (_$ModalDialogWindow.length > 0)
                             {
-                                var _$UIDialogTitlebar = $(".ui-dialog-titlebar", _$UIDialog);
-                                var _$UIDialogTitle = _$UIDialogTitlebar.children("span.ui-dialog-title");
-                                var _CurrentText = _$UIDialogTitle.text();
-                                _$UIDialogTitlebar.addClass("az-alert-danger");
-                                _$UIDialogTitle.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]);
+                                var _$Titlebar = $(".az-modal-dialog-titlebar", _$ModalDialogWindow);
+                                var _$TitlebarSpan = _$Titlebar.children("span.ui-dialog-title");
+                                var _CurrentText = _$TitlebarSpan.text();
+                                _$Titlebar.addClass("az-alert-danger");
+                                _$TitlebarSpan.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]);
                                 _$Input.focus();
                                 $("body").addClass("az-alert-active");
                                 window.setTimeout(function ()
                                 {
-                                    _$UIDialogTitlebar.removeClass("az-alert-danger");
-                                    _$UIDialogTitle.text(_CurrentText);
+                                    _$Titlebar.removeClass("az-alert-danger");
+                                    _$TitlebarSpan.text(_CurrentText);
                                     $("body").removeClass("az-alert-active");
                                 }, 3000);
                             }
                             else if (_$Window.length > 0)
                             {
-                                var _$NewTitlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error] + "</h1>").css({ "background-color": "#FF4136", "color": "#FFFFFF" });
-                                _$Window.children(".az-window-titlebar").hide();
-                                _$Window.prepend(_$NewTitlebar);
+                                var _$Titlebar = $(".az-window-titlebar", _$Window);
+                                var _$TitlebarSpan = _$Titlebar.children("h1");
+                                var _CurrentText = _$TitlebarSpan.text();
+                                _$Titlebar.addClass("az-alert-danger");
+                                _$TitlebarSpan.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]);
                                 _$Input.focus();
                                 $("body").addClass("az-alert-active");
                                 window.setTimeout(function ()
                                 {
-                                    _$NewTitlebar.remove();
-                                    _$Window.children(".az-window-titlebar").show();
+                                    _$Titlebar.removeClass("az-alert-danger");
+                                    _$TitlebarSpan.text(_CurrentText);
                                     $("body").removeClass("az-alert-active");
                                 }, 3000);
                             }
@@ -1239,7 +1245,9 @@ function AZSerializeForm(Options)
                                 new AZWindow(
                                     {
                                         azWindowTitle: Options.ObjLanguage.SingleDefaultElements.informationTitle,
-                                        azWindowText: Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]
+                                        azWindowText: Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error],
+                                        azWindowWidth: 400,
+                                        azWindowContentHeight: true
                                     });
                             }
                         }
@@ -1580,8 +1588,8 @@ function AZStandardAlert(Options)
 
             if ($(".az-alert-active").length === 0)
             {
-                var _$RoleAlert = $("[role='alert']", _Main.$Area);
-                var _$UIDialog = window.top.$(".ui-dialog");
+                var _$RoleAlert = $("[role='alert']");
+                var _$ModalDialogWindow = window.top.$(".az-modal-dialog");
                 var _$Window = $("#az-window");
 
                 if (_$RoleAlert.length > 0)
@@ -1599,13 +1607,13 @@ function AZStandardAlert(Options)
                         $("body").removeClass("az-alert-active");
                     }, 3000);
                 }
-                else if (_$UIDialog.length > 0)
+                else if (_$ModalDialogWindow.length > 0)
                 {
-                    var _$UIDialogTitlebar = $(".ui-dialog-titlebar", _$UIDialog);
-                    var _$UIDialogTitle = _$UIDialogTitlebar.children("span.ui-dialog-title");
-                    var _CurrentText = _$UIDialogTitle.text();
-                    _$UIDialogTitlebar.addClass("az-alert-danger");
-                    _$UIDialogTitle.text(_Main.Text);
+                    var _$Titlebar = $(".az-modal-dialog-titlebar", _$ModalDialogWindow);
+                    var _$TitlebarSpan = _$Titlebar.children("span.ui-dialog-title");
+                    var _CurrentText = _$TitlebarSpan.text();
+                    _$Titlebar.addClass("az-alert-danger");
+                    _$TitlebarSpan.text(_Main.Text);
                     if (_Main.InputJQElement != "")
                     {
                         _Main.InputJQElement.focus();
@@ -1613,16 +1621,18 @@ function AZStandardAlert(Options)
                     $("body").addClass("az-alert-active");
                     window.setTimeout(function ()
                     {
-                        _$UIDialogTitlebar.removeClass("az-alert-danger");
-                        _$UIDialogTitle.text(_CurrentText);
+                        _$Titlebar.removeClass("az-alert-danger");
+                        _$TitlebarSpan.text(_CurrentText);
                         $("body").removeClass("az-alert-active");
                     }, 3000);
                 }
                 else if (_$Window.length > 0)
                 {
-                    var _$NewTitlebar = $("<div></div>").addClass("az-window-titlebar").html("<h1>" + _Main.Text + "</h1>").css({ "background-color": "#FF4136", "color": "#FFFFFF" });
-                    _$Window.children(".az-window-titlebar").hide();
-                    _$Window.prepend(_$NewTitlebar);
+                    var _$Titlebar = $(".az-window-titlebar", _$Window);
+                    var _$TitlebarSpan = _$Titlebar.children("h1");
+                    var _CurrentText = _$TitlebarSpan.text();
+                    _$Titlebar.addClass("az-alert-danger");
+                    _$TitlebarSpan.text(_Main.Text);
                     if (_Main.InputJQElement != "")
                     {
                         _Main.InputJQElement.focus();
@@ -1630,8 +1640,8 @@ function AZStandardAlert(Options)
                     $("body").addClass("az-alert-active");
                     window.setTimeout(function ()
                     {
-                        _$NewTitlebar.remove();
-                        _$Window.children(".az-window-titlebar").show();
+                        _$Titlebar.removeClass("az-alert-danger");
+                        _$TitlebarSpan.text(_CurrentText);
                         $("body").removeClass("az-alert-active");
                     }, 3000);
                 }
@@ -1649,7 +1659,9 @@ function AZStandardAlert(Options)
                     new AZWindow(
                         {
                             azWindowTitle: _Main.Title,
-                            azWindowText: _Main.Text
+                            azWindowText: _Main.Text,
+                            azWindowWidth: 400,
+                            azWindowContentHeight: true
                         });
                 }
             }

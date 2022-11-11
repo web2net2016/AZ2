@@ -1,5 +1,4 @@
-﻿/* Modal Dialog */
-.az-modal-dialog
+﻿.az-modal-dialog
 {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -8,25 +7,13 @@
 
 .az-modal-dialog-titlebar
 {
-    margin-bottom: 7px;
+    height: 30px !important;
+    margin: 7px !important;
 }
 
-.az-modal-dialog .az-modal-card
+.az-modal-dialog-content
 {
-}
-
-    .az-modal-dialog .az-modal-card > article
-    {
-    }
-
-/* Modal Background */
-#az-background
-{
-    position: fixed;
-    z-index: 4999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+    overflow-y: auto;
+    margin-left: 7px;
+    margin-right: 7px;
 }

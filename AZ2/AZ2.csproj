@@ -67,7 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="admin\index\index.html" />
+    <Content Include="lib-2.0.1\admin\index\index.html" />
     <Content Include="lib-2.0.1\azgrid.html" />
     <Content Include="lib-2.0.1\azdragdrop.html" />
     <Content Include="lib-2.0.1\azfullwindow.html" />
@@ -150,14 +150,13 @@
     <Content Include="lib-2.0.1\jqueryui\jquery-ui.min.js" />
     <Content Include="lib-2.0.1\jqueryui\jquery_ui_langs.min.js" />
     <Content Include="lib-2.0.1\js\clientstorage.js" />
-    <None Include="lib\lang-val\default-lang.json" />
+    <None Include="lib-2.0.1\admin\index\lib\lang-val\default-lang.json" />
     <Content Include="lib-2.0.1\js\functionlib.js" />
     <Content Include="lib-2.0.1\js\jquery.js" />
     <Content Include="lib-2.0.1\js\jquery.matchHeight.js" />
     <Content Include="lib-2.0.1\js\moment.locales.js" />
     <Content Include="lib-2.0.1\js\numeral.js" />
     <Content Include="lib-2.0.1\js\numeral.locales.js" />
-    <Content Include="lib\crontab.js" />
     <Content Include="lib-2.0.1\lib\az-codecolor.js" />
     <Content Include="lib-2.0.1\lib\az-2.0.1.additionally.js" />
     <Content Include="lib-2.0.1\lib\az-codecolor.css" />
@@ -178,8 +177,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="admin\index\lib\lang-val\index-lang.json" />
-    <Content Include="admin\index\lib\lang-val\index-val.json" />
+    <Content Include="lib-2.0.1\admin\index\lib\lang-val\index-lang.json" />
+    <Content Include="lib-2.0.1\admin\index\lib\lang-val\index-val.json" />
     <None Include="bundleconfig.json" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
@@ -189,9 +188,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="web2net\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

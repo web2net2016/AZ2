@@ -45,6 +45,8 @@ xl - (1200 - )
 /* Size ALL ----------*/
 :root
 {
+
+
     --default-background-color: #FFFFFF;
     --default-color: #000000;
     --primary-background-color: #0078D7;
@@ -177,6 +179,17 @@ ul
     {
         padding-bottom: 4px;
     }
+
+#az-background
+{
+    position: fixed;
+    z-index: 4999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
 
 /* Image */
 .az-image

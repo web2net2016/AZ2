@@ -139,12 +139,18 @@
             font-size: 1.2em;
         }
 
-    .az-form-group .az-input ~ .az-input-icons i
+
+    .az-form-group .az-input-icons
     {
-        position: relative;
-        float: right;
-        margin: -22px 9px 0 0;
+        cursor: pointer;
     }
+
+        .az-form-group .az-input ~ .az-input-icons i
+        {
+            position: relative;
+            float: right;
+            margin: -22px 9px 0 0;
+        }
 
     .az-form-group .az-input.xs ~ .az-input-icons i
     {
@@ -1041,7 +1047,7 @@
     .az-form-group .az-alert-icons:first-child i
     {
         float: left;
-        margin: 9px 0 0 9px;
+        margin: 7px 0 0 9px;
     }
 
     .az-form-group.xs .az-alert-icons:first-child i
@@ -1105,10 +1111,10 @@
             display: block;
         }
 
-    .az-dropdown-hover:hover .az-dropdown-content
-    {
-        display: block;
-    }
+.az-dropdown-hover:hover .az-dropdown-content
+{
+    display: block;
+}
 
 .az-dropdown-content
 {
