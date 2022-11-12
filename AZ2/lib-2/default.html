@@ -1,0 +1,796 @@
+﻿
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>AZ Default</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib-2/css/az-2.min.css" />
+    <script src="/lib-2/js/az-2.min.js"></script>
+
+    <link rel="stylesheet" href="/lib-2/lib/additionally.css" />
+    <script src="/lib-2/lib/additionally.js"></script>
+    <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
+    <script src="/lib-2/lib/az-codecolor.js"></script>
+    <script>
+
+        $(document).ready(function ()
+        {
+            w3CodeColor();
+
+            $.subscribe("functionlib/azWindowScroll", function (e, data)
+            {
+                $("#azWindowScrollTop").text(data.azWindowScrollTop);
+                $("#azWindowScrollDir").text(data.azWindowScrollDir);
+            });
+
+            $.subscribe("functionlib/azWindowResize", function (e, data)
+            {
+                $("#azWindowWidth").text(data.azWindowWidth);
+                $("#azWindowHeight").text(data.azWindowHeight);
+                $("#azWindowScrollTop2").text(data.azWindowScrollTop);
+                $("#azWindowScrollLeft").text(data.azWindowScrollLeft);
+                $("#azWindowOrientation").text(data.azWindowOrientation);
+            });
+
+            $("#ClientStorageSet").off("click", ClientStorageSet).on("click", ClientStorageSet);
+            $("#ClientStorageGet").off("click", ClientStorageGet).on("click", ClientStorageGet);
+            $("#ClientStorageDelete").off("click", ClientStorageDelete).on("click", ClientStorageDelete);
+            $("#GetObj").off("click", GetObj).on("click", GetObj);
+            $("#RemoveObj").off("click", RemoveObj).on("click", RemoveObj);
+            $("#ExistObj").off("click", ExistObj).on("click", ExistObj);
+            $("#SortArray").off("click", SortArray).on("click", SortArray);
+            $("#GetURLParameters").off("click", GetURLParameters).on("click", GetURLParameters);
+            $("#BytesConverter").off("click", BytesConverter).on("click", BytesConverter);
+            $("#Guid").off("click", Guid).on("click", Guid);
+            $("#SetPageElement").off("click", SetPageElement).on("click", SetPageElement);
+            $("#StandardAlert").off("click", StandardAlert).on("click", StandardAlert);
+
+            $("#ShowCoverSpin1").off("click", ShowCoverSpin1).on("click", ShowCoverSpin1);
+            $("#ShowCoverSpin2").off("click", ShowCoverSpin2).on("click", ShowCoverSpin2);
+            $("#AZAnim").off("click", AZAnim).on("click", AZAnim);
+        });
+
+        function ClientStorageSet()
+        {
+            var _Customers = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
+            AZClientStorage("set", "Customer", _Customers);
+            $("#ClientStorage").show();
+        }
+
+        function ClientStorageGet()
+        {
+            var _Customers = AZClientStorage("get", "Customer");
+            if (AZIsEmpty(_Customers) === false)
+            {
+                $("#clienstoragestring").html("<br /><strong>String</strong><br /><brown>" + JSON.stringify(_Customers) + "</brown>");
+                $("#clienstorageparsed").html("<br /><strong>Parsed (JavaScript Objects)</strong> Se also <strong>Console</strong><br /><brown>" + _Customers + "</brown>");
+                console.log(_Customers);
+            }
+        }
+
+        function ClientStorageDelete()
+        {
+            AZClientStorage("delete", "Customer");
+            $("#clienstoragestring").text("");
+            $("#clienstorageparsed").text("");
+            $("#ClientStorage").hide();
+        }
+
+        function GetObj()
+        {
+            var _Customers = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
+            var _Customer = AZGetObj(_Customers, "Name", "Olsen", 1);
+            $("#azgetobjstring").html("<br /><strong>String</strong><br /><brown>" + JSON.stringify(_Customer) + "</brown>");
+            $("#azgetobjparsed").html("<br /><strong>Parsed (JavaScript Objects)</strong> Se also <strong>Console</strong><br /><brown>" + _Customer + "</brown>");
+            console.log(_Customers);
+        }
+
+        function RemoveObj()
+        {
+            var _Customers = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
+            AZRemoveObj(_Customers, "Name", "Olsen");
+            $("#azremoveobjstring").html("<br /><strong>String</strong><br /><brown>" + JSON.stringify(_Customers) + "</brown>");
+            $("#azremoveobjparsed").html("<br /><strong>Parsed (JavaScript Objects)</strong> Se also <strong>Console</strong><br /><brown>" + _Customers + "</brown>");
+            console.log(_Customers);
+        }
+
+        function ExistObj()
+        {
+            var _Customers = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
+            $("#azexistobj").html("<br /><mediumblue>" + AZExistObj(_Customers, "Name", "Olsen") + "</mediumblue>");
+        }
+
+        function SortArray()
+        {
+            var _Customers = [{ "Name": "Hansen" }, { "Name": "Olsen" }, { "Name": "Andersen" }];
+            var _CustomersAsc = AZSortJSONArray(_Customers, "Name", "asc");
+            $("#arrayasc").html("<br /><strong>Sorted ASC</strong><br /><brown>" + JSON.stringify(_CustomersAsc) + "</brown>");
+            var _CustomersDesc = AZSortJSONArray(_Customers, "Name", "desc");
+            $("#arraydesc").html("<br /><strong>Sorted DESC</strong><br /><brown>" + JSON.stringify(_CustomersDesc) + "</brown>");
+        }
+
+        function GetURLParameters()
+        {
+            $("#AZURLParameters").show();
+            var _URL = "https://cdn.web2net.no/lib-2.0.1/default.html?id=1&guid=23j4j223k54k235k";
+            var _URLParametersReturn = AZGetURLParameters(_URL);
+            if (AZIsEmpty(_URLParametersReturn) === false)
+            {
+                $("#parameters").html("<br /><brown>" + _URLParametersReturn.id + " - " + _URLParametersReturn.guid + "</brown>");
+                $("#urlparameters").html("<br /><brown>" + JSON.stringify(_URLParametersReturn) + "</brown>");
+            }
+            console.log(_URLParametersReturn);
+        }
+
+        function BytesConverter()
+        {
+            $("#byte").html("<br /><brown>" + AZBytesConverter(123456) + " - " + AZBytesConverter(987654321) + "</brown>");
+        }
+
+        function Guid()
+        {
+            $("#guid").html("<br /><brown>" + AZGuid() + "</brown>");
+        }
+
+        function StandardAlert()
+        {
+            var _AZStandardAlertOptions =
+            {
+                Title: "Internet connection",
+                Text: "You are not connected to Internet or your Internet connection is too slow."
+            };
+            new AZStandardAlert(_AZStandardAlertOptions);
+        }
+
+        function SetPageElement()
+        {
+            $("#AZSetPageElement").show();
+            AZSetPageElement(["SetPageElement", "AZSetPageElement"]);
+            console.log(ObjPageData.Elements);
+        }
+
+        function AZAnim()
+        {
+            var _$AZAnim = $(this);
+            _$AZAnim.attr("disabled", true);
+            $("p.az-anim-message").append(" Started...");
+
+            $.when(effect()).done(function ()
+            {
+                $("p.az-anim-message").append(" Finished!");
+                window.setTimeout(function ()
+                {
+                    $("p.az-anim-message").text("Animation...");
+                    $("div.az-anim-rect").show();
+                    _$AZAnim.attr("disabled", false);
+                }, 3000);
+            });
+
+            function effect()
+            {
+                return $("div.az-anim-rect").each(function (Index)
+                {
+                    $(this).fadeOut(1000 * (Index + 1));
+                });
+            };
+        }
+
+        function ShowCoverSpin1()
+        {
+            AZShowCoverSpin();
+            $("#az-cover-spin").off("click", AZHideCoverSpin).on("click", AZHideCoverSpin);
+        }
+
+        function ShowCoverSpin2()
+        {
+            AZShowCoverSpin("Show Cover Spin");
+            $("#az-cover-spin").off("click", AZHideCoverSpin).on("click", AZHideCoverSpin);
+        }
+
+    </script>
+    <style>
+        div.az-anim-rect
+        {
+            display: block;
+            float: left;
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="frmReg">
+        <div id="section-1" class="az-section az-padding-t-56 az-padding-b-56">
+
+            <div class="az-container az-background-white">
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <h1 class="az-code-header" style="margin: 0;">AZ Standard Functions</h1>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code htmlHigh notranslate">
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Promise</property>
+                                <type><span>Type:</span> <brown>Functions</brown></type>
+                                <br />
+                                &emsp;&ensp;&emsp;&ensp;$.publish()<br />
+                                &emsp;&ensp;&emsp;&ensp;$.subscribe()<br />
+                                &emsp;&ensp;&emsp;&ensp;$.subscribeonce()<br />
+                                &emsp;&ensp;&emsp;&ensp;$.unsubscribe()<br />
+                                <br />
+                                <p style="word-break: break-word;">Based on <strong>jQuery Promise</strong>, we have created several functions you can subscribe on that will help you get a better flow in your code.
+                                The principles are based on <strong>Events & Delegates</strong>, which is a good form of programming practice and should replace all forms of use of <strong>Callback</strong>.</p>
+                                <br />
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    $.publish("Location - Name", Data);<br />
+                                </div>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    $.subscribe("Location - Name", function (e, data) { });<br />
+                                </div>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    $.subscribeonce("Location - Name", function (e, data) { });<br />
+                                </div>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    $.unsubscribe("Location - Name", function (e, data) { });<br />
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Window Scroll</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    $.subscribe("functionlib/azWindowScroll", function (e, data)<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azWindowScrollTop<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azWindowScrollDir<br />
+                                    });<br />
+                                    <br />
+                                </div>
+                                <br />
+                                This function is triggered every time you scroll.
+                                <br />
+                                <br />
+                                <span>azWindowScrollTop: </span><span id="azWindowScrollTop"></span>
+                                <br />
+                                <span>azWindowScrollDir: </span><span id="azWindowScrollDir"></span>
+                                <br />
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Window Resize</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    $.subscribe("functionlib/azWindowResize", function (e, data)<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azWindowWidth<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azWindowHeight<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azWindowScrollTop<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azWindowScrollLeft<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azWindowOrientation<br />
+                                    });<br />
+                                    <br />
+                                </div>
+                                <br />
+                                <p style="word-break: break-word;">This function is triggered when the page loads and every time the page resizes.</p>
+                                <br />
+                                <br />
+                                <span>azWindowWidth: </span><span id="azWindowWidth"></span>
+                                <br />
+                                <span>azWindowHeight: </span><span id="azWindowHeight"></span>
+                                <br />
+                                <span>azWindowScrollTop: </span><span id="azWindowScrollTop2"></span>
+                                <br />
+                                <span>azWindowScrollLeft: </span><span id="azWindowScrollLeft"></span>
+                                <br />
+                                <span>azWindowOrientation: </span><span id="azWindowOrientation"></span>
+                                <br />
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Client Storage</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Parameters:</span> <brown>ActionType - Name - Value</brown></default>
+                                <default><span>Return:</span> <brown>Objects, Arrays, String, Integer...</brown></default>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    AZClientStorage(ActionType, Name, Value);<br />
+                                </div>
+                                <br />
+                                <p style="word-break: break-word;">This function is used to store and retrieve data, (Items) from the browser. <strong>AZClientStorage</strong> will automatically test if your browser supports storage. First <strong>Local Storage</strong> is tested, and if your browser supports this, your data will be stored in <strong>Local Storage</strong>.
+                                However, if your browser does not support <strong>Local Storage</strong>, it will try to store data in <strong>Cookies</strong>.</p>
+                                <br />
+                                <br />
+                                <table width="100%">
+                                    <tr>
+                                        <th align="left" style="width: 33%;">ActionType</th>
+                                        <th align="left" style="width: 33%;">Name</th>
+                                        <th align="left" style="width: 33%;">Value</th>
+                                    </tr>
+                                    <tr>
+                                        <td>set</td>
+                                        <td>Item Name</td>
+                                        <td>Varying data types</td>
+                                    </tr>
+                                    <tr>
+                                        <td>get</td>
+                                        <td>Item Name</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>delete (remove)</td>
+                                        <td>Item Name</td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                                <br />
+                                <br />
+                                <strong>Store data</strong>
+                                <div class="jsHigh notranslate">
+                                    var _Customers = [{"Name": "Hansen"}, {"Name": "Olsen"}, {"Name": "Andersen"}];
+                                    <br />
+                                    AZClientStorage("set", "Customers", _Customers);
+                                    <br />
+                                </div>
+                                <br />
+                                <div class="az-code" style="word-break: break-word;">
+                                    In addition to Item Name, the function adds the site's domain name - www.yourdomain.no-itemname. You can store virtually any type of data. Objects and Arrays will be automatically stringified.
+                                </div>
+                                <br />
+                                <strong>Get data</strong>
+                                <div class="jsHigh notranslate">
+                                    var _Customers = AZClientStorage("get", "Customers");
+                                </div>
+                                <br />
+                                <div class="az-code">
+                                    Objects and Arrays will be automatically parsed to JavaScript Objects or Arrays.
+                                </div>
+                                <br />
+                                <strong>Delete data</strong>
+                                <div class="jsHigh notranslate">
+                                    AZClientStorage("delete", "Customers");
+                                </div>
+                                <div id="clienstoragestring" class="jsHigh notranslate"></div>
+                                <div id="clienstorageparsed" class="jsHigh notranslate"></div>
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="ClientStorageSet" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Store data</button>
+                                    <button id="ClientStorageGet" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Get data</button>
+                                    <button id="ClientStorageDelete" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Delete data</button>
+                                </div>
+                                <br />
+                                <p id="ClientStorage" style="display: none;">Open the console in your browser and find the tab - <strong>Application</strong> and <strong>Local Storage</strong>.</p>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Get Obj</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Parameters:</span> <brown>Array - Key - Val - Int</brown></default>
+                                <values><span>Return:</span> <mediumblue>object</mediumblue></values>
+                                <br />
+                                AZGetObj(Array, "Name", "Olsen", Level);
+                                <br />
+                                <br />
+                                <p style="word-break: break-word;"><strong>Level</strong> The function is recursive, ie it does a multi level search in the array. If you specify the level, e.g. 1, it will only search for the object in level 1.</p>
+                                <br />
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    [{"Name": "Hansen"}, {"Name": "Olsen"}, {"Name": "Andersen"}]
+                                </div>
+                                <div id="azgetobjstring" class="jsHigh notranslate"></div>
+                                <div id="azgetobjparsed" class="jsHigh notranslate"></div>
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="GetObj" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Get Object</button>
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Remove Obj</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Parameters:</span> <brown>Array - Key - Val</brown></default>
+                                <br />
+                                AZRemoveObj(Array, "Name", "Olsen");
+                                <br />
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    [{"Name": "Hansen"}, {"Name": "Olsen"}, {"Name": "Andersen"}]
+                                </div>
+                                <div id="azremoveobjstring" class="jsHigh notranslate"></div>
+                                <div id="azremoveobjparsed" class="jsHigh notranslate"></div>
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="RemoveObj" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Remove Object</button>
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Exist Obj</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Parameters:</span> <brown>Array - Key - Val</brown></default>
+                                <values><span>Return:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
+                                <br />
+                                AZExistObj(Array, "Name", "Olsen");
+                                <br />
+                                <br />
+                                <p style="word-break: break-word;">The function is recursive, ie it does a multi level search in the array.</p>
+                                <br />
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    [{"Name": "Hansen"}, {"Name": "Olsen"}, {"Name": "Andersen"}]
+                                </div>
+                                <div id="azexistobj" class="jsHigh notranslate"></div>
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="ExistObj" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Exist Object</button>
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Sort Array</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Parameters:</span> <brown>Array - Key - Sort</brown></default>
+                                <values><span>Return:</span> <mediumblue>array</mediumblue></values>
+                                <br />
+                                AZSortArray(Array, "Name", "asc");
+                                <br />
+                                <br />
+                                <p style="word-break: break-word;">For more advanced sorting, we can recommend looking at the module <strong><a href="https://github.com/Teun/thenBy.js" target="_blank">thenBy.js</a></strong> which is part of the AZ system.</p>
+                                <br />
+                                <br />
+                                <strong>Unsorted</strong>
+                                <div class="jsHigh notranslate">
+                                    [{"Name": "Hansen"}, {"Name": "Olsen"}, {"Name": "Andersen"}]
+                                </div>
+                                <div id="arrayasc" class="jsHigh notranslate"></div>
+                                <div id="arraydesc" class="jsHigh notranslate"></div>
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="SortArray" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Sort Array</button>
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZIsEmpty (IsEmpty)</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Parameters:</span> <mediumblue>object{} og array[]</mediumblue></default>
+                                <values><span>Return:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
+                                <br />
+                                AZIsEmpty(object/array);
+                                <br />
+                                <br />
+                                <p style="word-break: break-word;">The function returns <mediumblue>false</mediumblue> if you are testing an Object/Array and the Object/Array is not empty and the Object has at least one property.</p>
+                                <br />
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Get URL Parameters</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Parameters:</span> <brown>String</brown></default>
+                                <default><span>Default:</span> <brown>window.location.href</brown></default>
+                                <values><span>Return:</span> <mediumblue>object</mediumblue></values>
+                                <br />
+                                var _URL = "https://cdn.web2net.no/lib-2.0.1/default.html?id=1&guid=23j4j223k54k235k";<br />
+                                AZGetURLParameters(_URL);
+                                <br />
+                                <br />
+                                <div id="parameters" class="jsHigh notranslate"></div>
+                                <div id="urlparameters" class="jsHigh notranslate"></div>
+                                <br />
+                                <p id="AZURLParameters" style="display: none;">Open the console in your browser and find the tab - <strong>Console</strong>.</p>
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="GetURLParameters" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Get URL Parameters</button>
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Bytes Converter</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Parameters:</span> <brown>Bytes - Decimal</brown></default>
+                                <default><span>Default:</span> <brown>2 decimal</brown></default>
+                                <values><span>Return:</span> <brown>String</brown></values>
+                                <br />
+                                AZBytesConverter(123456, 2);
+                                <br />
+                                AZBytesConverter(987654321, 2);
+                                <br />
+                                <br />
+                                <div id="byte" class="jsHigh notranslate"></div>
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="BytesConverter" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Bytes Converter</button>
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Guid</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <values><span>Return:</span> <brown>String</brown></values>
+                                <br />
+                                AZGuid();
+                                <br />
+                                <br />
+                                <div id="guid" class="jsHigh notranslate"></div>
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="Guid" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Guid</button>
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Standard Alert</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    var _AZStandardAlertOptions =<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;$Area: "Optional",<br />
+                                    &emsp;&ensp;&emsp;&ensp;Title: "",<br />
+                                    &emsp;&ensp;&emsp;&ensp;Text: ""<br />
+                                    };<br />
+                                    new AZStandardAlert(_AZStandardAlertOptions);<br />
+                                    <br />
+                                </div>
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="StandardAlert" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Standard Alert</button>
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>Set AZ Page</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <values><span>Return:</span> <mediumblue>object</mediumblue></values>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    function SetAZPage()<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;$.subscribeonce("functionlib/AZPage", function (e, data)<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;data:<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;$Form: i.fn.init<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Location: ""<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;PageName: ""<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;PageFirstName: ""<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Language: ""<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;ObjLanguage: {}<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;ObjValidation: {}<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;AppName: ""<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;AppVersion: ""<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;ApiVersion: ""<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;AZSettings: {}<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;}<br />
+                                    &emsp;&ensp;&emsp;&ensp;});<br />
+                                    &emsp;&ensp;&emsp;&ensp;new AZPage(<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageArea: {},<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageElement: [],<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageInputTypeEvents: false,<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageLanguage: false,<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageLanguageUrl: "",<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageValidation: false,<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageValidationUrl: ""<br />
+                                    &emsp;&ensp;&emsp;&ensp;});<br />
+                                    }<br />
+                                    <br />
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Set Language</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    var _AZSetLanguageOptions =<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;$Area: Selector,<br />
+                                    &emsp;&ensp;&emsp;&ensp;ObjLanguage: {}<br />
+                                    }<br />
+                                    new AZSetLanguage(_AZSetLanguageOptions);<br />
+                                    <br />
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Set Validation</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    var _AZSetValidationOptions =<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;$Area: Selector,<br />
+                                    &emsp;&ensp;&emsp;&ensp;ObjValidation: {}<br />
+                                    }<br />
+                                    new AZSetValidation(_AZSetValidationOptions);<br />
+                                    <br />
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Set Input Type Events</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    AZSetInputTypeEvents()<br />
+                                    <br />
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Serialize Form</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <values><span>Return:</span> <mediumblue>object</mediumblue></values>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    var _AZSerializeFormOptions =<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;$Area: Selector,<br />
+                                    &emsp;&ensp;&emsp;&ensp;ObjLanguage: {},<br />
+                                    &emsp;&ensp;&emsp;&ensp;ObjValidation: {}<br />
+                                    }<br />
+                                    AZSerializeForm(_AZSerializeFormOptions);<br />
+                                    <br />
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Populate Form</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    var _AZPopulateFormOptions =<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;$Area: Selector,<br />
+                                    &emsp;&ensp;&emsp;&ensp;ObjInputData: {},<br />
+                                    &emsp;&ensp;&emsp;&ensp;ObjValidation: {}<br />
+                                    }<br />
+                                    AZPopulateForm(_AZPopulateFormOptions);<br />
+                                    <br />
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Set Page Element</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Parameters:</span> <brown>String - Array</brown></default>
+                                <values><span>Return:</span> <mediumblue>ObjPageData.Elements</mediumblue></values>
+                                <br />
+                                var PageElement = ["SetPageElement", "AZSetPageElement"];<br />
+                                AZSetPageElement(PageElement);<br />
+                                <br />
+                                ObjPageData.Elements.$SetPageElement;<br />
+                                ObjPageData.Elements.$AZSetPageElement;<br />
+                                <br />
+                                <br />
+                                <p style="word-break: break-word;">The function looks for elements with <strong>ID</strong> or <strong>CLASS</strong> that match the elements in the list you submit in the function.
+                                When an element is found, the element is created as a <strong>jQuery</strong> object and added to the variable <strong>ObjPageData.Elements</strong>.</p>
+                                <br />
+                                <br />
+                                <p id="AZSetPageElement" style="display: none;">Open the console in your browser and find the tab - <strong>Console</strong>.</p>
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="SetPageElement" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Set Object</button>
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Promise</property>
+                                <br />
+                                Below you also see an example of using Promise using the feature <strong>$.when</strong>
+                                <br />
+                                <br />
+                                <div style="display: inline-block; height: 70px;">
+                                    <p class="az-anim-message">Animation...</p>
+                                    <div class="az-anim-rect"></div>
+                                    <div class="az-anim-rect"></div>
+                                    <div class="az-anim-rect"></div>
+                                    <div class="az-anim-rect"></div>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    function Effect()<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;return $("div.az-anim-rect").each(function (i)<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;$(this).fadeOut(1000 * (i + 1));<br />
+                                    &emsp;&ensp;&emsp;&ensp;});<br />
+                                    };<br />
+                                    <br />
+                                    $.when(Effect()).done(function () { // Do Something });<br />
+                                    <br />
+                                    <br />
+                                </div>
+                                <div class="az-form-group">
+                                    <button type="button" id="AZAnim" class="az-button primary az-shadow-1 az-shadow-hover-2">Go Anim</button>
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Show/Hide CoverSpin</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Input:</span> <brown>string</brown></default>
+                                <br />
+                                AZShowCoverSpin();<br />
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="ShowCoverSpin1" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Show Cover Spin 1</button>
+                                </div>
+                                <br />
+                                AZShowCoverSpin("Show Cover Spin");<br />
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="ShowCoverSpin2" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Show Cover Spin 2</button>
+                                </div>
+                                <br />
+                                AZHideCoverSpin();<br />
+                                <br />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

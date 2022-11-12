@@ -1,0 +1,159 @@
+﻿
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>AZ Color</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib-2/css/az-2.min.css" />
+    <script src="/lib-2/js/az-2.min.js"></script>
+
+    <link rel="stylesheet" href="/lib-2/lib/additionally.css" />
+    <script src="/lib-2/lib/additionally.js"></script>
+    <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
+    <script src="/lib-2/lib/az-codecolor.js"></script>
+    <script>
+
+        $(document).ready(function ()
+        {
+            w3CodeColor();
+
+            $(".az-col", "#row0, #row1, #row2").css({ "text-align": "center", "margin-bottom": "20px" });
+            $(".az-col", "#row2").each(function (i)
+            {
+                $(this).html($(this)[0].classList[3]);
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+    <form id="frmReg">
+        <div class="az-container">
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+                    <h1 class="az-code-header">AZ Color</h1>
+                </div>
+            </div>
+            <div class="az-card">
+                <article>
+                    <div class="az-row">
+                        <div class="az-col xs-12">
+                            <div class="az-margin-t-14 az-margin-b-49">
+                                <p><strong>AZ Color</strong> consists of 6 base colors used on various <strong>Form</strong> elements such as <strong>AZ Button</strong>, <strong>AZ Alert</strong>, <strong>AZ Modal Dialog</strong> and <strong>AZ Window</strong> etc.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="row0" class="az-row">
+                        <div class="az-col xs-12 sm-6 az-background-default">az-color-default (White)</div>
+                        <div class="az-col xs-12 sm-6 az-background-primary">az-color-primary</div>
+                        <div class="az-col xs-12 sm-6 az-background-success">az-color-success</div>
+                        <div class="az-col xs-12 sm-6 az-background-info">az-color-info</div>
+                        <div class="az-col xs-12 sm-6 az-background-warning">az-color-warning</div>
+                        <div class="az-col xs-12 sm-6 az-background-danger">az-color-danger</div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+                    <h6 class="az-code-header">AZ Font Color</h6>
+                </div>
+            </div>
+            <div class="az-card">
+                <article>
+                    <div id="row1" class="az-row">
+                        <div class="az-col xs-12 sm-6 az-background-fire-engine">az-color-fire-engine</div>
+                        <div class="az-col xs-12 sm-6 az-background-harley-davidson-orange">az-color-harley-davidson-orange</div>
+                        <div class="az-col xs-12 sm-6 az-background-selective-yellow">az-color-selective-yellow</div>
+                        <div class="az-col xs-12 sm-6 az-background-green">az-color-green</div>
+                        <div class="az-col xs-12 sm-6 az-background-pine-green">az-color-pine-green</div>
+                        <div class="az-col xs-12 sm-6 az-background-navy-blue">az-color-navy-blue</div>
+                        <div class="az-col xs-12 sm-6 az-background-kelly-green">az-color-kelly-green</div>
+                        <div class="az-col xs-12 sm-6 az-background-navy">az-color-navy</div>
+                        <div class="az-col xs-12 sm-6 az-background-blue">az-color-blue</div>
+                        <div class="az-col xs-12 sm-6 az-background-aqua">az-color-aqua</div>
+                        <div class="az-col xs-12 sm-6 az-background-olive">az-color-olive</div>
+                        <div class="az-col xs-12 sm-6 az-background-lime">az-color-lime</div>
+                        <div class="az-col xs-12 sm-6 az-background-orange">az-color-orange</div>
+                        <div class="az-col xs-12 sm-6 az-background-red">az-color-red</div>
+                        <div class="az-col xs-12 sm-6 az-background-fuchsia">az-color-fuchsia</div>
+                        <div class="az-col xs-12 sm-6 az-background-purple">az-color-purple</div>
+                        <div class="az-col xs-12 sm-6 az-background-maroon">az-color-maroon</div>
+                        <div class="az-col xs-12 sm-6 az-background-white">az-color-white</div>
+                        <div class="az-col xs-12 sm-6 az-background-gray">az-color-gray</div>
+                        <div class="az-col xs-12 sm-6 az-background-silver">az-color-silver</div>
+                        <div class="az-col xs-12 sm-6 az-background-black">az-color-black</div>
+                        <div class="az-col xs-12 sm-6 az-background-teal">az-color-teal</div>
+                        <div class="az-col xs-12 sm-6 az-background-blue-grey">az-color-blue-grey</div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+                    <h6 class="az-code-header">AZ Background Color</h6>
+                </div>
+            </div>
+            <div class="az-card">
+                <article>
+                    <div id="row2" class="az-row">
+                        <div class="az-col xs-12 sm-6 az-background-fire-engine"></div>
+                        <div class="az-col xs-12 sm-6 az-background-harley-davidson-orange"></div>
+                        <div class="az-col xs-12 sm-6 az-background-selective-yellow"></div>
+                        <div class="az-col xs-12 sm-6 az-background-green"></div>
+                        <div class="az-col xs-12 sm-6 az-background-pine-green"></div>
+                        <div class="az-col xs-12 sm-6 az-background-navy-blue"></div>
+                        <div class="az-col xs-12 sm-6 az-background-kelly-green"></div>
+                        <div class="az-col xs-12 sm-6 az-background-navy"></div>
+                        <div class="az-col xs-12 sm-6 az-background-blue"></div>
+                        <div class="az-col xs-12 sm-6 az-background-aqua"></div>
+                        <div class="az-col xs-12 sm-6 az-background-olive"></div>
+                        <div class="az-col xs-12 sm-6 az-background-lime"></div>
+                        <div class="az-col xs-12 sm-6 az-background-orange"></div>
+                        <div class="az-col xs-12 sm-6 az-background-red"></div>
+                        <div class="az-col xs-12 sm-6 az-background-fuchsia"></div>
+                        <div class="az-col xs-12 sm-6 az-background-purple"></div>
+                        <div class="az-col xs-12 sm-6 az-background-maroon"></div>
+                        <div class="az-col xs-12 sm-6 az-background-white"></div>
+                        <div class="az-col xs-12 sm-6 az-background-gray"></div>
+                        <div class="az-col xs-12 sm-6 az-background-silver"></div>
+                        <div class="az-col xs-12 sm-6 az-background-black"></div>
+                        <div class="az-col xs-12 sm-6 az-background-teal"></div>
+                        <div class="az-col xs-12 sm-6 az-background-blue-grey"></div>
+                    </div>
+                </article>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+        </div>
+    </form>
+
+</body>
+</html>

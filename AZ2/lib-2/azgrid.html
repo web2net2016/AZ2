@@ -1,0 +1,395 @@
+﻿
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>AZ Grid</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib-2/css/az-2.min.css" />
+    <script src="/lib-2/js/az-2.min.js"></script>
+
+    <link rel="stylesheet" href="/lib-2/lib/additionally.css" />
+    <script src="/lib-2/lib/additionally.js"></script>
+    <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
+    <script src="/lib-2/lib/az-codecolor.js"></script>
+    <script>
+
+        var _LanguageObj =
+        {
+            "SingleElements": {
+                "GridHeaderDate": "Dato",
+                "GridHeaderTime": "Klokke",
+                "GridHeaderDateTime": "Dato/Klokke",
+                "GridHeaderDecimal": "Desimal",
+                "GridHeaderBytes": "Bytes",
+                "GridHeaderEmail": "E-post",
+                "GridHeaderWeb": "Hjemmeside"
+            }
+        };
+
+        var _SettingList =
+            [
+                {
+                    "name": "Date",
+                    "sort": true,
+                    "datatype": "date",
+                    "width": 120,
+                    "index": 0
+                },
+                {
+                    "name": "Time",
+                    "sort": false,
+                    "datatype": "time",
+                    "width": 120,
+                    "index": 1
+                },
+                {
+                    "name": "DateTime",
+                    "sort": true,
+                    "datatype": "datetime",
+                    "width": 200,
+                    "index": 2
+                },
+                {
+                    "name": "Decimal",
+                    "sort": false,
+                    "datatype": "decimal",
+                    "width": 100,
+                    "index": 3
+                },
+                {
+                    "name": "Bytes",
+                    "sort": false,
+                    "datatype": "bytes",
+                    "width": 150,
+                    "index": 4
+                },
+                {
+                    "name": "Email",
+                    "sort": false,
+                    "datatype": "email",
+                    "width": 150,
+                    "index": 5
+                },
+                {
+                    "name": "Web",
+                    "sort": false,
+                    "datatype": "web",
+                    "index": 6
+                }
+            ];
+
+        var _DataList =
+            [
+                {
+                    "Date": "2020-01-15",
+                    "Time": "11:10:00",
+                    "DateTime": "2020-02-21T02:38:00.000Z",
+                    "Decimal": 111.50,
+                    "Bytes": 987654321,
+                    "Email": "john@doe.com",
+                    "Web": "https://cdn.web2net.no/lib-2.0.1/azcdn200.html"
+                },
+                {
+                    "Date": "2020-02-21",
+                    "Time": "11:10:00",
+                    "DateTime": "2020-01-11T12:38:00.000Z",
+                    "Decimal": 22.50,
+                    "Bytes": 568568568568,
+                    "Email": "john@doe.com",
+                    "Web": "https://cdn.web2net.no"
+                }
+            ];
+
+        var _MetaObj = {};
+        _MetaObj =
+        {
+            "PageCurrent": 1,
+            "PageSize": 10,
+            "RecordCount": 2,
+            "OrderByClause": "",
+            "SearchClause": ""
+        };
+        var _DataObj = {};
+        _DataObj.Data = _DataList;
+        _DataObj.Meta = _MetaObj;
+
+        function SetAZPage()
+        {
+            $.subscribe("functionlib/AZPage", function (e, data)
+            {
+                SetAZPageContent(e, data);
+            });
+            new AZPage(
+                {
+                    azPageInputTypeEvents: true
+                });
+        }
+
+        function SetAZPageContent(e, data)
+        {
+            ObjPageData.Values.AZPage = data;
+
+            w3CodeColor();
+            GetGridContent();
+        }
+
+        function GetGridContent()
+        {
+            $.subscribe("functionlib/azGridMeta", function (e, data)
+            {
+                AZShowCoverSpin("Loading data...");
+                window.setTimeout(function ()
+                {
+                    GetGridContent();
+                }, 3000)
+            });
+            new AZGrid(
+                {
+                    azGridId: "az-grid-1",
+                    azGridData: _DataObj,
+                    azGridSetting: _SettingList,
+                    azGridLanguage: _LanguageObj
+                });
+
+            AZHideCoverSpin();
+        }
+
+    </script>
+    <style>
+
+        .az-grid-table
+        {
+            width: 100%;
+        }
+
+        .az-grid-table-header
+        {
+            table-layout: fixed;
+            background-color: var(--primary-background-color);
+            color: #FFFFFF;
+        }
+
+            .az-grid-table-header td:first-child
+            {
+                padding-left: 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .az-grid-table-header td
+            {
+                font-size: 1.2em;
+                padding: 8px 8px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+        .az-grid-table-data
+        {
+            table-layout: fixed;
+            color: #000000;
+        }
+
+            .az-grid-table-data td:first-child
+            {
+                padding-left: 16px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .az-grid-table-data td
+            {
+                padding: 8px 8px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .az-grid-table-data > tr:nth-child(odd)
+            {
+                background-color: #FFFFFF;
+            }
+
+            .az-grid-table-data > tr:nth-child(even)
+            {
+                background-color: #F5F5F5;
+            }
+
+            .az-grid-table-data > tr:hover:nth-child(odd)
+            {
+                background-color: #DDDDDD;
+                color: #000000;
+            }
+
+            .az-grid-table-data > tr:hover:nth-child(even)
+            {
+                background-color: #DDDDDD;
+                color: #000000;
+            }
+
+        .az-grid-table-footer
+        {
+            background-color: var(--primary-background-color);
+            color: #FFFFFF;
+        }
+
+        .InfoGridPage
+        {
+            padding: 0 16px 0 16px;
+        }
+
+        .icon
+        {
+            cursor: pointer;
+        }
+
+            .icon::after
+            {
+                display: inline-block;
+                margin-left: 14px;
+                font-style: normal;
+                font-variant: normal;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+                cursor: pointer;
+            }
+
+        .sort::after
+        {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            content: "\f0dc";
+        }
+
+        .sort-up::after
+        {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            content: "\f0de";
+        }
+
+        .sort-down::after
+        {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            content: "\f0dd";
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="frmReg">
+        <div class="az-container">
+
+            <div class="az-row az-margin-t-28">
+                <div class="az-col xs-12">
+
+                    <div id="az-grid-1"></div>
+
+                </div>
+            </div>
+
+
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12">
+                    <h1 class="az-code-header" style="margin: 0;">AZ Grid</h1>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-code jsHigh notranslate">
+                        <strong>Default settings</strong>
+                        <br />
+                        <br />
+                        new AZGrid(<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;azGridId: "",<br />
+                        &emsp;&ensp;&emsp;&ensp;azGridData: [],<br />
+                        &emsp;&ensp;&emsp;&ensp;azGridTableHeaderColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azGridTableHeaderBackgroundColor: "#0078D7",<br />
+                        &emsp;&ensp;&emsp;&ensp;azGridTableDataColor: "#000000",<br />
+                        &emsp;&ensp;&emsp;&ensp;azGridTableDataOddBackgroundColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azGridTableDataEvenBackgroundColor: "#F5F5F5",<br />
+                        &emsp;&ensp;&emsp;&ensp;azGridTableDataMouseoverColor: "#000000",<br />
+                        &emsp;&ensp;&emsp;&ensp;azGridTableDataOddMouseoverBackgroundColor: "#DDDDDD",<br />
+                        &emsp;&ensp;&emsp;&ensp;azGridTableDataEvenMouseoverBackgroundColor: "#DDDDDD",<br />
+                        &emsp;&ensp;&emsp;&ensp;azGridFooterColor: "#FFFFFF",<br />
+                        &emsp;&ensp;&emsp;&ensp;azGridFooterBackgroundColor: "#0078D7"<br />
+                        });<br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div class="az-row">
+                <div class="az-col xs-12">
+                    <div class="az-code htmlHigh notranslate">
+                        <div class="az-code-property-wrapper">
+                            <property>azGridId</property>
+                            <type><span>Type:</span> <brown>String</brown></type>
+                            <default><span>Default:</span> <brown>""</brown></default>
+                            <br />
+                        </div>
+                        <div class="az-code-property-wrapper">
+                            <property>azGridData</property>
+                            <type><span>Type:</span> <brown>Array</brown></type>
+                            <br />
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12">
+                    <h1 class="az-code-header" style="margin: 0;">AZ Grid HTML and CSS</h1>
+                </div>
+            </div>
+            <div class="az-row az-margin-b-56">
+                <div class="az-col xs-12">
+                    <div class="az-code htmlHigh notranslate">
+                        &lt;div id="az-grid-1"&gt;&lt;/div&gt;<br />
+                        <br />
+                        <br />
+                        AZGrid has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.1/css/backgroundslider.css" target="_blank" class="az-border-bottom-1-blue">backgroundslider.css</a>
+                        <br />
+                    </div>
+                    <div class="az-code cssHigh notranslate">
+                        @media (max-width: 576px)<br />
+                        {<br />
+                        &emsp;&ensp;&emsp;&ensp;::-webkit-scrollbar<br />
+                        &emsp;&ensp;&emsp;&ensp;{<br />
+                        &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;width: 0;<br />
+                        &emsp;&ensp;&emsp;&ensp;}<br />
+                        }<br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,503 @@
+﻿
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>AZ Snackbar</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib-2/css/az-2.min.css" />
+    <script src="/lib-2/js/az-2.min.js"></script>
+
+    <link rel="stylesheet" href="/lib-2/lib/additionally.css" />
+    <script src="/lib-2/lib/additionally.js"></script>
+    <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
+    <script src="/lib-2/lib/az-codecolor.js"></script>
+    <script>
+
+        var AZSnackbar1 = {};
+        var AZSnackbar2 = {};
+        var AZSnackbar3 = {};
+        var AZSnackbar4 = {};
+        var AZSnackbar5 = {};
+        var AZSnackbar6 = {};
+        var AZSnackbar7 = {};
+        var AZSnackbar8 = {};
+        var AZSnackbar9 = {};
+        var AZSnackbar10 = {};
+
+        $(document).ready(function ()
+        {
+            w3CodeColor();
+
+            $("#cmdSnackbar1").off("click", setSnackbar1).on("click", setSnackbar1);
+            $("#cmdSnackbar2").off("click", setSnackbar2).on("click", setSnackbar2);
+            $("#cmdSnackbar3").off("click", setSnackbar3).on("click", setSnackbar3);
+            $("#cmdSnackbar4").off("click", setSnackbar4).on("click", setSnackbar4);
+            $("#cmdSnackbar5").off("click", setSnackbar5).on("click", setSnackbar5);
+            $("#cmdSnackbar6").off("click", setSnackbar6).on("click", setSnackbar6);
+            $("#cmdSnackbar7").off("click", setSnackbar7).on("click", setSnackbar7);
+            $("#cmdSnackbar8").off("click", setSnackbar8).on("click", setSnackbar8);
+            $("#cmdSnackbar9").off("click", setSnackbar9).on("click", setSnackbar9);
+            $("#cmdSnackbar10").off("click", setSnackbar10).on("click", setSnackbar10);
+        });
+
+        function setSnackbar1()
+        {
+            AZSnackbar1 = new AZSnackbar(
+                {
+                    azSnackbarText: "Dette er en tekst...",
+                    azSnackbarPosition: "left-top"
+                });
+        }
+
+        function setSnackbar2()
+        {
+            AZSnackbar2 = new AZSnackbar(
+                {
+                    azSnackbarText: 'Dette er en tekst...',
+                    azSnackbarPosition: "center-top"
+                });
+        }
+
+        function setSnackbar3()
+        {
+            AZSnackbar3 = new AZSnackbar(
+                {
+                    azSnackbarText: "Dette er en tekst...",
+                    azSnackbarPosition: "right-top"
+                });
+        }
+
+        function setSnackbar4()
+        {
+            AZSnackbar4 = new AZSnackbar(
+                {
+                    azSnackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    azSnackbarPosition: "full-width-top"
+                });
+        }
+
+        function setSnackbar5()
+        {
+            AZSnackbar5 = new AZSnackbar(
+                {
+                    azSnackbarText: 'Dette er en tekst...',
+                    azSnackbarPosition: "left-bottom"
+                });
+        }
+
+        function setSnackbar6()
+        {
+            AZSnackbar6 = new AZSnackbar(
+                {
+                    azSnackbarText: "Dette er en tekst...",
+                    azSnackbarPosition: "center-bottom"
+                });
+        }
+
+        function setSnackbar7()
+        {
+            AZSnackbar7 = new AZSnackbar(
+                {
+                    azSnackbarText: "Dette er en tekst...",
+                    azSnackbarPosition: "right-bottom"
+                });
+        }
+
+        function setSnackbar8()
+        {
+            AZSnackbar8 = new AZSnackbar(
+                {
+                    azSnackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    azSnackbarPosition: "full-width-bottom"
+                });
+        }
+
+        function setSnackbar9()
+        {
+            $.subscribeonce("functionlib/azSnackbarAfterOpen", function (e, data)
+            {
+                $(".az-input-group-addon").off().on('click', function ()
+                {
+                    data.azChangeSnackbarText("Takk for din respons, " + $("#Navn").val());
+                });
+            });
+
+            var _HTML = "";
+            _HTML += '<div class="az-form-group">';
+            _HTML += '<div class="az-input-group">';
+            _HTML += '<input type="text" placeholder="Navn" id="Navn" class="az-input" />';
+            _HTML += '<span class="az-input-group-addon az-cursor-pointer" style="border: none;"><i class="fas fa-user" style="color: #000000;"></i></span>';
+            _HTML += '</div>';
+            _HTML += '</div>';
+
+            AZSnackbar9 = new AZSnackbar(
+                {
+                    azSnackbarText: _HTML,
+                    azSnackbarPosition: "left-bottom",
+                    azSnackbarClose: true
+                });
+        }
+
+        function setSnackbar10()
+        {
+            AZSnackbar10 = new AZSnackbar(
+                {
+                    azSnackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    azSnackbarPosition: "full-width-bottom",
+                    azSnackbarClose: true,
+                    azSnackbarBackgroundColor: "#FF9F55",
+                    azSnackbarColor: "#000000",
+                    azSnackbarMobileMinHeight: 250
+                });
+        }
+
+    </script>
+</head>
+<body>
+
+    <form id="frmReg">
+        <div id="section-1" class="az-section az-padding-t-56 az-padding-b-56">
+
+            <div class="az-container">
+                <div class="az-row">
+                    <div class="az-col xs-12 sm-3">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar1">Snackbar - Left / Top</button>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-3">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar2">Snackbar - Center / Top</button>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-3">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar3">Snackbar - Right / Top</button>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-3">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar4">Snackbar Full Width Top</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12 sm-3">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar5">Snackbar - Left / Bottom</button>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-3">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar6">Snackbar - Center / Bottom</button>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-3">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar7">Snackbar - Right / Bottom</button>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-3">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar8">Snackbar Full Width Bottom</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12 sm-6">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar9">Snackbar Form</button>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-6">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdSnackbar10">Snackbar Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="az-container az-background-white az-margin-t-56 az-margin-b-56">
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <h1 class="az-code-header" style="margin: 0;">AZ Snackbar</h1>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code jsHigh notranslate">
+                            <strong>Default settings</strong>
+                            <br />
+                            <br />
+                            new AZSnackbar(<br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;azSnackbarText: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;azSnackbarPosition: "left-top",<br />
+                            &emsp;&ensp;&emsp;&ensp;azSnackbarTopMargin: 20,<br />
+                            &emsp;&ensp;&emsp;&ensp;azSnackbarBottomMargin: 20,<br />
+                            &emsp;&ensp;&emsp;&ensp;azSnackbarMobileMinHeight: 0,<br />
+                            &emsp;&ensp;&emsp;&ensp;azSnackbarClose: false,<br />
+                            &emsp;&ensp;&emsp;&ensp;azSnackbarTimeout: 3000<br />
+                            &emsp;&ensp;&emsp;&ensp;azSnackbarBackgroundColor: ""<br />
+                            &emsp;&ensp;&emsp;&ensp;azSnackbarColor: ""<br />
+                            &emsp;&ensp;&emsp;&ensp;azSnackbarCloseColor: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;azSnackbarAfterOpen: function () { }<br />
+                            });<br />
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code htmlHigh notranslate">
+                            <strong>Init AZSnackbar</strong>
+                            <br />
+                            <br />
+                            There are two ways to initiate the <strong>AZSnackbar</strong>. The way you choose is important for further use of the function.<br />
+                            <br />
+                            <strong>1. new AZSnackbar();</strong><br />
+                            The function is initiated but you do not assign the function to a variable. This means you can use the <strong>azSnackbarAfterOpen</strong> function in relation to further interaction with the function.
+                            <br />
+                            <br />
+                            <strong>2. var AZSnackbar = new AZSnackbar();</strong><br />
+                            The function is initiated and assigned to a variable. This means you can use the variable in relation to further interaction with the function.
+                            <br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code htmlHigh notranslate">
+                            <strong>Additional Features</strong><br />
+                            <br />
+                            If you want to use your own buttons or links to open/close the <strong>AZSnackbar</strong>.<br />
+                            <br />
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td>
+                                        <strong>1. functionlib/azSnackbarAfterOpen</strong><br />
+                                        <br />
+                                        <div class="jsHigh notranslate">
+                                            $.subscribe("functionlib/azSnackbarAfterOpen", function (e, data)<br />
+                                            {<br />
+                                            &emsp;&ensp;&emsp;&ensp;data.azCloseSnackbar();<br />
+                                            });<br />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>2. var AZSnackbar</strong><br />
+                                        <br />
+                                        <div class="jsHigh notranslate">
+                                            <br />
+                                            AZSnackbar.azCloseSnackbar();<br />
+                                            <br />
+                                            <br />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            <br />
+                            You also have the option to replace the content of the <strong>AZSnackbar</strong>.<br />
+                            <br />
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td>
+                                        <strong>1. functionlib/azSnackbarAfterOpen</strong><br />
+                                        <br />
+                                        <div class="jsHigh notranslate">
+                                            $.subscribe("functionlib/azSnackbarAfterOpen", function (e, data)<br />
+                                            {<br />
+                                            &emsp;&ensp;&emsp;&ensp;data.azChangeText("This is a text");<br />
+                                            });<br />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>2. var AZSnackbar</strong><br />
+                                        <br />
+                                        <div class="jsHigh notranslate">
+                                            <br />
+                                            AZSnackbar.azChangeText("This is a text");<br />
+                                            <br />
+                                            <br />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code htmlHigh notranslate">
+                            <div class="az-code-property-wrapper">
+                                <property>azSnackbarText</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>""</brown></default>
+                                <values><span>Values:</span> Text or HTML</values>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azSnackbarPosition</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>"left-top"</brown></default>
+                                <values><span>Values:</span> <brown>"left-top"</brown> or <brown>"center-top"</brown> or <brown>"right-top"</brown> or <brown>"full-width-top"</brown> or <brown>"left-bottom"</brown> or <brown>"center-bottom"</brown> or <brown>"right-bottom"</brown> or <brown>"full-width-bottom"</brown></values>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azSnackbarTopMargin</property>
+                                <type><span>Type:</span> <brown>Integer</brown></type>
+                                <default><span>Default:</span> <red>20</red></default>
+                                <units><span>Unit:</span> <red>pixels</red></units>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azSnackbarBottomMargin</property>
+                                <type><span>Type:</span> <brown>Integer</brown></type>
+                                <default><span>Default:</span> <red>20</red></default>
+                                <units><span>Unit:</span> <red>pixels</red></units>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azSnackbarMobileMinHeight</property>
+                                <type><span>Type:</span> <brown>Integer</brown></type>
+                                <default><span>Default:</span> <red>0</red></default>
+                                <units><span>Unit:</span> <red>pixels</red></units>
+                                <br />
+                                For screen sizes below 576px, you can set a minimum height of the AZSnackbar.
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azSnackbarClose</property>
+                                <type><span>Type:</span> <brown>Boolean</brown></type>
+                                <default><span>Default:</span> <mediumblue>false</mediumblue></default>
+                                <values><span>Values:</span> <mediumblue>false</mediumblue> or <mediumblue>true</mediumblue></values>
+                                <br />
+                                By changing the value to true, a close button (X) will be inserted in the right part, at the same time as <strong>azSnackbarTimeout</strong> is overridden, ie the AZSnackbar is displayed until you choose to close it.
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azSnackbarTimeout</property>
+                                <type><span>Type:</span> <brown>Integer</brown></type>
+                                <default><span>Default:</span> <red>3000</red></default>
+                                <units><span>Unit:</span> <red>milliseconds</red></units>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azSnackbarBackgroundColor</property>
+                                <type><span>Type:</span> <brown>Color Hex</brown></type>
+                                <default><span>Default:</span> <brown>""</brown></default>
+                                <br />
+                                Se også CSS .az-snackbar
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azSnackbarColor</property>
+                                <type><span>Type:</span> <brown>Color Hex</brown></type>
+                                <default><span>Default:</span> <brown>""</brown></default>
+                                <br />
+                                Se også CSS .az-snackbar > .az-snackbar-table .az-snackbar-text
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azSnackbarCloseColor</property>
+                                <type><span>Type:</span> <brown>Color Hex</brown></type>
+                                <default><span>Default:</span> <brown>""</brown></default>
+                                <br />
+                                Se også CSS .az-snackbar > .az-snackbar-table .az-snackbar-close
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>functionlib/azSnackbarAfterOpen</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    $.subscribe("functionlib/azSnackbarAfterOpen", function (e, data)<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azChangeText - ƒ (n)<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azCloseSnackbar - ƒ ()<br />
+                                    });<br />
+                                    <br />
+                                    This function is triggered when <strong>AZSnackbar</strong> is fully initiated.
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="az-container az-background-white az-margin-t-56">
+                <div class="row">
+                    <div class="az-col xs-12">
+                        <h1 class="az-code-header" style="margin: 0;">AZ Snackbar CSS</h1>
+                    </div>
+                </div>
+                <div class="az-row az-margin-b-56">
+                    <div class="az-col xs-12">
+                        <div class="az-code htmlHigh notranslate">
+                            AZ Snackbar has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.1/css/snackbar.css" target="_blank" class="az-border-bottom-1-blue">snackbar.css</a>
+                            <br />
+                            You can find the CSS which you can change yourself in the file <a href="/lib-2/lib/additionally.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
+                            <br />
+                            <br />
+                            /*---------------------<br />
+                            Snackbar<br />
+                            snackbar.css<br />
+                            ---------------------*/<br />
+                            <br />
+                        </div>
+                        <div class="az-code cssHigh notranslate">
+                            .az-snackbar<br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;background-color: #0078D7;<br />
+                            &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+                            &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+                            &emsp;&ensp;&emsp;&ensp;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
+                            }<br />
+                            <br />
+                            .az-snackbar > .az-snackbar-table .az-snackbar-text<br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
+                            }<br />
+                            <br />
+                            .az-snackbar > .az-snackbar-table .az-snackbar-close<br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
+                            }<br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

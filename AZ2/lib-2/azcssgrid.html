@@ -1,0 +1,131 @@
+﻿
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>AZ CSS Grid</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib-2/css/az-2.min.css" />
+    <script src="/lib-2/js/az-2.min.js"></script>
+
+    <link rel="stylesheet" href="/lib-2/lib/additionally.css" />
+    <script src="/lib-2/lib/additionally.js"></script>
+    <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
+    <script src="/lib-2/lib/az-codecolor.js"></script>
+    <script>
+
+        $(document).ready(function ()
+        {
+            w3CodeColor();
+
+            $(".az-grid-item").each(function (i)
+            {
+                $(this).html($(this).attr("class") + '<p style="color: red; margin: 10px">' + (Number(i) + 1) + '</p>');
+            });
+        });
+
+    </script>
+    <style type="text/css">
+        .az-grid-item
+        {
+            outline: 1px solid #28a745;
+            text-align: center;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="frmReg">
+
+        <div class="az-container az-padding-t-56 az-padding-b-56">
+            <div class="az-grid-row xs-1 sm-2 md-4 lg-6 xl-12">
+                <div class="az-grid-item"></div>
+                <div class="az-grid-item"></div>
+                <div class="az-grid-item"></div>
+                <div class="az-grid-item"></div>
+                <div class="az-grid-item"></div>
+                <div class="az-grid-item"></div>
+                <div class="az-grid-item"></div>
+                <div class="az-grid-item"></div>
+                <div class="az-grid-item"></div>
+                <div class="az-grid-item"></div>
+                <div class="az-grid-item"></div>
+                <div class="az-grid-item"></div>
+            </div>
+
+            <!--<br />
+            <br />
+            <br />
+            <br />
+
+            <div class="az-grid-row" style="grid-template-columns: 1fr 300px;">
+                <div class="az-grid-item"></div>
+                <div class="az-grid-item az-padding-0" style="grid-column: 2; grid-row: 1 / 2; display: grid;">
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Primary</button>
+                    </div>
+                    <div class="az-form-group">
+                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2">Primary</button>
+                    </div>
+                </div>
+            </div>-->
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div class="az-grid-row xs-1 sm-4">
+                <div class="az-grid-item sm-span-2"></div>
+                <div class="az-grid-item sm-start-2"></div>
+                <div class="az-grid-item"></div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div class="az-grid-row xs-1 sm-4">
+                <div class="az-grid-item sm-span-2 md-span-3"></div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div class="az-grid-row xs-1 sm-2">
+                <div class="az-grid-item xs-order-2 sm-order-1"></div>
+                <div class="az-grid-item xs-order-1 sm-order-2"></div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div class="az-grid-row xs-1 sm-2">
+                <div class="az-grid-item xl-order-1 sm-order-2"></div>
+                <div class="az-grid-item xl-order-2 sm-order-1"></div>
+            </div>
+
+        </div>
+
+    </form>
+
+</body>
+</html>
