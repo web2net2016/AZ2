@@ -54,12 +54,16 @@
             $("#GetURLParameters").off("click", GetURLParameters).on("click", GetURLParameters);
             $("#BytesConverter").off("click", BytesConverter).on("click", BytesConverter);
             $("#Guid").off("click", Guid).on("click", Guid);
-            $("#SetPageElement").off("click", SetPageElement).on("click", SetPageElement);
-            $("#StandardAlert").off("click", StandardAlert).on("click", StandardAlert);
+            $("#ElementSize").off("click", ElementSize).on("click", ElementSize);
+            $("#ResolutionConverter").off("click", ResolutionConverter).on("click", ResolutionConverter);
+            
 
+
+            $("#StandardAlert").off("click", StandardAlert).on("click", StandardAlert);
+            $("#SetPageElement").off("click", SetPageElement).on("click", SetPageElement);
+            $("#AZAnim").off("click", AZAnim).on("click", AZAnim);
             $("#ShowCoverSpin1").off("click", ShowCoverSpin1).on("click", ShowCoverSpin1);
             $("#ShowCoverSpin2").off("click", ShowCoverSpin2).on("click", ShowCoverSpin2);
-            $("#AZAnim").off("click", AZAnim).on("click", AZAnim);
         });
 
         function ClientStorageSet()
@@ -143,6 +147,24 @@
         {
             $("#guid").html("<br /><brown>" + AZGuid() + "</brown>");
         }
+
+        function ElementSize()
+        {
+            var _ElementSizeObj = AZElementSize($('body'));
+            $("#elementsize").html("<br /><brown>" + _ElementSizeObj.Width + " / " + _ElementSizeObj.Height + "</brown>");            
+        }
+
+        function ResolutionConverter()
+        {
+            $("#resolutionconverter").html("<br /><brown>" + AZResolutionConverter(4530, 3750) + "</brown>");
+        }
+
+
+
+
+
+
+
 
         function StandardAlert()
         {
@@ -236,8 +258,10 @@
                                 &emsp;&ensp;&emsp;&ensp;$.subscribeonce()<br />
                                 &emsp;&ensp;&emsp;&ensp;$.unsubscribe()<br />
                                 <br />
-                                <p style="word-break: break-word;">Based on <strong>jQuery Promise</strong>, we have created several functions you can subscribe on that will help you get a better flow in your code.
-                                The principles are based on <strong>Events & Delegates</strong>, which is a good form of programming practice and should replace all forms of use of <strong>Callback</strong>.</p>
+                                <p style="word-break: break-word;">
+                                    Based on <strong>jQuery Promise</strong>, we have created several functions you can subscribe on that will help you get a better flow in your code.
+                                    The principles are based on <strong>Events & Delegates</strong>, which is a good form of programming practice and should replace all forms of use of <strong>Callback</strong>.
+                                </p>
                                 <br />
                                 <br />
                                 <div class="jsHigh notranslate">
@@ -323,8 +347,10 @@
                                     AZClientStorage(ActionType, Name, Value);<br />
                                 </div>
                                 <br />
-                                <p style="word-break: break-word;">This function is used to store and retrieve data, (Items) from the browser. <strong>AZClientStorage</strong> will automatically test if your browser supports storage. First <strong>Local Storage</strong> is tested, and if your browser supports this, your data will be stored in <strong>Local Storage</strong>.
-                                However, if your browser does not support <strong>Local Storage</strong>, it will try to store data in <strong>Cookies</strong>.</p>
+                                <p style="word-break: break-word;">
+                                    This function is used to store and retrieve data, (Items) from the browser. <strong>AZClientStorage</strong> will automatically test if your browser supports storage. First <strong>Local Storage</strong> is tested, and if your browser supports this, your data will be stored in <strong>Local Storage</strong>.
+                                    However, if your browser does not support <strong>Local Storage</strong>, it will try to store data in <strong>Cookies</strong>.
+                                </p>
                                 <br />
                                 <br />
                                 <table width="100%">
@@ -554,6 +580,50 @@
                             </div>
 
                             <div class="az-code-property-wrapper">
+                                <property>AZ Element Size</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Parameters:</span> <brown>$('#HtmlElement') - HtmlElementId (String)</brown></default>
+                                <values><span>Return:</span> <mediumblue>object - width/height</mediumblue></values>
+                                <br />
+                                AZElementSize($('body'));
+                                <br />
+                                <br />
+                                <div id="elementsize" class="jsHigh notranslate"></div>
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="ElementSize" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Element Size</button>
+                                </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Resolution Converter</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Parameters:</span> <brown>Width - Height - Decimal</brown></default>
+                                <default><span>Default:</span> <brown>2 decimal</brown></default>
+                                <values><span>Return:</span> <brown>String</brown></values>
+                                <br />
+                                AZResolutionConverter(4530, 3750);
+                                <br />
+                                <br />
+                                <div id="resolutionconverter" class="jsHigh notranslate"></div>
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="ResolutionConverter" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Resolution Converter</button>
+                                </div>
+                                <br />
+                            </div>
+
+
+
+
+
+
+
+
+
+
+                            <div class="az-code-property-wrapper">
                                 <property>AZ Standard Alert</property>
                                 <type><span>Type:</span> <brown>Function</brown></type>
                                 <br />
@@ -718,8 +788,10 @@
                                 ObjPageData.Elements.$AZSetPageElement;<br />
                                 <br />
                                 <br />
-                                <p style="word-break: break-word;">The function looks for elements with <strong>ID</strong> or <strong>CLASS</strong> that match the elements in the list you submit in the function.
-                                When an element is found, the element is created as a <strong>jQuery</strong> object and added to the variable <strong>ObjPageData.Elements</strong>.</p>
+                                <p style="word-break: break-word;">
+                                    The function looks for elements with <strong>ID</strong> or <strong>CLASS</strong> that match the elements in the list you submit in the function.
+                                    When an element is found, the element is created as a <strong>jQuery</strong> object and added to the variable <strong>ObjPageData.Elements</strong>.
+                                </p>
                                 <br />
                                 <br />
                                 <p id="AZSetPageElement" style="display: none;">Open the console in your browser and find the tab - <strong>Console</strong>.</p>

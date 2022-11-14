@@ -1,4 +1,4 @@
-﻿// Additionally AZ-2.0 v.2 | (c) web2net AS
+﻿// AZ-2.0 Additionally | (c) web2net AS
 
 var AZSettings =
 {
@@ -1186,7 +1186,7 @@ function AZSerializeForm(Options)
                         consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + _ObjReturnValidation.Input + " - " + _ObjReturnValidation.Error });
                         if ($(".az-alert-active").length === 0)
                         {
-                            var _$RoleAlert = $("[role='alert']", _$Area);
+                            var _$RoleAlert = $("[role='alert']");
                             var _$ModalDialogWindow = window.top.$(".az-modal-dialog");
                             var _$Window = $("#az-window");
 
@@ -1588,7 +1588,7 @@ function AZStandardAlert(Options)
 
             if ($(".az-alert-active").length === 0)
             {
-                var _$RoleAlert = $("[role='alert']", _Main.$Area);
+                var _$RoleAlert = $("[role='alert']");
                 var _$ModalDialogWindow = window.top.$(".az-modal-dialog");
                 var _$Window = $("#az-window");
 

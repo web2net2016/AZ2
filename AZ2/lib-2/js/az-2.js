@@ -1899,7 +1899,7 @@ function AZClientStorage(ActionType, Name, Value)
         return _ReturnObj;
     }
 }
-// AZ-Functionlib v2.0.1 | (c) web2net AS
+// AZ-Functionlib AZ-2.0 v.2 | (c) web2net AS
 
 var ModalDialogScrollTop = 0;
 
@@ -3011,7 +3011,10 @@ function AZAccordion(Options)
                         _Main.$AccordionCard.eq(SelectedIndex).children("article").html(SelectedText);
                     }).fadeIn(function ()
                     {
-                        _Main.azArticleHeight();
+                        if (_Main.Options.azAccordionHeightStyle == "auto")
+                        {
+                            _Main.azArticleHeight();
+                        }
                     });
                 }, 500);
             };
@@ -3041,16 +3044,21 @@ function AZAccordion(Options)
                             }
                             $.publish("functionlib/azAccordionHeader",
                                 {
-                                    azEvent: e,
                                     azAccordionId: _Main.azAccordionId,
                                     azAccordionStatus: "closed",
                                     azAccordionActivated: _Main.AccordionActivated,
                                     azAccordionDeactivated: _Main.AccordionDeactivated,
+                                    azAccordionClickJQElement: $(e.target).length > 0 ? $(e.target) : "",
                                     azAccordionCardJQElement: $($SelectedAccordionHeader.parent()),
                                     azAccordionHeaderJQElement: $SelectedAccordionHeader,
                                     azAccordionArticleJQElement: $($SelectedAccordionHeader.siblings("article")),
-                                    azAccordionFooterJQElement: $($SelectedAccordionHeader.siblings("footer")),
-                                    azMain: _Main
+                                    azAccordionFooterJQElement: $($SelectedAccordionHeader.siblings("footer")).length > 0 ? $($SelectedAccordionHeader.siblings("footer")) : "",
+                                    $Accordion: _Main.$Accordion,
+                                    $AccordionCard: _Main.$AccordionCard,
+                                    $Header: _Main.$Header,
+                                    $Article: _Main.$Article,
+                                    $Footer: _Main.$Footer.length > 0 ? _Main.$Footer : "",
+                                    azExec: _Main.azExec
                                 });
                             _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
                         }
@@ -3062,16 +3070,21 @@ function AZAccordion(Options)
                             }
                             $.publish("functionlib/azAccordionHeader",
                                 {
-                                    azEvent: e,
                                     azAccordionId: _Main.azAccordionId,
                                     azAccordionStatus: "open",
                                     azAccordionActivated: $SelectedAccordionHeader.parent().index(),
                                     azAccordionDeactivated: _Main.AccordionDeactivated,
+                                    azAccordionClickJQElement: $(e.target).length > 0 ? $(e.target) : "",
                                     azAccordionCardJQElement: $($SelectedAccordionHeader.parent()),
                                     azAccordionHeaderJQElement: $SelectedAccordionHeader,
                                     azAccordionArticleJQElement: $($SelectedAccordionHeader.siblings("article")),
-                                    azAccordionFooterJQElement: $($SelectedAccordionHeader.siblings("footer")),
-                                    azMain: _Main
+                                    azAccordionFooterJQElement: $($SelectedAccordionHeader.siblings("footer")).length > 0 ? $($SelectedAccordionHeader.siblings("footer")) : "",
+                                    $Accordion: _Main.$Accordion,
+                                    $AccordionCard: _Main.$AccordionCard,
+                                    $Header: _Main.$Header,
+                                    $Article: _Main.$Article,
+                                    $Footer: _Main.$Footer.length > 0 ? _Main.$Footer : "",
+                                    azExec: _Main.azExec
                                 });
                             _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
                         }
@@ -3096,16 +3109,21 @@ function AZAccordion(Options)
                         }
                         $.publish("functionlib/azAccordionHeader",
                             {
-                                azEvent: e,
                                 azAccordionId: _Main.azAccordionId,
                                 azAccordionStatus: "open",
                                 azAccordionActivated: $SelectedAccordionHeader.parent().index(),
                                 azAccordionDeactivated: _Main.AccordionDeactivated,
+                                azAccordionClickJQElement: $(e.target).length > 0 ? $(e.target) : "",
                                 azAccordionCardJQElement: $($SelectedAccordionHeader.parent()),
                                 azAccordionHeaderJQElement: $SelectedAccordionHeader,
                                 azAccordionArticleJQElement: $($SelectedAccordionHeader.siblings("article")),
-                                azAccordionFooterJQElement: $($SelectedAccordionHeader.siblings("footer")),
-                                azMain: _Main
+                                azAccordionFooterJQElement: $($SelectedAccordionHeader.siblings("footer")).length > 0 ? $($SelectedAccordionHeader.siblings("footer")) : "",
+                                $Accordion: _Main.$Accordion,
+                                $AccordionCard: _Main.$AccordionCard,
+                                $Header: _Main.$Header,
+                                $Article: _Main.$Article,
+                                $Footer: _Main.$Footer.length > 0 ? _Main.$Footer : "",
+                                azExec: _Main.azExec
                             });
                         _Main.AccordionDeactivated = $SelectedAccordionHeader.parent().index();
                     }
@@ -3123,7 +3141,19 @@ function AZAccordion(Options)
             {
                 _Main.azSelectAccordion(0);
             }
-            $.publish("functionlib/azAccordionReady", _Main);
+            $.publish("functionlib/azAccordionReady",
+                {
+                    $Accordion: _Main.$Accordion,
+                    $AccordionCard: _Main.$AccordionCard,
+                    $Header: _Main.$Header,
+                    $Article: _Main.$Article,
+                    $Footer: _Main.$Footer,
+                    azAccordionId: _Main.azAccordionId,
+                    azSelectAccordion: _Main.azSelectAccordion,
+                    azChangeText: _Main.azChangeText,
+                    azExec: _Main.azExec,
+                    Options: _Main.Options
+                });
         }
     }
     else
@@ -3273,73 +3303,6 @@ function AZBackgroundSlider(Options)
     }
 }
 
-// AZ Circular Bar
-function AZCircularBar(Options)
-{
-    if (this instanceof AZCircularBar === true)
-    {
-        var _Defaults =
-        {
-            azCircularBarId: "",
-            azCircularBarSize: 120,
-            azCircularBarColor: "#BBBBBB",
-            azCircularBarValue: 0,
-            azCircularBarValueColor: "#0078D7",
-            azCircularBarLabel: "",
-            azCircularBarCaption: "",
-            azCircularBarCaptionColor: ""
-        };
-
-        var _Main;
-        if (Options && Options.length > 0)
-        {
-            $.each(Options, function (Index, ObjCurrentOption)
-            {
-                _Main = new AktivateAZCircularBar(ObjCurrentOption);
-                $.publish("functionlib/azCircularBarReady", _Main);
-            });
-        }
-        else if (IsEmpty(Options) === false)
-        {
-            _Main = new AktivateAZCircularBar(Options);
-            $.publish("functionlib/azCircularBarReady", _Main);
-        }
-
-        function AktivateAZCircularBar(ObjCurrentOption)
-        {
-            this.Options = $.extend({}, _Defaults, ObjCurrentOption || {});
-            if (this.Options.azCircularBarId != "")
-            {
-                this.$CircularBar = $("#" + this.Options.azCircularBarId);
-                this.$CircularBar.$Slice = $('<div></div>').addClass("slice");
-                this.$CircularBar.$Bar = $('<div></div>').addClass("bar").css({ "border-color": this.Options.azCircularBarValueColor });
-                this.$CircularBar.$Fill = $('<div></div>').addClass("fill").css({ "border-color": this.Options.azCircularBarValueColor });
-                this.$CircularBar.$Label = $('<span></span>').addClass("label").html(this.Options.azCircularBarLabel);
-                if (this.Options.azCircularBarCaption != "")
-                {
-                    this.$CircularBar.$Caption = $('<span></span>').addClass("caption").css({ "top": this.Options.azCircularBarSize, "color": this.Options.azCircularBarCaptionColor }).html(this.Options.azCircularBarCaption);
-                }
-                this.$CircularBar.$Slice.append(this.$CircularBar.$Bar).append(this.$CircularBar.$Fill);
-                this.$CircularBar.append(this.$CircularBar.$Label).append(this.$CircularBar.$Slice).append(this.$CircularBar.$Caption).addClass("c100 p" + this.Options.azCircularBarValue).css({ "background-color": this.Options.azCircularBarColor, "font-size": this.Options.azCircularBarSize });
-
-                this.ChangeCircularBar = function (Options)
-                {
-                    this.$CircularBar.$Bar.css({ "border-color": Options.azCircularBarValueColor });
-                    this.$CircularBar.$Fill.css({ "border-color": Options.azCircularBarValueColor });
-                    this.$CircularBar.$Label.html(Options.azCircularBarLabel);
-                    this.$CircularBar.$Caption.css({ "top": Options.azCircularBarSize, "color": Options.azCircularBarCaptionColor }).html(Options.azCircularBarCaption);
-                    this.$CircularBar.removeClass().addClass("c100 p" + Options.azCircularBarValue).css({ "background-color": Options.azCircularBarColor, "font-size": Options.azCircularBarSize });
-                };
-                return this;
-            }
-        }
-    }
-    else
-    {
-        return new AZCircularBar(Options);
-    }
-}
-
 // AZ Modal Dialog
 function AZModalDialog(Options)
 {
@@ -3478,7 +3441,7 @@ function AZModalDialog(Options)
             // AZModalDialog iFrame
             if (_Main.Options.azModalDialogiFrameURL != "")
             {
-                var _IFrameHeight = ((_Main.Options.azModalDialogHeight - AZElementHeight(_Main.$Titlebar)) - 6);
+                var _IFrameHeight = ((_Main.Options.azModalDialogHeight - AZElementSize(_Main.$Titlebar).Height) - 6);
                 if (_Main.Options.azModalDialogTitlebar === false)
                 {
                     _IFrameHeight = (_Main.Options.azModalDialogHeight - 6);
@@ -3632,7 +3595,7 @@ function AZModalDialog(Options)
                 // AZModalDialog iFrame
                 if (_Main.Options.azModalDialogiFrameURL != "")
                 {
-                    var _IFrameHeight = ((_Main.ModalDialogResize.azModalDialogHeight - AZElementHeight(_Main.$Titlebar)) - 6);
+                    var _IFrameHeight = ((_Main.ModalDialogResize.azModalDialogHeight - AZElementSize(_Main.$Titlebar).Height) - 6);
                     if (_Main.Options.azModalDialogTitlebar === false)
                     {
                         _IFrameHeight = (_Main.Options.azModalDialogHeight - 6);
@@ -4086,7 +4049,7 @@ function AZWindow(Options)
             if (_Main.Options.azWindowContentHeight === false)
             {
                 _Main.$Window.height(_Main.Options.azWindowHeight);
-                _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementHeight(_Main.$Titlebar)));
+                _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementSize(_Main.$Titlebar).Height));
                 if (_Main.Options.azWindowTitlebar === false)
                 {
                     _Main.$Dialog.height(_Main.Options.azWindowHeight);
@@ -4097,7 +4060,7 @@ function AZWindow(Options)
                 if (_Main.$Window.height() < 100)
                 {
                     _Main.$Window.height(100);
-                    _Main.$Dialog.height((100 - AZElementHeight(_Main.$Titlebar)));
+                    _Main.$Dialog.height((100 - AZElementSize(_Main.$Titlebar).Height));
                     if (_Main.Options.azWindowTitlebar === false)
                     {
                         _Main.$Dialog.height(100);
@@ -4234,7 +4197,7 @@ function AZWindow(Options)
                 }
                 _Main.$Window.width(_Main.WindowResizeOptions.azWindowWidth);
                 _Main.$Window.height(_Main.WindowResizeOptions.azWindowHeight);
-                _Main.$Dialog.height((_Main.WindowResizeOptions.azWindowHeight - AZElementHeight(_Main.$Titlebar)));
+                _Main.$Dialog.height((_Main.WindowResizeOptions.azWindowHeight - AZElementSize(_Main.$Titlebar).Height));
                 if (_Main.Options.azWindowTitlebar === false)
                 {
                     _Main.$Dialog.height(_Main.WindowResizeOptions.azWindowHeight);
@@ -4723,42 +4686,6 @@ function AZRangeMulti(Options)
     }
 }
 
-// AZ Portfolio
-var _$PortfolioMenu = {};
-var _$PortfolioContent = {};
-function setPortfolio()
-{
-    _$PortfolioMenu = $(".az-portfolio-menu");
-    _$PortfolioContent = $(".az-portfolio-content");
-    _$PortfolioMenu.off().on("click", "li", function (e)
-    {
-        var _$MenuFilter = $(this).attr('data-filter');
-        if (_$MenuFilter == "*")
-        {
-            _$PortfolioContent.children("li").removeClass("az-portfolio-content-hidden");
-        }
-        else
-        {
-            _$PortfolioContent.children("li").not(_$MenuFilter).addClass("az-portfolio-content-hidden");
-            _$PortfolioContent.children(_$MenuFilter).removeClass("az-portfolio-content-hidden");
-        }
-    });
-    if ($(".az-portfolio-content-hidden", _$PortfolioContent).length == 0)
-    {
-        _$PortfolioContent.height(0);
-        _$PortfolioContent.height(_$PortfolioContent.parent().height() + 28);
-    }
-}
-
-function setParallaxImages(ParallaxImages)
-{
-    $.each(ParallaxImages, function (i, ImagesContent)
-    {
-        var _CurrentImage = $('#img' + (i + 1));
-        _CurrentImage.css({ 'background-image': 'url(' + ImagesContent.url + ')', 'height': ImagesContent.height, 'opacity': ImagesContent.opacity });
-    });
-}
-
 function AZSortJSONArray(Arr, Prop, Order)
 {
     return AZSortArray(Arr, Prop, Order);
@@ -5117,7 +5044,7 @@ function AZSetCheckbox($SelectedCheckbox)
 function AZResolutionConverter(Width, Height, Decimal)
 {
     var _Return = "0 MP";
-    if (Width !== null && Width !== undefined && Width != "" && Height !== null && Height !== undefined && Height != "")
+    if (AZIsNullOrEmpty(Width) === false && AZIsNullOrEmpty(Height) === false)
     {
         var _Decimal = Decimal === 0 ? 0 : Decimal || 2;
         _Return = ((Width * Height) / 1000000).toFixed(_Decimal) + ' MP';
@@ -5138,14 +5065,48 @@ function AZResetForm(Options)
     }
 }
 
-function AZElementHeight($Object)
+function AZElementSize(Element)
 {
-    var _Return = 0;
-    var _Element = $Object[0];
-    var _Height = _Element.offsetHeight;
-    var _Style = window.getComputedStyle ? getComputedStyle(_Element, null) : _Element.currentStyle;
-    var _MarginTop = parseInt(_Style.marginTop) || 0;
-    var _MarginBottom = parseInt(_Style.marginBottom) || 0;
-    _Return = (_Height + _MarginTop + _MarginBottom);
-    return _Return;
+    if (Element instanceof Object)
+    {
+        if (Element.length > 0)
+        {
+            return GetElementSize(Element);
+        }
+        else
+        {
+            return {};
+        }
+    }
+    else if (typeof Element == 'string')
+    {
+        if ($('#' + Element).length > 0)
+        {
+            return GetElementSize($('#' + Element));
+        }
+        else
+        {
+            return {};
+        }
+    }
+    else
+    {
+        return {};
+    }
+
+    function GetElementSize($Object)
+    {
+        var _Return = {};
+        var _Element = $Object[0];
+        var _Style = window.getComputedStyle ? getComputedStyle(_Element, null) : _Element.currentStyle;
+        var _Width = _Element.offsetWidth;
+        var _Height = _Element.offsetHeight;
+        var _MarginTop = parseInt(_Style.marginTop) || 0;
+        var _MarginBottom = parseInt(_Style.marginBottom) || 0;
+        var _MarginLeft = parseInt(_Style.marginLeft) || 0;
+        var _MarginRight = parseInt(_Style.marginRight) || 0;
+        _Return.Width = (_Width + _MarginLeft + _MarginRight);
+        _Return.Height = (_Height + _MarginTop + _MarginBottom);
+        return _Return;
+    }
 }

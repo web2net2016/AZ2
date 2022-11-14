@@ -69,7 +69,6 @@
   <ItemGroup>
     <Content Include="lib-2\admin\index\index.html" />
     <Content Include="lib-2\azgrid.html" />
-    <Content Include="lib-2\azdragdrop.html" />
     <Content Include="lib-2\azfullwindow.html" />
     <Content Include="lib-2\css\az-2.css" />
     <Content Include="lib-2\css\az-2.min.css">
@@ -107,10 +106,8 @@
     <Content Include="lib-2\azsnackbar.html" />
     <Content Include="lib-2\azslidein.html" />
     <Content Include="lib-2\azwindow.html" />
-    <Content Include="lib-2\azcircularbar.html" />
     <Content Include="lib-2\azcard.html" />
     <Content Include="lib-2\color.html" />
-    <Content Include="lib-2\css\circularbar.css" />
     <Content Include="lib-2\css\flex.css" />
     <Content Include="lib-2\css\slidein.css" />
     <Content Include="lib-2\css\snackbar.css" />
@@ -131,13 +128,10 @@
     <Content Include="lib-2\css\cardlayout.css" />
     <Content Include="lib-2\css\navbar.css" />
     <Content Include="lib-2\css\normalize.css" />
-    <Content Include="lib-2\css\parallax.css" />
-    <Content Include="lib-2\css\portfolio.css" />
     <Content Include="lib-2\css\sidebar.css" />
     <Content Include="lib-2\css\slideshow.css" />
     <Content Include="lib-2\css\table.css" />
     <Content Include="lib-2\css\text.css" />
-    <Content Include="lib-2\css\timeline.css" />
     <Content Include="lib-2\fontawesome\fontawesome-all.css" />
     <Content Include="lib-2\jqueryui\images\ui-icons_444444_256x240.png" />
     <Content Include="lib-2\jqueryui\images\ui-icons_555555_256x240.png" />
@@ -162,15 +156,10 @@
     <Content Include="lib-2\lib\az-codecolor.css" />
     <Content Include="lib-2\lib\additionally.css" />
     <Content Include="lib-2\azcardlayout.html" />
-    <Content Include="lib-2\mobile.html" />
     <Content Include="lib-2\navbar.html" />
-    <Content Include="lib-2\parallax.html" />
-    <Content Include="lib-2\portfolio.html" />
-    <Content Include="lib-2\sendmail.html" />
     <Content Include="lib-2\sidebar.html" />
     <Content Include="lib-2\slideshow.html" />
     <Content Include="lib-2\template.html" />
-    <Content Include="lib-2\timeline.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

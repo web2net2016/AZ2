@@ -1,4 +1,4 @@
-﻿/* Additionally AZ-2.0 v.2 | (c) web2net AS */
+﻿/* AZ-2.0 Additionally | (c) web2net AS */
 html
 {
     font-family: Verdana, sans-serif;
@@ -234,7 +234,6 @@ form.css
 - Input Animated
 - Alert
 - Dropdown
-- Input Spinner
 - Badge
 - Cover Spin
 - Fieldset
@@ -321,6 +320,8 @@ form.css
     background-color: transparent;
     color: var(--default-color);
 }
+
+
 
 .az-form-group .az-button.default
 {
@@ -466,14 +467,8 @@ form.css
                 margin-right: 7px !important;
             }
 
-/* Input Spinner */
-.az-form-group .az-input-spinner
-{
-    border: 1px solid #BBBBBB;
-    background-color: #FFFFFF;
-}
-
 /* Badge */
+
 
 /* Cover Spin Text */
 #az-cover-spin > div
@@ -667,6 +662,125 @@ navbar.css
 }
 
 /*--------------------------------------------------------
+Parallax 
+parallax.css    
+-----------------------------------------------------------*/
+
+
+/*--------------------------------------------------------
+Portfolio 
+portfolio.css    
+-----------------------------------------------------------*/
+.az-portfolio-menu
+{
+}
+
+    .az-portfolio-menu li
+    {
+        background-color: #00929F;
+        color: #FFFFFF;
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+
+        .az-portfolio-menu li:hover
+        {
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+/* Content */
+.az-portfolio-content li
+{
+    width: 380px;
+}
+
+    .az-portfolio-content li > .az-portfolio-card, .az-portfolio-content li > img
+    {
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+
+        .az-portfolio-content li > .az-portfolio-card > header
+        {
+            background-color: var(--primary-background-color);
+        }
+
+            .az-portfolio-content li > .az-portfolio-card > header > h1
+            {
+                font-size: 14px;
+                color: #FFFFFF;
+            }
+
+        .az-portfolio-content li > .az-portfolio-card > article
+        {
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+            .az-portfolio-content li > .az-portfolio-card > article > h1
+            {
+                font-size: 14px;
+            }
+
+            .az-portfolio-content li > .az-portfolio-card > article > img
+            {
+                width: 380px;
+            }
+
+        .az-portfolio-content li > .az-portfolio-card > footer
+        {
+            background-color: var(--primary-background-color);
+            color: #FFFFFF;
+        }
+
+            .az-portfolio-content li > .az-portfolio-card > footer > h1
+            {
+                font-size: 14px;
+            }
+
+@media (max-width: 576px)
+{
+    .az-portfolio-content li > .az-portfolio-card > article > img
+    {
+        width: 330px;
+    }
+
+    .az-portfolio-content li
+    {
+        width: 330px;
+    }
+}
+
+/* Card Overlay */
+.az-portfolio-content li > .az-portfolio-card > .az-portfolio-overlay
+{
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+    .az-portfolio-content li > .az-portfolio-card > .az-portfolio-overlay > .az-portfolio-overlay-card
+    {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+
+        .az-portfolio-content li > .az-portfolio-card > .az-portfolio-overlay > .az-portfolio-overlay-card > article
+        {
+            background-color: #00929F;
+            color: #FFFFFF;
+        }
+
+            .az-portfolio-content li > .az-portfolio-card > .az-portfolio-overlay > .az-portfolio-overlay-card > article > h1
+            {
+                font-size: 14px;
+            }
+
+
+/*--------------------------------------------------------
 Sidebar 
 sidebar.css    
 -----------------------------------------------------------*/
@@ -839,6 +953,91 @@ Text
 text.css    
 -----------------------------------------------------------*/
 
+
+/*--------------------------------------------------------
+Timeline 
+timeline.css    
+-----------------------------------------------------------*/
+.az-timeline::after
+{
+    background-color: #00929F;
+}
+
+/* Circles */
+.az-timeline > .az-timeline-container::after
+{
+    border: 4px solid #FF9F55;
+    background-color: #FFFFFF;
+}
+
+/* Arrows (pointing right) */
+.az-timeline > .az-timeline-container.left::before
+{
+    border: medium solid #FF9F55;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent #FF9F55;
+}
+
+/* Arrows (pointing left) */
+.az-timeline > .az-timeline-container.right::before
+{
+    border: medium solid #FF9F55;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #FF9F55 transparent transparent;
+}
+
+/* Responsive */
+@media (max-width: 576px)
+{
+    .az-timeline > .az-timeline-container.left::before, .az-timeline > .az-timeline-container.right::before
+    {
+        border: medium solid #FF9F55;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent #FF9F55 transparent transparent;
+    }
+}
+
+/* Content */
+.az-timeline > .az-timeline-container > .az-timeline-card
+{
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+    .az-timeline > .az-timeline-container > .az-timeline-card > header
+    {
+        background-color: var(--primary-background-color);
+    }
+
+        .az-timeline > .az-timeline-container > .az-timeline-card > header > h1
+        {
+            font-size: 14px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+        }
+
+    .az-timeline > .az-timeline-container > .az-timeline-card > article
+    {
+        background-color: #FFFFFF;
+        color: #000000;
+    }
+
+        .az-timeline > .az-timeline-container > .az-timeline-card > article > h1
+        {
+            font-size: 14px;
+        }
+
+    .az-timeline > .az-timeline-container > .az-timeline-card > footer
+    {
+        background-color: var(--primary-background-color);
+        color: #FFFFFF;
+    }
+
+        .az-timeline > .az-timeline-container > .az-timeline-card > footer > h1
+        {
+            font-size: 14px;
+        }
 
 /*--------------------------------------------------------
 Window
