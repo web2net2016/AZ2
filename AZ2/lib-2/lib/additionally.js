@@ -741,7 +741,7 @@ function AZSetValidation(Options)
 function AZSetInputTypeEvents()
 {
     var _DefaultLanguage = AZClientStorage("get", "language", "");
-    if (typeof _DefaultLanguage == "")
+    if (_DefaultLanguage == "")
     {
         _DefaultLanguage = AZSettings.DefaultLanguage;
     }
@@ -1542,7 +1542,7 @@ function AZSetTimeFormat(Time)
 function AZIsValidDecimal(Float)
 {
     var _DefaultLanguage = AZClientStorage("get", "language", "");
-    if (typeof _DefaultLanguage == "")
+    if (_DefaultLanguage == "")
     {
         _DefaultLanguage = AZSettings.DefaultLanguage;
     }

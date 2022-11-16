@@ -57,7 +57,7 @@ $(document).ready(function ()
         });
 
         var _DefaultLanguage = AZClientStorage("get", "language", "");
-        if (typeof _DefaultLanguage == "")
+        if (_DefaultLanguage == "")
         {
             _DefaultLanguage = "nb-NO";
         }
@@ -3207,5 +3207,59 @@ function AZElementSize(Element)
         _Return.Width = (_Width + _MarginLeft + _MarginRight);
         _Return.Height = (_Height + _MarginTop + _MarginBottom);
         return _Return;
+    }
+}
+
+function AZTooltip(Options)
+{
+    var _Lang = false;
+    if (AZIsNullOrEmpty(Options) === false && AZIsEmpty(Options) === false)
+    {
+        if (Options.hasOwnProperty('LanguageCode') === true && AZIsNullOrEmpty(Options.LanguageCode) === false)
+        {
+            _Lang = true;
+        }
+    }
+    var _Defaults =
+    {
+        LanguageCode: "nb-NO",
+        Url: "/lib/help/help.html"
+    };
+    var _Options = $.extend({}, _Defaults, Options || {});
+    if (_Lang === false)
+    {
+        var _DefaultLanguage = AZClientStorage("get", "language", "");
+        if (_DefaultLanguage != "")
+        {
+            _Options.LanguageCode = _DefaultLanguage;
+        }
+    }
+    $('body').tooltip(
+        {
+            items: "[data-help]",
+            content: function ()
+            {
+                var _$Div = $('<div>');
+                _$Div.load(_Options.Url + " #" + $(this).attr("data-help") + "-" + _Options.LanguageCode);
+                return _$Div
+            }
+        });
+}
+
+function AZLoadTemplates(Options)
+{
+    var _Defaults =
+    {
+        TemplateId: "",
+        Url: "/lib/template/template.html"
+    };
+    var _Options = $.extend({}, _Defaults, Options || {});
+
+    if (AZIsNullOrEmpty(_Options.TemplateId) === false && AZIsNullOrEmpty(_Options.TemplateId) === false)
+    {
+        $('<div>').load(_Options.Url + " #" + _Options.TemplateId, function ()
+        {
+            $.publish("functionlib/azLoadTemplates", $($(this).html()).html());
+        });
     }
 }
