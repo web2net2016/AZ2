@@ -2,6 +2,9 @@
   {
     "outputFileName": "lib-2/css/az-2.css",
     "inputFiles": [
+      "lib-2/fontawesome/fontawesome-all.css",
+      "lib-2/jqueryui/jquery-ui.min.css",
+      "lib-2/jquerytimepicker/jquery.ui.timepicker.css",
       "lib-2/css/accordion.css",
       "lib-2/css/backgroundslider.css",
       "lib-2/css/card.css",
@@ -14,6 +17,7 @@
       "lib-2/css/floatgrid.css",
       "lib-2/css/form.css",
       "lib-2/css/fullwindow.css",
+      "lib-2/css/jqueryui.css",
       "lib-2/css/modaldialog.css",
       "lib-2/css/navbar.css",
       "lib-2/css/normalize.css",
@@ -24,10 +28,7 @@
       "lib-2/css/table.css",
       "lib-2/css/tabs.css",
       "lib-2/css/text.css",
-      "lib-2/css/window.css",
-      "lib-2/fontawesome/fontawesome-all.css",
-      "lib-2/jqueryui/jquery-ui.min.css",
-      "lib-2/jquerytimepicker/jquery.ui.timepicker.css"
+      "lib-2/css/window.css"
     ]
   },
   {

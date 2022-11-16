@@ -10,16 +10,29 @@
         position: relative;
         overflow: visible;
         white-space: normal;
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     }
 
         .az-accordion > .az-accordion-card > header
         {
+            padding: 7px;
+            background-color: var(--primary-background-color);
+            color: #FFFFFF;
             cursor: pointer;
         }
+
+            .az-accordion > .az-accordion-card > header:hover
+            {
+                background-color: #0bb2d4;
+                color: #FFFFFF;
+            }
 
             .az-accordion > .az-accordion-card > header > *
             {
                 display: inline-block;
+                font-size: 14px;
             }
 
             .az-accordion > .az-accordion-card > header > span.az-accordion-icon
@@ -27,7 +40,30 @@
                 float: right;
             }
 
+                .az-accordion > .az-accordion-card > header > span.az-accordion-icon > i
+                {
+                    font-size: 12px;
+                    margin-right: 2px;
+                    margin-top: 4px;
+                }
+
         .az-accordion > .az-accordion-card > article
         {
             display: none;
+            padding: 7px;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+            .az-accordion > .az-accordion-card > article > *
+            {
+                font-size: 14px;
+            }
+
+        .az-accordion > .az-accordion-card > header.az-accordion-header-active
+        {
+        }
+
+        .az-accordion > .az-accordion-card > article.az-accordion-article-active
+        {
         }

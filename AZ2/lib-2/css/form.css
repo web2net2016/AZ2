@@ -34,6 +34,8 @@
         vertical-align: middle;
         line-height: 1;
         text-align: center;
+        border: 1px solid #BBBBBB;
+        background-color: #DDDDDD;
     }
 
         .az-form-group .az-input-group-addon.xs
@@ -65,6 +67,8 @@
         -moz-transition: box-shadow ease-in-out .15s;
         -o-transition: box-shadow ease-in-out .15s;
         transition: box-shadow ease-in-out .15s;
+        border: 1px solid #BBBBBB;
+        background-color: #FFFFFF;
     }
 
         .az-form-group .az-input.xs
@@ -181,6 +185,8 @@
         -moz-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
         -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
         transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        border: 1px solid #BBBBBB;
+        background-color: #FFFFFF;
     }
 
         .az-form-group .az-textarea.xs
@@ -243,6 +249,8 @@
         -moz-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
         -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
         transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        border: 1px solid #BBBBBB;
+        background-color: #FFFFFF;
     }
 
         .az-form-group .az-select.xs
@@ -339,6 +347,8 @@
         padding: 0 7px 0 7px;
         box-sizing: border-box;
         text-align: center;
+        border: 1px solid #BBBBBB;
+        background-color: #FFFFFF;
     }
 
         .az-form-group .az-input-spinner.xs
@@ -446,6 +456,7 @@
             -moz-transition: .4s;
             -o-transition: .4s;
             transition: .4s;
+            background-color: #CCCCCC;
         }
 
             .az-form-group .az-switch .az-slider:before
@@ -460,6 +471,7 @@
                 -moz-transition: .4s;
                 -o-transition: .4s;
                 transition: .4s;
+                background-color: #FFFFFF;
             }
 
         .az-form-group .az-switch.xs .az-slider.xs:before
@@ -486,14 +498,19 @@
             bottom: 4px;
         }
 
-        .az-form-group .az-switch input:checked + .az-slider:before
+        .az-form-group .az-switch input:checked + .az-slider
         {
-            -webkit-transform: translateX(16px);
-            -moz-transform: translateX(16px);
-            -ms-transform: translateX(16px);
-            -o-transform: translateX(16px);
-            transform: translateX(16px);
+            background-color: var(--primary-background-color);
         }
+
+            .az-form-group .az-switch input:checked + .az-slider:before
+            {
+                -webkit-transform: translateX(16px);
+                -moz-transform: translateX(16px);
+                -ms-transform: translateX(16px);
+                -o-transform: translateX(16px);
+                transform: translateX(16px);
+            }
 
         .az-form-group .az-switch.xs input:checked + .az-slider.xs:before
         {
@@ -539,6 +556,7 @@
         -webkit-appearance: none;
         width: 100%;
         border-radius: 50px !important;
+        background-color: #DEDEDE;
     }
 
         .az-form-group .az-range:focus
@@ -549,6 +567,7 @@
         .az-form-group .az-range::-webkit-slider-runnable-track
         {
             height: 20px;
+            background-color: #CCCCCC;
         }
 
         .az-form-group .az-range.xs::-webkit-slider-runnable-track
@@ -589,6 +608,7 @@
         .az-form-group .az-range::-ms-track
         {
             height: 10px;
+            background-color: #CCCCCC;
         }
 
         .az-form-group .az-range.xs::-ms-track
@@ -633,6 +653,7 @@
             height: 30px;
             margin-top: -5px;
             cursor: pointer;
+            background-color: var(--primary-background-color);
         }
 
         .az-form-group .az-range.xs::-webkit-slider-thumb
@@ -683,6 +704,7 @@
             width: 20px;
             height: 30px;
             cursor: pointer;
+            background-color: var(--primary-background-color);
         }
 
         .az-form-group .az-range.xs::-ms-thumb
@@ -915,203 +937,309 @@
                 vertical-align: middle;
             }
 
-.az-form-group .az-button-disabled
-{
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-    cursor: default;
-}
-
-/* Input Animated */
-.az-form-group .az-input-group-addon-animated
-{
-    display: table-cell;
-    width: 1%;
-    padding: 0 9px 0 9px;
-    vertical-align: middle;
-    line-height: 1;
-    text-align: center;
-}
-
-    .az-form-group .az-input-group-addon-animated.xs
+    .az-form-group .az-button-disabled
     {
-        padding: 0 8px 0 8px;
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+        box-shadow: none !important;
+        cursor: default;
+    }
+
+    .az-form-group .az-button.outlined-primary
+    {
+        border: 1px solid var(--primary-background-color);
+        background-color: transparent;
+        color: var(--default-color);
+    }
+
+    .az-form-group .az-button.default
+    {
+        background-color: var(--default-background-color);
+        color: var(--default-color);
+    }
+
+    .az-form-group .az-button.default
+    {
+        background-color: var(--default-background-color);
+        color: var(--default-color);
+    }
+
+    .az-form-group .az-button.primary
+    {
+        background-color: var(--primary-background-color);
+        color: var(--primary-color);
+    }
+
+    .az-form-group .az-button.success
+    {
+        background-color: var(--success-background-color);
+        color: var(--success-color);
+    }
+
+    .az-form-group .az-button.info
+    {
+        background-color: var(--info-background-color);
+        color: var(--info-color);
+    }
+
+    .az-form-group .az-button.warning
+    {
+        background-color: var(--warning-background-color);
+        color: var(--warning-color);
+    }
+
+    .az-form-group .az-button.danger
+    {
+        background-color: var(--danger-background-color);
+        color: var(--danger-color);
+    }
+
+    .az-form-group .az-button.link
+    {
+        background-color: transparent;
+        border: none;
+    }
+
+        .az-form-group .az-button.link:hover
+        {
+            text-decoration: underline;
+        }
+
+    /* Input Animated */
+    .az-form-group .az-input-group-addon-animated
+    {
+        display: table-cell;
+        width: 1%;
+        padding: 0 9px 0 9px;
+        vertical-align: middle;
+        line-height: 1;
+        text-align: center;
+        background-color: transparent;
+    }
+
+        .az-form-group .az-input-group-addon-animated.xs
+        {
+            padding: 0 8px 0 8px;
+            font-size: 0.85em;
+        }
+
+        .az-form-group .az-input-group-addon-animated.sm
+        {
+            padding: 0 10px 0 10px;
+            font-size: 1.4em;
+        }
+
+        .az-form-group .az-input-group-addon-animated.md
+        {
+            padding: 0 11px 0 11px;
+            font-size: 1.7em;
+        }
+
+    .az-form-group .az-input-animated
+    {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 27px;
+        border: 0;
+        border-bottom: 1px solid #CCCCCC !important;
+        background-color: transparent;
+    }
+
+        .az-form-group .az-input-animated.xs
+        {
+            height: 22px;
+            font-size: 0.85em;
+        }
+
+        .az-form-group .az-input-animated.sm
+        {
+            height: 32px;
+            font-size: 1.1em;
+        }
+
+        .az-form-group .az-input-animated.md
+        {
+            height: 37px;
+            font-size: 1.2em;
+        }
+
+        .az-form-group .az-input-animated:focus
+        {
+            outline: 0;
+            -webkit-animation: input-focus 0.2s 1 forwards;
+            -moz-animation: input-focus 0.2s 1 forwards;
+            -o-animation: input-focus 0.2s 1 forwards;
+            animation: input-focus 0.2s 1 forwards;
+            border-bottom: 1px solid #666666 !important;
+        }
+
+            .az-form-group .az-input-animated:focus ~ .az-label-animated
+            {
+                top: -15px;
+                opacity: 1;
+            }
+
+    .az-form-group .az-label-animated
+    {
+        position: absolute;
+        top: 7px;
+        opacity: 0.5;
+        -webkit-transition: 0.2s ease top;
+        -moz-transition: 0.2s ease top;
+        -o-transition: 0.2s ease top;
+        transition: 0.2s ease top;
+    }
+
+        .az-form-group .az-label-animated.xs
+        {
+            top: 5px;
+            font-size: 0.85em;
+        }
+
+        .az-form-group .az-label-animated.sm
+        {
+            top: 9px;
+            font-size: 1.1em;
+        }
+
+        .az-form-group .az-label-animated.md
+        {
+            top: 11px;
+            font-size: 1.2em;
+        }
+
+    /* Alert */
+    .az-form-group .az-alert
+    {
+        padding: 6px;
+        text-align: center;
+    }
+
+        .az-form-group .az-alert.xs
+        {
+            padding: 5px;
+            font-size: 0.85em;
+        }
+
+        .az-form-group .az-alert.sm
+        {
+            padding: 7.5px;
+            font-size: 1.1em;
+        }
+
+        .az-form-group .az-alert.md
+        {
+            padding: 9px;
+            font-size: 1.2em;
+        }
+
+        .az-form-group .az-alert.az-round
+        {
+            border-radius: 4px;
+        }
+
+            .az-form-group .az-alert.az-round.xs
+            {
+                border-radius: 4px;
+            }
+
+            .az-form-group .az-alert.az-round.sm
+            {
+                border-radius: 4px;
+            }
+
+            .az-form-group .az-alert.az-round.md
+            {
+                border-radius: 4px;
+            }
+
+    .az-form-group .az-alert-icons:first-child i
+    {
+        float: left;
+        margin: 7px 0 0 9px;
+    }
+
+    .az-form-group.xs .az-alert-icons:first-child i
+    {
         font-size: 0.85em;
     }
 
-    .az-form-group .az-input-group-addon-animated.sm
+    .az-form-group.sm .az-alert-icons:first-child i
     {
-        padding: 0 10px 0 10px;
         font-size: 1.4em;
     }
 
-    .az-form-group .az-input-group-addon-animated.md
+    .az-form-group.md .az-alert-icons:first-child i
     {
-        padding: 0 11px 0 11px;
         font-size: 1.7em;
     }
 
-.az-form-group .az-input-animated
-{
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 27px;
-    border: 0;
-}
-
-    .az-form-group .az-input-animated.xs
+    .az-form-group .az-alert-icons:last-child i
     {
-        height: 22px;
+        float: right;
+        margin: -21px 9px 0 0;
+    }
+
+    .az-form-group.xs .az-alert-icons:last-child i
+    {
         font-size: 0.85em;
+        margin: -17px 9px 0 0;
     }
 
-    .az-form-group .az-input-animated.sm
+    .az-form-group.sm .az-alert-icons:last-child i
     {
-        height: 32px;
-        font-size: 1.1em;
+        font-size: 1.4em;
+        margin: -26px 9px 0 0;
     }
 
-    .az-form-group .az-input-animated.md
+    .az-form-group.md .az-alert-icons:last-child i
     {
-        height: 37px;
-        font-size: 1.2em;
+        font-size: 1.7em;
+        margin: -30px 9px 0 0;
     }
 
-    .az-form-group .az-input-animated:focus
+    .az-form-group .az-alert-default,
+    .az-alert-default
     {
-        outline: 0;
-        -webkit-animation: input-focus 0.2s 1 forwards;
-        -moz-animation: input-focus 0.2s 1 forwards;
-        -o-animation: input-focus 0.2s 1 forwards;
-        animation: input-focus 0.2s 1 forwards;
+        background-color: var(--default-background-color) !important;
+        color: var(--default-color) !important;
     }
 
-        .az-form-group .az-input-animated:focus ~ .az-label-animated
-        {
-            top: -15px;
-            opacity: 1;
-        }
-
-.az-form-group .az-label-animated
-{
-    position: absolute;
-    top: 7px;
-    opacity: 0.5;
-    -webkit-transition: 0.2s ease top;
-    -moz-transition: 0.2s ease top;
-    -o-transition: 0.2s ease top;
-    transition: 0.2s ease top;
-}
-
-    .az-form-group .az-label-animated.xs
+    .az-form-group .az-alert-primary,
+    .az-alert-primary
     {
-        top: 5px;
-        font-size: 0.85em;
+        background-color: var(--primary-background-color) !important;
+        color: var(--primary-color) !important;
     }
 
-    .az-form-group .az-label-animated.sm
+    .az-form-group .az-alert-success,
+    .az-alert-success
     {
-        top: 9px;
-        font-size: 1.1em;
+        background-color: var(--success-background-color) !important;
+        color: var(--success-color) !important;
     }
 
-    .az-form-group .az-label-animated.md
+    .az-form-group .az-alert-info,
+    .az-alert-info
     {
-        top: 11px;
-        font-size: 1.2em;
+        background-color: var(--info-background-color) !important;
+        color: var(--info-color) !important;
     }
 
-/* Alert */
-.az-form-group .az-alert
-{
-    padding: 6px;
-    text-align: center;
-}
-
-    .az-form-group .az-alert.xs
+    .az-form-group .az-alert-warning,
+    .az-alert-warning
     {
-        padding: 5px;
-        font-size: 0.85em;
+        background-color: var(--warning-background-color) !important;
+        color: var(--warning-color) !important;
     }
 
-    .az-form-group .az-alert.sm
+    .az-form-group .az-alert-danger,
+    .az-alert-danger
     {
-        padding: 7.5px;
-        font-size: 1.1em;
+        background-color: var(--danger-background-color) !important;
+        color: var(--danger-color) !important;
     }
-
-    .az-form-group .az-alert.md
-    {
-        padding: 9px;
-        font-size: 1.2em;
-    }
-
-    .az-form-group .az-alert.az-round
-    {
-        border-radius: 4px;
-    }
-
-        .az-form-group .az-alert.az-round.xs
-        {
-            border-radius: 4px;
-        }
-
-        .az-form-group .az-alert.az-round.sm
-        {
-            border-radius: 4px;
-        }
-
-        .az-form-group .az-alert.az-round.md
-        {
-            border-radius: 4px;
-        }
-
-.az-form-group .az-alert-icons:first-child i
-{
-    float: left;
-    margin: 7px 0 0 9px;
-}
-
-.az-form-group.xs .az-alert-icons:first-child i
-{
-    font-size: 0.85em;
-}
-
-.az-form-group.sm .az-alert-icons:first-child i
-{
-    font-size: 1.4em;
-}
-
-.az-form-group.md .az-alert-icons:first-child i
-{
-    font-size: 1.7em;
-}
-
-.az-form-group .az-alert-icons:last-child i
-{
-    float: right;
-    margin: -21px 9px 0 0;
-}
-
-.az-form-group.xs .az-alert-icons:last-child i
-{
-    font-size: 0.85em;
-    margin: -17px 9px 0 0;
-}
-
-.az-form-group.sm .az-alert-icons:last-child i
-{
-    font-size: 1.4em;
-    margin: -26px 9px 0 0;
-}
-
-.az-form-group.md .az-alert-icons:last-child i
-{
-    font-size: 1.7em;
-    margin: -30px 9px 0 0;
-}
 
 /* Dropdown */
 .az-dropdown-ul
@@ -1123,17 +1251,35 @@
 .az-dropdown-layout
 {
     min-width: 160px;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
     .az-dropdown-layout > li
     {
         cursor: pointer;
+        border-top: 1px solid #cccccc;
     }
 
         .az-dropdown-layout > li > a
         {
             display: block;
+            padding: 7px;
+            color: #000000;
         }
+
+            .az-dropdown-layout > li > a:hover
+            {
+                background-color: #cccccc;
+                color: #FFFFFF;
+            }
+
+            .az-dropdown-layout > li > a > i
+            {
+                margin-right: 7px !important;
+            }
 
 .az-dropdown-hover:hover .az-dropdown-content
 {
@@ -1180,20 +1326,20 @@
         height: 0;
     }
 
-.az-form-group .az-badge.xs
-{
-    font-size: 0.85em;
-}
+    .az-form-group .az-badge.xs
+    {
+        font-size: 0.85em;
+    }
 
-.az-form-group .az-badge.sm
-{
-    font-size: 1.1em;
-}
+    .az-form-group .az-badge.sm
+    {
+        font-size: 1.1em;
+    }
 
-.az-form-group .az-badge.md
-{
-    font-size: 1.2em;
-}
+    .az-form-group .az-badge.md
+    {
+        font-size: 1.2em;
+    }
 
 .az-form-group.az-badge-wrapper
 {
@@ -1252,7 +1398,6 @@
         font-size: 1.2em;
     }
 
-
 /* Cover Spin */
 #az-cover-spin
 {
@@ -1276,6 +1421,8 @@
         -ms-transform: translate(-50%,-50%);
         -o-transform: translate(-50%,-50%);
         transform: translate(-50%,-50%);
+        margin-top: 60px;
+        font-size: 20px;
     }
 
     #az-cover-spin::after
@@ -1304,11 +1451,20 @@
     }
 
 /* Fieldset */
+.az-fieldset
+{
+    border: 1px solid #DDDDDD;
+}
 
+    .az-fieldset legend
+    {
+    }
 
 /* Lable Asterisk */
-
-
+.az-mandatory-asterisk
+{
+    color: #FF0000;
+}
 
 /* Progress Bar */
 .az-form-group .az-progress-bar-hor

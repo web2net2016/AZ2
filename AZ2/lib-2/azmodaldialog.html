@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="/lib-2/css/az-2.min.css" />
     <script src="/lib-2/js/az-2.min.js"></script>
 
-    <link rel="stylesheet" href="/lib-2/lib/additionally.css" />
     <script src="/lib-2/lib/additionally.js"></script>
     <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
     <script src="/lib-2/lib/az-codecolor.js"></script>
@@ -338,11 +337,7 @@
 
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
-            _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialogClose()<br />';
-            _HTML += '<br />';
-            _HTML += '</div>';
-            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
+            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-56">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
@@ -377,12 +372,7 @@
 
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
-            _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialogClose();<br />';
-            _HTML += 'location.reload();<br />';
-            _HTML += '<br />';
-            _HTML += '</div>';
-            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
+            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-56">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
@@ -408,7 +398,7 @@
                     {
                         $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
                         {
-                            window.location.href = "azcdn201.html";
+                            window.location.href = "/lib-2/azcdn2.html";
                         });
                         data.azModalDialogClose();
                     });
@@ -417,12 +407,7 @@
 
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
-            _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialogClose();<br />';
-            _HTML += 'window.location.href = "";<br />';
-            _HTML += '<br />';
-            _HTML += '</div>';
-            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
+            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-56">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
@@ -458,7 +443,7 @@
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azChangeModalTitlebar(<br />';
+            _HTML += 'var ChangeModalTitlebarOptions = <br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "New Title",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "#FF4136"<br />';
@@ -504,7 +489,7 @@
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate">';
-            _HTML += 'azModalDialogResize(<br />';
+            _HTML += 'var ModalDialogResizeOptions = <br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 600,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 600<br />';
@@ -876,7 +861,169 @@
                 </div>
             </div>
 
-            <div class="az-container az-background-white az-margin-t-28">
+            <div class="az-container az-background-white az-margin-t-56">
+                <div id="dialog-modal-title" class="az-row">
+                    <div class="az-col xs-12">
+                        <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog - Title</h1>
+                        <div class="az-code jsHigh notranslate">
+                            <strong>Default settings</strong>
+                            <br />
+                            <br />
+                            new AZModalDialog(<br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarColor: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogAlertTimeout: 3000<br />
+                            });<br />
+                        </div>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code htmlHigh notranslate">
+                            <div class="az-code-property-wrapper">
+                                <property>azModalDialogTitle</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>""</brown></default>
+                                <values><span>Values:</span> Text</values>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azModalDialogTitlebarBackgroundColor</property>
+                                <type><span>Type:</span> <brown>Color Hex</brown></type>
+                                <default><span>Default:</span> <brown>""</brown></default>
+                                <br />
+                                See also CSS .az-modal-dialog-titlebar
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azModalDialogTitlebarColor</property>
+                                <type><span>Type:</span> <brown>Color Hex</brown></type>
+                                <default><span>Default:</span> <brown>""</brown></default>
+                                <br />
+                                See also CSS .az-modal-dialog-titlebar
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azModalDialogAlertTimeout</property>
+                                <type><span>Type:</span> <brown>Integer</brown></type>
+                                <default><span>Default:</span> <red>3000</red></default>
+                                <units><span>Unit:</span> <red>milliseconds</red></units>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code jsHigh notranslate">
+                            var ChangeModalTitlebarOptions = <br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarColor: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogAlertTimeout: 3000<br />
+                            };<br />
+                            <br />
+                            <strong>1. new AZModalDialog();</strong>
+                            <br />
+                            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)<br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;data.azChangeModalTitlebar(ChangeModalTitlebarOptions);<br />
+                            });<br />
+                            <br />
+                            <strong>2. var AZModalDialog = new AZModalDialog();</strong>
+                            <br />
+                            AZModalDialog.azChangeModalTitlebar(ChangeModalTitlebarOptions);
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-container az-margin-t-28">
+                <div class="az-row">
+                    <div class="az-col xs-12 sm-4">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog7">AZ Modal Dialog Title</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="az-container az-background-white az-margin-t-56">
+                <div id="dialog-modal-resize" class="az-row">
+                    <div class="az-col xs-12">
+                        <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog - Resize</h1>
+                        <div class="az-code jsHigh notranslate">
+                            <strong>Default settings</strong>
+                            <br />
+                            <br />
+                            new AZModalDialog(<br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 300,<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 150<br />
+                            };<br />
+                        </div>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code htmlHigh notranslate">
+                            <div class="az-code-property-wrapper">
+                                <property>azModalDialogWidth</property>
+                                <type><span>Type:</span> <brown>Integer</brown></type>
+                                <default><span>Default:</span> <red>300</red></default>
+                                <units><span>Unit:</span> <red>px</red></units>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azModalDialogHeight</property>
+                                <type><span>Type:</span> <brown>Integer</brown></type>
+                                <default><span>Default:</span> <red>150</red></default>
+                                <units><span>Unit:</span> <red>px</red></units>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code jsHigh notranslate">
+                            var ModalDialogResizeOptions = <br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 600,<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 600<br />
+                            };<br />
+                            <br />
+                            <strong>1. new AZModalDialog();</strong>
+                            <br />
+                            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)<br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;data.azModalDialogResize(ModalDialogResizeOptions);<br />
+                            });<br />
+                            <br />
+                            <strong>2. var AZModalDialog = new AZModalDialog();</strong>
+                            <br />
+                            AZModalDialog.azModalDialogResize(ModalDialogResizeOptions);
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="az-container az-margin-t-28">
+                <div class="az-row">
+                    <div class="az-col xs-12 sm-4">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog8">AZ Modal Dialog Resize</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="az-container az-background-white az-margin-t-56">
                 <div id="dialog-modal-close" class="az-row">
                     <div class="az-col xs-12">
                         <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog - Close</h1>
@@ -980,150 +1127,6 @@
                     <div class="az-col xs-12 sm-4">
                         <div class="az-form-group">
                             <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog6">AZ Modal Dialog 6</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="az-container az-background-white az-margin-t-56">
-                <div id="dialog-modal-title" class="az-row">
-                    <div class="az-col xs-12">
-                        <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog - Title</h1>
-                        <div class="az-code jsHigh notranslate">
-                            <strong>Default settings</strong>
-                            <br />
-                            <br />
-                            azChangeModalTitlebar(<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
-                            &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "",<br />
-                            &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarColor: "",<br />
-                            &emsp;&ensp;&emsp;&ensp;azModalDialogAlertTimeout: 3000<br />
-                            };<br />
-                        </div>
-                    </div>
-                </div>
-                <div class="az-row">
-                    <div class="az-col xs-12">
-                        <div class="az-code htmlHigh notranslate">
-                            <div class="az-code-property-wrapper">
-                                <property>azModalDialogTitle</property>
-                                <type><span>Type:</span> <brown>String</brown></type>
-                                <default><span>Default:</span> <brown>""</brown></default>
-                                <values><span>Values:</span> Text</values>
-                                <br />
-                            </div>
-                            <div class="az-code-property-wrapper">
-                                <property>azModalDialogTitlebarBackgroundColor</property>
-                                <type><span>Type:</span> <brown>Color Hex</brown></type>
-                                <default><span>Default:</span> <brown>""</brown></default>
-                                <br />
-                                See also CSS .az-modal-dialog-titlebar
-                                <br />
-                            </div>
-                            <div class="az-code-property-wrapper">
-                                <property>azModalDialogTitlebarColor</property>
-                                <type><span>Type:</span> <brown>Color Hex</brown></type>
-                                <default><span>Default:</span> <brown>""</brown></default>
-                                <br />
-                                See also CSS .az-modal-dialog-titlebar
-                                <br />
-                            </div>
-                            <div class="az-code-property-wrapper">
-                                <property>azModalDialogAlertTimeout</property>
-                                <type><span>Type:</span> <brown>Integer</brown></type>
-                                <default><span>Default:</span> <red>3000</red></default>
-                                <units><span>Unit:</span> <red>milliseconds</red></units>
-                                <br />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="az-row">
-                    <div class="az-col xs-12">
-                        <div class="az-code jsHigh notranslate">
-                            var ChangeModalTitlebarOptions = <br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
-                            &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "",<br />
-                            &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarColor: "",<br />
-                            &emsp;&ensp;&emsp;&ensp;azModalDialogAlertTimeout: 3000<br />
-                            };<br />
-                            <br />
-                            azChangeModalTitlebar(ChangeModalTitlebarOptions);
-                            <br />
-                            <br />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="az-container az-margin-t-28">
-                <div class="az-row">
-                    <div class="az-col xs-12 sm-4">
-                        <div class="az-form-group">
-                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog7">AZ Modal Dialog Title</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="az-container az-background-white az-margin-t-56">
-                <div id="dialog-modal-resize" class="az-row">
-                    <div class="az-col xs-12">
-                        <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog - Resize</h1>
-                        <div class="az-code jsHigh notranslate">
-                            <strong>Default settings</strong>
-                            <br />
-                            <br />
-                            azModalDialogResize(<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 300,<br />
-                            &emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 150<br />
-                            };<br />
-                        </div>
-                    </div>
-                </div>
-                <div class="az-row">
-                    <div class="az-col xs-12">
-                        <div class="az-code htmlHigh notranslate">
-                            <div class="az-code-property-wrapper">
-                                <property>azModalDialogWidth</property>
-                                <type><span>Type:</span> <brown>Integer</brown></type>
-                                <default><span>Default:</span> <red>300</red></default>
-                                <units><span>Unit:</span> <red>px</red></units>
-                                <br />
-                            </div>
-                            <div class="az-code-property-wrapper">
-                                <property>azModalDialogHeight</property>
-                                <type><span>Type:</span> <brown>Integer</brown></type>
-                                <default><span>Default:</span> <red>150</red></default>
-                                <units><span>Unit:</span> <red>px</red></units>
-                                <br />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="az-row">
-                    <div class="az-col xs-12">
-                        <div class="az-code jsHigh notranslate">
-                            var ModalDialogResizeOptions = <br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 600,<br />
-                            &emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 600<br />
-                            };<br />
-                            <br />
-                            azModalDialogResize(ModalDialogResizeOptions);
-                            <br />
-                            <br />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="az-container az-margin-t-28">
-                <div class="az-row">
-                    <div class="az-col xs-12 sm-4">
-                        <div class="az-form-group">
-                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog8">AZ Modal Dialog Resize</button>
                         </div>
                     </div>
                 </div>
