@@ -18,8 +18,6 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2/css/az-2.min.css" />
     <script src="/lib-2/js/az-2.min.js"></script>
-
-    <script src="/lib-2/lib/additionally.js"></script>
     <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
     <script src="/lib-2/lib/az-codecolor.js"></script>
     <script>
@@ -188,16 +186,27 @@
 
         function setModalDialog3()
         {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)
+            {
+                console.log("azModalDialogBeforeOpen");
+                console.log(data);
+            });
             $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
+                console.log("azModalDialogAfterOpen");
+                console.log(data)
                 if (data.azModalDialogId === "ModalDialog3")
                 {
-                    console.log(data)
                     $("#cmdModalDialog31").off().on('click', function ()
                     {
                         data.azModalDialogClose();
                     });
                 }
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
+            {
+                console.log("azModalDialogAfterClose");
+                console.log(data);
             });
 
             var _HTML = "";
@@ -242,6 +251,22 @@
 
         function setModalDialogiFrame1()
         {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)
+            {
+                console.log("azModalDialogBeforeOpen");
+                console.log(data);
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
+            {
+                console.log("azModalDialogAfterOpen");
+                console.log(data);
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
+            {
+                console.log("azModalDialogAfterClose");
+                console.log(data);
+            });
+
             ModalDialogiFrame1 = new AZModalDialog(
                 {
                     azModalDialogId: "azModalDialogiFrame1",
@@ -254,6 +279,22 @@
 
         function setModalDialogiFrame2()
         {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)
+            {
+                console.log("azModalDialogBeforeOpen");
+                console.log(data);
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
+            {
+                console.log("azModalDialogAfterOpen");
+                console.log(data);
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
+            {
+                console.log("azModalDialogAfterClose");
+                console.log(data);
+            });
+
             ModalDialogiFrame2 = new AZModalDialog(
                 {
                     azModalDialogId: "azModalDialogiFrame2",
@@ -268,16 +309,27 @@
 
         function setModalDialogPosition()
         {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)
+            {
+                console.log("azModalDialogBeforeOpen");
+                console.log(data);
+            });
             $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
+                console.log("azModalDialogAfterOpen");
+                console.log(data)
                 if (data.azModalDialogId === "ModalDialogPosition")
                 {
-                    console.log(data)
                     $("#cmdModalDialogPosition1").off().on('click', function ()
                     {
                         data.azModalDialogClose();
                     });
                 }
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
+            {
+                console.log("azModalDialogAfterClose");
+                console.log(data);
             });
 
             var _HTML = "";
@@ -324,8 +376,15 @@
 
         function setModalDialog4()
         {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)
+            {
+                console.log("azModalDialogBeforeOpen");
+                console.log(data);
+            });
             $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
+                console.log("azModalDialogAfterOpen");
+                console.log(data)
                 if (data.azModalDialogId === "ModalDialog4")
                 {
                     $("#cmdButton1").off().on('click', function ()
@@ -333,6 +392,11 @@
                         data.azModalDialogClose();
                     });
                 }
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
+            {
+                console.log("azModalDialogAfterClose");
+                console.log(data);
             });
 
             var _HTML = "";
@@ -354,11 +418,17 @@
 
         function setModalDialog5()
         {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)
+            {
+                console.log("azModalDialogBeforeOpen");
+                console.log(data);
+            });
             $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
+                console.log("azModalDialogAfterOpen");
+                console.log(data)
                 if (data.azModalDialogId === "ModalDialog5")
                 {
-                    console.log(data)
                     $("#cmdButton1").off().on('click', function ()
                     {
                         $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
@@ -368,6 +438,11 @@
                         data.azModalDialogClose();
                     });
                 }
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
+            {
+                console.log("azModalDialogAfterClose");
+                console.log(data);
             });
 
             var _HTML = "";
@@ -389,11 +464,17 @@
 
         function setModalDialog6()
         {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)
+            {
+                console.log("azModalDialogBeforeOpen");
+                console.log(data);
+            });
             $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
+                console.log("azModalDialogAfterOpen");
+                console.log(data)
                 if (data.azModalDialogId === "ModalDialog6")
                 {
-                    console.log(data)
                     $("#cmdButton1").off().on('click', function ()
                     {
                         $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
@@ -403,6 +484,11 @@
                         data.azModalDialogClose();
                     });
                 }
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
+            {
+                console.log("azModalDialogAfterClose");
+                console.log(data);
             });
 
             var _HTML = "";
@@ -424,11 +510,17 @@
 
         function setModalDialog7()
         {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)
+            {
+                console.log("azModalDialogBeforeOpen");
+                console.log(data);
+            });
             $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
+                console.log("azModalDialogAfterOpen");
+                console.log(data)
                 if (data.azModalDialogId === "ModalDialog7")
                 {
-                    console.log(data)
                     $("#cmdButton1").off().on('click', function ()
                     {
                         data.azChangeModalTitlebar({ azModalDialogTitle: "New Title", azModalDialogTitlebarBackgroundColor: "#FF4136" });
@@ -438,6 +530,11 @@
                         data.azModalDialogClose();
                     });
                 }
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
+            {
+                console.log("azModalDialogAfterClose");
+                console.log(data);
             });
 
             var _HTML = "";
@@ -470,11 +567,17 @@
 
         function setModalDialog8()
         {
+            $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)
+            {
+                console.log("azModalDialogBeforeOpen");
+                console.log(data);
+            });
             $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)
             {
+                console.log("azModalDialogAfterOpen");
+                console.log(data)
                 if (data.azModalDialogId === "ModalDialog8")
                 {
-                    console.log(data)
                     $("#cmdModalDialog81").off().on('click', function ()
                     {
                         data.azModalDialogResize({ azModalDialogWidth: 600, azModalDialogHeight: 600 });
@@ -484,6 +587,11 @@
                         data.azModalDialogClose();
                     });
                 }
+            });
+            $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
+            {
+                console.log("azModalDialogAfterClose");
+                console.log(data);
             });
 
             var _HTML = "";
@@ -832,10 +940,15 @@
                                 <div class="jsHigh notranslate">
                                     $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)<br />
                                     {<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Window - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Titlebar: i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Dialog - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Article - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Iframe - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azModalDialogId<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azModalDialogClose - ƒ ()<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azChangeModalTitlebar - ƒ (n)<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azModalDialogResize - ƒ (n)<br />
-                                    &emsp;&ensp;&emsp;&ensp;data.azModalDialogClose - ƒ ()<br />
                                     });<br />
                                     <br />
                                     This function is triggered after <strong>AZModalDialog</strong> is fully initiated.

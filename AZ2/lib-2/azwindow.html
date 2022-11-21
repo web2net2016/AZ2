@@ -18,8 +18,6 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2/css/az-2.min.css" />
     <script src="/lib-2/js/az-2.min.js"></script>
-
-    <script src="/lib-2/lib/additionally.js"></script>
     <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
     <script src="/lib-2/lib/az-codecolor.js"></script>
     <script>
@@ -41,9 +39,10 @@
 
         function setAZWindow1()
         {
-            $.subscribeonce("functionlib/azWindowBeforeOpen", function ()
+            $.subscribeonce("functionlib/azWindowBeforeOpen", function (e, data)
             {
                 console.log("azWindowBeforeOpen")
+                console.log(data)
             });
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
             {
@@ -54,9 +53,10 @@
                     data.azWindowClose();
                 });
             });
-            $.subscribeonce("functionlib/azWindowAfterClose", function ()
+            $.subscribeonce("functionlib/azWindowAfterClose", function (e, data)
             {
                 console.log("azWindowAfterClose")
+                console.log(data)
             });
 
             var _HTML = "";
@@ -108,9 +108,10 @@
                     data.azWindowClose();
                 });
             });
-            $.subscribeonce("functionlib/azWindowAfterClose", function ()
+            $.subscribeonce("functionlib/azWindowAfterClose", function (e, data)
             {
-                console.log("azWindowAfterClose")
+                console.log("azWindowAfterClose");
+                console.log(data)
             });
 
             var _HTML = "";
@@ -178,9 +179,10 @@
                     data.azWindowClose();
                 });
             });
-            $.subscribeonce("functionlib/azWindowAfterClose", function ()
+            $.subscribeonce("functionlib/azWindowAfterClose", function (e, data)
             {
-                console.log("azWindowAfterClose")
+                console.log("azWindowAfterClose");
+                console.log(data)
             });
 
             var _HTML = "";
@@ -229,9 +231,10 @@
                     data.azWindowClose();
                 });
             });
-            $.subscribeonce("functionlib/azWindowAfterClose", function ()
+            $.subscribeonce("functionlib/azWindowAfterClose", function (e, data)
             {
-                console.log("azWindowAfterClose")
+                console.log("azWindowAfterClose");
+                console.log(data)
             });
 
             var _HTML = "";
@@ -521,8 +524,9 @@
                                 <type><span>Type:</span> <brown>Function</brown></type>
                                 <br />
                                 <div class="jsHigh notranslate">
-                                    $.subscribeonce("functionlib/azWindowBeforeOpen", function ()<br />
+                                    $.subscribeonce("functionlib/azWindowBeforeOpen", function (e, data)<br />
                                     {<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azWindowId<br />
                                     });<br />
                                     <br />
                                     This function is triggered before <strong>AZWindow</strong> is fully initiated.
@@ -536,9 +540,14 @@
                                 <div class="jsHigh notranslate">
                                     $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)<br />
                                     {<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Window - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Titlebar: i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Dialog - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Article - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azWindowId<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azWindowClose - ƒ ()<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azChangeWindowTitlebar - ƒ (n)<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azWindowResize - ƒ (n)<br />
-                                    &emsp;&ensp;&emsp;&ensp;data.azWindowClose - ƒ ()<br />
                                     });<br />
                                     <br />
                                     This function is triggered after <strong>AZWindow</strong> is fully initiated.
@@ -550,8 +559,9 @@
                                 <type><span>Type:</span> <brown>Function</brown></type>
                                 <br />
                                 <div class="jsHigh notranslate">
-                                    $.subscribeonce("functionlib/azWindowAfterClose", function ()<br />
+                                    $.subscribeonce("functionlib/azWindowAfterClose", function (e, data)<br />
                                     {<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azWindowId<br />
                                     });<br />
                                     <br />
                                     This function is triggered after <strong>AZWindow</strong> is closed.
