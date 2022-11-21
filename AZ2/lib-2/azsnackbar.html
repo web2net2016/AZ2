@@ -51,6 +51,12 @@
 
         function setSnackbar1()
         {
+            $.subscribeonce("functionlib/azSnackbarAfterOpen", function (e, data)
+            {
+                console.log("azSnackbarAfterOpen");
+                console.log(data);
+            });
+
             AZSnackbar1 = new AZSnackbar(
                 {
                     azSnackbarText: "Dette er en tekst...",
@@ -149,6 +155,12 @@
 
         function setSnackbar10()
         {
+            $.subscribeonce("functionlib/azSnackbarAfterOpen", function (e, data)
+            {
+                console.log("azSnackbarAfterOpen");
+                console.log(data);
+            });
+
             AZSnackbar10 = new AZSnackbar(
                 {
                     azSnackbarText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -249,8 +261,7 @@
                             &emsp;&ensp;&emsp;&ensp;azSnackbarTimeout: 3000<br />
                             &emsp;&ensp;&emsp;&ensp;azSnackbarBackgroundColor: ""<br />
                             &emsp;&ensp;&emsp;&ensp;azSnackbarColor: ""<br />
-                            &emsp;&ensp;&emsp;&ensp;azSnackbarCloseColor: "",<br />
-                            &emsp;&ensp;&emsp;&ensp;azSnackbarAfterOpen: function () { }<br />
+                            &emsp;&ensp;&emsp;&ensp;azSnackbarCloseColor: ""<br />
                             });<br />
                             <br />
                             <br />
@@ -459,35 +470,8 @@
                 <div class="az-row az-margin-b-56">
                     <div class="az-col xs-12">
                         <div class="az-code htmlHigh notranslate">
-                            AZ Snackbar has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.1/css/snackbar.css" target="_blank" class="az-border-bottom-1-blue">snackbar.css</a>
+                            AZ Snackbar has some CSS that you can find here: <a href="/lib-2.0.1/css/snackbar.css" target="_blank">snackbar.css</a>
                             <br />
-                            You can find the CSS which you can change yourself in the file <a href="/lib-2/lib/additionally.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
-                            <br />
-                            <br />
-                            /*---------------------<br />
-                            Snackbar<br />
-                            snackbar.css<br />
-                            ---------------------*/<br />
-                            <br />
-                        </div>
-                        <div class="az-code cssHigh notranslate">
-                            .az-snackbar<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;background-color: #0078D7;<br />
-                            &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                            &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                            &emsp;&ensp;&emsp;&ensp;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                            }<br />
-                            <br />
-                            .az-snackbar > .az-snackbar-table .az-snackbar-text<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
-                            }<br />
-                            <br />
-                            .az-snackbar > .az-snackbar-table .az-snackbar-close<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
-                            }<br />
                             <br />
                         </div>
                     </div>

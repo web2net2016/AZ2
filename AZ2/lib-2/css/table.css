@@ -46,7 +46,6 @@
 	}
 }
 
-
 /* Size MD ----*/
 @media (min-width: 768px)
 {
@@ -69,7 +68,6 @@
 	}
 }
 
-
 /* Size LG ----*/
 @media (min-width: 992px)
 {
@@ -91,7 +89,6 @@
 		margin-left: auto;
 	}
 }
-
 
 /* Size XL ----*/
 @media (min-width: 1200px)

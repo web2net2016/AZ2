@@ -99,6 +99,7 @@
     <Content Include="favicon.ico" />
     <Content Include="lib-2\azbackgroundslider.html" />
     <Content Include="lib-2\css\backgroundslider.css" />
+    <Content Include="lib-2\lib\help.html" />
     <Content Include="lib-2\side1.html" />
     <Content Include="lib-2\aztabs.html" />
     <Content Include="lib-2\azaccordion.html" />
@@ -130,7 +131,6 @@
     <Content Include="lib-2\css\cardlayout.css" />
     <Content Include="lib-2\css\navbar.css" />
     <Content Include="lib-2\css\normalize.css" />
-    <Content Include="lib-2\css\sidebar.css" />
     <Content Include="lib-2\css\slideshow.css" />
     <Content Include="lib-2\css\table.css" />
     <Content Include="lib-2\css\text.css" />
@@ -154,12 +154,9 @@
     <Content Include="lib-2\js\numeral.js" />
     <Content Include="lib-2\js\numeral.locales.js" />
     <Content Include="lib-2\lib\az-codecolor.js" />
-    <Content Include="lib-2\lib\additionally.js" />
     <Content Include="lib-2\lib\az-codecolor.css" />
-    <Content Include="lib-2\lib\additionally.css" />
     <Content Include="lib-2\azcardlayout.html" />
     <Content Include="lib-2\navbar.html" />
-    <Content Include="lib-2\sidebar.html" />
     <Content Include="lib-2\slideshow.html" />
     <Content Include="lib-2\template.html" />
     <Content Include="Web.config" />

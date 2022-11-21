@@ -629,6 +629,7 @@
     <form id="frmReg">
 
         <div id="section-1" class="az-section az-padding-t-56 az-padding-b-56">
+            
             <div class="az-container">
                 <div class="az-row">
                     <div class="az-col xs-12 sm-4">
@@ -667,7 +668,7 @@
             </div>
 
             <div class="az-container az-background-white az-margin-t-28">
-                <div class="row">
+                <div class="az-row">
                     <div class="az-col xs-12">
                         <h1 class="az-code-header" style="margin: 0;">AZ Modal Dialog</h1>
                     </div>
@@ -941,7 +942,7 @@
                                     $.subscribeonce("functionlib/azModalDialogAfterOpen", function (e, data)<br />
                                     {<br />
                                     &emsp;&ensp;&emsp;&ensp;data.$Window - i.fn.init[]<br />
-                                    &emsp;&ensp;&emsp;&ensp;data.$Titlebar: i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Titlebar - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.$Dialog - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.$Article - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.$Iframe - i.fn.init[]<br />
@@ -1031,7 +1032,7 @@
                 <div class="az-row">
                     <div class="az-col xs-12">
                         <div class="az-code jsHigh notranslate">
-                            var ChangeModalTitlebarOptions = <br />
+                            var ChangeModalTitlebarOptions =<br />
                             {<br />
                             &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "",<br />
@@ -1254,35 +1255,8 @@
                 <div class="az-row">
                     <div class="az-col xs-12">
                         <div class="az-code htmlHigh notranslate">
-                            AZModalDialog has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.1/css/modaldialog.css" target="_blank" class="az-border-bottom-1-blue">modaldialog.css</a>
+                            AZ Modal Dialog has some CSS that you can find here: <a href="/lib-2/css/modaldialog.css" target="_blank">modaldialog.css</a>
                             <br />
-                            You can find the CSS which you can change yourself in the file <a href="/lib-2/lib/additionally.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
-                            <br />
-                            <br />
-                            /*---------------------<br />
-                            Modal Dialog<br />
-                            modaldialog.css<br />
-                            ---------------------*/<br />
-                        </div>
-                        <div class="az-code cssHigh notranslate">
-                            .az-modal-dialog<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;border: none !important;<br />
-                            &emsp;&ensp;&emsp;&ensp;background-color: #FFFFFF;<br />
-                            &emsp;&ensp;&emsp;&ensp;color: #000000;<br />
-                            }<br />
-                            <br />
-                            .az-modal-dialog-titlebar<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;background-color: #0078D7;<br />
-                            &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
-                            }<br />
-                            <br />
-                            #az-background<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;background-color: rgb(0,0,0);<br />
-                            &emsp;&ensp;&emsp;&ensp;background-color: rgba(0,0,0,0.4);<br />
-                            }<br />
                             <br />
                         </div>
                     </div>

@@ -426,9 +426,7 @@
                 <div class="az-row az-margin-b-56">
                     <div class="az-col xs-12">
                         <div class="az-code htmlHigh notranslate">
-                            AZSlideIn has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.1/css/slidein.css" target="_blank" class="az-border-bottom-1-blue">slidein.css</a>
-                            <br />
-                            You can find the CSS which you can change yourself in the file <a href="/lib-2/lib/additionally.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
+                            AZ SlideIn has some CSS that you can find here: <a href="/lib-2/css/slidein.css" target="_blank">slidein.css</a>
                             <br />
                             <br />
                             A CSS class is added to <strong>AZSlideIn</strong> when the <strong>AZSlideIn</strong> is active.
@@ -439,57 +437,17 @@
                             This allows you to check if an <strong>AZSlideIn</strong> is active or deactivated, (open/closed).
                             <br />
                             <br />
-                            <strong>1. functionlib/azSlideInReady</strong><br />
+                            <strong>1. new AZSlideIn();</strong>
                             <br />
-                            <div class="jsHigh notranslate">
-                                $.subscribe("functionlib/azSlideInReady", function (e, data)<br />
-                                {<br />
-                                &emsp;&ensp;&emsp;&ensp;data.$SlideIn.hasClass("az-slidein-active")<br />
-                                });<br />
-                            </div>
-                            <br />
-                            <strong>2. var AZSlideIn</strong><br />
-                            <br />
-                            <div class="jsHigh notranslate">
-                                <br />
-                                AZSlideIn.$SlideIn.hasClass("az-slidein-active")<br />
-                                <br />
-                            </div>
-                            <br />
-                            /*---------------------<br />
-                            Slidein<br />
-                            slidein.css<br />
-                            ---------------------*/<br />
-                            <br />
-                        </div>
-                        <div class="az-code cssHigh notranslate">
-                            .az-slidein > .az-slidein-tab<br />
+                            $.subscribeonce("functionlib/azSlideInReady", function (e, data)<br />
                             {<br />
-                            &emsp;&ensp;&emsp;&ensp;background-color: #0078D7;<br />
-                            &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
-                            &emsp;&ensp;&emsp;&ensp;font-size: 14px;<br />
-                            &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                            &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                            &emsp;&ensp;&emsp;&ensp;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                            }<br />
+                            &emsp;&ensp;&emsp;&ensp;data.$SlideIn.hasClass("az-slidein-active")<br />
+                            });<br />
                             <br />
-                            .az-slidein-card<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                            &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                            &emsp;&ensp;&emsp;&ensp;box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);<br />
-                            }<br />
+                            <strong>2. var AZSlideIn = new AZSlideIn();</strong>
                             <br />
-                            .az-slidein-card > article<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;background-color: #FFFFFF;<br />
-                            &emsp;&ensp;&emsp;&ensp;color: #000000;<br />
-                            }<br />
+                            AZSlideIn.$SlideIn.hasClass("az-slidein-active")<br />
                             <br />
-                            .az-slidein-card > article > *<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;font-size: 14px;<br />
-                            }<br />
                             <br />
                         </div>
                     </div>

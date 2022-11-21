@@ -1906,6 +1906,7 @@ var AZSettings =
     LanguageValidationFolder: "/admin",
     DefaultLanguageFile: "/lib-2/admin/index/lib/lang-val/default-lang.json",
     DefaultLanguage: "nb-NO",
+    DefaultTooltipFile: "/lib/help/help.html",
     DebugMode: true,
     AppName: "AZ Team",
     AppVersion: "1.0.0",
@@ -2400,7 +2401,7 @@ function AZBackgroundSlider(Options)
                             azBackgroundSliderId: _Main.Options.azBackgroundSliderId
                         });
                 }
-            }            
+            }
         }
     }
     else
@@ -2752,8 +2753,7 @@ function AZSnackbar(Options)
             azSnackbarTimeout: 3000,
             azSnackbarBackgroundColor: "",
             azSnackbarColor: "",
-            azSnackbarCloseColor: "",
-            azSnackbarAfterOpen: function () { }
+            azSnackbarCloseColor: ""
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
@@ -3414,7 +3414,7 @@ function AZFullWindow(Options)
 
         if ($("#az-full-window").length === 0)
         {
-            $.publish("functionlib/azFullWindowBeforeOpen");
+            $.publish("functionlib/azFullWindowBeforeOpen", { azFullWindowId: "az-full-window" });
 
             ModalDialogScrollTop = 0;
             _Main.$Window = $("<div></div>").attr("id", "az-full-window");
@@ -3453,7 +3453,6 @@ function AZFullWindow(Options)
                 ModalDialogScrollTop = $(window).scrollTop();
                 $("body").addClass("az-no-parent-scroll");
             });
-            $.publish("functionlib/azFullWindowAfterOpen", _Main);
 
             _Main.$Close.on('click', function (e)
             {
@@ -3476,8 +3475,16 @@ function AZFullWindow(Options)
                 {
                     $(this).remove();
                 });
-                $.publish("functionlib/azFullWindowAfterClose");
+                $.publish("functionlib/azFullWindowAfterClose", { azFullWindowId: "az-full-window" });
             };
+
+            $.publish("functionlib/azFullWindowAfterOpen",
+                {
+                    $Window: _Main.$Window,
+                    $Close: _Main.$Close,
+                    azFullWindowId: "az-full-window",
+                    azFullWindowClose: _Main.azFullWindowClose
+                });
         }
     }
     else
@@ -3926,7 +3933,9 @@ function AZPage(Options)
             azPageLanguage: false,
             azPageLanguageUrl: "",
             azPageValidation: false,
-            azPageValidationUrl: ""
+            azPageValidationUrl: "",
+            azPageTootltip: false,
+            azPageTootltipFile: ""
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
@@ -4065,6 +4074,24 @@ function AZPage(Options)
                     }
                 };
 
+                _Main.Tootltip = function ()
+                {
+                    if (_Main.Options.azPageTootltip === true)
+                    {
+                        var _TooltipFile = _Main.Options.azPageTootltipFile;
+                        if (_Main.Options.azPageTootltipFile === "")
+                        {
+                            _TooltipFile = AZSettings.DefaultTooltipFile;
+                        }
+                        AZTooltip({ File: _TooltipFile });
+                        _Main.Language();
+                    }
+                    else
+                    {
+                        _Main.Language();
+                    }
+                };
+
                 if (AZIsEmpty(AZSettings) === false)
                 {
                     _Main.DefaultLanguageFile = AZSettings.DefaultLanguageFile;
@@ -4085,7 +4112,7 @@ function AZPage(Options)
                     {
                         _Main.JsonUrl = AZSettings.LanguageValidationFolder + "/" + _Main.ObjPageAttributes.PageFirstName + "/lib/lang-val/" + _Main.ObjPageAttributes.PageFirstName;
                     }
-                    _Main.Language();
+                    _Main.Tootltip();
                 }
                 else
                 {
@@ -4217,7 +4244,6 @@ function AZSetLanguage(Options)
     if (this instanceof AZSetLanguage === true)
     {
         var _Main = this;
-
         if (AZIsEmpty(Options) === false)
         {
             if (Options.hasOwnProperty("ObjPageLanguage") && Options.hasOwnProperty("DefaultLanguageFile") && Options.hasOwnProperty("DefaultLanguage"))
@@ -4564,7 +4590,7 @@ function AZSetValidation(Options)
                     {
                         $("label[for='" + HtmlElement + "']", _Main.$Area).addClass(AttrValue);
                     }
-                    else if (AttrType.toLowerCase() === "data-attr" || AttrType.toLowerCase() === "minlength" || AttrType.toLowerCase() === "maxlength" || AttrType.toLowerCase() === "tabindex")
+                    else if (AttrType.toLowerCase() === "data-attr" || AttrType.toLowerCase() === "minlength" || AttrType.toLowerCase() === "maxlength" || AttrType.toLowerCase() === "data-help" || AttrType.toLowerCase() === "tabindex")
                     {
                         if ($('#' + HtmlElement, _Main.$Area).length > 0)
                         {
@@ -6592,7 +6618,7 @@ function AZTooltip(Options)
     var _Defaults =
     {
         LanguageCode: "nb-NO",
-        Url: "/lib/help/help.html"
+        File: "/lib/help/help.html"
     };
     var _Options = $.extend({}, _Defaults, Options || {});
     if (_Lang === false)
@@ -6609,7 +6635,7 @@ function AZTooltip(Options)
             content: function ()
             {
                 var _$Div = $('<div>');
-                _$Div.load(_Options.Url + " #" + $(this).attr("data-help") + "-" + _Options.LanguageCode);
+                _$Div.load(_Options.File + " #" + $(this).attr("data-help") + "-" + _Options.LanguageCode);
                 return _$Div;
             }
         });

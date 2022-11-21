@@ -53,7 +53,7 @@
             $("#Guid").off("click", Guid).on("click", Guid);
             $("#ElementSize").off("click", ElementSize).on("click", ElementSize);
             $("#ResolutionConverter").off("click", ResolutionConverter).on("click", ResolutionConverter);
-            
+
 
 
             $("#StandardAlert").off("click", StandardAlert).on("click", StandardAlert);
@@ -148,7 +148,7 @@
         function ElementSize()
         {
             var _ElementSizeObj = AZElementSize($('body'));
-            $("#elementsize").html("<br /><brown>" + _ElementSizeObj.Width + " / " + _ElementSizeObj.Height + "</brown>");            
+            $("#elementsize").html("<br /><brown>" + _ElementSizeObj.Width + " / " + _ElementSizeObj.Height + "</brown>");
         }
 
         function ResolutionConverter()
@@ -165,6 +165,11 @@
 
         function StandardAlert()
         {
+            $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
+            {
+                data.$Article.css({ 'text-align': 'center', 'margin-top': '24px' });
+                data.azWindowResize();
+            });
             var _AZStandardAlertOptions =
             {
                 Title: "Internet connection",
@@ -674,7 +679,9 @@
                                     &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageLanguage: false,<br />
                                     &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageLanguageUrl: "",<br />
                                     &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageValidation: false,<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageValidationUrl: ""<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageValidationUrl: "",<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageTootltip: false,<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageTootltipFile: ""<br />
                                     &emsp;&ensp;&emsp;&ensp;});<br />
                                     }<br />
                                     <br />

@@ -541,7 +541,7 @@
                                     $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)<br />
                                     {<br />
                                     &emsp;&ensp;&emsp;&ensp;data.$Window - i.fn.init[]<br />
-                                    &emsp;&ensp;&emsp;&ensp;data.$Titlebar: i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Titlebar - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.$Dialog - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.$Article - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azWindowId<br />
@@ -581,7 +581,7 @@
                             <strong>Default settings</strong>
                             <br />
                             <br />
-                            azChangeWindowTitlebar(<br />
+                            new AZWindow(<br />
                             {<br />
                             &emsp;&ensp;&emsp;&ensp;azWindowTitle: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azWindowTitlebarBackgroundColor: "",<br />
@@ -638,7 +638,16 @@
                             &emsp;&ensp;&emsp;&ensp;azWindowAlertTimeout: 3000<br />
                             };<br />
                             <br />
-                            azChangeWindowTitlebar(ChangeWindowTitlebarOptions);
+                            <strong>1. new AZWindow();</strong>
+                            <br />
+                            $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)<br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;data.azChangeWindowTitlebar(ChangeWindowTitlebarOptions);<br />
+                            });<br />
+                            <br />
+                            <strong>2. var AZWindow = new AZWindow();</strong>
+                            <br />
+                            AZWindow.azChangeWindowTitlebar(ChangeWindowTitlebarOptions);
                             <br />
                             <br />
                         </div>
@@ -663,7 +672,7 @@
                             <strong>Default settings</strong>
                             <br />
                             <br />
-                            azWindowResize(<br />
+                            new AZWindow(<br />
                             {<br />
                             &emsp;&ensp;&emsp;&ensp;azWindowWidth: 300,<br />
                             &emsp;&ensp;&emsp;&ensp;azWindowHeight: 150<br />
@@ -700,7 +709,16 @@
                             &emsp;&ensp;&emsp;&ensp;azWindowHeight: 600<br />
                             };<br />
                             <br />
-                            azWindowResize(WindowResizeOptions);
+                            <strong>1. new AZWindow();</strong>
+                            <br />
+                            $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)<br />
+                            {<br />
+                            &emsp;&ensp;&emsp;&ensp;data.azWindowResize(WindowResizeOptions);<br />
+                            });<br />
+                            <br />
+                            <strong>2. var AZWindow = new AZWindow();</strong>
+                            <br />
+                            AZWindow.azWindowResize(WindowResizeOptions);
                             <br />
                             <br />
                         </div>
@@ -726,50 +744,10 @@
                 <div class="az-row">
                     <div class="az-col xs-12">
                         <div class="az-code htmlHigh notranslate">
-                            AZWindow has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.1/css/window.css" target="_blank" class="az-border-bottom-1-blue">window.css</a>
-                            <br />
-                            You can find the CSS which you can change yourself in the file <a href="/lib-2/lib/additionally.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
+                            AZ Window has some CSS that you can find here: <a href="/lib-2/css/window.css" target="_blank">window.css</a>
                             <br />
                             <br />
-                            /*---------------------<br />
-                            AZ Window<br />
-                            window.css<br />
-                            ---------------------*/<br />
-                        </div>
-                        <div class="az-code cssHigh notranslate">
-                            #az-window<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;background-color: #FFFFFF;<br />
-                            &emsp;&ensp;&emsp;&ensp;color: #000000;<br />
-                            &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);<br />
-                            &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);<br />
-                            &emsp;&ensp;&emsp;&ensp;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);<br />
-                            }<br />
-                            <br />
-                            #az-window > .az-window-titlebar<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;background-color: #0078D7;<br />
-                            &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
-                            }<br />
-                            <br />
-                            #az-window > .az-window-titlebar > h1<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;font-size: 14px;<br />
-                            }<br />
-                            <br />
-                            #az-window > .az-window-titlebar > span<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;font-size: 14px;<br />
-                            &emsp;&ensp;&emsp;&ensp;font-weight: bold;<br />
-                            }<br />
-                            <br />
-                            #az-window > .az-window-titlebar > span:hover<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;color: #FF4136;<br />
-                            }<br />
-                            <br />
-                            <br />
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>

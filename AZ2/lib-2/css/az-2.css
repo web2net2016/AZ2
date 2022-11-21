@@ -12659,8 +12659,6 @@ ul
         box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     }
 }
-/* Size ALL ----------*/
-/* Display */
 .az-display-absolute-topleft
 {
     position: absolute;
@@ -16220,7 +16218,6 @@ ul
         padding-left: 56px !important;
     }
 }
-
 .az-flex
 {
     box-sizing: border-box;
@@ -20204,49 +20201,6 @@ template
 {
     display: none;
 }
-.az-sidebar-menu
-{
-    list-style-type: none;
-    padding: 0;
-}
-
-    .az-sidebar-menu > li
-    {
-        width: 100%;
-        cursor: pointer;
-    }
-
-        .az-sidebar-menu > li > a
-        {
-            display: block;
-            padding: 6px;
-            font-size: 16px;
-            color: #000000;
-        }
-
-            .az-sidebar-menu > li > a > i
-            {
-                margin-right: 14px;
-                font-size: 16px;
-            }
-
-            .az-sidebar-menu > li > a:hover
-            {
-                background-color: var(--primary-background-color);
-                color: #FFFFFF;
-            }
-
-.az-sidebar-filter
-{
-    list-style-type: none;
-    padding: 0;
-}
-
-    .az-sidebar-filter > li
-    {
-        width: 100%;
-        margin: 7px;
-    }
 .az-slidein
 {
     position: fixed;
@@ -20658,7 +20612,6 @@ template
 	}
 }
 
-
 /* Size MD ----*/
 @media (min-width: 768px)
 {
@@ -20681,7 +20634,6 @@ template
 	}
 }
 
-
 /* Size LG ----*/
 @media (min-width: 992px)
 {
@@ -20703,7 +20655,6 @@ template
 		margin-left: auto;
 	}
 }
-
 
 /* Size XL ----*/
 @media (min-width: 1200px)
@@ -20823,7 +20774,6 @@ template
     {
         margin: 7px 7px 0 7px;
     }
-/* Size ALL ----------*/
 h1,
 h2,
 h3,
