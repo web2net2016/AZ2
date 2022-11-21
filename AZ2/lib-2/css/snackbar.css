@@ -69,6 +69,11 @@
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+    padding: 14px 0 14px 0;
+    background-color: var(--primary-background-color);
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
     .az-snackbar.az-snackbar-left-top
@@ -124,4 +129,11 @@
             width: 20px;
             font-weight: bold;
             cursor: pointer;
+            color: #FFFFFF;
+        }
+
+        .az-snackbar > .az-snackbar-table .az-snackbar-text
+        {
+            padding: 0 14px 0 14px;
+            color: #FFFFFF;
         }

@@ -18,9 +18,6 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2/css/az-2.min.css" />
     <script src="/lib-2/js/az-2.min.js"></script>
-
-    <link rel="stylesheet" href="/lib-2/lib/additionally.css" />
-    <script src="/lib-2/lib/additionally.js"></script>
     <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
     <script src="/lib-2/lib/az-codecolor.js"></script>
     <script>
@@ -31,6 +28,12 @@
         $(document).ready(function ()
         {
             w3CodeColor();
+
+            $.subscribe("functionlib/azBackgroundSliderReady", function (e, data)
+            {
+                console.log("azBackgroundSliderReady")
+                console.log(data)
+            });
 
             AZBackgroundSlider1 = new AZBackgroundSlider(
                 {
@@ -43,8 +46,6 @@
                 {
                     azBackgroundSliderId: "az-background-slider-2",
                     azBackgroundSliderDir: "vertical"
-                    //azBackgroundSliderWidth: 2000,
-                    //azBackgroundSliderHeight: 2000
                 });
 
         });
@@ -57,7 +58,6 @@
     <form id="frmReg">
         <div id="section-1" class="az-section az-padding-t-56 az-padding-b-56">
             <div class="az-container-fluid">
-
 
                 <div class="az-row">
                     <div class="az-col xs-12">
@@ -177,6 +177,31 @@
                 <div class="az-row">
                     <div class="az-col xs-12">
                         <div class="az-code htmlHigh notranslate">
+                            <strong>Init AZBackgroundSlider</strong>
+                            <br />
+                            <br />
+                            There are two ways to initiate the <strong>AZBackgroundSlider</strong>. The way you choose is important for further use of the function.<br />
+                            <br />
+                            <strong>1. new AZBackgroundSlider();</strong><br />
+                            The function is initiated but you do not assign the function to a variable. This means that you can not directly interact with the function.
+                            <br />
+                            <br />
+                            <strong>2. var AZBackgroundSlider = new AZBackgroundSlider();</strong><br />
+                            The function is initiated and assigned to a variable. This means you can use the variable in relation to further interaction with the function.
+                            <br />
+                            <br />
+                            Whatever approach you choose, you can use the following features (Events):
+                            <br />
+                            <br />
+                            <a href="#azBackgroundSliderReady">azBackgroundSliderReady</a>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code htmlHigh notranslate">
                             <div class="az-code-property-wrapper">
                                 <property>azBackgroundSliderId</property>
                                 <type><span>Type:</span> <brown>String</brown></type>
@@ -205,13 +230,17 @@
                                 <units><span>Unit:</span> <red>px</red></units>
                                 <br />
                             </div>
-                            <div class="az-code-property-wrapper">
+                            <div id="azBackgroundSliderReady" class="az-code-property-wrapper">
                                 <property>functionlib/azBackgroundSliderReady</property>
                                 <type><span>Type:</span> <brown>Function</brown></type>
                                 <br />
                                 <div class="jsHigh notranslate">
                                     $.subscribe("functionlib/azBackgroundSliderReady", function (e, data)<br />
                                     {<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$BackgroundSlider - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$BackgroundSliderWrapper: i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$BackgroundSliderContent - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azBackgroundSliderId - your id<br />
                                     });<br />
                                     <br />
                                     This function is triggered when <strong>AZBackgroundSlider</strong> is fully initiated. By subscribing to the function, you will get a better flow in your own code.
@@ -241,17 +270,8 @@
                             &lt;/div&gt;<br />
                             <br />
                             <br />
-                            AZBackgroundSlider has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.1/css/backgroundslider.css" target="_blank" class="az-border-bottom-1-blue">backgroundslider.css</a>
+                            AZ Background Slider has some CSS that you can find here: <a href="/lib-2/css/backgroundslider.css" target="_blank">backgroundslider.css</a>
                             <br />
-                        </div>
-                        <div class="az-code cssHigh notranslate">
-                            @media (max-width: 576px)<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;::-webkit-scrollbar<br />
-                            &emsp;&ensp;&emsp;&ensp;{<br />
-                            &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;width: 0;<br />
-                            &emsp;&ensp;&emsp;&ensp;}<br />
-                            }<br />
                             <br />
                         </div>
                     </div>

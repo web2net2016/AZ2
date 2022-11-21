@@ -89,6 +89,7 @@
     <Content Include="lib-2\fontawesome\webfonts\fa-v4compatibility.woff2" />
     <Content Include="lib-2\jquerytimepicker\jquery.ui.timepicker.css" />
     <Content Include="lib-2\jquerytimepicker\jquery.ui.timepicker.js" />
+    <Content Include="lib-2\jqueryui\swiped-events.js" />
     <Content Include="lib-2\js\az-2.js" />
     <Content Include="lib-2\js\az-2.min.js">
       <DependentUpon>az-2.js</DependentUpon>

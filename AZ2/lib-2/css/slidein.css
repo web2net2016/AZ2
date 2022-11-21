@@ -36,6 +36,12 @@
         position: absolute;
         width: 40px;
         cursor: pointer;
+        background-color: var(--primary-background-color);
+        color: #FFFFFF;
+        font-size: 14px;
+        -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
         .az-slidein > .az-slidein-tab > div
@@ -66,9 +72,13 @@
 {
     display: block;
     position: relative;
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
     .az-slidein-card > article
     {
         padding: 7px;
+        font-size: 14px;
     }

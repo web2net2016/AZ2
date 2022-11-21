@@ -8,6 +8,8 @@
     {
         list-style-type: none;
         margin: 0;
+        padding: 7px 0 0 7px;
+        background-color: #DEDEDE;
     }
 
         .az-tabs > ul::after
@@ -22,12 +24,45 @@
             float: left;
             border-bottom-width: 0 !important;
             cursor: pointer;
+            padding: 14px;
+            font-size: 14px;
+            color: #FFFFFF;
+            background-color: var(--primary-background-color);
+            border: 1px solid #DDDDDD;
         }
+
+            .az-tabs > ul > li:hover
+            {
+                background-color: #FF9F55;
+                -webkit-transition: background-color 0.4s;
+                -moz-transition: background-color 0.4s;
+                -o-transition: background-color 0.4s;
+                transition: background-color 0.4s;
+            }
+
+            .az-tabs > ul > li.az-tabs-tab-active
+            {
+                background-color: #FF9F55;
+            }
 
     .az-tabs > .az-tabs-card > article
     {
         display: none;
+        margin: 0 7px 7px 7px;
+        padding: 7px;
+        background-color: #FFFFFF;
     }
+
+        .az-tabs > .az-tabs-card > article > *
+        {
+            color: #000000;
+            font-size: 14px;
+        }
+
+        .az-tabs > .az-tabs-card > article.az-tabs-article-active
+        {
+            display: block;
+        }
 
     .az-tabs.az-tabs-vertical > ul
     {
@@ -44,4 +79,19 @@
     {
         float: left;
         width: 78.5%;
+    }
+
+        .az-tabs.az-tabs-vertical > .az-tabs-card > article
+        {
+            margin-top: 7px;
+        }
+
+    .az-tabs.az-tabs-bottom > ul
+    {
+        padding: 0 0 7px 7px;
+    }
+
+    .az-tabs.az-tabs-bottom > .az-tabs-card > article
+    {
+        margin: 7px 7px 0 7px;
     }

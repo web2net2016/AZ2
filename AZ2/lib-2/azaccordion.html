@@ -18,9 +18,6 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/lib-2/css/az-2.min.css" />
     <script src="/lib-2/js/az-2.min.js"></script>
-
-    <link rel="stylesheet" href="/lib-2/lib/additionally.css" />
-    <script src="/lib-2/lib/additionally.js"></script>
     <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
     <script src="/lib-2/lib/az-codecolor.js"></script>
     <script>
@@ -417,7 +414,7 @@
                                     &emsp;&ensp;&emsp;&ensp;data.azAccordionActivated - index<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azAccordionDeactivated - index<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azAccordionCardJQElement - i.fn.init[]<br />
-                                    &emsp;&ensp;&emsp;&ensp;data.azAccordionClickJQElement - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azAccordionClickedJQElement - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azAccordionHeaderJQElement - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azAccordionArticleJQElement - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azAccordionFooterJQElement - i.fn.init[]<br />
@@ -513,13 +510,13 @@
                 </div>
             </div>
 
-            <div class="az-container az-background-white az-margin-t-56">
+            <div class="az-container az-background-white az-margin-t-56 az-margin-b-56">
                 <div class="az-row">
                     <div class="az-col xs-12">
                         <h1 class="az-code-header" style="margin: 0;">AZ Accordion HTML and CSS</h1>
                     </div>
                 </div>
-                <div class="az-row az-margin-b-56">
+                <div class="az-row">
                     <div class="az-col xs-12">
                         <div class="az-code htmlHigh notranslate">
                             &lt;div class="az-accordion" id="az-accordion-1"&gt;<br />
@@ -543,77 +540,10 @@
                             &lt;article class="az-accordion-article-active"&gt;<br />
                             <br />
                             <br />
-                            AZAccordion has some basic CSS that you should not initially need to adjust. <a href="/lib-2.0.1/css/accordion.css" target="_blank" class="az-border-bottom-1-blue">accordion.css</a>
-                            <br />
-                            You can find the CSS which you can change yourself in the file <a href="/lib-2/lib/additionally.css" target="_blank" class="az-border-bottom-1-blue">CSS Team</a>
+                            AZ Accordion has some CSS that you can find here: <a href="/lib-2/css/accordion.css" target="_blank">accordion.css</a>
                             <br />
                             <br />
-                            /*---------------------<br />
-                            Accordion<br />
-                            accordion.css<br />
-                            ---------------------*/<br />
-                            <br />
-                        </div>
-                        <div class="az-code cssHigh notranslate">
-                            .az-accordion<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;display: block;<br />
-                            &emsp;&ensp;&emsp;&ensp;position: relative;<br />
-                            }<br />
-                            <br />
-                            .az-accordion > .az-accordion-card<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);<br />
-                            &emsp;&ensp;&emsp;&ensp;-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);<br />
-                            &emsp;&ensp;&emsp;&ensp;box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);<br />
-                            }<br />
-                            <br />
-                            .az-accordion > .az-accordion-card > header<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;padding: 7px;<br />
-                            &emsp;&ensp;&emsp;&ensp;background-color: #0078D7;<br />
-                            &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
-                            }<br />
-                            <br />
-                            .az-accordion > .az-accordion-card > header:hover<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;background-color: #0bb2d4;<br />
-                            &emsp;&ensp;&emsp;&ensp;color: #FFFFFF;<br />
-                            }<br />
-                            <br />
-                            .az-accordion > .az-accordion-card > header > *<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;font-size: 14px;<br />
-                            }<br />
-                            <br />
-                            .az-accordion > .az-accordion-card > header > i<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;font-size: 12px;<br />
-                            &emsp;&ensp;&emsp;&ensp;margin-right: 2px;<br />
-                            &emsp;&ensp;&emsp;&ensp;margin-top: 4px;<br />
-                            }<br />
-                            <br />
-                            .az-accordion > .az-accordion-card > article<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;padding: 7px;<br />
-                            &emsp;&ensp;&emsp;&ensp;background-color: #FFFFFF;<br />
-                            &emsp;&ensp;&emsp;&ensp;color: #000000;<br />
-                            }<br />
-                            <br />
-                            .az-accordion > .az-accordion-card > article > *<br />
-                            {<br />
-                            &emsp;&ensp;&emsp;&ensp;font-size: 14px;<br />
-                            }<br />
-                            <br />
-                            .az-accordion > .az-accordion-card > header.az-accordion-header-active<br />
-                            {<br />
-                            }<br />
-                            <br />
-                            .az-accordion > .az-accordion-card > header.az-accordion-article-active<br />
-                            {<br />
-                            }<br />
-                            <br />
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>

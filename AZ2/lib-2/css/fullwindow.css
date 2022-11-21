@@ -6,6 +6,8 @@
     height: 0;
     overflow: hidden;
     opacity: 0;
+    background-color: #FFFFFF;
+    color: #000000;
 }
 
     #az-full-window.az-window-full
@@ -24,4 +26,11 @@
     -ms-transform: translateX(0%, -50%);
     -o-transform: translateX(0%, -50%);
     transform: translate(0%, -50%);
+    padding: 7px 14px;
+    font-size: 35px;
 }
+
+    #az-full-window-close:hover
+    {
+        background: #DDDDDD;
+    }

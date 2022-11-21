@@ -1,23 +1,4 @@
 ﻿
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //function AZCheckAsyncAndPublish(FunctionToRun, Publish, ObjData)
 //{
 //    if (FunctionToRun)

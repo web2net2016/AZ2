@@ -2161,7 +2161,7 @@ function AZAccordion(Options)
                                     azAccordionStatus: "closed",
                                     azAccordionActivated: _Main.AccordionActivated,
                                     azAccordionDeactivated: _Main.AccordionDeactivated,
-                                    azAccordionClickJQElement: $(e.target).length > 0 ? $(e.target) : "",
+                                    azAccordionClickedJQElement: $(e.target).length > 0 ? $(e.target) : "",
                                     azAccordionCardJQElement: $($SelectedAccordionHeader.parent()),
                                     azAccordionHeaderJQElement: $SelectedAccordionHeader,
                                     azAccordionArticleJQElement: $($SelectedAccordionHeader.siblings("article")),
@@ -2182,7 +2182,7 @@ function AZAccordion(Options)
                                     azAccordionStatus: "open",
                                     azAccordionActivated: $SelectedAccordionHeader.parent().index(),
                                     azAccordionDeactivated: _Main.AccordionDeactivated,
-                                    azAccordionClickJQElement: $(e.target).length > 0 ? $(e.target) : "",
+                                    azAccordionClickedJQElement: $(e.target).length > 0 ? $(e.target) : "",
                                     azAccordionCardJQElement: $($SelectedAccordionHeader.parent()),
                                     azAccordionHeaderJQElement: $SelectedAccordionHeader,
                                     azAccordionArticleJQElement: $($SelectedAccordionHeader.siblings("article")),
@@ -2216,7 +2216,7 @@ function AZAccordion(Options)
                                 azAccordionStatus: "open",
                                 azAccordionActivated: $SelectedAccordionHeader.parent().index(),
                                 azAccordionDeactivated: _Main.AccordionDeactivated,
-                                azAccordionClickJQElement: $(e.target).length > 0 ? $(e.target) : "",
+                                azAccordionClickedJQElement: $(e.target).length > 0 ? $(e.target) : "",
                                 azAccordionCardJQElement: $($SelectedAccordionHeader.parent()),
                                 azAccordionHeaderJQElement: $SelectedAccordionHeader,
                                 azAccordionArticleJQElement: $($SelectedAccordionHeader.siblings("article")),
@@ -2321,77 +2321,86 @@ function AZBackgroundSlider(Options)
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
-        if (_Main.Options.azBackgroundSliderId != "")
+        if (_Main.Options.azBackgroundSliderId !== "")
         {
             _Main.$BackgroundSlider = $("#" + _Main.Options.azBackgroundSliderId);
-            _Main.$BackgroundSliderWrapper = _Main.$BackgroundSlider.children(".az-background-slider-wrapper");
-            _Main.$BackgroundSliderContent = _Main.$BackgroundSliderWrapper.children(".az-background-slider-content");
-
-            if (_Main.$BackgroundSliderContent.length > 0)
+            if (_Main.$BackgroundSlider.length > 0)
             {
-                _Main.SliderWidth = _Main.Options.azBackgroundSliderWidth;
-                _Main.SliderHeight = _Main.Options.azBackgroundSliderHeight;
-                _Main.ContentWidth = _Main.Options.azBackgroundSliderWidth;
-                _Main.ContentHeight = _Main.Options.azBackgroundSliderHeight;
-                _Main.ContentMaxWidth = 0;
-                _Main.ContentMaxHeight = 0;
-                _Main.LeftRightMargin = 7;
-                _Main.TopBottomMargin = 7;
+                _Main.$BackgroundSliderWrapper = _Main.$BackgroundSlider.children(".az-background-slider-wrapper");
+                _Main.$BackgroundSliderContent = _Main.$BackgroundSliderWrapper.children(".az-background-slider-content");
 
-                if (_Main.Options.azBackgroundSliderWidth > window.innerWidth)
+                if (_Main.$BackgroundSliderContent.length > 0)
                 {
-                    _Main.Options.azBackgroundSliderWidth = (window.innerWidth - 40);
                     _Main.SliderWidth = _Main.Options.azBackgroundSliderWidth;
-                    _Main.ContentWidth = _Main.Options.azBackgroundSliderWidth;
-                }
-                if (_Main.Options.azBackgroundSliderHeight > window.innerHeight)
-                {
-                    _Main.Options.azBackgroundSliderHeight = (window.innerHeight - 40);
                     _Main.SliderHeight = _Main.Options.azBackgroundSliderHeight;
+                    _Main.ContentWidth = _Main.Options.azBackgroundSliderWidth;
                     _Main.ContentHeight = _Main.Options.azBackgroundSliderHeight;
-                }
+                    _Main.ContentMaxWidth = 0;
+                    _Main.ContentMaxHeight = 0;
+                    _Main.LeftRightMargin = 7;
+                    _Main.TopBottomMargin = 7;
 
-                _Main.$BackgroundSliderContent.css({ "width": _Main.ContentWidth, "height": _Main.ContentHeight });
-                _Main.$BackgroundSliderContent.find("img").css({ "width": _Main.ContentWidth, "height": _Main.ContentHeight });
-
-                _Main.$BackgroundSliderContent.each(function (Index, Content)
-                {
-                    if ($(Content).outerWidth(true) > _Main.ContentMaxWidth)
+                    if (_Main.Options.azBackgroundSliderWidth > window.innerWidth)
                     {
-                        _Main.ContentMaxWidth = $(Content).outerWidth(true);
+                        _Main.Options.azBackgroundSliderWidth = (window.innerWidth - 40);
+                        _Main.SliderWidth = _Main.Options.azBackgroundSliderWidth;
+                        _Main.ContentWidth = _Main.Options.azBackgroundSliderWidth;
                     }
-                    if ($(Content).outerHeight(true) > _Main.ContentMaxHeight)
+                    if (_Main.Options.azBackgroundSliderHeight > window.innerHeight)
                     {
-                        _Main.ContentMaxHeight = $(Content).outerHeight(true);
+                        _Main.Options.azBackgroundSliderHeight = (window.innerHeight - 40);
+                        _Main.SliderHeight = _Main.Options.azBackgroundSliderHeight;
+                        _Main.ContentHeight = _Main.Options.azBackgroundSliderHeight;
                     }
-                });
-                if (_Main.ContentMaxWidth > _Main.$BackgroundSliderContent.innerWidth())
-                {
-                    _Main.LeftRightMargin = ((_Main.ContentMaxWidth - _Main.$BackgroundSliderContent.innerWidth()) / 2);
-                }
-                if (_Main.ContentMaxHeight > _Main.$BackgroundSliderContent.innerHeight())
-                {
-                    _Main.TopBottomMargin = ((_Main.ContentMaxHeight - _Main.$BackgroundSliderContent.innerHeight()) / 2);
-                }
 
-                if (_Main.Options.azBackgroundSliderDir === "horizontal")
-                {
-                    _Main.$BackgroundSliderWrapper.css({ "width": (_Main.$BackgroundSliderContent.length * _Main.ContentMaxWidth) });
-                    _Main.$BackgroundSlider.css({ "overflow-x": "scroll", "width": "100%", "height": (_Main.ContentMaxHeight + 20) });
-                    _Main.$BackgroundSliderContent.css({ "float": "left", "margin-left": _Main.LeftRightMargin, "margin-right": _Main.LeftRightMargin, "margin-top": 0, "margin-bottom": 0 });
-                }
-                else
-                {
-                    _Main.$BackgroundSlider.css({ "overflow-y": "scroll", "width": "100%", "height": _Main.ContentMaxHeight });
-                    if (_Main.Options.azBackgroundSliderWidth < window.innerWidth)
+                    _Main.$BackgroundSliderContent.css({ "width": _Main.ContentWidth, "height": _Main.ContentHeight });
+                    _Main.$BackgroundSliderContent.find("img").css({ "width": _Main.ContentWidth, "height": _Main.ContentHeight });
+
+                    _Main.$BackgroundSliderContent.each(function (Index, Content)
                     {
-                        _Main.$BackgroundSlider.css({ "width": (_Main.ContentWidth + 20) });
+                        if ($(Content).outerWidth(true) > _Main.ContentMaxWidth)
+                        {
+                            _Main.ContentMaxWidth = $(Content).outerWidth(true);
+                        }
+                        if ($(Content).outerHeight(true) > _Main.ContentMaxHeight)
+                        {
+                            _Main.ContentMaxHeight = $(Content).outerHeight(true);
+                        }
+                    });
+                    if (_Main.ContentMaxWidth > _Main.$BackgroundSliderContent.innerWidth())
+                    {
+                        _Main.LeftRightMargin = ((_Main.ContentMaxWidth - _Main.$BackgroundSliderContent.innerWidth()) / 2);
                     }
-                    _Main.$BackgroundSliderContent.css({ "margin-left": _Main.LeftRightMargin, "margin-right": 0, "margin-top": _Main.TopBottomMargin, "margin-bottom": _Main.TopBottomMargin });
-                }
+                    if (_Main.ContentMaxHeight > _Main.$BackgroundSliderContent.innerHeight())
+                    {
+                        _Main.TopBottomMargin = ((_Main.ContentMaxHeight - _Main.$BackgroundSliderContent.innerHeight()) / 2);
+                    }
 
-                $.publish("functionlib/azBackgroundSliderReady", _Main);
-            }
+                    if (_Main.Options.azBackgroundSliderDir === "horizontal")
+                    {
+                        _Main.$BackgroundSliderWrapper.css({ "width": (_Main.$BackgroundSliderContent.length * _Main.ContentMaxWidth) });
+                        _Main.$BackgroundSlider.css({ "overflow-x": "scroll", "width": "100%", "height": (_Main.ContentMaxHeight + 20) });
+                        _Main.$BackgroundSliderContent.css({ "float": "left", "margin-left": _Main.LeftRightMargin, "margin-right": _Main.LeftRightMargin, "margin-top": 0, "margin-bottom": 0 });
+                    }
+                    else
+                    {
+                        _Main.$BackgroundSlider.css({ "overflow-y": "scroll", "width": "100%", "height": _Main.ContentMaxHeight });
+                        if (_Main.Options.azBackgroundSliderWidth < window.innerWidth)
+                        {
+                            _Main.$BackgroundSlider.css({ "width": (_Main.ContentWidth + 20) });
+                        }
+                        _Main.$BackgroundSliderContent.css({ "margin-left": _Main.LeftRightMargin, "margin-right": 0, "margin-top": _Main.TopBottomMargin, "margin-bottom": _Main.TopBottomMargin });
+                    }
+
+                    $.publish("functionlib/azBackgroundSliderReady",
+                        {
+                            $BackgroundSlider: _Main.$BackgroundSlider,
+                            $BackgroundSliderWrapper: _Main.$BackgroundSliderWrapper,
+                            $BackgroundSliderContent: _Main.$BackgroundSliderContent,
+                            azBackgroundSliderId: _Main.Options.azBackgroundSliderId
+                        });
+                }
+            }            
         }
     }
     else

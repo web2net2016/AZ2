@@ -13,7 +13,22 @@
         .az-sidebar-menu > li > a
         {
             display: block;
+            padding: 6px;
+            font-size: 16px;
+            color: #000000;
         }
+
+            .az-sidebar-menu > li > a > i
+            {
+                margin-right: 14px;
+                font-size: 16px;
+            }
+
+            .az-sidebar-menu > li > a:hover
+            {
+                background-color: var(--primary-background-color);
+                color: #FFFFFF;
+            }
 
 .az-sidebar-filter
 {
@@ -24,4 +39,5 @@
     .az-sidebar-filter > li
     {
         width: 100%;
+        margin: 7px;
     }
