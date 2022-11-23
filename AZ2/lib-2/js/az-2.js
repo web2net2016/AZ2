@@ -1909,7 +1909,7 @@ var AZSettings =
     DefaultTooltipFile: "/lib/help/help.html",
     DebugMode: true,
     AppName: "AZ Team",
-    AppVersion: "1.0.0",
+    AppVersion: "2.0.2",
     ApiVersion: "_1"
 };
 

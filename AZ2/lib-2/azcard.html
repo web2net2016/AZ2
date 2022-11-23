@@ -20,11 +20,26 @@
     <script src="/lib-2/js/az-2.min.js"></script>
     <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
     <script src="/lib-2/lib/az-codecolor.js"></script>
+    <script src="/lib-2/jqueryui/swiped-events.js"></script>
     <script>
 
         $(document).ready(function ()
         {
             w3CodeColor();
+
+            ['swiped-left', 'swiped-right'].forEach(function (e)
+            {
+                document.querySelectorAll(".az-card").addEventListener(e, function (e)
+                {
+                    console.log(e.target); // the element that was swiped
+                    console.log(e.detail); // swiped direction
+                });
+            });
+            //document.addEventListener(' swiped-right', function (e)
+            //{
+            //    console.log(e.target); // the element that was swiped
+            //    console.log(e.detail); // swiped direction
+            //});
         });
 
     </script>
@@ -36,7 +51,7 @@
             <div class="az-container">
 
                 <div class="az-row">
-                    <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-col xs-12 sm-6 lg-3">
                         <div class="az-card">
                             <header>
                                 <h1>Header 1</h1>
@@ -48,7 +63,7 @@
                             </footer>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14 az-sm-margin-t-0">
+                    <div class="az-col xs-12 sm-6 lg-3">
                         <div class="az-card">
                             <header>
                                 <h1>Header 1</h1>
@@ -60,7 +75,7 @@
                             </footer>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14 az-md-margin-t-0">
+                    <div class="az-col xs-12 sm-6 lg-3 az-xs-margin-t-14 az-lg-margin-t-0">
                         <div class="az-card">
                             <header>
                                 <h1>Header 1</h1>
@@ -72,7 +87,7 @@
                             </footer>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14 az-md-margin-t-0">
+                    <div class="az-col xs-12 sm-6 lg-3 az-xs-margin-t-14 az-lg-margin-t-0">
                         <div class="az-card">
                             <header>
                                 <h1>Header 1</h1>
@@ -87,7 +102,7 @@
                 </div>
 
                 <div class="az-row az-margin-t-56 az-margin-b-56">
-                    <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-col xs-12 sm-6 lg-3">
                         <div class="az-card adjust">
                             <img class="az-image az-width-100" src="/web2net/img_avatar3.png" />
                             <article>
@@ -108,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14 az-sm-margin-t-0">
+                    <div class="az-col xs-12 sm-6 lg-3">
                         <div class="az-card adjust">
                             <img class="az-image az-width-100" src="/web2net/img_avatar4.png" />
                             <article>
@@ -129,7 +144,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14 az-md-margin-t-0">
+                    <div class="az-col xs-12 sm-6 lg-3 az-xs-margin-t-14 az-lg-margin-t-0">
                         <div class="az-card adjust">
                             <img class="az-image az-width-100" src="/web2net/img_avatar3.png" />
                             <article>
@@ -140,7 +155,7 @@
                             </article>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14 az-md-margin-t-0">
+                    <div class="az-col xs-12 sm-6 lg-3 az-xs-margin-t-14 az-lg-margin-t-0">
                         <div class="az-card adjust">
                             <img class="az-image az-width-100" src="/web2net/img_avatar4.png" />
                             <article>
@@ -154,7 +169,7 @@
                 </div>
 
                 <div class="az-row az-margin-t-56 az-margin-b-56">
-                    <div class="az-col xs-12 sm-6 md-3">
+                    <div class="az-col xs-12 sm-6 lg-3">
                         <div class="az-card">
                             <img class="az-image az-width-100" src="/web2net/img_avatar4.png" />
                             <article>
@@ -167,7 +182,7 @@
                             </footer>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14 az-sm-margin-t-0">
+                    <div class="az-col xs-12 sm-6 lg-3">
                         <div class="az-card">
                             <img class="az-image az-width-100" src="/web2net/img_avatar3.png" />
                             <article>
@@ -180,7 +195,7 @@
                             </footer>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14 az-md-margin-t-0">
+                    <div class="az-col xs-12 sm-6 lg-3 az-xs-margin-t-14 az-lg-margin-t-0">
                         <div class="az-card">
                             <img class="az-image az-width-100" src="/web2net/img_avatar4.png" />
                             <article>
@@ -193,7 +208,7 @@
                             </footer>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6 md-3 az-xs-margin-t-14 az-md-margin-t-0">
+                    <div class="az-col xs-12 sm-6 lg-3 az-xs-margin-t-14 az-lg-margin-t-0">
                         <div class="az-card">
                             <img class="az-image az-width-100" src="/web2net/img_avatar3.png" />
                             <article>
@@ -210,7 +225,6 @@
 
                 <div class="az-row az-margin-t-56 az-margin-b-56">
                     <div class="az-col xs-12">
-
                         <div class="az-card" style="background-color: #F1F1F2;">
                             <article class="az-padding-14">
                                 <div class="az-form-group md az-padding-7">
@@ -229,10 +243,10 @@
                                 </div>
                             </article>
                         </div>
-
                     </div>
                 </div>
             </div>
+
         </div>
     </form>
 

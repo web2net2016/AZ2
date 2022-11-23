@@ -20,7 +20,6 @@
     <script src="/lib-2/js/az-2.min.js"></script>
     <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
     <script src="/lib-2/lib/az-codecolor.js"></script>
-    <!--<script src="/lib-2/jqueryui/swiped-events.js"></script>-->
     <script>
 
         var InputData =
@@ -64,12 +63,6 @@
 
         function SetAZPageContent(e, data)
         {
-            //document.addEventListener('swiped', function (e)
-            //{
-            //    console.log(e.target); // the element that was swiped
-            //    console.log(e.detail.dir); // swiped direction
-            //});
-
             ObjPageData.Values.AZPage = data;
 
             $.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
@@ -166,34 +159,36 @@
                     </div>
                 </div>
             </div>
+
             <div class="az-row az-margin-t-14">
-                <div class="az-col xs-12 sm-3">
+                <div class="az-col xs-12 sm-6 lg-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="CustomerName" id="labelCustomerName"></label>
                         <input type="text" class="az-input" id="CustomerName" />
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-3">
+                <div class="az-col xs-12 sm-6 lg-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Contact" id="labelContact"></label>
                         <input type="text" class="az-input" id="Contact" />
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-3">
+                <div class="az-col xs-12 sm-6 lg-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Email" id="labelEmail"></label>
                         <input type="text" class="az-input" id="Email" />
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-3">
+                <div class="az-col xs-12 sm-6 lg-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Web" id="labelWeb"></label>
                         <input type="text" class="az-input" id="Web" />
                     </div>
                 </div>
             </div>
+
             <div class="az-row">
-                <div class="az-col xs-12 sm-3">
+                <div class="az-col xs-12 sm-6 lg-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="RequestReasonId" id="labelRequestReasonId"></label>
                         <select class="az-select" id="RequestReasonId">
@@ -210,41 +205,42 @@
                         </select>
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-3">
+                <div class="az-col xs-12 sm-6 lg-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Date" id="labelDate"></label>
                         <input type="text" class="az-input" id="Date" />
                         <label for="Date" class="az-input-icons"><i class="fas fa-calendar-alt"></i></label>
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-3">
+                <div class="az-col xs-12 sm-6 lg-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Time" id="labelTime"></label>
                         <input type="text" class="az-input" id="Time" />
                         <label for="Time" class="az-input-icons"><i class="far fa-clock"></i></label>
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-3">
+                <div class="az-col xs-12 sm-6 lg-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="DateTime" id="labelDateTime"></label>
                         <input type="text" class="az-input" id="DateTime" />
                     </div>
                 </div>
             </div>
+
             <div class="az-row">
-                <div class="az-col xs-12 sm-3">
+                <div class="az-col xs-12 sm-6 lg-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Decimal" id="labelDecimal"></label>
                         <input type="text" class="az-input" id="Decimal" />
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-3">
+                <div class="az-col xs-12 sm-6 lg-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Numeric" id="labelNumeric"></label>
                         <input type="text" class="az-input" id="Numeric" />
                     </div>
                 </div>
-                <div class="az-col xs-12 sm-3">
+                <div class="az-col xs-12 sm-6 lg-3">
                     <div class="az-form-group xs">
                         <label class="az-label" for="Comment" id="labelComment"></label>
                         <textarea class="az-textarea" id="Comment"></textarea>
@@ -253,18 +249,27 @@
             </div>
 
             <div class="az-row az-margin-t-14 az-margin-b-14">
-                <div class="az-col xs-12 sm-6">
-                    <div class="az-form-group xs">
-                        <!--<button type="button" class="az-button az-button-block info az-shadow-1 az-shadow-hover-2 cancel"></button>-->
-                    </div>
-                </div>
-                <div class="az-col xs-12 sm-6">
-                    <div class="az-form-group xs">
-                        <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2 submit"><i class="fas fa-exclamation az-padding-l-7"></i></button>
+                <div class="az-col xs-12">
+                    <div class="az-form-group xs az-text-center">
+                        <button type="button" class="az-button az-width-40 primary az-shadow-1 az-shadow-hover-2 submit"><i class="fas fa-exclamation az-padding-l-7"></i></button>
                     </div>
                 </div>
             </div>
+
             <div class="az-row az-margin-t-56">
+                <div class="az-col xs-12">
+                    <div class="az-card" style="margin: 0;">
+                        <header class="az-text-center">
+                            <h1>Klikk på <strong>Lagre</strong> for å se objektet som serialiseres fra skjemaet.</h1>
+                        </header>
+                        <article style="display: none;">
+                            <div id="ObjFormResponse" class="az-code jsHigh notranslate"></div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="az-row az-margin-t-56">
                 <div class="az-col xs-12">
                     <div class="az-form-group xs">
                         <h5>Feltene valideres etter følgende regler:</h5>
@@ -290,19 +295,8 @@
                         <li>Web</li>
                     </ul>
                 </div>
-            </div>
-            <div class="az-row az-margin-t-56">
-                <div class="az-col xs-12">
-                    <div class="az-card" style="margin: 0;">
-                        <header>
-                            <h1>Click <strong>Submit</strong> to see the object that is serializes from the form.</h1>
-                        </header>
-                        <article style="display: none;">
-                            <div id="ObjFormResponse" class="az-code jsHigh notranslate"></div>
-                        </article>
-                    </div>
-                </div>
-            </div>
+            </div>-->
+
         </div>
     </form>
 
