@@ -2548,10 +2548,10 @@ function AZModalDialog(Options)
             // AZModalDialog iFrame
             if (_Main.Options.azModalDialogiFrameURL != "")
             {
-                var _IFrameHeight = ((_Main.Options.azModalDialogHeight - AZElementSize(_Main.$Titlebar).Height) - 6);
+                var _IFrameHeight = ((_Main.Options.azModalDialogHeight - AZElementSize(_Main.$Titlebar).Height) - 20);
                 if (_Main.Options.azModalDialogTitlebar === false)
                 {
-                    _IFrameHeight = (_Main.Options.azModalDialogHeight - 6);
+                    _IFrameHeight = (_Main.Options.azModalDialogHeight - 20);
                 }
                 _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe-" + _Main.azModalDialogId);
                 _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": _IFrameHeight });
@@ -2705,10 +2705,10 @@ function AZModalDialog(Options)
                 // AZModalDialog iFrame
                 if (_Main.Options.azModalDialogiFrameURL != "")
                 {
-                    var _IFrameHeight = ((_Main.ModalDialogResize.azModalDialogHeight - AZElementSize(_Main.$Titlebar).Height) - 6);
+                    var _IFrameHeight = ((_Main.ModalDialogResize.azModalDialogHeight - AZElementSize(_Main.$Titlebar).Height) - 20);
                     if (_Main.Options.azModalDialogTitlebar === false)
                     {
-                        _IFrameHeight = (_Main.Options.azModalDialogHeight - 6);
+                        _IFrameHeight = (_Main.ModalDialogResize.azModalDialogHeight - 20);
                     }
                     _Main.$Iframe.css({ "width": "100%", "height": _IFrameHeight });
                 }
