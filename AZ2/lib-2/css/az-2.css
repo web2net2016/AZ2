@@ -18770,7 +18770,7 @@ ul
             border-radius: 50%;
             min-width: 20px;
             min-height: 20px;
-            padding: 5px;
+            padding: 7px;
             line-height: 1;
             box-sizing: content-box;
         }
@@ -19159,6 +19159,7 @@ ul
     display: inline-block;
     min-width: 20px;
     min-height: 20px;
+    text-align: center;
     padding: 9px;
     line-height: 1;
     box-sizing: content-box;
@@ -19181,16 +19182,22 @@ ul
     .az-form-group .az-badge.xs
     {
         font-size: 0.85em;
+        min-width: 13px;
+        min-height: 13px;
     }
 
     .az-form-group .az-badge.sm
     {
         font-size: 1.1em;
+        min-width: 23px;
+        min-height: 23px;
     }
 
     .az-form-group .az-badge.md
     {
         font-size: 1.2em;
+        min-width: 28px;
+        min-height: 28px;
     }
 
 .az-form-group.az-badge-wrapper

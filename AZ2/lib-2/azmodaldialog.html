@@ -51,11 +51,6 @@
             $("#cmdModalDialog8").off("click", setModalDialog8).on("click", setModalDialog8);
         });
 
-        function validateDirty()
-        {
-            formdirty = true;
-        }
-
         function setModalDialog1()
         {
             $.subscribeonce("functionlib/azModalDialogBeforeOpen", function (e, data)

@@ -103,6 +103,8 @@
             {
                 console.log("azWindowAfterOpen")
                 console.log(data)
+
+                data.$Article.find('.az-code').css({ 'background-color': 'transparent', 'color': '#FFFFFF' });
                 $("#cmdAZWindowButton1").off().on('click', function ()
                 {
                     data.azWindowClose();
