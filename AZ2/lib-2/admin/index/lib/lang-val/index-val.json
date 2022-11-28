@@ -39,6 +39,7 @@
     "data-attr": "val",
     "class": "validate validate-numeric",
     "datatype": "int",
+    "data-help": "RequestReasonId",
     "tabindex": 5
   },
   "Date": {

@@ -29,27 +29,31 @@
         {
             //$('#section-container-1-col-1, #section-container-1-col-2, #section-container-1-col-3').matchHeight();
 
-            //new AZSlideshow(
-            //    {
-            //        azSlideshowId: "az-slideshow-1",
-            //        azSlideshowArrows: true,
-            //        azSlideshowTimer: 3000,
-            //        azSlideshowFadeIn: 1000,
-            //        azSlideshowFadeOut: 1000
-            //    });
+            new AZSlideshow(
+                {
+                    azSlideshowId: "az-slideshow-1",
+                    azSlideshowArrows: true,
+                    azSlideshowTimer: 3000,
+                    azSlideshowFadeIn: 1000,
+                    azSlideshowFadeOut: 1000,
+                    azSlideshowAutoplay: true
+                });
 
             var swiper = new Swiper(".mySwiper",
                 {
-                    autoplay: {
+                    autoplay:
+                    {
                         delay: 3000,
                     },
                     effect: "fade",
                     loop: true,
-                    navigation: {
+                    navigation:
+                    {
                         nextEl: ".swiper-button-next",
                         prevEl: ".swiper-button-prev"
                     },
-                    pagination: {
+                    pagination:
+                    {
                         el: ".swiper-pagination",
                         clickable: true
                     }
@@ -58,7 +62,7 @@
 
     </script>
     <style>
-/*        html,
+        /*        html,
         body
         {
             position: relative;
@@ -102,8 +106,8 @@
                     <div class="swiper-wrapper">
 
                         <div class="swiper-slide">
-                            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                            <div class="az-display-absolute-topleft az-color-white az-margin-28" style="width: 50vw;">
+                            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />                            
+                            <div class="az-display-absolute-middle az-color-white az-margin-28" style="width: 50vw;">
                                 <div class="az-text-jumbo">Lorem ipsum</div>
                                 <p class="az-text-xlarge">
                                     Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
@@ -156,8 +160,8 @@
 </body>
 </html>
 
-
-<!--<div class="az-row">
+<!--
+<div class="az-row">
     <div class="az-col xs-12">
 
         <div id="az-slideshow-1" class="az-slideshow">
@@ -182,8 +186,9 @@
         </div>
 
     </div>
-</div>-->
-<!--<div id="section-2" class="az-section">
+</div>
+
+<div id="section-2" class="az-section">
     <div class="az-container-fluid">
 
         <div class="az-row">
