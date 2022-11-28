@@ -40,9 +40,11 @@
 
             var swiper = new Swiper(".mySwiper",
                 {
-                    autoHeight: true,
-                    spaceBetween: 30,
+                    autoplay: {
+                        delay: 3000,
+                    },
                     effect: "fade",
+                    loop: true,
                     navigation: {
                         nextEl: ".swiper-button-next",
                         prevEl: ".swiper-button-prev"
@@ -56,6 +58,19 @@
 
     </script>
     <style>
+/*        html,
+        body
+        {
+            position: relative;
+            height: 100%;
+        }*/
+
+        .az-container-fluid
+        {
+            height: 50vw;
+            max-height: 100vh;
+        }
+
         .swiper
         {
             width: 100%;
@@ -77,24 +92,57 @@
 </head>
 <body>
 
+
+
     <form id="frmReg">
         <div class="az-section">
             <div class="az-container-fluid">
 
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                        </div>
+
                         <div class="swiper-slide">
                             <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                            <div class="az-display-absolute-topleft az-color-white az-margin-28" style="width: 50vw;">
+                                <div class="az-text-jumbo">Lorem ipsum</div>
+                                <p class="az-text-xlarge">
+                                    Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                                    Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                                </p>
+                            </div>
                         </div>
+
+                        <div class="swiper-slide">
+                            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                            <div class="az-display-absolute-topright az-color-white az-margin-28" style="width: 50vw;">
+                                <div class="az-text-jumbo">Lorem ipsum</div>
+                                <p class="az-text-xlarge">
+                                    Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                                </p>
+                            </div>
+                        </div>
+
                         <div class="swiper-slide">
                             <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                            <div class="az-display-absolute-bottomleft az-color-white az-margin-28" style="width: 50vw;">
+                                <div class="az-text-jumbo">Lorem ipsum</div>
+                                <p class="az-text-xlarge">
+                                    Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                                    Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                                </p>
+                            </div>
                         </div>
+
                         <div class="swiper-slide">
                             <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                            <div class="az-display-absolute-bottomright az-color-white az-margin-28" style="width: 50vw;">
+                                <div class="az-text-jumbo">Lorem ipsum</div>
+                                <p class="az-text-xlarge">
+                                    Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                                </p>
+                            </div>
                         </div>
+
                     </div>
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
@@ -103,7 +151,6 @@
 
             </div>
         </div>
-
     </form>
 
 </body>
