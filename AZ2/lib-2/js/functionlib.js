@@ -3,9 +3,9 @@
 var AZSettings =
 {
     LanguageValidationFolder: "/admin",
-    DefaultLanguageFile: "/lib-2/admin/index/lib/lang-val/default-lang.json",
+    DefaultLanguageFile: "/lib-2/admin/default-lang.json",
     DefaultLanguage: "nb-NO",
-    DefaultTooltipFile: "/lib/help/help.html",
+    DefaultTooltipFile: "/lib-2/admin/help.html",
     DebugMode: true,
     AppName: "AZ Team",
     AppVersion: "2.0.2",
@@ -48,17 +48,15 @@ $(document).ready(function ()
 
     window.setTimeout(function ()
     {
-        $.publish("functionlib/azWindowResize",
-            {
-                azWindowWidth: parseInt(window.innerWidth),
-                azWindowHeight: parseInt(window.innerHeight),
-                azWindowScrollTop: parseInt($(window).scrollTop()),
-                azWindowScrollLeft: parseInt($(window).scrollLeft()),
-                azWindowOrientation: (window.innerHeight > window.innerWidth) ? "portrait" : "landscape"
-            });
+        PublishWindowResize();
     }, 100);
 
     $(window).resize(function ()
+    {
+        PublishWindowResize();
+    });
+
+    function PublishWindowResize()
     {
         $.publish("functionlib/azWindowResize",
             {
@@ -68,7 +66,7 @@ $(document).ready(function ()
                 azWindowScrollLeft: parseInt($(window).scrollLeft()),
                 azWindowOrientation: (window.innerHeight > window.innerWidth) ? "portrait" : "landscape"
             });
-    });
+    }
 
     if (typeof SetAZPage == "function")
     {
@@ -88,6 +86,7 @@ $(document).ready(function ()
         new AZStandardAlert(_AZStandardAlertOptions);
     });
 
+    // AZ Validate Input
     $.subscribe("functionlib/azValidateInputValidChar", function (e, data)
     {
         var _AZStandardAlertOptions =
@@ -100,7 +99,7 @@ $(document).ready(function ()
         new AZStandardAlert(_AZStandardAlertOptions);
     });
 
-    AZSetInputTypeEvents();;
+    AZSetInputTypeEvents();
 });
 
 // AZ Accordion
@@ -1750,82 +1749,73 @@ function AZSlideshow(Options)
         {
             azSlideshowId: "",
             azSlideshowArrows: false,
-            azSlideshowTimer: 3000,
-            azSlideshowFadeIn: 1000,
-            azSlideshowFadeOut: 1000
+            azSlideshowPagination: false,
+            azSlideshowAutoplay: false,
+            azSlideshowLoop: false
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
         if (_Main.Options.azSlideshowId != "")
         {
-            _Main.$Slideshow = $("#" + _Main.Options.azSlideshowId);
-            _Main.$Slides = $(".az-slides", _Main.$Slideshow);
-            _Main.SlideShow;
-            _Main.SlideIndex = 0;
-
-            if (_Main.Options.azSlideshowArrows)
+            _Main.$Swiper = $("#" + _Main.Options.azSlideshowId);
+            // creative cards fade
+            _Main.SwiperOptions =
             {
-                _Main.$Slideshow.append('<div class="az-arrows az-arrow-left az-display-left" onclick="plusDivs(-1)">&#10094;</div><div class="az-arrows az-arrow-right az-display-right" onclick="plusDivs(1)">&#10095;</div>');
-                _Main.$Slideshow.off().on("mouseenter", "slide, .az-arrows", function ()
-                {
-                    $.unsubscribe("runSlides");
-                    window.clearTimeout(_Main.SlideShow);
-
-                }).on("mouseleave", function ()
-                {
-                    $.subscribe("runSlides", function (e, data)
-                    {
-                        _Main.SlideShow = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
-                    });
-                    _Main.SlideShow = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
-                });
-            }
-
-            $.subscribe("functionlib/azWindowResize", function (e, data)
-            {
-                _Main.$Slideshow.height($("slide:first", _Main.$Slides).height());
-            });
-
-            $.subscribe("runSlides", function (e, data)
-            {
-                _Main.SlideShow = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
-            });
-
-            _Main.$Slideshow.height($("slide:first", _Main.$Slides).height());
-            $("slide:gt(0)", _Main.$Slides).hide();
-            _Main.SlideShow = window.setTimeout(runSlides, _Main.Options.azSlideshowTimer);
-
-            function runSlides()
-            {
-                $("slide", _Main.$Slides).eq(_Main.SlideIndex).fadeOut(_Main.Options.azSlideshowFadeOut);
-                _Main.SlideIndex = (_Main.SlideIndex != $("slide", _Main.$Slides).length - 1) ? _Main.SlideIndex + 1 : 0;
-                $("slide", _Main.$Slides).eq(_Main.SlideIndex).fadeIn(_Main.Options.azSlideshowFadeIn, function ()
-                {
-                    $.publish("runSlides");
-                });
-            }
-
-            plusDivs = function (n)
-            {
-                $.unsubscribe("runSlides");
-                window.clearTimeout(_Main.SlideShow);
-                _Main.SlideIndex += n;
-                showDivs();
+                effect: "creative"
             };
 
-            showDivs = function ()
+            _Main.SwiperOptions.creativeEffect =
             {
-                if (_Main.SlideIndex > $("slide", _Main.$Slides).length - 1)
+                prev:
                 {
-                    _Main.SlideIndex = 0;
+                    shadow: true,
+                    translate: ["-125%", 0, -800],
+                    rotate: [0, 0, -90],
+                },
+                next:
+                {
+                    shadow: true,
+                    translate: ["125%", 0, -800],
+                    rotate: [0, 0, 190],
                 }
-                if (_Main.SlideIndex < 0)
-                {
-                    _Main.SlideIndex = $("slide", _Main.$Slides).length - 1;
-                };
-                $("slide", _Main.$Slides).fadeOut(100);
-                $("slide", _Main.$Slides).eq(_Main.SlideIndex).fadeIn(100);
             };
+
+
+
+
+            if (_Main.Options.azSlideshowArrows === true)
+            {
+                _Main.$Swiper.children(".swiper-wrapper").append('<div class="swiper-button-next"></div><div class="swiper-button-prev"></div>');
+                _Main.SwiperOptions.navigation =
+                {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev"
+                };
+            }
+            if (_Main.Options.azSlideshowPagination === true)
+            {
+                _Main.$Swiper.children(".swiper-wrapper").append('<div class="swiper-pagination"></div>');
+                _Main.SwiperOptions.pagination =
+                {
+                    el: ".swiper-pagination",
+                    clickable: true
+                };
+            }
+            if (_Main.Options.azSlideshowAutoplay === true)
+            {
+                _Main.SwiperOptions.autoplay =
+                {
+                    delay: 3000
+                };
+            }
+            if (_Main.Options.azSlideshowLoop === true)
+            {
+                _Main.SwiperOptions.loop = true;
+            }
+            new Swiper("#" + _Main.Options.azSlideshowId, _Main.SwiperOptions);
+            _Main.$Swiper.css({ 'width': '100%', 'height': '100%' });
+            $(".swiper-slide", _Main.$Swiper).css({ 'background-position': 'center', 'background-size': 'cover' });
+            $(".swiper-slide > img", _Main.$Swiper).css({ 'display': 'block', 'width': '100%' });
         }
     }
     else

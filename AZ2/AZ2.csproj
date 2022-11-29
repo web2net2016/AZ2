@@ -67,7 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lib-2\admin\index\index.html" />
+    <Content Include="lib-2\admin\index.html" />
     <Content Include="lib-2\azgrid.html" />
     <Content Include="lib-2\azfullwindow.html" />
     <Content Include="lib-2\css\az-2.css" />
@@ -99,7 +99,7 @@
     <Content Include="favicon.ico" />
     <Content Include="lib-2\azbackgroundslider.html" />
     <Content Include="lib-2\css\backgroundslider.css" />
-    <Content Include="lib-2\lib\help.html" />
+    <Content Include="lib-2\admin\help.html" />
     <Content Include="lib-2\side1.html" />
     <Content Include="lib-2\aztabs.html" />
     <Content Include="lib-2\azaccordion.html" />
@@ -146,7 +146,7 @@
     <Content Include="lib-2\jqueryui\jquery-ui.min.js" />
     <Content Include="lib-2\jqueryui\jquery_ui_langs.min.js" />
     <Content Include="lib-2\js\clientstorage.js" />
-    <None Include="lib-2\admin\index\lib\lang-val\default-lang.json" />
+    <None Include="lib-2\admin\default-lang.json" />
     <Content Include="lib-2\js\functionlib.js" />
     <Content Include="lib-2\js\jquery.js" />
     <Content Include="lib-2\js\jquery.matchHeight.js" />
@@ -165,8 +165,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lib-2\admin\index\lib\lang-val\index-lang.json" />
-    <Content Include="lib-2\admin\index\lib\lang-val\index-val.json" />
+    <Content Include="lib-2\admin\index-lang.json" />
+    <Content Include="lib-2\admin\index-val.json" />
     <None Include="bundleconfig.json" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
