@@ -1748,42 +1748,156 @@ function AZSlideshow(Options)
         var _Defaults =
         {
             azSlideshowId: "",
-            azSlideshowArrows: false,
+            azSlideshowArrows: true,
             azSlideshowPagination: false,
             azSlideshowAutoplay: false,
-            azSlideshowLoop: false
+            azSlideshowLoop: true,
+            azSlideshowEffect: "fade",
+            azSlideshowSpeed: 400
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
         if (_Main.Options.azSlideshowId != "")
         {
-            _Main.$Swiper = $("#" + _Main.Options.azSlideshowId);
-            // creative cards fade
-            _Main.SwiperOptions =
+            _Main.SwiperOptions = {};
+            _Main.$Swiper = $("#" + _Main.Options.azSlideshowId).wrap('<div class="swiper-outher-wrapper"></div>');
+            _Main.SwiperOptions.speed = _Main.Options.azSlideshowSpeed;
+
+            // AZSlideshow Effects
+            if (_Main.Options.azSlideshowEffect === "fade")
             {
-                effect: "creative"
-            };
-
-            _Main.SwiperOptions.creativeEffect =
+                _Main.SwiperOptions.effect = "fade";
+            }
+            if (_Main.Options.azSlideshowEffect === "coverflow")
             {
-                prev:
+                _Main.SwiperOptions.grabCursor = true;
+                _Main.SwiperOptions.effect = "coverflow";
+                _Main.SwiperOptions.centeredSlides = true;
+                _Main.SwiperOptions.slidesPerView = "auto";
+                _Main.SwiperOptions.coverflowEffect =
                 {
-                    shadow: true,
-                    translate: ["-125%", 0, -800],
-                    rotate: [0, 0, -90],
-                },
-                next:
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true
+                };
+            }
+            if (_Main.Options.azSlideshowEffect === "creative-1")
+            {
+                _Main.SwiperOptions.grabCursor = true;
+                _Main.SwiperOptions.effect = "creative";
+                _Main.SwiperOptions.creativeEffect =
                 {
-                    shadow: true,
-                    translate: ["125%", 0, -800],
-                    rotate: [0, 0, 190],
-                }
-            };
-
-
-
-
-            if (_Main.Options.azSlideshowArrows === true)
+                    prev:
+                    {
+                        shadow: true,
+                        translate: [0, 0, -400]
+                    },
+                    next:
+                    {
+                        shadow: true,
+                        translate: ["100%", 0, 0]
+                    }
+                };
+            }
+            if (_Main.Options.azSlideshowEffect === "creative-2")
+            {
+                _Main.SwiperOptions.grabCursor = true;
+                _Main.SwiperOptions.effect = "creative";
+                _Main.SwiperOptions.creativeEffect =
+                {
+                    prev:
+                    {
+                        shadow: true,
+                        translate: ["-120%", 0, -500]
+                    },
+                    next:
+                    {
+                        shadow: true,
+                        translate: ["120%", 0, -500]
+                    }
+                };
+            }
+            if (_Main.Options.azSlideshowEffect === "creative-3")
+            {
+                _Main.SwiperOptions.grabCursor = true;
+                _Main.SwiperOptions.effect = "creative";
+                _Main.SwiperOptions.creativeEffect =
+                {
+                    prev:
+                    {
+                        shadow: true,
+                        translate: ["-20%", 0, -1]
+                    },
+                    next:
+                    {
+                        translate: ["100%", 0, 0]
+                    }
+                };
+            }
+            if (_Main.Options.azSlideshowEffect === "creative-4")
+            {
+                _Main.SwiperOptions.grabCursor = true;
+                _Main.SwiperOptions.effect = "creative";
+                _Main.SwiperOptions.creativeEffect =
+                {
+                    prev:
+                    {
+                        shadow: true,
+                        translate: [0, 0, -800],
+                        rotate: [180, 0, 0]
+                    },
+                    next:
+                    {
+                        shadow: true,
+                        translate: [0, 0, -800],
+                        rotate: [-180, 0, 0]
+                    }
+                };
+            }
+            if (_Main.Options.azSlideshowEffect === "creative-5")
+            {
+                _Main.SwiperOptions.grabCursor = true;
+                _Main.SwiperOptions.effect = "creative";
+                _Main.SwiperOptions.creativeEffect =
+                {
+                    prev:
+                    {
+                        shadow: true,
+                        translate: ["-125%", 0, -800],
+                        rotate: [0, 0, -90]
+                    },
+                    next:
+                    {
+                        shadow: true,
+                        translate: ["125%", 0, -800],
+                        rotate: [0, 0, 190]
+                    }
+                };
+            }
+            if (_Main.Options.azSlideshowEffect === "creative-6")
+            {
+                _Main.SwiperOptions.grabCursor = true;
+                _Main.SwiperOptions.effect = "creative";
+                _Main.SwiperOptions.creativeEffect =
+                {
+                    prev:
+                    {
+                        shadow: true,
+                        origin: "left center",
+                        translate: ["-5%", 0, -200],
+                        rotate: [0, 100, 0]
+                    },
+                    next:
+                    {
+                        origin: "right center",
+                        translate: ["5%", 0, -200],
+                        rotate: [0, -100, 0]
+                    }
+                };
+            }
+            if (_Main.Options.azSlideshowArrows === true && _Main.Options.azSlideshowEffect !== "coverflow")
             {
                 _Main.$Swiper.children(".swiper-wrapper").append('<div class="swiper-button-next"></div><div class="swiper-button-prev"></div>');
                 _Main.SwiperOptions.navigation =
@@ -1792,7 +1906,7 @@ function AZSlideshow(Options)
                     prevEl: ".swiper-button-prev"
                 };
             }
-            if (_Main.Options.azSlideshowPagination === true)
+            if (_Main.Options.azSlideshowPagination === true && _Main.Options.azSlideshowEffect !== "coverflow")
             {
                 _Main.$Swiper.children(".swiper-wrapper").append('<div class="swiper-pagination"></div>');
                 _Main.SwiperOptions.pagination =
@@ -1801,20 +1915,41 @@ function AZSlideshow(Options)
                     clickable: true
                 };
             }
-            if (_Main.Options.azSlideshowAutoplay === true)
+            if (_Main.Options.azSlideshowAutoplay === true && _Main.Options.azSlideshowEffect !== "coverflow")
             {
                 _Main.SwiperOptions.autoplay =
                 {
                     delay: 3000
                 };
             }
-            if (_Main.Options.azSlideshowLoop === true)
+            if (_Main.Options.azSlideshowLoop === true && _Main.Options.azSlideshowEffect !== "coverflow")
             {
                 _Main.SwiperOptions.loop = true;
             }
+
             new Swiper("#" + _Main.Options.azSlideshowId, _Main.SwiperOptions);
-            _Main.$Swiper.css({ 'width': '100%', 'height': '100%' });
-            $(".swiper-slide", _Main.$Swiper).css({ 'background-position': 'center', 'background-size': 'cover' });
+            var _SwiperCssOptions =
+            {
+                width: '100%'
+            };
+            var _SwiperSlideCssOptions =
+            {
+                backgroundPosition: 'center',
+                backgroundSize: 'cover'
+            };
+            if (_Main.Options.azSlideshowEffect !== "coverflow")
+            {
+                _SwiperCssOptions.height = '100%';
+            }
+            else
+            {
+                _SwiperCssOptions.paddingTop = '50px';
+                _SwiperCssOptions.paddingBottom = '50px';
+                _SwiperSlideCssOptions.width = '300px';
+                _SwiperSlideCssOptions.height = '300px'; 
+            }
+            _Main.$Swiper.css(_SwiperCssOptions);
+            $(".swiper-slide", _Main.$Swiper).css(_SwiperSlideCssOptions);
             $(".swiper-slide > img", _Main.$Swiper).css({ 'display': 'block', 'width': '100%' });
         }
     }

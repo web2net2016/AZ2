@@ -5,6 +5,7 @@
       "lib-2/fontawesome/fontawesome-all.css",
       "lib-2/jqueryui/jquery-ui.min.css",
       "lib-2/jquerytimepicker/jquery.ui.timepicker.css",
+      "lib-2/swiper/swiper-bundle.min.css",
       "lib-2/css/accordion.css",
       "lib-2/css/backgroundslider.css",
       "lib-2/css/card.css",
@@ -43,6 +44,7 @@
       "lib-2/js/numeral.js",
       "lib-2/js/numeral.locales.js",
       "lib-2/js/sort.js",
+      "lib-2/swiper/swiper-bundle.min.js",
       "lib-2/js/clientstorage.js",
       "lib-2/js/functionlib.js"
     ]

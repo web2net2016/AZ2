@@ -20,58 +20,89 @@
     <script src="/lib-2/js/az-2.min.js"></script>
     <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
     <script src="/lib-2/lib/az-codecolor.js"></script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script>
 
         $(document).ready(function ()
         {
             new AZSlideshow(
                 {
-                    azSlideshowId: "az-slideshow-1",
-                    azSlideshowArrows: true,
-                    azSlideshowPagination: false,
-                    azSlideshowAutoplay: true,
-                    azSlideshowLoop: true
+                    azSlideshowId: "annesslideshow",
+                    azSlideshowEffect: "creative-5",
+                    azSlideshowSpeed: 1500
                 });
         });
 
+            //azSlideshowArrows: true,
+            //azSlideshowPagination: true,
+            //azSlideshowAutoplay: false,
+            //azSlideshowLoop: true,
+            //azSlideshowEffect: "coverflow"
+            //azSlideshowSpeed: 1500
+
     </script>
-    <style>
-        .az-container-fluid
-        {
-            height: 50vw;
-            max-height: 100vh;
-        }
-
-        .swiper-pagination-bullet
-        {
-            width: 20px;
-            height: 20px;
-            background: #FFFFFF;
-            opacity: 0.7;
-        }
-
-        .swiper-pagination-bullet-active
-        {
-            background: #007aff;
-        }
-    </style>
 </head>
 <body>
+    
+    <div class="swiper" id="annesslideshow">
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+                <img src="https://shaders-slider.uiinitiative.com/images/01.jpg" />
+            </div>
+
+            <div class="swiper-slide">
+                <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+            </div>
+
+            <div class="swiper-slide">
+                <img src="https://shaders-slider.uiinitiative.com/images/02.jpg" />
+            </div>
+
+            <div class="swiper-slide">
+                <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+            </div>
+
+            <div class="swiper-slide">
+                <img src="https://shaders-slider.uiinitiative.com/images/03.jpg" />
+            </div>
+
+            <div class="swiper-slide">
+                <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+            </div>
+
+            <div class="swiper-slide">
+                <img src="https://shaders-slider.uiinitiative.com/images/04.jpg" />
+            </div>
+
+            <div class="swiper-slide">
+                <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+            </div>
+
+            <div class="swiper-slide">
+                <img src="https://shaders-slider.uiinitiative.com/images/05.jpg" />
+            </div>
+
+        </div>
+    </div>
 
 
+</body>
+</html>
+
+<!--
 
     <form id="frmReg">
-        <div class="az-section">
-            <div class="az-container-fluid">
 
-                <div class="swiper" id="az-slideshow-1">
-                    <div class="swiper-wrapper">
+    <div class="az-section">
+        <div class="az-container-fluid">
+
+        </div>
+    </div>
+    </form>
+
 
                         <div class="swiper-slide">
-                            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />                            
+                            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
                             <div class="az-display-absolute-middle az-color-white az-margin-28" style="width: 50vw;">
                                 <div class="az-text-jumbo">Lorem ipsum</div>
                                 <p class="az-text-xlarge">
@@ -112,17 +143,13 @@
                             </div>
                         </div>
 
-                    </div>
-                </div>
 
-            </div>
-        </div>
-    </form>
 
-</body>
-</html>
 
-<!--
+
+
+
+
 <div class="az-row">
     <div class="az-col xs-12">
 
