@@ -21078,6 +21078,10 @@ template
 {
     position: relative;
     display: block;
+}
+
+.swiper-outher-wrapper.fullscreen
+{
     height: 50vw;
     max-height: 100vh;
 }

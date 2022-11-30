@@ -1753,15 +1753,29 @@ function AZSlideshow(Options)
             azSlideshowAutoplay: false,
             azSlideshowLoop: true,
             azSlideshowEffect: "fade",
-            azSlideshowSpeed: 400
+            azSlideshowSpeed: 400,
+            azSlideshowWidth: 0,
+            azSlideshowHeight: 0
         };
         _Main.Options = $.extend({}, _Defaults, Options || {});
 
         if (_Main.Options.azSlideshowId != "")
         {
             _Main.SwiperOptions = {};
-            _Main.$Swiper = $("#" + _Main.Options.azSlideshowId).wrap('<div class="swiper-outher-wrapper"></div>');
-            _Main.SwiperOptions.speed = _Main.Options.azSlideshowSpeed;
+            _Main.$SwiperOutherWrapper = $('<div class="swiper-outher-wrapper"></div>');
+            if (_Main.Options.azSlideshowWidth === 0 && _Main.Options.azSlideshowHeight === 0)
+            {
+                _Main.$SwiperOutherWrapper.addClass('fullscreen')
+            }
+            if (_Main.Options.azSlideshowWidth > 0)
+            {
+                _Main.$SwiperOutherWrapper.width(_Main.Options.azSlideshowWidth);
+            }
+            if (_Main.Options.azSlideshowHeight > 0)
+            {
+                _Main.$SwiperOutherWrapper.height(_Main.Options.azSlideshowHeight);
+            }
+            _Main.$Swiper = $("#" + _Main.Options.azSlideshowId).wrap(_Main.$SwiperOutherWrapper);
 
             // AZSlideshow Effects
             if (_Main.Options.azSlideshowEffect === "fade")
@@ -1926,6 +1940,8 @@ function AZSlideshow(Options)
             {
                 _Main.SwiperOptions.loop = true;
             }
+            _Main.SwiperOptions.speed = _Main.Options.azSlideshowSpeed;
+            _Main.SwiperOptions.autoHeight = true;
 
             new Swiper("#" + _Main.Options.azSlideshowId, _Main.SwiperOptions);
             var _SwiperCssOptions =
