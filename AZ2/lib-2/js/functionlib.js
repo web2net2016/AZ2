@@ -1763,10 +1763,7 @@ function AZSlideshow(Options)
         {
             _Main.SwiperOptions = {};
             _Main.$SwiperOutherWrapper = $('<div class="swiper-outher-wrapper"></div>');
-            if (_Main.Options.azSlideshowWidth === 0 && _Main.Options.azSlideshowHeight === 0)
-            {
-                _Main.$SwiperOutherWrapper.addClass('fullscreen')
-            }
+
             if (_Main.Options.azSlideshowWidth > 0)
             {
                 _Main.$SwiperOutherWrapper.width(_Main.Options.azSlideshowWidth);
@@ -1911,7 +1908,7 @@ function AZSlideshow(Options)
                     }
                 };
             }
-            if (_Main.Options.azSlideshowArrows === true && _Main.Options.azSlideshowEffect !== "coverflow")
+            if (_Main.Options.azSlideshowArrows === true && _Main.Options.azSlideshowEffect !== "coverflow" && window.innerWidth > 576)
             {
                 _Main.$Swiper.children(".swiper-wrapper").append('<div class="swiper-button-next"></div><div class="swiper-button-prev"></div>');
                 _Main.SwiperOptions.navigation =
@@ -1941,7 +1938,6 @@ function AZSlideshow(Options)
                 _Main.SwiperOptions.loop = true;
             }
             _Main.SwiperOptions.speed = _Main.Options.azSlideshowSpeed;
-            _Main.SwiperOptions.autoHeight = true;
 
             new Swiper("#" + _Main.Options.azSlideshowId, _Main.SwiperOptions);
             var _SwiperCssOptions =

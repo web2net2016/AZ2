@@ -21080,12 +21080,6 @@ template
     display: block;
 }
 
-.swiper-outher-wrapper.fullscreen
-{
-    height: 50vw;
-    max-height: 100vh;
-}
-
 .swiper-button-next,
 .swiper-button-prev
 {
