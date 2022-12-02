@@ -12947,6 +12947,12 @@ xl - (1200 - )
     --warning-color: #FFFFFF;
     --danger-background-color: #FF4136;
     --danger-color: #FFFFFF;
+    --fontSizeHeading1: max(min(calc(32px + (120 - 32) * ((100vw - 360px) / (1366 - 360))), 120px), 32px);
+    --fontSizeHeading2: max(min(calc(28px + (64 - 28) * ((100vw - 360px) / (1366 - 360))), 64px), 28px);
+    --fontSizeHeading3: max(min(calc(22px + (44 - 22) * ((100vw - 360px) / (1366 - 360))), 44px), 22px);
+    --marginLeft1: max(min(calc(10px + (450 - 10) * ((100vw - 360px) / (1366 - 360))), 450px), 10px);
+    --marginLeft2: max(min(calc(10px + (350 - 10) * ((100vw - 360px) / (1366 - 360))), 350px), 10px);
+    --marginLeft3: max(min(calc(10px + (650 - 10) * ((100vw - 360px) / (1366 - 360))), 650px), 10px);
 }
 
 *

@@ -30,22 +30,85 @@
                 });
         });
 
-            //azSlideshowId: "",
-            //azSlideshowArrows: true,
-            //azSlideshowPagination: false,
-            //azSlideshowAutoplay: false,
-            //azSlideshowLoop: true,
-            //azSlideshowEffect: "fade",
-            //azSlideshowSpeed: 400,
-            //azSlideshowWidth: 700,
-            //azSlideshowHeight: 400
+                    //azSlideshowId: "",
+                    //azSlideshowArrows: true,
+                    //azSlideshowPagination: false,
+                    //azSlideshowAutoplay: false,
+                    //azSlideshowLoop: true,
+                    //azSlideshowEffect: "fade",
+                    //azSlideshowSpeed: 400,
+                    //azSlideshowWidth: 700,
+                    //azSlideshowHeight: 400
 
     </script>
     <style>
+
         .swiper-outher-wrapper
         {
             height: 50vw;
             max-height: 100vh;
+        }
+
+        .absolute-topleft
+        {
+            position: absolute;
+            inset: 0;
+        }
+
+            .absolute-topleft .spiderman
+            {
+                position: relative;
+                top: 30%;
+                left: 3%;
+            }
+
+            .absolute-topleft .matrix
+            {
+                position: relative;
+                top: 47%;
+                left: 2%;
+            }
+
+        .text-jumbo
+        {
+            text-transform: uppercase;
+            color: #FFFFFF;
+        }
+
+            .text-jumbo:nth-child(1)
+            {
+                margin-left: var(--marginLeft1);
+                font-size: var(--fontSizeHeading1);
+                letter-spacing: 12px;
+            }
+
+            .text-jumbo:nth-child(2)
+            {
+                margin-bottom: 14px;
+                margin-left: var(--marginLeft2);
+                font-size: var(--fontSizeHeading2);
+            }
+
+            .text-jumbo:nth-child(3)
+            {
+                margin-left: var(--marginLeft3);
+                font-size: var(--fontSizeHeading3);
+                font-style: italic;
+                letter-spacing: 12px;
+                color: gold;
+                background-color: rgba(0,0,0,0.7);
+                padding-right: 2px;
+                display: inline-block;
+                border-radius: 14px;
+                padding-left: 14px;
+            }
+
+        @media (max-width: 576px)
+        {
+            .absolute-topleft
+            {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -55,6 +118,15 @@
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <img src="https://shaders-slider.uiinitiative.com/images/01.jpg" />
+
+                <div class="absolute-topleft">
+                    <div class="spiderman">
+                        <div class="text-jumbo">Spiderman</div>
+                        <div class="text-jumbo">Marvel <span style="font-weight: bold;">Comics</span></div>
+                        <div class="text-jumbo">Peter Parker</div>
+                    </div>
+                </div>
+
             </div>
             <div class="swiper-slide">
                 <img src="https://shaders-slider.uiinitiative.com/images/02.jpg" />
@@ -64,6 +136,14 @@
             </div>
             <div class="swiper-slide">
                 <img src="https://shaders-slider.uiinitiative.com/images/04.jpg" />
+
+                <div class="absolute-topleft">
+                    <div class="matrix">
+                        <div class="text-jumbo">The Matrix</div>
+                        <div class="text-jumbo">Warner Bros</div>
+                        <div class="text-jumbo">Keanu Reeves</div>
+                    </div>
+                </div>
             </div>
             <div class="swiper-slide">
                 <img src="https://shaders-slider.uiinitiative.com/images/05.jpg" />
