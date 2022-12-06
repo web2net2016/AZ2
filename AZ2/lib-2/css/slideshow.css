@@ -1,7 +1,18 @@
-﻿.swiper-outher-wrapper
+﻿
+.swiper-outher-wrapper
 {
     position: relative;
     display: block;
+    height: 50vw;
+    max-height: 100vh;
+}
+
+.swiper-outher-wrapper-page
+{
+    position: relative;
+    display: block;
+    height: 100vh;
+    max-height: 100vh;
 }
 
 .swiper-button-next,

@@ -22,94 +22,130 @@
     <script src="/lib-2/lib/az-codecolor.js"></script>
     <script>
 
+        var AZSlideshow1 = {};
+
         $(document).ready(function ()
         {
-            new AZSlideshow(
+            $.subscribe("functionlib/azSlideshowAfterOpen", function (e, data)
+            {
+                console.log("azSlideshowAfterOpen");
+                console.log(data);
+            });
+
+            AZSlideshow1 = new AZSlideshow(
                 {
-                    azSlideshowId: "slideshow1"
+                    azSlideshowId: "slideshow1",
+                    azSlideshowType: "page",
+                    //azSlideshowDirection: "vertical"
                 });
         });
 
-                    //azSlideshowId: "",
-                    //azSlideshowArrows: true,
-                    //azSlideshowPagination: false,
-                    //azSlideshowAutoplay: false,
-                    //azSlideshowLoop: true,
-                    //azSlideshowEffect: "fade",
-                    //azSlideshowSpeed: 400,
-                    //azSlideshowWidth: 700,
-                    //azSlideshowHeight: 400
+//azSlideshowId: ""
+//azSlideshowType: "slideshow", "page"
+//azSlideshowDirection: "horisontal", "vertical",
+//azSlideshowEffect: "fade", "cube", "flip", "coverflow", "creative1", "creative2", "creative3", "creative4", "creative5", "creative6"
+//azSlideshowArrows: true / false
+//azSlideshowPagination: false / true
+//azSlideshowAutoplay: false / true
+//azSlideshowLoop: true / false
+//azSlideshowSpeed: 400
+//azSlideshowWidth: 0
+//azSlideshowHeight: 0
 
     </script>
     <style>
 
-        .swiper-outher-wrapper
+        :root
         {
-            height: 50vw;
-            max-height: 100vh;
+            --fontSizeHeading1: max(min(calc(32px + (120 - 32) * ((100vw - 360px) / (1366 - 360))), 120px), 32px);
+            --fontSizeHeading2: max(min(calc(28px + (64 - 28) * ((100vw - 360px) / (1366 - 360))), 64px), 28px);
+            --fontSizeHeading3: max(min(calc(22px + (44 - 22) * ((100vw - 360px) / (1366 - 360))), 44px), 22px);
         }
 
-        .absolute-topleft
+        .absolute
         {
             position: absolute;
             inset: 0;
         }
 
-            .absolute-topleft .spiderman
+            .absolute > .spiderman
             {
-                position: relative;
-                top: 30%;
-                left: 3%;
+                position: absolute;
+                bottom: 21px;
+                right: 14px;
+                border-radius: 7px;
+                background-color: rgba(0,0,0,0.4);
             }
 
-            .absolute-topleft .matrix
+            .absolute > .matrix
             {
-                position: relative;
-                top: 47%;
-                left: 2%;
+                position: absolute;
+                bottom: 21px;
+                left: 14px;
             }
 
-        .text-jumbo
+        .text
         {
             text-transform: uppercase;
             color: #FFFFFF;
         }
 
-            .text-jumbo:nth-child(1)
-            {
-                margin-left: var(--marginLeft1);
-                font-size: var(--fontSizeHeading1);
-                letter-spacing: 12px;
-            }
-
-            .text-jumbo:nth-child(2)
-            {
-                margin-bottom: 14px;
-                margin-left: var(--marginLeft2);
-                font-size: var(--fontSizeHeading2);
-            }
-
-            .text-jumbo:nth-child(3)
-            {
-                margin-left: var(--marginLeft3);
-                font-size: var(--fontSizeHeading3);
-                font-style: italic;
-                letter-spacing: 12px;
-                color: gold;
-                background-color: rgba(0,0,0,0.7);
-                padding-right: 2px;
-                display: inline-block;
-                border-radius: 14px;
-                padding-left: 14px;
-            }
-
-        @media (max-width: 576px)
+        .absolute > .spiderman > .text:nth-child(1)
         {
-            .absolute-topleft
+            margin-left: 70px;
+            font-size: var(--fontSizeHeading1);
+            letter-spacing: 12px;
+        }
+
+        .absolute > .spiderman > .text:nth-child(2)
+        {
+            margin-left: 154px;
+            font-size: var(--fontSizeHeading2);
+        }
+
+            .absolute > .spiderman > .text:nth-child(2) > span
+            {
+                font-weight: bold;
+            }
+
+        .absolute > .spiderman > .text:nth-child(3)
+        {
+            margin-left: 10px;
+            font-size: var(--fontSizeHeading3);
+            font-style: italic;
+            letter-spacing: 12px;
+            color: gold;
+        }
+
+        .absolute > .matrix > .text:nth-child(1)
+        {
+            margin-left: 70px;
+            font-size: var(--fontSizeHeading1);
+            letter-spacing: 12px;
+        }
+
+        .absolute > .matrix > .text:nth-child(2)
+        {
+            margin-left: 154px;
+            font-size: var(--fontSizeHeading2);
+        }
+
+        .absolute > .matrix > .text:nth-child(3)
+        {
+            margin-left: 10px;
+            font-size: var(--fontSizeHeading3);
+            font-style: italic;
+            letter-spacing: 12px;
+            color: gold;
+        }
+
+        /*        @media (max-width: 576px)
+        {
+            .absolute
             {
                 display: none;
             }
-        }
+        }*/
     </style>
 </head>
 <body>
@@ -117,36 +153,56 @@
     <div class="swiper" id="slideshow1">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <img src="https://shaders-slider.uiinitiative.com/images/01.jpg" />
 
-                <div class="absolute-topleft">
-                    <div class="spiderman">
-                        <div class="text-jumbo">Spiderman</div>
-                        <div class="text-jumbo">Marvel <span style="font-weight: bold;">Comics</span></div>
-                        <div class="text-jumbo">Peter Parker</div>
+                <div style="position: absolute; inset: 0; background-color: gold ">
+                    <div style="margin: 42px;">
+                        <div style="font-size: var(--fontSizeHeading1); margin-bottom: 14px;">Lorem ipsum</div>
+                        <p style="font-size: var(--fontSizeHeading3);">
+                            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                        </p>
                     </div>
                 </div>
 
             </div>
             <div class="swiper-slide">
-                <img src="https://shaders-slider.uiinitiative.com/images/02.jpg" />
-            </div>
-            <div class="swiper-slide">
-                <img src="https://shaders-slider.uiinitiative.com/images/03.jpg" />
-            </div>
-            <div class="swiper-slide">
-                <img src="https://shaders-slider.uiinitiative.com/images/04.jpg" />
 
-                <div class="absolute-topleft">
-                    <div class="matrix">
-                        <div class="text-jumbo">The Matrix</div>
-                        <div class="text-jumbo">Warner Bros</div>
-                        <div class="text-jumbo">Keanu Reeves</div>
+                <div style="position: absolute; inset: 0; background-color: black">
+                    <div style="margin: 42px;">
+                        <div style="font-size: var(--fontSizeHeading1); color: white; margin-bottom: 14px;">Lorem ipsum</div>
+                        <p style="font-size: var(--fontSizeHeading3); color: white;">
+                            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                        </p>
                     </div>
                 </div>
+
             </div>
             <div class="swiper-slide">
-                <img src="https://shaders-slider.uiinitiative.com/images/05.jpg" />
+
+                <div style="position: absolute; inset: 0; background-color: gold ">
+                    <div style="margin: 42px;">
+                        <div style="font-size: var(--fontSizeHeading1); margin-bottom: 14px;">Lorem ipsum</div>
+                        <p style="font-size: var(--fontSizeHeading3);">
+                            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-slide">
+
+                <div style="position: absolute; inset: 0; background-color: black">
+                    <div style="margin: 42px;">
+                        <div style="font-size: var(--fontSizeHeading1); color: white; margin-bottom: 14px;">Lorem ipsum</div>
+                        <p style="font-size: var(--fontSizeHeading3); color: white;">
+                            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -155,6 +211,41 @@
 </html>
 
 <!--
+
+    <div class="swiper" id="slideshow1">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="https://shaders-slider.uiinitiative.com/images/01.jpg" />
+                <div class="absolute">
+                    <div class="spiderman">
+                        <div class="text">Spiderman</div>
+                        <div class="text">Marvel <span>Comics</span></div>
+                        <div class="text">Peter Parker</div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img src="https://shaders-slider.uiinitiative.com/images/04.jpg" />
+                <div class="absolute">
+                    <div class="matrix">
+                        <div class="text">The Matrix</div>
+                        <div class="text">Warner Bros</div>
+                        <div class="text">Keanu Reeves</div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img src="https://shaders-slider.uiinitiative.com/images/02.jpg" />
+            </div>
+            <div class="swiper-slide">
+                <img src="https://shaders-slider.uiinitiative.com/images/03.jpg" />
+            </div>
+            <div class="swiper-slide">
+                <img src="https://shaders-slider.uiinitiative.com/images/05.jpg" />
+            </div>
+        </div>
+    </div>
+
 
     <div class="az-section">
         <div class="az-container-fluid">
@@ -217,72 +308,47 @@
         </div>
     </div>
 
+    <div class="swiper-slide">
+        <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+        <div class="az-display-absolute-middle az-color-white az-margin-28" style="width: 50vw;">
+            <div class="az-text-jumbo">Lorem ipsum</div>
+            <p class="az-text-xlarge">
+                Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+            </p>
+        </div>
+    </div>
 
+    <div class="swiper-slide">
+        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+        <div class="az-display-absolute-topright az-color-white az-margin-28" style="width: 50vw;">
+            <div class="az-text-jumbo">Lorem ipsum</div>
+            <p class="az-text-xlarge">
+                Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+            </p>
+        </div>
+    </div>
 
-            <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-            </div>
+    <div class="swiper-slide">
+        <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+        <div class="az-display-absolute-bottomleft az-color-white az-margin-28" style="width: 50vw;">
+            <div class="az-text-jumbo">Lorem ipsum</div>
+            <p class="az-text-xlarge">
+                Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+            </p>
+        </div>
+    </div>
 
-            <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-            </div>
-
-                <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-            </div>
-
-            <div class="swiper-slide">
-                <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-            </div>
-
-
-    <form id="frmReg">
-
-
-    </form>
-
-
-                        <div class="swiper-slide">
-                            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                            <div class="az-display-absolute-middle az-color-white az-margin-28" style="width: 50vw;">
-                                <div class="az-text-jumbo">Lorem ipsum</div>
-                                <p class="az-text-xlarge">
-                                    Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
-                                    Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                            <div class="az-display-absolute-topright az-color-white az-margin-28" style="width: 50vw;">
-                                <div class="az-text-jumbo">Lorem ipsum</div>
-                                <p class="az-text-xlarge">
-                                    Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                            <div class="az-display-absolute-bottomleft az-color-white az-margin-28" style="width: 50vw;">
-                                <div class="az-text-jumbo">Lorem ipsum</div>
-                                <p class="az-text-xlarge">
-                                    Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
-                                    Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                            <div class="az-display-absolute-bottomright az-color-white az-margin-28" style="width: 50vw;">
-                                <div class="az-text-jumbo">Lorem ipsum</div>
-                                <p class="az-text-xlarge">
-                                    Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
-                                </p>
-                            </div>
-                        </div>
+    <div class="swiper-slide">
+        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+        <div class="az-display-absolute-bottomright az-color-white az-margin-28" style="width: 50vw;">
+            <div class="az-text-jumbo">Lorem ipsum</div>
+            <p class="az-text-xlarge">
+                Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+            </p>
+        </div>
+    </div>
 
 
 
