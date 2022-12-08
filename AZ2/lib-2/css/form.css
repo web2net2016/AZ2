@@ -416,6 +416,12 @@
         height: 20px;
     }
 
+        .az-form-group .az-switch ~ .az-label
+        {
+            position: relative;
+            top: 2px;
+        }
+
         .az-form-group .az-switch.xs
         {
             width: 28px;
@@ -1278,7 +1284,7 @@
 
             .az-dropdown-layout > li > a > i
             {
-                margin-right: 7px !important;
+                margin-right: 14px !important;
             }
 
 .az-dropdown-hover:hover .az-dropdown-content

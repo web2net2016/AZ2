@@ -1,0 +1,159 @@
+﻿
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>AZ Slideshow</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib-2/css/az-2.min.css" />
+    <script src="/lib-2/js/az-2.min.js"></script>
+    <link rel="stylesheet" href="/lib-2/lib/az-codecolor.css" />
+    <script src="/lib-2/lib/az-codecolor.js"></script>
+    <script>
+
+        var AZSlideshow1 = {};
+
+        $(document).ready(function ()
+        {
+            $.subscribe("functionlib/azSlideshowAfterOpen", function (e, data)
+            {
+                console.log("azSlideshowAfterOpen");
+                console.log(data);
+            });
+
+            AZSlideshow1 = new AZSlideshow(
+                {
+                    azSlideshowId: "slideshow1",
+                    azSlideshowType: "page",
+                    azSlideshowDirection: "vertical"
+                });
+        });
+
+//azSlideshowId: ""
+//azSlideshowType: "slideshow", "page"
+//azSlideshowDirection: "horisontal", "vertical",
+//azSlideshowEffect: "fade", "cube", "flip", "coverflow", "creative1", "creative2", "creative3", "creative4", "creative5", "creative6"
+//azSlideshowArrows: true / false
+//azSlideshowPagination: false / true
+//azSlideshowAutoplay: false / true
+//azSlideshowLoop: true / false
+//azSlideshowSpeed: 400
+//azSlideshowWidth: 0
+//azSlideshowHeight: 0
+
+    </script>
+    <style>
+
+        :root
+        {
+            --fontSizeHeading1: max(min(calc(32px + (120 - 32) * ((100vw - 360px) / (1366 - 360))), 120px), 32px);
+            --fontSizeHeading2: max(min(calc(28px + (64 - 28) * ((100vw - 360px) / (1366 - 360))), 64px), 28px);
+            --fontSizeHeading3: max(min(calc(16px + (24 - 16) * ((100vw - 360px) / (1366 - 360))), 24px), 16px);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="swiper" id="slideshow1">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+
+                <div style="position: absolute; inset: 0; background-color: gold;">
+                    <div class="az-section" style="margin-top: var(--fontSizeHeading1);">
+                        <div class="az-container">
+                            <div class="az-row">
+                                <div class="az-col xs-12">
+                                    <div style="font-size: var(--fontSizeHeading2); margin: 14px 14px 42px 14px;">LEI EN <strong>WEBREDAKTØR</strong></div>
+                                </div>
+                            </div>
+                            <div class="az-row">
+                                <div class="az-col xs-12 lg-6">
+                                    <p style="font-size: var(--fontSizeHeading3); margin: 14px;">
+                                        Vi kan tilby en webredaktør som kan hjelpe deg med å utvikle nettstedet ditt, både når det gjelder brukervennlighet, innholdsforvaltning, ny funksjonalitet, optimalisering og lignende.
+                                        <br /><br />
+                                        En webredaktør vil være behjelpelig med å tilpasse dine bilder, sørger for at teksten alltid holder den utformingen du har valgt, (størrelse/skrifttype), gjør at viktige ord og overskrifter blir optimalisert i forhold til søkemotorer og ellers at innholdet holder seg innenfor de rammer du har bestemt i forhold til størrelser, farger, m.m.
+                                    </p>
+                                </div>
+                                <div class="az-col xs-12 lg-6">
+                                    <div style="margin: 14px;">
+                                        <img class="az-image" src="https://www.visma.no/contentassets/1a6b196ec37440369deae3176592703c/_dsc5604.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-slide">
+
+                <div style="position: absolute; inset: 0; background-color: #1d2327;">
+                    <div class="az-section" style="margin-top: var(--fontSizeHeading1);">
+                        <div class="az-container">
+                            <div class="az-row">
+                                <div class="az-col xs-12">
+                                    <div style="font-size: var(--fontSizeHeading2); color: white; margin: 14px 14px 42px 14px;">LEI EN <strong>WEBREDAKTØR</strong></div>
+                                </div>
+                            </div>
+                            <div class="az-row">
+                                <div class="az-col xs-12 lg-6">
+                                    <p style="font-size: var(--fontSizeHeading3); margin: 14px; color: white;">
+                                        Vi kan tilby en webredaktør som kan hjelpe deg med å utvikle nettstedet ditt, både når det gjelder brukervennlighet, innholdsforvaltning, ny funksjonalitet, optimalisering og lignende.
+                                        <br /><br />
+                                        En webredaktør vil være behjelpelig med å tilpasse dine bilder, sørger for at teksten alltid holder den utformingen du har valgt, (størrelse/skrifttype), gjør at viktige ord og overskrifter blir optimalisert i forhold til søkemotorer og ellers at innholdet holder seg innenfor de rammer du har bestemt i forhold til størrelser, farger, m.m.
+                                    </p>
+                                </div>
+                                <div class="az-col xs-12 lg-6">
+                                    <div style="margin: 14px;">
+                                        <img class="az-image" src="https://www.visma.no/contentassets/1a6b196ec37440369deae3176592703c/_dsc5604.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-slide">
+
+                <div style="position: absolute; inset: 0; background-color: gold;">
+                    <div style="margin: 42px;">
+                        <div style="font-size: var(--fontSizeHeading1); margin-bottom: 14px;">Lorem ipsum</div>
+                        <p style="font-size: var(--fontSizeHeading3);">
+                            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-slide">
+
+                <div style="position: absolute; inset: 0; background-color: #1d2327; ">
+                    <div style="margin: 42px;">
+                        <div style="font-size: var(--fontSizeHeading1); color: white; margin-bottom: 14px;">Lorem ipsum</div>
+                        <p style="font-size: var(--fontSizeHeading3); color: white;">
+                            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                            Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

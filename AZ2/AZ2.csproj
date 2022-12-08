@@ -157,6 +157,8 @@
     <Content Include="lib-2\lib\az-codecolor.css" />
     <Content Include="lib-2\azcardlayout.html" />
     <Content Include="lib-2\navbar.html" />
+    <Content Include="lib-2\pagehor.html" />
+    <Content Include="lib-2\pagever.html" />
     <Content Include="lib-2\slideshow.html" />
     <Content Include="lib-2\swiper\swiper-bundle.min.js" />
     <Content Include="lib-2\swiper\swiper-bundle.min.css" />

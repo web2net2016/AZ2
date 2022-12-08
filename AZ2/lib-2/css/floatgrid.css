@@ -1165,11 +1165,11 @@
 }
 
 /* Size XL ----*/
-@media (min-width: 1200px)
+@media (min-width: 1366px)
 {
     .az-container
     {
-        width: 1200px;
+        width: 1366px;
     }
 
     .az-col.xl-12
