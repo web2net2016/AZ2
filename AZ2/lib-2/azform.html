@@ -26,6 +26,11 @@
         {
             w3CodeColor();
 
+            $.subscribe("functionlib/azValidateDirty", function (e, data)
+            {
+                console.log("FUNCTIONLIB - azValidateDirty\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputJQElement: ", data.azInputJQElement);
+            });
+
             $.subscribe("functionlib/azSetDate", function (e, data)
             {
                 console.log("FUNCTIONLIB - azSetDate\nazDateId: " + data.azDateId + "\nazDateName: " + data.azDateName + "\nazDateClass: " + data.azDateClass + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateISODate: " + data.azDateISODate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);

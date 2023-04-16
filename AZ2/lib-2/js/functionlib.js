@@ -2913,58 +2913,28 @@ function AZSetValidation(Options)
     }
 }
 
-function AZValidateDirtyKeyup(e)
+function AZValidateDirtyChange(e)
 {
     var _Element = e.target || e.srcElement;
     if (!$(_Element).attr("readonly"))
     {
-        var _InputValue = "";
-        var _InputKey = "";
-        var _KeyChar = e.keyCode || e.which;
-        if (e.type == "keydown")
+        var _Data =
         {
-            if (_KeyChar === 8)
+            azInputId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+            azInputName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+            azInputClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+            azInputJQElement: $(_Element)
+        };
+        $.publish("functionlib/azValidateDirty",
             {
-                _InputValue = $(_Element).val();
-                SetData();
-            }
-        }
-        else if (e.type == "keypress")
+                azInputId: _Data.azInputId,
+                azInputName: _Data.azInputName,
+                azInputClass: _Data.azInputClass,
+                azInputJQElement: _Data.azInputJQElement,
+            });
+        if (typeof AZValidateDirty == "function")
         {
-            _InputValue = $(_Element).val() + String.fromCharCode(_KeyChar);
-            _InputKey = String.fromCharCode(_KeyChar);
-            SetData();
-        }
-        else
-        {
-            _InputValue = $(_Element).val();
-            SetData();
-        }
-
-        function SetData()
-        {
-            var _Data =
-            {
-                azInputId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
-                azInputName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
-                azInputClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
-                azInputValue: _InputValue,
-                azInputKey: _InputKey,
-                azInputJQElement: $(_Element)
-            };
-            $.publish("functionlib/azValidateDirty",
-                {
-                    azInputId: _Data.azInputId,
-                    azInputName: _Data.azInputName,
-                    azInputClass: _Data.azInputClass,
-                    azInputValue: _Data.azInputValue,
-                    azInputKey: _Data.azInputKey,
-                    azInputJQElement: _Data.azInputJQElement,
-                });
-            if (typeof AZValidateDirty == "function")
-            {
-                AZValidateDirty(e, _Data);
-            }
+            AZValidateDirty(e, _Data);
         }
     }
 }
@@ -3519,7 +3489,7 @@ function AZSetInputTypeEvents()
         {
             _ValidType = "";
             $(this).attr("autocomplete", "off");
-            $(this).off("keypress keydown change", AZValidateDirtyKeyup).on("keypress keydown", AZValidateDirtyKeyup);
+            $(this).off("input", AZValidateDirtyChange).on("input", AZValidateDirtyChange);
             _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
             if (_ValidType !== null)
             {
@@ -3566,14 +3536,14 @@ function AZSetInputTypeEvents()
         }
         if ($(this).is("[type='range']") && $(this).hasClass("az-range"))
         {
-            $(this).off("change", AZValidateDirtyKeyup).on("change", AZValidateDirtyKeyup);
+            $(this).off("input", AZValidateDirtyChange).on("input", AZValidateDirtyChange);
             $(this).off("input change", AZRange).on("input change", AZRange);
         }
         if ($(this).is("textarea"))
         {
             _ValidType = "";
             $(this).attr("autocomplete", "false");
-            $(this).off("keypress keydown change", AZValidateDirtyKeyup).on("keypress keydown", AZValidateDirtyKeyup);
+            $(this).off("input", AZValidateDirtyChange).on("input", AZValidateDirtyChange);
             _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
             if (_ValidType !== null)
             {
@@ -3613,7 +3583,7 @@ function AZSetInputTypeEvents()
         }
         if ($(this).is("[type='checkbox']"))
         {
-            $(this).off("click", AZValidateDirtyKeyup).on("click", AZValidateDirtyKeyup);
+            $(this).off("click", AZValidateDirtyChange).on("click", AZValidateDirtyChange);
             if ($(this).hasClass("disabled"))
             {
                 $(this).attr("disabled", true);
@@ -3629,7 +3599,7 @@ function AZSetInputTypeEvents()
         }
         if ($(this).is("[type='radio']"))
         {
-            $(this).off("click", AZValidateDirtyKeyup).on("click", AZValidateDirtyKeyup);
+            $(this).off("click", AZValidateDirtyChange).on("click", AZValidateDirtyChange);
             if ($(this).hasClass("disabled"))
             {
                 $(this).attr("disabled", true);
@@ -3641,7 +3611,7 @@ function AZSetInputTypeEvents()
         }
         if ($(this).is("select"))
         {
-            $(this).off("change", AZValidateDirtyKeyup).on("change", AZValidateDirtyKeyup);
+            $(this).off("input", AZValidateDirtyChange).on("input", AZValidateDirtyChange);
             if ($(this).hasClass("readonly"))
             {
                 $(this).attr("readOnly", true);

@@ -11165,7 +11165,7 @@ button.swiper-pagination-bullet
     }
 }
 
-@media (min-width: 1200px)
+@media (min-width: 1366px)
 {
     .az-card-layout-wrapper
     {
@@ -12623,7 +12623,7 @@ button.swiper-pagination-bullet
 }
 
 /* Size XL ----*/
-@media (min-width: 1200px)
+@media (min-width: 1366px)
 {
     .az-grid-row.xl-12
     {
@@ -12928,8 +12928,8 @@ Grid:
 xs - (0 - 576)
 sm - (577 - 767)
 md - (768 - 991)
-lg - (992 - 1199)
-xl - (1200 - )
+lg - (992 - 1365)
+xl - (1366 - )
 */
 
 /* Size ALL ----------*/
@@ -13403,7 +13403,7 @@ ul
 }
 
 /* Size XL ----------*/
-@media (min-width: 1200px)
+@media (min-width: 1366px)
 {
     /* Shadow */
     .az-xl-shadow-1, .az-xl-shadow-hover-1:hover
@@ -16422,7 +16422,7 @@ ul
 }
 
 /* Size XL ----------*/
-@media (min-width: 1200px)
+@media (min-width: 1366px)
 {
     /* Display */
     .az-xl-display-hidden
@@ -18318,11 +18318,11 @@ ul
 }
 
 /* Size XL ----*/
-@media (min-width: 1200px)
+@media (min-width: 1366px)
 {
     .az-container
     {
-        width: 1200px;
+        width: 1366px;
     }
 
     .az-col.xl-12
@@ -19049,6 +19049,12 @@ ul
         width: 36px;
         height: 20px;
     }
+
+        .az-form-group .az-switch ~ .az-label
+        {
+            position: relative;
+            top: 2px;
+        }
 
         .az-form-group .az-switch.xs
         {
@@ -19912,7 +19918,7 @@ ul
 
             .az-dropdown-layout > li > a > i
             {
-                margin-right: 7px !important;
+                margin-right: 14px !important;
             }
 
 .az-dropdown-hover:hover .az-dropdown-content
@@ -21342,7 +21348,7 @@ template
 }
 
 /* Size XL ----*/
-@media (min-width: 1200px)
+@media (min-width: 1366px)
 {
 	.az-table.az-xl-left
 	{
@@ -22140,7 +22146,7 @@ address
 }
 
 /* Size XL ----------*/
-@media (min-width: 1200px)
+@media (min-width: 1366px)
 {
     /* Text ---*/
     .az-xl-text-left
