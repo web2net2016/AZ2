@@ -52,3 +52,10 @@
             {
                 color: #FF4136;
             }
+
+    .az-window > .az-window-dialog > article
+    {
+        padding: 14px 14px 21px 14px;
+        font-size: 15px;
+        line-height: 21px;
+    }

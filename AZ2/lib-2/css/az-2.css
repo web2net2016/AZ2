@@ -18632,6 +18632,10 @@ ul
         display: none;
     }
 }
+.input-error
+{
+    border-bottom: 1px solid #FF0000 !important;
+}
 /* Form Group */
 .az-form-group
 {
@@ -20382,11 +20386,22 @@ ul
 ul.ui-autocomplete
 {
     border: 0 !important;
-    border-radius: 4px !important;
-    background-color: #FFFFFF !important;
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
+    border-radius: 7px !important;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.ui-tooltip
+{
+    padding: 0;
+}
+
+li.ui-menu-item
+{
+    padding: 7px;
+    font-size: 15px;
 }
 .az-modal-dialog
 {
@@ -22322,3 +22337,10 @@ address
             {
                 color: #FF4136;
             }
+
+    .az-window > .az-window-dialog > article
+    {
+        padding: 14px 14px 21px 14px;
+        font-size: 15px;
+        line-height: 21px;
+    }

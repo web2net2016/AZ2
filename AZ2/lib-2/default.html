@@ -165,11 +165,6 @@
 
         function StandardAlert()
         {
-            $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
-            {
-                data.$Article.css({ 'text-align': 'center', 'margin-top': '24px' });
-                data.azWindowResize();
-            });
             var _AZStandardAlertOptions =
             {
                 Title: "Internet connection",
