@@ -540,7 +540,7 @@ function AZSetFormLanguage(Options)
         var _ObjElements = Options;
         if (Options.hasOwnProperty("ObjElements") && AZIsEmpty(Options.ObjElements) === false)
         {
-            _ObjElements = Options.ObjElements;
+            _ObjElements = Options.ObjElements[0];
         }
 
         $.each(_ObjElements, function (Key, Value)
