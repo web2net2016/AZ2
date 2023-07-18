@@ -186,43 +186,6 @@ function AZPage(Options)
                     }
                 };
 
-                _Main.Validation = function ()
-                {
-                    if (_Main.Options.azPageValidation === true)
-                    {
-                        $.subscribeonce("functionlib/AZSetValidation", function (e, data)
-                        {
-                            _Main.InputTypeEvents();
-                        });
-                        if (_Main.Options.azPageValidationUrl !== "")
-                        {
-                            _Main.JsonUrl = _Main.Options.azPageValidationUrl;
-                        }
-                        _Main.$Validation = new AZGetJSON({ azJsonUrl: _Main.JsonUrl + "-val.json" });
-                        _Main.$Validation.done(function (data, textStatus, jqXHR)
-                        {
-                            if (textStatus === "success")
-                            {
-                                _Main.ObjValidation = data;
-                                var _AZSetValidationOptions =
-                                {
-                                    $Area: _Main.ObjPageAttributes.$AZFormObj,
-                                    ObjValidation: data
-                                };
-                                new AZSetValidation(_AZSetValidationOptions);
-                            }
-                            else
-                            {
-                                consoleLog({ consoleType: "error", consoleText: "AZPage - AZSetValidation is empty or missing some properties" });
-                            }
-                        });
-                    }
-                    else
-                    {
-                        _Main.InputTypeEvents();
-                    }
-                };
-
                 _Main.Language = function ()
                 {
                     if (_Main.Options.azPageLanguage === true)
@@ -230,7 +193,7 @@ function AZPage(Options)
                         $.subscribeonce("functionlib/AZSetLanguage", function (e, data)
                         {
                             _Main.ObjLanguage = data;
-                            _Main.Validation();
+                            _Main.InputTypeEvents();
                         });
                         if (_Main.Options.azPageLanguageUrl != "")
                         {
@@ -257,7 +220,44 @@ function AZPage(Options)
                     }
                     else
                     {
-                        _Main.Validation();
+                        _Main.InputTypeEvents();
+                    }
+                };
+
+                _Main.Validation = function ()
+                {
+                    if (_Main.Options.azPageValidation === true)
+                    {
+                        $.subscribeonce("functionlib/AZSetValidation", function (e, data)
+                        {
+                            _Main.Language();
+                        });
+                        if (_Main.Options.azPageValidationUrl !== "")
+                        {
+                            _Main.JsonUrl = _Main.Options.azPageValidationUrl;
+                        }
+                        _Main.$Validation = new AZGetJSON({ azJsonUrl: _Main.JsonUrl + "-val.json" });
+                        _Main.$Validation.done(function (data, textStatus, jqXHR)
+                        {
+                            if (textStatus === "success")
+                            {
+                                _Main.ObjValidation = data;
+                                var _AZSetValidationOptions =
+                                {
+                                    $Area: _Main.ObjPageAttributes.$AZFormObj,
+                                    ObjValidation: data
+                                };
+                                new AZSetValidation(_AZSetValidationOptions);
+                            }
+                            else
+                            {
+                                consoleLog({ consoleType: "error", consoleText: "AZPage - AZSetValidation is empty or missing some properties" });
+                            }
+                        });
+                    }
+                    else
+                    {
+                        _Main.Language();
                     }
                 };
 
@@ -271,11 +271,11 @@ function AZPage(Options)
                             _TooltipFile = AZSettings.DefaultTooltipFile;
                         }
                         AZTooltip({ File: _TooltipFile });
-                        _Main.Language();
+                        _Main.Validation();
                     }
                     else
                     {
-                        _Main.Language();
+                        _Main.Validation();
                     }
                 };
 
@@ -434,16 +434,34 @@ function AZSetLanguage(Options)
 
                 _Main.SetFullLanguage = function (ObjDefaultLanguage)
                 {
+                    var _ObjDefaultElements = false;
+                    var _ObjElements = false;
                     _Main.ObjLanguage =
                     {
                         ObjActiveLanguages: ObjDefaultLanguage.ActiveLanguages,
                         ObjNonLanguageElements: ObjDefaultLanguage.ObjNonLanguageElements,
                         SingleNonLanguageElements: ObjDefaultLanguage.SingleNonLanguageElements,
-                        ObjDefaultElements: ObjDefaultLanguage.ObjDefaultElements[_Main.DefaultLanguage],
                         SingleDefaultElements: ObjDefaultLanguage.SingleDefaultElements[_Main.DefaultLanguage],
-                        ObjElements: _Main.ObjPageLanguage.ObjElements[_Main.DefaultLanguage],
                         SingleElements: _Main.ObjPageLanguage.SingleElements[_Main.DefaultLanguage]
                     };
+                    if (ObjDefaultLanguage.hasOwnProperty("ObjDefaultElements"))
+                    {
+                        _ObjDefaultElements = true;
+                        _Main.ObjLanguage.ObjDefaultElements = ObjDefaultLanguage.ObjDefaultElements[_Main.DefaultLanguage];
+                    }
+                    if (_Main.ObjPageLanguage.hasOwnProperty("ObjElements"))
+                    {
+                        _ObjElements = true;
+                        _Main.ObjLanguage.ObjElements = _Main.ObjPageLanguage.ObjElements[_Main.DefaultLanguage];
+                    }
+                    if (_ObjDefaultElements === false)
+                    {
+                        AZSetSingleLanguage(_Main.ObjLanguage.SingleDefaultElements);
+                    }
+                    if (_ObjElements === false)
+                    {
+                        AZSetSingleLanguage(_Main.ObjLanguage.SingleElements);
+                    }
                     $.publish("AZSetLanguage");
                 };
 
@@ -492,39 +510,70 @@ function AZSetLanguage(Options)
             }
             else if (Options.hasOwnProperty("ObjLanguage") && AZIsEmpty(Options.ObjLanguage) === false)
             {
-                _Main.$Area = "";
-                if (Options.hasOwnProperty("$Area") && AZIsEmpty(Options.$Area) === false)
+                if (Options.ObjLanguage.length > 0)
                 {
-                    _Main.$Area = Options.$Area;
-                }
-                _Main.ObjFormLanguageOptions =
-                {
-                    $Area: _Main.$Area
-                };
-                if (Options.ObjLanguage.hasOwnProperty("ObjElements") && AZIsEmpty(Options.ObjLanguage.ObjElements) === false)
-                {
-                    _Main.ObjFormLanguageOptions.ObjElements = Options.ObjLanguage.ObjElements;
+                    AZSetFormLanguage(Options.ObjLanguage);
                 }
                 else
                 {
-                    _Main.ObjFormLanguageOptions.ObjElements = [Options.ObjLanguage];
+                    AZSetSingleLanguage(Options.ObjLanguage);
                 }
-                AZSetFormLanguage(_Main.ObjFormLanguageOptions);
             }
             else
             {
-                consoleLog({ consoleType: "error", consoleText: "AZSetLanguage - Options is empty or missing some properties" });
+                consoleLog({ consoleType: "error", consoleText: "AZSetLanguage 2 - Options is empty or missing some properties" });
             }
         }
         else
         {
-            consoleLog({ consoleType: "error", consoleText: "AZSetLanguage - Options is empty or missing some properties" });
+            consoleLog({ consoleType: "error", consoleText: "AZSetLanguage 1 - Options is empty or missing some properties" });
         }
     }
     else
     {
         return new AZSetLanguage(Options);
     }
+}
+
+function AZSetSingleLanguage(SingleElements)
+{
+    $.each(SingleElements, function (Key, Value)
+    {
+        var _$Obj = $('#' + Key).length > 0 ? $('#' + Key) : $('.' + Key);
+
+        if (_$Obj.hasClass("htmlembedded") || _$Obj.hasClass("htmlembedded-left") || _$Obj.hasClass("htmlembedded-right"))
+        {
+            var _FirstChildElement = $('>:first', _$Obj);
+            _$Obj.html('');
+            _$Obj.html(Value);
+            if (_FirstChildElement.length > 0)
+            {
+                if (_$Obj.hasClass("htmlembedded") || _$Obj.hasClass("htmlembedded-left"))
+                {
+                    _$Obj.prepend(_FirstChildElement);
+                }
+                else
+                {
+                    _$Obj.append(_FirstChildElement);
+                }
+            }
+        }
+        else
+        {
+            _$Obj.html('');
+            _$Obj.html(Value);
+        }
+        if (_$Obj.hasClass("placeholder"))
+        {
+            _$Obj.prop("placeholder", "");
+            _$Obj.prop("placeholder", Value);
+        }
+        if (_$Obj.hasClass("title"))
+        {
+            _$Obj.prop("title", "");
+            _$Obj.prop("title", Value);
+        }
+    });
 }
 
 function AZSetFormLanguage(Options)
@@ -542,7 +591,6 @@ function AZSetFormLanguage(Options)
         {
             _ObjElements = Options.ObjElements[0];
         }
-
         $.each(_ObjElements, function (Key, Value)
         {
             $.each(Value, function (Key, Value)
@@ -2755,7 +2803,7 @@ function AZSlideshow(Options)
                 _Main.$SwiperOutherWrapper.height(_Main.Options.azSlideshowHeight);
             }
             _Main.$Swiper = $("#" + _Main.Options.azSlideshowId).wrap(_Main.$SwiperOutherWrapper);
-            _Main.SwiperOptions.speed = _Main.Options.azSlideshowSpeed; 
+            _Main.SwiperOptions.speed = _Main.Options.azSlideshowSpeed;
 
             // Page
             if (_Main.Options.azSlideshowType == "page")

@@ -34,7 +34,7 @@
             DateTime: "2020-02-21T02:38",
             Decimal: 111.50,
             Numeric: 12345,
-            Comment: "Kommentar"
+            Comment: ""
         };
 
         $(document).ready(function ()
@@ -101,12 +101,11 @@
                 console.log("FUNCTIONLIB - azRadioClick\nazRadioId: " + data.azRadioId + "\nazRadioName: " + data.azRadioName + "\nazRadioClass: " + data.azRadioClass + "\nazRadioValue: " + data.azRadioValue + "\nazRadioChecked: " + data.azRadioChecked + "\nazRadioJQElement: ", data.azRadioJQElement);
             });
 
-            //ObjPageData.Values.AZPage.ObjLanguage
             //var _AZSetLanguageOptions =
             //{
             //    $Area: $("#labelCustomerName").parent(),
-            //    ObjLanguage: { "labelCustomerName": ["id", "text", "Et firmanavn:"] }
-            //}
+            //    ObjLanguage: { "labelCustomerName": "Et firmanavn:" }
+            //};
             //AZSetLanguage(_AZSetLanguageOptions);
 
             var _AZPopulateFormOptions =
@@ -250,7 +249,7 @@
                 <div class="az-row az-margin-t-14 az-margin-b-14">
                     <div class="az-col xs-12">
                         <div class="az-form-group xs az-text-center">
-                            <button type="button" class="az-button az-width-40 primary az-shadow-1 az-shadow-hover-2 submit"><i class="fas fa-exclamation az-padding-l-7"></i></button>
+                            <button type="button" class="az-button az-width-40 primary az-shadow-1 az-shadow-hover-2 submit htmlembedded title"><i class="fas fa-exclamation az-padding-r-7"></i></button>
                         </div>
                     </div>
                 </div>
@@ -331,7 +330,47 @@
 </html>
 
 
-<!--<div class="az-row az-margin-t-56">
+<!--
+
+    "ObjElements": {
+    "en-US": [
+      { "labelCustomerName": [ "id", "text", "Kunde:" ] },
+      { "labelContact": [ "id", "text", "Kontaktperson:" ] },
+      { "labelEmail": [ "id", "text", "E-post:" ] },
+      { "labelWeb": [ "id", "text", "Hjemmesider:" ] },
+      { "labelRequestReasonId": [ "id", "text", "Hva gjelder henvendelsen?" ] },
+      { "labelDate": [ "id", "text", "Dato:" ] },
+      { "labelTime": [ "id", "text", "Tid:" ] },
+      { "labelDateTime": [ "id", "text", "Dato/Tid:" ] },
+      { "labelDecimal": [ "id", "text", "Desimal:" ] },
+      { "labelNumeric": [ "id", "text", "Heltall:" ] },
+      { "labelComment": [ "id", "text", "Kommentar:" ] },
+      { "submit": [ "class", "htmlembedded-right", "Submit" ] },
+      { "submit": [ "class", "title", "Klikk for å lagre" ] }
+    ],
+    "nb-NO": [
+      { "labelCustomerName": [ "id", "text", "Kunde:" ] },
+      { "labelContact": [ "id", "text", "Kontaktperson:" ] },
+      { "labelEmail": [ "id", "text", "E-post:" ] },
+      { "labelWeb": [ "id", "text", "Hjemmesider:" ] },
+      { "labelRequestReasonId": [ "id", "text", "Hva gjelder henvendelsen?" ] },
+      { "labelDate": [ "id", "text", "Dato:" ] },
+      { "labelTime": [ "id", "text", "Tid:" ] },
+      { "labelDateTime": [ "id", "text", "Dato/Tid:" ] },
+      { "labelDecimal": [ "id", "text", "Desimal:" ] },
+      { "labelNumeric": [ "id", "text", "Heltall:" ] },
+      { "labelComment": [ "id", "text", "Kommentar:" ] },
+      { "submit": [ "class", "htmlembedded-right", "Lagre" ] },
+      { "submit": [ "class", "title", "Klikk for å lagre" ] }
+    ]
+  },
+
+
+
+
+
+
+    <div class="az-row az-margin-t-56">
     <div class="az-col xs-12">
         <div class="az-form-group xs">
             <h5>Feltene valideres etter følgende regler:</h5>

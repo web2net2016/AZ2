@@ -9,32 +9,6 @@
   "SingleNonLanguageElements": {
     "labelAppVersion": "Version"
   },
-  "ObjDefaultElements": {
-    "en-US": [
-      { "cmdClose": [ "id", "text", "Close" ] },
-      { "cmdClose": [ "id", "title", "Click to close." ] },
-      { "cmdCancel": [ "id", "text", "Exit" ] },
-      { "cmdCancel": [ "id", "title", "Click to exit." ] },
-      { "cmdSubmit": [ "id", "text", "Save" ] },
-      { "cmdSubmit": [ "id", "title", "Click to save." ] },
-      { "cmdSubmitAndContinue": [ "id", "text", "Save And Continue" ] },
-      { "cmdSubmitAndContinue": [ "id", "title", "Click to save and continue." ] },
-      { "cmdDelete": [ "id", "text", "Delete" ] },
-      { "cmdDelete": [ "id", "title", "Click to delete." ] }
-    ],
-    "nb-NO": [
-      { "cmdClose": [ "id", "text", "Lukk" ] },
-      { "cmdClose": [ "id", "title", "Klikk for å lukke." ] },
-      { "cmdCancel": [ "id", "text", "Avslutt" ] },
-      { "cmdCancel": [ "id", "title", "Klikk for å avslutte." ] },
-      { "cmdSubmit": [ "id", "text", "Lagre" ] },
-      { "cmdSubmit": [ "id", "title", "Klikk for å lagre." ] },
-      { "cmdSubmitAndContinue": [ "id", "text", "Lagre Og Fortsett" ] },
-      { "cmdSubmitAndContinue": [ "id", "title", "Klikk for å lagre og fortsette." ] },
-      { "cmdDelete": [ "id", "text", "Slett" ] },
-      { "cmdDelete": [ "id", "title", "Klikk for å slette." ] }
-    ]
-  },
   "SingleDefaultElements": {
     "en-US": {
       "modalNoConnectionTitle": "Internet connection",
@@ -45,7 +19,6 @@
       "informationTitle": "Information",
       "invalidCharacterTitle": "Form error/invalid character.",
       "invalidCharacterText": "You have entered an invalid character.",
-
       "SignInInfoError": "An error has occurred. This may be because you have been inactive for an extended period, or that your browser does not support JavaScript and/or Cookies. If you believe this is incorrect, please contact the Administration.",
       "SignedOutError": "There has been an error and the last action was not saved/modified. If this error persists please contact the Administration.",
       "LanguageCookieError": "Unable to set language coockie. Please try again. If this error persists please contact the Administration.",
@@ -55,7 +28,11 @@
       "LoadDataError": "Unable to load data for unknown reasons. This may be because your Internet connection is too slow. Please try again. If this error persists please contact the Administration.",
       "StoreDataError": "Unable to store data for unknown reasons. This may be because your Internet connection is too slow. Please try again. If this error persists please contact the Administration.",
       "DeleteDataError": "Unable to delete data for unknown reasons. This may be because your Internet connection is too slow. Please try again. If this error persists please contact the Administration.",
-
+      "cmdClose": "Close",
+      "cmdCancel": "Exit",
+      "cmdSubmit": "Save",
+      "cmdSubmitAndContinue": "Save and Continue",
+      "cmdDelete": "Delete",
       "cmdCloseText": "Close",
       "cmdCloseTitle": "Click to close",
       "cmdExitText": "Exit",
@@ -91,7 +68,6 @@
       "informationTitle": "Information",
       "invalidCharacterTitle": "Skjema feil/ugyldig tegn",
       "invalidCharacterText": "Du har skrevet et ugyldig tegn.",
-
       "SignInInfoError": "An error has occurred. This may be because you have been inactive for an extended period, or that your browser does not support JavaScript and/or Cookies. If you believe this is incorrect, please contact the Administration.",
       "SignedOutError": "There has been an error and the last action was not saved/modified. Hvis denne feilen vedvarer, vennligst kontakt administrasjonen.",
       "LanguageCookieError": "Unable to set language coockie. Vennligst prøv på nytt. Hvis denne feilen vedvarer, vennligst kontakt administrasjonen.",
@@ -101,7 +77,11 @@
       "LoadDataError": "Kan ikke laste data av ukjente årsaker. Dette kan skyldes at Internett-tilkoblingen din er for langsom. Vennligst prøv på nytt. Hvis denne feilen vedvarer, vennligst kontakt administrasjonen.",
       "StoreDataError": "Kan ikke lagre data av ukjente årsaker. Dette kan skyldes at Internett-tilkoblingen din er for langsom. Vennligst prøv på nytt. Hvis denne feilen vedvarer, vennligst kontakt administrasjonen.",
       "DeleteDataError": "Kan ikke slette data av ukjente årsaker. Dette kan skyldes at Internett-tilkoblingen din er for langsom. Vennligst prøv på nytt. Hvis denne feilen vedvarer, vennligst kontakt administrasjonen.",
-
+      "cmdClose": "Lukk",
+      "cmdCancel": "Avslutt",
+      "cmdSubmit": "Lagre",
+      "cmdSubmitAndContinue": "Lagre og Fortsett",
+      "cmdDelete": "Slett",
       "cmdCloseText": "Lukk",
       "cmdCloseTitle": "Klikk for å lukke",
       "cmdExitText": "Avslutt",

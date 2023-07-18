@@ -89,6 +89,12 @@
     <Content Include="lib-2\fontawesome\webfonts\fa-v4compatibility.woff2" />
     <Content Include="lib-2\jquerytimepicker\jquery.ui.timepicker.css" />
     <Content Include="lib-2\jquerytimepicker\jquery.ui.timepicker.js" />
+    <Content Include="lib-2\jqueryui\images\ui-icons_444444_256x240.png" />
+    <Content Include="lib-2\jqueryui\images\ui-icons_555555_256x240.png" />
+    <Content Include="lib-2\jqueryui\images\ui-icons_777620_256x240.png" />
+    <Content Include="lib-2\jqueryui\images\ui-icons_777777_256x240.png" />
+    <Content Include="lib-2\jqueryui\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="lib-2\jqueryui\images\ui-icons_ffffff_256x240.png" />
     <Content Include="lib-2\jqueryui\swiped-events.js" />
     <Content Include="lib-2\js\az-2.js" />
     <Content Include="lib-2\js\az-2.min.js">
@@ -135,12 +141,6 @@
     <Content Include="lib-2\css\table.css" />
     <Content Include="lib-2\css\text.css" />
     <Content Include="lib-2\fontawesome\fontawesome-all.css" />
-    <Content Include="lib-2\jqueryui\images\ui-icons_444444_256x240.png" />
-    <Content Include="lib-2\jqueryui\images\ui-icons_555555_256x240.png" />
-    <Content Include="lib-2\jqueryui\images\ui-icons_777620_256x240.png" />
-    <Content Include="lib-2\jqueryui\images\ui-icons_777777_256x240.png" />
-    <Content Include="lib-2\jqueryui\images\ui-icons_cc0000_256x240.png" />
-    <Content Include="lib-2\jqueryui\images\ui-icons_ffffff_256x240.png" />
     <Content Include="lib-2\jqueryui\jquery.ui.touch-punch.min.js" />
     <Content Include="lib-2\jqueryui\jquery-ui.min.css" />
     <Content Include="lib-2\jqueryui\jquery-ui.min.js" />
