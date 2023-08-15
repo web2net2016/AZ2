@@ -79,6 +79,7 @@
     <Content Include="lib-2\css\jqueryui.css" />
     <Content Include="lib-2\css\window.css" />
     <Content Include="lib-2\css\modaldialog.css" />
+    <Content Include="lib-2\fontawesome\fontawesome-all - Copy.css" />
     <Content Include="lib-2\fontawesome\webfonts\fa-brands-400.ttf" />
     <Content Include="lib-2\fontawesome\webfonts\fa-brands-400.woff2" />
     <Content Include="lib-2\fontawesome\webfonts\fa-regular-400.ttf" />
