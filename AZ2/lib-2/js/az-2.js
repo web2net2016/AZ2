@@ -2976,7 +2976,14 @@ function AZSetInputTypeEvents()
                 {
                     _$CurrentSpinner.val(numeral(_ObjAttributes.Value).format('0.00'));
                 }
-                _$ParentElement.append('<span class="az-input-group-addon az-spinner-decrement"><i class="fas fa-minus"></i></span>').append(_$CurrentSpinner).append('<span class="az-input-group-addon az-spinner-increment"><i class="fas fa-plus"></i></span>');
+                if (_$CurrentSpinner.hasClass('az-round') === true)
+                {
+                    _$ParentElement.append('<span class="az-input-group-addon az-spinner-decrement az-round"><i class="fas fa-minus"></i></span>').append(_$CurrentSpinner).append('<span class="az-input-group-addon az-spinner-increment az-round"><i class="fas fa-plus"></i></span>');
+                }
+                else
+                {
+                    _$ParentElement.append('<span class="az-input-group-addon az-spinner-decrement"><i class="fas fa-minus"></i></span>').append(_$CurrentSpinner).append('<span class="az-input-group-addon az-spinner-increment"><i class="fas fa-plus"></i></span>');
+                }
                 AZSetSpinnerEvents(_$ParentElement, _ObjAttributes);
             }
         }
