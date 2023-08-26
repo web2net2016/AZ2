@@ -4438,6 +4438,7 @@ function AZFullWindow(Options)
             azFullWindowPosition: "bottom",
             azFullWindowFadeIn: 400,
             azFullWindowFadeOut: 400,
+            azFullWindowHeight: 100,
             azFullWindowBackgroundColor: "",
             azFullWindowColor: ""
         };
@@ -4459,31 +4460,39 @@ function AZFullWindow(Options)
             {
                 _Main.$Window.css({ "color": _Main.Options.azFullWindowColor + " !important" });
             }
+            if (Number.isInteger(_Main.Options.azFullWindowHeight) === false || _Main.Options.azFullWindowHeight < 1 || _Main.Options.azFullWindowHeight > 100)
+            {
+                _Main.Options.azFullWindowHeight = 100;
+            }
+            if (Number.isInteger(_Main.Options.azFullWindowFadeIn) === false || _Main.Options.azFullWindowFadeIn < 1)
+            {
+                _Main.Options.azFullWindowFadeIn = 400;
+            }
+            if (Number.isInteger(_Main.Options.azFullWindowFadeOut) === false || _Main.Options.azFullWindowFadeOut < 1)
+            {
+                _Main.Options.azFullWindowFadeOut = 400;
+            }
 
             _Main.AnimateOpenOptions = {};
             _Main.AnimateCloseOptions = {};
             if (_Main.Options.azFullWindowPosition == "top")
             {
-                _Main.AnimateOpenOptions = { "height": "100%", "opacity": 1 };
+                _Main.AnimateOpenOptions = { "height": _Main.Options.azFullWindowHeight + "%", "opacity": 1 };
                 _Main.AnimateCloseOptions = { "height": 0, "opacity": 0 };
                 _Main.$Window.css({ "top": 0 });
             }
             else if (_Main.Options.azFullWindowPosition == "bottom")
             {
-                _Main.AnimateOpenOptions = { "height": "100%", "opacity": 1 };
+                _Main.AnimateOpenOptions = { "height": _Main.Options.azFullWindowHeight + "%", "opacity": 1 };
                 _Main.AnimateCloseOptions = { "height": 0, "opacity": 0 };
                 _Main.$Window.css({ "bottom": 0 });
             }
 
             _Main.$Window.html(_Main.Options.azFullWindowText);
             _Main.$Window.append(_Main.$Close);
-            $("body").append(_Main.$Window);
-
-            _Main.$Window.animate(_Main.AnimateOpenOptions, _Main.Options.azFullWindowFadeIn, function ()
-            {
-                ModalDialogScrollTop = $(window).scrollTop();
-                $("body").addClass("az-no-parent-scroll");
-            });
+            $("body").append(_Main.$Window).addClass("az-no-parent-scroll");
+            ModalDialogScrollTop = $(window).scrollTop();
+            _Main.$Window.animate(_Main.AnimateOpenOptions, _Main.Options.azFullWindowFadeIn);
 
             _Main.$Close.on('click', function (e)
             {

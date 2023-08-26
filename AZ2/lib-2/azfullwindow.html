@@ -24,6 +24,7 @@
 
         var AZFullWindow1 = {};
         var AZFullWindow2 = {};
+        var AZFullWindow3 = {};
         var AZModalDialog1 = {};
         var AZWindow1 = {};
 
@@ -33,6 +34,7 @@
 
             $("#cmdAZFullWindow1").off("click", setAZFullWindow1).on("click", setAZFullWindow1);
             $("#cmdAZFullWindow2").off("click", setAZFullWindow2).on("click", setAZFullWindow2);
+            $("#cmdAZFullWindow3").off("click", setAZFullWindow3).on("click", setAZFullWindow3);
         });
 
         function setAZFullWindow1()
@@ -180,12 +182,50 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            AZFullWindow1 = new AZFullWindow(
+            AZFullWindow2 = new AZFullWindow(
                 {
                     azFullWindowText: _HTML,
                     azFullWindowPosition: "top",
                     azFullWindowFadeIn: 700,
                     azFullWindowFadeOut: 700
+                });
+        }
+
+        function setAZFullWindow3()
+        {
+            $.subscribeonce("functionlib/azFullWindowBeforeOpen", function (e, data)
+            {
+                console.log("azFullWindowBeforeOpen");
+                console.log(data);
+            });
+            $.subscribeonce("functionlib/azFullWindowAfterOpen", function (e, data)
+            {
+                console.log("azFullWindowAfterOpen");
+                console.log(data);
+                data.$Window.css({ 'border-top-left-radius': '20px', 'border-top-right-radius': '20px' });
+            });
+            $.subscribeonce("functionlib/azFullWindowAfterClose", function (e, data)
+            {
+                console.log("azFullWindowAfterClose");
+                console.log(data);
+            });
+
+            var _HTML = "";
+            _HTML = '<div class="az-margin-56">';
+            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += 'new AZFullWindow(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowText: _HTML<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowHeight: 50<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+
+            AZFullWindow3 = new AZFullWindow(
+                {
+                    azFullWindowText: _HTML,
+                    azFullWindowHeight: 50
                 });
         }
 
@@ -197,14 +237,19 @@
         <div id="section-1" class="az-section az-padding-t-56 az-padding-b-56">
             <div class="az-container">
                 <div class="az-row">
-                    <div class="az-col xs-12 sm-6">
+                    <div class="az-col xs-12 sm-4">
                         <div class="az-form-group">
                             <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZFullWindow1">AZ Full Window 1</button>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6">
+                    <div class="az-col xs-12 sm-4">
                         <div class="az-form-group">
                             <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZFullWindow2">AZ Full Window 2</button>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-4">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZFullWindow3">AZ Full Window 3</button>
                         </div>
                     </div>
                 </div>
@@ -228,6 +273,7 @@
                             &emsp;&ensp;&emsp;&ensp;azFullWindowPosition: "bottom",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowFadeIn: 400,<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowFadeOut: 400,<br />
+                            &emsp;&ensp;&emsp;&ensp;azFullWindowHeight: 100,<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowBackgroundColor: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowColor: ""<br />
                             });<br />
@@ -293,6 +339,14 @@
                                 <type><span>Type:</span> <brown>Integer</brown></type>
                                 <default><span>Default:</span> <red>400</red></default>
                                 <units><span>Unit:</span> <red>milliseconds</red></units>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azFullWindowHeight</property>
+                                <type><span>Type:</span> <brown>Integer</brown></type>
+                                <default><span>Default:</span> <red>100</red></default>
+                                <units><span>Unit:</span> <red>percent</red></units>
+                                <values><span>Values:</span> 1 - 100</values>
                                 <br />
                             </div>
                             <div class="az-code-property-wrapper">

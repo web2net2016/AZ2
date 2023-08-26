@@ -25849,11 +25849,6 @@ ul
     color: #000000;
 }
 
-    #az-full-window.az-window-full
-    {
-        height: 100%;
-    }
-
 #az-full-window-close
 {
     cursor: pointer;
