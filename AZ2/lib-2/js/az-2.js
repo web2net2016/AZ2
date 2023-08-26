@@ -2775,6 +2775,10 @@ function AZSetInputTypeEvents()
             {
                 $(this).off("focusout", AZInputAnimatedFocusout).on("focusout", AZInputAnimatedFocusout);
             }
+            if ($(this).hasClass("az-input-slideup"))
+            {
+                $(this).off("focusout", AZInputAnimatedSlideupFocusout).on("focusout", AZInputAnimatedSlideupFocusout);
+            }
             if ($(this).hasClass("forceuppercase"))
             {
                 $(this).off("keypress focusout", AZForceUppercaseKeypressFocusout).on("keypress focusout", AZForceUppercaseKeypressFocusout);
@@ -2934,7 +2938,7 @@ function AZSetInputTypeEvents()
     $(".passwordeye").off("click", AZHideShowPassword).on("click", AZHideShowPassword);
 
     // Animated Label
-    $(".az-label-animated").off("click", AZLabelAnimatedClick).on("click", AZLabelAnimatedClick);
+    $(".az-label-animated, .az-label-slideup").off("click", AZLabelAnimatedClick).on("click", AZLabelAnimatedClick);
 
     // Adjust Cards Height
     $('.az-accordion-card.adjust, .az-card.adjust, .az-card.adjust, .az-timeline-card.adjust').matchHeight();
@@ -5975,11 +5979,43 @@ function AZInputAnimatedFocusout(e)
         var _Element = e.target || e.srcElement;
         if (AZIsNullOrEmpty($(_Element).val()) === false)
         {
-            $('label[for="' + _Element.id + '"]').css({ "top": "-15px" });
+            $(_Element).siblings('.az-label-animated').addClass('top');
         }
         else
         {
-            $('label[for="' + _Element.id + '"]').removeAttr('style');
+            $(_Element).siblings('.az-label-animated').removeClass('top');
+        }
+    }
+}
+
+function AZInputAnimatedSlideupFocusout(e)
+{
+    if (AZIsNullOrEmpty(e) === false)
+    {
+        var _Element = e.target || e.srcElement;
+        var _$Sibling = $(_Element).siblings('.az-label-slideup');
+        if (AZIsNullOrEmpty($(_Element).val()) === false)
+        {
+            if (_$Sibling.hasClass('xs') === true)
+            {
+                _$Sibling.addClass('xs-top');
+            }
+            else if (_$Sibling.hasClass('sm') === true)
+            {
+                _$Sibling.addClass('sm-top');
+            }
+            else if (_$Sibling.hasClass('md') === true)
+            {
+                _$Sibling.addClass('md-top');
+            }
+            else
+            {
+                _$Sibling.addClass('normal-top');
+            }
+        }
+        else
+        {
+            _$Sibling.removeClass('xs-top').removeClass('sm-top').removeClass('md-top').removeClass('normal-top');
         }
     }
 }
