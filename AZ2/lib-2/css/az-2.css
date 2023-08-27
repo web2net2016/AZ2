@@ -24007,6 +24007,11 @@ ul
         margin: 6px;
     }
 
+    .az-form-group .az-round
+    {
+        border-radius: 4px;
+    }
+
     /* Input Group Addon */
     .az-form-group .az-input-group
     {
@@ -24072,14 +24077,6 @@ ul
         {
             padding: 12.05px;
             font-size: 1.2em;
-        }
-
-        .az-form-group .az-input.az-round,
-        .az-form-group .az-input.az-round.xs,
-        .az-form-group .az-input.az-round.sm,
-        .az-form-group .az-input.az-round.md
-        {
-            border-radius: 4px;
         }
 
         .az-form-group .az-input:focus
@@ -24177,14 +24174,6 @@ ul
             font-size: 1.2em;
         }
 
-        .az-form-group .az-textarea.az-round,
-        .az-form-group .az-textarea.az-round.xs,
-        .az-form-group .az-textarea.az-round.sm,
-        .az-form-group .az-textarea.az-round.md
-        {
-            border-radius: 4px;
-        }
-
         .az-form-group .az-textarea:focus
         {
             outline: 0;
@@ -24221,14 +24210,6 @@ ul
         {
             padding: 10.5px;
             font-size: 1.2em;
-        }
-
-        .az-form-group .az-select.az-round,
-        .az-form-group .az-select.az-round.xs,
-        .az-form-group .az-select.az-round.sm,
-        .az-form-group .az-select.az-round.md
-        {
-            border-radius: 4px;
         }
 
         .az-form-group .az-select:focus
@@ -24308,16 +24289,6 @@ ul
         {
             padding: 12.05px;
             font-size: 1.2em;
-        }
-
-        .az-form-group .az-input-spinner.az-round,
-        .az-form-group .az-input-spinner.az-round.xs,
-        .az-form-group .az-input-spinner.az-round.sm,
-        .az-form-group .az-input-spinner.az-round.md,
-        .az-form-group .az-input-group .az-spinner-decrement.az-round,
-        .az-form-group .az-input-group .az-spinner-increment.az-round
-        {
-            border-radius: 4px;
         }
 
         .az-form-group .az-input-spinner:focus
@@ -24813,14 +24784,6 @@ ul
             font-size: 1.2em;
         }
 
-        .az-form-group .az-button.az-round,
-        .az-form-group .az-button.az-round.xs,
-        .az-form-group .az-button.az-round.sm,
-        .az-form-group .az-button.az-round.md
-        {
-            border-radius: 4px;
-        }
-
         .az-form-group .az-button.az-button-block
         {
             width: 100%;
@@ -24973,14 +24936,6 @@ ul
         font-size: 1.2em;
     }
 
-    .az-form-group:has(.az-input-label.az-round),
-    .az-form-group:has(.az-input-label.az-round.xs),
-    .az-form-group:has(.az-input-label.az-round.sm),
-    .az-form-group:has(.az-input-label.az-round.md)
-    {
-        border-radius: 4px;
-    }
-
     .az-form-group:has(.az-input-label):focus-within
     {
         outline: 0;
@@ -25041,14 +24996,6 @@ ul
     {
         line-height: 1.70;
         font-size: 1.2em;
-    }
-
-    .az-form-group:has(.az-textarea-label.az-round),
-    .az-form-group:has(.az-textarea-label.az-round.xs),
-    .az-form-group:has(.az-textarea-label.az-round.sm),
-    .az-form-group:has(.az-textarea-label.az-round.md)
-    {
-        border-radius: 4px;
     }
 
     .az-form-group:has(.az-textarea-label):focus-within
@@ -25304,14 +25251,6 @@ ul
         box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
     }
 
-    .az-form-group .az-input-slideup.az-round,
-    .az-form-group .az-input-slideup.az-round.xs,
-    .az-form-group .az-input-slideup.az-round.sm,
-    .az-form-group .az-input-slideup.az-round.md
-    {
-        border-radius: 4px;
-    }
-
     /* Alert */
     .az-form-group .az-alert
     {
@@ -25335,14 +25274,6 @@ ul
         {
             padding: 13.05px;
             font-size: 1.2em;
-        }
-
-        .az-form-group .az-alert.az-round,
-        .az-form-group .az-alert.az-round.xs,
-        .az-form-group .az-alert.az-round.sm,
-        .az-form-group .az-alert.az-round.md
-        {
-            border-radius: 4px;
         }
 
     .az-form-group .az-alert-icons:first-child i
