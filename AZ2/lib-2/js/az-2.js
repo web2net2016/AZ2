@@ -2765,7 +2765,10 @@ function AZSetInputTypeEvents()
             _ValidType = "";
             $(this).attr("autocomplete", "off");
             $(this).off("input", AZValidateDirtyChange).on("input", AZValidateDirtyChange);
-            _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
+            if ($(this).attr("class") != undefined)
+            {
+                _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
+            }
             if (_ValidType !== null)
             {
                 $(this).off("keypress", AZValidateInputValueKeypress).on("keypress", { ValidType: _ValidType }, AZValidateInputValueKeypress);
