@@ -5148,76 +5148,85 @@ function AZStandardAlert(Options)
 
 function AZValidateDirtyChange(e)
 {
-    var _Element = e.target || e.srcElement;
-    if (!$(_Element).attr("readonly"))
+    if (AZIsNullOrEmpty(e) === false)
     {
-        var _Data =
+        var _Element = e.target || e.srcElement;
+        if (!$(_Element).attr("readonly"))
         {
-            azInputId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
-            azInputName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
-            azInputClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
-            azInputJQElement: $(_Element)
-        };
-        $.publish("functionlib/azValidateDirty",
+            var _Data =
             {
-                azInputId: _Data.azInputId,
-                azInputName: _Data.azInputName,
-                azInputClass: _Data.azInputClass,
-                azInputJQElement: _Data.azInputJQElement,
-            });
-        if (typeof AZValidateDirty == "function")
-        {
-            AZValidateDirty(e, _Data);
+                azInputId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+                azInputName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+                azInputClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+                azInputJQElement: $(_Element)
+            };
+            $.publish("functionlib/azValidateDirty",
+                {
+                    azInputId: _Data.azInputId,
+                    azInputName: _Data.azInputName,
+                    azInputClass: _Data.azInputClass,
+                    azInputJQElement: _Data.azInputJQElement,
+                });
+            if (typeof AZValidateDirty == "function")
+            {
+                AZValidateDirty(e, _Data);
+            }
         }
-    }
+    }   
 }
 
 function AZValidateInputValueKeypress(e)
 {
-    var _Element = e.target || e.srcElement;
-    var _KeyChar = e.keyCode || e.which;
-    var _ValidType = AZGetValidType(e.data.ValidType);
-    if (_KeyChar === 8 || _KeyChar === 13)
+    if (AZIsNullOrEmpty(e) === false)
     {
-        return true;
-    }
-    else
-    {
-        var _Char = String.fromCharCode(_KeyChar);
-        if (_ValidType.substring(0, 3) === "NOT")
+        var _Element = e.target || e.srcElement;
+        var _KeyChar = e.keyCode || e.which;
+        var _ValidType = AZGetValidType(e.data.ValidType);
+        if (AZIsNullOrEmpty(_ValidType) === false)
         {
-            _ValidType = _ValidType.substring(3);
-            if (_ValidType.indexOf(_Char.toLowerCase()) < 0)
+            if (_KeyChar === 8 || _KeyChar === 13)
             {
                 return true;
             }
             else
             {
-                TriggerAlert();
-            }
-        }
-        else if (_ValidType.indexOf(_Char.toLowerCase()) >= 0)
-        {
-            return true;
-        }
-        else
-        {
-            TriggerAlert();
-        }
-
-        function TriggerAlert()
-        {
-            e.preventDefault ? e.preventDefault() : e.returnValue = false;
-            $.publish("functionlib/azValidateInputValueKeypress",
+                var _Char = String.fromCharCode(_KeyChar);
+                if (_ValidType.substring(0, 3) === "NOT")
                 {
-                    azInputId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
-                    azInputName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
-                    azInputClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
-                    azInputValue: $(_Element).val(),
-                    azInputInvalidChar: _Char,
-                    azInputValidType: e.data.ValidType.toString(),
-                    azInputJQElement: $(_Element)
-                });
+                    _ValidType = _ValidType.substring(3);
+                    if (_ValidType.indexOf(_Char.toLowerCase()) < 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        TriggerAlert();
+                    }
+                }
+                else if (_ValidType.indexOf(_Char.toLowerCase()) >= 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    TriggerAlert();
+                }
+
+                function TriggerAlert()
+                {
+                    e.preventDefault ? e.preventDefault() : e.returnValue = false;
+                    $.publish("functionlib/azValidateInputValueKeypress",
+                        {
+                            azInputId: $(_Element).attr("id") != undefined ? $(_Element).attr("id") : $(_Element).attr("data-id") != undefined ? $(_Element).attr("data-id") : "",
+                            azInputName: $(_Element).attr("name") === undefined ? "" : $(_Element).attr("name"),
+                            azInputClass: $(_Element).attr("class") === undefined ? "" : $(_Element).attr("class"),
+                            azInputValue: $(_Element).val(),
+                            azInputInvalidChar: _Char,
+                            azInputValidType: e.data.ValidType.toString(),
+                            azInputJQElement: $(_Element)
+                        });
+                }
+            }
         }
     }
 }
