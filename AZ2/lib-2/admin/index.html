@@ -65,41 +65,41 @@
         {
             ObjPageData.Values.AZPage = data;
 
-            $.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azValidateInputValueKeypress\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputValue: " + data.azInputValue + "\nazInputInvalidChar: " + data.azInputInvalidChar + "\nazInputValidType: " + data.azInputValidType + "\nazInputJQElement: ", data.azInputJQElement);
-            });
+            //$.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
+            //{
+            //    console.log("FUNCTIONLIB - azValidateInputValueKeypress\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputValue: " + data.azInputValue + "\nazInputInvalidChar: " + data.azInputInvalidChar + "\nazInputValidType: " + data.azInputValidType + "\nazInputJQElement: ", data.azInputJQElement);
+            //});
 
-            $.subscribe("functionlib/azValidateInputValidChar", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azValidateInputValidChar\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputValue: " + data.azInputValue + "\nazInputInvalidChar: " + data.azInputInvalidChar + "\nazInputValidType: " + data.azInputValidType + "\nazInputJQElement: ", data.azInputJQElement);
-            });
+            //$.subscribe("functionlib/azValidateInputValidChar", function (e, data)
+            //{
+            //    console.log("FUNCTIONLIB - azValidateInputValidChar\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputValue: " + data.azInputValue + "\nazInputInvalidChar: " + data.azInputInvalidChar + "\nazInputValidType: " + data.azInputValidType + "\nazInputJQElement: ", data.azInputJQElement);
+            //});
 
-            $.subscribe("functionlib/azValidateDirty", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azValidateDirty\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputJQElement: ", data.azInputJQElement);
-            });
+            //$.subscribe("functionlib/azValidateDirty", function (e, data)
+            //{
+            //    console.log("FUNCTIONLIB - azValidateDirty\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputJQElement: ", data.azInputJQElement);
+            //});
 
-            $.subscribe("functionlib/azSetDate", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azSetDate\nazDateId: " + data.azDateId + "\nazDateName: " + data.azDateName + "\nazDateClass: " + data.azDateClass + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateISODate: " + data.azDateISODate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
-                consoleLog({ consoleType: "warn", consoleText: "azDateENUSDate is deprecated, use azDateISODate." });
-            });
+            //$.subscribe("functionlib/azSetDate", function (e, data)
+            //{
+            //    console.log("FUNCTIONLIB - azSetDate\nazDateId: " + data.azDateId + "\nazDateName: " + data.azDateName + "\nazDateClass: " + data.azDateClass + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateISODate: " + data.azDateISODate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
+            //    consoleLog({ consoleType: "warn", consoleText: "azDateENUSDate is deprecated, use azDateISODate." });
+            //});
 
-            $.subscribe("functionlib/azSetTime", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azSetTime\nazTimeId: " + data.azTimeId + "\nazTimeName: " + data.azTimeName + "\nazTimeClass: " + data.azTimeClass + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeENUSTime: " + data.azTimeENUSTime + "\nazTimeJQElement: ", data.azTimeJQElement);
-            });
+            //$.subscribe("functionlib/azSetTime", function (e, data)
+            //{
+            //    console.log("FUNCTIONLIB - azSetTime\nazTimeId: " + data.azTimeId + "\nazTimeName: " + data.azTimeName + "\nazTimeClass: " + data.azTimeClass + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeENUSTime: " + data.azTimeENUSTime + "\nazTimeJQElement: ", data.azTimeJQElement);
+            //});
 
-            $.subscribe("functionlib/azCheckboxClick", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azCheckboxClick\nazCheckboxId: " + data.azCheckboxId + "\nazCheckboxName: " + data.azCheckboxName + "\nazCheckboxClass: " + data.azCheckboxClass + "\nazCheckboxValue: " + data.azCheckboxValue + "\nazCheckboxChecked: " + data.azCheckboxChecked + "\nazCheckboxJQElement: ", data.azCheckboxJQElement);
-            });
+            //$.subscribe("functionlib/azCheckboxClick", function (e, data)
+            //{
+            //    console.log("FUNCTIONLIB - azCheckboxClick\nazCheckboxId: " + data.azCheckboxId + "\nazCheckboxName: " + data.azCheckboxName + "\nazCheckboxClass: " + data.azCheckboxClass + "\nazCheckboxValue: " + data.azCheckboxValue + "\nazCheckboxChecked: " + data.azCheckboxChecked + "\nazCheckboxJQElement: ", data.azCheckboxJQElement);
+            //});
 
-            $.subscribe("functionlib/azRadioClick", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azRadioClick\nazRadioId: " + data.azRadioId + "\nazRadioName: " + data.azRadioName + "\nazRadioClass: " + data.azRadioClass + "\nazRadioValue: " + data.azRadioValue + "\nazRadioChecked: " + data.azRadioChecked + "\nazRadioJQElement: ", data.azRadioJQElement);
-            });
+            //$.subscribe("functionlib/azRadioClick", function (e, data)
+            //{
+            //    console.log("FUNCTIONLIB - azRadioClick\nazRadioId: " + data.azRadioId + "\nazRadioName: " + data.azRadioName + "\nazRadioClass: " + data.azRadioClass + "\nazRadioValue: " + data.azRadioValue + "\nazRadioChecked: " + data.azRadioChecked + "\nazRadioJQElement: ", data.azRadioJQElement);
+            //});
 
             //var _AZSetLanguageOptions =
             //{
@@ -142,6 +142,12 @@
                 $(".az-card").find("article").show();
                 $("#ObjFormResponse").text(JSON.stringify(_ObjReturnForm));
             }
+        }
+
+        function AZValidateDirty(e, data)
+        {
+            console.log(e);
+            console.log(data);
         }
 
     </script>
@@ -244,8 +250,53 @@
                         </div>
                     </div>
                 </div>
+                <div class="az-row az-margin-t-21">
+                    <div class="az-col xs-12 sm-6 lg-3">
+                        <div class="az-form-group">
+                            <input class="az-checkbox" type="checkbox" value="1">
+                            <label class="az-label">Størrelse Normal</label>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-6 lg-3">
+                        <div class="az-form-group">
+                            <label class="az-switch">
+                                <input type="checkbox" id="switch1" value="1">
+                                <span class="az-slider"></span>
+                            </label>
+                            <label class="az-label">Størrelse Normal</label>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-6 lg-3">
+                        <div class="az-form-group">
+                            <input class="az-radio" type="radio" name="id" value="1">
+                            <label class="az-label">Størrelse Normal</label>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-6 lg-3">
+                        <div class="az-form-group">
+                            <input class="az-radio" type="radio" name="id" value="2">
+                            <label class="az-label">Størrelse Normal</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="az-row az-margin-t-21">
 
-                <div class="az-row az-margin-t-14 az-margin-b-14">
+                    <div class="az-col xs-12 sm-6 lg-3">
+                        <div class="az-form-group">
+                            <input class="az-range" type="range" min="0" max="20" step="1" id="range1">
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-6 lg-3">
+                        <div class="az-form-group">
+                            <div class="az-input-group">
+                                <input type="text" class="az-input-spinner" value="0" min="0" max="100" step="10" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="az-row az-margin-t-56 az-margin-b-14">
                     <div class="az-col xs-12">
                         <div class="az-form-group xs az-text-center">
                             <button type="button" class="az-button az-width-40 primary az-shadow-1 az-shadow-hover-2 submit htmlembedded title"><i class="fas fa-exclamation az-padding-r-7"></i></button>
