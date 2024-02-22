@@ -22,7 +22,7 @@
     <script src="/lib-2/lib/az-codecolor.js"></script>
     <script>
 
-        $(document).ready(function ()
+        $(function ()
         {
             w3CodeColor();
 
@@ -53,15 +53,17 @@
             $("#Guid").off("click", Guid).on("click", Guid);
             $("#ElementSize").off("click", ElementSize).on("click", ElementSize);
             $("#ResolutionConverter").off("click", ResolutionConverter).on("click", ResolutionConverter);
-
-
-
             $("#StandardAlert").off("click", StandardAlert).on("click", StandardAlert);
             $("#SetPageElement").off("click", SetPageElement).on("click", SetPageElement);
-            $("#AZAnim").off("click", AZAnim).on("click", AZAnim);
             $("#ShowCoverSpin1").off("click", ShowCoverSpin1).on("click", ShowCoverSpin1);
             $("#ShowCoverSpin2").off("click", ShowCoverSpin2).on("click", ShowCoverSpin2);
         });
+
+        function AZValidateDirty(type, data)
+        {
+            console.log(type);
+            console.log(data);
+        }
 
         function ClientStorageSet()
         {
@@ -180,32 +182,6 @@
             console.log(ObjPageData.Elements);
         }
 
-        function AZAnim()
-        {
-            var _$AZAnim = $(this);
-            _$AZAnim.attr("disabled", true);
-            $("p.az-anim-message").append(" Started...");
-
-            $.when(effect()).done(function ()
-            {
-                $("p.az-anim-message").append(" Finished!");
-                window.setTimeout(function ()
-                {
-                    $("p.az-anim-message").text("Animation...");
-                    $("div.az-anim-rect").show();
-                    _$AZAnim.attr("disabled", false);
-                }, 3000);
-            });
-
-            function effect()
-            {
-                return $("div.az-anim-rect").each(function (Index)
-                {
-                    $(this).fadeOut(1000 * (Index + 1));
-                });
-            };
-        }
-
         function ShowCoverSpin1()
         {
             AZShowCoverSpin();
@@ -234,8 +210,8 @@
 <body>
 
     <form id="frmReg">
-        <div id="section-1" class="az-section az-padding-t-56 az-padding-b-56">
 
+        <div id="section-1" class="az-section az-padding-t-56">
             <div class="az-container az-background-white">
                 <div class="az-row">
                     <div class="az-col xs-12">
@@ -611,15 +587,6 @@
                                 <br />
                             </div>
 
-
-
-
-
-
-
-
-
-
                             <div class="az-code-property-wrapper">
                                 <property>AZ Standard Alert</property>
                                 <type><span>Type:</span> <brown>Function</brown></type>
@@ -638,6 +605,104 @@
                                 <div class="az-form-group">
                                     <button id="StandardAlert" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Standard Alert</button>
                                 </div>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Show/Hide CoverSpin</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <default><span>Input:</span> <brown>string</brown></default>
+                                <br />
+                                AZShowCoverSpin();<br />
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="ShowCoverSpin1" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Show Cover Spin 1</button>
+                                </div>
+                                <br />
+                                AZShowCoverSpin("Show Cover Spin");<br />
+                                <br />
+                                <div class="az-form-group">
+                                    <button id="ShowCoverSpin2" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Show Cover Spin 2</button>
+                                </div>
+                                <br />
+                                AZHideCoverSpin();<br />
+                                <br />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="section-2" class="az-section az-padding-t-56 az-padding-b-56">
+            <div class="az-container az-background-white">
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <h1 class="az-code-header" style="margin: 0;">AZ Page Functions</h1>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12">
+                        <div class="az-code htmlHigh notranslate">
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Validate Dirty</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <p style="word-break: break-word;">
+                                    This function <strong>listens</strong> to many different events, especially in relation to form elements but also other things such as <strong>Window Scroll</strong>, <strong>Window Resize</strong>, etc.
+                                </p>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    function AZValidateDirty(type, data)<br />
+                                    {<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/AZValidateInputValueKeydown
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputKey<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azValidateInputValidChar
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputInvalidChar<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValidChar<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValidType<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azSelectChange
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azSelectId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azSelectName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azSelectClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azSelectValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azSelectText<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azSelectList<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azSelectJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+
+
+                                    }<br />
+                                    <br />
+                                </div>
+                                <br />
+                                <br />
                                 <br />
                             </div>
 
@@ -801,60 +866,6 @@
                                 <br />
                             </div>
 
-                            <div class="az-code-property-wrapper">
-                                <property>AZ Promise</property>
-                                <br />
-                                Below you also see an example of using Promise using the feature <strong>$.when</strong>
-                                <br />
-                                <br />
-                                <div style="display: inline-block; height: 70px;">
-                                    <p class="az-anim-message">Animation...</p>
-                                    <div class="az-anim-rect"></div>
-                                    <div class="az-anim-rect"></div>
-                                    <div class="az-anim-rect"></div>
-                                    <div class="az-anim-rect"></div>
-                                </div>
-                                <br />
-                                <br />
-                                <div class="jsHigh notranslate">
-                                    function Effect()<br />
-                                    {<br />
-                                    &emsp;&ensp;&emsp;&ensp;return $("div.az-anim-rect").each(function (i)<br />
-                                    &emsp;&ensp;&emsp;&ensp;{<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;$(this).fadeOut(1000 * (i + 1));<br />
-                                    &emsp;&ensp;&emsp;&ensp;});<br />
-                                    };<br />
-                                    <br />
-                                    $.when(Effect()).done(function () { // Do Something });<br />
-                                    <br />
-                                    <br />
-                                </div>
-                                <div class="az-form-group">
-                                    <button type="button" id="AZAnim" class="az-button primary az-shadow-1 az-shadow-hover-2">Go Anim</button>
-                                </div>
-                                <br />
-                            </div>
-
-                            <div class="az-code-property-wrapper">
-                                <property>AZ Show/Hide CoverSpin</property>
-                                <type><span>Type:</span> <brown>Function</brown></type>
-                                <default><span>Input:</span> <brown>string</brown></default>
-                                <br />
-                                AZShowCoverSpin();<br />
-                                <br />
-                                <div class="az-form-group">
-                                    <button id="ShowCoverSpin1" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Show Cover Spin 1</button>
-                                </div>
-                                <br />
-                                AZShowCoverSpin("Show Cover Spin");<br />
-                                <br />
-                                <div class="az-form-group">
-                                    <button id="ShowCoverSpin2" type="button" class="az-button primary az-shadow-1 az-shadow-hover-2">Show Cover Spin 2</button>
-                                </div>
-                                <br />
-                                AZHideCoverSpin();<br />
-                                <br />
-                            </div>
 
                         </div>
                     </div>
@@ -865,3 +876,68 @@
 
 </body>
 </html>
+
+<!--
+$("#AZAnim").off("click", AZAnim).on("click", AZAnim);
+function AZAnim()
+{
+var _$AZAnim = $(this);
+_$AZAnim.attr("disabled", true);
+$("p.az-anim-message").append(" Started...");
+
+$.when(effect()).done(function ()
+{
+$("p.az-anim-message").append(" Finished!");
+window.setTimeout(function ()
+{
+$("p.az-anim-message").text("Animation...");
+$("div.az-anim-rect").show();
+_$AZAnim.attr("disabled", false);
+}, 3000);
+});
+
+function effect()
+{
+return $("div.az-anim-rect").each(function (Index)
+{
+$(this).fadeOut(1000 * (Index + 1));
+});
+};
+}
+
+<div class="az-code-property-wrapper">
+<property>AZ Promise</property>
+<br />
+<p style="word-break: break-word;">
+Below you also see an example of using Promise using the feature <strong>$.when</strong>
+</p>
+<br />
+<br />
+<div style="display: inline-block; height: 70px;">
+<p class="az-anim-message">Animation...</p>
+<div class="az-anim-rect"></div>
+<div class="az-anim-rect"></div>
+<div class="az-anim-rect"></div>
+<div class="az-anim-rect"></div>
+</div>
+<br />
+<br />
+<div class="jsHigh notranslate">
+function Effect()<br />
+{<br />
+&emsp;&ensp;&emsp;&ensp;return $("div.az-anim-rect").each(function (i)<br />
+&emsp;&ensp;&emsp;&ensp;{<br />
+&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;$(this).fadeOut(1000 * (i + 1));<br />
+&emsp;&ensp;&emsp;&ensp;});<br />
+};<br />
+<br />
+$.when(Effect()).done(function () { // Do Something });<br />
+<br />
+<br />
+</div>
+<div class="az-form-group">
+<button type="button" id="AZAnim" class="az-button primary az-shadow-1 az-shadow-hover-2">Go Anim</button>
+</div>
+<br />
+</div>
+-->

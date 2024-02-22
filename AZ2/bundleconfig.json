@@ -44,6 +44,7 @@
       "lib-2/js/numeral.js",
       "lib-2/js/numeral.locales.js",
       "lib-2/js/sort.js",
+      "lib-2/js/swiped-events.js",
       "lib-2/swiper/swiper-bundle.min.js",
       "lib-2/js/clientstorage.js",
       "lib-2/js/functionlib.js"

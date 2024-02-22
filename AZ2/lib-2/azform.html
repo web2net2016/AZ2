@@ -22,62 +22,9 @@
     <script src="/lib-2/lib/az-codecolor.js"></script>
     <script>
 
-        $(document).ready(function ()
+        $(function ()
         {
             w3CodeColor();
-
-            $.subscribe("functionlib/azValidateDirty", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azValidateDirty\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputJQElement: ", data.azInputJQElement);
-            });
-
-            $.subscribe("functionlib/azSetDate", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azSetDate\nazDateId: " + data.azDateId + "\nazDateName: " + data.azDateName + "\nazDateClass: " + data.azDateClass + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateISODate: " + data.azDateISODate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
-                consoleLog({ consoleType: "warn", consoleText: "azDateENUSDate is deprecated, use azDateISODate." });
-            });
-
-            $.subscribe("functionlib/azCheckboxClick", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azCheckboxClick\nazCheckboxId: " + data.azCheckboxId + "\nazCheckboxName: " + data.azCheckboxName + "\nazCheckboxClass: " + data.azCheckboxClass + "\nazCheckboxValue: " + data.azCheckboxValue + "\nazCheckboxChecked: " + data.azCheckboxChecked + "\nazCheckboxJQElement: ", data.azCheckboxJQElement);
-            });
-
-            $.subscribe("functionlib/azRadioClick", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azRadioClick\nazRadioId: " + data.azRadioId + "\nazRadioName: " + data.azRadioName + "\nazRadioClass: " + data.azRadioClass + "\nazRadioValue: " + data.azRadioValue + "\nazRadioChecked: " + data.azRadioChecked + "\nazRadioJQElement: ", data.azRadioJQElement);
-            });
-
-            $.subscribe("functionlib/azSwitchClick", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azSwitchClick\nazSwitchId: " + data.azSwitchId + "\nazSwitchName: " + data.azSwitchName + "\nazSwitchClass: " + data.azSwitchClass + "\nazSwitchValue: " + data.azSwitchValue + "\nazSwitchChecked: " + data.azSwitchChecked + "\nazSwitchJQElement: ", data.azSwitchJQElement);
-            });
-
-            $.subscribe("functionlib/azRangeSlide", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azRangeSlide\nazRangeId: " + data.azRangeId + "\nazRangeName: " + data.azRangeName + "\nazRangeClass: " + data.azRangeClass + "\nazRangeValue: " + data.azRangeValue + "\nazRangeJQElement: ", data.azRangeJQElement);
-            });
-
-            $.subscribe("functionlib/azRangeStop", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azRangeStop\nazRangeId: " + data.azRangeId + "\nazRangeName: " + data.azRangeName + "\nazRangeClass: " + data.azRangeClass + "\nazRangeValue: " + data.azRangeValue + "\nazRangeJQElement: ", data.azRangeJQElement);
-            });
-
-            $.subscribe("functionlib/azRangeMultiCreate", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azRangeMultiCreate\nazRangeMultiId: " + data.azRangeMultiId + "\nazRangeMultiValueLeft: " + data.azRangeMultiValueLeft + "\nazRangeMultiValueRight: " + data.azRangeMultiValueRight + "\nazRangeMultiJQElement: ", data.azRangeMultiJQElement)
-                data.azRangeMultiJQElement.siblings("div").text(data.azRangeMultiValueLeft + " - " + data.azRangeMultiValueRight);
-            });
-
-            $.subscribe("functionlib/azRangeMultiSlide", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azRangeMultiSlide\nazRangeMultiId: " + data.azRangeMultiId + "\nazRangeMultiValueLeft: " + data.azRangeMultiValueLeft + "\nazRangeMultiValueRight: " + data.azRangeMultiValueRight + "\nazRangeMultiJQElement: ", data.azRangeMultiJQElement)
-                data.azRangeMultiJQElement.siblings("div").text(data.azRangeMultiValueLeft + " - " + data.azRangeMultiValueRight);
-            });
-
-            $.subscribe("functionlib/azRangeMultiStop", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azRangeMultiStop\nazRangeMultiId: " + data.azRangeMultiId + "\nazRangeMultiValueLeft: " + data.azRangeMultiValueLeft + "\nazRangeMultiValueRight: " + data.azRangeMultiValueRight + "\nazRangeMultiJQElement: ", data.azRangeMultiJQElement)
-            });
 
             new AZRangeMulti(
                 {
@@ -133,12 +80,13 @@
                     azRangeMultiHandlerRightBackgroundColor: "#FF4136",
                     azRangeMultiValues: [25, 75]
                 });
-
-            $.subscribe("functionlib/azInputSpinner", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azInputSpinner\nInputSpinnerId: " + data.azInputSpinnerId + "\nazInputSpinnerName: " + data.azInputSpinnerName + "\nazInputSpinnerClass: " + data.azInputSpinnerClass + "\nazInputSpinnerValue: " + data.azInputSpinnerValue + "\nazInputSpinnerJQElement: ", data.azInputSpinnerJQElement)
-            });
         });
+
+        function AZValidateDirty(type, data)
+        {
+            console.log(type);
+            console.log(data);
+        }
 
     </script>
     <style>

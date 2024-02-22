@@ -37,7 +37,7 @@
             Comment: ""
         };
 
-        $(document).ready(function ()
+        $(function ()
         {
             w3CodeColor();
         });
@@ -64,42 +64,6 @@
         function SetAZPageContent(e, data)
         {
             ObjPageData.Values.AZPage = data;
-
-            //$.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
-            //{
-            //    console.log("FUNCTIONLIB - azValidateInputValueKeypress\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputValue: " + data.azInputValue + "\nazInputInvalidChar: " + data.azInputInvalidChar + "\nazInputValidType: " + data.azInputValidType + "\nazInputJQElement: ", data.azInputJQElement);
-            //});
-
-            //$.subscribe("functionlib/azValidateInputValidChar", function (e, data)
-            //{
-            //    console.log("FUNCTIONLIB - azValidateInputValidChar\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputValue: " + data.azInputValue + "\nazInputInvalidChar: " + data.azInputInvalidChar + "\nazInputValidType: " + data.azInputValidType + "\nazInputJQElement: ", data.azInputJQElement);
-            //});
-
-            //$.subscribe("functionlib/azValidateDirty", function (e, data)
-            //{
-            //    console.log("FUNCTIONLIB - azValidateDirty\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputJQElement: ", data.azInputJQElement);
-            //});
-
-            //$.subscribe("functionlib/azSetDate", function (e, data)
-            //{
-            //    console.log("FUNCTIONLIB - azSetDate\nazDateId: " + data.azDateId + "\nazDateName: " + data.azDateName + "\nazDateClass: " + data.azDateClass + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateISODate: " + data.azDateISODate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
-            //    consoleLog({ consoleType: "warn", consoleText: "azDateENUSDate is deprecated, use azDateISODate." });
-            //});
-
-            //$.subscribe("functionlib/azSetTime", function (e, data)
-            //{
-            //    console.log("FUNCTIONLIB - azSetTime\nazTimeId: " + data.azTimeId + "\nazTimeName: " + data.azTimeName + "\nazTimeClass: " + data.azTimeClass + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeENUSTime: " + data.azTimeENUSTime + "\nazTimeJQElement: ", data.azTimeJQElement);
-            //});
-
-            //$.subscribe("functionlib/azCheckboxClick", function (e, data)
-            //{
-            //    console.log("FUNCTIONLIB - azCheckboxClick\nazCheckboxId: " + data.azCheckboxId + "\nazCheckboxName: " + data.azCheckboxName + "\nazCheckboxClass: " + data.azCheckboxClass + "\nazCheckboxValue: " + data.azCheckboxValue + "\nazCheckboxChecked: " + data.azCheckboxChecked + "\nazCheckboxJQElement: ", data.azCheckboxJQElement);
-            //});
-
-            //$.subscribe("functionlib/azRadioClick", function (e, data)
-            //{
-            //    console.log("FUNCTIONLIB - azRadioClick\nazRadioId: " + data.azRadioId + "\nazRadioName: " + data.azRadioName + "\nazRadioClass: " + data.azRadioClass + "\nazRadioValue: " + data.azRadioValue + "\nazRadioChecked: " + data.azRadioChecked + "\nazRadioJQElement: ", data.azRadioJQElement);
-            //});
 
             //var _AZSetLanguageOptions =
             //{
@@ -144,9 +108,9 @@
             }
         }
 
-        function AZValidateDirty(e, data)
+        function AZValidateDirty(type, data)
         {
-            console.log(e);
+            console.log(type);
             console.log(data);
         }
 

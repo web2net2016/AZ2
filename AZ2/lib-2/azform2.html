@@ -22,26 +22,16 @@
     <script src="/lib-2/lib/az-codecolor.js"></script>
     <script>
 
-        $(document).ready(function ()
+        $(function ()
         {
             w3CodeColor();
-
-            $.subscribe("functionlib/azValidateDirty", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azValidateDirty\nazInputId: " + data.azInputId + "\nazInputName: " + data.azInputName + "\nazInputClass: " + data.azInputClass + "\nazInputJQElement: ", data.azInputJQElement);
-            });
-
-            $.subscribe("functionlib/azSetDate", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azSetDate\nazDateId: " + data.azDateId + "\nazDateName: " + data.azDateName + "\nazDateClass: " + data.azDateClass + "\nazDateLocalDate: " + data.azDateLocalDate + "\nazDateISODate: " + data.azDateISODate + "\nazDateENUSDate: " + data.azDateENUSDate + "\nazDateJQElement: ", data.azDateJQElement);
-                consoleLog({ consoleType: "warn", consoleText: "azDateENUSDate is deprecated, use azDateISODate." });
-            });
-
-            $.subscribe("functionlib/azSetTime", function (e, data)
-            {
-                console.log("FUNCTIONLIB - azSetTime\nazTimeId: " + data.azTimeId + "\nazTimeName: " + data.azTimeName + "\nazTimeClass: " + data.azTimeClass + "\nazTimeLocalTime: " + data.azTimeLocalTime + "\nazTimeISOTime: " + data.azTimeISOTime + "\nazTimeENUSTime: " + data.azTimeENUSTime + "\nazTimeJQElement: ", data.azTimeJQElement);
-            });
         });
+
+        function AZValidateDirty(type, data)
+        {
+            console.log(type);
+            console.log(data);
+        }
 
     </script>
 </head>
