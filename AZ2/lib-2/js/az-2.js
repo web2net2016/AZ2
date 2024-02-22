@@ -3879,23 +3879,23 @@ function AZDatepicker($Obj, DefaultLanguage)
         var _Date = AZSetDateFormat($Obj.datepicker("getDate"));
         var _Data =
         {
-            azDateId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
-            azDateName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
-            azDateClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
-            azDateLocalDate: curDate,
-            azDateISODate: _Date.ISODate,
-            azDateENUSDate: _Date.ENUSDate,
-            azDateJQElement: $Obj
+            azInputId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+            azInputName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+            azInputClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
+            azInputLocalDate: curDate,
+            azInputISODate: _Date.ISODate,
+            azInputENUSDate: _Date.ENUSDate,
+            azInputJQElement: $Obj
         };
         $.publish("functionlib/azSetDate",
             {
-                azDateId: _Data.azDateId,
-                azDateName: _Data.azDateName,
-                azDateClass: _Data.azDateClass,
-                azDateLocalDate: _Data.azDateLocalDate,
-                azDateISODate: _Data.azDateISODate,
-                azDateENUSDate: _Data.azDateENUSDate,
-                azDateJQElement: _Data.azDateJQElement
+                azInputId: _Data.azInputId,
+                azInputName: _Data.azInputName,
+                azInputClass: _Data.azInputClass,
+                azInputLocalDate: _Data.azInputLocalDate,
+                azInputISODate: _Data.azInputISODate,
+                azInputENUSDate: _Data.azInputENUSDate,
+                azInputJQElement: _Data.azInputJQElement
             });
         if (typeof AZValidateDirty == "function")
         {
@@ -3941,23 +3941,23 @@ function AZTimepicker($Obj, DefaultLanguage)
                     var _Time = AZSetTimeFormat('0001-01-01 ' + curTime);
                     var _Data =
                     {
-                        azTimeId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
-                        azTimeName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
-                        azTimeClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
-                        azTimeLocalTime: curTime,
-                        azTimeISOTime: curTime != "" ? _Time.ISOTime : "",
-                        azTimeENUSTime: curTime != "" ? _Time.ENUSTime : "",
-                        azTimeJQElement: $Obj
+                        azInputId: $Obj.attr("id") != undefined ? $Obj.attr("id") : $Obj.attr("data-id") != undefined ? $Obj.attr("data-id") : "",
+                        azInputName: $Obj.attr("name") === undefined ? "" : $Obj.attr("name"),
+                        azInputClass: $Obj.attr("class") === undefined ? "" : $Obj.attr("class"),
+                        azInputLocalTime: curTime,
+                        azInputISOTime: curTime != "" ? _Time.ISOTime : "",
+                        azInputENUSTime: curTime != "" ? _Time.ENUSTime : "",
+                        azInputJQElement: $Obj
                     };
                     $.publish("functionlib/azSetTime",
                         {
-                            azTimeId: _Data.azTimeId,
-                            azTimeName: _Data.azTimeName,
-                            azTimeClass: _Data.azTimeClass,
-                            azTimeLocalTime: _Data.azTimeLocalTime,
-                            azTimeISOTime: _Data.azTimeISOTime,
-                            azTimeENUSTime: _Data.azTimeENUSTime,
-                            azTimeJQElement: _Data.azTimeJQElement
+                            azInputId: _Data.azInputId,
+                            azInputName: _Data.azInputName,
+                            azInputClass: _Data.azInputClass,
+                            azInputLocalTime: _Data.azInputLocalTime,
+                            azInputISOTime: _Data.azInputISOTime,
+                            azInputENUSTime: _Data.azInputENUSTime,
+                            azInputJQElement: _Data.azInputJQElement
                         });
                     if (typeof AZValidateDirty == "function")
                     {
@@ -4071,21 +4071,21 @@ function AZCheckboxClick(e)
         var _$Checkbox = $(_Element);
         var _Data =
         {
-            azCheckboxId: _$Checkbox.attr("id") != undefined ? _$Checkbox.attr("id") : _$Checkbox.attr("data-id") != undefined ? _$Checkbox.attr("data-id") : "",
-            azCheckboxName: _$Checkbox.attr("name") === undefined ? "" : _$Checkbox.attr("name"),
-            azCheckboxClass: _$Checkbox.attr("class") === undefined ? "" : _$Checkbox.attr("class"),
-            azCheckboxValue: _$Checkbox.attr("value") === undefined ? "" : _$Checkbox.attr("value"),
-            azCheckboxChecked: _$Checkbox.is(":checked"),
-            azCheckboxJQElement: _$Checkbox
+            azInputId: _$Checkbox.attr("id") != undefined ? _$Checkbox.attr("id") : _$Checkbox.attr("data-id") != undefined ? _$Checkbox.attr("data-id") : "",
+            azInputName: _$Checkbox.attr("name") === undefined ? "" : _$Checkbox.attr("name"),
+            azInputClass: _$Checkbox.attr("class") === undefined ? "" : _$Checkbox.attr("class"),
+            azInputValue: _$Checkbox.attr("value") === undefined ? "" : _$Checkbox.attr("value"),
+            azInputChecked: _$Checkbox.is(":checked"),
+            azInputJQElement: _$Checkbox
         };
         $.publish("functionlib/azCheckboxClick",
             {
-                azCheckboxId: _Data.azCheckboxId,
-                azCheckboxName: _Data.azCheckboxName,
-                azCheckboxClass: _Data.azCheckboxClass,
-                azCheckboxValue: _Data.azCheckboxValue,
-                azCheckboxChecked: _Data.azCheckboxChecked,
-                azCheckboxJQElement: _Data.azCheckboxJQElement
+                azInputId: _Data.azInputId,
+                azInputName: _Data.azInputName,
+                azInputClass: _Data.azInputClass,
+                azInputValue: _Data.azInputValue,
+                azInputChecked: _Data.azInputChecked,
+                azInputJQElement: _Data.azInputJQElement
             });
         if (typeof AZValidateDirty == "function")
         {
@@ -4102,21 +4102,21 @@ function AZRadioClick(e)
         var _$Radio = $(_Element);
         var _Data =
         {
-            azRadioId: _$Radio.attr("id") != undefined ? _$Radio.attr("id") : _$Radio.attr("data-id") != undefined ? _$Radio.attr("data-id") : "",
-            azRadioName: _$Radio.attr("name") === undefined ? "" : _$Radio.attr("name"),
-            azRadioClass: _$Radio.attr("class") === undefined ? "" : _$Radio.attr("class"),
-            azRadioValue: _$Radio.attr("value") === undefined ? "" : _$Radio.attr("value"),
-            azRadioChecked: _$Radio.is(":checked"),
-            azRadioJQElement: _$Radio
+            azInputId: _$Radio.attr("id") != undefined ? _$Radio.attr("id") : _$Radio.attr("data-id") != undefined ? _$Radio.attr("data-id") : "",
+            azInputName: _$Radio.attr("name") === undefined ? "" : _$Radio.attr("name"),
+            azInputClass: _$Radio.attr("class") === undefined ? "" : _$Radio.attr("class"),
+            azInputValue: _$Radio.attr("value") === undefined ? "" : _$Radio.attr("value"),
+            azInputChecked: _$Radio.is(":checked"),
+            azInputJQElement: _$Radio
         };
         $.publish("functionlib/azRadioClick",
             {
-                azRadioId: _Data.azRadioId,
-                azRadioName: _Data.azRadioName,
-                azRadioClass: _Data.azRadioClass,
-                azRadioValue: _Data.azRadioValue,
-                azRadioChecked: _Data.azRadioChecked,
-                azRadioJQElement: _Data.azRadioJQElement
+                azInputId: _Data.azInputId,
+                azInputName: _Data.azInputName,
+                azInputClass: _Data.azInputClass,
+                azInputValue: _Data.azInputValue,
+                azInputChecked: _Data.azInputChecked,
+                azInputJQElement: _Data.azInputJQElement
             });
         if (typeof AZValidateDirty == "function")
         {
@@ -4133,21 +4133,21 @@ function AZSwitchClick(e)
         var _$Switch = $(_Element);
         var _Data =
         {
-            azSwitchId: _$Switch.attr("id") != undefined ? _$Switch.attr("id") : _$Switch.attr("data-id") != undefined ? _$Switch.attr("data-id") : "",
-            azSwitchName: _$Switch.attr("name") === undefined ? "" : _$Switch.attr("name"),
-            azSwitchClass: _$Switch.attr("class") === undefined ? "" : _$Switch.attr("class"),
-            azSwitchValue: _$Switch.attr("value") === undefined ? "" : _$Switch.attr("value"),
-            azSwitchChecked: _$Switch.is(":checked"),
-            azSwitchJQElement: _$Switch
+            azInputId: _$Switch.attr("id") != undefined ? _$Switch.attr("id") : _$Switch.attr("data-id") != undefined ? _$Switch.attr("data-id") : "",
+            azInputName: _$Switch.attr("name") === undefined ? "" : _$Switch.attr("name"),
+            azInputClass: _$Switch.attr("class") === undefined ? "" : _$Switch.attr("class"),
+            azInputValue: _$Switch.attr("value") === undefined ? "" : _$Switch.attr("value"),
+            azInputChecked: _$Switch.is(":checked"),
+            azInputJQElement: _$Switch
         };
         $.publish("functionlib/azSwitchClick",
             {
-                azSwitchId: _Data.azSwitchId,
-                azSwitchName: _Data.azSwitchName,
-                azSwitchClass: _Data.azSwitchClass,
-                azSwitchValue: _Data.azSwitchValue,
-                azSwitchChecked: _Data.azSwitchChecked,
-                azSwitchJQElement: _Data.azSwitchJQElement
+                azInputId: _Data.azInputId,
+                azInputName: _Data.azInputName,
+                azInputClass: _Data.azInputClass,
+                azInputValue: _Data.azInputValue,
+                azInputChecked: _Data.azInputChecked,
+                azInputJQElement: _Data.azInputJQElement
             });
         if (typeof AZValidateDirty == "function")
         {
@@ -4164,21 +4164,21 @@ function AZRange(e)
         var _$Range = $(_Element);
         var _Data =
         {
-            azRangeId: _$Range.attr("id") != undefined ? _$Range.attr("id") : _$Range.attr("data-id") != undefined ? _$Range.attr("data-id") : "",
-            azRangeName: _$Range.attr("name") === undefined ? "" : _$Range.attr("name"),
-            azRangeClass: _$Range.attr("class") === undefined ? "" : _$Range.attr("class"),
-            azRangeJQElement: _$Range
+            azInputId: _$Range.attr("id") != undefined ? _$Range.attr("id") : _$Range.attr("data-id") != undefined ? _$Range.attr("data-id") : "",
+            azInputName: _$Range.attr("name") === undefined ? "" : _$Range.attr("name"),
+            azInputClass: _$Range.attr("class") === undefined ? "" : _$Range.attr("class"),
+            azInputJQElement: _$Range
         };
         if (e.type === "input")
         {
-            _Data.azRangeValue = _$Range.val();
+            _Data.azInputValue = _$Range.val();
             $.publish("functionlib/azRangeSlide",
                 {
-                    azRangeId: _Data.azRangeId,
-                    azRangeName: _Data.azRangeName,
-                    azRangeClass: _Data.azRangeClass,
-                    azRangeValue: _Data.azRangeValue,
-                    azRangeJQElement: _Data.azRangeJQElement
+                    azInputId: _Data.azInputId,
+                    azInputName: _Data.azInputName,
+                    azInputClass: _Data.azInputClass,
+                    azInputValue: _Data.azInputValue,
+                    azInputJQElement: _Data.azInputJQElement
                 });
             if (typeof AZValidateDirty == "function")
             {
@@ -4187,14 +4187,14 @@ function AZRange(e)
         }
         else if (e.type === "change")
         {
-            _Data.azRangeValue = _$Range.val();
+            _Data.azInputValue = _$Range.val();
             $.publish("functionlib/azRangeStop",
                 {
-                    azRangeId: _Data.azRangeId,
-                    azRangeName: _Data.azRangeName,
-                    azRangeClass: _Data.azRangeClass,
-                    azRangeValue: _Data.azRangeValue,
-                    azRangeJQElement: _Data.azRangeJQElement
+                    azInputId: _Data.azInputId,
+                    azInputName: _Data.azInputName,
+                    azInputClass: _Data.azInputClass,
+                    azInputValue: _Data.azInputValue,
+                    azInputJQElement: _Data.azInputJQElement
                 });
             if (typeof AZValidateDirty == "function")
             {
@@ -4221,23 +4221,23 @@ function AZSelectChange(e)
         }).get();
         var _Data =
         {
-            azSelectId: _$Select.attr("id") != undefined ? _$Select.attr("id") : _$Select.attr("data-id") != undefined ? _$Select.attr("data-id") : "",
-            azSelectName: _$Select.attr("name") === undefined ? "" : _$Select.attr("name"),
-            azSelectClass: _$Select.attr("class") === undefined ? "" : _$Select.attr("class"),
-            azSelectValue: _$Select.val(),
-            azSelectText: $("option:selected", _$Select).text(),
-            azSelectList: _SelectList,
-            azSelectJQElement: _$Select
+            azInputId: _$Select.attr("id") != undefined ? _$Select.attr("id") : _$Select.attr("data-id") != undefined ? _$Select.attr("data-id") : "",
+            azInputName: _$Select.attr("name") === undefined ? "" : _$Select.attr("name"),
+            azInputClass: _$Select.attr("class") === undefined ? "" : _$Select.attr("class"),
+            azInputValue: _$Select.val(),
+            azInputText: $("option:selected", _$Select).text(),
+            azInputList: _SelectList,
+            azInputJQElement: _$Select
         };
         $.publish("functionlib/azSelectChange",
             {
-                azSelectId: _Data.azSelectId,
-                azSelectName: _Data.azSelectName,
-                azSelectClass: _Data.azSelectClass,
-                azSelectValue: _Data.azSelectValue,
-                azSelectText: _Data.azSelectText,
-                azSelectList: _Data.azSelectList,
-                azSelectJQElement: _Data.azSelectJQElement
+                azInputId: _Data.azInputId,
+                azInputName: _Data.azInputName,
+                azInputClass: _Data.azInputClass,
+                azInputValue: _Data.azInputValue,
+                azInputText: _Data.azInputText,
+                azInputList: _Data.azInputList,
+                azInputJQElement: _Data.azInputJQElement
             });
         if (typeof AZValidateDirty == "function")
         {
@@ -4397,10 +4397,10 @@ function AZSetSpinnerEvents(Element, ObjAttributes)
     var _CurrentSpinnerValue = 0;
     var _Data =
     {
-        azInputSpinnerId: Element.attr("id") != undefined ? Element.attr("id") : Element.attr("data-id") != undefined ? Element.attr("data-id") : "",
-        azInputSpinnerName: Element.attr("name") === undefined ? "" : Element.attr("name"),
-        azInputSpinnerClass: Element.attr("class") === undefined ? "" : Element.attr("class"),
-        azInputSpinnerJQElement: Element
+        azInputId: Element.attr("id") != undefined ? Element.attr("id") : Element.attr("data-id") != undefined ? Element.attr("data-id") : "",
+        azInputName: Element.attr("name") === undefined ? "" : Element.attr("name"),
+        azInputClass: Element.attr("class") === undefined ? "" : Element.attr("class"),
+        azInputJQElement: Element
     };
 
     Element.children().eq(0).off("mousedown touchstart mouseup mouseleave touchend").on("mousedown touchstart", function (e)
@@ -4470,14 +4470,14 @@ function AZSetSpinnerEvents(Element, ObjAttributes)
 
     function PublishAZSetSpinner()
     {
-        _Data.azInputSpinnerValue = _CurrentSpinnerValue;
+        _Data.azInputValue = _CurrentSpinnerValue;
         $.publish("functionlib/azInputSpinner",
             {
-                azInputSpinnerId: _Data.azInputSpinnerId,
-                azInputSpinnerName: _Data.azInputSpinnerName,
-                azInputSpinnerClass: _Data.azInputSpinnerClass,
-                azInputSpinnerValue: _Data.azInputSpinnerValue,
-                azInputSpinnerJQElement: _Data.azInputSpinnerJQElement
+                azInputId: _Data.azInputId,
+                azInputName: _Data.azInputName,
+                azInputClass: _Data.azInputClass,
+                azInputValue: _Data.azInputValue,
+                azInputJQElement: _Data.azInputJQElement
             });
         if (typeof AZValidateDirty == "function")
         {
@@ -6981,17 +6981,17 @@ function AZRangeMulti(Options)
                     {
                         var _Data =
                         {
-                            azRangeMultiId: _Main.Options.azRangeMultiId,
-                            azRangeMultiValueLeft: _Main.Options.azRangeMultiValues[0],
-                            azRangeMultiValueRight: _Main.Options.azRangeMultiValues[1],
-                            azRangeMultiJQElement: _Main.$MultiRange
+                            azInputId: _Main.Options.azRangeMultiId,
+                            azInputValueLeft: _Main.Options.azRangeMultiValues[0],
+                            azInputValueRight: _Main.Options.azRangeMultiValues[1],
+                            azInputJQElement: _Main.$MultiRange
                         };
                         $.publish("functionlib/azRangeMultiCreate",
                             {
-                                azRangeMultiId: _Data.azRangeMultiId,
-                                azRangeMultiValueLeft: _Data.azRangeMultiValueLeft,
-                                azRangeMultiValueRight: _Data.azRangeMultiValueRight,
-                                azRangeMultiJQElement: _Data.azRangeMultiJQElement
+                                azInputId: _Data.azInputId,
+                                azInputValueLeft: _Data.azInputValueLeft,
+                                azInputValueRight: _Data.azInputValueRight,
+                                azInputJQElement: _Data.azInputJQElement
                             });
                         if (typeof AZValidateDirty == "function")
                         {
@@ -7002,17 +7002,17 @@ function AZRangeMulti(Options)
                     {
                         var _Data =
                         {
-                            azRangeMultiId: _Main.Options.azRangeMultiId,
-                            azRangeMultiValueLeft: ui.values[0],
-                            azRangeMultiValueRight: ui.values[1],
-                            azRangeMultiJQElement: _Main.$MultiRange
+                            azInputId: _Main.Options.azRangeMultiId,
+                            azInputValueLeft: ui.values[0],
+                            azInputValueRight: ui.values[1],
+                            azInputJQElement: _Main.$MultiRange
                         };
                         $.publish("functionlib/azRangeMultiSlide",
                             {
-                                azRangeMultiId: _Data.azRangeMultiId,
-                                azRangeMultiValueLeft: _Data.azRangeMultiValueLeft,
-                                azRangeMultiValueRight: _Data.azRangeMultiValueRight,
-                                azRangeMultiJQElement: _Data.azRangeMultiJQElement
+                                azInputId: _Data.azInputId,
+                                azInputValueLeft: _Data.azInputValueLeft,
+                                azInputValueRight: _Data.azInputValueRight,
+                                azInputJQElement: _Data.azInputJQElement
                             });
                         if (typeof AZValidateDirty == "function")
                         {
@@ -7023,17 +7023,17 @@ function AZRangeMulti(Options)
                     {
                         var _Data =
                         {
-                            azRangeMultiId: _Main.Options.azRangeMultiId,
-                            azRangeMultiValueLeft: ui.values[0],
-                            azRangeMultiValueRight: ui.values[1],
-                            azRangeMultiJQElement: _Main.$MultiRange
+                            azInputId: _Main.Options.azRangeMultiId,
+                            azInputValueLeft: ui.values[0],
+                            azInputValueRight: ui.values[1],
+                            azInputJQElement: _Main.$MultiRange
                         };
                         $.publish("functionlib/azRangeMultiStop",
                             {
-                                azRangeMultiId: _Data.azRangeMultiId,
-                                azRangeMultiValueLeft: _Data.azRangeMultiValueLeft,
-                                azRangeMultiValueRight: _Data.azRangeMultiValueRight,
-                                azRangeMultiJQElement: _Data.azRangeMultiJQElement
+                                azInputId: _Data.azInputId,
+                                azInputValueLeft: _Data.azInputValueLeft,
+                                azInputValueRight: _Data.azInputValueRight,
+                                azInputJQElement: _Data.azInputJQElement
                             });
                         if (typeof AZValidateDirty == "function")
                         {
