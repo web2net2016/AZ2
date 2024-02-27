@@ -53,10 +53,6 @@ $(function ()
                 azWindowScrollTop: _Data.azWindowScrollTop,
                 azWindowScrollDir: _Data.azWindowScrollDir
             });
-        if (typeof AZValidateDirty == "function")
-        {
-            AZValidateDirty("functionlib/azWindowScroll", _Data);
-        }
         _azLastScrollTop = $(this).scrollTop();
     });
 
@@ -86,10 +82,6 @@ $(function ()
                 azWindowScrollLeft: _Data.azWindowScrollLeft,
                 azWindowOrientation: _Data.azWindowOrientation
             });
-        if (typeof AZValidateDirty == "function")
-        {
-            AZValidateDirty("functionlib/azWindowResize", _Data);
-        }
     }
 
     $.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
@@ -4269,37 +4261,52 @@ function AZWindow(Options)
                 _Main.$Window.show();
             }
 
-            _Main.$Window.width(_Main.Options.azWindowWidth);
-            if (_Main.Options.azWindowContentHeight === false)
+            window.setTimeout(function ()
             {
-                _Main.$Window.height(_Main.Options.azWindowHeight);
-                _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementSize(_Main.$Titlebar).Height));
-                if (_Main.Options.azWindowTitlebar === false)
+                _Main.$Window.width(_Main.Options.azWindowWidth);
+                if (_Main.Options.azWindowContentHeight === false)
                 {
-                    _Main.$Dialog.height(_Main.Options.azWindowHeight);
-                }
-            }
-            else
-            {
-                if (_Main.$Window.height() < 100)
-                {
-                    _Main.$Window.height(100);
-                    _Main.$Dialog.height((100 - AZElementSize(_Main.$Titlebar).Height));
+                    _Main.$Window.height(_Main.Options.azWindowHeight);
+                    _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementSize(_Main.$Titlebar).Height));
                     if (_Main.Options.azWindowTitlebar === false)
                     {
-                        _Main.$Dialog.height(100);
+                        _Main.$Dialog.height(_Main.Options.azWindowHeight);
                     }
                 }
-            }
-            _Main.$Window.css({ "left": (window.innerWidth / 2) - (_Main.$Window.width() / 2) });
-            if (_Main.Options.azWindowPositionTop === 0 || ((_Main.Options.azWindowPositionTop + _Main.$Window.height()) > (window.innerHeight)))
-            {
-                _Main.$Window.css({ "top": (window.innerHeight / 2) - (_Main.$Window.height() / 2) });
-            }
-            else
-            {
-                _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
-            }
+                else
+                {
+                    if (_Main.$Window.height() < 100)
+                    {
+                        _Main.$Window.height(100);
+                        _Main.$Dialog.height((100 - AZElementSize(_Main.$Titlebar).Height));
+                        if (_Main.Options.azWindowTitlebar === false)
+                        {
+                            _Main.$Dialog.height(100);
+                        }
+                    }
+                }
+                _Main.$Window.css({ "left": (window.innerWidth / 2) - (_Main.$Window.width() / 2) });
+                if (_Main.Options.azWindowPositionTop === 0 || ((_Main.Options.azWindowPositionTop + _Main.$Window.height()) > (window.innerHeight)))
+                {
+                    _Main.$Window.css({ "top": (window.innerHeight / 2) - (_Main.$Window.height() / 2) });
+                }
+                else
+                {
+                    _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
+                }
+
+                $.publish("functionlib/azWindowAfterOpen",
+                    {
+                        $Window: _Main.$Window,
+                        $Titlebar: _Main.$Titlebar,
+                        $Dialog: _Main.$Dialog,
+                        $Article: _Main.$Article,
+                        azWindowId: "az-window",
+                        azWindowClose: _Main.azWindowClose,
+                        azChangeWindowTitlebar: _Main.azChangeWindowTitlebar,
+                        azWindowResize: _Main.azWindowResize
+                    });
+            }, 100);
 
             // AZWindow Close
             _Main.azWindowClose = function ()
@@ -4436,18 +4443,6 @@ function AZWindow(Options)
                     _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
                 }
             };
-
-            $.publish("functionlib/azWindowAfterOpen",
-                {
-                    $Window: _Main.$Window,
-                    $Titlebar: _Main.$Titlebar,
-                    $Dialog: _Main.$Dialog,
-                    $Article: _Main.$Article,
-                    azWindowId: "az-window",
-                    azWindowClose: _Main.azWindowClose,
-                    azChangeWindowTitlebar: _Main.azChangeWindowTitlebar,
-                    azWindowResize: _Main.azWindowResize
-                });
         }
     }
     else
