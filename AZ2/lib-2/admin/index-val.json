@@ -1,19 +1,23 @@
 ﻿{
   "CustomerName": {
-    "label": "mandatory",
+    "label": "optional",
     "data-attr": "val",
+    "minlength": "2",
     "maxlength": "100",
     "class": "validate validate-alpha",
     "datatype": "string",
+    "connected": [ "CustomerName", "Contact" ],
     "data-help": "CustomerName",
     "tabindex": 1
   },
   "Contact": {
-    "label": "mandatory",
+    "label": "optional",
     "data-attr": "val",
+    "minlength": "2",
     "maxlength": "50",
     "class": "validate validate-alpha",
     "datatype": "string",
+    "connected": [ "CustomerName", "Contact" ],
     "data-help": "Contact",
     "tabindex": 2
   },

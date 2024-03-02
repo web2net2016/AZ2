@@ -1163,8 +1163,8 @@ function AZValidateInputValueKeydown(e)
     {
         var _Element = e.target || e.srcElement;
         var _KeyChar = e.keyCode || e.which;
-        var _CharList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 91, 92, 93, 127, 144, 145];
-        if (_CharList.includes(_KeyChar) === false)
+        var _CharList = [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 91, 92, 93, 127, 144, 145];
+        if (_CharList.includes(_KeyChar) === false && e.ctrlKey === false)
         {
             var _$Element = $(_Element);
             setTimeout(function ()
@@ -1318,137 +1318,250 @@ function AZSerializeForm(Options)
 
         $.each(Options.ObjValidation, function (HTMLElement, Value)
         {
-            if ($('#' + HTMLElement, _$Area).length > 0 && Value.class.indexOf("validate") > -1)
+            _$Input = $('#' + HTMLElement, _$Area);
+
+            if (_$Input.length > 0)
             {
-                _$Input = $('#' + HTMLElement, _$Area);
-
-                if (AZIsEmpty(_$Input) === false)
+                if (Value.hasOwnProperty("label") === true && Value.hasOwnProperty("class") === true && Value.hasOwnProperty("datatype") === true)
                 {
-                    _ObjCurrentValidation = Value;
+                    if (Value.class.indexOf("validate") > -1)
+                    {
+                        _ObjCurrentValidation = Value;
 
-                    if (_ObjCurrentValidation.datatype.toLowerCase() === "int")
-                    {
-                        _ObjOutputData[_$Input.attr("id")] = Number(_$Input.val());
-                    }
-                    else if (_ObjCurrentValidation.datatype.toLowerCase() === "decimal")
-                    {
-                        _ObjOutputData[_$Input.attr("id")] = parseFloat(_$Input.val().replace(",", ".").replace(/ /g, ""));
-                    }
-                    else if (_ObjCurrentValidation.datatype.toLowerCase() === "date")
-                    {
-                        if (_$Input.val().replace(/^\s+|\s+$/g, '') !== "")
+                        if (_ObjCurrentValidation.datatype.toLowerCase() === "int")
                         {
-                            _ObjOutputData[_$Input.attr("id")] = AZSetDateFormat(_$Input.datepicker("getDate")).ISODate;
+                            _ObjOutputData[_$Input.attr("id")] = Number(_$Input.val());
+                        }
+                        else if (_ObjCurrentValidation.datatype.toLowerCase() === "decimal")
+                        {
+                            _ObjOutputData[_$Input.attr("id")] = parseFloat(_$Input.val().replace(",", ".").replace(/ /g, ""));
+                        }
+                        else if (_ObjCurrentValidation.datatype.toLowerCase() === "date")
+                        {
+                            if (_$Input.val().replace(/^\s+|\s+$/g, '') !== "")
+                            {
+                                _ObjOutputData[_$Input.attr("id")] = AZSetDateFormat(_$Input.datepicker("getDate")).ISODate;
+                            }
+                            else
+                            {
+                                _ObjOutputData[_$Input.attr("id")] = null;
+                            }
+                        }
+                        else if (_ObjCurrentValidation.datatype.toLowerCase() === "datetime")
+                        {
+                            var _LongDateFormat = moment()._locale._longDateFormat;
+                            _ObjOutputData[_$Input.attr("id")] = moment(_$Input.val(), _LongDateFormat.L + " " + _LongDateFormat.LT).toJSON();
+                        }
+                        else if (_ObjCurrentValidation.datatype.toLowerCase() === "time")
+                        {
+                            _ObjOutputData[_$Input.attr("id")] = AZSetTimeFormat('0001-01-01 ' + _$Input.val()).ISOTime;
                         }
                         else
                         {
-                            _ObjOutputData[_$Input.attr("id")] = null;
+                            _ObjOutputData[_$Input.attr("id")] = _$Input.val();
                         }
-                    }
-                    else if (_ObjCurrentValidation.datatype.toLowerCase() === "datetime")
-                    {
-                        var _LongDateFormat = moment()._locale._longDateFormat;
-                        _ObjOutputData[_$Input.attr("id")] = moment(_$Input.val(), _LongDateFormat.L + " " + _LongDateFormat.LT).toJSON();
-                    }
-                    else if (_ObjCurrentValidation.datatype.toLowerCase() === "time")
-                    {
-                        _ObjOutputData[_$Input.attr("id")] = AZSetTimeFormat('0001-01-01 ' + _$Input.val()).ISOTime;
+
+                        _ObjReturnValidation = AZValidateInput(_$Input, _ObjCurrentValidation);
+                        if (AZIsEmpty(_ObjReturnValidation) === false)
+                        {
+                            _ObjReturnValidation.Input = _$Input.attr("id");
+                            consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + _ObjReturnValidation.Input + " - " + _ObjReturnValidation.Error });
+                            if ($(".az-alert-active").length === 0)
+                            {
+                                var _$RoleAlert = $("[role='alert']", _$Area);
+                                var _$ModalDialogWindow = window.top.$(".az-modal-dialog");
+                                var _$Window = $("#az-window");
+
+                                if (_$RoleAlert.length > 0)
+                                {
+                                    var _CurrentText = _$RoleAlert.text();
+                                    _$RoleAlert.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]).removeClass("az-alert-info").addClass("az-alert-danger").show();
+                                    _$Input.focus();
+                                    $("body").addClass("az-alert-active");
+                                    window.setTimeout(function ()
+                                    {
+                                        _$RoleAlert.text(_CurrentText).removeClass("az-alert-danger").addClass("az-alert-info").show();
+                                        $("body").removeClass("az-alert-active");
+                                    }, 3000);
+                                }
+                                else if (_$ModalDialogWindow.length > 0)
+                                {
+                                    var _$Titlebar = $(".az-modal-dialog-titlebar", _$ModalDialogWindow);
+                                    var _$TitlebarSpan = _$Titlebar.children("span.ui-dialog-title");
+                                    var _CurrentText = _$TitlebarSpan.text();
+                                    _$Titlebar.addClass("az-alert-danger");
+                                    _$TitlebarSpan.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]);
+                                    _$Input.focus();
+                                    $("body").addClass("az-alert-active");
+                                    window.setTimeout(function ()
+                                    {
+                                        _$Titlebar.removeClass("az-alert-danger");
+                                        _$TitlebarSpan.text(_CurrentText);
+                                        $("body").removeClass("az-alert-active");
+                                    }, 3000);
+                                }
+                                else if (_$Window.length > 0)
+                                {
+                                    var _$Titlebar = $(".az-window-titlebar", _$Window);
+                                    var _$TitlebarSpan = _$Titlebar.children("h1");
+                                    var _CurrentText = _$TitlebarSpan.text();
+                                    _$Titlebar.addClass("az-alert-danger");
+                                    _$TitlebarSpan.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]);
+                                    _$Input.focus();
+                                    $("body").addClass("az-alert-active");
+                                    window.setTimeout(function ()
+                                    {
+                                        _$Titlebar.removeClass("az-alert-danger");
+                                        _$TitlebarSpan.text(_CurrentText);
+                                        $("body").removeClass("az-alert-active");
+                                    }, 3000);
+                                }
+                                else
+                                {
+                                    $("body").addClass("az-alert-active");
+                                    $.subscribeonce("functionlib/azWindowAfterClose", function (e)
+                                    {
+                                        _$Input.focus();
+                                        $("body").removeClass("az-alert-active");
+                                    });
+                                    new AZWindow(
+                                        {
+                                            azWindowTitle: Options.ObjLanguage.SingleDefaultElements.informationTitle,
+                                            azWindowText: Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error],
+                                            azWindowWidth: 400,
+                                            azWindowContentHeight: true
+                                        });
+                                }
+                            }
+                            _InputError = true;
+                            return false;
+                        }
                     }
                     else
                     {
                         _ObjOutputData[_$Input.attr("id")] = _$Input.val();
                     }
-
-                    _ObjReturnValidation = AZValidateInput(_$Input, _ObjCurrentValidation);
-                    if (AZIsEmpty(_ObjReturnValidation) === false)
-                    {
-                        _ObjReturnValidation.Input = _$Input.attr("id");
-                        consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + _ObjReturnValidation.Input + " - " + _ObjReturnValidation.Error });
-                        if ($(".az-alert-active").length === 0)
-                        {
-                            var _$RoleAlert = $("[role='alert']", _$Area);
-                            var _$ModalDialogWindow = window.top.$(".az-modal-dialog");
-                            var _$Window = $("#az-window");
-
-                            if (_$RoleAlert.length > 0)
-                            {
-                                var _CurrentText = _$RoleAlert.text();
-                                _$RoleAlert.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]).removeClass("az-alert-info").addClass("az-alert-danger").show();
-                                _$Input.focus();
-                                $("body").addClass("az-alert-active");
-                                window.setTimeout(function ()
-                                {
-                                    _$RoleAlert.text(_CurrentText).removeClass("az-alert-danger").addClass("az-alert-info").show();
-                                    $("body").removeClass("az-alert-active");
-                                }, 3000);
-                            }
-                            else if (_$ModalDialogWindow.length > 0)
-                            {
-                                var _$Titlebar = $(".az-modal-dialog-titlebar", _$ModalDialogWindow);
-                                var _$TitlebarSpan = _$Titlebar.children("span.ui-dialog-title");
-                                var _CurrentText = _$TitlebarSpan.text();
-                                _$Titlebar.addClass("az-alert-danger");
-                                _$TitlebarSpan.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]);
-                                _$Input.focus();
-                                $("body").addClass("az-alert-active");
-                                window.setTimeout(function ()
-                                {
-                                    _$Titlebar.removeClass("az-alert-danger");
-                                    _$TitlebarSpan.text(_CurrentText);
-                                    $("body").removeClass("az-alert-active");
-                                }, 3000);
-                            }
-                            else if (_$Window.length > 0)
-                            {
-                                var _$Titlebar = $(".az-window-titlebar", _$Window);
-                                var _$TitlebarSpan = _$Titlebar.children("h1");
-                                var _CurrentText = _$TitlebarSpan.text();
-                                _$Titlebar.addClass("az-alert-danger");
-                                _$TitlebarSpan.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]);
-                                _$Input.focus();
-                                $("body").addClass("az-alert-active");
-                                window.setTimeout(function ()
-                                {
-                                    _$Titlebar.removeClass("az-alert-danger");
-                                    _$TitlebarSpan.text(_CurrentText);
-                                    $("body").removeClass("az-alert-active");
-                                }, 3000);
-                            }
-                            else
-                            {
-                                $("body").addClass("az-alert-active");
-                                $.subscribeonce("functionlib/azWindowAfterClose", function (e)
-                                {
-                                    _$Input.focus();
-                                    $("body").removeClass("az-alert-active");
-                                });
-                                new AZWindow(
-                                    {
-                                        azWindowTitle: Options.ObjLanguage.SingleDefaultElements.informationTitle,
-                                        azWindowText: Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error],
-                                        azWindowWidth: 400,
-                                        azWindowContentHeight: true
-                                    });
-                            }
-                        }
-                        _InputError = true;
-                        return false;
-                    }
+                }
+                else
+                {
+                    _ObjReturnValidation.Error = "";
+                    _InputError = true;
+                    ConsoleLogError("Missing one of following properties in your validating object: label - class - datatype");
+                    return false;
                 }
             }
+            else
+            {
+                _ObjReturnValidation.Error = "";
+                _InputError = true;
+                ConsoleLogError("Missing object in your form.");
+                return false;
+            }
         });
+
         if (_InputError === false)
         {
-            return _ObjOutputData;
+            var _ReturnConnected = ValidateConnected();
+            if (_ReturnConnected.Status === false)
+            {
+                var _ElementList = [];
+                $.each(_ReturnConnected.ElementList, function (Index, ElementObj)
+                {
+                    var _ConnectedList = [];
+                    $.each(ElementObj.Connected, function (Index, ConnectedObj)
+                    {
+                        _$Input = $('#' + ConnectedObj, _$Area);
+                        _ConnectedList.push(
+                            {
+                                azInputId: _$Input.attr("id") != undefined ? _$Input.attr("id") : _$Input.attr("data-id") != undefined ? _$Input.attr("data-id") : "",
+                                azInputName: _$Input.attr("name") === undefined ? "" : _$Input.attr("name"),
+                                azInputClass: _$Input.attr("class") === undefined ? "" : _$Input.attr("class"),
+                                azInputError: "Connected",
+                                azInputValue: _$Input.val(),
+                                azInputJQElement: _$Input
+                            });
+                    });
+                    consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + ElementObj.Connected + " - Connected" });
+                    _ElementList.push(_ConnectedList);
+                });
+                $.publish("functionlib/azConnected",
+                    {
+                        azElementList: _ElementList
+                    });
+                if (typeof AZValidateDirty == "function")
+                {
+                    AZValidateDirty("functionlib/azConnected", _ElementList);
+                }
+                return {};
+            }
+            else
+            {
+                return _ObjOutputData;
+            }
         }
         else
         {
+            var _Data =
+            {
+                azInputId: _$Input.attr("id") != undefined ? _$Input.attr("id") : _$Input.attr("data-id") != undefined ? _$Input.attr("data-id") : "",
+                azInputName: _$Input.attr("name") === undefined ? "" : _$Input.attr("name"),
+                azInputClass: _$Input.attr("class") === undefined ? "" : _$Input.attr("class"),
+                azInputError: _ObjReturnValidation.Error,
+                azInputValue: _$Input.val(),
+                azInputJQElement: _$Input
+            };
+            $.publish("functionlib/azSerializeForm",
+                {
+                    azInputId: _Data.azInputId,
+                    azInputName: _Data.azInputName,
+                    azInputClass: _Data.azInputClass,
+                    azInputError: _Data.azInputError,
+                    azInputValue: _Data.azInputValue,
+                    azInputJQElement: _Data.azInputJQElement
+                });
+            if (typeof AZValidateDirty == "function")
+            {
+                AZValidateDirty("functionlib/azSerializeForm", _Data);
+            }
             return {};
         }
     }
     else
     {
-        consoleLog({ consoleType: "error", consoleText: "AZSerializeForm - Options is empty or missing some properties" });
+        ConsoleLogError("Options is empty or missing some properties");
+    }
+
+    function ValidateConnected()
+    {
+        var _ReturnObj =
+        {
+            Status: true
+        };
+        var _ElementList = [];
+        $.each(Options.ObjValidation, function (HTMLElement, Value)
+        {
+            if (Value.hasOwnProperty("connected") === true && AZIsEmpty(Value.connected) === false)
+            {
+                if ($('#' + HTMLElement, _$Area).val() == "")
+                {
+                    _ElementList.push(
+                        {
+                            Connected: Value.connected
+                        });
+                }
+            }
+        });
+        if (_ElementList.length > 0)
+        {
+            _ReturnObj.Status = false;
+            _ReturnObj.ElementList = _ElementList;
+        }
+        return _ReturnObj;
+    }
+
+    function ConsoleLogError(ErrorText)
+    {
+        consoleLog({ consoleType: "error", consoleText: "AZSerializeForm - " + ErrorText });
     }
 }
 
