@@ -3362,24 +3362,29 @@ function AZSerializeForm(Options)
             if (_ReturnConnected.Status === false)
             {
                 var _ElementList = [];
+                var _ElementObj = {};
                 $.each(_ReturnConnected.ElementList, function (Index, ElementObj)
                 {
-                    var _ConnectedList = [];
-                    $.each(ElementObj.Connected, function (Index, ConnectedObj)
+                    if (JSON.stringify(_ElementObj) != JSON.stringify(ElementObj))
                     {
-                        _$Input = $('#' + ConnectedObj, _$Area);
-                        _ConnectedList.push(
-                            {
-                                azInputId: _$Input.attr("id") != undefined ? _$Input.attr("id") : _$Input.attr("data-id") != undefined ? _$Input.attr("data-id") : "",
-                                azInputName: _$Input.attr("name") === undefined ? "" : _$Input.attr("name"),
-                                azInputClass: _$Input.attr("class") === undefined ? "" : _$Input.attr("class"),
-                                azInputError: "Connected",
-                                azInputValue: _$Input.val(),
-                                azInputJQElement: _$Input
-                            });
-                    });
-                    consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + ElementObj.Connected + " - Connected" });
-                    _ElementList.push(_ConnectedList);
+                        _ElementObj = ElementObj;
+                        var _ConnectedList = [];
+                        $.each(ElementObj.Connected, function (Index, ConnectedObj)
+                        {
+                            _$Input = $('#' + ConnectedObj, _$Area);
+                            _ConnectedList.push(
+                                {
+                                    azInputId: _$Input.attr("id") != undefined ? _$Input.attr("id") : _$Input.attr("data-id") != undefined ? _$Input.attr("data-id") : "",
+                                    azInputName: _$Input.attr("name") === undefined ? "" : _$Input.attr("name"),
+                                    azInputClass: _$Input.attr("class") === undefined ? "" : _$Input.attr("class"),
+                                    azInputError: "Connected",
+                                    azInputValue: _$Input.val(),
+                                    azInputJQElement: _$Input
+                                });
+                        });
+                        consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + ElementObj.Connected + " - Connected" });
+                        _ElementList.push(_ConnectedList); 
+                    }                      
                 });
                 $.publish("functionlib/azConnected",
                     {
