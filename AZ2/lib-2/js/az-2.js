@@ -3171,7 +3171,7 @@ function AZGetValidType(SelectedType)
     var _ValidTypes = {};
     _ValidTypes =
     {
-        "validate-alpha": "NOT|§\"",
+        "validate-alpha": "NOT|§\\",
         "validate-numeric": "1234567890",
         "validate-decimal": "1234567890,.",
         "validate-date": "1234567890./",
@@ -3179,7 +3179,7 @@ function AZGetValidType(SelectedType)
         "validate-time": "1234567890apm:\u0020",
         "validate-email": "1234567890abcdefghijklmnopqrstuvwxyz@.!#%&/=?`-_*'~^+",
         "validate-web": "1234567890abcdefghijklmnopqrstuvwxyz@.:_/?=%+~#",
-        "validate-userpass": "NOT|§\"",
+        "validate-userpass": "NOT|§\\",
         "validate-ip": "1234567890.",
         "validate-connectionid": "abcdefghijklmnopqrstuvwxyz"
     };
