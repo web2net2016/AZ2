@@ -4385,21 +4385,22 @@ function AZWindow(Options)
                 if (_Main.Options.azWindowContentHeight === false)
                 {
                     _Main.$Window.height(_Main.Options.azWindowHeight);
-                    _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementSize(_Main.$Titlebar).Height));
+                    _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementSize(_Main.$Titlebar).Height) - 7);
                     if (_Main.Options.azWindowTitlebar === false)
                     {
-                        _Main.$Dialog.height(_Main.Options.azWindowHeight);
+                        _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementSize(_Main.$Titlebar).Height));
                     }
                 }
                 else
                 {
-                    if (_Main.$Window.height() < 100)
+                    if (AZElementSize(_Main.$Window).Height > (window.innerHeight - 28))
                     {
-                        _Main.$Window.height(100);
-                        _Main.$Dialog.height((100 - AZElementSize(_Main.$Titlebar).Height));
+                        _Main.Options.azWindowHeight = (window.innerHeight - 28);
+                        _Main.$Window.height(_Main.Options.azWindowHeight);
+                        _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementSize(_Main.$Titlebar).Height) - 7);
                         if (_Main.Options.azWindowTitlebar === false)
                         {
-                            _Main.$Dialog.height(100);
+                            _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementSize(_Main.$Titlebar).Height));
                         }
                     }
                 }
