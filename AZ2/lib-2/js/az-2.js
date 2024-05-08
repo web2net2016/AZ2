@@ -6322,7 +6322,7 @@ function AZWindow(Options)
                         azChangeWindowTitlebar: _Main.azChangeWindowTitlebar,
                         azWindowResize: _Main.azWindowResize
                     });
-            }, 100);
+            }, 400);
 
             // AZWindow Close
             _Main.azWindowClose = function ()
