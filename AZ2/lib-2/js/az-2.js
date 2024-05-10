@@ -3266,7 +3266,7 @@ function AZSerializeForm(Options)
                             if ($(".az-alert-active").length === 0)
                             {
                                 var _$RoleAlert = $("[role='alert']", _$Area);
-                                var _$ModalDialogWindow = window.top.$(".az-modal-dialog");
+                                var _$ModalDialogWindow = window.parent.$(".az-modal-dialog");
                                 var _$Window = $("#az-window");
 
                                 if (_$RoleAlert.length > 0)
@@ -3281,7 +3281,7 @@ function AZSerializeForm(Options)
                                         $("body").removeClass("az-alert-active");
                                     }, 3000);
                                 }
-                                else if (_$ModalDialogWindow.length > 0)
+                                else if (_$ModalDialogWindow.length > 0 && $(".az-modal-dialog-titlebar", _$ModalDialogWindow).is(':visible'))
                                 {
                                     var _$Titlebar = $(".az-modal-dialog-titlebar", _$ModalDialogWindow);
                                     var _$TitlebarSpan = _$Titlebar.children("span.ui-dialog-title");
@@ -3297,7 +3297,7 @@ function AZSerializeForm(Options)
                                         $("body").removeClass("az-alert-active");
                                     }, 3000);
                                 }
-                                else if (_$Window.length > 0)
+                                else if (_$Window.length > 0 && $(".az-window-titlebar", _$Window).is(':visible'))
                                 {
                                     var _$Titlebar = $(".az-window-titlebar", _$Window);
                                     var _$TitlebarSpan = _$Titlebar.children("h1");
@@ -3383,8 +3383,8 @@ function AZSerializeForm(Options)
                                 });
                         });
                         consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + ElementObj.Connected + " - Connected" });
-                        _ElementList.push(_ConnectedList); 
-                    }                      
+                        _ElementList.push(_ConnectedList);
+                    }
                 });
                 $.publish("functionlib/azConnected",
                     {
