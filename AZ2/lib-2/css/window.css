@@ -1,5 +1,6 @@
 ﻿.az-window
 {
+    display: none;
     position: fixed;
     z-index: 5000;
     -webkit-border-radius: 4px;

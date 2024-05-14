@@ -5413,6 +5413,7 @@ function AZAjax(Options)
 
         if (_Main.Options.azAjaxUrl != "")
         {
+            console.log(window.navigator.onLine)
             _Main.AjaxOptions =
             {
                 url: _Main.Options.azAjaxUrl,
@@ -6266,15 +6267,6 @@ function AZWindow(Options)
             }
 
             $("body").append(_Main.$Window);
-            _Main.$Window.hide();
-            if (_Main.Options.azWindowAnimation === true)
-            {
-                _Main.$Window.fadeIn();
-            }
-            else
-            {
-                _Main.$Window.show();
-            }
 
             window.setTimeout(function ()
             {
@@ -6311,6 +6303,15 @@ function AZWindow(Options)
                     _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
                 }
 
+                if (_Main.Options.azWindowAnimation === true)
+                {
+                    _Main.$Window.fadeIn();
+                }
+                else
+                {
+                    _Main.$Window.show();
+                }
+
                 $.publish("functionlib/azWindowAfterOpen",
                     {
                         $Window: _Main.$Window,
@@ -6322,7 +6323,7 @@ function AZWindow(Options)
                         azChangeWindowTitlebar: _Main.azChangeWindowTitlebar,
                         azWindowResize: _Main.azWindowResize
                     });
-            }, 400);
+            }, 200);
 
             // AZWindow Close
             _Main.azWindowClose = function ()
