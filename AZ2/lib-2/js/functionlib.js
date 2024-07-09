@@ -3516,7 +3516,6 @@ function AZAjax(Options)
 
         if (_Main.Options.azAjaxUrl != "")
         {
-            console.log(window.navigator.onLine)
             _Main.AjaxOptions =
             {
                 url: _Main.Options.azAjaxUrl,
