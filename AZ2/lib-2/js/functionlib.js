@@ -3150,14 +3150,22 @@ function AZElementSize(Element)
         var _Return = {};
         var _Element = $Object[0];
         var _Style = window.getComputedStyle ? getComputedStyle(_Element, null) : _Element.currentStyle;
-        var _Width = _Element.offsetWidth;
-        var _Height = _Element.offsetHeight;
+        var _Width = _Element.offsetWidth || $Object.width();
+        var _Height = _Element.offsetHeight || $Object.height();
         var _MarginTop = parseInt(_Style.marginTop) || 0;
         var _MarginBottom = parseInt(_Style.marginBottom) || 0;
         var _MarginLeft = parseInt(_Style.marginLeft) || 0;
         var _MarginRight = parseInt(_Style.marginRight) || 0;
-        _Return.Width = (_Width + _MarginLeft + _MarginRight);
-        _Return.Height = (_Height + _MarginTop + _MarginBottom);
+        var _PaddingTop = parseInt(_Style.paddingTop) || 0;
+        var _PaddingBottom = parseInt(_Style.paddingBottom) || 0;
+        var _PaddingLeft = parseInt(_Style.paddingLeft) || 0;
+        var _PaddingRight = parseInt(_Style.paddingRight) || 0;
+        var _BorderTop = parseInt(_Style.borderTop) || 0;
+        var _BorderBottom = parseInt(_Style.borderBottom) || 0;
+        var _BorderLeft = parseInt(_Style.borderLeft) || 0;
+        var _BorderRight = parseInt(_Style.borderRight) || 0;
+        _Return.Width = (_Width + _MarginLeft + _MarginRight + _PaddingLeft + _PaddingRight + _BorderLeft + _BorderRight);
+        _Return.Height = (_Height + _MarginTop + _MarginBottom + _PaddingTop + _PaddingBottom + _BorderTop + _BorderBottom);
         return _Return;
     }
 }
@@ -4373,13 +4381,14 @@ function AZWindow(Options)
             window.setTimeout(function ()
             {
                 _Main.$Window.width(_Main.Options.azWindowWidth);
+                _Main.TitlebarHeight = AZElementSize(_Main.$Titlebar).Height;
                 if (_Main.Options.azWindowContentHeight === false)
                 {
                     _Main.$Window.height(_Main.Options.azWindowHeight);
-                    _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementSize(_Main.$Titlebar).Height) - 7);
+                    _Main.$Dialog.height((_Main.Options.azWindowHeight - _Main.TitlebarHeight) - 7);
                     if (_Main.Options.azWindowTitlebar === false)
                     {
-                        _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementSize(_Main.$Titlebar).Height));
+                        _Main.$Dialog.height(_Main.Options.azWindowHeight - _Main.TitlebarHeight);
                     }
                 }
                 else
@@ -4388,10 +4397,10 @@ function AZWindow(Options)
                     {
                         _Main.Options.azWindowHeight = (window.innerHeight - 28);
                         _Main.$Window.height(_Main.Options.azWindowHeight);
-                        _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementSize(_Main.$Titlebar).Height) - 7);
+                        _Main.$Dialog.height((_Main.Options.azWindowHeight - _Main.TitlebarHeight) - 7);
                         if (_Main.Options.azWindowTitlebar === false)
                         {
-                            _Main.$Dialog.height((_Main.Options.azWindowHeight - AZElementSize(_Main.$Titlebar).Height));
+                            _Main.$Dialog.height(_Main.Options.azWindowHeight - _Main.TitlebarHeight);
                         }
                     }
                 }
