@@ -170,7 +170,7 @@ function AZClientStorage(ActionType, Name, Value)
             }
             if (_Found == true)
             {
-                _ReturnObj = $.parseJSON(Data);
+                _ReturnObj = JSON.parse(Data);
             }
             else
             {

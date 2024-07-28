@@ -1885,7 +1885,7 @@ function AZClientStorage(ActionType, Name, Value)
             }
             if (_Found == true)
             {
-                _ReturnObj = $.parseJSON(Data);
+                _ReturnObj = JSON.parse(Data);
             }
             else
             {
@@ -1913,6 +1913,7 @@ var ObjPageData = {};
 ObjPageData.Elements = {};
 ObjPageData.Values = {};
 var ModalDialogScrollTop = 0;
+var AZStandardAlertReturnObj = {};
 
 $(function ()
 {
@@ -1980,18 +1981,6 @@ $(function ()
                 azWindowOrientation: _Data.azWindowOrientation
             });
     }
-
-    $.subscribe("functionlib/azValidateInputValueKeypress", function (e, data)
-    {
-        var _AZStandardAlertOptions =
-        {
-            $Area: ObjPageData.Values.AZPage.$Form,
-            Title: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.invalidCharacterTitle,
-            Text: ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.invalidCharacterText + " " + data.azInputInvalidChar,
-            InputJQElement: data.azInputJQElement
-        };
-        new AZStandardAlert(_AZStandardAlertOptions);
-    });
 
     $.subscribe("functionlib/azValidateInputValidChar", function (e, data)
     {
@@ -2781,15 +2770,11 @@ function AZSetInputTypeEvents()
         {
             _ValidType = "";
             $(this).attr("autocomplete", "off");
-            $(this).off("keydown", AZValidateInputValueKeydown).on("keydown", AZValidateInputValueKeydown);
             if ($(this).attr("class") != undefined)
             {
                 _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
-                if (_ValidType !== null)
-                {
-                    $(this).off("keydown", AZValidateInputValidChar).on("keydown", { ValidType: _ValidType }, AZValidateInputValidChar);
-                }
             }
+            $(this).off("keydown", AZValidateInputValueKeydown).on("keydown", { ValidType: _ValidType }, AZValidateInputValueKeydown);
             if ($(this).hasClass("az-input-animated"))
             {
                 $(this).off("focusout", AZInputAnimatedFocusout).on("focusout", AZInputAnimatedFocusout);
@@ -2840,15 +2825,11 @@ function AZSetInputTypeEvents()
         {
             _ValidType = "";
             $(this).attr("autocomplete", "false");
-            $(this).off("keydown", AZValidateInputValueKeydown).on("keydown", AZValidateInputValueKeydown);
             if ($(this).attr("class") != undefined)
             {
                 _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
-                if (_ValidType !== null)
-                {
-                    $(this).off("keydown", AZValidateInputValidChar).on("keypress", { ValidType: _ValidType }, AZValidateInputValidChar);
-                }
             }
+            $(this).off("keydown", AZValidateInputValueKeydown).on("keypress", { ValidType: _ValidType }, AZValidateInputValueKeydown);
             if ($(this).hasClass("forceuppercase"))
             {
                 $(this).off("keypress focusout", AZForceUppercaseKeypressFocusout).on("keypress focusout", AZForceUppercaseKeypressFocusout);
@@ -3060,8 +3041,42 @@ function AZValidateInputValueKeydown(e)
     {
         var _Element = e.target || e.srcElement;
         var _KeyChar = e.keyCode || e.which;
-        var _CharList = [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 91, 92, 93, 127, 144, 145];
+        var _ValidType = AZGetValidType(e.data.ValidType);
+
+        var _CharList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 91, 92, 93, 127, 144, 145];
         if (_CharList.includes(_KeyChar) === false && e.ctrlKey === false)
+        {
+            ResetAZStandardAlert();
+            if (AZIsNullOrEmpty(_ValidType) === false)
+            {
+                if (_ValidType.substring(0, 3) === "NOT")
+                {
+                    _ValidType = _ValidType.substring(3);
+                    if (_ValidType.includes(e.key.toLowerCase()) === false)
+                    {
+                        TriggerNormal();
+                    }
+                    else
+                    {
+                        TriggerAlert();
+                    }
+                }
+                else if (_ValidType.includes(e.key.toLowerCase()) === true)
+                {
+                    TriggerNormal();
+                }
+                else
+                {
+                    TriggerAlert();
+                }
+            }
+            else
+            {
+                TriggerNormal();
+            }
+        }
+
+        function TriggerNormal()
         {
             var _$Element = $(_Element);
             setTimeout(function ()
@@ -3075,7 +3090,7 @@ function AZValidateInputValueKeydown(e)
                     azInputValue: _Element.value,
                     azInputJQElement: _$Element
                 };
-                $.publish("functionlib/AZValidateInputValueKeydown",
+                $.publish("functionlib/asValidateInputValueKeydown",
                     {
                         azInputId: _Data.azInputId,
                         azInputName: _Data.azInputName,
@@ -3086,81 +3101,40 @@ function AZValidateInputValueKeydown(e)
                     });
                 if (typeof AZValidateDirty == "function")
                 {
-                    AZValidateDirty("functionlib/AZValidateInputValueKeydown", _Data);
+                    AZValidateDirty("functionlib/asValidateInputValueKeydown", _Data);
                 }
             }, 0);
         }
-    }
-}
 
-function AZValidateInputValidChar(e)
-{
-    if (AZIsNullOrEmpty(e) === false)
-    {
-        var _Element = e.target || e.srcElement;
-        var _KeyChar = e.keyCode || e.which;
-        var _ValidType = AZGetValidType(e.data.ValidType);
-        if (AZIsNullOrEmpty(_ValidType) === false)
+        function TriggerAlert()
         {
-            var _CharList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 91, 92, 93, 127, 144, 145];
-            if (_CharList.includes(_KeyChar) === true || e.ctrlKey === true)
+            e.preventDefault ? e.preventDefault() : e.returnValue = false;
+            var _$Element = $(_Element);
+            var _Data =
             {
-                return true;
-            }
-            else
+                azInputId: _$Element.attr("id") != undefined ? _$Element.attr("id") : _$Element.attr("data-id") != undefined ? _$Element.attr("data-id") : "",
+                azInputName: _$Element.attr("name") === undefined ? "" : _$Element.attr("name"),
+                azInputClass: _$Element.attr("class") === undefined ? "" : _$Element.attr("class"),
+                azInputValue: _Element.value,
+                azInputInvalidChar: e.key,
+                azInputValidChar: _ValidType.toString(),
+                azInputValidType: e.data.ValidType.toString(),
+                azInputJQElement: _$Element
+            };
+            $.publish("functionlib/azValidateInputValidChar",
+                {
+                    azInputId: _Data.azInputId,
+                    azInputName: _Data.azInputName,
+                    azInputClass: _Data.azInputClass,
+                    azInputValue: _Data.azInputValue,
+                    azInputInvalidChar: _Data.azInputInvalidChar,
+                    azInputValidChar: _Data.azInputValidChar,
+                    azInputValidType: _Data.azInputValidType,
+                    azInputJQElement: _Data.azInputJQElement
+                });
+            if (typeof AZValidateDirty == "function")
             {
-                if (_ValidType.substring(0, 3) === "NOT")
-                {
-                    _ValidType = _ValidType.substring(3);
-                    if (_ValidType.includes(e.key.toLowerCase()) === false)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        TriggerAlert();
-                    }
-                }
-                else if (_ValidType.includes(e.key.toLowerCase()) === true)
-                {
-                    return true;
-                }
-                else
-                {
-                    TriggerAlert();
-                }
-
-                function TriggerAlert()
-                {
-                    e.preventDefault ? e.preventDefault() : e.returnValue = false;
-                    var _$Element = $(_Element);
-                    var _Data =
-                    {
-                        azInputId: _$Element.attr("id") != undefined ? _$Element.attr("id") : _$Element.attr("data-id") != undefined ? _$Element.attr("data-id") : "",
-                        azInputName: _$Element.attr("name") === undefined ? "" : _$Element.attr("name"),
-                        azInputClass: _$Element.attr("class") === undefined ? "" : _$Element.attr("class"),
-                        azInputValue: _$Element.val(),
-                        azInputInvalidChar: e.key,
-                        azInputValidChar: _ValidType.toString(),
-                        azInputValidType: e.data.ValidType.toString(),
-                        azInputJQElement: _$Element
-                    };
-                    $.publish("functionlib/azValidateInputValidChar",
-                        {
-                            azInputId: _Data.azInputId,
-                            azInputName: _Data.azInputName,
-                            azInputClass: _Data.azInputClass,
-                            azInputValue: _Data.azInputValue,
-                            azInputInvalidChar: _Data.azInputInvalidChar,
-                            azInputValidChar: _Data.azInputValidChar,
-                            azInputValidType: _Data.azInputValidType,
-                            azInputJQElement: _Data.azInputJQElement
-                        });
-                    if (typeof AZValidateDirty == "function")
-                    {
-                        AZValidateDirty("functionlib/azValidateInputValidChar", _Data);
-                    }
-                }
+                AZValidateDirty("functionlib/azValidateInputValidChar", _Data);
             }
         }
     }
@@ -3199,6 +3173,7 @@ function AZGetValidType(SelectedType)
 // MinLength
 function AZSerializeForm(Options)
 {
+    ResetAZStandardAlert();
     if (AZIsEmpty(Options) === false && Options.hasOwnProperty("ObjLanguage") && Options.hasOwnProperty("ObjValidation"))
     {
         var _$Area = "";
@@ -3258,78 +3233,18 @@ function AZSerializeForm(Options)
                             _ObjOutputData[_$Input.attr("id")] = _$Input.val();
                         }
 
-                        _ObjReturnValidation = AZValidateInput(_$Input, _ObjCurrentValidation);
+                        _ObjReturnValidation = AZSerializeFormValidateInput(_$Input, _ObjCurrentValidation);
                         if (AZIsEmpty(_ObjReturnValidation) === false)
                         {
                             _ObjReturnValidation.Input = _$Input.attr("id");
                             consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + _ObjReturnValidation.Input + " - " + _ObjReturnValidation.Error });
-                            if ($(".az-alert-active").length === 0)
-                            {
-                                var _$RoleAlert = $("[role='alert']", _$Area);
-                                var _$ModalDialogWindow = window.parent.$(".az-modal-dialog");
-                                var _$Window = $("#az-window");
-
-                                if (_$RoleAlert.length > 0)
+                            new AZStandardAlert(
                                 {
-                                    var _CurrentText = _$RoleAlert.text();
-                                    _$RoleAlert.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]).removeClass("az-alert-info").addClass("az-alert-danger").show();
-                                    _$Input.focus();
-                                    $("body").addClass("az-alert-active");
-                                    window.setTimeout(function ()
-                                    {
-                                        _$RoleAlert.text(_CurrentText).removeClass("az-alert-danger").addClass("az-alert-info").show();
-                                        $("body").removeClass("az-alert-active");
-                                    }, 3000);
-                                }
-                                else if (_$ModalDialogWindow.length > 0 && $(".az-modal-dialog-titlebar", _$ModalDialogWindow).is(':visible'))
-                                {
-                                    var _$Titlebar = $(".az-modal-dialog-titlebar", _$ModalDialogWindow);
-                                    var _$TitlebarSpan = _$Titlebar.children("span.ui-dialog-title");
-                                    var _CurrentText = _$TitlebarSpan.text();
-                                    _$Titlebar.addClass("az-alert-danger");
-                                    _$TitlebarSpan.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]);
-                                    _$Input.focus();
-                                    $("body").addClass("az-alert-active");
-                                    window.setTimeout(function ()
-                                    {
-                                        _$Titlebar.removeClass("az-alert-danger");
-                                        _$TitlebarSpan.text(_CurrentText);
-                                        $("body").removeClass("az-alert-active");
-                                    }, 3000);
-                                }
-                                else if (_$Window.length > 0 && $(".az-window-titlebar", _$Window).is(':visible'))
-                                {
-                                    var _$Titlebar = $(".az-window-titlebar", _$Window);
-                                    var _$TitlebarSpan = _$Titlebar.children("h1");
-                                    var _CurrentText = _$TitlebarSpan.text();
-                                    _$Titlebar.addClass("az-alert-danger");
-                                    _$TitlebarSpan.text(Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]);
-                                    _$Input.focus();
-                                    $("body").addClass("az-alert-active");
-                                    window.setTimeout(function ()
-                                    {
-                                        _$Titlebar.removeClass("az-alert-danger");
-                                        _$TitlebarSpan.text(_CurrentText);
-                                        $("body").removeClass("az-alert-active");
-                                    }, 3000);
-                                }
-                                else
-                                {
-                                    $("body").addClass("az-alert-active");
-                                    $.subscribeonce("functionlib/azWindowAfterClose", function (e)
-                                    {
-                                        _$Input.focus();
-                                        $("body").removeClass("az-alert-active");
-                                    });
-                                    new AZWindow(
-                                        {
-                                            azWindowTitle: Options.ObjLanguage.SingleDefaultElements.informationTitle,
-                                            azWindowText: Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error],
-                                            azWindowWidth: 400,
-                                            azWindowContentHeight: true
-                                        });
-                                }
-                            }
+                                    $Area: _$Area,
+                                    InputElement: _$Input,
+                                    Title: Options.ObjLanguage.SingleDefaultElements.informationTitle,
+                                    Text: Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]
+                                });
                             _InputError = true;
                             return false;
                         }
@@ -3467,7 +3382,7 @@ function AZSerializeForm(Options)
     }
 }
 
-function AZValidateInput($Input, CurrentValidationObj)
+function AZSerializeFormValidateInput($Input, CurrentValidationObj)
 {
     var _ReturnValidationObj = {};
     var _CurrentInputType = GetCurrentInputType($Input);
@@ -3986,6 +3901,7 @@ function AZDatepicker($Obj, DefaultLanguage)
 
     function PublishSetDate(curDate)
     {
+        ResetAZStandardAlert();
         var _Date = AZSetDateFormat($Obj.datepicker("getDate"));
         var _Data =
         {
@@ -4048,6 +3964,7 @@ function AZTimepicker($Obj, DefaultLanguage)
                 },
                 onClose: function (curTime, instance)
                 {
+                    ResetAZStandardAlert();
                     var _Time = AZSetTimeFormat('0001-01-01 ' + curTime);
                     var _Data =
                     {
@@ -4177,6 +4094,7 @@ function AZCheckboxClick(e)
 {
     if (AZIsNullOrEmpty(e) === false)
     {
+        ResetAZStandardAlert();
         var _Element = e.target || e.srcElement;
         var _$Checkbox = $(_Element);
         var _Data =
@@ -4208,6 +4126,7 @@ function AZRadioClick(e)
 {
     if (AZIsNullOrEmpty(e) === false)
     {
+        ResetAZStandardAlert();
         var _Element = e.target || e.srcElement;
         var _$Radio = $(_Element);
         var _Data =
@@ -4239,6 +4158,7 @@ function AZSwitchClick(e)
 {
     if (AZIsNullOrEmpty(e) === false)
     {
+        ResetAZStandardAlert();
         var _Element = e.target || e.srcElement;
         var _$Switch = $(_Element);
         var _Data =
@@ -4270,6 +4190,7 @@ function AZRange(e)
 {
     if (AZIsNullOrEmpty(e) === false)
     {
+        ResetAZStandardAlert();
         var _Element = e.target || e.srcElement;
         var _$Range = $(_Element);
         var _Data =
@@ -4318,6 +4239,7 @@ function AZSelectChange(e)
 {
     if (AZIsNullOrEmpty(e) === false)
     {
+        ResetAZStandardAlert();
         var _Element = e.target || e.srcElement;
         var _$Select = $(_Element);
         var _SelectList = [];
@@ -4580,6 +4502,7 @@ function AZSetSpinnerEvents(Element, ObjAttributes)
 
     function PublishAZSetSpinner()
     {
+        ResetAZStandardAlert();
         _Data.azInputValue = _CurrentSpinnerValue;
         $.publish("functionlib/azInputSpinner",
             {
@@ -4898,32 +4821,32 @@ function AZRemoveObj(List, x, y)
     }
 }
 
-function AZFilterArray(SelectedList, SelectedKey, SelectedVal)
+function AZFilterArray(List, x, y)
 {
     var _Return = [];
-    if (SelectedList.length > 0 && AZIsNullOrEmpty(SelectedKey) === false && AZIsNullOrEmpty(SelectedVal) === false)
+    if (AZIsNullOrEmpty(List) === false && List.length > 0 && AZIsNullOrEmpty(x) === false && AZIsNullOrEmpty(y) === false)
     {
-        _Return = $.grep(SelectedList, function (Obj)
+        _Return = $.grep(List, function (Obj)
         {
-            if (Obj.hasOwnProperty(SelectedKey) === true)
+            if (Obj.hasOwnProperty(x) === true)
             {
-                return (Obj[SelectedKey] == SelectedVal.toString().toLowerCase());
+                return (Obj[x] == y.toString().toLowerCase());
             }
         });
     }
     return _Return;
 }
 
-function AZFilterArrayUnique(SelectedList, SelectedKey, SelectedVal)
+function AZFilterArrayUnique(List, x, y)
 {
     var _ReturnList = [];
-    if (SelectedList.length > 0 && AZIsNullOrEmpty(SelectedKey) === false && AZIsNullOrEmpty(SelectedVal) === false)
+    if (AZIsNullOrEmpty(List) === false && List.length > 0 && AZIsNullOrEmpty(x) === false && AZIsNullOrEmpty(y) === false)
     {
-        $.each(SelectedList, function (Key, Value)
+        $.each(List, function (Key, Value)
         {
-            if (Value.hasOwnProperty(SelectedKey) === true)
+            if (Value.hasOwnProperty(x) === true)
             {
-                if (AZExistObj(_ReturnList, SelectedKey, SelectedVal) === false)
+                if (AZExistObj(_ReturnList, x, y) === false)
                 {
                     _ReturnList.push(Value);
                 }
@@ -5146,7 +5069,280 @@ function AZDownloadFileContent(Content, MimeType, Filename)
     _Link.remove();
 }
 
+function AZStandardAlert(Options)
+{
+    if (this instanceof AZStandardAlert === true)
+    {
+        var _Main = this;
+        if (AZIsEmpty(Options) === false)
+        {
+            _Main.$Area = "";
+            _Main.ErrorElement = "";
+            _Main.AlertType = "";
+            _Main.AlertElement = "";
+            _Main.ErrorTitle = AZIsNullOrEmpty(Options.Title) === false ? Options.Title : "";
+            _Main.ErrorText = Options.Text;
 
+            if ((Options.hasOwnProperty("$Area") && AZIsEmpty(Options.$Area) === false) ||
+                (Options.hasOwnProperty("Area") && AZIsEmpty(Options.Area) === false))
+            {
+                _Main.$Area = AZIsNullOrEmpty(Options.$Area) === false ? Options.$Area : Options.Area;
+            }
+            if ((Options.hasOwnProperty("InputJQElement") && AZIsEmpty(Options.InputJQElement) === false) ||
+                (Options.hasOwnProperty("InputElement") && AZIsEmpty(Options.InputElement) === false))
+            {
+                _Main.ErrorElement = AZIsNullOrEmpty(Options.InputJQElement) === false ? Options.InputJQElement : Options.InputElement;
+            }
+
+            if ($(".az-alert-active").length === 0)
+            {
+                var _$RoleAlert = $("[role='alert']", _Main.$Area);
+                var _$ModalDialogWindow = window.top.$(".az-modal-dialog");
+                var _$ModalDialogTitlebar = $(".az-modal-dialog-titlebar", _$ModalDialogWindow);
+                var _$Window = $("#az-window");
+                var _$WindowTitlebar = $(".az-window-titlebar", _$Window);
+                $("body").addClass("az-alert-active");
+
+                if (_$RoleAlert.length > 0)
+                {
+                    _Main.AlertType = "RoleAlert";
+                    _Main.AlertElement = _$RoleAlert;
+                    _Main.CurrentText = _$RoleAlert.text();
+                    _$RoleAlert.text(_Main.ErrorText).addClass("az-alert-danger").show();
+                    if (_Main.ErrorElement != "")
+                    {
+                        _Main.ErrorElement.focus();
+                    }
+                }
+                else if (_$ModalDialogWindow.length > 0 && _$ModalDialogTitlebar.is(":visible") === true)
+                {
+                    _Main.AlertType = "AZModalDialog";
+                    _Main.AlertElement = _$ModalDialogWindow;
+                    var _$ModalDialogTitlebarSpan = _$ModalDialogTitlebar.children("span.ui-dialog-title");
+                    _Main.CurrentText = _$ModalDialogTitlebarSpan.text();
+                    _$ModalDialogTitlebar.addClass("az-alert-danger");
+                    _$ModalDialogTitlebarSpan.text(_Main.ErrorText);
+                    if (_Main.ErrorElement != "")
+                    {
+                        _Main.ErrorElement.focus();
+                    }
+                }
+                else if (_$Window.length > 0 && _$WindowTitlebar.is(":visible") === true)
+                {
+                    _Main.AlertType = "AZWindow";
+                    _Main.AlertElement = _$Window;
+                    var _$WindowTitlebarSpan = _$WindowTitlebar.children("h1");
+                    _Main.CurrentText = _$WindowTitlebarSpan.text();
+                    _$WindowTitlebar.addClass("az-alert-danger");
+                    _$WindowTitlebarSpan.text(_Main.ErrorText);
+                    if (_Main.ErrorElement != "")
+                    {
+                        _Main.ErrorElement.focus();
+                    }
+                }
+                else
+                {
+                    $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
+                    {
+                        if (_Main.ErrorTitle == "")
+                        {
+                            data.$Article.css({ "padding-top": "14px" });
+                        }
+                    });
+                    $.subscribeonce("functionlib/azWindowAfterClose", function (e)
+                    {
+                        if (_Main.ErrorElement != "")
+                        {
+                            _Main.ErrorElement.focus();
+                        }
+                        $("body").removeClass("az-alert-active");
+                    });
+                    var _AZWindowOptions =
+                    {
+                        azWindowText: _Main.ErrorText,
+                        azWindowWidth: 400,
+                        azWindowContentHeight: true,
+                        azWindowTitlebar: false
+                    };
+                    if (_Main.ErrorTitle != "")
+                    {
+                        _AZWindowOptions.azWindowTitle = _Main.ErrorTitle;
+                        _AZWindowOptions.azWindowTitlebar = true;
+                    }
+                    new AZWindow(_AZWindowOptions);
+                }
+                AZStandardAlertReturnObj = _Main;
+            }
+        }
+        else
+        {
+            consoleLog({ consoleType: "error", consoleText: "AZStandardAlert - Options is empty or missing some properties" });
+        }
+    }
+    else
+    {
+        return new AZStandardAlert(Options);
+    }
+}
+
+function ResetAZStandardAlert()
+{
+    if ($(".az-alert-active").length > 0 && AZIsEmpty(AZStandardAlertReturnObj) === false)
+    {
+        if (AZStandardAlertReturnObj.hasOwnProperty("AlertType") && AZIsNullOrEmpty(AZStandardAlertReturnObj.AlertType) === false)
+        {
+            if (AZStandardAlertReturnObj.AlertType == "RoleAlert")
+            {
+                AZStandardAlertReturnObj.AlertElement.text(AZStandardAlertReturnObj.CurrentText).removeClass("az-alert-danger").show();
+                $("body").removeClass("az-alert-active");
+            }
+            if (AZStandardAlertReturnObj.AlertType == "AZModalDialog")
+            {
+                var _$ModalDialogTitlebar = $(".az-modal-dialog-titlebar", AZStandardAlertReturnObj.AlertElement);
+                var _$ModalDialogTitlebarSpan = _$ModalDialogTitlebar.children("span.ui-dialog-title");
+                _$ModalDialogTitlebar.removeClass("az-alert-danger");
+                _$ModalDialogTitlebarSpan.text(AZStandardAlertReturnObj.CurrentText);
+                $("body").removeClass("az-alert-active");
+            }
+            if (AZStandardAlertReturnObj.AlertType == "AZWindow")
+            {
+                var _$WindowTitlebar = $(".az-window-titlebar", AZStandardAlertReturnObj.AlertElement);
+                var _$WindowTitlebarSpan = _$WindowTitlebar.children("h1");
+                _$WindowTitlebar.removeClass("az-alert-danger");
+                _$WindowTitlebarSpan.text(AZStandardAlertReturnObj.CurrentText);
+                $("body").removeClass("az-alert-active");
+            }
+        }
+        AZStandardAlertReturnObj = {};
+    }
+}
+
+function AZRunFunction(FunctionBody, FunctionArgs)
+{
+    var RunFunctionName = FunctionBody;
+    var RunFunctionArgs = FunctionArgs;
+    if (AZIsEmpty(FunctionBody) === false && FunctionBody.hasOwnProperty("FunctionName"))
+    {
+        RunFunctionName = FunctionBody.FunctionName;
+        RunFunctionArgs = FunctionBody.FunctionArgs;
+    }
+    else if (typeof FunctionBody == "object")
+    {
+        consoleLog({ consoleType: "warn", consoleText: "RunFunction argument failed, received wrong object" });
+        return false;
+    }
+
+    if (RunFunctionArgs == null || RunFunctionArgs == undefined || !Array.isArray(RunFunctionArgs))
+    {
+        RunFunctionArgs = [];
+    }
+    if (RunFunctionName && typeof RunFunctionName == "string" && RunFunctionName == "")
+    {
+        consoleLog({ consoleType: "warn", consoleText: "RunFunction argument failed, received empty string" });
+    }
+    else if (RunFunctionName && typeof RunFunctionName == "string")
+    {
+        var _ObjectList = RunFunctionName.split('.');
+        if (_ObjectList[0] == "window")
+        {
+            if (_ObjectList.length > 1)
+            {
+                RecursiveFindAndRunFunction(window, _ObjectList.slice(1));
+            }
+            else
+            {
+                consoleLog({ consoleType: "warn", consoleText: "RunFunction failed, received " + RunFunctionName });
+            }
+        }
+        else
+        {
+            RecursiveFindAndRunFunction(window, _ObjectList);
+        }
+    }
+    else
+    {
+        consoleLog({ consoleType: "warn", consoleText: "RunFunction argument failed, received " + typeof RunFunctionName + ", expected string" });
+    }
+
+    function RecursiveFindAndRunFunction(currentObject, currentQueue)
+    {
+        var _CurrentProperty = currentQueue.shift();
+        var _NewObject = null;
+        if (currentObject.hasOwnProperty(_CurrentProperty))
+        {
+            _NewObject = currentObject[_CurrentProperty];
+        }
+        if (_NewObject != null)
+        {
+            if (currentQueue.length > 0)
+            {
+                RecursiveFindAndRunFunction(_NewObject, currentQueue);
+            }
+            else
+            {
+                if (typeof _NewObject == "function")
+                {
+                    _NewObject.apply(currentObject, RunFunctionArgs);
+                }
+                else
+                {
+                    consoleLog({ consoleType: "warn", consoleText: "RunFunction failed, not a function - " + RunFunctionName });
+                }
+            }
+        }
+        else
+        {
+            consoleLog({ consoleType: "warn", consoleText: "RunFunction failed, missing property property " + _CurrentProperty + " - " + RunFunctionName });
+        }
+    }
+}
+
+function consoleLog(Options)
+{
+    var _Defaults =
+    {
+        consoleType: "log",
+    };
+
+    var _Options;
+    if (typeof Options === "string" || typeof Options === "number")
+    {
+        _Options = $.extend({}, _Defaults, { consoleText: Options });
+    }
+    else if (typeof Options === "object")
+    {
+        Options.hasOwnProperty("consoleType") === true ? _Defaults.consoleType = Options.consoleType : "";
+        Options.hasOwnProperty("consoleText") === true ? _Defaults.consoleText = JSON.parse(JSON.stringify(Options.consoleText)) : _Defaults.consoleText = JSON.parse(JSON.stringify(Options));
+        _Options = _Defaults;
+    }
+    else
+    {
+        _Options = $.extend({}, _Defaults, Options || {});
+    }
+    if (AZSettings.DebugMode === true)
+    {
+        console[_Options.consoleType](_Options.consoleText);
+    }
+}
+
+(function ($)
+{
+    $.fn.decimal = function ()
+    {
+        var _Return = this.map(function ()
+        {
+            var _Value = $(this).val();
+            if (_Value != "" && _Value.indexOf(",") > 0)
+            {
+                return parseFloat(_Value.replace(",", ".").replace(/ /g, ""));
+            }
+        });
+        if (_Return.length > 0)
+        {
+            return _Return[0];
+        }
+    };
+})(jQuery);
 function AZAccordion(Options)
 {
     if (this instanceof AZAccordion === true)
@@ -7175,248 +7371,3 @@ function AZRangeMulti(Options)
         return new AZRangeMulti(Options);
     }
 }
-
-var AZStandardAlertTimeOut;
-function AZStandardAlert(Options)
-{
-    if (this instanceof AZStandardAlert === true)
-    {
-        var _Main = this;
-        if (AZIsEmpty(Options) === false)
-        {
-            _Main.$Area = "";
-            _Main.InputJQElement = "";
-            if (Options.hasOwnProperty("$Area") && AZIsEmpty(Options.$Area) === false)
-            {
-                _Main.$Area = Options.$Area;
-            }
-            if (Options.hasOwnProperty("InputJQElement") && AZIsEmpty(Options.InputJQElement) === false)
-            {
-                _Main.InputJQElement = Options.InputJQElement;
-            }
-            _Main.Title = Options.Title;
-            _Main.Text = Options.Text;
-
-            if ($(".az-alert-active").length === 0)
-            {
-                var _$RoleAlert = $("[role='alert']", _Main.$Area);
-                var _$ModalDialogWindow = window.top.$(".az-modal-dialog");
-                var _$Window = $("#az-window");
-
-                if (_$RoleAlert.length > 0)
-                {
-                    var _CurrentText = _$RoleAlert.text();
-                    _$RoleAlert.text(_Main.Text).removeClass("az-alert-info").addClass("az-alert-danger").show();
-                    if (_Main.InputJQElement != "")
-                    {
-                        _Main.InputJQElement.focus();
-                    }
-                    $("body").addClass("az-alert-active");
-                    AZStandardAlertTimeOut = window.setTimeout(function ()
-                    {
-                        _$RoleAlert.text(_CurrentText).removeClass("az-alert-danger").addClass("az-alert-info").show();
-                        $("body").removeClass("az-alert-active");
-                    }, 3000);
-                }
-                else if (_$ModalDialogWindow.length > 0)
-                {
-                    var _$Titlebar = $(".az-modal-dialog-titlebar", _$ModalDialogWindow);
-                    var _$TitlebarSpan = _$Titlebar.children("span.ui-dialog-title");
-                    var _CurrentText = _$TitlebarSpan.text();
-                    _$Titlebar.addClass("az-alert-danger");
-                    _$TitlebarSpan.text(_Main.Text);
-                    if (_Main.InputJQElement != "")
-                    {
-                        _Main.InputJQElement.focus();
-                    }
-                    $("body").addClass("az-alert-active");
-                    AZStandardAlertTimeOut = window.setTimeout(function ()
-                    {
-                        _$Titlebar.removeClass("az-alert-danger");
-                        _$TitlebarSpan.text(_CurrentText);
-                        $("body").removeClass("az-alert-active");
-                    }, 3000);
-                }
-                else if (_$Window.length > 0)
-                {
-                    var _$Titlebar = $(".az-window-titlebar", _$Window);
-                    var _$TitlebarSpan = _$Titlebar.children("h1");
-                    var _CurrentText = _$TitlebarSpan.text();
-                    _$Titlebar.addClass("az-alert-danger");
-                    _$TitlebarSpan.text(_Main.Text);
-                    if (_Main.InputJQElement != "")
-                    {
-                        _Main.InputJQElement.focus();
-                    }
-                    $("body").addClass("az-alert-active");
-                    AZStandardAlertTimeOut = window.setTimeout(function ()
-                    {
-                        _$Titlebar.removeClass("az-alert-danger");
-                        _$TitlebarSpan.text(_CurrentText);
-                        $("body").removeClass("az-alert-active");
-                    }, 3000);
-                }
-                else
-                {
-                    $("body").addClass("az-alert-active");
-                    $.subscribeonce("functionlib/azWindowAfterClose", function (e)
-                    {
-                        if (_Main.InputJQElement != "")
-                        {
-                            _Main.InputJQElement.focus();
-                        }
-                        $("body").removeClass("az-alert-active");
-                    });
-                    new AZWindow(
-                        {
-                            azWindowTitle: _Main.Title,
-                            azWindowText: _Main.Text,
-                            azWindowWidth: 400,
-                            azWindowContentHeight: true
-                        });
-                }
-            }
-        }
-        else
-        {
-            consoleLog({ consoleType: "error", consoleText: "AZStandardAlert - Options is empty or missing some properties" });
-        }
-    }
-    else
-    {
-        return new AZStandardAlert(Options);
-    }
-}
-
-function ResetAZStandardAlert()
-{
-    clearTimeout(AZStandardAlertTimeOut);
-    $("body").removeClass("az-alert-active");
-}
-
-function AZRunFunction(FunctionBody, FunctionArgs)
-{
-    var RunFunctionName = FunctionBody;
-    var RunFunctionArgs = FunctionArgs;
-    if (AZIsEmpty(FunctionBody) === false && FunctionBody.hasOwnProperty("FunctionName"))
-    {
-        RunFunctionName = FunctionBody.FunctionName;
-        RunFunctionArgs = FunctionBody.FunctionArgs;
-    }
-    else if (typeof FunctionBody == "object")
-    {
-        consoleLog({ consoleType: "warn", consoleText: "RunFunction argument failed, received wrong object" });
-        return false;
-    }
-
-    if (RunFunctionArgs == null || RunFunctionArgs == undefined || !Array.isArray(RunFunctionArgs))
-    {
-        RunFunctionArgs = [];
-    }
-    if (RunFunctionName && typeof RunFunctionName == "string" && RunFunctionName == "")
-    {
-        consoleLog({ consoleType: "warn", consoleText: "RunFunction argument failed, received empty string" });
-    }
-    else if (RunFunctionName && typeof RunFunctionName == "string")
-    {
-        var _ObjectList = RunFunctionName.split('.');
-        if (_ObjectList[0] == "window")
-        {
-            if (_ObjectList.length > 1)
-            {
-                RecursiveFindAndRunFunction(window, _ObjectList.slice(1));
-            }
-            else
-            {
-                consoleLog({ consoleType: "warn", consoleText: "RunFunction failed, received " + RunFunctionName });
-            }
-        }
-        else
-        {
-            RecursiveFindAndRunFunction(window, _ObjectList);
-        }
-    }
-    else
-    {
-        consoleLog({ consoleType: "warn", consoleText: "RunFunction argument failed, received " + typeof RunFunctionName + ", expected string" });
-    }
-
-    function RecursiveFindAndRunFunction(currentObject, currentQueue)
-    {
-        var _CurrentProperty = currentQueue.shift();
-        var _NewObject = null;
-        if (currentObject.hasOwnProperty(_CurrentProperty))
-        {
-            _NewObject = currentObject[_CurrentProperty];
-        }
-        if (_NewObject != null)
-        {
-            if (currentQueue.length > 0)
-            {
-                RecursiveFindAndRunFunction(_NewObject, currentQueue);
-            }
-            else
-            {
-                if (typeof _NewObject == "function")
-                {
-                    _NewObject.apply(currentObject, RunFunctionArgs);
-                }
-                else
-                {
-                    consoleLog({ consoleType: "warn", consoleText: "RunFunction failed, not a function - " + RunFunctionName });
-                }
-            }
-        }
-        else
-        {
-            consoleLog({ consoleType: "warn", consoleText: "RunFunction failed, missing property property " + _CurrentProperty + " - " + RunFunctionName });
-        }
-    }
-}
-
-function consoleLog(Options)
-{
-    var _Defaults =
-    {
-        consoleType: "log",
-    };
-
-    var _Options;
-    if (typeof Options === "string" || typeof Options === "number")
-    {
-        _Options = $.extend({}, _Defaults, { consoleText: Options });
-    }
-    else if (typeof Options === "object")
-    {
-        Options.hasOwnProperty("consoleType") === true ? _Defaults.consoleType = Options.consoleType : "";
-        Options.hasOwnProperty("consoleText") === true ? _Defaults.consoleText = JSON.parse(JSON.stringify(Options.consoleText)) : _Defaults.consoleText = JSON.parse(JSON.stringify(Options));
-        _Options = _Defaults;
-    }
-    else
-    {
-        _Options = $.extend({}, _Defaults, Options || {});
-    }
-    if (AZSettings.DebugMode === true)
-    {
-        console[_Options.consoleType](_Options.consoleText);
-    }
-}
-
-(function ($)
-{
-    $.fn.decimal = function ()
-    {
-        var _Return = this.map(function ()
-        {
-            var _Value = $(this).val();
-            if (_Value != "" && _Value.indexOf(",") > 0)
-            {
-                return parseFloat(_Value.replace(",", ".").replace(/ /g, ""));
-            }
-        });
-        if (_Return.length > 0)
-        {
-            return _Return[0];
-        }
-    };
-})(jQuery);

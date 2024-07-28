@@ -61,8 +61,7 @@
 
         function AZValidateDirty(type, data)
         {
-            console.log(type);
-            console.log(data);
+            console.log(type, data);
         }
 
         function ClientStorageSet()
@@ -127,7 +126,7 @@
         function GetURLParameters()
         {
             $("#AZURLParameters").show();
-            var _URL = "https://cdn.web2net.no/lib-2.0.1/default.html?id=1&guid=23j4j223k54k235k";
+            var _URL = "https://cdn.web2net.no/lib-2/default.html?id=1&guid=23j4j223k54k235k";
             var _URLParametersReturn = AZGetURLParameters(_URL);
             if (AZIsEmpty(_URLParametersReturn) === false)
             {
@@ -647,66 +646,6 @@
                         <div class="az-code htmlHigh notranslate">
 
                             <div class="az-code-property-wrapper">
-                                <property>AZ Validate Dirty</property>
-                                <type><span>Type:</span> <brown>Function</brown></type>
-                                <br />
-                                <p style="word-break: break-word;">
-                                    This function <strong>listens</strong> to many different events, especially in relation to form elements but also other things such as <strong>Window Scroll</strong>, <strong>Window Resize</strong>, etc.
-                                </p>
-                                <br />
-                                <div class="jsHigh notranslate">
-                                    function AZValidateDirty(type, data)<br />
-                                    {<br />
-                                    <br />
-                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/AZValidateInputValueKeydown
-                                    <br />
-                                    &emsp;&ensp;&emsp;&ensp;data =<br />
-                                    &emsp;&ensp;&emsp;&ensp;{<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputKey<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
-                                    &emsp;&ensp;&emsp;&ensp;};<br />
-                                    <br />
-                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azValidateInputValidChar
-                                    <br />
-                                    &emsp;&ensp;&emsp;&ensp;data =<br />
-                                    &emsp;&ensp;&emsp;&ensp;{<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputInvalidChar<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValidChar<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValidType<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
-                                    &emsp;&ensp;&emsp;&ensp;};<br />
-                                    <br />
-                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azSelectChange
-                                    <br />
-                                    &emsp;&ensp;&emsp;&ensp;data =<br />
-                                    &emsp;&ensp;&emsp;&ensp;{<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputText<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputList<br />
-                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
-                                    &emsp;&ensp;&emsp;&ensp;};<br />
-
-
-                                    }<br />
-                                    <br />
-                                </div>
-                                <br />
-                                <br />
-                                <br />
-                            </div>
-
-                            <div class="az-code-property-wrapper">
                                 <property>Set AZ Page</property>
                                 <type><span>Type:</span> <brown>Function</brown></type>
                                 <values><span>Return:</span> <mediumblue>object</mediumblue></values>
@@ -743,6 +682,174 @@
                                     &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageTootltip: false,<br />
                                     &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageTootltipFile: ""<br />
                                     &emsp;&ensp;&emsp;&ensp;});<br />
+                                    }<br />
+                                    <br />
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
+                                <property>AZ Validate Dirty</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <p style="word-break: break-word;">
+                                    This function <strong>listens</strong> to many different events, especially in relation to form elements.
+                                </p>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    function AZValidateDirty(type, data)<br />
+                                    {<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/AZValidateInputValueKeydown
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputKey<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azValidateInputValidChar
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputInvalidChar<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValidChar<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValidType<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azSetDate
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputLocalDate<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputISODate<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputENUSDate<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azSetTime
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputLocalTime<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputISOTime<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputENUSTime<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azCheckboxClick
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputChecked<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azRadioClick
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputChecked<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azSwitchClick
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputChecked<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azRangeSlide
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azRangeStop
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azSelectChange
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputText<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputList<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azInputSpinner
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azConnected
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputError<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;type = functionlib/azSerializeForm
+                                    <br />
+                                    &emsp;&ensp;&emsp;&ensp;data =<br />
+                                    &emsp;&ensp;&emsp;&ensp;{<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputId<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputName<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputClass<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputError<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputValue<br />
+                                    &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azInputJQElement<br />
+                                    &emsp;&ensp;&emsp;&ensp;};<br />
                                     }<br />
                                     <br />
                                 </div>
