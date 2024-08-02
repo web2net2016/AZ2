@@ -3200,7 +3200,7 @@ function AZStandardAlert(Options)
             if ($(".az-alert-active").length === 0)
             {
                 var _$RoleAlert = $("[role='alert']", _Main.$Area);
-                var _$ModalDialogWindow = window.top.$(".az-modal-dialog");
+                var _$ModalDialogWindow = window.parent.$(".az-modal-dialog");
                 var _$ModalDialogTitlebar = $(".az-modal-dialog-titlebar", _$ModalDialogWindow);
                 var _$Window = $("#az-window");
                 var _$WindowTitlebar = $(".az-window-titlebar", _$Window);
