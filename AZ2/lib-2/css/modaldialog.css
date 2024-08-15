@@ -19,7 +19,6 @@
 
     .az-modal-dialog > .az-modal-dialog-titlebar
     {
-        height: 30px;
         background-color: var(--primary-background-color);
         color: #FFFFFF;
     }

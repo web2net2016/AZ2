@@ -444,7 +444,10 @@ function AZModalDialog(Options)
             _Main.$Iframe = {};
             _Main.$Window;
             _Main.$Dialog = $("<div></div>").attr("id", _Main.azModalDialogId).addClass("az-modal-dialog-content " + _Main.Options.azModalDialogStyle);
-            _Main.$Article = $("<article></article>").html(_Main.Options.azModalDialogText);
+            if (_Main.Options.azModalDialogiFrameURL == "")
+            {
+                _Main.$Article = $("<article></article>").html(_Main.Options.azModalDialogText);
+            }
             _Main.$Dialog.append(_Main.$Article);
 
             // AZModalDialog Size
@@ -548,8 +551,13 @@ function AZModalDialog(Options)
             // AZModalDialog iFrame
             if (_Main.Options.azModalDialogiFrameURL != "")
             {
+                var _IFrameHeight = AZElementSize(_Main.$Dialog).Height;
+                if (_Main.Options.azModalDialogTitlebar === true)
+                {
+                    _IFrameHeight = (_IFrameHeight + 1);
+                }
                 _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe-" + _Main.azModalDialogId).addClass("az-iframe");
-                _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": _Main.Options.azModalDialogHeight });
+                _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": _IFrameHeight });
                 _Main.$Dialog.append(_Main.$Iframe).addClass("overflow");
             }
 
