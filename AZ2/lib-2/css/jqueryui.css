@@ -1,15 +1,9 @@
 ﻿.ui-front
 {
-    z-index: 5000;
 }
 
 .ui-dialog
 {
-    position: fixed;
-    padding: 0;
-    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .ui-widget-header
@@ -35,9 +29,9 @@
 
 .ui-corner-all
 {
-    -webkit-border-radius: 4px !important;
-    -moz-border-radius: 4px !important;
-    border-radius: 4px !important;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
 .ui-dialog-content

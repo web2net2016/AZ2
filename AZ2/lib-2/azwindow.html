@@ -26,6 +26,7 @@
         var AZWindow2 = {};
         var AZWindow3 = {};
         var AZWindow4 = {};
+        var AZWindow5 = {};
 
         $(function ()
         {
@@ -35,19 +36,20 @@
             $("#cmdAZWindow2").off("click", setAZWindow2).on("click", setAZWindow2);
             $("#cmdAZWindow3").off("click", setAZWindow3).on("click", setAZWindow3);
             $("#cmdAZWindow4").off("click", setAZWindow4).on("click", setAZWindow4);
+            $("#cmdAZWindow5").off("click", setAZWindow5).on("click", setAZWindow5);
         });
 
         function setAZWindow1()
         {
             $.subscribeonce("functionlib/azWindowBeforeOpen", function (e, data)
             {
-                console.log("azWindowBeforeOpen")
-                console.log(data)
+                console.log("azWindowBeforeOpen");
+                console.log(data);
             });
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
             {
-                console.log("azWindowAfterOpen")
-                console.log(data)
+                console.log("azWindowAfterOpen");
+                console.log(data);
                 $("#cmdAZWindowButton1").off().on('click', function ()
                 {
                     data.azWindowClose();
@@ -55,12 +57,12 @@
             });
             $.subscribeonce("functionlib/azWindowAfterClose", function (e, data)
             {
-                console.log("azWindowAfterClose")
-                console.log(data)
+                console.log("azWindowAfterClose");
+                console.log(data);
             });
 
             var _HTML = "";
-            _HTML = '<div class="az-margin-b-28">';
+            _HTML += '<div class="az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate" style="border: none;">';
             _HTML += 'new AZWindow(<br />';
             _HTML += '{<br />';
@@ -85,7 +87,8 @@
                     azWindowText: _HTML,
                     azWindowWidth: 500,
                     azWindowContentHeight: true,
-                    azWindowButton: {
+                    azWindowButton:
+                    {
                         Button1: true,
                         TextButton1: "Close",
                         RoundedButton1: true
@@ -95,14 +98,71 @@
 
         function setAZWindow2()
         {
-            $.subscribeonce("functionlib/azWindowBeforeOpen", function ()
+            $.subscribeonce("functionlib/azWindowBeforeOpen", function (e, data)
             {
-                console.log("azWindowBeforeOpen")
+                console.log("azWindowBeforeOpen");
+                console.log(data);
             });
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
             {
-                console.log("azWindowAfterOpen")
-                console.log(data)
+                console.log("azWindowAfterOpen");
+                console.log(data);
+                $("#cmdAZWindowButton1").off().on('click', function ()
+                {
+                    data.azWindowClose();
+                });
+            });
+            $.subscribeonce("functionlib/azWindowAfterClose", function (e, data)
+            {
+                console.log("azWindowAfterClose");
+                console.log(data);
+            });
+
+            var _HTML = "";
+            _HTML += '<div class="az-margin-b-28">';
+            _HTML += '<div class="az-code jsHigh notranslate" style="border: none;">';
+            _HTML += 'new AZWindow(<br />';
+            _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowStyle: "flat",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "AZ Window 2",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowText: _HTML,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowWidth: 500,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowContentHeight: true,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowButton:<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;Button1: true,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;TextButton1: "Close"<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;}<br />';
+            _HTML += '});<br />';
+            _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '</div>';
+
+            AZWindow2 = new AZWindow(
+                {
+                    azWindowStyle: "flat",
+                    azWindowTitle: "AZ Window 2",
+                    azWindowText: _HTML,
+                    azWindowWidth: 500,
+                    azWindowContentHeight: true,
+                    azWindowButton:
+                    {
+                        Button1: true,
+                        TextButton1: "Close"
+                    }
+                });
+        }
+
+        function setAZWindow3()
+        {
+            $.subscribeonce("functionlib/azWindowBeforeOpen", function ()
+            {
+                console.log("azWindowBeforeOpen");
+            });
+            $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
+            {
+                console.log("azWindowAfterOpen");
+                console.log(data);
 
                 data.$Article.find('.az-code').css({ 'background-color': 'transparent', 'color': '#FFFFFF' });
                 $("#cmdAZWindowButton1").off().on('click', function ()
@@ -113,7 +173,7 @@
             $.subscribeonce("functionlib/azWindowAfterClose", function (e, data)
             {
                 console.log("azWindowAfterClose");
-                console.log(data)
+                console.log(data);
             });
 
             var _HTML = "";
@@ -121,7 +181,7 @@
             _HTML += '<div class="az-code jsHigh notranslate" style="border: none;">';
             _HTML += 'new AZWindow(<br />';
             _HTML += '{<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "AZ Window 2",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "AZ Window 3",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowText: _HTML,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowWidth: 500,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowHeight: 570,<br />';
@@ -142,9 +202,9 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            AZWindow2 = new AZWindow(
+            AZWindow3 = new AZWindow(
                 {
-                    azWindowTitle: "AZ Window 2",
+                    azWindowTitle: "AZ Window 3",
                     azWindowText: _HTML,
                     azWindowWidth: 500,
                     azWindowHeight: 570,
@@ -162,16 +222,16 @@
                 });
         }
 
-        function setAZWindow3()
+        function setAZWindow4()
         {
             $.subscribeonce("functionlib/azWindowBeforeOpen", function ()
             {
-                console.log("azWindowBeforeOpen")
+                console.log("azWindowBeforeOpen");
             });
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
             {
-                console.log("azWindowAfterOpen")
-                console.log(data)
+                console.log("azWindowAfterOpen");
+                console.log(data);
                 $("#cmdButton1").off().on('click', function ()
                 {
                     data.azChangeWindowTitlebar({ azWindowTitle: "New title", azWindowTitlebarBackgroundColor: "#FF4136" });
@@ -184,7 +244,7 @@
             $.subscribeonce("functionlib/azWindowAfterClose", function (e, data)
             {
                 console.log("azWindowAfterClose");
-                console.log(data)
+                console.log(data);
             });
 
             var _HTML = "";
@@ -205,7 +265,7 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            AZWindow3 = new AZWindow(
+            AZWindow4 = new AZWindow(
                 {
                     azWindowTitle: "AZ Window Title",
                     azWindowText: _HTML,
@@ -214,16 +274,16 @@
                 });
         }
 
-        function setAZWindow4()
+        function setAZWindow5()
         {
             $.subscribeonce("functionlib/azWindowBeforeOpen", function ()
             {
-                console.log("azWindowBeforeOpen")
+                console.log("azWindowBeforeOpen");
             });
             $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
             {
-                console.log("azWindowAfterOpen")
-                console.log(data)
+                console.log("azWindowAfterOpen");
+                console.log(data);
                 $("#cmdButton1").off().on('click', function ()
                 {
                     data.azWindowResize({ azWindowWidth: 800, azWindowHeight: 600 });
@@ -236,11 +296,11 @@
             $.subscribeonce("functionlib/azWindowAfterClose", function (e, data)
             {
                 console.log("azWindowAfterClose");
-                console.log(data)
+                console.log(data);
             });
 
             var _HTML = "";
-            _HTML = '<div class="az-margin-b-28">';
+            _HTML += '<div class="az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate">';
             _HTML += 'azWindowResize(<br />';
             _HTML += '{<br />';
@@ -257,13 +317,12 @@
             _HTML += '</div>';
             _HTML += '</div>';
 
-            AZWindow4 = new AZWindow(
+            AZWindow5 = new AZWindow(
                 {
                     azWindowTitle: "AZ Window Resize",
                     azWindowText: _HTML,
                     azWindowWidth: 500,
-                    azWindowContentHeight: true,
-                    azWindowPositionTop: 50
+                    azWindowContentHeight: true
                 });
         }
 
@@ -275,14 +334,19 @@
         <div id="section-1" class="az-section az-padding-t-56 az-padding-b-56">
             <div class="az-container">
                 <div class="az-row">
-                    <div class="az-col xs-12 sm-6">
+                    <div class="az-col xs-12 sm-4">
                         <div class="az-form-group">
                             <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow1">AZ Window 1</button>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6">
+                    <div class="az-col xs-12 sm-4">
                         <div class="az-form-group">
                             <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow2">AZ Window 2</button>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-4">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow3">AZ Window 3</button>
                         </div>
                     </div>
                 </div>
@@ -302,6 +366,7 @@
                             <br />
                             new AZWindow(<br />
                             {<br />
+                            &emsp;&ensp;&emsp;&ensp;azWindowStyle: "rounded",<br />
                             &emsp;&ensp;&emsp;&ensp;azWindowTitle: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azWindowText: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azWindowWidth: 300,<br />
@@ -374,6 +439,13 @@
                 <div class="az-row">
                     <div class="az-col xs-12">
                         <div class="az-code htmlHigh notranslate">
+                            <div class="az-code-property-wrapper">
+                                <property>azWindowStyle</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>"rounded"</brown></default>
+                                <values><span>Values:</span><brown>"rounded"</brown> or <brown>"flat"</brown></values>
+                                <br />
+                            </div>
                             <div class="az-code-property-wrapper">
                                 <property>azWindowTitle</property>
                                 <type><span>Type:</span> <brown>String</brown></type>
@@ -660,7 +732,7 @@
                 <div class="az-row az-margin-t-28">
                     <div class="az-col xs-12 sm-4">
                         <div class="az-form-group">
-                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow3">AZ Window Title</button>
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow4">AZ Window Title</button>
                         </div>
                     </div>
                 </div>
@@ -731,7 +803,7 @@
                 <div class="az-row">
                     <div class="az-col xs-12 sm-4">
                         <div class="az-form-group">
-                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow4">AZ Window Resize</button>
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZWindow5">AZ Window Resize</button>
                         </div>
                     </div>
                 </div>
@@ -749,7 +821,7 @@
                             AZ Window has some CSS that you can find here: <a href="/lib-2/css/window.css" target="_blank">window.css</a>
                             <br />
                             <br />
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>

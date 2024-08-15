@@ -78,6 +78,11 @@
                     });
                 }
             });
+            $.subscribe("functionlib/azModalDialogFocus", function (e, data)
+            {
+                console.log("azModalDialogFocus");
+                console.log(data);
+            });
             $.subscribeonce("functionlib/azModalDialogAfterClose", function (e, data)
             {
                 console.log("azModalDialogAfterClose")
@@ -86,7 +91,7 @@
 
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
-            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += '<div class="az-code jsHigh notranslate" style="border: none; background-color: inherit;">';
             _HTML += 'new AZModalDialog(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogId: "ModalDialog1",<br />';
@@ -98,13 +103,13 @@
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog11" style="width: 60%; margin-left: 4px;">AZ Modal Dialog 2</button>';
+            _HTML += '<button type="button" class="az-button az-round primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog11" style="width: 60%; margin-left: 4px;">AZ Modal Dialog 2</button>';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog12" style="width: 60%; margin-left: 4px;">AZ Modal Dialog 3</button>';
+            _HTML += '<button type="button" class="az-button az-round primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog12" style="width: 60%; margin-left: 4px;">AZ Modal Dialog 3</button>';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog13" style="width: 60%; margin-left: 4px;">Close</button>';
+            _HTML += '<button type="button" class="az-button az-round primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog13" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
 
@@ -145,9 +150,10 @@
 
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
-            _HTML += '<div class="az-code jsHigh notranslate" style="border: none;">';
+            _HTML += '<div class="az-code jsHigh notranslate" style="border: none; background-color: inherit;">';
             _HTML += 'new AZModalDialog(<br />';
             _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogStyle: "flat",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogId: "ModalDialog2",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "AZ Modal Dialog 2",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogText: _HTML,<br />';
@@ -155,6 +161,7 @@
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogContentHeight: true,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogModal: false,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogBackgroundColor: "#AA0263",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogColor: "#FFFFFF",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "#FFFFFF",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarColor: "#000000"<br />';
             _HTML += '});<br />';
@@ -167,6 +174,7 @@
 
             AZModalDialog2 = new AZModalDialog(
                 {
+                    azModalDialogStyle: "flat",
                     azModalDialogId: "ModalDialog2",
                     azModalDialogTitle: "AZ Modal Dialog 2",
                     azModalDialogText: _HTML,
@@ -174,6 +182,7 @@
                     azModalDialogContentHeight: true,
                     azModalDialogModal: false,
                     azModalDialogBackgroundColor: "#AA0263",
+                    azModalDialogColor: "#FFFFFF",
                     azModalDialogTitlebarBackgroundColor: "#FFFFFF",
                     azModalDialogTitlebarColor: "#000000"
                 });
@@ -206,7 +215,7 @@
 
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
-            _HTML += '<div class="az-code jsHigh notranslate" style="border: none;">';
+            _HTML += '<div class="az-code jsHigh notranslate" style="border: none; background-color: inherit;">';
             _HTML += 'new AZModalDialog(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogId: "ModalDialog3",<br />';
@@ -218,13 +227,14 @@
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogCloseOnEscape: false,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogNoParentScroll: true<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogBackgroundColor: "#00AA9B",<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogColor: "#FFFFFF",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarBackgroundColor: "#FFFFFF",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitlebarColor: "#000000"<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
-            _HTML += '<button type="button" class="az-button default az-shadow-1 az-shadow-hover-2" id="cmdModalDialog31" style="width: 60%; margin-left: 4px;">Close</button>';
+            _HTML += '<button type="button" class="az-button az-round default az-shadow-1 az-shadow-hover-2" id="cmdModalDialog31" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
 
@@ -239,6 +249,7 @@
                     azModalDialogCloseOnEscape: false,
                     azModalDialogNoParentScroll: true,
                     azModalDialogBackgroundColor: "#00AA9B",
+                    azModalDialogColor: "#FFFFFF",
                     azModalDialogTitlebarBackgroundColor: "#FFFFFF",
                     azModalDialogTitlebarColor: "#000000"
                 });
@@ -292,6 +303,7 @@
 
             ModalDialogiFrame2 = new AZModalDialog(
                 {
+                    azModalDialogStyle: "flat",
                     azModalDialogId: "azModalDialogiFrame2",
                     azModalDialogTitle: "AZ Modal Dialog iFrame 2",
                     azModalDialogWidth: 800,
@@ -329,7 +341,7 @@
 
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
-            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += '<div class="az-code jsHigh notranslate" style="border: none; background-color: inherit;">';
             _HTML += 'new AZModalDialog(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogId: "ModalDialogPosition",<br />';
@@ -351,7 +363,7 @@
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialogPosition1" style="width: 60%; margin-left: 4px;">Close</button>';
+            _HTML += '<button type="button" class="az-button az-round primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialogPosition1" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
 
@@ -397,7 +409,7 @@
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-56">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Close</button>';
+            _HTML += '<button type="button" class="az-button az-round primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
 
@@ -443,7 +455,7 @@
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-56">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Close</button>';
+            _HTML += '<button type="button" class="az-button az-round primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
 
@@ -489,7 +501,7 @@
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-56">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Close</button>';
+            _HTML += '<button type="button" class="az-button az-round primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
 
@@ -534,7 +546,7 @@
 
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
-            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += '<div class="az-code jsHigh notranslate" style="border: none; background-color: inherit;">';
             _HTML += 'var ChangeModalTitlebarOptions = <br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "New Title",<br />';
@@ -543,10 +555,10 @@
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Change Title</button>';
+            _HTML += '<button type="button" class="az-button az-round primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Change Title</button>';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton2" style="width: 60%; margin-left: 4px;">Close</button>';
+            _HTML += '<button type="button" class="az-button az-round primary az-shadow-1 az-shadow-hover-2" id="cmdButton2" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
 
@@ -575,7 +587,7 @@
                 {
                     $("#cmdModalDialog81").off().on('click', function ()
                     {
-                        data.azModalDialogResize({ azModalDialogWidth: 600, azModalDialogHeight: 600 });
+                        data.azModalDialogResize({ azModalDialogWidth: 800, azModalDialogHeight: 600 });
                     });
                     $("#cmdModalDialog82").off().on('click', function ()
                     {
@@ -591,19 +603,19 @@
 
             var _HTML = "";
             _HTML = '<div class="az-margin-b-28">';
-            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += '<div class="az-code jsHigh notranslate" style="border: none; background-color: inherit;">';
             _HTML += 'var ModalDialogResizeOptions = <br />';
             _HTML += '{<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 600,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogWidth: 800,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azModalDialogHeight: 600<br />';
             _HTML += '};<br />';
             _HTML += '<br />';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog81" style="width: 60%; margin-left: 4px;">Resize</button>';
+            _HTML += '<button type="button" class="az-button az-round primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog81" style="width: 60%; margin-left: 4px;">Resize</button>';
             _HTML += '</div>';
             _HTML += '<div class="az-form-group xs az-text-center">';
-            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog82" style="width: 60%; margin-left: 4px;">Close</button>';
+            _HTML += '<button type="button" class="az-button az-round primary az-shadow-1 az-shadow-hover-2" id="cmdModalDialog82" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
 
@@ -676,6 +688,7 @@
                             <br />
                             new AZModalDialog(<br />
                             {<br />
+                            &emsp;&ensp;&emsp;&ensp;azModalDialogStyle: "rounded",<br />
                             &emsp;&ensp;&emsp;&ensp;azModalDialogId: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azModalDialogTitle: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azModalDialogText: "",<br />
@@ -727,6 +740,8 @@
                             <br />
                             <a href="#azModalDialogAfterOpen">azModalDialogAfterOpen</a>
                             <br />
+                            <a href="#azModalDialogFocus">azModalDialogFocus</a>
+                            <br />
                             <a href="#azModalDialogAfterClose">azModalDialogAfterClose</a>
                             <br />
                             <br />
@@ -744,6 +759,13 @@
                 <div class="az-row">
                     <div class="az-col xs-12">
                         <div class="az-code htmlHigh notranslate">
+                            <div class="az-code-property-wrapper">
+                                <property>azModalDialogStyle</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>"rounded"</brown></default>
+                                <values><span>Values:</span><brown>"rounded"</brown> or <brown>"flat"</brown></values>
+                                <br />
+                            </div>
                             <div class="az-code-property-wrapper">
                                 <property>azModalDialogId</property>
                                 <type><span>Type:</span> <brown>String</brown></type>
@@ -948,6 +970,23 @@
                                     });<br />
                                     <br />
                                     This function is triggered after <strong>AZModalDialog</strong> is fully initiated.
+                                    <br />
+                                </div>
+                            </div>
+                            <div id="azModalDialogFocus" class="az-code-property-wrapper">
+                                <property>functionlib/azModalDialogFocus</property>
+                                <type><span>Type:</span> <brown>Function</brown></type>
+                                <br />
+                                <div class="jsHigh notranslate">
+                                    $.subscribe("functionlib/azModalDialogFocus", function (e, data)<br />
+                                    {<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Window - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Titlebar - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Dialog - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Article - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.$Iframe - i.fn.init[]<br />
+                                    &emsp;&ensp;&emsp;&ensp;data.azModalDialogId<br />
+                                    });<br />
                                     <br />
                                 </div>
                             </div>
