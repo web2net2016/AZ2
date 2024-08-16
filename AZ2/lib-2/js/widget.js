@@ -1,4 +1,6 @@
-﻿function AZAccordion(Options)
+﻿// AZ Widgets AZ-2.0 v.2 | (c) web2net AS
+
+function AZAccordion(Options)
 {
     if (this instanceof AZAccordion === true)
     {

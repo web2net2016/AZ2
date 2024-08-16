@@ -1343,6 +1343,7 @@ function AZSerializeForm(Options)
                             consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + _ObjReturnValidation.Input + " - " + _ObjReturnValidation.Error });
                             new AZStandardAlert(
                                 {
+                                    AZWindowStyle: AZIsNullOrEmpty(Options.AZWindowStyle) === false ? Options.AZWindowStyle : "rounded",
                                     $Area: _$Area,
                                     InputElement: _$Input,
                                     Title: Options.ObjLanguage.SingleDefaultElements.informationTitle,
@@ -3179,6 +3180,7 @@ function AZStandardAlert(Options)
         var _Main = this;
         if (AZIsEmpty(Options) === false)
         {
+            _Main.AZWindowStyle = "rounded";
             _Main.$Area = "";
             _Main.ErrorElement = "";
             _Main.AlertType = "";
@@ -3186,13 +3188,17 @@ function AZStandardAlert(Options)
             _Main.ErrorTitle = AZIsNullOrEmpty(Options.Title) === false ? Options.Title : "";
             _Main.ErrorText = Options.Text;
 
-            if ((Options.hasOwnProperty("$Area") && AZIsEmpty(Options.$Area) === false) ||
-                (Options.hasOwnProperty("Area") && AZIsEmpty(Options.Area) === false))
+            if ((Options.hasOwnProperty("AZWindowStyle") && AZIsNullOrEmpty(Options.AZWindowStyle) === false))
+            {
+                _Main.AZWindowStyle = Options.AZWindowStyle;
+            }
+            if ((Options.hasOwnProperty("$Area") && AZIsNullOrEmpty(Options.$Area) === false) ||
+                (Options.hasOwnProperty("Area") && AZIsNullOrEmpty(Options.Area) === false))
             {
                 _Main.$Area = AZIsNullOrEmpty(Options.$Area) === false ? Options.$Area : Options.Area;
             }
-            if ((Options.hasOwnProperty("InputJQElement") && AZIsEmpty(Options.InputJQElement) === false) ||
-                (Options.hasOwnProperty("InputElement") && AZIsEmpty(Options.InputElement) === false))
+            if ((Options.hasOwnProperty("InputJQElement") && AZIsNullOrEmpty(Options.InputJQElement) === false) ||
+                (Options.hasOwnProperty("InputElement") && AZIsNullOrEmpty(Options.InputElement) === false))
             {
                 _Main.ErrorElement = AZIsNullOrEmpty(Options.InputJQElement) === false ? Options.InputJQElement : Options.InputElement;
             }
@@ -3206,7 +3212,7 @@ function AZStandardAlert(Options)
                 var _$WindowTitlebar = $(".az-window-titlebar", _$Window);
                 $("body").addClass("az-alert-active");
 
-                if (_$RoleAlert.length > 0)
+                if (_$RoleAlert.length > 0 && _$RoleAlert.is(":visible") === true)
                 {
                     _Main.AlertType = "RoleAlert";
                     _Main.AlertElement = _$RoleAlert;
@@ -3245,13 +3251,6 @@ function AZStandardAlert(Options)
                 }
                 else
                 {
-                    $.subscribeonce("functionlib/azWindowAfterOpen", function (e, data)
-                    {
-                        if (_Main.ErrorTitle == "")
-                        {
-                            data.$Article.css({ "padding-top": "14px" });
-                        }
-                    });
                     $.subscribeonce("functionlib/azWindowAfterClose", function (e)
                     {
                         if (_Main.ErrorElement != "")
@@ -3262,13 +3261,15 @@ function AZStandardAlert(Options)
                     });
                     var _AZWindowOptions =
                     {
-                        azWindowText: _Main.ErrorText,
+                        azWindowStyle: _Main.AZWindowStyle,
+                        azWindowText: '<div style="margin: 35px 14px 0 14px;">' + _Main.ErrorText + '</div>',
                         azWindowWidth: 400,
                         azWindowContentHeight: true,
                         azWindowTitlebar: false
                     };
                     if (_Main.ErrorTitle != "")
                     {
+                        _AZWindowOptions.azWindowText = '<div style="margin: 14px;">' + _Main.ErrorText + '</div>',
                         _AZWindowOptions.azWindowTitle = _Main.ErrorTitle;
                         _AZWindowOptions.azWindowTitlebar = true;
                     }

@@ -1,4 +1,6 @@
-﻿function clientStorage(ActionType, Name, Value)
+﻿// AZ Client Storage AZ-2.0 v.2 | (c) web2net AS
+
+function clientStorage(ActionType, Name, Value)
 {
     return AZClientStorage(ActionType, Name, Value);
 }
