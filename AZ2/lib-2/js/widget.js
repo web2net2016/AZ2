@@ -439,18 +439,17 @@ function AZModalDialog(Options)
 
         if (_Main.Options.azModalDialogId !== "" && $("#" + _Main.Options.azModalDialogId).length === 0)
         {
-            _Main.azModalDialogId = _Main.Options.azModalDialogId;
-            $.publish("functionlib/azModalDialogBeforeOpen", { azModalDialogId: _Main.azModalDialogId });
+            $.publish("functionlib/azModalDialogBeforeOpen", { azModalDialogId: _Main.Options.azModalDialogId });
 
             ModalDialogScrollTop = 0;
             _Main.$Iframe = {};
             _Main.$Window;
-            _Main.$Dialog = $("<div></div>").attr("id", _Main.azModalDialogId).addClass("az-modal-dialog-content " + _Main.Options.azModalDialogStyle);
+            _Main.$Dialog = $("<div></div>").attr("id", _Main.Options.azModalDialogId).addClass("az-modal-dialog-content " + _Main.Options.azModalDialogStyle);
             if (_Main.Options.azModalDialogiFrameURL == "")
             {
                 _Main.$Article = $("<article></article>").html(_Main.Options.azModalDialogText);
+                _Main.$Dialog.append(_Main.$Article);
             }
-            _Main.$Dialog.append(_Main.$Article);
 
             // AZModalDialog Size
             if (_Main.Options.azModalDialogWidth > (window.innerWidth - 28))
@@ -461,10 +460,6 @@ function AZModalDialog(Options)
             {
                 _Main.Options.azModalDialogHeight = (window.innerHeight - 28);
             }
-            if (_Main.Options.azModalDialogContentHeight === true)
-            {
-                _Main.Options.azModalDialogHeight = "auto";
-            }
 
             // AZModalDialog UI Dialog
             _Main.$Dialog.dialog(
@@ -472,7 +467,7 @@ function AZModalDialog(Options)
                     autoOpen: false,
                     modal: false,
                     width: _Main.Options.azModalDialogWidth,
-                    height: _Main.Options.azModalDialogHeight,
+                    height: _Main.Options.azModalDialogContentHeight === false ? _Main.Options.azModalDialogHeight : "auto",
                     resizable: _Main.Options.azModalDialogResizable,
                     draggable: _Main.Options.azModalDialogDraggable,
                     closeOnEscape: _Main.Options.azModalDialogCloseOnEscape
@@ -538,7 +533,7 @@ function AZModalDialog(Options)
                                 $Dialog: _Main.$Dialog,
                                 $Article: _Main.$Article,
                                 $Iframe: _Main.$Iframe,
-                                azModalDialogId: _Main.azModalDialogId
+                                azModalDialogId: _Main.Options.azModalDialogId
                             });
                     },
                     close: function (e, ui)
@@ -549,19 +544,6 @@ function AZModalDialog(Options)
                         }
                     }
                 });
-
-            // AZModalDialog iFrame
-            if (_Main.Options.azModalDialogiFrameURL != "")
-            {
-                var _IFrameHeight = AZElementSize(_Main.$Dialog).Height;
-                if (_Main.Options.azModalDialogTitlebar === true)
-                {
-                    _IFrameHeight = (_IFrameHeight + 1);
-                }
-                _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe-" + _Main.azModalDialogId).addClass("az-iframe");
-                _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": _IFrameHeight });
-                _Main.$Dialog.append(_Main.$Iframe).addClass("overflow");
-            }
 
             // AZModalDialog No Parent Scroll
             if ($("body").hasClass("az-no-parent-scroll") === false && _Main.Options.azModalDialogNoParentScroll === true)
@@ -596,6 +578,50 @@ function AZModalDialog(Options)
                 });
             }
 
+            window.setTimeout(function ()
+            {
+                _Main.WindowHeight = AZElementSize(_Main.$Dialog).Height;
+                _Main.TitlebarHeight = AZElementSize(_Main.$Titlebar).Height;
+
+                if (_Main.Options.azModalDialogContentHeight === true)
+                {
+                    if (_Main.WindowHeight > (window.innerHeight - 28))
+                    {
+                        _Main.Options.azModalDialogHeight = (window.innerHeight - 28);
+                    }
+                    else
+                    {
+                        _Main.Options.azModalDialogHeight = _Main.WindowHeight;
+                        if (_Main.Options.azModalDialogTitlebar === true)
+                        {
+                            _Main.Options.azModalDialogHeight = (_Main.Options.azModalDialogHeight + _Main.TitlebarHeight + 14);
+                            if (_Main.Options.azWindowStyle == "flat")
+                            {
+                                _Main.Options.azModalDialogHeight = (_Main.Options.azModalDialogHeight + _Main.TitlebarHeight);
+                            }
+                        }
+                        if (_Main.Options.azModalDialogHeight > (window.innerHeight - 28))
+                        {
+                            _Main.Options.azModalDialogHeight = (window.innerHeight - 28);
+                        }
+                    }
+                }
+
+                // AZModalDialog iFrame
+                if (_Main.Options.azModalDialogiFrameURL != "")
+                {
+                    var _IFrameHeight = _Main.Options.azModalDialogHeight;
+                    if (_Main.Options.azModalDialogTitlebar === true)
+                    {
+                        _IFrameHeight = (_Main.Options.azModalDialogHeight + 1);
+                    }
+                    _Main.$Iframe = $("<iframe></iframe>").attr("id", "az-iframe-" + _Main.Options.azModalDialogId).addClass("az-iframe");
+                    _Main.$Iframe.attr("src", _Main.Options.azModalDialogiFrameURL).css({ "width": "100%", "height": _IFrameHeight });
+                    _Main.$Dialog.append(_Main.$Iframe).addClass("overflow");
+                }
+                _Main.$Dialog.dialog({ height: _Main.Options.azModalDialogHeight });
+            }, 200);
+
             // AZModalDialog Close
             _Main.azModalDialogClose = function (e)
             {
@@ -624,7 +650,7 @@ function AZModalDialog(Options)
                         $("body").removeAttr("class");
                     }
                 }
-                $.publish("functionlib/azModalDialogAfterClose", { azModalDialogId: _Main.azModalDialogId });
+                $.publish("functionlib/azModalDialogAfterClose", { azModalDialogId: _Main.Options.azModalDialogId });
             };
 
             // AZModalDialog Change Titlebar
@@ -721,7 +747,7 @@ function AZModalDialog(Options)
                     $Dialog: _Main.$Dialog,
                     $Article: _Main.$Article,
                     $Iframe: _Main.$Iframe,
-                    azModalDialogId: _Main.azModalDialogId,
+                    azModalDialogId: _Main.Options.azModalDialogId,
                     azModalDialogClose: _Main.azModalDialogClose,
                     azChangeModalTitlebar: _Main.azChangeModalTitlebar,
                     azModalDialogResize: _Main.azModalDialogResize
@@ -1144,13 +1170,11 @@ function AZWindow(Options)
                         {
                             _Main.Options.azWindowHeight = (window.innerHeight - 28);
                             _Main.$Window.addClass("az-window-center-center");
-                            SetAZWindowHeight(_Main.Options.azWindowHeight);
                         }
                         else
                         {
                             _Main.$Window.addClass("az-window-center");
                             _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
-                            SetAZWindowHeight(_Main.Options.azWindowHeight);
                         }
                     }
                     else
@@ -1159,14 +1183,12 @@ function AZWindow(Options)
                         {
                             _Main.Options.azWindowHeight = (window.innerHeight - 28);
                             _Main.$Window.addClass("az-window-center-center");
-                            SetAZWindowHeight(_Main.Options.azWindowHeight);
                         }
                         else
                         {
-                            _Main.Options.azWindowHeight = (_Main.WindowHeight + _Main.TitlebarHeight);
+                            _Main.Options.azWindowHeight = _Main.WindowHeight;
                             _Main.$Window.addClass("az-window-center");
                             _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
-                            SetAZWindowHeight(_Main.Options.azWindowHeight);
                         }
                     }
                 }
@@ -1175,7 +1197,6 @@ function AZWindow(Options)
                     if (_Main.Options.azWindowContentHeight === false)
                     {
                         _Main.$Window.addClass("az-window-center-center");
-                        SetAZWindowHeight(_Main.Options.azWindowHeight);
                     }
                     else
                     {
@@ -1183,16 +1204,15 @@ function AZWindow(Options)
                         {
                             _Main.Options.azWindowHeight = (window.innerHeight - 28);
                             _Main.$Window.addClass("az-window-center-center");
-                            SetAZWindowHeight(_Main.Options.azWindowHeight);
                         }
                         else
                         {
-                            _Main.Options.azWindowHeight = (_Main.WindowHeight + _Main.TitlebarHeight);
+                            _Main.Options.azWindowHeight = _Main.WindowHeight;
                             _Main.$Window.addClass("az-window-center-center");
-                            SetAZWindowHeight(_Main.Options.azWindowHeight);
                         }
                     }
                 }
+                SetAZWindowHeight(_Main.Options.azWindowHeight);
 
                 if (_Main.Options.azWindowAnimation === true)
                 {
@@ -1339,30 +1359,39 @@ function AZWindow(Options)
                         {
                             _Main.WindowResizeOptions.azWindowHeight = (window.innerHeight - 28);
                             _Main.$Window.addClass("az-window-center-center");
-                            SetAZWindowHeight(_Main.WindowResizeOptions.azWindowHeight);
                         }
                         else
                         {
                             _Main.$Window.addClass("az-window-center");
                             _Main.$Window.css({ "top": _Main.Options.azWindowPositionTop });
-                            SetAZWindowHeight(_Main.WindowResizeOptions.azWindowHeight);
                         }
                     }
                     else
                     {
                         _Main.$Window.addClass("az-window-center-center");
-                        SetAZWindowHeight(_Main.WindowResizeOptions.azWindowHeight);                        
                     }
+                    SetAZWindowHeight(_Main.WindowResizeOptions.azWindowHeight);
                 }, 200);
             };
 
             function SetAZWindowHeight(Height)
             {
-                _Main.$Window.height(Height);
-                _Main.$Dialog.height((Height - _Main.TitlebarHeight) - 7);
-                if (_Main.Options.azWindowTitlebar === false)
+                _Main.$Window.add(_Main.$Dialog).height(Height);
+                if (_Main.Options.azWindowTitlebar === true)
                 {
-                    _Main.$Dialog.height(Height - _Main.TitlebarHeight);
+                    _Main.$Dialog.height(Height - _Main.TitlebarHeight - 7);
+                    if (_Main.Options.azWindowStyle == "flat")
+                    {
+                        _Main.$Dialog.height(Height - _Main.TitlebarHeight);
+                    }
+                }
+                else
+                {
+                    _Main.$Dialog.height(Height - 14);
+                    if (_Main.Options.azWindowStyle == "flat")
+                    {
+                        _Main.$Dialog.height(Height);
+                    }
                 }
             };
         }
