@@ -34,7 +34,7 @@
             DateTime: "2020-02-21T02:38",
             Decimal: 111.50,
             Numeric: 12345,
-            Comment: ""
+            Comment: "Dette er en kommentar."
         };
 
         $(function ()
@@ -50,7 +50,7 @@
             });
             new AZPage(
                 {
-                    azPageElement: ["submit"],
+                    azPageElement: ["cmdSubmit", "cmdCancel"],
                     azPageInputTypeEvents: true,
                     azPageLanguage: true,
                     azPageLanguageUrl: "/lib-2/admin/index",
@@ -64,13 +64,7 @@
         function SetAZPageContent(e, data)
         {
             ObjPageData.Values.AZPage = data;
-
-            //var _AZSetLanguageOptions =
-            //{
-            //    $Area: $("#labelCustomerName").parent(),
-            //    ObjLanguage: { "labelCustomerName": "Et firmanavn:" }
-            //};
-            //AZSetLanguage(_AZSetLanguageOptions);
+            ObjPageData.Elements.$cmdSubmit.attr("disabled", true).prop("title", "");
 
             var _AZPopulateFormOptions =
             {
@@ -87,7 +81,7 @@
 
         function AZCancel()
         {
-            window.location.href = "/lib-2.0.1/azcdn200.html";
+            window.location.href = "/lib-2/azcdn2.html";
         }
 
         function AZSubmit()
@@ -110,8 +104,13 @@
 
         function AZValidateDirty(type, data)
         {
-            console.log("AZValidateDirty");
-            console.log(type, data);
+            if (formdirty === false)
+            {
+                formdirty = true;
+                ObjPageData.Elements.$cmdSubmit.removeClass("az-button-disabled").attr("disabled", false).prop("title", ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.cmdSubmitTitle);
+                ObjPageData.Elements.$cmdCancel.html(ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.cmdCancelText).prop("title", ObjPageData.Values.AZPage.ObjLanguage.SingleDefaultElements.cmdCancelTitle);
+            }
+            console.log("AZValidateDirty", type, data);
         }
 
     </script>
@@ -263,7 +262,8 @@
                 <div class="az-row az-margin-t-56 az-margin-b-14">
                     <div class="az-col xs-12">
                         <div class="az-form-group xs az-text-center">
-                            <button type="button" class="az-button az-width-40 primary az-shadow-1 az-shadow-hover-2 submit htmlembedded title"><i class="fas fa-exclamation az-padding-r-7"></i></button>
+                            <button type="button" class="az-button az-round info az-shadow-1 az-shadow-hover-2 cancel" id="cmdCancel"></button>
+                            <button type="button" class="az-button az-round primary az-shadow-1 az-shadow-hover-2 submit az-button-disabled" id="cmdSubmit"></button>
                         </div>
                     </div>
                 </div>
@@ -272,7 +272,7 @@
                     <div class="az-col xs-12">
                         <div class="az-card" style="margin: 0;">
                             <header class="az-text-center">
-                                <h1>Klikk på <strong>Lagre</strong> for å se objektet som serialiseres fra skjemaet.</h1>
+                                <h1>Click <strong>Save</strong> to see the object being serialized from the form.</h1>
                             </header>
                             <article style="display: none;">
                                 <div id="ObjFormResponse" class="az-code jsHigh notranslate"></div>
@@ -285,6 +285,18 @@
                     <div class="az-col xs-12">
                         <h1 class="az-code-header" style="margin: 0;">AZSettings - SetAZPage</h1>
                         <div class="az-code jsHigh notranslate">
+                            <br />
+                            <p>
+                                AZ contains a Global object (ObjPageData) which contains general system information and in which you can store information yourself.<br /><br />
+                                ObjPageData is divided into two sub-objects, Elements and Values.<br /><br />
+                                - Elements typically contains HTML elements.<br />
+                                - Values ​​typically contains Arrays and Objects.
+                            </p>
+                            <br />
+                            ObjPageData.Elements = {}<br />
+                            ObjPageData.Values = {}<br />
+                            <br />
+                            <br />
                             var AZSettings =<br />
                             {<br />
                             &emsp;&ensp;&emsp;&ensp;DefaultLanguageFile: "/lib-2/admin/default-lang.json",<br />
@@ -299,7 +311,7 @@
                             &emsp;&ensp;&emsp;&ensp;});<br />
                             &emsp;&ensp;&emsp;&ensp;new AZPage(<br />
                             &emsp;&ensp;&emsp;&ensp;{<br />
-                            &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageElement: ["submit"],<br />
+                            &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageElement: ["cmdSubmit", "cmdCancel"],<br />
                             &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageInputTypeEvents: true,<br />
                             &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageLanguage: true,<br />
                             &emsp;&ensp;&emsp;&ensp;&emsp;&ensp;&emsp;&ensp;azPageLanguageUrl: "/lib-2/admin/index",<br />

@@ -12,9 +12,11 @@ var AZSettings =
     ApiVersion: "_1"
 };
 
-var ObjPageData = {};
-ObjPageData.Elements = {};
-ObjPageData.Values = {};
+var ObjPageData =
+{
+    Elements: {},
+    Values: {}
+};
 var ModalDialogScrollTop = 0;
 var AZStandardAlertReturnObj = {};
 
@@ -878,21 +880,13 @@ function AZSetInputTypeEvents()
                 _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
             }
             $(this).off("keydown", AZValidateInputValueKeydown).on("keydown", { ValidType: _ValidType }, AZValidateInputValueKeydown);
-            if ($(this).hasClass("az-input-animated"))
-            {
-                $(this).off("focusout", AZInputAnimatedFocusout).on("focusout", AZInputAnimatedFocusout);
-            }
-            if ($(this).hasClass("az-input-slideup"))
-            {
-                $(this).off("focusout", AZInputAnimatedSlideupFocusout).on("focusout", AZInputAnimatedSlideupFocusout);
-            }
             if ($(this).hasClass("forceuppercase"))
             {
-                $(this).off("keypress focusout", AZForceUppercaseKeypressFocusout).on("keypress focusout", AZForceUppercaseKeypressFocusout);
+                $(this).off("keydown focusout", AZForceUppercaseKeypressFocusout).on("keydown focusout", AZForceUppercaseKeypressFocusout);
             }
             if ($(this).hasClass("forcelowercase"))
             {
-                $(this).off("keypress focusout", AZForceLowercaseKeypressFocusout).on("keypress focusout", AZForceLowercaseKeypressFocusout);
+                $(this).off("keydown focusout", AZForceLowercaseKeypressFocusout).on("keydown focusout", AZForceLowercaseKeypressFocusout);
             }
             if ($(this).hasClass("donotpaste"))
             {
@@ -917,12 +911,16 @@ function AZSetInputTypeEvents()
                     $(this)[0].select();
                 });
             }
+            if ($(this).hasClass("az-input-animated"))
+            {
+                $(this).off("focusout", AZInputAnimatedFocusout).on("focusout", AZInputAnimatedFocusout);
+            }
+            if ($(this).hasClass("az-input-slideup"))
+            {
+                $(this).off("focusout", AZInputAnimatedSlideupFocusout).on("focusout", AZInputAnimatedSlideupFocusout);
+            }
             AZDatepicker($(this), _DefaultLanguage);
             AZTimepicker($(this), _DefaultLanguage);
-        }
-        if ($(this).is("[type='range']") && $(this).hasClass("az-range"))
-        {
-            $(this).off("input change", AZRange).on("input change", AZRange);
         }
         if ($(this).is("textarea"))
         {
@@ -932,14 +930,14 @@ function AZSetInputTypeEvents()
             {
                 _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
             }
-            $(this).off("keydown", AZValidateInputValueKeydown).on("keypress", { ValidType: _ValidType }, AZValidateInputValueKeydown);
+            $(this).off("keydown", AZValidateInputValueKeydown).on("keydown", { ValidType: _ValidType }, AZValidateInputValueKeydown);
             if ($(this).hasClass("forceuppercase"))
             {
-                $(this).off("keypress focusout", AZForceUppercaseKeypressFocusout).on("keypress focusout", AZForceUppercaseKeypressFocusout);
+                $(this).off("keydown focusout", AZForceUppercaseKeypressFocusout).on("keydown focusout", AZForceUppercaseKeypressFocusout);
             }
             if ($(this).hasClass("forcelowercase"))
             {
-                $(this).off("keypress focusout", AZForceLowercaseKeypressFocusout).on("keypress focusout", AZForceLowercaseKeypressFocusout);
+                $(this).off("keydown focusout", AZForceLowercaseKeypressFocusout).on("keydown focusout", AZForceLowercaseKeypressFocusout);
             }
             if ($(this).hasClass("donotpaste"))
             {
@@ -1028,6 +1026,10 @@ function AZSetInputTypeEvents()
             {
                 AZDisableButton(this);
             }
+        }
+        if ($(this).is("[type='range']") && $(this).hasClass("az-range"))
+        {
+            $(this).off("input change", AZRange).on("input change", AZRange);
         }
     });
 
@@ -1145,17 +1147,34 @@ function AZValidateInputValueKeydown(e)
         var _Element = e.target || e.srcElement;
         var _KeyChar = e.keyCode || e.which;
         var _ValidType = AZGetValidType(e.data.ValidType);
+        var _CharDesList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 127, 129, 141, 143, 144, 157];
+        var _SpesCharList = ['ScrollLock', 'Pause', 'Insert', 'Home', 'PageUp', 'PageDown', 'End', 'Delete', 'ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft', 'Insert', 'Meta', 'ContextMenu',]
 
-        var _CharList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 91, 92, 93, 127, 144, 145];
-        if (_CharList.includes(_KeyChar) === false && e.ctrlKey === false)
+        if (_CharDesList.includes(_KeyChar) === true || _SpesCharList.includes(e.key) === true || e.ctrlKey === true)
         {
             ResetAZStandardAlert();
-            if (AZIsNullOrEmpty(_ValidType) === false)
+            TriggerSpecialChar();
+        }
+        else
+        {
+            if (_CharDesList.includes(_KeyChar) === false && _SpesCharList.includes(e.key) === false && e.ctrlKey === false)
             {
-                if (_ValidType.substring(0, 3) === "NOT")
+                ResetAZStandardAlert();
+                if (AZIsNullOrEmpty(_ValidType) === false)
                 {
-                    _ValidType = _ValidType.substring(3);
-                    if (_ValidType.includes(e.key.toLowerCase()) === false)
+                    if (_ValidType.substring(0, 3) === "NOT")
+                    {
+                        _ValidType = _ValidType.substring(3);
+                        if (_ValidType.includes(e.key.toLowerCase()) === false)
+                        {
+                            TriggerNormal();
+                        }
+                        else
+                        {
+                            TriggerAlert();
+                        }
+                    }
+                    else if (_ValidType.includes(e.key.toLowerCase()) === true)
                     {
                         TriggerNormal();
                     }
@@ -1164,22 +1183,14 @@ function AZValidateInputValueKeydown(e)
                         TriggerAlert();
                     }
                 }
-                else if (_ValidType.includes(e.key.toLowerCase()) === true)
+                else
                 {
                     TriggerNormal();
                 }
-                else
-                {
-                    TriggerAlert();
-                }
-            }
-            else
-            {
-                TriggerNormal();
             }
         }
 
-        function TriggerNormal()
+        function TriggerSpecialChar()
         {
             var _$Element = $(_Element);
             setTimeout(function ()
@@ -1189,10 +1200,59 @@ function AZValidateInputValueKeydown(e)
                     azInputId: _$Element.attr("id") != undefined ? _$Element.attr("id") : _$Element.attr("data-id") != undefined ? _$Element.attr("data-id") : "",
                     azInputName: _$Element.attr("name") === undefined ? "" : _$Element.attr("name"),
                     azInputClass: _$Element.attr("class") === undefined ? "" : _$Element.attr("class"),
-                    azInputKey: e.key,
-                    azInputValue: _Element.value,
+                    azInputKey: e.code,
                     azInputJQElement: _$Element
                 };
+                $.publish("functionlib/asValidateInputSpecialChar",
+                    {
+                        azInputId: _Data.azInputId,
+                        azInputName: _Data.azInputName,
+                        azInputClass: _Data.azInputClass,
+                        azInputKey: _Data.azInputKey,
+                        azInputJQElement: _Data.azInputJQElement
+                    });
+                if (typeof AZValidateDirty == "function")
+                {
+                    AZValidateDirty("functionlib/asValidateInputSpecialChar", _Data);
+                }
+            }, 0);
+        }
+
+        function TriggerNormal()
+        {
+            var _$Element = $(_Element);
+            setTimeout(function ()
+            {
+                var _InputKey = e.key;
+                var _InputValue = _Element.value;
+
+                $.each($._data(_$Element[0], "events"), function (Index, Obj)
+                {
+                    if (Obj[0].type == "focusout")
+                    {
+                        if (Obj[0].handler.name == "AZForceUppercaseKeypressFocusout")
+                        {
+                            _InputKey = _InputKey.toUpperCase();
+                            _InputValue = _InputValue.toUpperCase();
+                        }
+                        if (Obj[0].handler.name == "AZForceLowercaseKeypressFocusout")
+                        {
+                            _InputKey = _InputKey.toLowerCase();
+                            _InputValue = _InputValue.toLowerCase();
+                        }                        
+                    }
+                });
+
+                var _Data =
+                {
+                    azInputId: _$Element.attr("id") != undefined ? _$Element.attr("id") : _$Element.attr("data-id") != undefined ? _$Element.attr("data-id") : "",
+                    azInputName: _$Element.attr("name") === undefined ? "" : _$Element.attr("name"),
+                    azInputClass: _$Element.attr("class") === undefined ? "" : _$Element.attr("class"),
+                    azInputKey: _InputKey,
+                    azInputValue: _InputValue,
+                    azInputJQElement: _$Element
+                };
+
                 $.publish("functionlib/asValidateInputValueKeydown",
                     {
                         azInputId: _Data.azInputId,

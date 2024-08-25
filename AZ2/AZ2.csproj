@@ -74,15 +74,6 @@
     <Content Include="lib-2\css\jqueryui.css" />
     <Content Include="lib-2\css\window.css" />
     <Content Include="lib-2\css\modaldialog.css" />
-    <Content Include="lib-2\fontawesome\fontawesome-all - Copy.css" />
-    <Content Include="lib-2\fontawesome\webfonts\fa-brands-400.ttf" />
-    <Content Include="lib-2\fontawesome\webfonts\fa-brands-400.woff2" />
-    <Content Include="lib-2\fontawesome\webfonts\fa-regular-400.ttf" />
-    <Content Include="lib-2\fontawesome\webfonts\fa-regular-400.woff2" />
-    <Content Include="lib-2\fontawesome\webfonts\fa-solid-900.ttf" />
-    <Content Include="lib-2\fontawesome\webfonts\fa-solid-900.woff2" />
-    <Content Include="lib-2\fontawesome\webfonts\fa-v4compatibility.ttf" />
-    <Content Include="lib-2\fontawesome\webfonts\fa-v4compatibility.woff2" />
     <Content Include="lib-2\jquerytimepicker\jquery.ui.timepicker.css" />
     <Content Include="lib-2\jquerytimepicker\jquery.ui.timepicker.js" />
     <Content Include="lib-2\jqueryui\images\ui-icons_444444_256x240.png" />
@@ -169,6 +160,14 @@
     <Content Include="lib-2\admin\index-lang.json" />
     <Content Include="lib-2\admin\index-val.json" />
     <None Include="bundleconfig.json" />
+    <Content Include="lib-2\fontawesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="lib-2\fontawesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="lib-2\fontawesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="lib-2\fontawesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="lib-2\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="lib-2\fontawesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="lib-2\fontawesome\webfonts\fa-v4compatibility.ttf" />
+    <Content Include="lib-2\fontawesome\webfonts\fa-v4compatibility.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
