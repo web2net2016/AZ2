@@ -880,6 +880,10 @@ function AZSetInputTypeEvents()
                 _ValidType = $(this).attr("class").match(/[\w-]*validate-[\w-]*/g);
             }
             $(this).off("keydown", AZValidateInputValueKeydown).on("keydown", { ValidType: _ValidType }, AZValidateInputValueKeydown);
+            if ($(this).hasClass("forcetitlecase"))
+            {
+                $(this).off("focusout", AZForceTitleCaseFocusout).on("focusout", AZForceTitleCaseFocusout);
+            }
             if ($(this).hasClass("forceuppercase"))
             {
                 $(this).off("keydown focusout", AZForceUppercaseKeypressFocusout).on("keydown focusout", AZForceUppercaseKeypressFocusout);
@@ -2209,6 +2213,15 @@ function AZInputAnimatedSlideupFocusout(e)
         {
             _$Sibling.removeClass('xs-top').removeClass('sm-top').removeClass('md-top').removeClass('normal-top');
         }
+    }
+}
+
+function AZForceTitleCaseFocusout(e)
+{
+    if (AZIsNullOrEmpty(e) === false)
+    {
+        var _Element = e.target || e.srcElement;
+        $(_Element).val(v.titleCase($(_Element).val()));
     }
 }
 

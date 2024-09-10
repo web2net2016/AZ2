@@ -47,6 +47,7 @@
       "lib-2/js/sort.js",
       "lib-2/js/swiped-events.js",
       "lib-2/swiper/swiper-bundle.min.js",
+      "lib-2/js/voca.min.js",
       "lib-2/js/clientstorage.js",
       "lib-2/js/functionlib.js",
       "lib-2/js/widget.js"

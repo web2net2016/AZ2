@@ -82,6 +82,7 @@
     <Content Include="lib-2\jqueryui\images\ui-icons_777777_256x240.png" />
     <Content Include="lib-2\jqueryui\images\ui-icons_cc0000_256x240.png" />
     <Content Include="lib-2\jqueryui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="lib-2\js\voca.min.js" />
     <Content Include="lib-2\js\swiped-events.js" />
     <Content Include="lib-2\js\az-2.js" />
     <Content Include="lib-2\js\az-2.min.js">

@@ -15,7 +15,7 @@
     "data-attr": "val",
     "minlength": "2",
     "maxlength": "50",
-    "class": "validate validate-alpha",
+    "class": "validate validate-alpha forcetitlecase",
     "datatype": "string",
     "connected": [ "CustomerName", "Contact" ],
     "data-help": "Contact",
