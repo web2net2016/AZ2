@@ -25650,7 +25650,7 @@ ul
     }
 }
 
-#az-full-window
+.az-full-window
 {
     position: fixed;
     z-index: 4999;
@@ -25662,25 +25662,53 @@ ul
     color: #000000;
 }
 
-#az-full-window-close
+.az-full-window.rounded-top
 {
-    cursor: pointer;
-    position: absolute;
-    top: 50px;
-    right: 10px;
-    -webkit-transform: translateX(0%, -50%);
-    -moz-transform: translateX(0%, -50%);
-    -ms-transform: translateX(0%, -50%);
-    -o-transform: translateX(0%, -50%);
-    transform: translate(0%, -50%);
-    padding: 7px 14px;
-    font-size: 35px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
-    #az-full-window-close:hover
+    .az-full-window > .az-full-window-titlebar
     {
-        background: #DDDDDD;
+        display: grid;
+        grid-template-columns: 1fr 27px;
+        align-items: center;
+        border-bottom: 1px solid #BBBBBB;
+        height: 49px;
     }
+
+        .az-full-window > .az-full-window-titlebar > h1
+        {
+            display: inline-block;
+            margin: 0 14px 0 14px;
+            font-size: 14px;
+        }
+
+        .az-full-window > .az-full-window-titlebar > span
+        {
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .az-full-window > .az-full-window-titlebar > span:hover
+            {
+                color: #ff4136;
+            }
+
+    .az-full-window > article
+    {
+        margin: 14px;
+        overflow-y: auto;
+    }
+
+@media screen and (min-width: 576px)
+{
+    .az-full-window > article
+    {
+        scrollbar-width: thin;
+    }
+}
 
 .az-hover-grow
 {

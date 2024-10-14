@@ -3211,16 +3211,16 @@ function AZLoadTemplates(Options)
 {
     var _Defaults =
     {
+        ReturnId: "",
         TemplateId: "",
         Url: "/lib/template/template.html"
     };
     var _Options = $.extend({}, _Defaults, Options || {});
-
-    if (AZIsNullOrEmpty(_Options.TemplateId) === false && AZIsNullOrEmpty(_Options.TemplateId) === false)
+    if (AZIsNullOrEmpty(_Options.TemplateId) === false && _Options.Url != "")
     {
-        $('<div>').load(_Options.Url + " #" + _Options.TemplateId, function ()
+        $('<div>').load(_Options.Url + " #" + _Options.TemplateId, function (response, status, xhr)
         {
-            $.publish("functionlib/azLoadTemplates", $($(this).html()).html());
+            $.publish("functionlib/azLoadTemplates" + _Options.ReturnId, $($(this).html()).html());
         });
     }
 }
@@ -3244,6 +3244,17 @@ function AZDownloadFileContent(Content, MimeType, Filename)
     _Link.setAttribute('download', Filename);
     _Link.click();
     _Link.remove();
+}
+
+function AZMobile()
+{
+    var regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    var _ReturnObj =
+    {
+        Mobile: regex.test(navigator.userAgent),
+        Orientation: window.screen.orientation.type == "portrait-primary" ? "portrait" : "landscape"
+    };
+    return _ReturnObj;
 }
 
 function AZStandardAlert(Options)

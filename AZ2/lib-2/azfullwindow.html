@@ -25,6 +25,7 @@
         var AZFullWindow1 = {};
         var AZFullWindow2 = {};
         var AZFullWindow3 = {};
+        var AZFullWindow4 = {};
         var AZModalDialog1 = {};
         var AZWindow1 = {};
 
@@ -35,6 +36,7 @@
             $("#cmdAZFullWindow1").off("click", setAZFullWindow1).on("click", setAZFullWindow1);
             $("#cmdAZFullWindow2").off("click", setAZFullWindow2).on("click", setAZFullWindow2);
             $("#cmdAZFullWindow3").off("click", setAZFullWindow3).on("click", setAZFullWindow3);
+            $("#cmdAZFullWindow4").off("click", setAZFullWindow4).on("click", setAZFullWindow4);
         });
 
         function setAZFullWindow1()
@@ -48,6 +50,7 @@
             {
                 console.log("azFullWindowAfterOpen");
                 console.log(data)
+                $("#cmdCloseFullWindow").on("click", data.azFullWindowClose);
                 $("#cmdModalDialog1").off("click", setModalDialog1).on("click", setModalDialog1);
                 $("#cmdModalDialog2").off("click", setAZWindow1).on("click", setAZWindow1);
             });
@@ -62,6 +65,7 @@
             _HTML += '<div class="az-code jsHigh notranslate">';
             _HTML += 'new AZFullWindow(<br />';
             _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowId: 1,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowText: _HTML<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
@@ -72,10 +76,14 @@
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2 az-sm-width-20" id="cmdModalDialog2">AZ Window 1</button>';
             _HTML += '</div>';
+            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-56">';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2 az-sm-width-20" id="cmdCloseFullWindow">Close AZ FullWindow</button>';
+            _HTML += '</div>';
             _HTML += '</div>';
 
             AZFullWindow1 = new AZFullWindow(
                 {
+                    azFullWindowId: 1,
                     azFullWindowText: _HTML
                 });
         }
@@ -161,6 +169,7 @@
             {
                 console.log("azFullWindowAfterOpen");
                 console.log(data);
+                $("#cmdCloseFullWindow").on("click", data.azFullWindowClose);
             });
             $.subscribeonce("functionlib/azFullWindowAfterClose", function (e, data)
             {
@@ -173,21 +182,24 @@
             _HTML += '<div class="az-code jsHigh notranslate">';
             _HTML += 'new AZFullWindow(<br />';
             _HTML += '{<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowText: _HTML<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowPosition: "top"<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowId: 2,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowText: _HTML,<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowPosition: "top",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowFadeIn: 700<br />';
-            _HTML += '&emsp;&ensp;&emsp;&ensp;azFullWindowFadeOut: 700<br />';
             _HTML += '});<br />';
             _HTML += '<br />';
+            _HTML += '</div>';
+            _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
+            _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2 az-sm-width-20" id="cmdCloseFullWindow">Close AZ FullWindow</button>';
             _HTML += '</div>';
             _HTML += '</div>';
 
             AZFullWindow2 = new AZFullWindow(
                 {
+                    azFullWindowId: 2,
                     azFullWindowText: _HTML,
                     azFullWindowPosition: "top",
-                    azFullWindowFadeIn: 700,
-                    azFullWindowFadeOut: 700
+                    azFullWindowFadeIn: 700
                 });
         }
 
@@ -202,7 +214,40 @@
             {
                 console.log("azFullWindowAfterOpen");
                 console.log(data);
-                data.$Window.css({ 'border-top-left-radius': '20px', 'border-top-right-radius': '20px' });
+            });
+            $.subscribeonce("functionlib/azFullWindowAfterClose", function (e, data)
+            {
+                console.log("azFullWindowAfterClose");
+                console.log(data);
+            });
+
+            var _HTML = "";
+            _HTML = '<div style="display: grid; grid-template-columns: 1fr 50px; align-items: center;">';
+            _HTML += '<div>There are two ways to initiate the AZFullWindow</div>';
+            _HTML += '<div style="margin-top: 3px;"><i class="fas fa-search fa-lg fa-fw"></i></div>';
+            _HTML += '</div>';
+
+            AZFullWindow3 = new AZFullWindow(
+                {
+                    azFullWindowId: 3,
+                    azFullWindowTitle: _HTML,
+                    azFullWindowText: '<div style="height: 1200px;"></div>',
+                    azFullWindowHeight: 600,
+                    azFullWindowTitlebar: true
+                });
+        }
+
+        function setAZFullWindow4()
+        {
+            $.subscribeonce("functionlib/azFullWindowBeforeOpen", function (e, data)
+            {
+                console.log("azFullWindowBeforeOpen");
+                console.log(data);
+            });
+            $.subscribeonce("functionlib/azFullWindowAfterOpen", function (e, data)
+            {
+                console.log("azFullWindowAfterOpen");
+                console.log(data);
             });
             $.subscribeonce("functionlib/azFullWindowAfterClose", function (e, data)
             {
@@ -212,11 +257,14 @@
 
             var _HTML = "";
 
-
-            AZFullWindow3 = new AZFullWindow(
+            AZFullWindow4 = new AZFullWindow(
                 {
+                    azFullWindowId: 4,
                     azFullWindowText: _HTML,
-                    azFullWindowHeight: 65
+                    azFullWindowHeight: 450,
+                    azFullWindowBackgroundColor: "#EFEFF2",
+                    azFullWindowTitlebar: true,
+                    azFullWindowTitlebarClose: true
                 });
         }
 
@@ -228,19 +276,24 @@
         <div id="section-1" class="az-section az-padding-t-56 az-padding-b-56">
             <div class="az-container">
                 <div class="az-row">
-                    <div class="az-col xs-12 sm-4">
+                    <div class="az-col xs-12 sm-3">
                         <div class="az-form-group">
                             <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZFullWindow1">AZ Full Window 1</button>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-4">
+                    <div class="az-col xs-12 sm-3">
                         <div class="az-form-group">
                             <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZFullWindow2">AZ Full Window 2</button>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-4">
+                    <div class="az-col xs-12 sm-3">
                         <div class="az-form-group">
                             <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZFullWindow3">AZ Full Window 3</button>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-3">
+                        <div class="az-form-group">
+                            <button type="button" class="az-button az-button-block primary az-shadow-1 az-shadow-hover-2" id="cmdAZFullWindow4">AZ Full Window 4</button>
                         </div>
                     </div>
                 </div>
@@ -260,11 +313,14 @@
                             <br />
                             new AZFullWindow(<br />
                             {<br />
+                            &emsp;&ensp;&emsp;&ensp;azFullWindowId: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;azFullWindowTitle: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowText: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowPosition: "bottom",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowFadeIn: 400,<br />
-                            &emsp;&ensp;&emsp;&ensp;azFullWindowFadeOut: 400,<br />
-                            &emsp;&ensp;&emsp;&ensp;azFullWindowHeight: 100,<br />
+                            &emsp;&ensp;&emsp;&ensp;azFullWindowHeight: 100%,<br />
+                            &emsp;&ensp;&emsp;&ensp;azFullWindowTitlebar: false,<br />
+                            &emsp;&ensp;&emsp;&ensp;azFullWindowTitlebarClose: true,<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowBackgroundColor: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowColor: ""<br />
                             });<br />
@@ -305,6 +361,19 @@
                     <div class="az-col xs-12">
                         <div class="az-code htmlHigh notranslate">
                             <div class="az-code-property-wrapper">
+                                <property>azFullWindowId</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>""</brown></default>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azFullWindowTitle</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>""</brown></default>
+                                <values><span>Values:</span> Text or HTML</values>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
                                 <property>azFullWindowText</property>
                                 <type><span>Type:</span> <brown>String</brown></type>
                                 <default><span>Default:</span> <brown>""</brown></default>
@@ -326,18 +395,28 @@
                                 <br />
                             </div>
                             <div class="az-code-property-wrapper">
-                                <property>azFullWindowFadeOut</property>
+                                <property>azFullWindowHeight</property>
                                 <type><span>Type:</span> <brown>Integer</brown></type>
-                                <default><span>Default:</span> <red>400</red></default>
-                                <units><span>Unit:</span> <red>milliseconds</red></units>
+                                <default><span>Default:</span> <red>100%</red></default>
+                                <units><span>Unit:</span> <red>pixel</red></units>
                                 <br />
                             </div>
                             <div class="az-code-property-wrapper">
-                                <property>azFullWindowHeight</property>
-                                <type><span>Type:</span> <brown>Integer</brown></type>
-                                <default><span>Default:</span> <red>100</red></default>
-                                <units><span>Unit:</span> <red>percent</red></units>
-                                <values><span>Values:</span> 1 - 100</values>
+                                <property>azFullWindowTitlebar</property>
+                                <type><span>Type:</span> <brown>Boolean</brown></type>
+                                <default><span>Default:</span> <mediumblue>true</mediumblue></default>
+                                <values><span>Values:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
+                                <br />
+                                By changing the values to <mediumblue>false</mediumblue>, you have the option to hide the entire title bar.
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azFullWindowTitlebarClose</property>
+                                <type><span>Type:</span> <brown>Boolean</brown></type>
+                                <default><span>Default:</span> <mediumblue>true</mediumblue></default>
+                                <values><span>Values:</span> <mediumblue>true</mediumblue> or <mediumblue>false</mediumblue></values>
+                                <br />
+                                By changing the values to <mediumblue>false</mediumblue>, you have the option to hide the close button (X) in the right part of the title bar.
                                 <br />
                             </div>
                             <div class="az-code-property-wrapper">
