@@ -62,10 +62,11 @@
             });
 
             var _HTML = "";
-            _HTML += '<div>';
+            _HTML += '<div class="az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate" style="border: none;">';
             _HTML += 'new AZWindow(<br />';
             _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowId: 1,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "AZ Window 1",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowText: _HTML,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowWidth: 500,<br />';
@@ -79,10 +80,19 @@
             _HTML += '});<br />';
             _HTML += '<br />';
             _HTML += '</div>';
+
+            //_HTML += '<div>';
+            //_HTML += '<img src="https://cdn.web2net.no/web2net/2fddb2c1-8e56-42fc-b01b-221526501e40.png" />';
+            //_HTML += '</div>';
+            //_HTML += '<div>';
+            //_HTML += '<img style="width: 350px" src="https://medxplore.blob.core.windows.net/360powerview/2fddb2c1-8e56-42fc-b01b-221526501e40.png" />';
+            //_HTML += '</div>';
+
             _HTML += '</div>';
 
             AZWindow1 = new AZWindow(
                 {
+                    azWindowId: 1,
                     azWindowTitle: "AZ Window 1",
                     azWindowText: _HTML,
                     azWindowWidth: 500,
@@ -119,10 +129,11 @@
             });
 
             var _HTML = "";
-            _HTML += '<div>';
+            _HTML += '<div class="az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate" style="border: none;">';
             _HTML += 'new AZWindow(<br />';
             _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowId: 2,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowStyle: "flat",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "AZ Window 2",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowText: _HTML,<br />';
@@ -140,6 +151,7 @@
 
             AZWindow2 = new AZWindow(
                 {
+                    azWindowId: 2,
                     azWindowStyle: "flat",
                     azWindowTitle: "AZ Window 2",
                     azWindowText: _HTML,
@@ -177,10 +189,11 @@
             });
 
             var _HTML = "";
-            _HTML = '<div>';
+            _HTML = '<div class="az-margin-b-28">';
             _HTML += '<div class="az-code jsHigh notranslate" style="border: none;">';
             _HTML += 'new AZWindow(<br />';
             _HTML += '{<br />';
+            _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowId: 3,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowTitle: "AZ Window 3",<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowText: _HTML,<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowWidth: 500,<br />';
@@ -204,17 +217,19 @@
 
             AZWindow3 = new AZWindow(
                 {
+                    azWindowId: 3,
                     azWindowTitle: "AZ Window 3",
                     azWindowText: _HTML,
                     azWindowWidth: 500,
-                    azWindowHeight: 570,
+                    azWindowHeight: 550,
                     azWindowPositionTop: 50,
                     azWindowModal: true,
                     azWindowAnimation: false,
                     azWindowNoParentScroll: true,
                     azWindowTitlebar: false,
                     azWindowBackgroundColor: "#607D8B",
-                    azWindowButton: {
+                    azWindowButton:
+                    {
                         Button1: true,
                         TypeButton1: "default",
                         TextButton1: "Close"
@@ -260,13 +275,14 @@
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Change title</button>';
             _HTML += '</div>';
-            _HTML += '<div class="az-form-group xs az-text-center">';
+            _HTML += '<div class="az-form-group xs az-text-center az-margin-b-28">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton2" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
 
             AZWindow4 = new AZWindow(
                 {
+                    azWindowId: 4,
                     azWindowTitle: "AZ Window Title",
                     azWindowText: _HTML,
                     azWindowWidth: 500,
@@ -301,7 +317,7 @@
 
             var _HTML = "";
             _HTML += '<div>';
-            _HTML += '<div class="az-code jsHigh notranslate">';
+            _HTML += '<div class="az-code jsHigh notranslate" style="border: none;">';
             _HTML += 'azWindowResize(<br />';
             _HTML += '{<br />';
             _HTML += '&emsp;&ensp;&emsp;&ensp;azWindowWidth: 800,<br />';
@@ -312,13 +328,14 @@
             _HTML += '<div class="az-form-group xs az-text-center az-margin-t-28">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton1" style="width: 60%; margin-left: 4px;">Resize</button>';
             _HTML += '</div>';
-            _HTML += '<div class="az-form-group xs az-text-center">';
+            _HTML += '<div class="az-form-group xs az-text-center az-margin-b-28">';
             _HTML += '<button type="button" class="az-button primary az-shadow-1 az-shadow-hover-2" id="cmdButton2" style="width: 60%; margin-left: 4px;">Close</button>';
             _HTML += '</div>';
             _HTML += '</div>';
 
             AZWindow5 = new AZWindow(
                 {
+                    azWindowId: 5,
                     azWindowTitle: "AZ Window Resize",
                     azWindowText: _HTML,
                     azWindowWidth: 500,
@@ -366,6 +383,7 @@
                             <br />
                             new AZWindow(<br />
                             {<br />
+                            &emsp;&ensp;&emsp;&ensp;azWindowId: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azWindowStyle: "rounded",<br />
                             &emsp;&ensp;&emsp;&ensp;azWindowTitle: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azWindowText: "",<br />
@@ -440,6 +458,12 @@
                     <div class="az-col xs-12">
                         <div class="az-code htmlHigh notranslate">
                             <div class="az-code-property-wrapper">
+                                <property>azWindowId</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>""</brown></default>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
                                 <property>azWindowStyle</property>
                                 <type><span>Type:</span> <brown>String</brown></type>
                                 <default><span>Default:</span> <brown>"rounded"</brown></default>
@@ -450,7 +474,7 @@
                                 <property>azWindowTitle</property>
                                 <type><span>Type:</span> <brown>String</brown></type>
                                 <default><span>Default:</span> <brown>""</brown></default>
-                                <values><span>Values:</span> Text</values>
+                                <values><span>Values:</span> Text or HTML</values>
                                 <br />
                             </div>
                             <div class="az-code-property-wrapper">
@@ -616,7 +640,6 @@
                                     {<br />
                                     &emsp;&ensp;&emsp;&ensp;data.$Window - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.$Titlebar - i.fn.init[]<br />
-                                    &emsp;&ensp;&emsp;&ensp;data.$Dialog - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.$Article - i.fn.init[]<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azWindowId<br />
                                     &emsp;&ensp;&emsp;&ensp;data.azWindowClose - ƒ ()<br />
