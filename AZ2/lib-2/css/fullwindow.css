@@ -10,11 +10,17 @@
     color: #000000;
 }
 
-.az-full-window.rounded-top
-{
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
+    .az-full-window.rounded-top
+    {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+
+    .az-full-window.rounded-bottom
+    {
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
 
     .az-full-window > .az-full-window-titlebar
     {
@@ -49,6 +55,11 @@
         margin: 14px;
         overflow-y: auto;
     }
+
+        .az-full-window > article.overflow
+        {
+            overflow: hidden;
+        }
 
 @media screen and (min-width: 576px)
 {

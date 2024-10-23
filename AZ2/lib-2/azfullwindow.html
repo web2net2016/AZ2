@@ -49,7 +49,7 @@
             $.subscribeonce("functionlib/azFullWindowAfterOpen", function (e, data)
             {
                 console.log("azFullWindowAfterOpen");
-                console.log(data)
+                console.log(data);
                 $("#cmdCloseFullWindow").on("click", data.azFullWindowClose);
                 $("#cmdModalDialog1").off("click", setModalDialog1).on("click", setModalDialog1);
                 $("#cmdModalDialog2").off("click", setAZWindow1).on("click", setAZWindow1);
@@ -83,6 +83,7 @@
 
             AZFullWindow1 = new AZFullWindow(
                 {
+                    azFullWindowStyle: "flat",
                     azFullWindowId: 1,
                     azFullWindowText: _HTML
                 });
@@ -196,10 +197,12 @@
 
             AZFullWindow2 = new AZFullWindow(
                 {
+                    azFullWindowStyle: "flat",
                     azFullWindowId: 2,
                     azFullWindowText: _HTML,
                     azFullWindowPosition: "top",
-                    azFullWindowFadeIn: 700
+                    azFullWindowFadeIn: 700,
+                    azFullWindowFadeOut: 700
                 });
         }
 
@@ -214,6 +217,21 @@
             {
                 console.log("azFullWindowAfterOpen");
                 console.log(data);
+
+                $("#cmdClose", data.$Titlebar).on("click", function (e)
+                {
+                    if (data.Options.azFullWindowHeight == 600)
+                    {
+                        $("#cmdClose", data.$Titlebar).removeClass("fa-chevron-up").addClass("fa-chevron-down");
+                        data.azFullWindowResize({ azFullWindowHeight: 800 });
+                    }
+                    else
+                    {
+                        $("#cmdClose", data.$Titlebar).removeClass("fa-chevron-down").addClass("fa-chevron-up");
+                        data.azFullWindowResize({ azFullWindowHeight: 600 });
+                    }
+                });
+                //$("#cmdClose").on("click", data.azFullWindowClose);
             });
             $.subscribeonce("functionlib/azFullWindowAfterClose", function (e, data)
             {
@@ -222,18 +240,18 @@
             });
 
             var _HTML = "";
-            _HTML = '<div style="display: grid; grid-template-columns: 1fr 50px; align-items: center;">';
-            _HTML += '<div>There are two ways to initiate the AZFullWindow</div>';
-            _HTML += '<div style="margin-top: 3px;"><i class="fas fa-search fa-lg fa-fw"></i></div>';
+            _HTML = '<div style="display: grid; grid-template-columns: 1fr; justify-items: center;">';
+            _HTML += '<div style="margin-top: 3px;"><i style="cursor: pointer;" id="cmdClose" class="fa-solid fa-chevron-up"></i></div>';
             _HTML += '</div>';
 
             AZFullWindow3 = new AZFullWindow(
                 {
-                    azFullWindowId: 3,
+                    azFullWindowStyle: "flat",
                     azFullWindowTitle: _HTML,
-                    azFullWindowText: '<div style="height: 1200px;"></div>',
+                    azFullWindowId: 3,
                     azFullWindowHeight: 600,
-                    azFullWindowTitlebar: true
+                    azFullWindowTitlebar: true,
+                    azFullWindowBackgroundColor: "#EEEEEE"
                 });
         }
 
@@ -248,6 +266,20 @@
             {
                 console.log("azFullWindowAfterOpen");
                 console.log(data);
+
+                $("#cmdClose", data.$Titlebar).on("click", function ()
+                {
+                    if (data.Options.azFullWindowHeight == 450)
+                    {
+                        $("#cmdClose", data.$Titlebar).removeClass("fa-chevron-up").addClass("fa-chevron-down");
+                        data.azFullWindowResize({ azFullWindowHeight: 700 });
+                    }
+                    else
+                    {
+                        $("#cmdClose", data.$Titlebar).removeClass("fa-chevron-down").addClass("fa-chevron-up");
+                        data.azFullWindowResize({ azFullWindowHeight: 450 });
+                    }
+                });
             });
             $.subscribeonce("functionlib/azFullWindowAfterClose", function (e, data)
             {
@@ -256,15 +288,18 @@
             });
 
             var _HTML = "";
+            _HTML = '<div style="display: grid; grid-template-columns: 1fr; justify-items: center;">';
+            _HTML += '<div style="margin-top: 3px;"><i style="cursor: pointer;" id="cmdClose" class="fa-solid fa-chevron-up"></i></div>';
+            _HTML += '</div>';
 
             AZFullWindow4 = new AZFullWindow(
                 {
+                    azFullWindowStyle: "flat",
                     azFullWindowId: 4,
-                    azFullWindowText: _HTML,
+                    azFullWindowTitle: _HTML,
+                    azFullWindowiFrameURL: "https://web2net.no",
                     azFullWindowHeight: 450,
-                    azFullWindowBackgroundColor: "#EFEFF2",
-                    azFullWindowTitlebar: true,
-                    azFullWindowTitlebarClose: true
+                    azFullWindowTitlebar: true
                 });
         }
 
@@ -313,11 +348,14 @@
                             <br />
                             new AZFullWindow(<br />
                             {<br />
+                            &emsp;&ensp;&emsp;&ensp;azFullWindowStyle: "rounded-top",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowId: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowTitle: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowText: "",<br />
+                            &emsp;&ensp;&emsp;&ensp;azFullWindowiFrameURL: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowPosition: "bottom",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowFadeIn: 400,<br />
+                            &emsp;&ensp;&emsp;&ensp;azFullWindowFadeOut: 400,<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowHeight: 100%,<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowTitlebar: false,<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowTitlebarClose: true,<br />
@@ -361,6 +399,13 @@
                     <div class="az-col xs-12">
                         <div class="az-code htmlHigh notranslate">
                             <div class="az-code-property-wrapper">
+                                <property>azFullWindowStyle</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>"rounded-top"</brown></default>
+                                <values><span>Values:</span><brown>"rounded-top"</brown> or <brown>"rounded-bottom"</brown> or <brown>"flat"</brown></values>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
                                 <property>azFullWindowId</property>
                                 <type><span>Type:</span> <brown>String</brown></type>
                                 <default><span>Default:</span> <brown>""</brown></default>
@@ -381,6 +426,13 @@
                                 <br />
                             </div>
                             <div class="az-code-property-wrapper">
+                                <property>azFullWindowiFrameURL</property>
+                                <type><span>Type:</span> <brown>String</brown></type>
+                                <default><span>Default:</span> <brown>""</brown></default>
+                                <br />
+                            </div>
+
+                            <div class="az-code-property-wrapper">
                                 <property>azFullWindowPosition</property>
                                 <type><span>Type:</span> <brown>String</brown></type>
                                 <default><span>Default:</span> <brown>"bottom"</brown></default>
@@ -389,6 +441,13 @@
                             </div>
                             <div class="az-code-property-wrapper">
                                 <property>azFullWindowFadeIn</property>
+                                <type><span>Type:</span> <brown>Integer</brown></type>
+                                <default><span>Default:</span> <red>400</red></default>
+                                <units><span>Unit:</span> <red>milliseconds</red></units>
+                                <br />
+                            </div>
+                            <div class="az-code-property-wrapper">
+                                <property>azFullWindowFadeOut</property>
                                 <type><span>Type:</span> <brown>Integer</brown></type>
                                 <default><span>Default:</span> <red>400</red></default>
                                 <units><span>Unit:</span> <red>milliseconds</red></units>
