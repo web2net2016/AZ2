@@ -70,13 +70,45 @@
     "datatype": "datetime",
     "tabindex": 8
   },
+  "PastDate": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date pastdate",
+    "datatype": "date",
+    "tabindex": 9
+  },
+  "NoPastDate": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date nopastdate",
+    "datatype": "date",
+    "tabindex": 10
+  },
+  "FromDate": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date fromdate",
+    "datatype": "date",
+    "tabindex": 11
+  },
+  "ToDate": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date todate",
+    "datatype": "date",
+    "tabindex": 12
+  },
   "Decimal": {
     "label": "mandatory",
     "data-attr": "val",
     "maxlength": "10",
     "class": "validate validate-decimal selecttext",
     "datatype": "decimal",
-    "tabindex": 9
+    "tabindex": 13
   },
   "Numeric": {
     "label": "mandatory",
@@ -84,7 +116,7 @@
     "maxlength": "10",
     "class": "validate validate-numeric selecttext",
     "datatype": "int",
-    "tabindex": 10
+    "tabindex": 14
   },
   "Comment": {
     "label": "optional",
@@ -92,6 +124,6 @@
     "maxlength": "255",
     "class": "validate validate-alpha",
     "datatype": "string",
-    "tabindex": 11
+    "tabindex": 15
   }
 }

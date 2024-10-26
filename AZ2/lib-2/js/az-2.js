@@ -3251,9 +3251,9 @@ function AZSerializeForm(Options)
 
         var _InputError = false;
         var _$Input = {};
-        var _ObjCurrentValidation = {};
-        var _ObjReturnValidation = {};
-        var _ObjOutputData = {};
+        var _CurrentValidationObj = {};
+        var _ReturnValidationObj = {};
+        var _OutputData = {};
 
         $.each(Options.ObjValidation, function (HTMLElement, Value)
         {
@@ -3265,53 +3265,53 @@ function AZSerializeForm(Options)
                 {
                     if (Value.class.indexOf("validate") > -1)
                     {
-                        _ObjCurrentValidation = Value;
+                        _CurrentValidationObj = Value;
 
-                        if (_ObjCurrentValidation.datatype.toLowerCase() === "int")
+                        if (_CurrentValidationObj.datatype.toLowerCase() === "int")
                         {
-                            _ObjOutputData[_$Input.attr("id")] = Number(_$Input.val());
+                            _OutputData[_$Input.attr("id")] = Number(_$Input.val());
                         }
-                        else if (_ObjCurrentValidation.datatype.toLowerCase() === "decimal")
+                        else if (_CurrentValidationObj.datatype.toLowerCase() === "decimal")
                         {
-                            _ObjOutputData[_$Input.attr("id")] = parseFloat(_$Input.val().replace(",", ".").replace(/ /g, ""));
+                            _OutputData[_$Input.attr("id")] = parseFloat(_$Input.val().replace(",", ".").replace(/ /g, ""));
                         }
-                        else if (_ObjCurrentValidation.datatype.toLowerCase() === "date")
+                        else if (_CurrentValidationObj.datatype.toLowerCase() === "date")
                         {
                             if (_$Input.val().replace(/^\s+|\s+$/g, '') !== "")
                             {
-                                _ObjOutputData[_$Input.attr("id")] = AZSetDateFormat(_$Input.datepicker("getDate")).ISODate;
+                                _OutputData[_$Input.attr("id")] = AZSetDateFormat(_$Input.datepicker("getDate")).ISODate;
                             }
                             else
                             {
-                                _ObjOutputData[_$Input.attr("id")] = null;
+                                _OutputData[_$Input.attr("id")] = null;
                             }
                         }
-                        else if (_ObjCurrentValidation.datatype.toLowerCase() === "datetime")
+                        else if (_CurrentValidationObj.datatype.toLowerCase() === "datetime")
                         {
                             var _LongDateFormat = moment()._locale._longDateFormat;
-                            _ObjOutputData[_$Input.attr("id")] = moment(_$Input.val(), _LongDateFormat.L + " " + _LongDateFormat.LT).toJSON();
+                            _OutputData[_$Input.attr("id")] = moment(_$Input.val(), _LongDateFormat.L + " " + _LongDateFormat.LT).toJSON();
                         }
-                        else if (_ObjCurrentValidation.datatype.toLowerCase() === "time")
+                        else if (_CurrentValidationObj.datatype.toLowerCase() === "time")
                         {
-                            _ObjOutputData[_$Input.attr("id")] = AZSetTimeFormat('0001-01-01 ' + _$Input.val()).ISOTime;
+                            _OutputData[_$Input.attr("id")] = AZSetTimeFormat('0001-01-01 ' + _$Input.val()).ISOTime;
                         }
                         else
                         {
-                            _ObjOutputData[_$Input.attr("id")] = _$Input.val();
+                            _OutputData[_$Input.attr("id")] = _$Input.val();
                         }
 
-                        _ObjReturnValidation = AZSerializeFormValidateInput(_$Input, _ObjCurrentValidation);
-                        if (AZIsEmpty(_ObjReturnValidation) === false)
+                        _ReturnValidationObj = AZSerializeFormValidateInput(_$Input, _CurrentValidationObj);
+                        if (AZIsEmpty(_ReturnValidationObj) === false)
                         {
-                            _ObjReturnValidation.Input = _$Input.attr("id");
-                            consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + _ObjReturnValidation.Input + " - " + _ObjReturnValidation.Error });
+                            _ReturnValidationObj.Input = _$Input.attr("id");
+                            consoleLog({ consoleType: "warn", consoleText: "AZSerializeForm - " + _ReturnValidationObj.Input + " - " + _ReturnValidationObj.Error });
                             new AZStandardAlert(
                                 {
                                     AZWindowStyle: AZIsNullOrEmpty(Options.AZWindowStyle) === false ? Options.AZWindowStyle : "rounded",
                                     $Area: _$Area,
                                     InputElement: _$Input,
                                     Title: Options.ObjLanguage.SingleDefaultElements.informationTitle,
-                                    Text: Options.ObjLanguage.SingleElements[_ObjReturnValidation.Input + _ObjReturnValidation.Error]
+                                    Text: Options.ObjLanguage.SingleElements[_ReturnValidationObj.Input + _ReturnValidationObj.Error]
                                 });
                             _InputError = true;
                             return false;
@@ -3319,12 +3319,12 @@ function AZSerializeForm(Options)
                     }
                     else
                     {
-                        _ObjOutputData[_$Input.attr("id")] = _$Input.val();
+                        _OutputData[_$Input.attr("id")] = _$Input.val();
                     }
                 }
                 else
                 {
-                    _ObjReturnValidation.Error = "";
+                    _ReturnValidationObj.Error = "";
                     _InputError = true;
                     ConsoleLogError("Missing one of following properties in your validating object: label - class - datatype");
                     return false;
@@ -3332,7 +3332,7 @@ function AZSerializeForm(Options)
             }
             else
             {
-                _ObjReturnValidation.Error = "";
+                _ReturnValidationObj.Error = "";
                 _InputError = true;
                 ConsoleLogError("Missing object in your form.");
                 return false;
@@ -3381,7 +3381,7 @@ function AZSerializeForm(Options)
             }
             else
             {
-                return _ObjOutputData;
+                return _OutputData;
             }
         }
         else
@@ -3391,7 +3391,7 @@ function AZSerializeForm(Options)
                 azInputId: _$Input.attr("id") != undefined ? _$Input.attr("id") : _$Input.attr("data-id") != undefined ? _$Input.attr("data-id") : "",
                 azInputName: _$Input.attr("name") === undefined ? "" : _$Input.attr("name"),
                 azInputClass: _$Input.attr("class") === undefined ? "" : _$Input.attr("class"),
-                azInputError: _ObjReturnValidation.Error,
+                azInputError: _ReturnValidationObj.Error,
                 azInputValue: _$Input.val(),
                 azInputJQElement: _$Input
             };
@@ -3598,13 +3598,13 @@ function AZPopulateForm(Options)
 
         var _$Input = {};
         var _DataAttr = "";
-        var _ObjCurrentValidation = {};
+        var _CurrentValidationObj = {};
 
         $.each(Options.ObjInputData, function (HTMLElement, Value)
         {
             _$Input = {};
             _DataAttr = "";
-            _ObjCurrentValidation = {};
+            _CurrentValidationObj = {};
 
             if ($('#' + HTMLElement, _$Area).length > 0 && $('#' + HTMLElement, _$Area).attr("data-attr") !== undefined)
             {
@@ -3618,9 +3618,9 @@ function AZPopulateForm(Options)
             if (AZIsEmpty(_$Input) === false)
             {
                 _DataAttr = _$Input.attr("data-attr");
-                _ObjCurrentValidation = Options.ObjValidation[_$Input.attr("id")];
+                _CurrentValidationObj = Options.ObjValidation[_$Input.attr("id")];
 
-                if (_ObjCurrentValidation.datatype === "decimal")
+                if (_CurrentValidationObj.datatype === "decimal")
                 {
                     if (AZIsNullOrEmpty(Value) === false)
                     {
@@ -3631,25 +3631,49 @@ function AZPopulateForm(Options)
                         _$Input[_DataAttr](0);
                     }
                 }
-                else if (_ObjCurrentValidation.datatype === "date")
+                else if (_CurrentValidationObj.datatype === "date")
                 {
                     if (AZIsNullOrEmpty(Value) === false)
                     {
-                        _$Input[_DataAttr](AZSetDateFormat(Value).LocalDate);
+                        if (!isNaN(Date.parse(Value)) === true)
+                        {
+                            var _List = ['pastdate', 'nopastdate', 'fromdate', 'todate', 'frompastdate', 'topastdate', 'fromnopastdate', 'tonopastdate'];
+
+
+                            var subArr = _CurrentValidationObj.class.split(' ').map(function (word)
+                            {
+                                console.log(word)
+
+                                //return words.indexOf(word.toLowerCase()) >= 0 ? '<b>' + word + '</b>' : word;
+                            });
+
+                            console.log(subArr)
+
+                            //var arrayOfString = _CurrentValidationObj.class.match(/\w+/g);
+                            //const arrayOfString = string.match(/\b\w+\b/g);
+                            //var subArr = _List.filter(str => str.includes(_CurrentValidationObj.class));
+
+                            console.log(subArr )
+
+                            _$Input[_DataAttr](AZSetDateFormat(Value).LocalDate);
+                        }
                     }
                 }
-                else if (_ObjCurrentValidation.datatype === "datetime")
+                else if (_CurrentValidationObj.datatype === "datetime")
                 {
                     if (AZIsNullOrEmpty(Value) === false)
                     {
-                        _$Input[_DataAttr](AZSetDateTimeFormat(Value).LocalDateTime);
+                        if (!isNaN(Date.parse(Value)) === true)
+                        {
+                            _$Input[_DataAttr](AZSetDateTimeFormat(Value).LocalDateTime);
+                        }
                     }
                     else
                     {
                         _$Input[_DataAttr](0);
                     }
                 }
-                else if (_ObjCurrentValidation.datatype === "time")
+                else if (_CurrentValidationObj.datatype === "time")
                 {
                     if (AZIsNullOrEmpty(Value) === false)
                     {

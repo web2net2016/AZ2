@@ -29,9 +29,13 @@
             Email: "john@doe.com",
             Web: "www.johndoe.com",
             RequestReasonId: 1,
-            Date: "2020-02-21",
+            Date: "2024-02-21",
             Time: "17:00",
-            DateTime: "2020-02-21T02:38",
+            DateTime: "2024-02-21T02:38",
+            PastDate: "2024-02-01",
+            NoPastDate: "2024-04-21",
+            FromDate: "2024-02-01",
+            ToDate: "2024-04-21",
             Decimal: 111.50,
             Numeric: 12345,
             Comment: "Dette er en kommentar."
@@ -190,6 +194,36 @@
                         <div class="az-form-group xs">
                             <label class="az-label" for="DateTime" id="labelDateTime"></label>
                             <input type="text" class="az-input" id="DateTime" />
+                        </div>
+                    </div>
+                </div>
+                <div class="az-row">
+                    <div class="az-col xs-12 sm-6 md-3">
+                        <div class="az-form-group">
+                            <label class="az-label" for="PastDate" id="labelPastDate"></label>
+                            <input type="text" class="az-input" id="PastDate" />
+                            <label for="PastDate" class="az-input-icons"><i class="fas fa-calendar-alt"></i></label>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-6 md-3">
+                        <div class="az-form-group">
+                            <label class="az-label" for="NoPastDate" id="labelNoPastDate"></label>
+                            <input type="text" class="az-input" id="NoPastDate" />
+                            <label for="NoPastDate" class="az-input-icons"><i class="fas fa-calendar-alt"></i></label>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-6 lg-3">
+                        <div class="az-form-group xs">
+                            <label class="az-label" for="FromDate" id="labelFromDate"></label>
+                            <input type="text" class="az-input" id="FromDate" />
+                            <label for="FromDate" class="az-input-icons"><i class="fas fa-calendar-alt"></i></label>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-6 lg-3">
+                        <div class="az-form-group xs">
+                            <label class="az-label" for="ToDate" id="labelToDate"></label>
+                            <input type="text" class="az-input" id="ToDate" />
+                            <label for="ToDate" class="az-input-icons"><i class="fas fa-calendar-alt"></i></label>
                         </div>
                     </div>
                 </div>
