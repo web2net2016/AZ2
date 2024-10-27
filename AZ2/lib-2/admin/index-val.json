@@ -46,69 +46,13 @@
     "data-help": "RequestReasonId",
     "tabindex": 5
   },
-  "Date": {
-    "label": "mandatory",
-    "data-attr": "val",
-    "maxlength": "10",
-    "class": "validate validate-date date",
-    "datatype": "date",
-    "tabindex": 6
-  },
-  "Time": {
-    "label": "mandatory",
-    "data-attr": "val",
-    "maxlength": "8",
-    "class": "validate validate-time time",
-    "datatype": "time",
-    "tabindex": 7
-  },
-  "DateTime": {
-    "label": "mandatory",
-    "data-attr": "val",
-    "maxlength": "19",
-    "class": "validate validate-datetime",
-    "datatype": "datetime",
-    "tabindex": 8
-  },
-  "PastDate": {
-    "label": "mandatory",
-    "data-attr": "val",
-    "maxlength": "10",
-    "class": "validate validate-date pastdate",
-    "datatype": "date",
-    "tabindex": 9
-  },
-  "NoPastDate": {
-    "label": "mandatory",
-    "data-attr": "val",
-    "maxlength": "10",
-    "class": "validate validate-date nopastdate",
-    "datatype": "date",
-    "tabindex": 10
-  },
-  "FromDate": {
-    "label": "mandatory",
-    "data-attr": "val",
-    "maxlength": "10",
-    "class": "validate validate-date fromdate",
-    "datatype": "date",
-    "tabindex": 11
-  },
-  "ToDate": {
-    "label": "mandatory",
-    "data-attr": "val",
-    "maxlength": "10",
-    "class": "validate validate-date todate",
-    "datatype": "date",
-    "tabindex": 12
-  },
   "Decimal": {
     "label": "mandatory",
     "data-attr": "val",
     "maxlength": "10",
     "class": "validate validate-decimal selecttext",
     "datatype": "decimal",
-    "tabindex": 13
+    "tabindex": 6
   },
   "Numeric": {
     "label": "mandatory",
@@ -116,7 +60,7 @@
     "maxlength": "10",
     "class": "validate validate-numeric selecttext",
     "datatype": "int",
-    "tabindex": 14
+    "tabindex": 7
   },
   "Comment": {
     "label": "optional",
@@ -124,6 +68,94 @@
     "maxlength": "255",
     "class": "validate validate-alpha",
     "datatype": "string",
+    "tabindex": 8
+  },
+  "Date": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date date",
+    "datatype": "date",
+    "tabindex": 9
+  },
+  "Time": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "8",
+    "class": "validate validate-time time",
+    "datatype": "time",
+    "tabindex": 10
+  },
+  "DateTime": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "19",
+    "class": "validate validate-datetime",
+    "datatype": "datetime",
+    "tabindex": 11
+  },
+  "PastDate": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date pastdate",
+    "datatype": "date",
+    "tabindex": 12
+  },
+  "NoPastDate": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date nopastdate",
+    "datatype": "date",
+    "tabindex": 13
+  },
+  "FromDate": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date fromdate",
+    "datatype": "date",
+    "tabindex": 14
+  },
+  "ToDate": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date todate",
+    "datatype": "date",
     "tabindex": 15
+  },
+  "FromPastDate": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date frompastdate",
+    "datatype": "date",
+    "tabindex": 16
+  },
+  "ToPastDate": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date topastdate",
+    "datatype": "date",
+    "tabindex": 17
+  },
+  "FromNoPastDate": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date fromnopastdate",
+    "datatype": "date",
+    "tabindex": 18
+  },
+  "ToNoPastDate": {
+    "label": "mandatory",
+    "data-attr": "val",
+    "maxlength": "10",
+    "class": "validate validate-date tonopastdate",
+    "datatype": "date",
+    "tabindex": 19
   }
 }

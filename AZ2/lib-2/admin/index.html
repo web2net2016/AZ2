@@ -29,16 +29,20 @@
             Email: "john@doe.com",
             Web: "www.johndoe.com",
             RequestReasonId: 1,
-            Date: "2024-02-21",
-            Time: "17:00",
-            DateTime: "2024-02-21T02:38",
-            PastDate: "2024-02-01",
-            NoPastDate: "2024-04-21",
-            FromDate: "2024-02-01",
-            ToDate: "2024-04-21",
             Decimal: 111.50,
             Numeric: 12345,
-            Comment: "Dette er en kommentar."
+            Comment: "Dette er en kommentar.",
+            Date: "2024-10-21",
+            Time: "17:00",
+            DateTime: "2024-10-21T17:00",
+            PastDate: "2024-10-21",
+            NoPastDate: "2024-10-21",
+            FromDate: "2024-01-05",
+            ToDate: "2024-02-15",
+            FromPastDate: "2024-10-20",
+            ToPastDate: "2024-10-25",
+            FromNoPastDate: "2024-11-01",
+            ToNoPastDate: "2024-11-15"
         };
 
         $(function ()
@@ -159,6 +163,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="az-row">
                     <div class="az-col xs-12 sm-6 lg-3">
                         <div class="az-form-group xs">
@@ -176,6 +181,27 @@
                             </select>
                         </div>
                     </div>
+                    <div class="az-col xs-12 sm-6 lg-3">
+                        <div class="az-form-group xs">
+                            <label class="az-label" for="Decimal" id="labelDecimal"></label>
+                            <input type="text" class="az-input" id="Decimal" />
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-6 lg-3">
+                        <div class="az-form-group xs">
+                            <label class="az-label" for="Numeric" id="labelNumeric"></label>
+                            <input type="text" class="az-input" id="Numeric" />
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-6 lg-3">
+                        <div class="az-form-group xs">
+                            <label class="az-label" for="Comment" id="labelComment"></label>
+                            <textarea class="az-textarea" id="Comment"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="az-row">
                     <div class="az-col xs-12 sm-6 lg-3">
                         <div class="az-form-group xs">
                             <label class="az-label" for="Date" id="labelDate"></label>
@@ -197,6 +223,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="az-row">
                     <div class="az-col xs-12 sm-6 md-3">
                         <div class="az-form-group">
@@ -227,26 +254,38 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="az-row">
-                    <div class="az-col xs-12 sm-6 lg-3">
-                        <div class="az-form-group xs">
-                            <label class="az-label" for="Decimal" id="labelDecimal"></label>
-                            <input type="text" class="az-input" id="Decimal" />
+                    <div class="az-col xs-12 sm-6 md-3">
+                        <div class="az-form-group">
+                            <label class="az-label">Fra dato (Tidligere datoer)</label>
+                            <input type="text" class="az-input" id="FromPastDate" />
+                            <label for="FromPastDate" class="az-input-icons"><i class="fas fa-calendar-alt"></i></label>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6 lg-3">
-                        <div class="az-form-group xs">
-                            <label class="az-label" for="Numeric" id="labelNumeric"></label>
-                            <input type="text" class="az-input" id="Numeric" />
+                    <div class="az-col xs-12 sm-6 md-3">
+                        <div class="az-form-group">
+                            <label class="az-label">Til dato (Tidligere datoer)</label>
+                            <input type="text" class="az-input" id="ToPastDate" />
+                            <label for="ToPastDate" class="az-input-icons"><i class="fas fa-calendar-alt"></i></label>
                         </div>
                     </div>
-                    <div class="az-col xs-12 sm-6 lg-3">
-                        <div class="az-form-group xs">
-                            <label class="az-label" for="Comment" id="labelComment"></label>
-                            <textarea class="az-textarea" id="Comment"></textarea>
+                    <div class="az-col xs-12 sm-6 md-3">
+                        <div class="az-form-group">
+                            <label class="az-label">Fra dato (Ikke tidligere datoer)</label>
+                            <input type="text" class="az-input" id="FromNoPastDate" />
+                            <label for="FromNoPastDate" class="az-input-icons"><i class="fas fa-calendar-alt"></i></label>
+                        </div>
+                    </div>
+                    <div class="az-col xs-12 sm-6 md-3">
+                        <div class="az-form-group">
+                            <label class="az-label">Til dato (Ikke tidligere datoer)</label>
+                            <input type="text" class="az-input" id="ToNoPastDate" />
+                            <label for="ToNoPastDate" class="az-input-icons"><i class="fas fa-calendar-alt"></i></label>
                         </div>
                     </div>
                 </div>
+
                 <div class="az-row az-margin-t-21">
                     <div class="az-col xs-12 sm-6 lg-3">
                         <div class="az-form-group">
@@ -276,8 +315,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="az-row az-margin-t-21">
 
+                <div class="az-row az-margin-t-21">
                     <div class="az-col xs-12 sm-6 lg-3">
                         <div class="az-form-group">
                             <input class="az-range" type="range" min="0" max="20" step="1" id="range1">
@@ -290,7 +329,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="az-row az-margin-t-56 az-margin-b-14">

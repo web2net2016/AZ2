@@ -1686,6 +1686,7 @@ function AZSerializeFormValidateInput($Input, CurrentValidationObj)
     }
 }
 
+
 function AZPopulateForm(Options)
 {
     if (AZIsEmpty(Options) === false && Options.hasOwnProperty("ObjInputData") && Options.hasOwnProperty("ObjValidation"))
@@ -1737,24 +1738,36 @@ function AZPopulateForm(Options)
                     {
                         if (!isNaN(Date.parse(Value)) === true)
                         {
-                            var _List = ['pastdate', 'nopastdate', 'fromdate', 'todate', 'frompastdate', 'topastdate', 'fromnopastdate', 'tonopastdate'];
-
-
-                            var subArr = _CurrentValidationObj.class.split(' ').map(function (word)
+                            var _ListDateClasses = ['pastdate', 'nopastdate', 'fromdate', 'todate', 'frompastdate', 'topastdate', 'fromnopastdate', 'tonopastdate'];                 
+                            var _ListObjectClasses = _CurrentValidationObj.class.match(/\w+/g);
+                            if (AZIsEmpty(_ListDateClasses) === false && AZIsEmpty(_ListObjectClasses) === false)
                             {
-                                console.log(word)
-
-                                //return words.indexOf(word.toLowerCase()) >= 0 ? '<b>' + word + '</b>' : word;
-                            });
-
-                            console.log(subArr)
-
-                            //var arrayOfString = _CurrentValidationObj.class.match(/\w+/g);
-                            //const arrayOfString = string.match(/\b\w+\b/g);
-                            //var subArr = _List.filter(str => str.includes(_CurrentValidationObj.class));
-
-                            console.log(subArr )
-
+                                var _Word = _ListDateClasses.find(word => _ListObjectClasses.includes(word));
+                                if (_Word == "fromdate")
+                                {
+                                    $(".todate").datepicker("option", "minDate", AZSetDateFormat(Value).LocalDate); 
+                                }
+                                if (_Word == "todate")
+                                {
+                                    $(".fromdate").datepicker("option", "maxDate", AZSetDateFormat(Value).LocalDate);
+                                }
+                                if (_Word == "frompastdate")
+                                {
+                                    $(".topastdate").datepicker("option", "minDate", AZSetDateFormat(Value).LocalDate);
+                                }
+                                if (_Word == "topastdate")
+                                {
+                                    $(".frompastdate").datepicker("option", "maxDate", AZSetDateFormat(Value).LocalDate);
+                                }
+                                if (_Word == "fromnopastdate")
+                                {
+                                    $(".tonopastdate").datepicker("option", "minDate", AZSetDateFormat(Value).LocalDate);
+                                }
+                                if (_Word == "tonopastdate")
+                                {
+                                    $(".fromnopastdate").datepicker("option", "maxDate", AZSetDateFormat(Value).LocalDate);
+                                }
+                            }
                             _$Input[_DataAttr](AZSetDateFormat(Value).LocalDate);
                         }
                     }
