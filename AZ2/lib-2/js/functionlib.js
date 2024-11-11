@@ -3383,14 +3383,14 @@ function AZStandardAlert(Options)
                     var _AZWindowOptions =
                     {
                         azWindowStyle: _Main.AZWindowStyle,
-                        azWindowText: '<div style="margin: 35px 14px 0 14px;">' + _Main.ErrorText + '</div>',
+                        azWindowText: '<div class="az-window-content-without-title">' + _Main.ErrorText + '</div>',
                         azWindowWidth: 400,
                         azWindowContentHeight: true,
                         azWindowTitlebar: false
                     };
                     if (_Main.ErrorTitle != "")
                     {
-                        _AZWindowOptions.azWindowText = '<div style="margin: 14px;">' + _Main.ErrorText + '</div>',
+                        _AZWindowOptions.azWindowText = '<div class="az-window-content-with-title">' + _Main.ErrorText + '</div>',
                         _AZWindowOptions.azWindowTitle = _Main.ErrorTitle;
                         _AZWindowOptions.azWindowTitlebar = true;
                     }

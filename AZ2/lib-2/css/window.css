@@ -78,6 +78,16 @@
         overflow-x: hidden;
     }
 
+        .az-window > article > .az-window-content-without-title
+        {
+            margin: 35px 14px 0 14px;
+        }
+
+        .az-window > article > .az-window-content-with-title
+        {
+            margin: 14px;
+        }
+
 @media screen and (min-width: 576px)
 {
     .az-window > article

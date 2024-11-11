@@ -266,20 +266,6 @@
             {
                 console.log("azFullWindowAfterOpen");
                 console.log(data);
-
-                $("#cmdClose", data.$Titlebar).on("click", function ()
-                {
-                    if (data.Options.azFullWindowHeight == 450)
-                    {
-                        $("#cmdClose", data.$Titlebar).removeClass("fa-chevron-up").addClass("fa-chevron-down");
-                        data.azFullWindowResize({ azFullWindowHeight: 700 });
-                    }
-                    else
-                    {
-                        $("#cmdClose", data.$Titlebar).removeClass("fa-chevron-down").addClass("fa-chevron-up");
-                        data.azFullWindowResize({ azFullWindowHeight: 450 });
-                    }
-                });
             });
             $.subscribeonce("functionlib/azFullWindowAfterClose", function (e, data)
             {
@@ -287,16 +273,11 @@
                 console.log(data);
             });
 
-            var _HTML = "";
-            _HTML = '<div style="display: grid; grid-template-columns: 1fr; justify-items: center;">';
-            _HTML += '<div style="margin-top: 3px;"><i style="cursor: pointer;" id="cmdClose" class="fa-solid fa-chevron-up"></i></div>';
-            _HTML += '</div>';
-
             AZFullWindow4 = new AZFullWindow(
                 {
-                    azFullWindowStyle: "flat",
+                    azFullWindowStyle: "rounded-top shadow",
                     azFullWindowId: 4,
-                    azFullWindowTitle: _HTML,
+                    azFullWindowTitle: "Vår virksomhet knyttet til produksjon og drift av nettsider er solgt til DataPower Learning AS. Overdragelsen omfatter alle kundeforhold, avtaler og løsninger som er knyttet til utvikling og drift av nettsider hos oss.",
                     azFullWindowiFrameURL: "https://web2net.no",
                     azFullWindowHeight: 450,
                     azFullWindowTitlebar: true
@@ -348,7 +329,7 @@
                             <br />
                             new AZFullWindow(<br />
                             {<br />
-                            &emsp;&ensp;&emsp;&ensp;azFullWindowStyle: "rounded-top",<br />
+                            &emsp;&ensp;&emsp;&ensp;azFullWindowStyle: "flat",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowId: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowTitle: "",<br />
                             &emsp;&ensp;&emsp;&ensp;azFullWindowText: "",<br />
@@ -401,8 +382,10 @@
                             <div class="az-code-property-wrapper">
                                 <property>azFullWindowStyle</property>
                                 <type><span>Type:</span> <brown>String</brown></type>
-                                <default><span>Default:</span> <brown>"rounded-top"</brown></default>
+                                <default><span>Default:</span> <brown>"flat"</brown></default>
                                 <values><span>Values:</span><brown>"rounded-top"</brown> or <brown>"rounded-bottom"</brown> or <brown>"flat"</brown></values>
+                                <br />
+                                You can also add <brown>shadow</brown> to all three values ​​above.
                                 <br />
                             </div>
                             <div class="az-code-property-wrapper">

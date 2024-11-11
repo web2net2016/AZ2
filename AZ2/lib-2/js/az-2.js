@@ -5283,14 +5283,14 @@ function AZStandardAlert(Options)
                     var _AZWindowOptions =
                     {
                         azWindowStyle: _Main.AZWindowStyle,
-                        azWindowText: '<div style="margin: 35px 14px 0 14px;">' + _Main.ErrorText + '</div>',
+                        azWindowText: '<div class="az-window-content-without-title">' + _Main.ErrorText + '</div>',
                         azWindowWidth: 400,
                         azWindowContentHeight: true,
                         azWindowTitlebar: false
                     };
                     if (_Main.ErrorTitle != "")
                     {
-                        _AZWindowOptions.azWindowText = '<div style="margin: 14px;">' + _Main.ErrorText + '</div>',
+                        _AZWindowOptions.azWindowText = '<div class="az-window-content-with-title">' + _Main.ErrorText + '</div>',
                         _AZWindowOptions.azWindowTitle = _Main.ErrorTitle;
                         _AZWindowOptions.azWindowTitlebar = true;
                     }
@@ -6915,7 +6915,7 @@ function AZFullWindow(Options)
         var _Main = this;
         var _Defaults =
         {
-            azFullWindowStyle: "rounded-top",
+            azFullWindowStyle: "flat",
             azFullWindowId: "",
             azFullWindowTitle: "",
             azFullWindowText: "",
@@ -6988,12 +6988,20 @@ function AZFullWindow(Options)
                 _Main.AnimateOpenOptions = { "height": _Main.Options.azFullWindowHeight + "px", "opacity": 1 };
                 _Main.AnimateCloseOptions = { "height": 0, "opacity": 0 };
                 _Main.$Window.css({ "top": 0 });
+                if (_Main.Options.azFullWindowStyle.includes("shadow"))
+                {
+                    _Main.$Window.addClass('shadow-top');
+                }
             }
             else if (_Main.Options.azFullWindowPosition == "bottom")
             {
                 _Main.AnimateOpenOptions = { "height": _Main.Options.azFullWindowHeight + "px", "opacity": 1 };
                 _Main.AnimateCloseOptions = { "height": 0, "opacity": 0 };
                 _Main.$Window.css({ "bottom": 0 });
+                if (_Main.Options.azFullWindowStyle.includes("shadow"))
+                {
+                    _Main.$Window.addClass('shadow-bottom');
+                }
             }
 
             // AZFullWindow Titlebar

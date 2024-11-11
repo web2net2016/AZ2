@@ -25662,6 +25662,20 @@ ul
     color: #000000;
 }
 
+    .az-full-window.shadow-top
+    {
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+
+    .az-full-window.shadow-bottom
+    {
+        -webkit-box-shadow: 0 -1px 3px rgba(0,0,0,0.12), 0 -1px 2px rgba(0,0,0,0.24);
+        -moz-box-shadow: 0 -1px 3px rgba(0,0,0,0.12), 0 -1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 -1px 3px rgba(0,0,0,0.12), 0 -1px 2px rgba(0,0,0,0.24);
+    }
+
     .az-full-window.rounded-top
     {
         border-top-left-radius: 20px;
@@ -25680,13 +25694,13 @@ ul
         grid-template-columns: 1fr 27px;
         align-items: center;
         border-bottom: 1px solid #BBBBBB;
-        height: 49px;
+        min-height: 49px;
     }
 
         .az-full-window > .az-full-window-titlebar > h1
         {
             display: inline-block;
-            margin: 0 14px 0 14px;
+            margin: 14px;
             font-size: 14px;
         }
 
@@ -33012,6 +33026,16 @@ address
         overflow-y: auto;
         overflow-x: hidden;
     }
+
+        .az-window > article > .az-window-content-without-title
+        {
+            margin: 35px 14px 0 14px;
+        }
+
+        .az-window > article > .az-window-content-with-title
+        {
+            margin: 14px;
+        }
 
 @media screen and (min-width: 576px)
 {

@@ -1445,7 +1445,7 @@ function AZFullWindow(Options)
         var _Main = this;
         var _Defaults =
         {
-            azFullWindowStyle: "rounded-top",
+            azFullWindowStyle: "flat",
             azFullWindowId: "",
             azFullWindowTitle: "",
             azFullWindowText: "",
@@ -1518,12 +1518,20 @@ function AZFullWindow(Options)
                 _Main.AnimateOpenOptions = { "height": _Main.Options.azFullWindowHeight + "px", "opacity": 1 };
                 _Main.AnimateCloseOptions = { "height": 0, "opacity": 0 };
                 _Main.$Window.css({ "top": 0 });
+                if (_Main.Options.azFullWindowStyle.includes("shadow"))
+                {
+                    _Main.$Window.addClass('shadow-top');
+                }
             }
             else if (_Main.Options.azFullWindowPosition == "bottom")
             {
                 _Main.AnimateOpenOptions = { "height": _Main.Options.azFullWindowHeight + "px", "opacity": 1 };
                 _Main.AnimateCloseOptions = { "height": 0, "opacity": 0 };
                 _Main.$Window.css({ "bottom": 0 });
+                if (_Main.Options.azFullWindowStyle.includes("shadow"))
+                {
+                    _Main.$Window.addClass('shadow-bottom');
+                }
             }
 
             // AZFullWindow Titlebar
