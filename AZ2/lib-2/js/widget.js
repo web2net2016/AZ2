@@ -1475,7 +1475,7 @@ function AZFullWindow(Options)
             _Main.$Article = {};
             _Main.$Iframe = {};
             _Main.$Window = $("<div></div>").attr("id", _Main.Options.azFullWindowId).addClass("az-full-window " + _Main.Options.azFullWindowStyle);
-            _Main.$Titlebar = $("<div></div>").addClass("az-full-window-titlebar").html("<h1>" + _Main.Options.azFullWindowTitle + "</h1><span>X</span>");
+            _Main.$Titlebar = $("<div></div>").addClass("az-full-window-titlebar").html("<div>" + _Main.Options.azFullWindowTitle + "</div><span>X</span>");
             _Main.$Article = $("<article></article>").html(_Main.Options.azFullWindowText);
             if (_Main.Options.azFullWindowTitle != "")
             {

@@ -5194,6 +5194,30 @@ function AZMobile()
     return _ReturnObj;
 }
 
+function AZEnableBackground(Options)
+{
+    var _Defaults =
+    {
+        azBackgroundIndex: "4999",
+        azBackground: true,
+    };
+    var _Options = $.extend({}, _Defaults, Options || {});
+    if ($("#az-background").length === 0)
+    {
+        $("body").append('<div id="az-background"></div>');
+        $("#az-background").css({ 'z-index': _Options.azBackgroundIndex });
+        if (_Options.azBackground === false)
+        {
+            $("#az-background").css({ 'background-color': 'transparent' });
+        }
+    }
+}
+
+function AZDisableBackground()
+{
+    $("#az-background").remove();
+}
+
 function AZStandardAlert(Options)
 {
     if (this instanceof AZStandardAlert === true)
@@ -6945,7 +6969,7 @@ function AZFullWindow(Options)
             _Main.$Article = {};
             _Main.$Iframe = {};
             _Main.$Window = $("<div></div>").attr("id", _Main.Options.azFullWindowId).addClass("az-full-window " + _Main.Options.azFullWindowStyle);
-            _Main.$Titlebar = $("<div></div>").addClass("az-full-window-titlebar").html("<h1>" + _Main.Options.azFullWindowTitle + "</h1><span>X</span>");
+            _Main.$Titlebar = $("<div></div>").addClass("az-full-window-titlebar").html("<div>" + _Main.Options.azFullWindowTitle + "</div><span>X</span>");
             _Main.$Article = $("<article></article>").html(_Main.Options.azFullWindowText);
             if (_Main.Options.azFullWindowTitle != "")
             {
