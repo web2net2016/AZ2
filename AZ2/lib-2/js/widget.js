@@ -411,6 +411,7 @@ function AZModalDialog(Options)
         var _Main = this;
         var _Defaults =
         {
+            azModalDialogReturnId: "",
             azModalDialogStyle: "rounded",
             azModalDialogId: "",
             azModalDialogTitle: "",
@@ -440,7 +441,7 @@ function AZModalDialog(Options)
 
         if (_Main.Options.azModalDialogId !== "" && $("#" + _Main.Options.azModalDialogId).length === 0)
         {
-            $.publish("functionlib/azModalDialogBeforeOpen", { azModalDialogId: _Main.Options.azModalDialogId });
+            $.publish("functionlib/azModalDialogBeforeOpen" + _Main.Options.azModalDialogReturnId, { azModalDialogId: _Main.Options.azModalDialogId });
 
             ModalDialogScrollTop = 0;
             _Main.$Iframe = {};
@@ -481,7 +482,7 @@ function AZModalDialog(Options)
                         var _Element = e.target || e.srcElement;
                         $(".ui-dialog").not($(_Element).parent(".ui-dialog")).css({ "z-index": "5000" });
                         $(_Element).parent(".ui-dialog").css({ "z-index": "5001" });
-                        $.publish("functionlib/azModalDialogFocus",
+                        $.publish("functionlib/azModalDialogFocus" + _Main.Options.azModalDialogReturnId,
                             {
                                 $Window: _Main.$Window,
                                 $Titlebar: _Main.$Titlebar,
@@ -627,7 +628,7 @@ function AZModalDialog(Options)
                         $("body").removeAttr("class");
                     }
                 }
-                $.publish("functionlib/azModalDialogAfterClose", { azModalDialogId: _Main.Options.azModalDialogId });
+                $.publish("functionlib/azModalDialogAfterClose" + _Main.Options.azModalDialogReturnId, { azModalDialogId: _Main.Options.azModalDialogId });
             };
 
             // AZModalDialog Change Titlebar
@@ -716,7 +717,7 @@ function AZModalDialog(Options)
                 }
             };
 
-            $.publish("functionlib/azModalDialogAfterOpen",
+            $.publish("functionlib/azModalDialogAfterOpen" + _Main.Options.azModalDialogReturnId,
                 {
                     Options: _Main.Options,
                     $Window: _Main.$Window,
@@ -1020,6 +1021,7 @@ function AZWindow(Options)
         var _Main = this;
         var _Defaults =
         {
+            azWindowReturnId: "",
             azWindowId: "",
             azWindowStyle: "rounded",
             azWindowTitle: "",
@@ -1049,7 +1051,7 @@ function AZWindow(Options)
 
         if (_Main.Options.azWindowId !== "" && $("#" + _Main.Options.azWindowId).length === 0)
         {
-            $.publish("functionlib/azWindowBeforeOpen", { azWindowId: _Main.Options.azWindowId });
+            $.publish("functionlib/azWindowBeforeOpen" + _Main.Options.azWindowReturnId, { azWindowId: _Main.Options.azWindowId });
 
             ModalDialogScrollTop = 0;
             _Main.$Window = $("<div></div>").attr("id", _Main.Options.azWindowId).addClass("az-window " + _Main.Options.azWindowStyle);
@@ -1204,7 +1206,7 @@ function AZWindow(Options)
                     _Main.$Window.show();
                 }
 
-                $.publish("functionlib/azWindowAfterOpen",
+                $.publish("functionlib/azWindowAfterOpen" + _Main.Options.azWindowReturnId,
                     {
                         Options: _Main.Options,
                         $Window: _Main.$Window,
@@ -1248,7 +1250,7 @@ function AZWindow(Options)
                         $("body").removeAttr("class");
                     }
                 }
-                $.publish("functionlib/azWindowAfterClose", { azWindowId: _Main.Options.azWindowId });
+                $.publish("functionlib/azWindowAfterClose" + _Main.Options.azWindowReturnId, { azWindowId: _Main.Options.azWindowId });
             };
 
             // AZWindow Change Titlebar
@@ -1445,6 +1447,7 @@ function AZFullWindow(Options)
         var _Main = this;
         var _Defaults =
         {
+            azFullWindowReturnId: "",
             azFullWindowStyle: "flat",
             azFullWindowId: "",
             azFullWindowTitle: "",
@@ -1468,7 +1471,7 @@ function AZFullWindow(Options)
 
         if (_Main.Options.azFullWindowId !== "" && $("#" + _Main.Options.azFullWindowId).length === 0)
         {
-            $.publish("functionlib/azFullWindowBeforeOpen", { azFullWindowId: _Main.Options.azFullWindowId });
+            $.publish("functionlib/azFullWindowBeforeOpen" + _Main.Options.azFullWindowReturnId, { azFullWindowId: _Main.Options.azFullWindowId });
 
             ModalDialogScrollTop = 0;
             _Main.$Titlebar = {};
@@ -1591,7 +1594,7 @@ function AZFullWindow(Options)
                             $("body").removeAttr("class");
                         }
                     }
-                    $.publish("functionlib/azFullWindowAfterClose", { azFullWindowId: _Main.Options.azFullWindowId });
+                    $.publish("functionlib/azFullWindowAfterClose" + _Main.Options.azFullWindowReturnId, { azFullWindowId: _Main.Options.azFullWindowId });
                 });
             };
 
@@ -1628,7 +1631,7 @@ function AZFullWindow(Options)
                 _Main.$Window.height(_Main.azFullWindowHeightOptions.azFullWindowHeight);
             };
 
-            $.publish("functionlib/azFullWindowAfterOpen",
+            $.publish("functionlib/azFullWindowAfterOpen" + _Main.Options.azFullWindowReturnId,
                 {
                     Options: _Main.Options,
                     $Window: _Main.$Window,
