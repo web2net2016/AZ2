@@ -25417,7 +25417,7 @@ ul
 #az-cover-spin
 {
     position: fixed;
-    z-index: 5000;
+    z-index: 5001;
     width: 100%;
     inset: 0;
     background-color: rgba(255,255,255,0.7);
