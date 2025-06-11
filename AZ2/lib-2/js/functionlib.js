@@ -3194,10 +3194,10 @@ function AZElementSize(Element)
         var _PaddingBottom = parseInt(_Style.paddingBottom) || 0;
         var _PaddingLeft = parseInt(_Style.paddingLeft) || 0;
         var _PaddingRight = parseInt(_Style.paddingRight) || 0;
-        var _BorderTop = parseInt(_Style.borderTop) || 0;
-        var _BorderBottom = parseInt(_Style.borderBottom) || 0;
-        var _BorderLeft = parseInt(_Style.borderLeft) || 0;
-        var _BorderRight = parseInt(_Style.borderRight) || 0;
+        var _BorderTop = parseInt(_Style.borderTopWidth) || 0;
+        var _BorderBottom = parseInt(_Style.borderBottomWidth) || 0;
+        var _BorderLeft = parseInt(_Style.borderLeftWidth) || 0;
+        var _BorderRight = parseInt(_Style.borderRightWidth) || 0;
         _Return.Width = (_Width + _MarginLeft + _MarginRight + _PaddingLeft + _PaddingRight + _BorderLeft + _BorderRight);
         _Return.Height = (_Height + _MarginTop + _MarginBottom + _PaddingTop + _PaddingBottom + _BorderTop + _BorderBottom);
         return _Return;

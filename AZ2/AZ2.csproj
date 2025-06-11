@@ -64,11 +64,11 @@
     <Content Include="lib-2\admin\index.html" />
     <Content Include="lib-2\azgrid.html" />
     <Content Include="lib-2\azfullwindow.html" />
-    <Content Include="lib-2\css\hover.css" />
     <Content Include="lib-2\css\az-2.css" />
     <Content Include="lib-2\css\az-2.min.css">
       <DependentUpon>az-2.css</DependentUpon>
     </Content>
+    <Content Include="lib-2\css\hover.css" />
     <Content Include="lib-2\css\cssgrid.css" />
     <Content Include="lib-2\css\fullwindow.css" />
     <Content Include="lib-2\css\jqueryui.css" />
@@ -82,12 +82,12 @@
     <Content Include="lib-2\jqueryui\images\ui-icons_777777_256x240.png" />
     <Content Include="lib-2\jqueryui\images\ui-icons_cc0000_256x240.png" />
     <Content Include="lib-2\jqueryui\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="lib-2\js\voca.min.js" />
-    <Content Include="lib-2\js\swiped-events.js" />
     <Content Include="lib-2\js\az-2.js" />
     <Content Include="lib-2\js\az-2.min.js">
       <DependentUpon>az-2.js</DependentUpon>
     </Content>
+    <Content Include="lib-2\js\voca.min.js" />
+    <Content Include="lib-2\js\swiped-events.js" />
     <Content Include="lib-2\js\sort.js" />
     <Content Include="lib-2\azcssgrid.html" />
     <Content Include="favicon.ico" />
