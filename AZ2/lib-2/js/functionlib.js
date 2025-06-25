@@ -1152,7 +1152,7 @@ function AZValidateInputValueKeydown(e)
         var _KeyChar = e.keyCode || e.which;
         var _ValidType = AZGetValidType(e.data.ValidType);
         var _CharDesList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 127, 129, 141, 143, 144, 157];
-        var _SpesCharList = ['ScrollLock', 'Pause', 'Insert', 'Home', 'PageUp', 'PageDown', 'End', 'Delete', 'ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft', 'Insert', 'Meta', 'ContextMenu',]
+        var _SpesCharList = ['ScrollLock', 'Pause', 'Insert', 'Home', 'PageUp', 'PageDown', 'End', 'Delete', 'ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft', 'Insert', 'Meta', 'ContextMenu',];
 
         if (_CharDesList.includes(_KeyChar) === true || _SpesCharList.includes(e.key) === true || e.ctrlKey === true)
         {
@@ -1243,7 +1243,7 @@ function AZValidateInputValueKeydown(e)
                         {
                             _InputKey = _InputKey.toLowerCase();
                             _InputValue = _InputValue.toLowerCase();
-                        }                        
+                        }
                     }
                 });
 
@@ -1738,14 +1738,14 @@ function AZPopulateForm(Options)
                     {
                         if (!isNaN(Date.parse(Value)) === true)
                         {
-                            var _ListDateClasses = ['pastdate', 'nopastdate', 'fromdate', 'todate', 'frompastdate', 'topastdate', 'fromnopastdate', 'tonopastdate'];                 
+                            var _ListDateClasses = ['pastdate', 'nopastdate', 'fromdate', 'todate', 'frompastdate', 'topastdate', 'fromnopastdate', 'tonopastdate'];
                             var _ListObjectClasses = _CurrentValidationObj.class.match(/\w+/g);
                             if (AZIsEmpty(_ListDateClasses) === false && AZIsEmpty(_ListObjectClasses) === false)
                             {
                                 var _Word = _ListDateClasses.find(word => _ListObjectClasses.includes(word));
                                 if (_Word == "fromdate")
                                 {
-                                    $(".todate").datepicker("option", "minDate", AZSetDateFormat(Value).LocalDate); 
+                                    $(".todate").datepicker("option", "minDate", AZSetDateFormat(Value).LocalDate);
                                 }
                                 if (_Word == "todate")
                                 {
@@ -3289,9 +3289,47 @@ function AZMobile()
     var _ReturnObj =
     {
         Mobile: regex.test(navigator.userAgent),
-        Orientation: window.screen.orientation.type == "portrait-primary" ? "portrait" : "landscape"
+        Orientation: AZGetOrientation()
     };
     return _ReturnObj;
+}
+
+function AZGetOrientation()
+{
+    if (typeof window === 'undefined') return "unknown";
+
+    if (window.screen.orientation && typeof window.screen.orientation.type === 'string')
+    {
+        if (window.screen.orientation.type.startsWith("portrait"))
+        {
+            return "portrait";
+        }
+        else if (window.screen.orientation.type.startsWith("landscape"))
+        {
+            return "landscape";
+        }
+    }
+
+    if (typeof window.matchMedia === "function")
+    {
+        if (window.matchMedia("(orientation: portrait)").matches)
+        {
+            return "portrait";
+        }
+        else if (window.matchMedia("(orientation: landscape)").matches)
+        {
+            return "landscape";
+        }
+    }
+
+    if (window.innerHeight > window.innerWidth)
+    {
+        return "portrait";
+    }
+    else
+    {
+        return "landscape";
+    }
 }
 
 function AZEnableBackground(Options)
@@ -3316,6 +3354,38 @@ function AZEnableBackground(Options)
 function AZDisableBackground()
 {
     $("#az-background").remove();
+}
+
+function AZMouseOver(e, HTML)
+{
+    AddonMouseover(e, HTML);
+}
+
+function AddonMouseover(e, HTML)
+{
+    var _$Popup = {};
+    var _InnerWidth = window.innerWidth;
+    var _InnerHeight = window.innerHeight;
+    var _MouseLeft = e.clientX;
+    var _MouseTop = e.clientY;
+    var _PopupSize = {};
+    var _PopupWidth = 0;
+    var _PopupHeight = 0;
+    var _Left = 0;
+    var _Top = 0;
+    var _Padding = 10;
+
+    $("#az-mouseover-wrapper").remove();
+    _$Popup = $("<div></div>").attr("id", "az-mouseover-wrapper");
+    $("body").append(_$Popup);
+    _$Popup.html(HTML);
+    _PopupSize = AZElementSize(_$Popup);
+    _$Popup.css({ display: "none" });
+    _PopupWidth = _PopupSize.Width + _Padding;
+    _PopupHeight = _PopupSize.Height + _Padding;
+    _Left = (_MouseLeft + _PopupWidth > _InnerWidth) ? Math.max(_MouseLeft - _PopupWidth, 0) : _MouseLeft + _Padding;
+    _Top = (_MouseTop + _PopupHeight > _InnerHeight) ? Math.max(_MouseTop - _PopupHeight, 0) : _MouseTop + _Padding;
+    _$Popup.css({ left: _Left, top: _Top, opacity: 0, display: "block", visibility: "visible" }).animate({ opacity: 1 });
 }
 
 function AZStandardAlert(Options)
@@ -3415,7 +3485,7 @@ function AZStandardAlert(Options)
                     if (_Main.ErrorTitle != "")
                     {
                         _AZWindowOptions.azWindowText = '<div class="az-window-content-with-title">' + _Main.ErrorText + '</div>',
-                        _AZWindowOptions.azWindowTitle = _Main.ErrorTitle;
+                            _AZWindowOptions.azWindowTitle = _Main.ErrorTitle;
                         _AZWindowOptions.azWindowTitlebar = true;
                     }
                     new AZWindow(_AZWindowOptions);
