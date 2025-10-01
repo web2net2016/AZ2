@@ -1,0 +1,601 @@
+﻿
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>AZ Menu Navbar</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib-2/css/az-2.min.css" />
+    <script src="/lib-2/js/az-2.min.js"></script>
+</head>
+<body>
+
+    <form id="frmReg">
+        <div id="main-wrapper">
+            <div class="az-container-fluid">
+                <div class="az-row">
+                    <div id="col-1-menu"></div>
+                    <div id="col-2-content">
+                        <div id="content">
+                            <fieldset>
+                                <legend id="MainLegend">Dashboard</legend>
+
+                                <div class="az-section">
+
+
+                                </div>
+
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <style>
+        html
+        {
+            background-color: #FFFFFF;
+        }
+
+        /* - HTML Page - */
+        #main-wrapper
+        {
+            max-width: 1920px;
+            min-width: 992px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .az-container-fluid
+        {
+        }
+
+        #col-1-menu
+        {
+            position: relative;
+            float: left;
+            width: 240px;
+            height: calc(100vh - 50px);
+        }
+
+            #col-1-menu.closed
+            {
+                width: 100px;
+            }
+
+        #col-2-content
+        {
+            position: relative;
+            float: left;
+            width: calc(100% - 240px);
+        }
+
+            #col-2-content.closed
+            {
+                width: calc(100% - 100px);
+            }
+
+                #col-2-content.closed .az-section
+                {
+                    min-width: 1259px;
+                }
+
+        #content
+        {
+            min-height: calc(100vh - 75px);
+            margin: 14px 14px 7px 7px;
+        }
+
+        fieldset
+        {
+            min-height: calc(100vh - 75px);
+            margin: 7px;
+            border: 1px solid #605a56;
+        }
+
+        legend
+        {
+            width: auto;
+            margin-bottom: 0;
+            padding: 0 7px 0 7px;
+            border: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        #MainLegend
+        {
+        }
+
+        .az-section
+        {
+            min-width: 1119px;
+            max-width: 1119px;
+        }
+
+        /* - TOP NAVBAR - */
+        .az-navbar.az-navbar-top
+        {
+            min-width: 1366px;
+            height: 50px;
+            background-color: #FFFFFF;
+            -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        }
+
+        .az-navbar > .az-navbar-top-content > .az-navbar-branding
+        {
+            height: 30px;
+            float: left;
+            margin: 10px 7px 0 14px;
+        }
+
+        .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper
+        {
+            display: grid;
+            grid-template-columns: 14px auto auto 14px;
+        }
+
+            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-button:hover,
+            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu > li > a:hover,
+            .az-navbar > .az-navbar-bottom-content > .az-navbar-menu > li > a:hover
+            {
+                background-color: transparent;
+            }
+
+            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu > li
+            {
+                float: none !important;
+                cursor: default;
+            }
+
+            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left,
+            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right
+            {
+                height: 50px;
+                float: none !important;
+                display: flex;
+                align-items: center;
+            }
+
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li > .az-navbar-branding
+                {
+                    height: 40px;
+                }
+
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li:nth-child(2) > div
+                {
+                    margin-left: 14px;
+                }
+
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li > a,
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a
+                {
+                    line-height: 40px;
+                    padding: 0 7px 0 7px;
+                    font-size: 21px;
+                }
+
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li:first-child
+                {
+                    margin-left: auto;
+                }
+
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > .az-navbar-customer
+                {
+                    font-size: 19px;
+                    margin-right: 28px;
+                }
+
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a > i
+                {
+                    color: #605a56;
+                }
+
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a:hover
+                {
+                    background-color: #F0F0F0;
+                    border-radius: 4px;
+                    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                }
+
+                    .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a:hover > i
+                    {
+                        color: #64070d;
+                    }
+
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > .az-dropdown-content
+                {
+                    transform: translateX(-210px);
+                }
+
+                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right #cmdMenuSignOut
+                {
+                    position: relative;
+                    top: -2px;
+                }
+
+        .az-avatar-wrapper
+        {
+            cursor: auto;
+            margin: 14px 0 7px 0;
+            text-align: center;
+            color: #000000;
+        }
+
+        .az-avatar
+        {
+            font-size: 60px;
+            color: #605a56;
+        }
+
+        .az-active-user
+        {
+            cursor: auto;
+            margin-bottom: 7px;
+            text-align: center;
+        }
+
+        .az-dropdown-layout
+        {
+        }
+
+            .az-dropdown-layout > li
+            {
+                border: 0;
+                margin: 11px;
+            }
+
+                .az-dropdown-layout > li:first-child
+                {
+                    border-bottom: 1px solid rgba(204,204,204,0.70);
+                }
+
+                .az-dropdown-layout > li > a
+                {
+                    color: inherit;
+                }
+
+                    .az-dropdown-layout > li > a > i
+                    {
+                        font-size: 21px;
+                        color: #605a56;
+                    }
+
+                    .az-dropdown-layout > li > a > span
+                    {
+                    }
+
+                    .az-dropdown-layout > li > a:hover
+                    {
+                        background-color: #F0F0F0;
+                        border-radius: 4px;
+                    }
+
+                        .az-dropdown-layout > li > a:hover > i
+                        {
+                            color: #64070d;
+                        }
+
+                        .az-dropdown-layout > li > a:hover > span
+                        {
+                            color: #000000;
+                        }
+
+
+        /* - RIGHT MENU - */
+        .az-menu
+        {
+            min-height: calc(100vh - 82px);
+            margin: 21px 7px 7px 14px;
+            padding: 7px;
+            border: 1px solid #605a56;
+        }
+
+            .az-menu > div.sub
+            {
+                margin-left: 21px;
+            }
+
+            .az-menu > div:nth-child(1)
+            {
+                margin-bottom: 21px;
+            }
+
+            .az-menu > div:not(div:nth-child(1))
+            {
+                margin-bottom: 14px;
+            }
+
+            .az-menu > div a
+            {
+                display: block;
+                padding: 10px;
+            }
+
+            .az-menu > div > a > i
+            {
+                margin-right: 14px;
+                margin-top: 10px;
+                color: #605a56;
+                font-size: 21px;
+            }
+
+            .az-menu > div:nth-child(1) > a > i
+            {
+                margin-left: 158px;
+            }
+
+            .az-menu > div > a > span
+            {
+                font-size: 15px;
+                color: #000000;
+            }
+
+            .az-menu.closed > div.sub
+            {
+                display: none;
+            }
+
+            .az-menu.closed > div:nth-child(1) > a > i
+            {
+                margin-left: 10px;
+            }
+
+            .az-menu.closed > div:not(div:nth-child(1)) > a > i
+            {
+                margin: 14px 0 0 5px;
+                font-size: 28px;
+            }
+
+            .az-menu.closed > div > a > span
+            {
+                display: none;
+            }
+
+            .az-menu > div.selected > a
+            {
+                background-color: #F0F0F0;
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+            }
+
+                .az-menu > div.selected > a > i
+                {
+                    color: #64070d;
+                }
+
+            .az-menu > div.selected a > span
+            {
+                color: #000000;
+            }
+
+            .az-menu > div a:hover
+            {
+                background-color: #F0F0F0;
+                border-radius: 4px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+            }
+
+            .az-menu > div > a:hover > i
+            {
+                color: #64070d;
+            }
+
+            .az-menu > div a:hover > span
+            {
+                color: #000000;
+            }
+    </style>
+    <script>
+        function SetAZPage()
+        {
+            ToggleMenu(new Event("load"), "Dashboard");
+        }
+
+        function ToggleMenu(e, Page)
+        {
+            var _Menu =
+                [
+                    {
+                        Name: "Dashboard",
+                        Url: "dashboard.html",
+                        Icon: "fa-solid fa-home fa-lg fa-fw"
+                    },
+                    {
+                        Name: "Users",
+                        Url: "users.html",
+                        Icon: "fa-solid fa-user fa-lg fa-fw"
+                    }
+                ];
+
+            if (e.type == "load")
+            {
+                CreateNavbarMenu();
+            }
+            else
+            {
+                if ($(".az-menu").hasClass("closed"))
+                {
+                    ToggleMenuOpen();
+                }
+                else
+                {
+                    ToggleMenuClose();
+                }
+            }
+
+            function CreateNavbarMenu()
+            {
+                $('#main-wrapper').prepend($($("#NavbarTopHTML").html()));
+
+                var _$DivMenu = $($("#MenuHTML").html());
+                var _$MenuContentList = [];
+
+                $.each(_Menu, function (Index, MenuObj)
+                {
+                    var _$DivMenuContent = {};
+                    _$DivMenuContent = $($("#MenuContentHTML").html()).attr("id", MenuObj.Name);
+                    _$DivMenuContent.find("a").attr("href", MenuObj.Url).attr('title', MenuObj.Name);
+                    _$DivMenuContent.find("i").addClass(MenuObj.Icon);
+                    _$DivMenuContent.find("span").text(MenuObj.Name).attr("id", "cmdMenu" + MenuObj.Name);
+                    _$MenuContentList.push(_$DivMenuContent);
+                });
+
+                _$DivMenu.append(_$MenuContentList);
+                $('#col-1-menu').html(_$DivMenu);
+                SetNavbarMenu();
+            }
+
+            function SetNavbarMenu()
+            {
+                _ToggleMenuStatus = AZClientStorage("get", "togglemenu");
+                if (_ToggleMenuStatus == "open")
+                {
+                    ToggleMenuOpen();
+                }
+                else
+                {
+                    ToggleMenuClose();
+                }
+
+                // Page selected
+                $("#" + Page).addClass("selected").find("a").attr("href", "#").css({ "cursor": "auto" });
+
+                // Navbar icon click
+                if ($(".az-dropdown-button").is(":button"))
+                {
+                    $(".az-dropdown-button").off("click", AZDropdown).on("click", AZDropdown);
+                }
+                $(".az-dropdown-button[href]").off("click", AZDropdown).on("click", AZDropdown);
+
+                // Navbar info
+                $("#AZNavbarCustomerName").text("web2net AS");
+                $("#AZNavbarAvatar").html('<i class="fa-solid fa-user fa-fw az-avatar"></i>');
+                $('#AZNavbarActiveUser').text("Ola Normann");
+                $('#cmdMenuMyProfile').text("My Profile");
+                $('#cmdMenuSignOut').text("Sign Out");
+            }
+
+            function ToggleMenuOpen()
+            {
+                var _$SideMenu = $(".az-menu");
+                var _$MenuBarIcon = $(".menubar", _$SideMenu).find("i");
+                _$MenuBarIcon.removeClass("fa-angle-double-right").addClass("fa-angle-double-left");
+
+                $("#col-1-menu, #col-2-content").add(_$SideMenu).removeClass("closed");
+                AZClientStorage("set", "togglemenu", "open");
+            }
+
+            function ToggleMenuClose()
+            {
+                var _$SideMenu = $(".az-menu");
+                var _$MenuBarIcon = $(".menubar", _$SideMenu).find("i");
+                _$MenuBarIcon.removeClass("fa-angle-double-left").addClass("fa-angle-double-right");
+
+                $("#col-1-menu, #col-2-content").add(_$SideMenu).addClass("closed");
+                AZClientStorage("set", "togglemenu", "closed");
+            }
+        }
+    </script>
+</body>
+</html>
+
+<script id="NavbarTopHTML" type="text/template">
+    <div class="az-navbar az-navbar-top">
+        <div class="az-navbar-top-content">
+            <div class="az-navbar-menu-wrapper">
+                <div>&nbsp;</div>
+                <ul class="az-navbar-menu az-display-left">
+                    <li>
+                        <img class="az-navbar-branding" src="/web2net/web2net_logo_black.png" />
+                    </li>
+                </ul>
+                <ul class="az-navbar-menu az-display-right">
+                    <li>
+                        <p id="AZNavbarCustomerName" class="az-navbar-customer"></p>
+                    </li>
+                    <li class="az-dropdown-click">
+                        <a class="az-dropdown-button" href="javascript:void(0);">
+                            <i class="fas fa-bell fa-fw"></i>
+                        </a>
+                        <ul id="AZNavbarNotification" class="az-dropdown-content az-dropdown-layout az-shadow-2" style="width: 250px; top: 50px;">
+                            <li></li>
+                        </ul>
+                    </li>
+                    <li class="az-dropdown-click">
+                        <a class="az-dropdown-button" href="javascript:void(0);">
+                            <i class="fas fa-envelope fa-fw"></i>
+                        </a>
+                        <ul id="AZNavbarMessage" class="az-dropdown-content az-dropdown-layout az-shadow-2" style="width: 250px; top: 50px;">
+                            <li></li>
+                        </ul>
+                    </li>
+                    <li class="az-dropdown-click">
+                        <a class="az-dropdown-button" href="javascript:void(0);">
+                            <i class="fas fa-user fa-fw"></i>
+                        </a>
+                        <ul id="AZNavbarSignedInUser" class="az-dropdown-content az-dropdown-layout az-shadow-2" style="width: 250px; top: 50px;">
+                            <li>
+                                <div id="AZNavbarAvatar" class="az-avatar-wrapper"></div>
+                                <div id="AZNavbarActiveUser" class="az-active-user"></div>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="MyProfile();">
+                                    <i class="fa-solid fa-user fa-fw"></i>
+                                    <span id="cmdMenuMyProfile"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="AZSignOut();">
+                                    <i class="fas fa-power-off fa-fw"></i>
+                                    <span id="cmdMenuSignOut"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div>&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="MenuHTML" type="text/template">
+    <div class="az-menu closed">
+        <div>
+            <a class="menubar" onclick="ToggleMenu(event, '');" href="javascript:void(0);">
+                <i class="fas fa-angle-double-right fa-lg fa-fw"></i>
+            </a>
+        </div>
+    </div>
+</script>
+
+<script id="MenuContentHTML" type="text/template">
+    <div>
+        <a>
+            <i></i>
+            <span></span>
+        </a>
+    </div>
+</script>

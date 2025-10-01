@@ -95,6 +95,7 @@
     <Content Include="lib-2\css\backgroundslider.css" />
     <Content Include="lib-2\admin\help.html" />
     <Content Include="lib-2\js\widget.js" />
+    <Content Include="lib-2\menu_navbar.html" />
     <Content Include="lib-2\side1.html" />
     <Content Include="lib-2\aztabs.html" />
     <Content Include="lib-2\azaccordion.html" />
