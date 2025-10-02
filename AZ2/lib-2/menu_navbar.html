@@ -22,86 +22,68 @@
 <body>
 
     <form id="frmReg">
-        <div id="main-wrapper">
-            <div class="az-container-fluid">
-                <div class="az-row">
-                    <div id="col-1-menu"></div>
-                    <div id="col-2-content">
-                        <div id="content">
-                            <fieldset>
-                                <legend id="MainLegend">Dashboard</legend>
+        <div id="MainWrapper">
 
-                                <div class="az-section">
+            <div id="MenuContentWrapper">
+                <div id="MenuWrapper" class="closed"></div>
+                <div id="ContentWrapper">
+                    <fieldset>
+                        <legend id="MainLegend">Dashboard</legend>
 
+                        <!--Content-->
 
-                                </div>
-
-                            </fieldset>
-                        </div>
-                    </div>
+                    </fieldset>
                 </div>
             </div>
+
         </div>
     </form>
 
     <style>
-        html
-        {
-            background-color: #FFFFFF;
-        }
-
         /* - HTML Page - */
-        #main-wrapper
+        #MainWrapper
         {
             max-width: 1920px;
-            min-width: 992px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .az-container-fluid
+        #MenuContentWrapper
         {
+            display: flex;
+            gap: 14px;
         }
 
-        #col-1-menu
+            #MenuContentWrapper:has(#ContentWrapper.closed)
+            {
+                gap: 0;
+            }
+
+        #MenuWrapper
         {
             position: relative;
-            float: left;
             width: 240px;
-            height: calc(100vh - 50px);
+            min-height: calc(100vh - 75px);
+            margin-top: 7px;
+            transition: width 0.3s ease;
         }
 
-            #col-1-menu.closed
+            #MenuWrapper.closed
             {
-                width: 100px;
+                width: 0;
+                overflow: hidden;
             }
 
-        #col-2-content
+        #ContentWrapper
         {
             position: relative;
-            float: left;
-            width: calc(100% - 240px);
-        }
-
-            #col-2-content.closed
-            {
-                width: calc(100% - 100px);
-            }
-
-                #col-2-content.closed .az-section
-                {
-                    min-width: 1259px;
-                }
-
-        #content
-        {
+            width: 100%;
             min-height: calc(100vh - 75px);
-            margin: 14px 14px 7px 7px;
         }
 
         fieldset
         {
-            min-height: calc(100vh - 75px);
+            height: 100%;
             margin: 7px;
             border: 1px solid #605a56;
         }
@@ -116,20 +98,12 @@
             letter-spacing: 1px;
         }
 
-        #MainLegend
-        {
-        }
-
-        .az-section
-        {
-            min-width: 1119px;
-            max-width: 1119px;
-        }
-
         /* - TOP NAVBAR - */
-        .az-navbar.az-navbar-top
+        #AZNavbarTop
         {
-            min-width: 1366px;
+            display: grid;
+            grid-template-columns: auto auto;
+            width: 100%;
             height: 50px;
             background-color: #FFFFFF;
             -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -137,76 +111,39 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         }
 
-        .az-navbar > .az-navbar-top-content > .az-navbar-branding
+        #AZNavbarBranding > img
         {
             height: 30px;
-            float: left;
-            margin: 10px 7px 0 14px;
         }
 
-        .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper
+        #AZNavbarLeft
         {
-            display: grid;
-            grid-template-columns: 14px auto auto 14px;
+            margin-left: 14px;
         }
 
-            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-button:hover,
-            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu > li > a:hover,
-            .az-navbar > .az-navbar-bottom-content > .az-navbar-menu > li > a:hover
+        #AZNavbarLeft,
+        #AZNavbarRight
+        {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            list-style: none;
+        }
+
+        #AZNavbarRight
+        {
+            margin-left: auto;
+            margin-right: 14px;
+        }
+
+            #AZNavbarLeft a,
+            #AZNavbarRight a
             {
-                background-color: transparent;
+                padding: 14px;
             }
 
-            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu > li
-            {
-                float: none !important;
-                cursor: default;
-            }
-
-            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left,
-            .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right
-            {
-                height: 50px;
-                float: none !important;
-                display: flex;
-                align-items: center;
-            }
-
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li > .az-navbar-branding
-                {
-                    height: 40px;
-                }
-
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li:nth-child(2) > div
-                {
-                    margin-left: 14px;
-                }
-
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-left > li > a,
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a
-                {
-                    line-height: 40px;
-                    padding: 0 7px 0 7px;
-                    font-size: 21px;
-                }
-
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li:first-child
-                {
-                    margin-left: auto;
-                }
-
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > .az-navbar-customer
-                {
-                    font-size: 19px;
-                    margin-right: 28px;
-                }
-
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a > i
-                {
-                    color: #605a56;
-                }
-
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a:hover
+                #AZNavbarLeft a:hover,
+                #AZNavbarRight a:hover
                 {
                     background-color: #F0F0F0;
                     border-radius: 4px;
@@ -215,23 +152,19 @@
                     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
                 }
 
-                    .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > a:hover > i
-                    {
-                        color: #64070d;
-                    }
-
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right > li > .az-dropdown-content
+                #AZNavbarLeft a > i,
+                #AZNavbarRight a > i
                 {
-                    transform: translateX(-210px);
+                    font-size: 21px;
+                    color: #605a56;
                 }
 
-                .az-navbar > .az-navbar-top-content > .az-navbar-menu-wrapper > .az-navbar-menu.az-display-right #cmdMenuSignOut
-                {
-                    position: relative;
-                    top: -2px;
-                }
+        #AZNavbarCustomerName
+        {
+            font-size: 19px;
+        }
 
-        .az-avatar-wrapper
+        #AZNavbarAvatar
         {
             cursor: auto;
             margin: 14px 0 7px 0;
@@ -239,173 +172,144 @@
             color: #000000;
         }
 
-        .az-avatar
-        {
-            font-size: 60px;
-            color: #605a56;
-        }
+            #AZNavbarAvatar > i
+            {
+                font-size: 60px;
+                color: #605a56;
+            }
 
-        .az-active-user
+        #AZNavbarActiveUser
         {
             cursor: auto;
             margin-bottom: 7px;
             text-align: center;
         }
 
-        .az-dropdown-layout
+        .az-dropdown-layout > li
         {
+            border: 0;
+            margin: 11px;
         }
 
-            .az-dropdown-layout > li
+            .az-dropdown-layout > li:first-child
             {
-                border: 0;
-                margin: 11px;
+                border-bottom: 1px solid rgba(204,204,204,0.70);
             }
 
-                .az-dropdown-layout > li:first-child
-                {
-                    border-bottom: 1px solid rgba(204,204,204,0.70);
-                }
-
-                .az-dropdown-layout > li > a
-                {
-                    color: inherit;
-                }
-
-                    .az-dropdown-layout > li > a > i
-                    {
-                        font-size: 21px;
-                        color: #605a56;
-                    }
-
-                    .az-dropdown-layout > li > a > span
-                    {
-                    }
-
-                    .az-dropdown-layout > li > a:hover
-                    {
-                        background-color: #F0F0F0;
-                        border-radius: 4px;
-                    }
-
-                        .az-dropdown-layout > li > a:hover > i
-                        {
-                            color: #64070d;
-                        }
-
-                        .az-dropdown-layout > li > a:hover > span
-                        {
-                            color: #000000;
-                        }
-
-
-        /* - RIGHT MENU - */
-        .az-menu
-        {
-            min-height: calc(100vh - 82px);
-            margin: 21px 7px 7px 14px;
-            padding: 7px;
-            border: 1px solid #605a56;
-        }
-
-            .az-menu > div.sub
-            {
-                margin-left: 21px;
-            }
-
-            .az-menu > div:nth-child(1)
-            {
-                margin-bottom: 21px;
-            }
-
-            .az-menu > div:not(div:nth-child(1))
-            {
-                margin-bottom: 14px;
-            }
-
-            .az-menu > div a
-            {
-                display: block;
-                padding: 10px;
-            }
-
-            .az-menu > div > a > i
-            {
-                margin-right: 14px;
-                margin-top: 10px;
-                color: #605a56;
-                font-size: 21px;
-            }
-
-            .az-menu > div:nth-child(1) > a > i
-            {
-                margin-left: 158px;
-            }
-
-            .az-menu > div > a > span
-            {
-                font-size: 15px;
-                color: #000000;
-            }
-
-            .az-menu.closed > div.sub
-            {
-                display: none;
-            }
-
-            .az-menu.closed > div:nth-child(1) > a > i
-            {
-                margin-left: 10px;
-            }
-
-            .az-menu.closed > div:not(div:nth-child(1)) > a > i
-            {
-                margin: 14px 0 0 5px;
-                font-size: 28px;
-            }
-
-            .az-menu.closed > div > a > span
-            {
-                display: none;
-            }
-
-            .az-menu > div.selected > a
+            .az-dropdown-layout > li > a:hover
             {
                 background-color: #F0F0F0;
                 border-radius: 4px;
-                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
-                -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
-                box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
             }
 
-                .az-menu > div.selected > a > i
+                .az-dropdown-layout > li > a:hover > i
                 {
                     color: #64070d;
                 }
 
-            .az-menu > div.selected a > span
+                .az-dropdown-layout > li > a:hover > span
+                {
+                    color: #000000;
+                }
+
+        .az-dropdown-click
+        {
+            position: relative;
+        }
+
+        /* - LEFT MENU - */
+        .az-menu
+        {
+            width: 100%;
+            height: 100%;
+            margin: 7px;
+            padding: 7px;
+            border: 1px solid #605a56;
+        }
+
+            .az-menu > div
             {
-                color: #000000;
+                margin-bottom: 14px;
             }
 
-            .az-menu > div a:hover
+                .az-menu > div > a
+                {
+                    display: flex;
+                    align-items: center;
+                    padding: 10px;
+                }
+
+                    .az-menu > div > a > i
+                    {
+                        margin-right: 14px;
+                        color: #605a56;
+                        font-size: 21px;
+                    }
+
+                    .az-menu > div > a > span
+                    {
+                        font-size: 15px;
+                        color: #000000;
+                    }
+
+                .az-menu > div.selected > a
+                {
+                    background-color: #F0F0F0;
+                    border-radius: 4px;
+                    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                }
+
+                    .az-menu > div.selected > a > i
+                    {
+                        color: #64070d;
+                    }
+
+                .az-menu > div a:hover
+                {
+                    background-color: #F0F0F0;
+                    border-radius: 4px;
+                    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                }
+
+                .az-menu > div > a:hover > i
+                {
+                    color: #64070d;
+                }
+
+        /* - MOBILE - */
+        @media (max-width: 576px)
+        {
+            #MenuWrapper
             {
-                background-color: #F0F0F0;
-                border-radius: 4px;
-                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
-                -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
-                box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+                width: 240px;
+                overflow: visible;
             }
 
-            .az-menu > div > a:hover > i
+                #MenuWrapper.closed
+                {
+                    width: 0;
+                    overflow: hidden;
+                }
+
+            #ContentWrapper
             {
-                color: #64070d;
+                width: auto;
             }
 
-            .az-menu > div a:hover > span
+                #ContentWrapper.closed
+                {
+                    width: 100%;
+                }
+
+            #AZNavbarCustomerName
             {
-                color: #000000;
+                display: none;
             }
+        }
     </style>
     <script>
         function SetAZPage()
@@ -447,9 +351,9 @@
 
             function CreateNavbarMenu()
             {
-                $('#main-wrapper').prepend($($("#NavbarTopHTML").html()));
+                $('#MainWrapper').prepend($($("#NavbarTopHTML").html()));
 
-                var _$DivMenu = $($("#MenuHTML").html());
+                var _$DivMenu = $('<div class="az-menu closed"></div>');
                 var _$MenuContentList = [];
 
                 $.each(_Menu, function (Index, MenuObj)
@@ -463,7 +367,7 @@
                 });
 
                 _$DivMenu.append(_$MenuContentList);
-                $('#col-1-menu').html(_$DivMenu);
+                $('#MenuWrapper').html(_$DivMenu);
                 SetNavbarMenu();
             }
 
@@ -490,8 +394,7 @@
                 $(".az-dropdown-button[href]").off("click", AZDropdown).on("click", AZDropdown);
 
                 // Navbar info
-                $("#AZNavbarCustomerName").text("web2net AS");
-                $("#AZNavbarAvatar").html('<i class="fa-solid fa-user fa-fw az-avatar"></i>');
+                $("#AZNavbarCustomerName").text('web2net AS');
                 $('#AZNavbarActiveUser').text("Ola Normann");
                 $('#cmdMenuMyProfile').text("My Profile");
                 $('#cmdMenuSignOut').text("Sign Out");
@@ -500,20 +403,14 @@
             function ToggleMenuOpen()
             {
                 var _$SideMenu = $(".az-menu");
-                var _$MenuBarIcon = $(".menubar", _$SideMenu).find("i");
-                _$MenuBarIcon.removeClass("fa-angle-double-right").addClass("fa-angle-double-left");
-
-                $("#col-1-menu, #col-2-content").add(_$SideMenu).removeClass("closed");
+                $("#MenuWrapper, #ContentWrapper").add(_$SideMenu).removeClass("closed");
                 AZClientStorage("set", "togglemenu", "open");
             }
 
             function ToggleMenuClose()
             {
                 var _$SideMenu = $(".az-menu");
-                var _$MenuBarIcon = $(".menubar", _$SideMenu).find("i");
-                _$MenuBarIcon.removeClass("fa-angle-double-left").addClass("fa-angle-double-right");
-
-                $("#col-1-menu, #col-2-content").add(_$SideMenu).addClass("closed");
+                $("#MenuWrapper, #ContentWrapper").add(_$SideMenu).addClass("closed");
                 AZClientStorage("set", "togglemenu", "closed");
             }
         }
@@ -522,72 +419,61 @@
 </html>
 
 <script id="NavbarTopHTML" type="text/template">
-    <div class="az-navbar az-navbar-top">
-        <div class="az-navbar-top-content">
-            <div class="az-navbar-menu-wrapper">
-                <div>&nbsp;</div>
-                <ul class="az-navbar-menu az-display-left">
+    <div id="AZNavbarTop">
+        <ul id="AZNavbarLeft">
+            <li id="AZNavbarButton">
+                <a href="javascript:void(0);" onclick="ToggleMenu(event, '');">
+                    <i class="fa-solid fa-bars"></i>
+                </a>
+            </li>
+            <li id="AZNavbarBranding">
+                <img src="/web2net/web2net_logo_black.png" />
+            </li>
+        </ul>
+        <ul id="AZNavbarRight">
+            <li id="AZNavbarCustomerName"></li>
+            <li id="AZNavbarNotification" class="az-dropdown-click">
+                <a class="az-dropdown-button" href="javascript:void(0);">
+                    <i class="fas fa-bell fa-fw"></i>
+                </a>
+                <ul class="az-dropdown-content az-dropdown-layout az-shadow-2" style="width: 250px; top: 36px; right: -10px; ">
+                    <li></li>
+                </ul>
+            </li>
+            <li id="AZNavbarMessage" class="az-dropdown-click">
+                <a class="az-dropdown-button" href="javascript:void(0);">
+                    <i class="fas fa-envelope fa-fw"></i>
+                </a>
+                <ul class="az-dropdown-content az-dropdown-layout az-shadow-2" style="width: 250px; top: 36px; right: -10px; ">
+                    <li></li>
+                </ul>
+            </li>
+            <li id="AZNavbarSignedInUser" class="az-dropdown-click">
+                <a class="az-dropdown-button" href="javascript:void(0);">
+                    <i class="fas fa-user fa-fw"></i>
+                </a>
+                <ul class="az-dropdown-content az-dropdown-layout az-shadow-2" style="width: 250px; top: 36px; right: -10px;">
                     <li>
-                        <img class="az-navbar-branding" src="/web2net/web2net_logo_black.png" />
+                        <div id="AZNavbarAvatar">
+                            <i class="fa-solid fa-user fa-fw"></i>
+                        </div>
+                        <div id="AZNavbarActiveUser"></div>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" onclick="MyProfile();">
+                            <i class="fa-solid fa-user fa-fw"></i>
+                            <span id="cmdMenuMyProfile"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" onclick="AZSignOut();">
+                            <i class="fas fa-power-off fa-fw"></i>
+                            <span id="cmdMenuSignOut"></span>
+                        </a>
                     </li>
                 </ul>
-                <ul class="az-navbar-menu az-display-right">
-                    <li>
-                        <p id="AZNavbarCustomerName" class="az-navbar-customer"></p>
-                    </li>
-                    <li class="az-dropdown-click">
-                        <a class="az-dropdown-button" href="javascript:void(0);">
-                            <i class="fas fa-bell fa-fw"></i>
-                        </a>
-                        <ul id="AZNavbarNotification" class="az-dropdown-content az-dropdown-layout az-shadow-2" style="width: 250px; top: 50px;">
-                            <li></li>
-                        </ul>
-                    </li>
-                    <li class="az-dropdown-click">
-                        <a class="az-dropdown-button" href="javascript:void(0);">
-                            <i class="fas fa-envelope fa-fw"></i>
-                        </a>
-                        <ul id="AZNavbarMessage" class="az-dropdown-content az-dropdown-layout az-shadow-2" style="width: 250px; top: 50px;">
-                            <li></li>
-                        </ul>
-                    </li>
-                    <li class="az-dropdown-click">
-                        <a class="az-dropdown-button" href="javascript:void(0);">
-                            <i class="fas fa-user fa-fw"></i>
-                        </a>
-                        <ul id="AZNavbarSignedInUser" class="az-dropdown-content az-dropdown-layout az-shadow-2" style="width: 250px; top: 50px;">
-                            <li>
-                                <div id="AZNavbarAvatar" class="az-avatar-wrapper"></div>
-                                <div id="AZNavbarActiveUser" class="az-active-user"></div>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" onclick="MyProfile();">
-                                    <i class="fa-solid fa-user fa-fw"></i>
-                                    <span id="cmdMenuMyProfile"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" onclick="AZSignOut();">
-                                    <i class="fas fa-power-off fa-fw"></i>
-                                    <span id="cmdMenuSignOut"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <div>&nbsp;</div>
-            </div>
-        </div>
-    </div>
-</script>
-
-<script id="MenuHTML" type="text/template">
-    <div class="az-menu closed">
-        <div>
-            <a class="menubar" onclick="ToggleMenu(event, '');" href="javascript:void(0);">
-                <i class="fas fa-angle-double-right fa-lg fa-fw"></i>
-            </a>
-        </div>
+            </li>
+        </ul>
     </div>
 </script>
 
