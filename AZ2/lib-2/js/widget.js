@@ -258,48 +258,58 @@ function AZAccordion(Options)
 
 function AZAjax(Options)
 {
-    if (this instanceof AZAjax === true)
-    {
-        var _Main = this;
-        var _Defaults =
-        {
-            azAjaxUrl: "",
-            azAjaxDataType: "json",
-            azAjaxType: "POST",
-            azAjaxContentType: "application/json; charset=utf-8",
-            azAjaxObjHeaders: {},
-            azAjaxTimeout: 15000,
-            azAjaxObjToSend: {}
-        };
-        _Main.Options = $.extend({}, _Defaults, Options || {});
+    if (!(this instanceof AZAjax)) return new AZAjax(Options);
 
-        if (_Main.Options.azAjaxUrl != "")
+    var _Main = this;
+    var _Defaults =
+    {
+        azAjaxUrl: "",
+        azAjaxDataType: "json",
+        azAjaxType: "POST",
+        azAjaxContentType: "application/json; charset=utf-8",
+        azAjaxObjHeaders: {},
+        azAjaxTimeout: 15000,
+        azAjaxObjToSend: {}
+    };
+
+    _Main.Options = $.extend({}, _Defaults, Options || {});
+    if (_Main.Options.azAjaxUrl === "")
+        return $.Deferred().resolve("").promise();
+
+    _Main.AjaxOptions =
+    {
+        url: _Main.Options.azAjaxUrl,
+        dataType: _Main.Options.azAjaxDataType,
+        type: _Main.Options.azAjaxType,
+        contentType: _Main.Options.azAjaxContentType,
+        headers: _Main.Options.azAjaxObjHeaders,
+        timeout: _Main.Options.azAjaxTimeout,
+        cache: false
+    };
+
+    if (AZIsEmpty(_Main.Options.azAjaxObjToSend) === false)
+    {
+        if (_Main.Options.azAjaxType.toUpperCase() === "GET")
         {
-            _Main.AjaxOptions =
-            {
-                url: _Main.Options.azAjaxUrl,
-                dataType: _Main.Options.azAjaxDataType,
-                type: _Main.Options.azAjaxType,
-                contentType: _Main.Options.azAjaxContentType,
-                headers: _Main.Options.azAjaxObjHeaders,
-                timeout: _Main.Options.azAjaxTimeout
-            };
-            if (AZIsEmpty(_Main.Options.azAjaxObjToSend) === false)
-            {
-                _Main.AjaxOptions.data = JSON.stringify(_Main.Options.azAjaxObjToSend);
-            }
-            $.ajaxSetup({ cache: false });
-            return $.ajax(_Main.AjaxOptions).promise();
+            _Main.AjaxOptions.data = _Main.Options.azAjaxObjToSend;
         }
         else
         {
-            return $.Deferred().resolve("");
+            _Main.AjaxOptions.data = JSON.stringify(_Main.Options.azAjaxObjToSend);
         }
     }
-    else
+
+    var deferred = $.Deferred();
+
+    $.ajax(_Main.AjaxOptions).done(function (data, textStatus, jqXHR)
     {
-        return new AZAjax(Options);
-    }
+        deferred.resolve(data, textStatus, jqXHR);
+    }).fail(function (jqXHR, textStatus, errorThrown)
+    {
+        deferred.resolve({ Data: {} }, textStatus, jqXHR);
+    });
+
+    return deferred.promise();
 }
 
 function AZBackgroundSlider(Options)
